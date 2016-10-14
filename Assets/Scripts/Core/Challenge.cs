@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 namespace MDS.Core
 {
@@ -17,14 +16,18 @@ namespace MDS.Core
         // ações executadas quando obtem sucesso na valicao
         public IAction[] posVictoryActionsList;
 
-
         // ações executadas quando obtem falhar no desafio
         //public IAction[] posVictoryActionsList;
-
 
         public Challenge nextChallenge;
 
         public ProcessAnswerButton btn;
+
+        protected override void Awake()
+        {
+            base.Awake();
+            ProcessAnswerButton.processAnswerEvent += ProcessResult;
+        }
 
         public void Update()
         {
@@ -32,7 +35,19 @@ namespace MDS.Core
                 btn.Enable();
             else
                 btn.Disable();
+        }
 
+        void ProcessResult()
+        {
+            ValidatorResult _validatorResult = validatorsList[0].Validate();
+            if(_validatorResult == ValidatorResult.Victory)
+            {
+                print("Venceu");
+            }
+            else
+            {
+                print("Falhou");
+            }
         }
     }
 }

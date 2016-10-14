@@ -4,6 +4,6 @@ using System;
 
 public interface IAction {
 
-    void Execute(Action callback );
+    void Execute(Action callback);
 
 }
