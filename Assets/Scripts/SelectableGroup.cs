@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System;
+using System.Linq;
 
 namespace MDS
 {
@@ -16,8 +17,7 @@ namespace MDS
 
         public SelectableType selectableType;
         public Selectable[] _selectables;
-        private int _selectedIndex;
-        public List<string> _selectedList;
+        
 
         void Start()
         {
@@ -25,72 +25,37 @@ namespace MDS
             {
                 _selectables[i].SetGroup(this);
             }
-            _selectedIndex = -1;
         }
 
         public Selectable GetSelectable()
         {
-            if(_selectedIndex == -1)
-                return null;
-
-            return _selectables[_selectedIndex];
+            return _selectables.FirstOrDefault(s => s.Selected);
         }
 
-        public List<string> GetSelectables()
+        public List<Selectable> GetSelectables()
         {
-            foreach (var item in _selectables)
-            {
-                if (item.chose)
-                    _selectedList.Add(item.name);
-            }
-            if (_selectedList.Count > 0)
-                return _selectedList;
-            return null;
+            return _selectables.Where(s => s.Selected).ToList();
         }
 
-        internal bool HasAnyoneSelected()
+        public bool HasAnyoneSelected()
         {
-            for (int i = 0; i < _selectables.Length; i++)
-            {
-                if (_selectables[i].chose)
-                    return true;
-            }
-            return false;
+            return _selectables.Any(s => s.Selected);
         }
 
 
-        public void SelectMe(Selectable s)
+        public void SelectItem(Selectable s)
         {
             if(selectableType == SelectableType.Single)
-                SelectMeSingle(s);
-
-            if (selectableType == SelectableType.Multiple)
-                SelectMultiple(s);
+                UnselectOthers(s);            
         }
 
-        private void SelectMultiple(Selectable s)
-        {
-            s.chose = !s.chose;
-        }
 
-        private void SelectMeSingle(Selectable s)
+        private void UnselectOthers(Selectable s)
         {
             for (int i = 0; i < _selectables.Length; i++)
             {
                 if (_selectables[i] != s)
                     _selectables[i].SetUnselected();
-                else
-                {
-                    if (_selectables[i].Selected)
-                    {
-                        _selectedIndex = i;
-                    }
-                    else
-                    {
-                        _selectedIndex = -1;
-                    }
-                }
-                    
             }
         }
     }
