@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Collections.Generic;
 using System;
 
 namespace MDS
@@ -14,9 +15,9 @@ namespace MDS
         }
 
         public SelectableType selectableType;
-
         public Selectable[] _selectables;
         private int _selectedIndex;
+        public List<string> _selectedList;
 
         void Start()
         {
@@ -35,21 +36,61 @@ namespace MDS
             return _selectables[_selectedIndex];
         }
 
+        public List<string> GetSelectables()
+        {
+            foreach (var item in _selectables)
+            {
+                if (item.chose)
+                    _selectedList.Add(item.name);
+            }
+            if (_selectedList.Count > 0)
+                return _selectedList;
+            return null;
+        }
+
+        internal bool HasAnyoneSelected()
+        {
+            for (int i = 0; i < _selectables.Length; i++)
+            {
+                if (_selectables[i].chose)
+                    return true;
+            }
+            return false;
+        }
+
+
         public void SelectMe(Selectable s)
         {
             if(selectableType == SelectableType.Single)
                 SelectMeSingle(s);
 
+            if (selectableType == SelectableType.Multiple)
+                SelectMultiple(s);
+        }
+
+        private void SelectMultiple(Selectable s)
+        {
+            s.chose = !s.chose;
         }
 
         private void SelectMeSingle(Selectable s)
         {
-            for(int i = 0; i < _selectables.Length; i++)
+            for (int i = 0; i < _selectables.Length; i++)
             {
-                if(_selectables[i] != s)
+                if (_selectables[i] != s)
                     _selectables[i].SetUnselected();
                 else
-                    _selectedIndex = i;
+                {
+                    if (_selectables[i].Selected)
+                    {
+                        _selectedIndex = i;
+                    }
+                    else
+                    {
+                        _selectedIndex = -1;
+                    }
+                }
+                    
             }
         }
     }

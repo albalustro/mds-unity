@@ -17,6 +17,7 @@ namespace MDS
 
         private SelectableGroup _group;
         public string ChoiseTag;
+        public bool chose;
 
         #region Unity 
 
@@ -37,8 +38,7 @@ namespace MDS
         {
             _selected = !_selected;
             SetSprite();
-            if(_selected)
-                Select();
+            Select();
         }
 
         #endregion
@@ -61,10 +61,11 @@ namespace MDS
 
         private void Select()
         {
-            if(_group != null)
+            if (_group != null)
+            {
                 _group.SelectMe(this);
+            }
         }
-
 
         public void SetGroup(SelectableGroup group)
         {
