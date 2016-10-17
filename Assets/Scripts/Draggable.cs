@@ -1,82 +1,97 @@
 ﻿using UnityEngine;
+using UnityEngine.EventSystems;
 using System.Collections;
+using System;
+using FullInspector;
 
 public class Draggable : MDSBehaviour
 {
-    private bool draggingItem = false;
-    private GameObject draggedObject;
-    private Vector2 touchOffset;
-    private SpriteRenderer render;
+    public bool changeSprite;
+    public bool changeScale;
 
-    void Start()
+    [InspectorShowIf("changeSprite")]
+    public DraggableState<Sprite> spriteState;
+
+    [InspectorShowIf("changeScale")]
+    public DraggableState<float> scaleState;
+
+    private Vector3 _touchOffset;
+    private SpriteRenderer _renderer;
+    private Vector3 _initialPosition;
+    private Vector3 dropPosition;
+
+    protected override void Awake()
     {
-        render = this.GetComponent<SpriteRenderer>();
+        base.Awake();
+        _renderer = this.GetComponent<SpriteRenderer>();
+        if(changeScale && (scaleState.draggingValue <= 0f || scaleState.releasedValue <= 0))
+            Debug.LogError("[Draggable] Scale cannot be 0");
     }
 
-    void Update()
+    public void OnMouseDown()
     {
-        if (HasInput)
-            DragOrPickUp();
-        else
-            if (draggingItem)
-                DropItem();
+        _renderer.sortingOrder = 5;
+        _touchOffset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        if(changeScale)
+            LeanTween.scale(gameObject, Vector3.one * scaleState.draggingValue, 0.5f).setEase(LeanTweenType.easeOutElastic);
+        if (changeSprite)
+            _renderer.sprite = spriteState.draggingValue;
+        _initialPosition = transform.position;
     }
 
-    /// <summary>
-    /// Retorna a posição atual do toque/clique.
-    /// </summary>
-    Vector2 CurrentTouchPosition
+    public void OnMouseDrag()
     {
-        get
+        Vector3 curVer = new Vector3();
+        Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _touchOffset;
+        transform.position = Vector3.SmoothDamp(transform.position, newPos, ref curVer, 0.05f);
+    }
+
+    public void OnMouseUp()
+    {
+        if(changeScale)
+            LeanTween.scale(gameObject, Vector3.one*scaleState.releasedValue, 0.5f).setEase(LeanTweenType.linear);
+
+        Ray ray;
+        RaycastHit hit;
+        ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        if (Physics.Raycast(ray, out hit))
         {
-            Vector2 inputPos;
-            inputPos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-            return inputPos;
-        }
-    }
-
-    /// <summary>
-    /// Método chamado quando um toque/clique é detectado. 
-    /// Verifica se o toque/clique foi em um objeto arrastável.
-    /// Se sim, pega o objeto e atualiza sua posição de acordo com o movimento do mouse.
-    /// </summary>
-    private void DragOrPickUp()
-    {
-        var inputPosition = CurrentTouchPosition;
-
-        if (draggingItem)
-            draggedObject.transform.position = inputPosition + touchOffset;
-        else
-        {
-            RaycastHit2D[] touches = Physics2D.RaycastAll(inputPosition, inputPosition, 0.5f);
-            if (touches.Length > 0)
+            var group = hit.collider.GetComponent<DropGroup>();
+            if(group.GetValidPosition(ref dropPosition, this))
             {
-                var hit = touches[0];
-                if (hit.transform != null)
-                {
-                    draggingItem = true;
-                    draggedObject = hit.transform.gameObject;
-                    draggedObject.GetComponent<SpriteRenderer>().sortingOrder = 5;
-                    touchOffset = (Vector2)hit.transform.position - inputPosition;
-                    draggedObject.transform.localScale = new Vector3(1.2f, 1.2f, 1.2f);
-                }
+                TweenMove(this.gameObject, dropPosition);
+            }
+            else
+            {
+                GameObject lastDrag = null;
+                group.ChangeSlotContent(ref lastDrag, this);
+                TweenMove(this.gameObject, lastDrag.transform.position);
+                TweenMove(lastDrag, lastDrag.GetComponent<Draggable>()._initialPosition);
             }
         }
+        else
+        {
+            TweenMove(this.gameObject, _initialPosition);
+        }
     }
 
-    /// <summary>
-    /// Retorna verdadeiro se houver alguma interação do usuário por toque ou clique.
-    /// </summary>
-    private bool HasInput { get { return Input.GetMouseButton(0); } }
-
-    /// <summary>
-    /// Solta o objeto que foi pego ou está sendo arrastado pelo toque/mouse.
-    /// </summary>
-    void DropItem()
+    private void TweenMove(GameObject go, Vector3 pos, float speed = 0.5f)
     {
-        draggingItem = false;
-        draggedObject.transform.localScale = new Vector3(1f, 1f, 1f);
-        render.sortingOrder = 0;
+        LeanTween.move(go, pos, speed)
+            .setEase(LeanTweenType.easeOutCubic)
+            .setOnComplete(() =>
+            {
+                _renderer.sortingOrder = 0;
+                if (changeSprite)
+                    _renderer.sprite = spriteState.releasedValue;
+            });
     }
 }
+
+public class DraggableState<T>
+{
+    public T releasedValue;
+    public T draggingValue;
+}
+
 
