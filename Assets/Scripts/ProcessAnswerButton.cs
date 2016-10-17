@@ -3,7 +3,7 @@
 public class ProcessAnswerButton : MDSBehaviour
 {
     public delegate void ProcessAnswerDelegate();
-    public static event ProcessAnswerDelegate processAnswerEvent;
+    public event ProcessAnswerDelegate processAnswerEvent;
 
     public Sprite downSprite;
     public Sprite upSprite;

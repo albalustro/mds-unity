@@ -16,8 +16,7 @@ namespace MDS
         public bool Selected { get { return _selected; } }
 
         private SelectableGroup _group;
-        public string ChoiseTag;
-        public bool chose;
+        public string[] Labels;
 
         #region Unity 
 
@@ -63,7 +62,7 @@ namespace MDS
         {
             if (_group != null)
             {
-                _group.SelectMe(this);
+                _group.SelectItem(this);
             }
         }
 

@@ -26,7 +26,7 @@ namespace MDS.Core
         protected override void Awake()
         {
             base.Awake();
-            ProcessAnswerButton.processAnswerEvent += ProcessResult;
+            btn.processAnswerEvent += ProcessResult;
         }
 
         public void Update()
