@@ -1,7 +1,6 @@
-﻿using UnityEngine;
-using System.Collections;
+﻿using MDS.Validators.Enum;
 
-namespace MDS.Core
+namespace MDS.Validators.Interfaces
 {
     public interface IValidator
     {
@@ -10,4 +9,5 @@ namespace MDS.Core
         ValidatorResult Validate();
 
     }
+
 }
