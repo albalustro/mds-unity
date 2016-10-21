@@ -33,7 +33,7 @@ namespace MDS.Gameplay.DragDrop
             int amountSlots = slots.Length;
             int amountDraggables = draggablesInScene.Length;
 
-            int maxIndex = Math.Max(amountSlots, amountDraggables);
+            int maxIndex = Math.Min(amountSlots, amountDraggables);
 
             for(int i = 0; i < maxIndex; i++)
             {

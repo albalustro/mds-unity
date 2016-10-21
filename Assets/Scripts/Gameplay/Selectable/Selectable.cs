@@ -1,11 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using MDS.Validators.Interfaces;
+using System.Linq;
 
-namespace MDS
+namespace MDS.Gameplay.Selectable
 {
-
-    public class Selectable : MDSBehaviour
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
+    public class Selectable : MDSBehaviour, IValidatable
     {
         public Sprite selectedSprite;
         public Sprite unselectedSprite;
@@ -72,5 +74,20 @@ namespace MDS
         }
 
         #endregion
+
+        #region IValidatable
+
+        public bool ReadyToValidate()
+        {
+            return true;
+        }
+
+        public bool Validate(string acceptableAnswer)
+        {
+            return Selected && Labels.Contains(acceptableAnswer);
+        }
+
+        #endregion
+
     }
 }

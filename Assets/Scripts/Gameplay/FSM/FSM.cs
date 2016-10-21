@@ -6,9 +6,9 @@ using MDS.Validators;
 using System.Linq;
 using MDS.Validators.Interfaces;
 
-namespace MDS
+namespace MDS.Gameplay.FSM
 {
-
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
     public class FSM : MDSBehaviour, IValidatable
     {
 
@@ -19,20 +19,20 @@ namespace MDS
         }
 
         public State[] states;
-        public int UnselectedStateIndex = 0;
+        public int? UnselectedStateIndex;
 
         public bool Selected
         {
             get
             {
-                return _currentStateIndex != UnselectedStateIndex;
+                if (UnselectedStateIndex.HasValue)
+                    return _currentStateIndex != UnselectedStateIndex.Value;
+                return true;
             }
         }
 
         private SpriteRenderer _spriteRenderer;
         private int _currentStateIndex;
-
-        private FSMGroup _group;
 
         #region Unity 
 
@@ -59,7 +59,6 @@ namespace MDS
                 _currentStateIndex = 0;
 
             SetSprite();
-            Select();
         }
 
         #endregion
@@ -73,22 +72,14 @@ namespace MDS
 
         public void SetUnselected()
         {
-            _currentStateIndex = UnselectedStateIndex;
+            if (UnselectedStateIndex.HasValue)
+                _currentStateIndex = UnselectedStateIndex.Value;
             SetSprite();
         }
 
-        private void Select()
-        {
-            if(_group != null)
-            {
-                _group.SelectItem(this);
-            }
-        }
+        #endregion
 
-        public void SetGroup(FSMGroup group)
-        {
-            _group = group;
-        }
+        #region IValidatable
 
         public bool ReadyToValidate()
         {
@@ -109,8 +100,6 @@ namespace MDS
             return ret;
 
         }
-
-       
 
         #endregion
     }
