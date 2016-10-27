@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 
+[ExecuteInEditMode]
+[RequireComponent(typeof(BoxCollider2D))]
 public class ProcessAnswerButton : MDSBehaviour
 {
     public delegate void ProcessAnswerDelegate();
@@ -45,4 +47,12 @@ public class ProcessAnswerButton : MDSBehaviour
         if (processAnswerEvent != null)
             processAnswerEvent();
     }
+
+	protected override void OnValidate ()
+	{
+		gameObject.name = "CheckAnswerButton";
+		if(_spriteRenderer != null)
+			_spriteRenderer.sprite = upSprite;
+
+	}
 }
