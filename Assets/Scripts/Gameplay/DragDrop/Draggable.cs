@@ -10,15 +10,29 @@ namespace MDS.Gameplay.DragDrop
     [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
     public class Draggable : MDSBehaviour
     {
+        [InspectorTooltip("Se o draggable tiver um indice preferencial na hora de ser ajustado no group inicial, use esse campo")]
+        public int? PreferredInitialIndex;
+
+        private bool ShowForcePreferredIndex
+        {
+            get
+            {
+                return (PreferredInitialIndex.HasValue);
+            }
+        }
+
+        [InspectorShowIf("ShowForcePreferredIndex"), InspectorTooltip("Esse atributo fará com que apenas o slot de indice = PreferredInitialIndex receba esse draggable")]
+        public bool forcePreferredIndexOnDrop;
+
         public List<string> Labels;
 
         public bool changeSprite;
         public bool changeScale;
 
-        [InspectorShowIf("changeSprite")]
+        [InspectorShowIf("changeSprite"), InspectorTooltip("Sprites usadas em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja nulo, o sprite releasedValue será usado.")]
         public DraggableState<Sprite> spriteState;
 
-        [InspectorShowIf("changeScale")]
+        [InspectorShowIf("changeScale"), InspectorTooltip("Valores de escala do sprite em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja 0, o valor releasedValue será usado.")]
         public DraggableState<float> scaleState;
 
         private Vector3 _touchOffset;
@@ -31,8 +45,15 @@ namespace MDS.Gameplay.DragDrop
         {
             base.Awake();
             _renderer = this.GetComponent<SpriteRenderer>();
-            if(changeScale && (scaleState.draggingValue <= 0f || scaleState.releasedValue <= 0))
-                Debug.LogError("[Draggable] Scale cannot be 0");
+            if(changeScale && (scaleState.draggingValue <= 0f 
+                             || scaleState.releasedValue <= 0))
+                Debug.LogError("[Draggable] Scale (draggingValue e releasedValue) não pode ser 0");
+
+            if(changeScale && scaleState.releasedFinalPositionValue == 0)
+                scaleState.releasedFinalPositionValue = scaleState.releasedValue;
+
+            if(changeSprite && spriteState.releasedFinalPositionValue == null)
+                spriteState.releasedFinalPositionValue = spriteState.releasedValue;
         }
 
         public void OnMouseDown()
@@ -68,15 +89,19 @@ namespace MDS.Gameplay.DragDrop
             {
                 group = hitGroup.transform.GetComponent<BaseDropGroupArea>();
 
-                RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
+                    RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                 LayerMask.GetMask(new[] { "GroupSlot" }));
 
                 if(hitSlot)
                 {
                     slot = hitSlot.transform.GetComponent<DropGroupSlot>();
+
+                    if(slot.IsInitialSlot && forcePreferredIndexOnDrop)
+                        slot = null;
                 }
 
-                group.SetInSlot(this, slot);
+                if (!group.SetInSlot(this, ref slot))
+                    TweenGoto(currentSlot.transform.position);
 
             }
             else
@@ -96,9 +121,21 @@ namespace MDS.Gameplay.DragDrop
                 {
                     _renderer.sortingOrder = 0;
                     if(changeSprite)
-                        _renderer.sprite = spriteState.releasedValue;
+                    {
+                        if(!currentSlot.IsInitialSlot)
+                            _renderer.sprite = spriteState.releasedFinalPositionValue;
+                        else
+                            _renderer.sprite = spriteState.releasedValue;
+                    }
+
+
                     if(changeScale)
-                        LeanTween.scale(gameObject, Vector3.one * scaleState.releasedValue, 0.2f).setEase(LeanTweenType.linear);
+                    {
+                        float value = scaleState.releasedValue;
+                        if(!currentSlot.IsInitialSlot)
+                            value = scaleState.releasedFinalPositionValue;
+                        LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
+                    }
                     pos.z = -1;
                     transform.position = pos;
                 });

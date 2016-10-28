@@ -14,10 +14,17 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public Draggable draggableReference;
 
+        [HideInInspector]
+        public bool IsInitialSlot { get; internal set; }
+
         protected override void Awake()
         {
             base.Awake();
             GetComponent<BoxCollider2D>().isTrigger = true;
+            if(GetComponentInParent<InitialDropGroupArea>() != null)
+                IsInitialSlot = true;
+            else
+                IsInitialSlot = false;
         }
 
         public bool IsBusy

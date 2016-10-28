@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using FullInspector;
+using UnityEngine;
 
 public class ProcessAnswerButton : MDSBehaviour
 {
@@ -14,6 +16,9 @@ public class ProcessAnswerButton : MDSBehaviour
     private Color enabledColor = Color.white;
     private Color disabledColor = new Color(1, 1, 1, 0.5f);
 
+    [SerializeField, InspectorShow, InspectorTooltip("GameObject (child) que será acionado quando estiver habilitado. Se mais de um efeito for necessário, coloque todos como filhos de um GO comum e use-o nessa propriedade")]
+    private GameObject enabledEffectGO;
+
     protected override void Awake()
     {
         base.Awake();
@@ -28,21 +33,35 @@ public class ProcessAnswerButton : MDSBehaviour
 
     public void Disable()
     {
-        _spriteRenderer.sprite = upSprite;
         _spriteRenderer.color = disabledColor;
         _collider.enabled = false;
+
+        if(enabledEffectGO != null)
+            enabledEffectGO.SetActive(false);
     }
 
     public void Enable()
     {
-        _spriteRenderer.sprite = downSprite;
         _spriteRenderer.color = enabledColor;
         _collider.enabled = true;
+
+        if(enabledEffectGO != null)
+            enabledEffectGO.SetActive(true);
     }
 
     public void OnMouseUp()
     {
         if (processAnswerEvent != null)
             processAnswerEvent();
+        _spriteRenderer.sprite = upSprite;
     }
+
+    public void OnMouseDown()
+    {
+        _spriteRenderer.sprite = downSprite;
+    }
+}
+
+internal class InspectorShowAttribute : Attribute
+{
 }

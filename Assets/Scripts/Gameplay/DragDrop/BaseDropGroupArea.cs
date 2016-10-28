@@ -1,6 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 using FullInspector;
+using System;
+using System.Collections.Generic;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -8,17 +10,49 @@ namespace MDS.Gameplay.DragDrop
     [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
     public abstract class BaseDropGroupArea : MDSBehaviour
     {
-        [ShowInInspector, InspectorDisabled]
-        protected DropGroupSlot[] slots;
 
-        public bool SetInSlot(Draggable draggable, DropGroupSlot slot)
+        [ShowInInspector, InspectorDisabled]
+        protected List<DropGroupSlot> slots;
+
+        public virtual bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
         {
             if(slot == null)
-                slot = slots.FirstOrDefault(s => s.IsBusy == false);
+            {
+                if(draggable.forcePreferredIndexOnDrop)
+                {
+                    if(draggable.PreferredInitialIndex.HasValue)
+                        slot = slots.FirstOrDefault(s => s.IsInitialSlot == true && slots.IndexOf(s) == draggable.PreferredInitialIndex.Value);
+                }
+                else
+                {
+                    slot = slots.FirstOrDefault(s => s.IsBusy == false);
+                }
+            }
 
             if(slot == null)
                 return false;
 
+            if(draggable.forcePreferredIndexOnDrop)
+            {
+                if(slot.IsInitialSlot)
+                {
+                    if(draggable.PreferredInitialIndex.HasValue)
+                    {
+                        int slotIndex = slots.IndexOf(slot);
+                        if(slotIndex != draggable.PreferredInitialIndex.Value)
+                            return false;
+                    }
+                    else
+                    {
+                        Debug.LogError("Draggable com 'forcePreferredIndexOnDrop' porém sem 'PreferredInitialIndex'");
+                        return false;
+                    }
+                }
+            }
+
+            // todo:
+            // da forma como está, ainda é possível 'forçar' um draggable no slot inicial errado 
+            // simplesmente fazendo o swap (soltando um draggable em um slot final ocupado por outro draggable)
             DraggableUtilities.SetDraggableInSlot(draggable, slot);
 
             return true;
@@ -30,10 +64,10 @@ namespace MDS.Gameplay.DragDrop
             FillSlots();
         }
 
-        [InspectorButton, InspectorTooltip("Use esse recurso para preencher os 'slots' com os DragGroupSlot filhos")]
+        [InspectorButton, InspectorTooltip("Use esse recurso para preencher os 'slots' com os DropGroupSlot filhos")]
         public void FillSlots()
         {
-            slots = transform.GetComponentsInChildren<DropGroupSlot>();
+            slots = transform.GetComponentsInChildren<DropGroupSlot>().ToList();
         }
 
 
