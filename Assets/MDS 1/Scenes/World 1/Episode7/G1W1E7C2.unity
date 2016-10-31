@@ -99,11 +99,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.998
+      value: -0.932
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.356
+      value: -0.497
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.z
@@ -297,7 +297,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 307012151}
-  m_RootOrder: 1
+  m_RootOrder: 0
 --- !u!61 &273045741
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -327,15 +327,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: cf76febc42db60d419b3b6a7e159e90b, type: 3}
   - {fileID: 21300000, guid: c215632210f93cf4a8945003f2dbc615, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
-  - '{"releasedValue":1.0,"draggingValue":1.2}'
+  - 0
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - placa
-  changeSprite: 1
-  changeScale: 0
+  changeSprite: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
 --- !u!1 &294732249
 GameObject:
@@ -397,6 +400,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 307012151}
+  - 114: {fileID: 307012152}
   m_Layer: 0
   m_Name: Botoes
   m_TagString: Untagged
@@ -415,13 +419,28 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
-  - {fileID: 1054384629}
   - {fileID: 273045740}
-  - {fileID: 740302574}
   - {fileID: 445639379}
   - {fileID: 2053806940}
+  - {fileID: 740302574}
+  - {fileID: 1054384629}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+--- !u!114 &307012152
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 307012150}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcc69aeebf4d80449edf0c199bf5f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  m_setPositions: 0
 --- !u!1 &321610432
 GameObject:
   m_ObjectHideFlags: 0
@@ -572,7 +591,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 307012151}
-  m_RootOrder: 3
+  m_RootOrder: 1
 --- !u!61 &445639380
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -602,15 +621,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: a2b23f3ecc9dbce43a5afd22a8a4bcdd, type: 3}
   - {fileID: 21300000, guid: 34440432187764642bcd2df36594a8af, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
-  - '{"releasedValue":1.0,"draggingValue":1.2}'
+  - 1
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - trapezio
-  changeSprite: 1
-  changeScale: 0
+  changeSprite: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
 --- !u!1 &681603848
 GameObject:
@@ -659,6 +681,7 @@ MonoBehaviour:
   - {fileID: 2053806941}
   - {fileID: 2108281810}
   - {fileID: 294732250}
+  - {fileID: 307012152}
   _values:
   - _keys: []
     _values: []
@@ -714,6 +737,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 294732250}
+  - _keys: []
+    _values: []
+    _target: {fileID: 307012152}
 --- !u!114 &681603850
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -744,6 +770,7 @@ MonoBehaviour:
   - {fileID: 2053806941}
   - {fileID: 2108281810}
   - {fileID: 294732250}
+  - {fileID: 307012152}
   _values:
   - _keys: []
     _values: []
@@ -802,6 +829,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 294732250}
+  - _keys: []
+    _values: []
+    _target: {fileID: 307012152}
 --- !u!4 &681603851
 Transform:
   m_ObjectHideFlags: 1
@@ -941,7 +971,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 307012151}
-  m_RootOrder: 2
+  m_RootOrder: 3
 --- !u!61 &740302575
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -971,15 +1001,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 19ebe49132226cb438fe4a14436d47e5, type: 3}
   - {fileID: 21300000, guid: b7940f1f17ef4c040a2d320978dc5930, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
-  - '{"releasedValue":1.0,"draggingValue":1.2}'
+  - 3
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
-  changeSprite: 1
-  changeScale: 0
+  changeSprite: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
 --- !u!1 &884470903
 GameObject:
@@ -1104,11 +1137,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.93
+      value: 0.03
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.417
+      value: -0.455
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1149,6 +1182,16 @@ Prefab:
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
       value: DropGroupSlot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[0]
+      value: false
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: draggableReference
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
@@ -1222,7 +1265,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 307012151}
-  m_RootOrder: 0
+  m_RootOrder: 4
 --- !u!61 &1054384630
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1252,15 +1295,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c8d32d31e074fc64f927cf8ec4cd3f20, type: 3}
   - {fileID: 21300000, guid: febaf73032ec890439698c5291816e4c, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
-  - '{"releasedValue":1.0,"draggingValue":1.2}'
+  - 4
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - bola
-  changeSprite: 1
-  changeScale: 0
+  changeSprite: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
 --- !u!1001 &1216557402
 Prefab:
@@ -1451,7 +1497,7 @@ GameObject:
   - 114: {fileID: 1541676446}
   - 61: {fileID: 1541676447}
   m_Layer: 0
-  m_Name: CheckAnswer
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1487,7 +1533,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 105c017062d48ac48967f0897a4d227a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &1541676445
@@ -1519,13 +1565,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 5e204c046b26e914aa29d6d1c9bba0b2, type: 3}
   upSprite: {fileID: 21300000, guid: 105c017062d48ac48967f0897a4d227a, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &1541676447
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1541676443}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1542,11 +1589,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.034
+      value: 0.866
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 0.391
+      value: 0.41
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1699,11 +1746,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -0.929
+      value: -1.004
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.53
+      value: 0.36
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.z
@@ -1821,11 +1868,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 0.035
+      value: -0.021
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -0.434
+      value: 0.381
       objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.z
@@ -2001,7 +2048,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 307012151}
-  m_RootOrder: 4
+  m_RootOrder: 2
 --- !u!114 &2053806941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2017,15 +2064,18 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 60c07180d5658144bb0b841396b52607, type: 3}
   - {fileID: 21300000, guid: aed38943f3c03a344a46ea8aa694c898, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
-  - '{"releasedValue":1.0,"draggingValue":1.2}'
+  - 2
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
-  changeSprite: 1
-  changeScale: 0
+  changeSprite: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
 --- !u!61 &2053806942
 BoxCollider2D:

@@ -398,14 +398,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 885997348}
-  - _keys:
-    - DefaultBehaviorEditor.slots.EditProperty
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 175868318}
   - _keys: []
     _values: []
@@ -447,7 +441,7 @@ GameObject:
   - 114: {fileID: 672481126}
   - 61: {fileID: 672481127}
   m_Layer: 0
-  m_Name: CheckAnswer
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -483,7 +477,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: b15b75526f6e3c849889accc53e4cc0a, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &672481125
@@ -515,13 +509,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: c6c43eb5a8d49234c93dabced50d0bd1, type: 3}
   upSprite: {fileID: 21300000, guid: b15b75526f6e3c849889accc53e4cc0a, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &672481127
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 672481123}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -669,16 +664,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 2d3350026f8c5d54daea27cab1a2fd98, type: 3}
+  - {fileID: 21300000, guid: 2f0eafe4507dc114bb1b6449530dc6c8, type: 3}
+  - {fileID: 21300000, guid: 2f0eafe4507dc114bb1b6449530dc6c8, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - preso
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &885997349
@@ -722,11 +723,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 3.24
+      value: 3.12
       objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.31
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -766,6 +767,11 @@ Prefab:
       propertyPath: m_Name
       value: Validatable DropGroupArea (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: true
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
   m_IsPrefabParent: 0
@@ -784,11 +790,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.x
-      value: -2.92
+      value: -3.01
       objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.31
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.z
@@ -823,6 +829,11 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 3.08
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: true
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}

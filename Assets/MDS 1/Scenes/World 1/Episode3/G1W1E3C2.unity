@@ -165,13 +165,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: af5e60326da3c3842a0fdff881ac83f1, type: 3}
+  - {fileID: 21300000, guid: 6f7d4d528e270ab48b9973c47eb8ac6a, type: 3}
+  - {fileID: 21300000, guid: 6f7d4d528e270ab48b9973c47eb8ac6a, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
+  - 2
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
-  - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
   changeSprite: 1
   changeScale: 0
@@ -200,8 +206,9 @@ GameObject:
   - 4: {fileID: 298425909}
   - 212: {fileID: 298425908}
   - 114: {fileID: 298425910}
+  - 61: {fileID: 298425911}
   m_Layer: 0
-  m_Name: ProcessAnswerButton
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -237,7 +244,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: eac32f886317fc548a5f4675121c1726, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &298425909
@@ -247,7 +254,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 298425907}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 4.1, y: 2.87, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -267,8 +274,23 @@ MonoBehaviour:
   _objectReferences: []
   _serializedStateKeys: []
   _serializedStateValues: []
-  downSprite: {fileID: 0}
-  upSprite: {fileID: 0}
+  downSprite: {fileID: 21300000, guid: d4e0173c10be265419b971b00ea59d73, type: 3}
+  upSprite: {fileID: 21300000, guid: eac32f886317fc548a5f4675121c1726, type: 3}
+  enabledEffectGO: {fileID: 0}
+--- !u!61 &298425911
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 298425907}
+  m_Enabled: 0
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.71, y: 1.32}
 --- !u!1 &302224863
 GameObject:
   m_ObjectHideFlags: 0
@@ -323,6 +345,8 @@ MonoBehaviour:
   - '"AND"'
   - false
   - 
+  _freezeAfterDrop: 0
+  _enableValidationOnlyIfSpecifcAmount: 0
 --- !u!212 &302224866
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -498,6 +522,9 @@ MonoBehaviour:
   - {fileID: 1108738825}
   - {fileID: 298425910}
   - {fileID: 1410129034}
+  - {fileID: 109730563}
+  - {fileID: 1476632704}
+  - {fileID: 838786166}
   _values:
   - _keys: []
     _values: []
@@ -535,6 +562,15 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1410129034}
+  - _keys: []
+    _values: []
+    _target: {fileID: 109730563}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1476632704}
+  - _keys: []
+    _values: []
+    _target: {fileID: 838786166}
 --- !u!114 &382903266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -559,6 +595,9 @@ MonoBehaviour:
   - {fileID: 1108738825}
   - {fileID: 298425910}
   - {fileID: 1410129034}
+  - {fileID: 109730563}
+  - {fileID: 1476632704}
+  - {fileID: 838786166}
   _values:
   - _keys: []
     _values: []
@@ -605,6 +644,15 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1410129034}
+  - _keys: []
+    _values: []
+    _target: {fileID: 109730563}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1476632704}
+  - _keys: []
+    _values: []
+    _target: {fileID: 838786166}
 --- !u!4 &382903267
 Transform:
   m_ObjectHideFlags: 1
@@ -647,8 +695,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - IsInitialSlot
+  _serializedStateValues:
+  - false
   draggableReference: {fileID: 0}
 --- !u!61 &578824642
 BoxCollider2D:
@@ -781,6 +831,7 @@ GameObject:
   serializedVersion: 4
   m_Component:
   - 4: {fileID: 838786165}
+  - 114: {fileID: 838786166}
   m_Layer: 0
   m_Name: Draggables
   m_TagString: Untagged
@@ -805,6 +856,21 @@ Transform:
   - {fileID: 1476632703}
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!114 &838786166
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 838786164}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: edcc69aeebf4d80449edf0c199bf5f43, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  m_setPositions: 0
 --- !u!1 &1108738824
 GameObject:
   m_ObjectHideFlags: 0
@@ -913,8 +979,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - IsInitialSlot
+  _serializedStateValues:
+  - false
   draggableReference: {fileID: 0}
 --- !u!1 &1205751057
 GameObject:
@@ -972,8 +1040,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - IsInitialSlot
+  _serializedStateValues:
+  - false
   draggableReference: {fileID: 0}
 --- !u!1 &1356886902
 GameObject:
@@ -1050,13 +1120,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4ea693c80ec91c74e9096a5957214e30, type: 3}
+  - {fileID: 21300000, guid: 6768ce29e8cf1864a989697743b9000a, type: 3}
+  - {fileID: 21300000, guid: 6768ce29e8cf1864a989697743b9000a, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":null,"draggingValue":null}'
+  - 1
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
   changeSprite: 1
   changeScale: 0
@@ -1104,8 +1180,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - IsInitialSlot
+  _serializedStateValues:
+  - false
   draggableReference: {fileID: 0}
 --- !u!61 &1358720662
 BoxCollider2D:
@@ -1209,13 +1287,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 5e5c2d7b645fc29499990c894304fd48, type: 3}
+  - {fileID: 21300000, guid: 1cd804ab5fd08a44cbeb19d958f0c1ad, type: 3}
+  - {fileID: 21300000, guid: 1cd804ab5fd08a44cbeb19d958f0c1ad, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":null,"draggingValue":null}'
+  - 0
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - ponteCorreta
   changeSprite: 1
@@ -1351,13 +1435,19 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: e3b0e3e85ce770947bbb3c0cbd6d6cd7, type: 3}
+  - {fileID: 21300000, guid: 078200991a6678a4dbfd8c12c9fb7784, type: 3}
+  - {fileID: 21300000, guid: 078200991a6678a4dbfd8c12c9fb7784, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
+  - 3
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
-  - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
   changeSprite: 1
   changeScale: 0
@@ -1494,8 +1584,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - IsInitialSlot
+  _serializedStateValues:
+  - false
   draggableReference: {fileID: 0}
 --- !u!1 &1969357477
 GameObject:
