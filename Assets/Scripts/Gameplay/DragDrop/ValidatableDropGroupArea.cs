@@ -47,13 +47,15 @@ namespace MDS.Gameplay.DragDrop
             bool ret = false;
 
             var readyCount = slots.Where(s => s.ReadyToValidate()).ToList().Count;
-            
 
             if(readyCount > 0)
             {
                 if(_enableValidationOnlyIfSpecifcAmount)
                 {
-                    ret = (readyCount == SpecificAmount);
+					if (readyCount == SpecificAmount)
+						ret = true;
+					else
+						ret = false;
                 }
                 else
                 {
