@@ -18,14 +18,11 @@ public class DEBUGDS : MonoBehaviour {
 
     public void DEBUG_SET_EPISODE(int num)
     {
-        //DSGlobal.episode = num.ToString();
-        //DSGlobal.minigame = "";
         SceneManager.LoadScene("G" + DSGlobal.game + "W" + DSGlobal.world + "E" + num);
     }
 
     public void DEBUG_SET_CHALLENGE(string scene)
     {
-        //DSGlobal.minigame = num.ToString();
         SceneManager.LoadScene(scene);
     }
 
