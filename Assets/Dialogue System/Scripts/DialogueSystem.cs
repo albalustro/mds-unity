@@ -2,17 +2,16 @@
 using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
-using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 
-
 public class DialogueSystem : MDSBehaviour {
+
+    public static DialogueSystem instance = null;
 
     //Componente que gerencia o canvas
     public Dialogue dialogue;
-    //Array com todos os registros de diálogo (vindo do json)
-    //public DialogueEntry[] _dialogues;
+    //Scriptable Object com todas as entradas de diálogo do Game/Mundo em questão
     private DialogueList SODialogue;
     //Instância para o arquivo de gerenciamento global do Dialogue System
     private DSGlobal global;
@@ -25,39 +24,45 @@ public class DialogueSystem : MDSBehaviour {
     //Audio clip tocado ao clicar no botão de avançar conversa
     public AudioClip nextBtnClickFx;
 
-    private float delay;
-
     private AudioSource audioSource; //<<<<<<<<<< provisório até implementarmos o singleton do Audio Manager
 
+    //Lista com os diálogos necessários apenas para o contexto atual
     public List<DialogueEntry> _currentDialogues;
+    //Índice do diálogo sendo exibido
     private int _currentDialogueIndex;
 
     protected override void Awake()
     {
         base.Awake();
+
+        if (instance == null)
+            instance = this;
+        else if (instance != this)
+            Destroy(gameObject);
+
         audioSource = GetComponent<AudioSource>(); //<<<<<<<<<< provisório até implementarmos o singleton do Audio Manager
-        delay = 0;
+        
         //Será substituído pelo componente de parse de scene
         DSGlobal.game = SceneManager.GetActiveScene().name.Substring(1, 1);
         DSGlobal.world = SceneManager.GetActiveScene().name.Substring(3, 1);
         DSGlobal.episode = SceneManager.GetActiveScene().name.Substring(5, 1);
+
+        //Verifica se a scene aberta é de episódio ou de challenge
         if (SceneManager.GetActiveScene().name.Length > 6)
         {
+            //Scene de Challenge
             DSGlobal.slug = "intro";
             DSGlobal.challenge = Convert.ToInt32(SceneManager.GetActiveScene().name.Substring(7, 1));
             DSGlobal.minigame = DSGlobal.challenge.ToString();
         }
         else
         {
+            //Scene de Episódio
             if (DSGlobal.challenge == 0)
-            {
-                delay = 1;
                 DSGlobal.challenge = 1;
-            }
             DSGlobal.minigame = "";
             DSGlobal.slug = "minigame" + DSGlobal.challenge;
         }
-        print(DSGlobal.slug);
         InitializeDialogueSystem();
 
         //atribuindo uma ação ao botão 'Next'
@@ -72,26 +77,19 @@ public class DialogueSystem : MDSBehaviour {
         _soPath = "Assets/Dialogue System/SO/G" + DSGlobal.game + "W" + DSGlobal.world + ".asset";
 
         //DSGlobal.id = 0;      //Ainda não sei como utilizar
+        DSGlobal.auxCount = 0;
 
-        //carrega o json e preenche o array de diálogos (talvez saia se formos utilizar o scriptable object
-        //LoadDataFromJson load = new LoadDataFromJson();
-        //_dialogues = load.LoadFromJson("Assets/Dialogue System/Json/G" + DSGlobal.game + "W" + DSGlobal.world + ".json");
+        //Carrega o scriptable object correspondente ao Game e Mundo escolhido pelo jogador (puxando pelo nome da Scene)
         SODialogue = AssetDatabase.LoadAssetAtPath(_soPath, typeof(DialogueList)) as DialogueList;
 
         //Gera a lista de diálogos pertinentes ao contexto atual
         _currentDialogues = new List<DialogueEntry>();
         _currentDialogues.Clear();
         _currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
-        StartCoroutine("Teste");
-    }
-
-    IEnumerator Teste()
-    {
-        yield return new WaitForSeconds(1);
         OpenDialogueBox();
     }
 
-    public void OpenDialogueBox()
+    void OpenDialogueBox()
     {
         _currentDialogueIndex = 0;
         dialogue.gameObject.SetActive(true);
@@ -99,12 +97,16 @@ public class DialogueSystem : MDSBehaviour {
         ChangeDialog();
     }
 
-    public void CloseDialogueBox()
+    void CloseDialogueBox()
     {
         dialogue.gameObject.SetActive(false);
         DSGlobal.isActive = false;
     }
 
+    /// <summary>
+    /// Método invocado quando o jogador clica na seta para avançar o diálogo.
+    /// Avança até a última mensagem da lista de diálogos do contexto e, ao terminar, fecha a caixa de diálogo
+    /// </summary>
     public void NetxDialogue()
     {
         audioSource.clip = nextBtnClickFx;
@@ -116,30 +118,55 @@ public class DialogueSystem : MDSBehaviour {
             ChangeDialog();
     }
 
-    public void GetVictoryEntry()
+    /// <summary>
+    /// Exibe mensagem de 'victory' do diálogo atual quando o jogador acerta um desafio
+    /// </summary>
+    public void ShowVictoryDialogueMessage(int victoryAmount = 0)
     {
-        DSGlobal.challenge++;
-        DSGlobal.slug = "victory";
+        if (victoryAmount == 0)
+        {
+            DSGlobal.slug = "victory";
+            DSGlobal.challenge++;
+            DSGlobal.challengeFinished = true;
+        }
+        else
+        {
+            //desafios múltiplos
+        }
         _currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
-        if (_currentDialogues.Count <= 0)
-        {
-            _currentDialogues = SODialogue.dialogueList.Where(d => d.episode == DSGlobal.episode && d.slug.Remove(d.slug.Length - 1) == "victory" && d.minigame == DSGlobal.minigame).ToList();
-        }
         OpenDialogueBox();
     }
 
-    public void GetErrorEntry()
+    /// <summary>
+    /// Exibe mensagem de 'error' do diálogo atual quando o jogador erra um desafio 
+    /// </summary>
+    public void ShowErrorDialogueMessage(int errorAmount = 0)
     {
-        DSGlobal.slug = "error";
-        //_currentDialogues = GetDialoguesForCurrentContext();
-        if (_currentDialogues.Count <= 0)
+        if (errorAmount == 0)
         {
-            //_currentDialogues = _dialogues.Where(d => d.episode == DSGlobal.episode && d.slug.Substring(0,5) == "error" && d.minigame == DSGlobal.minigame).ToList();
+            DSGlobal.slug = "error";
+            _currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
+            //Resolve automaticamente para o jogador e libera o botão de validar (nesse caso de error simples, não tem hint). Após validado, mostra mensagem de vitória e finaliza o desafio.
+        }
+        else
+        {
+            DSGlobal.auxCount++;
+            DSGlobal.slug = "error" + DSGlobal.auxCount;
+            _currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
+            if (DSGlobal.auxCount >= errorAmount)
+            {
+                DSGlobal.auxCount = errorAmount;
+                _currentDialogues = SODialogue.dialogueList.Where(d => d.episode == DSGlobal.episode && (d.slug == DSGlobal.slug || d.slug == "hint") && d.minigame == DSGlobal.minigame).ToList();
+                //Resolve automaticamente para o jogador e libera o botão de validar
+            }
         }
         OpenDialogueBox();
     }
 
-    public void GetHintEntry()
+    /// <summary>
+    /// Exibe mensagem de 'hint' do diálogo atual quando 
+    /// </summary>
+    public void ShowHintDialogueMessage()
     {
         //GetDialoguesForCurrentContext();
     }
@@ -166,14 +193,20 @@ public class DialogueSystem : MDSBehaviour {
     }
 
     /// <summary>
-    /// Método utilizado para criar uma lista dos diálogos do contexto atual
+    /// Cria uma lista de todos os diálogos do episódio atual
     /// </summary>
-    /// <returns>Lista de DialogueEntry pertinente ao contexto ativo</returns>
+    /// <returns>Lista de DialogueEntry do episódio sendo jogado</returns>
     public List<DialogueEntry> GetDialoguesForCurrentContext()
     {
         return SODialogue.dialogueList.Where(d => d.episode == DSGlobal.episode).ToList();
     }
 
+    /// <summary>
+    /// Cria uma lista dos diálogo do contexto atual baseado em parâmetros
+    /// </summary>
+    /// <param name="slug">Tag slug no json de diálogos (victory, error ou hint)</param>
+    /// <param name="minigame">Número do desafio (challenge). Null quando está na tela de episódio.</param>
+    /// <returns>Lista de DialogueEntry pertinente ao contexto ativo</returns>
     public List<DialogueEntry> GetDialoguesForCurrentContext(string slug, string minigame)
     {
         return SODialogue.dialogueList.Where(d => d.episode == DSGlobal.episode && d.slug == slug && d.minigame == minigame).ToList();

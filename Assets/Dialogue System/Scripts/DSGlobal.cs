@@ -6,5 +6,7 @@
     public static string slug;
     public static int id;
     public static int challenge = 1;
-    public static bool isActive;        //quando true, desativar controle do usuáro sobre o cenário (deve interagir apenas com o canvas)
+    public static bool isActive;            //quando true, desativar controle do usuáro sobre o cenário (deve interagir apenas com o canvas)
+    public static bool challengeFinished;   //quando true, carrega próxima scene automaticamente ao fechar a caixa de diálogo
+    public static int auxCount;
 }
