@@ -100,14 +100,15 @@ public class DialogueSystem : MDSBehaviour {
     void CloseDialogueBox()
     {
         dialogue.gameObject.SetActive(false);
-        DSGlobal.isActive = false;
+        DSGlobal.isActive = false; //esse cara nao faz mais sentido
+		//disparar um evento informando que o dialogo esta ativo ou nao
     }
 
     /// <summary>
     /// Método invocado quando o jogador clica na seta para avançar o diálogo.
     /// Avança até a última mensagem da lista de diálogos do contexto e, ao terminar, fecha a caixa de diálogo
     /// </summary>
-    public void NetxDialogue()
+    public void NextDialogue()
     {
         audioSource.clip = nextBtnClickFx;
         audioSource.Play();
@@ -127,7 +128,7 @@ public class DialogueSystem : MDSBehaviour {
         {
             DSGlobal.slug = "victory";
             DSGlobal.challenge++;
-            DSGlobal.challengeFinished = true;
+            //DSGlobal.challengeFinished = true;
         }
         else
         {
@@ -140,13 +141,14 @@ public class DialogueSystem : MDSBehaviour {
     /// <summary>
     /// Exibe mensagem de 'error' do diálogo atual quando o jogador erra um desafio 
     /// </summary>
-    public void ShowErrorDialogueMessage(int errorAmount = 0)
+    public void ShowErrorDialogueMessage(int errorAmount = 0) //o contador vai estar no challenge
     {
         if (errorAmount == 0)
         {
             DSGlobal.slug = "error";
             _currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
             //Resolve automaticamente para o jogador e libera o botão de validar (nesse caso de error simples, não tem hint). Após validado, mostra mensagem de vitória e finaliza o desafio.
+			//nao é responsabilidade do dialogue
         }
         else
         {
@@ -156,11 +158,12 @@ public class DialogueSystem : MDSBehaviour {
             if (DSGlobal.auxCount >= errorAmount)
             {
                 DSGlobal.auxCount = errorAmount;
-                _currentDialogues = SODialogue.dialogueList.Where(d => d.episode == DSGlobal.episode && (d.slug == DSGlobal.slug || d.slug == "hint") && d.minigame == DSGlobal.minigame).ToList();
-                //Resolve automaticamente para o jogador e libera o botão de validar
+				_currentDialogues = GetDialoguesForCurrentContext(DSGlobal.slug, DSGlobal.minigame);
+				//_currentDialogues = _currentDialogues.Concat (_tempDialogueList);
+				//Resolve automaticamente para o jogador e libera o botão de validar => nao é responsabilidade do dialogue
             }
         }
-        OpenDialogueBox();
+		ShowHintDialogueMessage ();
     }
 
     /// <summary>
@@ -168,7 +171,13 @@ public class DialogueSystem : MDSBehaviour {
     /// </summary>
     public void ShowHintDialogueMessage()
     {
-        //GetDialoguesForCurrentContext();
+		List<DialogueEntry> _tempDialogueList = GetDialoguesForCurrentContext("hint", DSGlobal.minigame);
+		if (_tempDialogueList.Count <= 0)
+		{
+			_tempDialogueList = GetDialoguesForCurrentContext("hint" + DSGlobal.auxCount, DSGlobal.minigame);
+		}
+		_currentDialogues.Add (_tempDialogueList[0]);
+		OpenDialogueBox();
     }
 
     /// <summary>
