@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
+using UnityEngine;
 
 namespace MDS.Validators
 {
@@ -34,8 +35,9 @@ namespace MDS.Validators
                     ret = Rules.All(r => r.ValidatableObject.ReadyToValidate());
                     break;
 
-                case OperationLogic.OR:
-                    ret = Rules.Any(r => r.ValidatableObject.ReadyToValidate());
+			case OperationLogic.OR:
+				ret = Rules.Any (r => r.ValidatableObject.ReadyToValidate ());
+				Debug.Log (ret);
                     break;
             }
 
