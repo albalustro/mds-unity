@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using MDS.Validators;
 using System;
 using MDS.Validators.Interfaces;
+using FullInspector;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -11,8 +12,35 @@ namespace MDS.Gameplay.DragDrop
     public class DropGroupSlot : MDSBehaviour, IValidatable
     {
 
+        [SerializeField]
+        private bool _changeSprite;
+
+        [SerializeField, InspectorShowIf("_changeSprite")]
+        private SlotState<Sprite> _sprite;
+
+        private SpriteRenderer _spriteRenderer;
+
+        private Draggable _draggableReference;
+
         [HideInInspector]
-        public Draggable draggableReference;
+        public Draggable draggableReference
+        {
+            get
+            {
+                return _draggableReference;
+            }
+            set
+            {
+                _draggableReference = value;
+                if (_changeSprite)
+                {
+                    if(_draggableReference == null)
+                        _spriteRenderer.sprite = _sprite.EmptyValue;
+                    else
+                        _spriteRenderer.sprite = _sprite.FilledValue;
+                }
+            }
+        }
 
         [HideInInspector]
         public bool IsInitialSlot { get; internal set; }
@@ -25,6 +53,18 @@ namespace MDS.Gameplay.DragDrop
                 IsInitialSlot = true;
             else
                 IsInitialSlot = false;
+
+            if (_changeSprite)
+            {
+                _spriteRenderer = GetComponent<SpriteRenderer>();
+                if(_spriteRenderer == null)
+                {
+                    _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
+                    _spriteRenderer.sortingLayerName = "DropGroup";
+                    _spriteRenderer.sortingOrder = 1;
+                }
+                _spriteRenderer.sprite = _sprite.EmptyValue;
+            }
         }
 
         public bool IsBusy
@@ -69,4 +109,11 @@ namespace MDS.Gameplay.DragDrop
 
         #endregion
     }
+
+    public class SlotState<T>
+    {
+        public T FilledValue { get; set; }
+        public T EmptyValue { get; set; }
+    }
+
 }

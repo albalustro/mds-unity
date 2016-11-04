@@ -63,14 +63,17 @@ public class ProcessAnswerButton : MDSBehaviour
         _spriteRenderer.sprite = downSprite;
     }
 
-	protected override void OnValidate ()
-	{
-		gameObject.name = "CheckAnswerButton";
-		if(_spriteRenderer != null)
-			_spriteRenderer.sprite = upSprite;
+    protected override void OnValidate()
+    {
+        base.OnValidate();
 
-	}
+        gameObject.name = "CheckAnswerButton";
+        if(_spriteRenderer != null)
+            _spriteRenderer.sprite = upSprite;
+
+    }
 }
+
 
 internal class InspectorShowAttribute : Attribute
 {

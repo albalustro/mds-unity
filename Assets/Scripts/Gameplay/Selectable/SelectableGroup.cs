@@ -17,6 +17,10 @@ namespace MDS.Gameplay.Selectable
             Multiple
         }
 
+        [SerializeField, InspectorTooltip("Propriedade para indicar quantos elementos podem estar selecionados simultaneamente")]
+        private int? _maxSelected;
+        private int _curSelectedAmount;
+
         #region IValidatableGroup
 
         [InspectorMargin(10)]
@@ -70,7 +74,14 @@ namespace MDS.Gameplay.Selectable
         public void SelectItem(Selectable s)
         {
             if(groupSelectionType == GroupSelectionType.Single)
-                UnselectOthers(s);            
+                UnselectOthers(s);     
+            else
+            {
+                if (_maxSelected.HasValue)
+                {
+
+                }
+            }       
         }
 
         private void UnselectOthers(Selectable s)
@@ -80,6 +91,22 @@ namespace MDS.Gameplay.Selectable
                 if (_selectables[i] != s)
                     _selectables[i].SetUnselected();
             }
+        }
+
+        internal bool CanSelect()
+        {
+            if(groupSelectionType == GroupSelectionType.Multiple)
+            {
+                if(!_maxSelected.HasValue)
+                    return true;
+
+                int curSelAmount = GetSelectedMultiple().Count;
+
+                return curSelAmount < _maxSelected.Value;
+                
+            }
+
+            return true;
         }
 
         #region IValidatable
