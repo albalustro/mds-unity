@@ -1,12 +1,46 @@
-﻿using MDS.Validators.Enum;
+﻿using System;
+using System.Collections;
+using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
 using UnityEngine;
 
 namespace MDS.Core
 {
+    [Serializable]
+    public class SolveChallenge : IAction
+    {
+        public IEnumerator Execute(Action callback)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    [Serializable]
+    public class OpenDialogue : IAction
+    {
+        public Slug[] slugs { get; set; }
+        public IEnumerator Execute(Action callback)
+        {
+            DialogueSystem.instance.ShowDialogueMessage(slugs);
+            yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
+        }
+    }
+
+    [Serializable]
+    public class ErrorHandlerr : IAction
+    {
+        public IAction[] actions;
+        public IEnumerator Execute(Action callback)
+        {
+            foreach (var item in actions)
+            {
+                yield return item.Execute();
+            }
+        }
+    }
+
     public class Challenge : MDSBehaviour
     {
-
         // ações executadas automaticamente quando
         // entra no desafio (ANTES do desafio ser jogado)
         // ex: sequencias de dialogos, animacoes, etc
@@ -14,6 +48,8 @@ namespace MDS.Core
 
         // validadores do desafio
         public IValidator[] validatorsList;
+
+        public IAction[] errorActionList;
 
         // ações executadas quando obtem sucesso na valicao
         public IAction[] posVictoryActionsList;
@@ -31,24 +67,48 @@ namespace MDS.Core
             btn.processAnswerEvent += ProcessResult;
         }
 
+        public IEnumerator Start()
+        {
+            foreach (var item in preActionsList)
+            {
+                yield return item.Execute();
+            }
+        }
+
         public void Update()
         {
-            if(validatorsList[0].ReadyToValidate())
+            if (validatorsList[0].ReadyToValidate())
                 btn.Enable();
             else
                 btn.Disable();
         }
 
+        IEnumerator Victory()
+        {
+            foreach (var item in posVictoryActionsList)
+            {
+                yield return item.Execute();
+            }
+        }
+
+        IEnumerator Lose()
+        {
+            foreach (var item in errorActionList)
+            {
+                yield return item.Execute();
+            }
+        }
+
         void ProcessResult()
         {
             ValidatorResult _validatorResult = validatorsList[0].Validate();
-            if(_validatorResult == ValidatorResult.Victory)
+            if (_validatorResult == ValidatorResult.Victory)
             {
-                print("Venceu");
+                StartCoroutine(Victory());
             }
             else
             {
-                print("Falhou");
+                StartCoroutine(Lose());
             }
         }
     }
