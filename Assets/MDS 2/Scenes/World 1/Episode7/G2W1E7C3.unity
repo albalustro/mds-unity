@@ -137,7 +137,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 5b4018e6399191a4793ff4ec66cf2562, type: 3}
+  m_Sprite: {fileID: 21300000, guid: db2e2186086ab9f43b6458239424e78d, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -165,13 +165,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 5b4018e6399191a4793ff4ec66cf2562, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: db2e2186086ab9f43b6458239424e78d, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 5b4018e6399191a4793ff4ec66cf2562, type: 3}
+  - {fileID: 21300000, guid: db2e2186086ab9f43b6458239424e78d, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels:
   - certo
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &11383714
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -233,7 +250,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 0751753a86903cc4790d3faca631224f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 92b99c52fc0233641a6a885930a97ecf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -275,12 +292,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 0751753a86903cc4790d3faca631224f, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 92b99c52fc0233641a6a885930a97ecf, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 0751753a86903cc4790d3faca631224f, type: 3}
+  - {fileID: 21300000, guid: 92b99c52fc0233641a6a885930a97ecf, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &257302434
 Prefab:
   m_ObjectHideFlags: 0
@@ -641,7 +675,7 @@ GameObject:
   - 114: {fileID: 1029082774}
   - 61: {fileID: 1029082773}
   m_Layer: 0
-  m_Name: CheckAnswer
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -677,7 +711,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ad4015810f909af4384f588400ee7fc7, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &1029082772
@@ -699,7 +733,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1029082770}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -723,6 +757,7 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 644224e691eb6044e8e0b5270d421333, type: 3}
   upSprite: {fileID: 21300000, guid: ad4015810f909af4384f588400ee7fc7, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!1 &1501693623
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,11 +961,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 11383713}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 1810455524}
   - _keys: []
     _values: []
@@ -1034,12 +1066,14 @@ MonoBehaviour:
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
   - SpecificAmount
+  - _maxSelected
   - groupSelectionType
   - _selectables
   _serializedStateValues:
   - false
   - '"AND"'
   - false
+  - 
   - 
   - '"Single"'
   - '[]'

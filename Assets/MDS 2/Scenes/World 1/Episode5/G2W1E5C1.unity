@@ -214,9 +214,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.15}
   serializedVersion: 2
-  m_Size: {x: 3.54, y: 0.88}
+  m_Size: {x: 3.54, y: 0.49}
 --- !u!114 &233888247
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -228,12 +228,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 21300000, guid: 8a5f8b6e799f41f488bc950528eaafe7, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 8a5f8b6e799f41f488bc950528eaafe7, type: 3}
+  - {fileID: 21300000, guid: 8a5f8b6e799f41f488bc950528eaafe7, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - '{"SelectedValue":{"x":1.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 1
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &280766193
 GameObject:
   m_ObjectHideFlags: 0
@@ -385,7 +402,7 @@ GameObject:
   - 114: {fileID: 514223904}
   - 61: {fileID: 514223905}
   m_Layer: 0
-  m_Name: CheckAnswer
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -421,7 +438,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 3d01729662e0d4f45a04c0649ac2acc8, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &514223903
@@ -453,13 +470,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: aedc350fd0a0a504eb7fb4e71086c44d, type: 3}
   upSprite: {fileID: 21300000, guid: 3d01729662e0d4f45a04c0649ac2acc8, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &514223905
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 514223901}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -558,8 +576,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 514223904}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1160159068}
   - _keys: []
     _values: []
@@ -646,12 +667,14 @@ MonoBehaviour:
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
   - SpecificAmount
+  - _maxSelected
   - groupSelectionType
   - _selectables
   _serializedStateValues:
   - false
   - '"AND"'
   - false
+  - 
   - 
   - '"Single"'
   - '[]'
@@ -682,7 +705,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1361970898}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.15, y: 0.56, z: -0.3}
+  m_LocalPosition: {x: -0.15, y: 0.56, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -716,7 +739,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 2afdf744b8ed86c42870ec71c74f4993, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -732,9 +755,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.15}
   serializedVersion: 2
-  m_Size: {x: 3.49, y: 0.98}
+  m_Size: {x: 3.49, y: 0.44}
 --- !u!114 &1361970902
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -746,13 +769,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 21300000, guid: 2afdf744b8ed86c42870ec71c74f4993, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 2afdf744b8ed86c42870ec71c74f4993, type: 3}
+  - {fileID: 21300000, guid: 2afdf744b8ed86c42870ec71c74f4993, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - '{"SelectedValue":{"x":1.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 1
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels:
   - certo
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1501693623
 GameObject:
   m_ObjectHideFlags: 0
@@ -840,7 +880,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1867344405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.18, y: -0.38, z: -0.1}
+  m_LocalPosition: {x: -0.18, y: -0.38, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -874,7 +914,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: 84c5f96067a65104f89c1f8318a5307f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -890,9 +930,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.12}
   serializedVersion: 2
-  m_Size: {x: 3.4, y: 0.91}
+  m_Size: {x: 3.31, y: 0.43}
 --- !u!114 &1867344409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -904,12 +944,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 21300000, guid: 84c5f96067a65104f89c1f8318a5307f, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 84c5f96067a65104f89c1f8318a5307f, type: 3}
+  - {fileID: 21300000, guid: 84c5f96067a65104f89c1f8318a5307f, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - '{"SelectedValue":{"x":1.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 1
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1886537141
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,7 +992,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1886537141}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.14, y: 1, z: -0.5}
+  m_LocalPosition: {x: -0.14, y: 1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -969,7 +1026,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 4
   m_Sprite: {fileID: 21300000, guid: df3ef6a36ab0c54469979bdc721347c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -985,12 +1042,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 21300000, guid: df3ef6a36ab0c54469979bdc721347c1, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: df3ef6a36ab0c54469979bdc721347c1, type: 3}
+  - {fileID: 21300000, guid: df3ef6a36ab0c54469979bdc721347c1, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - '{"SelectedValue":{"x":1.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 1
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &1886537145
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1002,9 +1076,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.18}
   serializedVersion: 2
-  m_Size: {x: 3.56, y: 0.78}
+  m_Size: {x: 3.56, y: 0.42}
 --- !u!1 &1950637123
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,7 +1166,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2086487405}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.2, y: 0.1, z: -0.2}
+  m_LocalPosition: {x: -0.2, y: 0.1, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -1126,7 +1200,7 @@ SpriteRenderer:
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 2
   m_Sprite: {fileID: 21300000, guid: 935c0441a132cf2479b76052d8184f72, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1142,9 +1216,9 @@ BoxCollider2D:
   m_Material: {fileID: 0}
   m_IsTrigger: 0
   m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
+  m_Offset: {x: 0, y: -0.15}
   serializedVersion: 2
-  m_Size: {x: 3.48, y: 0.95}
+  m_Size: {x: 3.48, y: 0.53}
 --- !u!114 &2086487409
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1156,12 +1230,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 0}
-  unselectedSprite: {fileID: 21300000, guid: 935c0441a132cf2479b76052d8184f72, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 935c0441a132cf2479b76052d8184f72, type: 3}
+  - {fileID: 21300000, guid: 935c0441a132cf2479b76052d8184f72, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - '{"SelectedValue":{"x":1.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 1
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &2142866853
 GameObject:
   m_ObjectHideFlags: 1
