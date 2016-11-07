@@ -7,119 +7,143 @@ using System.Collections.Generic;
 
 namespace MDS.Gameplay.DragDrop
 {
-    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
-    public class ValidatableDropGroupArea : BaseDropGroupArea, IValidatableGroup, IValidatable
-    {
-        [ShowInInspector, SerializeField, InspectorTooltip("Selecione para fazer com que o objeto e o slot fiquem bloqueados após um draggable ser solto sobre esse grupo")]
-        private bool _freezeAfterDrop;
+	[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
+	public class ValidatableDropGroupArea : BaseDropGroupArea, IValidatableGroup, IValidatable
+	{
 
-        [InspectorShowIf("ShowEnableValidation"), SerializeField, InspectorTooltip("Somente se a quantidade especifica de elementos estiver nos slots desse grupo é que ele estará pronto para ser validado. Caso contrário, com apenas um elemento já fica liberado para tentar validar")]
-        private bool _enableValidationOnlyIfSpecifcAmount;
-        private bool ShowEnableValidation
-        {
-            get
-            {
-                return (SpecificAmount.HasValue && !Overwritten);
-            }
-        }
+		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto sofra um FADE OUT OnDrop")]
+		protected bool _fadeAndFreezeOnDrop;
 
-        #region IValidatableGroup
+		[InspectorShowIf("_fadeAndFreezeOnDrop")]
+		[SerializeField, InspectorTooltip("Tempo, em segundos, para a animação de fade ocorrer")]
+		protected float _animationTime;
 
-        [InspectorMargin(10)]
+		[InspectorHideIf("_fadeAndFreezeOnDrop")]
+		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto e o slot fiquem bloqueados após um draggable ser solto sobre esse grupo")]
+		protected bool _freezeAfterDrop;
 
-        public bool Overwritten { get; set; }
+		[InspectorShowIf("ShowEnableValidation"), SerializeField, InspectorTooltip("Somente se a quantidade especifica de elementos estiver nos slots desse grupo é que ele estará pronto para ser validado. Caso contrário, com apenas um elemento já fica liberado para tentar validar")]
+		protected bool _enableValidationOnlyIfSpecifcAmount;
+		protected bool ShowEnableValidation
+		{
+			get
+			{
+				return (SpecificAmount.HasValue && !Overwritten);
+			}
+		}
 
-        [InspectorHideIf("Overwritten")]
-        public OperationLogic OperationLogic { get; set; }
+		[SerializeField, InspectorTooltip("Lista de labels que serão recusados.")]
+		protected List<string> _invalidLabels;
 
-        [InspectorHideIf("Overwritten")]
-        public bool AcceptEmptyAsCorrectAnswer { get; set; }
+		#region IValidatableGroup
 
-        [InspectorHideIf("Overwritten")]
-        public int? SpecificAmount { get; set; }
+		[InspectorMargin(10)]
 
-        #endregion
+		public bool Overwritten { get; set; }
 
-        #region IValidatable
+		[InspectorHideIf("Overwritten")]
+		public OperationLogic OperationLogic { get; set; }
 
-        public bool ReadyToValidate()
-        {
-            bool ret = false;
+		[InspectorHideIf("Overwritten")]
+		public bool AcceptEmptyAsCorrectAnswer { get; set; }
 
-            var readyCount = slots.Where(s => s.ReadyToValidate()).ToList().Count;
+		[InspectorHideIf("Overwritten")]
+		public int? SpecificAmount { get; set; }
 
-            if(readyCount > 0)
-            {
-                if(_enableValidationOnlyIfSpecifcAmount)
-                {
+		#endregion
+
+		#region IValidatable
+
+		public bool ReadyToValidate()
+		{
+			bool ret = false;
+
+			var readyCount = slots.Where(s => s.ReadyToValidate()).ToList().Count;
+
+			if(readyCount > 0)
+			{
+				if(_enableValidationOnlyIfSpecifcAmount)
+				{
 					if (readyCount == SpecificAmount)
 						ret = true;
 					else
 						ret = false;
-                }
-                else
-                {
-                    ret = true;
-                }
-            }
-            else
-            {
-                ret = AcceptEmptyAsCorrectAnswer;
-            }
+				}
+				else
+				{
+					ret = true;
+				}
+			}
+			else
+			{
+				ret = AcceptEmptyAsCorrectAnswer;
+			}
 
-            return ret;
-        }
+			return ret;
+		}
 
-        public bool Validate(string acceptableAnswer)
-        {
-            bool ret = false;
+		public bool Validate(string acceptableAnswer)
+		{
+			bool ret = false;
 
-            List<DropGroupSlot> temp = slots;
-            if(AcceptEmptyAsCorrectAnswer)
-                temp = slots.Where(s => s.draggableReference != null).ToList();
-
-
-            switch(OperationLogic)
-            {
-                case OperationLogic.AND:
-                    ret = temp.All(s => s.Validate(acceptableAnswer));
-                    break;
-                case OperationLogic.OR:
-                    ret = temp.Any(s => s.Validate(acceptableAnswer));
-                    break;
-            }
+			List<DropGroupSlot> temp = slots;
+			if(AcceptEmptyAsCorrectAnswer)
+				temp = slots.Where(s => s.draggableReference != null).ToList();
 
 
-            if(ret && SpecificAmount.HasValue)
-            {
-                int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
-                ret = (qtde == SpecificAmount.Value);
-            }
+			switch(OperationLogic)
+			{
+				case OperationLogic.AND:
+					ret = temp.All(s => s.Validate(acceptableAnswer));
+					break;
+				case OperationLogic.OR:
+					ret = temp.Any(s => s.Validate(acceptableAnswer));
+					break;
+			}
 
 
-            return ret;
-        }
-
-        #endregion
-
-        public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
-        {
-            bool ret = base.SetInSlot(draggable, ref slot);
-
-            if(ret && _freezeAfterDrop)
-            {
-                Freeze(draggable.gameObject);
-                Freeze(slot.gameObject);
-            }
-
-            return ret;
-        }
-
-        private void Freeze(GameObject go)
-        {
-            go.GetComponent<Collider2D>().enabled = false;
-        }
+			if(ret && SpecificAmount.HasValue)
+			{
+				int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
+				ret = (qtde == SpecificAmount.Value);
+			}
 
 
-    }
+			return ret;
+		}
+
+		#endregion
+
+		public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
+		{
+
+			if(draggable.Labels.Any(l => _invalidLabels.Contains(l)))
+				return false;
+
+			bool ret = base.SetInSlot(draggable, ref slot);
+
+			if(ret && _freezeAfterDrop)
+			{
+				Freeze(draggable.gameObject);
+				Freeze(slot.gameObject);
+			}
+
+			if (ret && _fadeAndFreezeOnDrop)
+			{
+				LeanTween.alpha(draggable.gameObject, 0, _animationTime);
+				LeanTween.scale(draggable.gameObject, Vector3.zero, _animationTime);
+				Freeze(draggable.gameObject);
+				Freeze(slot.gameObject);
+			}
+
+			return ret;
+		}
+
+		protected void Freeze(GameObject go)
+		{
+			go.GetComponent<Collider2D>().enabled = false;
+		}
+
+
+	}
 }

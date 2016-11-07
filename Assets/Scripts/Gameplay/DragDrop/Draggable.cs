@@ -41,6 +41,8 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public DropGroupSlot currentSlot;
 
+        public event Action<Draggable, DropGroupSlot> OnDrop;
+
         protected override void Awake()
         {
             base.Awake();
@@ -60,8 +62,10 @@ namespace MDS.Gameplay.DragDrop
         {
             _renderer.sortingOrder = 5;
             _touchOffset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
             if(changeScale)
                 LeanTween.scale(gameObject, Vector3.one * scaleState.draggingValue, 0.5f).setEase(LeanTweenType.easeOutElastic);
+
             if(changeSprite)
                 _renderer.sprite = spriteState.draggingValue;
 
@@ -85,24 +89,35 @@ namespace MDS.Gameplay.DragDrop
             Vector2 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             RaycastHit2D hitGroup = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                         LayerMask.GetMask(new[] { "Group" }));
+
+            // Verifica se soltou sobre um group qualquer
             if(hitGroup)
             {
                 group = hitGroup.transform.GetComponent<BaseDropGroupArea>();
 
-                    RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
+                RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                 LayerMask.GetMask(new[] { "GroupSlot" }));
 
+                // verifica se soltou sobre um slot especifico
                 if(hitSlot)
                 {
                     slot = hitSlot.transform.GetComponent<DropGroupSlot>();
 
+                    // se o slot é um slot do grupo inicial e o draggable é forçado a voltar para
+                    // o slot de indice preferencial, anula o slot encontrado
                     if(slot.IsInitialSlot && forcePreferredIndexOnDrop)
                         slot = null;
+
                 }
 
+                // caso o grupo (por motivos quaisquer) nao aceite o draggable
+                // entao deve voltar para a posicao de onde saiu.
                 if (!group.SetInSlot(this, ref slot))
                     TweenGoto(currentSlot.transform.position);
 
+
+                if(OnDrop != null)
+                    OnDrop(this, slot);
             }
             else
             {

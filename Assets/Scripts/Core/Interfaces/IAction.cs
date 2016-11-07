@@ -2,8 +2,9 @@
 using System.Collections;
 using System;
 
-public interface IAction {
+public interface IAction
+{
 
-    void Execute(Action callback);
+    IEnumerator Execute(Action callback = null);
 
 }
