@@ -162,12 +162,14 @@ MonoBehaviour:
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
   - SpecificAmount
+  - _maxSelected
   - groupSelectionType
   - _selectables
   _serializedStateValues:
   - false
   - '"AND"'
   - false
+  - 
   - 
   - '"Single"'
   - '[0,1,2,3,4,5,6,7,8,9,10,11]'
@@ -332,12 +334,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 8c35ca61c6893f843a5bd19c18213c72, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: ee4e6872a701b1a4a9f13804bedcaa6c, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 8c35ca61c6893f843a5bd19c18213c72, type: 3}
+  - {fileID: 21300000, guid: ee4e6872a701b1a4a9f13804bedcaa6c, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &167374807
 Prefab:
   m_ObjectHideFlags: 0
@@ -459,15 +478,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 19490fd089dc3f94b9785d2d1e1ce63e, type: 3}
+  - {fileID: 21300000, guid: 19ec5837a25c4ae4ead1ae806fde5aa7, type: 3}
+  - {fileID: 21300000, guid: a52ad5704f7a9c449bf80ee4d6bf7bf4, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &244749551
@@ -611,15 +636,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: a0e386d39db676946a474ac1ac2f2a26, type: 3}
+  - {fileID: 21300000, guid: 38b0b83735a4f8d49aa14f7980ecef1e, type: 3}
+  - {fileID: 21300000, guid: 2b0268ef36bae174b8c94b8df407a278, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &273586240
@@ -982,6 +1013,15 @@ MonoBehaviour:
   - {fileID: 1507001059}
   - {fileID: 578202384}
   - {fileID: 937762091}
+  - {fileID: 273586239}
+  - {fileID: 1023230972}
+  - {fileID: 894935080}
+  - {fileID: 244749550}
+  - {fileID: 818125708}
+  - {fileID: 991315635}
+  - {fileID: 960513862}
+  - {fileID: 1744515595}
+  - {fileID: 1220050146}
   _values:
   - _keys: []
     _values: []
@@ -1103,6 +1143,33 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 937762091}
+  - _keys: []
+    _values: []
+    _target: {fileID: 273586239}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1023230972}
+  - _keys: []
+    _values: []
+    _target: {fileID: 894935080}
+  - _keys: []
+    _values: []
+    _target: {fileID: 244749550}
+  - _keys: []
+    _values: []
+    _target: {fileID: 818125708}
+  - _keys: []
+    _values: []
+    _target: {fileID: 991315635}
+  - _keys: []
+    _values: []
+    _target: {fileID: 960513862}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1744515595}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1220050146}
 --- !u!114 &412143439
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1155,9 +1222,21 @@ MonoBehaviour:
   - {fileID: 1507001059}
   - {fileID: 578202384}
   - {fileID: 937762091}
+  - {fileID: 273586239}
+  - {fileID: 1023230972}
+  - {fileID: 894935080}
+  - {fileID: 244749550}
+  - {fileID: 818125708}
+  - {fileID: 991315635}
+  - {fileID: 960513862}
+  - {fileID: 1744515595}
+  - {fileID: 1220050146}
   _values:
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 8249041}
   - _keys: []
     _values: []
@@ -1285,6 +1364,33 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 937762091}
+  - _keys: []
+    _values: []
+    _target: {fileID: 273586239}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1023230972}
+  - _keys: []
+    _values: []
+    _target: {fileID: 894935080}
+  - _keys: []
+    _values: []
+    _target: {fileID: 244749550}
+  - _keys: []
+    _values: []
+    _target: {fileID: 818125708}
+  - _keys: []
+    _values: []
+    _target: {fileID: 991315635}
+  - _keys: []
+    _values: []
+    _target: {fileID: 960513862}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1744515595}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1220050146}
 --- !u!4 &412143440
 Transform:
   m_ObjectHideFlags: 1
@@ -1445,12 +1551,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: b62c43fcca09b6443afde2acf61466ab, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: f71029d6f3116f544accb1fb1e93fc61, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: b62c43fcca09b6443afde2acf61466ab, type: 3}
+  - {fileID: 21300000, guid: f71029d6f3116f544accb1fb1e93fc61, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &634881300
 Prefab:
   m_ObjectHideFlags: 0
@@ -1517,7 +1640,7 @@ GameObject:
   - 114: {fileID: 709191445}
   - 61: {fileID: 709191446}
   m_Layer: 0
-  m_Name: button_up
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1553,7 +1676,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 98a37d57ff76b2b45a7a18588dd65686, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &709191444
@@ -1585,13 +1708,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 5e194724555765a41b8071b72ec8d320, type: 3}
   upSprite: {fileID: 21300000, guid: 98a37d57ff76b2b45a7a18588dd65686, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &709191446
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 709191442}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1815,15 +1939,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 88108177e03a84e4ca59240ec69c2371, type: 3}
+  - {fileID: 21300000, guid: 5ac16ef2997d43e4c856de84bf79bbd9, type: 3}
+  - {fileID: 21300000, guid: 0d043195c17d0f643a43e5f7419c8bc8, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &818125709
@@ -1915,12 +2045,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 9e2f38d3d327d6b41a544d593bfb1109, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 93de0a4f5444ca74690c94478a86b71e, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 9e2f38d3d327d6b41a544d593bfb1109, type: 3}
+  - {fileID: 21300000, guid: 93de0a4f5444ca74690c94478a86b71e, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &887368773
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2010,15 +2157,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 2ac42ef58db297942b9d829375f7dee0, type: 3}
+  - {fileID: 21300000, guid: 7ec55f3105837bb41a13b7a9c7c67ac1, type: 3}
+  - {fileID: 21300000, guid: 3a212f7d0b6c090429fe27c55d00c554, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &894935081
@@ -2124,12 +2277,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 8c35ca61c6893f843a5bd19c18213c72, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: ee4e6872a701b1a4a9f13804bedcaa6c, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 8c35ca61c6893f843a5bd19c18213c72, type: 3}
+  - {fileID: 21300000, guid: ee4e6872a701b1a4a9f13804bedcaa6c, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &937762087
 GameObject:
   m_ObjectHideFlags: 0
@@ -2219,12 +2389,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 5301bac51f4b9314aa5cc8c9825069d0, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 21c0ecdd7d1a10842aefb8bba8217a7a, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 5301bac51f4b9314aa5cc8c9825069d0, type: 3}
+  - {fileID: 21300000, guid: 21c0ecdd7d1a10842aefb8bba8217a7a, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &950082404
 Prefab:
   m_ObjectHideFlags: 0
@@ -2346,15 +2533,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4de218762144b2c43b8caad3479760fd, type: 3}
+  - {fileID: 21300000, guid: 6ccc56080f1d5be49afca1a56bb8c884, type: 3}
+  - {fileID: 21300000, guid: 5aabe29de16e4cc40a7b91dd181d5a1e, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &960513863
@@ -2446,15 +2639,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: b5816948a7c1583468724fd3347c9d6a, type: 3}
+  - {fileID: 21300000, guid: a0721d0c272de0f458f3e2860a41f83c, type: 3}
+  - {fileID: 21300000, guid: 9870d917f2f1d774593a969dfd309d61, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &991315636
@@ -2546,15 +2745,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 429810c276110a347aafe8f9c5a9da33, type: 3}
+  - {fileID: 21300000, guid: 0d48fc1416f25fb4ab571460819ed058, type: 3}
+  - {fileID: 21300000, guid: fc9af78b73093204382ac1b88d279c2b, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &1023230973
@@ -2646,12 +2851,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 91b6327f3a969964f935ba89175c7c48, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: cb626cd7fd20b5f4d8c64adf72cbad67, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 91b6327f3a969964f935ba89175c7c48, type: 3}
+  - {fileID: 21300000, guid: cb626cd7fd20b5f4d8c64adf72cbad67, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &1047884809
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2747,15 +2969,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 7ac2a4c1875b9ef41a4a960a648e05e4, type: 3}
+  - {fileID: 21300000, guid: 14ebd520f094b634ea12c30a116e8124, type: 3}
+  - {fileID: 21300000, guid: 32c0be62f6d17034799584e2adef0d22, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &1220050147
@@ -2903,12 +3131,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 5301bac51f4b9314aa5cc8c9825069d0, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 21c0ecdd7d1a10842aefb8bba8217a7a, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 5301bac51f4b9314aa5cc8c9825069d0, type: 3}
+  - {fileID: 21300000, guid: 21c0ecdd7d1a10842aefb8bba8217a7a, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!114 &1344652202 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -3004,12 +3249,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: b62c43fcca09b6443afde2acf61466ab, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: f71029d6f3116f544accb1fb1e93fc61, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: b62c43fcca09b6443afde2acf61466ab, type: 3}
+  - {fileID: 21300000, guid: f71029d6f3116f544accb1fb1e93fc61, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1431654357
 GameObject:
   m_ObjectHideFlags: 0
@@ -3099,12 +3361,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 786d9c58aa903c54f922ffeb1544a3af, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 819936a209c7bdc44b3f7523b72fc220, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 786d9c58aa903c54f922ffeb1544a3af, type: 3}
+  - {fileID: 21300000, guid: 819936a209c7bdc44b3f7523b72fc220, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1501693623
 GameObject:
   m_ObjectHideFlags: 0
@@ -3242,12 +3521,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: a8380ec6b1d75374683b119109256e36, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 9abc85ac18350714096a93858d2965ff, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: a8380ec6b1d75374683b119109256e36, type: 3}
+  - {fileID: 21300000, guid: 9abc85ac18350714096a93858d2965ff, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &1507001060
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3567,13 +3863,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 9e2f38d3d327d6b41a544d593bfb1109, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 93de0a4f5444ca74690c94478a86b71e, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 9e2f38d3d327d6b41a544d593bfb1109, type: 3}
+  - {fileID: 21300000, guid: 93de0a4f5444ca74690c94478a86b71e, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels:
   - certo
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &1733862813
 Prefab:
   m_ObjectHideFlags: 0
@@ -3695,15 +4008,21 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: a78c62a16c9fe3643b7d8b683514e12a, type: 3}
+  - {fileID: 21300000, guid: 013eb5212640d8642b8f525a1a13af90, type: 3}
+  - {fileID: 21300000, guid: a709acc15ea81a142b5204a6ca020598, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels: []
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
 --- !u!61 &1744515596
@@ -3965,12 +4284,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: a8380ec6b1d75374683b119109256e36, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 9abc85ac18350714096a93858d2965ff, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: a8380ec6b1d75374683b119109256e36, type: 3}
+  - {fileID: 21300000, guid: 9abc85ac18350714096a93858d2965ff, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!114 &1921808149 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -4226,12 +4562,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 786d9c58aa903c54f922ffeb1544a3af, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 819936a209c7bdc44b3f7523b72fc220, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 786d9c58aa903c54f922ffeb1544a3af, type: 3}
+  - {fileID: 21300000, guid: 819936a209c7bdc44b3f7523b72fc220, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!114 &2001143692 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -4327,12 +4680,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 91b6327f3a969964f935ba89175c7c48, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: cb626cd7fd20b5f4d8c64adf72cbad67, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 91b6327f3a969964f935ba89175c7c48, type: 3}
+  - {fileID: 21300000, guid: cb626cd7fd20b5f4d8c64adf72cbad67, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &2122989845
 Prefab:
   m_ObjectHideFlags: 0

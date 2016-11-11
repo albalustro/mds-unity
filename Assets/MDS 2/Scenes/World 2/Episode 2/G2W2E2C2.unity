@@ -165,13 +165,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 558e18d7fc001a340b0b44da2a44281f, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: df5a90bc08fa6404a9252c63ef736e7d, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 558e18d7fc001a340b0b44da2a44281f, type: 3}
+  - {fileID: 21300000, guid: df5a90bc08fa6404a9252c63ef736e7d, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels:
   - 
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!61 &74948652
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,12 +213,12 @@ Prefab:
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
       propertyPath: _selectables.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4000011688627654, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_LocalPosition.x
@@ -248,7 +265,7 @@ Prefab:
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[5]
-      value: '[0,1]'
+      value: '"Single"'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
@@ -439,13 +456,30 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  selectedSprite: {fileID: 21300000, guid: 3025b2bc1bc7ed941833c692c8b45531, type: 3}
-  unselectedSprite: {fileID: 21300000, guid: 7c7c3c2796886cc46aebb7063cd4f12a, type: 3}
+  _objectReferences:
+  - {fileID: 21300000, guid: 3025b2bc1bc7ed941833c692c8b45531, type: 3}
+  - {fileID: 21300000, guid: 7c7c3c2796886cc46aebb7063cd4f12a, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels:
   - velha
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &544912860
 GameObject:
   m_ObjectHideFlags: 0
@@ -458,7 +492,7 @@ GameObject:
   - 114: {fileID: 544912863}
   - 61: {fileID: 544912864}
   m_Layer: 0
-  m_Name: button_up
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -494,7 +528,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 70d3daec27d684b49b8ac01c3d75430b, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &544912862
@@ -526,13 +560,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 5a668016fad0d81459fad06ba705d333, type: 3}
   upSprite: {fileID: 21300000, guid: 70d3daec27d684b49b8ac01c3d75430b, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &544912864
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 544912860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -703,11 +738,8 @@ MonoBehaviour:
   - {fileID: 544912863}
   - {fileID: 74948651}
   _values:
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 1517898497}
   - _keys: []
     _values: []
