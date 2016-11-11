@@ -22,6 +22,8 @@ namespace MDS.Gameplay.DragDrop
                 return (SpecificAmount.HasValue && !Overwritten);
             }
         }
+        [SerializeField]
+        private bool _isGeneric;
 
         #region IValidatableGroup
 
@@ -78,25 +80,37 @@ namespace MDS.Gameplay.DragDrop
             if(AcceptEmptyAsCorrectAnswer)
                 temp = slots.Where(s => s.draggableReference != null).ToList();
 
-
-            switch(OperationLogic)
+            if (_isGeneric)
             {
-                case OperationLogic.AND:
-                    ret = temp.All(s => s.Validate(acceptableAnswer));
-                    break;
-                case OperationLogic.OR:
-                    ret = temp.Any(s => s.Validate(acceptableAnswer));
-                    break;
+                var labels = temp[0].draggableReference.Labels;
+
+                foreach (var l in labels)
+                {
+                    ret = temp.All(s => s.Validate(l));
+                    if (ret)
+                    {
+                        break;
+                    }
+                }
             }
-
-
-            if(ret && SpecificAmount.HasValue)
+            else
             {
-                int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
-                ret = (qtde == SpecificAmount.Value);
+                switch (OperationLogic)
+                {
+                    case OperationLogic.AND:
+                        ret = temp.All(s => s.Validate(acceptableAnswer));
+                        break;
+                    case OperationLogic.OR:
+                        ret = temp.Any(s => s.Validate(acceptableAnswer));
+                        break;
+                }
+
+                if (ret && SpecificAmount.HasValue)
+                {
+                    int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
+                    ret = (qtde == SpecificAmount.Value);
+                }
             }
-
-
             return ret;
         }
 

@@ -1,6 +1,7 @@
 ﻿using System;
 using FullInspector;
 using UnityEngine;
+using System.Collections;
 
 [ExecuteInEditMode]
 [RequireComponent(typeof(BoxCollider2D))]

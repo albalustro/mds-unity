@@ -37,7 +37,7 @@ namespace MDS.Validators
 
 			case OperationLogic.OR:
 				ret = Rules.Any (r => r.ValidatableObject.ReadyToValidate ());
-				Debug.Log (ret);
+				//Debug.Log (ret);
                     break;
             }
 
