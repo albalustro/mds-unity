@@ -16,37 +16,41 @@ namespace MDS.Gameplay.DragDrop
 
         public virtual bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
         {
+            // se chegou aqui com slot nulo, vamos procurar um slot para ele. possivelmente soltou o draggable sobre
+            //  o grupo e nao sobre um slot especifico.
             if(slot == null)
             {
-                if(draggable.forcePreferredIndexOnDrop)
+                // Se o grupo em questão é inicial (nao da para saber atravez da classe base, por isso do hack)
+                //  e o draggable tem um indice inicial e, ainda por cima, esse indice inicial é
+                //  obrigatorio no OnDrop..
+                if (slots[0].IsInitialSlot && draggable.PreferredInitialIndex.HasValue && draggable.forcePreferredIndexOnDrop)
                 {
-                    if(draggable.PreferredInitialIndex.HasValue)
-                        slot = slots.FirstOrDefault(s => s.IsInitialSlot == true && slots.IndexOf(s) == draggable.PreferredInitialIndex.Value);
+                    // Caso o slot necessario ja esteja ocupado, anulamos a variavel e deixamos o resto do codigo cuidar do caso..
+                    slot = slots[draggable.PreferredInitialIndex.Value];
+                    if(slot.IsTaken)
+                        slot = null;
                 }
-                else
+                else // caso contrario, pega o primeiro que nao esteja ocupado e be happy..
                 {
-                    slot = slots.FirstOrDefault(s => s.IsBusy == false);
+                    slot = slots.FirstOrDefault(s => s.IsTaken == false);
                 }
             }
 
+            // se, ainda assim, o slot continua nulo, significa que nao existe slot disponivel nesse grupo.. 
             if(slot == null)
                 return false;
 
-            if(draggable.forcePreferredIndexOnDrop)
+            // Ok, slot disponivel, go ahead..
+            
+            // Se o slot é do grupo inicial e o draggable tem um indice inicial preferencial
+            // e esse indice é obrigatório...
+            if(slot.IsInitialSlot && draggable.PreferredInitialIndex.HasValue && draggable.forcePreferredIndexOnDrop)
             {
-                if(slot.IsInitialSlot)
+                // se nao tiver soltado o draggable no slot certo, retorna falso.
+                int slotIndex = slots.IndexOf(slot);
+                if(slotIndex != draggable.PreferredInitialIndex.Value)
                 {
-                    if(draggable.PreferredInitialIndex.HasValue)
-                    {
-                        int slotIndex = slots.IndexOf(slot);
-                        if(slotIndex != draggable.PreferredInitialIndex.Value)
-                            return false;
-                    }
-                    else
-                    {
-                        Debug.LogError("Draggable com 'forcePreferredIndexOnDrop' porém sem 'PreferredInitialIndex'");
-                        return false;
-                    }
+                    return false;
                 }
             }
 
@@ -57,6 +61,12 @@ namespace MDS.Gameplay.DragDrop
 
             return true;
 
+        }
+
+        protected override void Awake()
+        {
+            base.Awake();
+            gameObject.layer = LayerMask.NameToLayer("Group");
         }
 
         public virtual void Start()

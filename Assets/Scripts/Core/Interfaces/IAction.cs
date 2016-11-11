@@ -2,7 +2,8 @@
 using System.Collections;
 using System;
 
-public interface IAction {
+public interface IAction
+{
 
     IEnumerator Execute(Action callback = null);
 

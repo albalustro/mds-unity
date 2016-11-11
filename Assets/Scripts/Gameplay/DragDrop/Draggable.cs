@@ -41,10 +41,20 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public DropGroupSlot currentSlot;
 
+        [HideInInspector]
+        public bool instantiableDraggable;
+
+        public event Action<Draggable, DropGroupSlot> OnAfterDrop;
+
         protected override void Awake()
         {
             base.Awake();
+
+            gameObject.layer = LayerMask.NameToLayer("Draggable");
+
             _renderer = this.GetComponent<SpriteRenderer>();
+
+
             if(changeScale && (scaleState.draggingValue <= 0f 
                              || scaleState.releasedValue <= 0))
                 Debug.LogError("[Draggable] Scale (draggingValue e releasedValue) não pode ser 0");
@@ -54,14 +64,19 @@ namespace MDS.Gameplay.DragDrop
 
             if(changeSprite && spriteState.releasedFinalPositionValue == null)
                 spriteState.releasedFinalPositionValue = spriteState.releasedValue;
+
+
+            
         }
 
         public void OnMouseDown()
         {
             _renderer.sortingOrder = 5;
             _touchOffset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+
             if(changeScale)
                 LeanTween.scale(gameObject, Vector3.one * scaleState.draggingValue, 0.5f).setEase(LeanTweenType.easeOutElastic);
+
             if(changeSprite)
                 _renderer.sprite = spriteState.draggingValue;
 
@@ -85,30 +100,63 @@ namespace MDS.Gameplay.DragDrop
             Vector2 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
             RaycastHit2D hitGroup = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                         LayerMask.GetMask(new[] { "Group" }));
+
+            // Verifica se soltou sobre um group qualquer
             if(hitGroup)
             {
                 group = hitGroup.transform.GetComponent<BaseDropGroupArea>();
 
-                    RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
+                RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                 LayerMask.GetMask(new[] { "GroupSlot" }));
 
+                // verifica se soltou sobre um slot especifico
                 if(hitSlot)
                 {
                     slot = hitSlot.transform.GetComponent<DropGroupSlot>();
 
+                    // se o slot é um slot do grupo inicial e o draggable é forçado a voltar para
+                    // o slot de indice preferencial, anula o slot encontrado
                     if(slot.IsInitialSlot && forcePreferredIndexOnDrop)
                         slot = null;
+
                 }
 
-                if (!group.SetInSlot(this, ref slot))
+
+                // se for um draggable que saiu de um [initial intantiable group] e foi derrubado
+                //  sobre um slot específico e esse slot já esta ocupado, *não* deve fazer swap entre 
+                //  os elementos, que é comportamento padrao. 
+                // Porem tb nao deve procurar um slot vazio.
+                if( currentSlot.IsInstatiableInitialSlot && slot && slot.IsTaken)
+                {
                     TweenGoto(currentSlot.transform.position);
+                    return;
+                }
+
+                // caso o grupo aceite o draggable, invocar o evento
+                // entao deve voltar para a posicao de onde saiu.
+                DropGroupSlot originalSlot = currentSlot;
+                if(group.SetInSlot(this, ref slot))
+                {
+                    if(OnAfterDrop != null)
+                        OnAfterDrop(this, originalSlot);
+                }
+                else
+                // caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
+                {
+                    TweenGoto(currentSlot.transform.position);
+                }
+
 
             }
             else
             {
+                if(instantiableDraggable)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
                 TweenGoto(currentSlot.transform.position);
             }
-
 
         }
 
