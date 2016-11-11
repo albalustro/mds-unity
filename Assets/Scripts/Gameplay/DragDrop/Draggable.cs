@@ -41,12 +41,20 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public DropGroupSlot currentSlot;
 
-        public event Action<Draggable, DropGroupSlot> OnDrop;
+        [HideInInspector]
+        public bool instantiableDraggable;
+
+        public event Action<Draggable, DropGroupSlot> OnAfterDrop;
 
         protected override void Awake()
         {
             base.Awake();
+
+            gameObject.layer = LayerMask.NameToLayer("Draggable");
+
             _renderer = this.GetComponent<SpriteRenderer>();
+
+
             if(changeScale && (scaleState.draggingValue <= 0f 
                              || scaleState.releasedValue <= 0))
                 Debug.LogError("[Draggable] Scale (draggingValue e releasedValue) não pode ser 0");
@@ -56,6 +64,9 @@ namespace MDS.Gameplay.DragDrop
 
             if(changeSprite && spriteState.releasedFinalPositionValue == null)
                 spriteState.releasedFinalPositionValue = spriteState.releasedValue;
+
+
+            
         }
 
         public void OnMouseDown()
@@ -110,20 +121,42 @@ namespace MDS.Gameplay.DragDrop
 
                 }
 
-                // caso o grupo (por motivos quaisquer) nao aceite o draggable
-                // entao deve voltar para a posicao de onde saiu.
-                if (!group.SetInSlot(this, ref slot))
+
+                // se for um draggable que saiu de um [initial intantiable group] e foi derrubado
+                //  sobre um slot específico e esse slot já esta ocupado, *não* deve fazer swap entre 
+                //  os elementos, que é comportamento padrao. 
+                // Porem tb nao deve procurar um slot vazio.
+                if( currentSlot.IsInstatiableInitialSlot && slot && slot.IsTaken)
+                {
                     TweenGoto(currentSlot.transform.position);
+                    return;
+                }
+
+                // caso o grupo aceite o draggable, invocar o evento
+                // entao deve voltar para a posicao de onde saiu.
+                DropGroupSlot originalSlot = currentSlot;
+                if(group.SetInSlot(this, ref slot))
+                {
+                    if(OnAfterDrop != null)
+                        OnAfterDrop(this, originalSlot);
+                }
+                else
+                // caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
+                {
+                    TweenGoto(currentSlot.transform.position);
+                }
 
 
-                if(OnDrop != null)
-                    OnDrop(this, slot);
             }
             else
             {
+                if(instantiableDraggable)
+                {
+                    Destroy(gameObject);
+                    return;
+                }
                 TweenGoto(currentSlot.transform.position);
             }
-
 
         }
 

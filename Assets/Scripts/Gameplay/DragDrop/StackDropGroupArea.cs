@@ -12,12 +12,12 @@ namespace MDS.Gameplay.DragDrop
             bool ret = false;
             Draggable oldDrag;
 
-            if (slot.IsBusy)
+            if (slot.IsTaken)
             {
                 oldDrag = slot.draggableReference;
             }
 
-            slot = slots.FirstOrDefault(s => s.IsBusy == false);
+            slot = slots.FirstOrDefault(s => s.IsTaken == false);
 
             if(slot != null)
             {

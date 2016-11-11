@@ -45,14 +45,26 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public bool IsInitialSlot { get; internal set; }
 
+        [HideInInspector]
+        public bool IsInstatiableInitialSlot { get; internal set; }
+
         protected override void Awake()
         {
             base.Awake();
+
+            gameObject.layer = LayerMask.NameToLayer("GroupSlot");
+
             GetComponent<BoxCollider2D>().isTrigger = true;
+
             if(GetComponentInParent<InitialDropGroupArea>() != null)
                 IsInitialSlot = true;
             else
                 IsInitialSlot = false;
+
+            if(GetComponentInParent<InitialIntanceDropGroupArea>() != null)
+                IsInstatiableInitialSlot = true;
+            else
+                IsInstatiableInitialSlot = false;
 
             if (_changeSprite)
             {
@@ -67,7 +79,7 @@ namespace MDS.Gameplay.DragDrop
             }
         }
 
-        public bool IsBusy
+        public bool IsTaken
         {
             get
             {
@@ -79,7 +91,7 @@ namespace MDS.Gameplay.DragDrop
 
         public bool ReadyToValidate()
         {
-            return IsBusy;
+            return IsTaken;
         }
 
         public bool Validate(string acceptableAnswer)

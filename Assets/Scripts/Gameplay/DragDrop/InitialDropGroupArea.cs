@@ -85,7 +85,7 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (draggablesInScene[i].currentSlot!=null)
                     continue;
-                while(slots[freeSlotIndex].IsBusy)
+                while(slots[freeSlotIndex].IsTaken)
                     freeSlotIndex++;
                 draggablesInScene[i].currentSlot = slots[freeSlotIndex];
                 slots[freeSlotIndex].draggableReference = draggablesInScene[i];
