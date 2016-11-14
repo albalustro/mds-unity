@@ -132,9 +132,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &74861985
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -224,19 +230,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4e6087e767b3371448e6520a68a176d6, type: 3}
+  - {fileID: 21300000, guid: 0cbd6fd40e270874189e4d844c035809, type: 3}
+  - {fileID: 21300000, guid: 0cbd6fd40e270874189e4d844c035809, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - circulo
   - certo
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 2116849018}
+  instantiableDraggable: 0
 --- !u!61 &78875983
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -307,46 +320,84 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 1051763878}
---- !u!1 &245606992
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
+--- !u!1 &175201359
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 245606993}
-  - 212: {fileID: 245606994}
-  - 61: {fileID: 245606996}
-  - 114: {fileID: 245606995}
+  - 4: {fileID: 175201363}
+  - 212: {fileID: 175201362}
+  - 61: {fileID: 175201361}
+  - 114: {fileID: 175201360}
   m_Layer: 10
-  m_Name: losango_release (1)
+  m_Name: circulo_release (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &245606993
-Transform:
+--- !u!114 &175201360
+MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 245606992}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.4445415, y: -1.233808, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1481721507}
-  m_RootOrder: 2
---- !u!212 &245606994
+  m_GameObject: {fileID: 175201359}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4e6087e767b3371448e6520a68a176d6, type: 3}
+  - {fileID: 21300000, guid: 0cbd6fd40e270874189e4d844c035809, type: 3}
+  - {fileID: 21300000, guid: 0cbd6fd40e270874189e4d844c035809, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - circulo
+  - certo
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 2116849018}
+  instantiableDraggable: 0
+--- !u!61 &175201361
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 175201359}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.65, y: 0.72}
+--- !u!212 &175201362
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 245606992}
+  m_GameObject: {fileID: 175201359}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -370,47 +421,23 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1186929853
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 4e6087e767b3371448e6520a68a176d6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &245606995
-MonoBehaviour:
+--- !u!4 &175201363
+Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 245606992}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  Labels:
-  - losango
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 1748318193}
---- !u!61 &245606996
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 245606992}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.74, y: 1.1}
+  m_GameObject: {fileID: 175201359}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 1.67, y: -1.37, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 746552659}
+  m_RootOrder: 1
 --- !u!1 &280491849
 GameObject:
   m_ObjectHideFlags: 0
@@ -516,6 +543,115 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
+--- !u!1 &354477208
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 354477212}
+  - 212: {fileID: 354477211}
+  - 61: {fileID: 354477210}
+  - 114: {fileID: 354477209}
+  m_Layer: 10
+  m_Name: triangulo_release (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &354477209
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354477208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 8eb150750eb820a4680ba9dde7bd4528, type: 3}
+  - {fileID: 21300000, guid: 0dc1f418d6455ef4890c55edaee6d287, type: 3}
+  - {fileID: 21300000, guid: 0dc1f418d6455ef4890c55edaee6d287, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - triangulo
+  - certo
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 1587125720}
+  instantiableDraggable: 0
+--- !u!61 &354477210
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354477208}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.71, y: 0.71}
+--- !u!212 &354477211
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354477208}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1186929853
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 8eb150750eb820a4680ba9dde7bd4528, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &354477212
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 354477208}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.76, y: -0.33380803, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 444177340}
+  m_RootOrder: 1
 --- !u!1 &354718349
 GameObject:
   m_ObjectHideFlags: 1
@@ -589,11 +725,13 @@ MonoBehaviour:
   _serializedStateKeys:
   - preActionsList
   - validatorsList
+  - errorActionList
   - posVictoryActionsList
   _serializedStateValues:
-  - '[]'
+  - '[{"slugs":["intro"],"$type":"MDS.Core.OpenDialogue"}]'
   - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '[{"slugs":["error1","error2","error3"],"$type":"MDS.Core.OpenDialogue"}]'
+  - '[{"slugs":["victory"],"$type":"MDS.Core.OpenDialogue"}]'
   nextChallenge: {fileID: 0}
   btn: {fileID: 1134065773}
 --- !u!4 &378505047
@@ -609,6 +747,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+--- !u!1 &409432063
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 409432064}
+  - 212: {fileID: 409432066}
+  - 61: {fileID: 409432065}
+  - 114: {fileID: 409432067}
+  m_Layer: 10
+  m_Name: quadrado_release (2)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &409432064
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409432063}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.32, y: -1.76, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 810385163}
+  m_RootOrder: 1
+--- !u!61 &409432065
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409432063}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49, y: 0.49}
+--- !u!212 &409432066
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409432063}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1186929853
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!114 &409432067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 409432063}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - quadrado
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 1063759864}
+  instantiableDraggable: 0
 --- !u!1 &444177339
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +882,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 451627585}
-  - {fileID: 730035212}
+  - {fileID: 354477212}
   m_Father: {fileID: 0}
   m_RootOrder: 5
 --- !u!1 &451627584
@@ -714,19 +960,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 8eb150750eb820a4680ba9dde7bd4528, type: 3}
+  - {fileID: 21300000, guid: 0dc1f418d6455ef4890c55edaee6d287, type: 3}
+  - {fileID: 21300000, guid: 0dc1f418d6455ef4890c55edaee6d287, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
   - certo
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 1587125720}
+  instantiableDraggable: 0
 --- !u!61 &451627588
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -741,6 +994,114 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.71, y: 0.71}
+--- !u!1 &477821128
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 477821132}
+  - 212: {fileID: 477821131}
+  - 61: {fileID: 477821130}
+  - 114: {fileID: 477821129}
+  m_Layer: 10
+  m_Name: losango_release (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &477821129
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477821128}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 14cf487672369944c992849b04256b3d, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - losango
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 620034544}
+  instantiableDraggable: 0
+--- !u!61 &477821130
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477821128}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.74, y: 1.1}
+--- !u!212 &477821131
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477821128}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1186929853
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &477821132
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 477821128}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.47, y: -1.19, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1481721507}
+  m_RootOrder: 2
 --- !u!1 &493352458
 GameObject:
   m_ObjectHideFlags: 0
@@ -797,9 +1158,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 1067295658}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &528349780
 GameObject:
   m_ObjectHideFlags: 0
@@ -856,9 +1223,123 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 1217342172}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
+--- !u!1 &538603610
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 538603611}
+  - 212: {fileID: 538603613}
+  - 61: {fileID: 538603612}
+  - 114: {fileID: 538603614}
+  m_Layer: 10
+  m_Name: losango_release (3)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &538603611
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538603610}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.69, y: -0.91380805, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 1481721507}
+  m_RootOrder: 1
+--- !u!61 &538603612
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538603610}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.74, y: 1.1}
+--- !u!212 &538603613
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538603610}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1186929853
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!114 &538603614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 538603610}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 14cf487672369944c992849b04256b3d, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - losango
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 620034544}
+  instantiableDraggable: 0
 --- !u!1 &565395685
 GameObject:
   m_ObjectHideFlags: 0
@@ -901,9 +1382,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &565395688
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -960,9 +1447,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &569531054
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1033,9 +1526,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 2127122562}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &621977184
 GameObject:
   m_ObjectHideFlags: 0
@@ -1092,46 +1591,66 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 1729036735}
---- !u!1 &730035211
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
+--- !u!1 &677545930
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   serializedVersion: 4
   m_Component:
-  - 4: {fileID: 730035212}
-  - 212: {fileID: 730035213}
-  - 61: {fileID: 730035215}
-  - 114: {fileID: 730035214}
+  - 4: {fileID: 677545931}
+  - 212: {fileID: 677545933}
+  - 61: {fileID: 677545932}
+  - 114: {fileID: 677545934}
   m_Layer: 10
-  m_Name: triangulo_release (1)
+  m_Name: quadrado_release (3)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &730035212
+--- !u!4 &677545931
 Transform:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 730035211}
+  m_GameObject: {fileID: 677545930}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.75454164, y: -0.42380807, z: -0.7998047}
+  m_LocalPosition: {x: 1.35, y: -0.36, z: -0.7998047}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 444177340}
-  m_RootOrder: 1
---- !u!212 &730035213
+  m_Father: {fileID: 810385163}
+  m_RootOrder: 2
+--- !u!61 &677545932
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 677545930}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49, y: 0.49}
+--- !u!212 &677545933
 SpriteRenderer:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 730035211}
+  m_GameObject: {fileID: 677545930}
   m_Enabled: 1
   m_CastShadows: 0
   m_ReceiveShadows: 0
@@ -1155,48 +1674,40 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 1186929853
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 8eb150750eb820a4680ba9dde7bd4528, type: 3}
+  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &730035214
+--- !u!114 &677545934
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 730035211}
+  m_GameObject: {fileID: 677545930}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
-  - triangulo
-  - certo
-  changeSprite: 0
+  - quadrado
+  changeSprite: 1
   changeScale: 0
-  currentSlot: {fileID: 2056913186}
---- !u!61 &730035215
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 730035211}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.71, y: 0.71}
+  currentSlot: {fileID: 1063759864}
+  instantiableDraggable: 0
 --- !u!1 &746552658
 GameObject:
   m_ObjectHideFlags: 0
@@ -1224,7 +1735,7 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 78875980}
-  - {fileID: 1067295656}
+  - {fileID: 175201363}
   m_Father: {fileID: 0}
   m_RootOrder: 3
 --- !u!1 &755165945
@@ -1283,9 +1794,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 895288932}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &765201492
 GameObject:
   m_ObjectHideFlags: 0
@@ -1361,18 +1878,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 1063759864}
+  instantiableDraggable: 0
 --- !u!61 &765201496
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1387,6 +1911,106 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.49, y: 0.49}
+--- !u!1001 &769792254
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &810385162
 GameObject:
   m_ObjectHideFlags: 0
@@ -1414,112 +2038,11 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 765201493}
-  - {fileID: 895288930}
-  - {fileID: 1987220419}
-  - {fileID: 1729036733}
+  - {fileID: 409432064}
+  - {fileID: 677545931}
+  - {fileID: 1201283301}
   m_Father: {fileID: 0}
   m_RootOrder: 2
---- !u!1 &895288929
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 895288930}
-  - 212: {fileID: 895288931}
-  - 61: {fileID: 895288933}
-  - 114: {fileID: 895288932}
-  m_Layer: 10
-  m_Name: quadrado_release (2)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &895288930
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 895288929}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.3754585, y: -0.36380807, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 810385163}
-  m_RootOrder: 1
---- !u!212 &895288931
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 895288929}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1186929853
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!114 &895288932
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 895288929}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  Labels:
-  - quadrado
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 755165948}
---- !u!61 &895288933
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 895288929}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.49, y: 0.49}
 --- !u!1 &929196217
 GameObject:
   m_ObjectHideFlags: 0
@@ -1562,9 +2085,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &929196220
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1579,107 +2108,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
---- !u!1 &1051763875
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1051763876}
-  - 212: {fileID: 1051763877}
-  - 61: {fileID: 1051763879}
-  - 114: {fileID: 1051763878}
-  m_Layer: 10
-  m_Name: losango_release
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1051763876
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1051763875}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.6954584, y: -0.96380806, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 1481721507}
-  m_RootOrder: 1
---- !u!212 &1051763877
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1051763875}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1186929853
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!114 &1051763878
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1051763875}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  Labels:
-  - losango
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 129664194}
---- !u!61 &1051763879
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1051763875}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.74, y: 1.1}
 --- !u!1 &1056044872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1766,111 +2194,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 765201495}
---- !u!1 &1067295655
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1067295656}
-  - 212: {fileID: 1067295657}
-  - 61: {fileID: 1067295659}
-  - 114: {fileID: 1067295658}
-  m_Layer: 10
-  m_Name: circulo_release (1)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1067295656
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1067295655}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.6364584, y: -1.307808, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 746552659}
-  m_RootOrder: 1
---- !u!212 &1067295657
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1067295655}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1186929853
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 4e6087e767b3371448e6520a68a176d6, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!114 &1067295658
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1067295655}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
   _serializedStateKeys:
-  - spriteState
-  - scaleState
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
   _serializedStateValues:
+  - false
+  - false
   - 
-  - 
-  Labels:
-  - circulo
-  - certo
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 493352461}
---- !u!61 &1067295659
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1067295655}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.65, y: 0.72}
+  _changeSprite: 0
 --- !u!1 &1134065772
 GameObject:
   m_ObjectHideFlags: 0
@@ -1883,7 +2215,7 @@ GameObject:
   - 61: {fileID: 1134065774}
   - 114: {fileID: 1134065773}
   m_Layer: 0
-  m_Name: button_up
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1905,13 +2237,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 7ad7b82f8eee3ac408f1cd917c1a3a62, type: 3}
   upSprite: {fileID: 21300000, guid: d0be9252d1f6c974693c563b052cfad9, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &1134065774
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134065772}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1949,7 +2282,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d0be9252d1f6c974693c563b052cfad9, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &1134065776
@@ -1959,7 +2292,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1134065772}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -3.3968701, y: -2.6500764, z: 0}
+  m_LocalPosition: {x: -3.3968701, y: -2.6500764, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
@@ -2027,6 +2360,114 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+--- !u!1 &1201283297
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 4
+  m_Component:
+  - 4: {fileID: 1201283301}
+  - 212: {fileID: 1201283300}
+  - 61: {fileID: 1201283299}
+  - 114: {fileID: 1201283298}
+  m_Layer: 10
+  m_Name: quadrado_release (4)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1201283298
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201283297}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  - {fileID: 21300000, guid: 55e4279ed1126c44b8b6e65368f9f308, type: 3}
+  _serializedStateKeys:
+  - PreferredInitialIndex
+  - spriteState
+  - scaleState
+  _serializedStateValues:
+  - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
+  - 
+  forcePreferredIndexOnDrop: 0
+  Labels:
+  - quadrado
+  changeSprite: 1
+  changeScale: 0
+  currentSlot: {fileID: 1063759864}
+  instantiableDraggable: 0
+--- !u!61 &1201283299
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201283297}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 0.49, y: 0.49}
+--- !u!212 &1201283300
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201283297}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_SubsetIndices: 
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedWireframeHidden: 1
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 1186929853
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &1201283301
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1201283297}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 4.59, y: -1.7, z: -0.7998047}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_Children: []
+  m_Father: {fileID: 810385163}
+  m_RootOrder: 3
 --- !u!1 &1217342169
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,19 +2543,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 14053b24798c31c4aae7bb623a444c9f, type: 3}
+  - {fileID: 21300000, guid: f60653b4756d0fc4f840724e6bb8788e, type: 3}
+  - {fileID: 21300000, guid: f60653b4756d0fc4f840724e6bb8788e, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
   - certo
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 528349783}
+  instantiableDraggable: 0
 --- !u!61 &1217342173
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2171,9 +2619,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &1269680551
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2228,6 +2682,12 @@ MonoBehaviour:
   - '"AND"'
   - false
   - 6
+  _isGeneric: 0
+  _fadeAndFreezeOnDrop: 0
+  _animationTime: 0
+  _freezeAfterDrop: 0
+  _enableValidationOnlyIfSpecifcAmount: 1
+  _invalidLabels: []
 --- !u!61 &1274446768
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2337,10 +2797,8 @@ MonoBehaviour:
   - {fileID: 2056913186}
   - {fileID: 1587125720}
   - {fileID: 1748318193}
-  - {fileID: 1987220421}
   - {fileID: 78875982}
   - {fileID: 2127122562}
-  - {fileID: 730035214}
   - {fileID: 1217342172}
   - {fileID: 1274446767}
   - {fileID: 929196219}
@@ -2352,6 +2810,16 @@ MonoBehaviour:
   - {fileID: 1502926815}
   - {fileID: 378505046}
   - {fileID: 1134065773}
+  - {fileID: 538603614}
+  - {fileID: 477821129}
+  - {fileID: 175201360}
+  - {fileID: 765201495}
+  - {fileID: 409432067}
+  - {fileID: 677545934}
+  - {fileID: 1201283298}
+  - {fileID: 451627587}
+  - {fileID: 354477209}
+  - {fileID: 2001119195}
   _values:
   - _keys: []
     _values: []
@@ -2397,16 +2865,10 @@ MonoBehaviour:
     _target: {fileID: 1748318193}
   - _keys: []
     _values: []
-    _target: {fileID: 1987220421}
-  - _keys: []
-    _values: []
     _target: {fileID: 78875982}
   - _keys: []
     _values: []
     _target: {fileID: 2127122562}
-  - _keys: []
-    _values: []
-    _target: {fileID: 730035214}
   - _keys: []
     _values: []
     _target: {fileID: 1217342172}
@@ -2440,6 +2902,36 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1134065773}
+  - _keys: []
+    _values: []
+    _target: {fileID: 538603614}
+  - _keys: []
+    _values: []
+    _target: {fileID: 477821129}
+  - _keys: []
+    _values: []
+    _target: {fileID: 175201360}
+  - _keys: []
+    _values: []
+    _target: {fileID: 765201495}
+  - _keys: []
+    _values: []
+    _target: {fileID: 409432067}
+  - _keys: []
+    _values: []
+    _target: {fileID: 677545934}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1201283298}
+  - _keys: []
+    _values: []
+    _target: {fileID: 451627587}
+  - _keys: []
+    _values: []
+    _target: {fileID: 354477209}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2001119195}
 --- !u!114 &1396371740
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -2466,10 +2958,8 @@ MonoBehaviour:
   - {fileID: 2056913186}
   - {fileID: 1587125720}
   - {fileID: 1748318193}
-  - {fileID: 1987220421}
   - {fileID: 78875982}
   - {fileID: 2127122562}
-  - {fileID: 730035214}
   - {fileID: 1217342172}
   - {fileID: 1274446767}
   - {fileID: 929196219}
@@ -2481,12 +2971,19 @@ MonoBehaviour:
   - {fileID: 1502926815}
   - {fileID: 378505046}
   - {fileID: 1134065773}
+  - {fileID: 538603614}
+  - {fileID: 477821129}
+  - {fileID: 175201360}
+  - {fileID: 765201495}
+  - {fileID: 409432067}
+  - {fileID: 677545934}
+  - {fileID: 1201283298}
+  - {fileID: 451627587}
+  - {fileID: 354477209}
+  - {fileID: 2001119195}
   _values:
-  - _keys:
-    - DefaultBehaviorEditor.slots.EditProperty
-    _values:
-    - _showDropdown: 1
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 280491851}
   - _keys: []
     _values: []
@@ -2529,21 +3026,21 @@ MonoBehaviour:
     _target: {fileID: 1748318193}
   - _keys: []
     _values: []
-    _target: {fileID: 1987220421}
-  - _keys: []
-    _values: []
     _target: {fileID: 78875982}
   - _keys: []
     _values: []
     _target: {fileID: 2127122562}
   - _keys: []
     _values: []
-    _target: {fileID: 730035214}
-  - _keys: []
-    _values: []
     _target: {fileID: 1217342172}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.slots.EditProperty
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1274446767}
   - _keys: []
     _values: []
@@ -2572,6 +3069,36 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1134065773}
+  - _keys: []
+    _values: []
+    _target: {fileID: 538603614}
+  - _keys: []
+    _values: []
+    _target: {fileID: 477821129}
+  - _keys: []
+    _values: []
+    _target: {fileID: 175201360}
+  - _keys: []
+    _values: []
+    _target: {fileID: 765201495}
+  - _keys: []
+    _values: []
+    _target: {fileID: 409432067}
+  - _keys: []
+    _values: []
+    _target: {fileID: 677545934}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1201283298}
+  - _keys: []
+    _values: []
+    _target: {fileID: 451627587}
+  - _keys: []
+    _values: []
+    _target: {fileID: 354477209}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2001119195}
 --- !u!4 &1396371741
 Transform:
   m_ObjectHideFlags: 1
@@ -2641,9 +3168,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 2001119195}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &1481721506
 GameObject:
   m_ObjectHideFlags: 0
@@ -2671,8 +3204,8 @@ Transform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2127122560}
-  - {fileID: 1051763876}
-  - {fileID: 245606993}
+  - {fileID: 538603611}
+  - {fileID: 477821132}
   m_Father: {fileID: 0}
   m_RootOrder: 4
 --- !u!1 &1502926814
@@ -2780,9 +3313,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 451627587}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &1588020076
 GameObject:
   m_ObjectHideFlags: 0
@@ -2825,9 +3364,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &1588020079
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2842,107 +3387,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.7, y: 0.7}
---- !u!1 &1729036732
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1729036733}
-  - 212: {fileID: 1729036734}
-  - 61: {fileID: 1729036736}
-  - 114: {fileID: 1729036735}
-  m_Layer: 10
-  m_Name: quadrado_release (3)
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1729036733
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729036732}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3384585, y: -1.738808, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 810385163}
-  m_RootOrder: 3
---- !u!212 &1729036734
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729036732}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1186929853
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!114 &1729036735
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729036732}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  Labels:
-  - quadrado
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 621977187}
---- !u!61 &1729036736
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1729036732}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.49, y: 0.49}
 --- !u!1 &1748318192
 GameObject:
   m_ObjectHideFlags: 0
@@ -2972,9 +3416,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 245606995}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &1748318194
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3058,110 +3508,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 1987220421}
---- !u!1 &1987220418
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1987220419}
-  - 212: {fileID: 1987220420}
-  - 61: {fileID: 1987220422}
-  - 114: {fileID: 1987220421}
-  m_Layer: 10
-  m_Name: quadrado_release
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!4 &1987220419
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1987220418}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 4.6214585, y: -1.738808, z: -0.7998047}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 810385163}
-  m_RootOrder: 2
---- !u!212 &1987220420
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1987220418}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 1186929853
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: d7b94998026af8e438fa0282d4feeb1f, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!114 &1987220421
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1987220418}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
   _serializedStateKeys:
-  - spriteState
-  - scaleState
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
   _serializedStateValues:
+  - false
+  - false
   - 
-  - 
-  Labels:
-  - quadrado
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 1985898756}
---- !u!61 &1987220422
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1987220418}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 0.49, y: 0.49}
+  _changeSprite: 0
 --- !u!1 &2001119192
 GameObject:
   m_ObjectHideFlags: 0
@@ -3237,19 +3592,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: ce46f9ccf0782484fbaf91050856a2e0, type: 3}
+  - {fileID: 21300000, guid: 223edce2c3854d049829c9fb0c6d6fbd, type: 3}
+  - {fileID: 21300000, guid: 223edce2c3854d049829c9fb0c6d6fbd, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
   - certo
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 1412109929}
+  instantiableDraggable: 0
 --- !u!61 &2001119196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3320,9 +3682,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 730035214}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &2066451880
 GameObject:
   m_ObjectHideFlags: 0
@@ -3466,9 +3834,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 78875982}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!1 &2127122559
 GameObject:
   m_ObjectHideFlags: 0
@@ -3544,18 +3918,25 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 9aba765a860bfe84aa002a5fc849c21c, type: 3}
+  - {fileID: 21300000, guid: 14cf487672369944c992849b04256b3d, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - losango
-  changeSprite: 0
+  changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 620034544}
+  instantiableDraggable: 0
 --- !u!61 &2127122563
 BoxCollider2D:
   m_ObjectHideFlags: 0
