@@ -55,9 +55,11 @@ namespace MDS.Gameplay.DragDrop
             _renderer = this.GetComponent<SpriteRenderer>();
 
 
-            if(changeScale && (scaleState.draggingValue <= 0f 
-                             || scaleState.releasedValue <= 0))
-                Debug.LogError("[Draggable] Scale (draggingValue e releasedValue) não pode ser 0");
+			if (changeScale && (scaleState.draggingValue <= 0f
+			            || scaleState.releasedValue <= 0)) {
+				scaleState.draggingValue = scaleState.releasedValue = 1f;
+//				Debug.LogError ("[Draggable] Scale (draggingValue e releasedValue) não pode ser 0");
+			}
 
             if(changeScale && scaleState.releasedFinalPositionValue == 0)
                 scaleState.releasedFinalPositionValue = scaleState.releasedValue;
