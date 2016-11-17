@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
 
@@ -10,6 +11,26 @@ namespace MDS.Validators
         public ValidationRule[] rules;
 
         public OperationLogic OperationLogic { get; set; }
+
+        public int? GetNumericValue()
+        {
+            bool hasResult = false;
+            int result = 0;
+            int? temp;
+            foreach(var r in rules)
+            {
+                temp = r.ValidatableObject.GetNumericValue();
+                if(temp.HasValue)
+                {
+                    result += temp.Value;
+                    hasResult = true;
+                }
+
+            }
+            if(hasResult)
+                return result;
+            return null;
+        }
 
 
         #region IValidatable

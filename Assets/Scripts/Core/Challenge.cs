@@ -104,10 +104,12 @@ namespace MDS.Core
             ValidatorResult _validatorResult = validatorsList[0].Validate();
             if (_validatorResult == ValidatorResult.Victory)
             {
+                Debug.Log("Correct!!");
                 StartCoroutine(Victory());
             }
             else
             {
+                Debug.Log("Wrong!!");
                 StartCoroutine(Lose());
             }
         }

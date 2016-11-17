@@ -4,7 +4,8 @@ using FullInspector;
 using MDS.Validators.Interfaces;
 using System;
 
-public class CarrousselItem : MDSBehaviour, IValidatable {
+public class CarrousselItem : MDSBehaviour, IValidatable
+{
 
     [SerializeField, InspectorTooltip("Caso selecione o primeiro valor, esse será usado como indice e, a partir dele, os demais serão incrementados")]
     private string firstValue;
@@ -69,6 +70,7 @@ public class CarrousselItem : MDSBehaviour, IValidatable {
         }
     }
 
+    #region IValidatable
 
     public bool ReadyToValidate()
     {
@@ -82,4 +84,16 @@ public class CarrousselItem : MDSBehaviour, IValidatable {
     {
         return GetCurrentValue().Equals(acceptableAnswer);
     }
+
+    public int? GetNumericValue()
+    {
+        int result;
+        if(ReadyToValidate() && int.TryParse(GetCurrentValue(), out result))
+        {
+            return result;
+        }
+        return null;
+    }
+
+    #endregion
 }

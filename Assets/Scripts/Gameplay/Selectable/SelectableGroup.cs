@@ -175,6 +175,26 @@ namespace MDS.Gameplay.Selectable
 
         }
 
+        public int? GetNumericValue()
+        {
+            bool hasResult = false;
+            int result = 0;
+            int? temp;
+            foreach(var s in _selectables)
+            {
+                temp = s.GetNumericValue();
+                if(temp.HasValue)
+                {
+                    result += temp.Value;
+                    hasResult = true;
+                }
+
+            }
+            if(hasResult)
+                return result;
+            return null;
+        }
+
         #endregion
 
     }

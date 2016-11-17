@@ -150,11 +150,6 @@ namespace MDS.Gameplay.DragDrop
             }
             else
             {
-                if(instantiableDraggable)
-                {
-                    Destroy(gameObject);
-                    return;
-                }
                 TweenGoto(currentSlot.transform.position);
             }
 

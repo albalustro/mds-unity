@@ -102,6 +102,15 @@ namespace MDS.Gameplay.DragDrop
             return draggableReference.Labels.Contains(acceptableAnswer);
         }
 
+        public int? GetNumericValue()
+        {
+            int result;
+            if(IsTaken && int.TryParse(draggableReference.Labels[0], out result))
+            {
+                return result;
+            }
+            return null;
+        }
         #endregion
 
         #region Unity Editor Only
@@ -117,6 +126,8 @@ namespace MDS.Gameplay.DragDrop
                 Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
             }
         }
+
+        
 #endif
 
         #endregion

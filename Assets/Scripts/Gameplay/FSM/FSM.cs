@@ -101,6 +101,16 @@ namespace MDS.Gameplay.FSM
 
         }
 
+        public int? GetNumericValue()
+        {
+            int result;
+            if(Selected && int.TryParse(states[_currentStateIndex].Labels[0], out result))
+            {
+                return result;
+            }
+            return null;
+        }
+
         #endregion
     }
 }

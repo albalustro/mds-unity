@@ -8,6 +8,6 @@ namespace MDS.Validators.Interfaces
 
         bool ReadyToValidate();
         bool Validate(string acceptableAnswer);
-
+        int? GetNumericValue(); 
     }
 }

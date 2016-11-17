@@ -14,5 +14,6 @@ namespace MDS.Validators.Interfaces
         int? SpecificAmount { get; set; }
 
         bool Overwritten { get; set; }
+
     }
 }

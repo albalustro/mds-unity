@@ -238,6 +238,16 @@ namespace MDS.Gameplay.Selectable
             return Selected && Labels.Contains(acceptableAnswer);
         }
 
+        public int? GetNumericValue()
+        {
+            int result;
+            if (Selected && int.TryParse(Labels[0],out result))
+            {
+                return result;
+            }
+            return null;
+        }
+
         #endregion
 
     }

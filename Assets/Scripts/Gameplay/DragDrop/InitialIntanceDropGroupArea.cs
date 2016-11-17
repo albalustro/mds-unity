@@ -54,7 +54,10 @@ namespace MDS.Gameplay.DragDrop
 
             Draggable newDraggable = Instantiate(draggable);
             newDraggable.OnAfterDrop += DraggableAfterDropHandler;
+            newDraggable.GetComponent<Collider2D>().enabled = true;
 
+            if (draggable.transform.parent!=null)
+                newDraggable.transform.SetParent(draggable.transform.parent);
 
             // o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
             newDraggable.currentSlot = originalSlot;

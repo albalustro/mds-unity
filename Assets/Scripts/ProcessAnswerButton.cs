@@ -19,7 +19,7 @@ public class ProcessAnswerButton : MDSBehaviour
     private Color enabledColor = Color.white;
     private Color disabledColor = new Color(1, 1, 1, 0.5f);
 
-    [SerializeField, InspectorShow, InspectorTooltip("GameObject (child) que será acionado quando estiver habilitado. Se mais de um efeito for necessário, coloque todos como filhos de um GO comum e use-o nessa propriedade")]
+    [SerializeField, InspectorTooltip("GameObject (child) que será acionado quando estiver habilitado. Se mais de um efeito for necessário, coloque todos como filhos de um GO comum e use-o nessa propriedade")]
     private GameObject enabledEffectGO;
 
     protected override void Awake()
@@ -75,7 +75,3 @@ public class ProcessAnswerButton : MDSBehaviour
     }
 }
 
-
-internal class InspectorShowAttribute : Attribute
-{
-}

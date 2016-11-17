@@ -4,6 +4,7 @@ using MDS.Validators.Interfaces;
 using MDS.Validators.Enum;
 using FullInspector;
 using System.Collections.Generic;
+using System;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -11,16 +12,20 @@ namespace MDS.Gameplay.DragDrop
 	public class ValidatableDropGroupArea : BaseDropGroupArea, IValidatableGroup, IValidatable
 	{
 
-      
-        [SerializeField]
-        private bool _isGeneric;
+	  
+		[SerializeField]
+		private bool _isGeneric;
 
 		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto sofra um FADE OUT OnDrop")]
 		protected bool _fadeAndFreezeOnDrop;
 
-		[InspectorShowIf("_fadeAndFreezeOnDrop")]
+		[InspectorShowIf("_fadeAndFreezeOnDrop"), InspectorIndent(Order = 1)]
 		[SerializeField, InspectorTooltip("Tempo, em segundos, para a animação de fade ocorrer")]
 		protected float _animationTime;
+
+		[InspectorShowIf("_fadeAndFreezeOnDrop"), InspectorIndent(Order =1)]
+		[SerializeField, InspectorTooltip("Selecione para que o drop group se comporte como se fosse 'infinito'")]
+		protected bool _infinityBag;
 
 		[InspectorHideIf("_fadeAndFreezeOnDrop")]
 		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto e o slot fiquem bloqueados após um draggable ser solto sobre esse grupo")]
@@ -38,6 +43,13 @@ namespace MDS.Gameplay.DragDrop
 
 		[SerializeField, InspectorTooltip("Lista de labels que serão recusados.")]
 		protected List<string> _invalidLabels;
+
+		public override void Start()
+		{
+			base.Start();
+			if(slots.Count > 1 && _infinityBag)
+				Debug.LogError("Se o DropGroupArea é infinito, coloque apenas UM slot.");
+		}
 
 		#region IValidatableGroup
 
@@ -107,39 +119,59 @@ namespace MDS.Gameplay.DragDrop
 
 
 
-            if (_isGeneric)
-            {
-                var labels = temp[0].draggableReference.Labels;
+			if (_isGeneric)
+			{
+				var labels = temp[0].draggableReference.Labels;
 
-                foreach (var l in labels)
-                {
-                    ret = temp.All(s => s.Validate(l));
-                    if (ret)
-                    {
-                        break;
-                    }
-                }
-            }
-            else
-            {
-                switch (OperationLogic)
-                {
-                    case OperationLogic.AND:
-                        ret = temp.All(s => s.Validate(acceptableAnswer));
-                        break;
-                    case OperationLogic.OR:
-                        ret = temp.Any(s => s.Validate(acceptableAnswer));
-                        break;
-                }
+				foreach (var l in labels)
+				{
+					ret = temp.All(s => s.Validate(l));
+					if (ret)
+					{
+						break;
+					}
+				}
+			}
+			else
+			{
+				switch (OperationLogic)
+				{
+					case OperationLogic.AND:
+						ret = temp.All(s => s.Validate(acceptableAnswer));
+						break;
+					case OperationLogic.OR:
+						ret = temp.Any(s => s.Validate(acceptableAnswer));
+						break;
+				}
 
-                if (ret && SpecificAmount.HasValue)
-                {
-                    int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
-                    ret = (qtde == SpecificAmount.Value);
-                }
-            }
-            return ret;
-        }		
+				if (ret && SpecificAmount.HasValue)
+				{
+					int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
+					ret = (qtde == SpecificAmount.Value);
+				}
+			}
+			return ret;
+		}
+
+		public int? GetNumericValue()
+		{
+			bool hasResult = false;
+			int result = 0;
+			int? temp;
+			foreach(var s in slots)
+			{
+				temp = s.GetNumericValue();
+				if(temp.HasValue)
+				{
+					result += temp.Value;
+					hasResult = true;
+				}
+
+			}
+			if(hasResult)
+				return result;
+			return null;
+		}
 
 		#endregion
 
@@ -162,6 +194,10 @@ namespace MDS.Gameplay.DragDrop
 			{
 				LeanTween.alpha(draggable.gameObject, 0, _animationTime);
 				LeanTween.scale(draggable.gameObject, Vector3.zero, _animationTime);
+
+				if(_infinityBag)
+					DuplicateSlot(slot);
+
 				Freeze(draggable.gameObject);
 				Freeze(slot.gameObject);
 			}
@@ -174,6 +210,11 @@ namespace MDS.Gameplay.DragDrop
 			go.GetComponent<Collider2D>().enabled = false;
 		}
 
-
+		private void DuplicateSlot(DropGroupSlot slot)
+		{
+			DropGroupSlot newSlot = Instantiate(slot);
+			slots.Add(newSlot);
+			newSlot.transform.SetParent(transform,false);
+		}
 	}
 }
