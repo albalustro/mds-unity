@@ -140,8 +140,9 @@ public class DialogueSystem : MDSBehaviour
     }
 
     /// <summary>
-    /// Exibe mensagem de 'error' do diálogo atual quando o jogador erra um desafio 
+    /// Exibe caixa de dialogo para slugs correspondentes
     /// </summary>
+    /// <param name="_slugs">Slugs do dialogo a ser exibido</param>
     public void ShowDialogueMessage(Slug[] _slugs)
     {
         _currentDialogues.Clear();
@@ -150,7 +151,6 @@ public class DialogueSystem : MDSBehaviour
             List<DialogueEntry> tempList = GetDialoguesForCurrentContext(_slugs[i].ToString(), minigame);
             _currentDialogues.AddRange(tempList);
         }
-        //Como estamos usando o enum isso aqui nunca vai acontecer!!!
         if (_currentDialogues.Count <= 0)
         {
             Debug.LogError("Slug: " + slug + " não existe no json.\n Dado informado no Game: " + game + "\n World: " + world + "\n Episódio: " + episode + "\n Challenge: " + challenge);
