@@ -7,12 +7,6 @@ namespace MDS.Gameplay.DragDrop
 {
     public class StackDropGroupArea : ValidatableDropGroupArea
     {
-
-        protected override void Awake()
-        {
-            base.Awake();
-        }
-
         public override void Start()
         {
             base.Start();
@@ -25,13 +19,12 @@ namespace MDS.Gameplay.DragDrop
         public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
         {
             bool ret = false;
-            if (slots.Any(s => s.draggableReference == draggable))
-                return false;
-            else
+            if (!slots.Any(s => s.draggableReference == draggable))
             {
                 if (base.SetInSlot(draggable, ref slot))
                 {
                     draggable.OnAfterDrop += DraggableAfterDropHandler;
+                    ret = true;
                 }
             }
             return ret;
@@ -39,11 +32,7 @@ namespace MDS.Gameplay.DragDrop
 
         private void DraggableAfterDropHandler(Draggable draggable, DropGroupSlot originalSlot)
         {
-            if (slots.Any(s => s.draggableReference == draggable))
-            {
-                return;
-            }
-            else
+            if (!slots.Any(s => s.draggableReference == draggable))
             {
                 draggable.OnAfterDrop -= DraggableAfterDropHandler;
                 OrganizeStack();
@@ -53,16 +42,15 @@ namespace MDS.Gameplay.DragDrop
         private void OrganizeStack()
         {
             DropGroupSlot freeSlot = null;
-            for (int i = 0; i < slots.Count; i++)
+            for (int i = 0; i < slots.Count-1; i++)
             {
                 if (slots[i].draggableReference == null)
                 {
                     freeSlot = slots[i];
-                    if (slots[i + 1].draggableReference != null)
-                    {
-                        Draggable d = slots[i + 1].draggableReference;
-                        DraggableUtilities.SetDraggableInSlot(d, freeSlot);
-                    }
+                    if (slots[i + 1].draggableReference == null)
+                        return;
+                    Draggable d = slots[i + 1].draggableReference;
+                    DraggableUtilities.SetDraggableInSlot(d, freeSlot);
                 }
             }
         }
