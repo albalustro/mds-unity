@@ -251,11 +251,13 @@ MonoBehaviour:
   _serializedStateKeys:
   - preActionsList
   - validatorsList
+  - errorActionList
   - posVictoryActionsList
   _serializedStateValues:
-  - '[]'
+  - '[{"slugs":["intro"],"$type":"MDS.Core.OpenDialogue"}]'
   - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '[{"slugs":["error1"],"$type":"MDS.Core.OpenDialogue"},{"slugs":["error2"],"$type":"MDS.Core.OpenDialogue"},{"slugs":["error3"],"$type":"MDS.Core.OpenDialogue"}]'
+  - '[{"slugs":["victory"],"$type":"MDS.Core.OpenDialogue"}]'
   nextChallenge: {fileID: 0}
   btn: {fileID: 566409264}
 --- !u!4 &110572401
@@ -507,7 +509,7 @@ GameObject:
   - 114: {fileID: 566409264}
   - 61: {fileID: 566409265}
   m_Layer: 0
-  m_Name: button_up
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -543,7 +545,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: afda560fe3212fa4c864f447f6ae8e02, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &566409263
@@ -575,13 +577,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: bf5f5611b7c72094786aad29f634d643, type: 3}
   upSprite: {fileID: 21300000, guid: afda560fe3212fa4c864f447f6ae8e02, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &566409265
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 566409261}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -939,16 +942,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
   - 
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - 3
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1 &1281111681
 GameObject:
   m_ObjectHideFlags: 0
@@ -1040,16 +1047,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
   - 
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - 4
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!114 &1381357913 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1159,16 +1170,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
   - 
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - 1
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!114 &1510071261 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1263,16 +1278,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
   - 
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - 2
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1602771374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1436,16 +1455,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
   - 
   - 
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - 5
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!114 &1811739005 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1618,6 +1641,106 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+--- !u!1001 &2011106896
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2124401534
 GameObject:
   m_ObjectHideFlags: 1

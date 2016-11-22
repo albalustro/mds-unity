@@ -122,11 +122,13 @@ MonoBehaviour:
   _serializedStateKeys:
   - preActionsList
   - validatorsList
+  - errorActionList
   - posVictoryActionsList
   _serializedStateValues:
-  - '[]'
+  - '[{"slugs":["intro"],"$type":"MDS.Core.OpenDialogue"}]'
   - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '[{"slugs":["error1"],"$type":"MDS.Core.OpenDialogue"},{"slugs":["error2"],"$type":"MDS.Core.OpenDialogue"},{"slugs":["error3"],"$type":"MDS.Core.OpenDialogue"}]'
+  - '[{"slugs":["victory"],"$type":"MDS.Core.OpenDialogue"}]'
   nextChallenge: {fileID: 0}
   btn: {fileID: 130704490}
 --- !u!4 &36044745
@@ -295,8 +297,12 @@ MonoBehaviour:
   - '"AND"'
   - false
   - 
+  _isGeneric: 0
+  _fadeAndFreezeOnDrop: 0
+  _animationTime: 0
   _freezeAfterDrop: 0
   _enableValidationOnlyIfSpecifcAmount: 0
+  _invalidLabels: []
 --- !u!61 &76440833
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -552,6 +558,7 @@ MonoBehaviour:
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1001 &239605020
 Prefab:
   m_ObjectHideFlags: 0
@@ -657,6 +664,7 @@ MonoBehaviour:
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &427780823
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -988,8 +996,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: d0986f617672dad46b04cac5b0fc6e1f, type: 3}
   _serializedStateKeys:
   - IsInitialSlot
+  - IsInstatiableInitialSlot
   - _sprite
   _serializedStateValues:
+  - false
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
@@ -1101,8 +1111,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 85213708a7a4167439ef7e76b0620597, type: 3}
   _serializedStateKeys:
   - IsInitialSlot
+  - IsInstatiableInitialSlot
   - _sprite
   _serializedStateValues:
+  - false
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
@@ -1213,6 +1225,7 @@ MonoBehaviour:
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1 &874997893
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,8 +1320,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 85213708a7a4167439ef7e76b0620597, type: 3}
   _serializedStateKeys:
   - IsInitialSlot
+  - IsInstatiableInitialSlot
   - _sprite
   _serializedStateValues:
+  - false
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
@@ -1422,6 +1437,7 @@ MonoBehaviour:
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1097590146
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1866,6 +1882,7 @@ MonoBehaviour:
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1 &1430099233
 GameObject:
   m_ObjectHideFlags: 0
@@ -1999,8 +2016,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f1e9350fc1d9c744898c2173bf4a38b3, type: 3}
   _serializedStateKeys:
   - IsInitialSlot
+  - IsInstatiableInitialSlot
   - _sprite
   _serializedStateValues:
+  - false
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
@@ -2091,6 +2110,106 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+--- !u!1001 &1932947661
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2103857204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2185,8 +2304,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: bfac2ea9ffab1a94c897985bb6dcbff0, type: 3}
   _serializedStateKeys:
   - IsInitialSlot
+  - IsInstatiableInitialSlot
   - _sprite
   _serializedStateValues:
+  - false
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
