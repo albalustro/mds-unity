@@ -2,9 +2,13 @@
 using System.Collections;
 using System;
 
-public interface IAction
+namespace MDS.Core.Interfaces
 {
 
-    IEnumerator Execute(Action callback = null);
+    public interface IAction
+    {
 
+        IEnumerator Execute(Action callback = null);
+
+    }
 }

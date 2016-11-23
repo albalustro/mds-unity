@@ -124,6 +124,9 @@ namespace MDS.Gameplay.Selectable
 
             if(_spriteRenderer != null && _spriteRenderer.sprite == null)
                 _spriteRenderer.sprite = _sprite.UnselectedValue;
+
+            if(_sprite.UnselectedValue != null && _sprite.SelectedValue == null)
+                _sprite.SelectedValue = _sprite.UnselectedValue;
         }
 #endif
         #endregion

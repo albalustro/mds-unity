@@ -1,75 +1,64 @@
 ﻿using System;
 using System.Collections;
+using MDS.Core.Interfaces;
 using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace MDS.Core
 {
-    [Serializable]
-    public class SolveChallenge : IAction
-    {
-        public IEnumerator Execute(Action callback)
-        {
-            throw new NotImplementedException();
-        }
-    }
 
-    [Serializable]
-    public class OpenDialogue : IAction
-    {
-        public Slug[] slugs { get; set; }
-        public IEnumerator Execute(Action callback)
-        {
-            DialogueSystem.instance.ShowDialogueMessage(slugs);
-            yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
-        }
-    }
+    public delegate void ProcessAnswerDelegate();
 
-    [Serializable]
-    public class ErrorHandlerr : IAction
-    {
-        public IAction[] actions;
-        public IEnumerator Execute(Action callback)
-        {
-            foreach (var item in actions)
-            {
-                yield return item.Execute();
-            }
-        }
-    }
 
     public class Challenge : MDSBehaviour
     {
-        // ações executadas automaticamente quando
-        // entra no desafio (ANTES do desafio ser jogado)
-        // ex: sequencias de dialogos, animacoes, etc
-        public IAction[] preActionsList;
+
+        public class ChallengeActions
+        {
+            // ações executadas automaticamente quando
+            // entra no desafio (ANTES do desafio ser jogado)
+            // ex: sequencias de dialogos, animacoes, etc
+            public IAction[] onStartActions;
+
+            // ações executadas quando responde errado
+            public IAction[] onErrorActions;
+
+            // ações executadas quando obtem sucesso na valicao
+            public IAction[] onVictoryActions;
+        }
+
 
         // validadores do desafio
-        public IValidator[] validatorsList;
-
-        public IAction[] errorActionList;
-
-        // ações executadas quando obtem sucesso na valicao
-        public IAction[] posVictoryActionsList;
-
-        // ações executadas quando obtem falhar no desafio
-        //public IAction[] posVictoryActionsList;
+        public IValidator Validador;
 
         public Challenge nextChallenge;
 
-        public ProcessAnswerButton btn;
+        private IAnswerProcessor answerProcessor;
+
+        public ChallengeActions _actions;
+
 
         protected override void Awake()
         {
             base.Awake();
-            btn.processAnswerEvent += ProcessResult;
+
+            if(nextChallenge != null)
+                nextChallenge.gameObject.SetActive(false);
+
         }
 
         public IEnumerator Start()
         {
-            foreach (var item in preActionsList)
+            answerProcessor = GameObject.FindWithTag("IAnswerProcessor").GetComponent<IAnswerProcessor>();
+            if(answerProcessor == null)
+            {
+                Debug.LogError("IAnswerProcessor não encontrado na cena " + SceneManager.GetActiveScene().name);
+            }
+            answerProcessor.OnProcessAnswer += ProcessResult;
+
+            foreach(var item in _actions.onStartActions)
             {
                 yield return item.Execute();
             }
@@ -77,15 +66,16 @@ namespace MDS.Core
 
         public void Update()
         {
-            if (validatorsList[0].ReadyToValidate())
-                btn.Enable();
+            if(Validador.ReadyToValidate())
+                answerProcessor.Enable();
             else
-                btn.Disable();
+                answerProcessor.Disable();
         }
+
 
         IEnumerator Victory()
         {
-            foreach (var item in posVictoryActionsList)
+            foreach(var item in _actions.onVictoryActions)
             {
                 yield return item.Execute();
             }
@@ -93,7 +83,7 @@ namespace MDS.Core
 
         IEnumerator Lose()
         {
-            foreach (var item in errorActionList)
+            foreach(var item in _actions.onErrorActions)
             {
                 yield return item.Execute();
             }
@@ -101,11 +91,16 @@ namespace MDS.Core
 
         void ProcessResult()
         {
-            ValidatorResult _validatorResult = validatorsList[0].Validate();
-            if (_validatorResult == ValidatorResult.Victory)
+            ValidatorResult _validatorResult = Validador.Validate();
+            if(_validatorResult == ValidatorResult.Victory)
             {
                 Debug.Log("Correct!!");
                 StartCoroutine(Victory());
+                if(nextChallenge != null)
+                {
+                    nextChallenge.gameObject.SetActive(true);
+                    gameObject.SetActive(false);
+                }
             }
             else
             {
