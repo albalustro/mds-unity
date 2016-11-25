@@ -11,27 +11,52 @@ namespace MDS.Gameplay.DragDrop
 	[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
 	public class ValidatableDropGroupArea : BaseDropGroupArea, IValidatableGroup, IValidatable
 	{
+     
+        [InspectorMargin(10), InspectorDivider, InspectorHeader("Validation Properties")]
 
-	  
-		[SerializeField]
-		private bool _isGeneric;
+        [InspectorCategory("Validation")]
+        [SerializeField, InspectorOrder(0)]
+        private bool _isGeneric;
 
-		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto sofra um FADE OUT OnDrop")]
+        
+        [InspectorCategory("Validation")]
+        public bool Overwritten { get; set; }
+
+        [InspectorCategory("Validation")]
+        [InspectorHideIf("Overwritten")]
+        public OperationLogic OperationLogic { get; set; }
+
+        [InspectorCategory("Validation")]
+        [InspectorHideIf("Overwritten")]
+        public bool AcceptEmptyAsCorrectAnswer { get; set; }
+
+        [InspectorCategory("Validation")]
+        [InspectorHideIf("Overwritten")]
+        public int? SpecificAmount { get; set; }
+
+        [InspectorMargin(15), InspectorDivider, InspectorHeader("Mechanics Properties")]
+
+        [InspectorCategory("Mechanics")]
+        [SerializeField, InspectorTooltip("Selecione para fazer com que o objeto sofra um FADE OUT OnDrop")]
 		protected bool _fadeAndFreezeOnDrop;
 
-		[InspectorShowIf("_fadeAndFreezeOnDrop"), InspectorIndent(Order = 1)]
-		[SerializeField, InspectorTooltip("Tempo, em segundos, para a animação de fade ocorrer")]
+        [InspectorCategory("Mechanics")]
+        [InspectorShowIf("_fadeAndFreezeOnDrop")]
+		[InspectorRange(0.1f,1.0f), SerializeField, InspectorTooltip("Tempo, em segundos, para a animação de fade ocorrer")]
 		protected float _animationTime;
 
-		[InspectorShowIf("_fadeAndFreezeOnDrop"), InspectorIndent(Order =1)]
+        [InspectorCategory("Mechanics")]
+        [InspectorShowIf("_fadeAndFreezeOnDrop")]
 		[SerializeField, InspectorTooltip("Selecione para que o drop group se comporte como se fosse 'infinito'")]
 		protected bool _infinityBag;
 
-		[InspectorHideIf("_fadeAndFreezeOnDrop")]
+        [InspectorCategory("Mechanics")]
+        [InspectorHideIf("_fadeAndFreezeOnDrop")]
 		[SerializeField, InspectorTooltip("Selecione para fazer com que o objeto e o slot fiquem bloqueados após um draggable ser solto sobre esse grupo")]
 		protected bool _freezeAfterDrop;
 
-		[InspectorShowIf("ShowEnableValidation"), SerializeField, InspectorTooltip("Somente se a quantidade especifica de elementos estiver nos slots desse grupo é que ele estará pronto para ser validado. Caso contrário, com apenas um elemento já fica liberado para tentar validar")]
+        [InspectorCategory("Mechanics")]
+        [InspectorShowIf("ShowEnableValidation"), SerializeField, InspectorTooltip("Somente se a quantidade especifica de elementos estiver nos slots desse grupo é que ele estará pronto para ser validado. Caso contrário, com apenas um elemento já fica liberado para tentar validar")]
 		protected bool _enableValidationOnlyIfSpecifcAmount;
 		protected bool ShowEnableValidation
 		{
@@ -41,8 +66,10 @@ namespace MDS.Gameplay.DragDrop
 			}
 		}
 
-		[SerializeField, InspectorTooltip("Lista de labels que serão recusados.")]
+        [InspectorCategory("Mechanics")]
+        [SerializeField, InspectorTooltip("Lista de labels que serão recusados.")]
 		protected List<string> _invalidLabels;
+
 
 		public override void Start()
 		{
@@ -51,28 +78,27 @@ namespace MDS.Gameplay.DragDrop
 				Debug.LogError("Se o DropGroupArea é infinito, coloque apenas UM slot.");
 		}
 
-		#region IValidatableGroup
-
-		[InspectorMargin(10)]
-
-		public bool Overwritten { get; set; }
-
-		[InspectorHideIf("Overwritten")]
-		public OperationLogic OperationLogic { get; set; }
-
-		[InspectorHideIf("Overwritten")]
-		public bool AcceptEmptyAsCorrectAnswer { get; set; }
-
-		[InspectorHideIf("Overwritten")]
-		public int? SpecificAmount { get; set; }
-
-		#endregion
+		public int Count(string label)
+		{
+			if(string.IsNullOrEmpty(label))
+				return slots.Count(s => s.draggableReference != null);
+			return slots.Count(s => s.draggableReference != null && s.draggableReference.Labels.Contains(label));
+		}
 
 		#region IValidatable
 
 		public bool ReadyToValidate()
 		{
 			bool ret = false;
+			if (slots==null)
+			{
+				FillSlots();
+				if(slots == null)
+				{
+					Debug.LogErrorFormat(gameObject.name + " não possui slots.");
+					return false;
+				}
+			}
 
 			var readyCount = slots.Where(s => s.ReadyToValidate()).ToList().Count;
 
@@ -107,15 +133,15 @@ namespace MDS.Gameplay.DragDrop
 				temp = slots.Where(s => s.draggableReference != null).ToList();
 
 
-			switch(OperationLogic)
-			{
-				case OperationLogic.AND:
-					ret = temp.All(s => s.Validate(acceptableAnswer));
-					break;
-				case OperationLogic.OR:
-					ret = temp.Any(s => s.Validate(acceptableAnswer));
-					break;
-			}
+			//switch(OperationLogic)
+			//{
+			//	case OperationLogic.AND:
+			//		ret = temp.All(s => s.Validate(acceptableAnswer));
+			//		break;
+			//	case OperationLogic.OR:
+			//		ret = temp.Any(s => s.Validate(acceptableAnswer));
+			//		break;
+			//}
 
 
 
@@ -134,21 +160,24 @@ namespace MDS.Gameplay.DragDrop
 			}
 			else
 			{
-				switch (OperationLogic)
-				{
-					case OperationLogic.AND:
-						ret = temp.All(s => s.Validate(acceptableAnswer));
-						break;
-					case OperationLogic.OR:
-						ret = temp.Any(s => s.Validate(acceptableAnswer));
-						break;
-				}
-
-				if (ret && SpecificAmount.HasValue)
+				if(SpecificAmount.HasValue)
 				{
 					int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
 					ret = (qtde == SpecificAmount.Value);
 				}
+				else
+				{
+					switch(OperationLogic)
+					{
+						case OperationLogic.AND:
+							ret = temp.All(s => s.Validate(acceptableAnswer));
+							break;
+						case OperationLogic.OR:
+							ret = temp.Any(s => s.Validate(acceptableAnswer));
+							break;
+					}
+				}
+				
 			}
 			return ret;
 		}
@@ -216,5 +245,7 @@ namespace MDS.Gameplay.DragDrop
 			slots.Add(newSlot);
 			newSlot.transform.SetParent(transform,false);
 		}
+
+		
 	}
 }

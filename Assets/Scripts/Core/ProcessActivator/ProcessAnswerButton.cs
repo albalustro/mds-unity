@@ -3,16 +3,15 @@ using FullInspector;
 using UnityEngine;
 using System.Collections;
 using MDS.Core.Interfaces;
+using MDS.Validators.Interfaces;
 
-namespace MDS.Core
+namespace MDS.Core.ProcessActivator
 {
 
     [ExecuteInEditMode]
     [RequireComponent(typeof(BoxCollider2D))]
-    public class ProcessAnswerButton : MDSBehaviour, IAnswerProcessor
+    public class ProcessAnswerButton : BaseValidationActivator
     {
-
-        public event ProcessAnswerDelegate OnProcessAnswer;
 
         public Sprite downSprite;
         public Sprite upSprite;
@@ -26,10 +25,12 @@ namespace MDS.Core
         [SerializeField, InspectorTooltip("GameObject (child) que será acionado quando estiver habilitado. Se mais de um efeito for necessário, coloque todos como filhos de um GO comum e use-o nessa propriedade")]
         private GameObject enabledEffectGO;
 
+        private IValidator _validador;
+
         protected override void Awake()
         {
             base.Awake();
-            gameObject.tag = "IAnswerProcessor";
+           
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<BoxCollider2D>();
         }
@@ -39,8 +40,10 @@ namespace MDS.Core
             Disable();
         }
 
-        public void Disable()
+        public override void Disable()
         {
+            base.Disable();
+
             _spriteRenderer.color = disabledColor;
             _collider.enabled = false;
 
@@ -48,8 +51,10 @@ namespace MDS.Core
                 enabledEffectGO.SetActive(false);
         }
 
-        public void Enable()
+        public override void Enable()
         {
+            base.Enable();
+
             _spriteRenderer.color = enabledColor;
             _collider.enabled = true;
 
@@ -59,14 +64,25 @@ namespace MDS.Core
 
         public void OnMouseUp()
         {
-            if(OnProcessAnswer != null)
-                OnProcessAnswer();
+            FireValidation();
             _spriteRenderer.sprite = upSprite;
         }
 
         public void OnMouseDown()
         {
             _spriteRenderer.sprite = downSprite;
+        }
+
+
+        public void Update()
+        {
+            if(_validador == null)
+                _validador = Challenge.GetCurrentValidador();
+
+            if(_validador.ReadyToValidate())
+                Enable();
+            else
+                Disable();
         }
 
         protected override void OnValidate()

@@ -5,30 +5,21 @@ using System.Collections;
 using MDS.Core.Interfaces;
 using UnityEngine.Events;
 
-namespace MDS.Core
+namespace MDS.Core.ProcessActivator
 {
-    public class ProcessAnswerTimer : MDSBehaviour, IAnswerProcessor
+    public class ProcessAnswerTimer : BaseValidationActivator
     {
-
-        public event ProcessAnswerDelegate OnProcessAnswer;
 
         [SerializeField]
         private int _seconds;
-
         private int _currentCounter;
-        private bool _enabledCounter;
+        
 
         [SerializeField]
         private bool _countDown;
 
         public UnityEvent<int> OnTick;
 
-
-        protected override void Awake()
-        {
-            base.Awake();
-            gameObject.tag = "IAnswerProcessor";
-        }
 
         public void Start()
         {
@@ -44,22 +35,14 @@ namespace MDS.Core
             Enable();
         }
 
-        public void Disable()
-        {
-            _enabledCounter = false;
-        }
-
-        public void Enable()
-        {
-            _enabledCounter = true;
-        }
+     
 
         public IEnumerator CountOneSecond()
         {
             while(true)
             {
                 yield return new WaitForSeconds(1);
-                if(_enabledCounter)
+                if(_isEnabled)
                 {
                     if(_countDown)
                     {
@@ -83,8 +66,7 @@ namespace MDS.Core
             OnTick.Invoke(_currentCounter);
 
             Disable();
-            if(OnProcessAnswer != null)
-                OnProcessAnswer();
+            FireValidation();
 
         }
 

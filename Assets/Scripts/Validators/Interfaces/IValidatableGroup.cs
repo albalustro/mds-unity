@@ -15,5 +15,8 @@ namespace MDS.Validators.Interfaces
 
         bool Overwritten { get; set; }
 
+
+        int Count(string label);
+
     }
 }

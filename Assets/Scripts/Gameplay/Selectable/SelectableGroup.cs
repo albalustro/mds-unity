@@ -36,6 +36,18 @@ namespace MDS.Gameplay.Selectable
         [InspectorHideIf("Overwritten")]
         public int? SpecificAmount { get; set; }
 
+        
+        /// <summary>
+        /// Retorna quantidade de elementos *selecionados* e que contem o label do parametro
+        /// </summary>
+        public int Count(string label)
+        {
+            if(string.IsNullOrEmpty(label))
+                return _selectables.Count(s => s.Selected);
+
+            return _selectables.Count(s => s.Selected && s.Labels.Contains(label));
+        }
+
         #endregion
 
         public GroupSelectionType groupSelectionType;

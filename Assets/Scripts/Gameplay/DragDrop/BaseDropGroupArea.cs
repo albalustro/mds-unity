@@ -11,7 +11,6 @@ namespace MDS.Gameplay.DragDrop
     public abstract class BaseDropGroupArea : MDSBehaviour
     {
 
-        [ShowInInspector, InspectorDisabled]
         protected List<DropGroupSlot> slots;
 
         public virtual bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
@@ -74,7 +73,6 @@ namespace MDS.Gameplay.DragDrop
             FillSlots();
         }
 
-        [InspectorButton, InspectorTooltip("Use esse recurso para preencher os 'slots' com os DropGroupSlot filhos")]
         public void FillSlots()
         {
             slots = transform.GetComponentsInChildren<DropGroupSlot>().ToList();

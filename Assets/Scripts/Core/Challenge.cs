@@ -1,6 +1,7 @@
-﻿using System;
+﻿using System.Linq;
 using System.Collections;
 using MDS.Core.Interfaces;
+using MDS.Core.ProcessActivator;
 using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
 using UnityEngine;
@@ -9,7 +10,7 @@ using UnityEngine.SceneManagement;
 namespace MDS.Core
 {
 
-    public delegate void ProcessAnswerDelegate();
+    public delegate void ValidateAnswerDelegate();
 
 
     public class Challenge : MDSBehaviour
@@ -35,9 +36,22 @@ namespace MDS.Core
 
         public Challenge nextChallenge;
 
-        private IAnswerProcessor answerProcessor;
+        private IValidationActivator[] _answerProcessors;
 
         public ChallengeActions _actions;
+
+
+        public static IValidator GetCurrentValidador()
+        {
+            Challenge[] challenges = FindObjectsOfType<Challenge>();
+            Challenge currentChallenge;
+            if(challenges.Length == 1)
+                currentChallenge = challenges[0];
+            else
+                currentChallenge = challenges.First(c => c.isActiveAndEnabled);
+
+            return currentChallenge.Validador;
+        }
 
 
         protected override void Awake()
@@ -51,25 +65,21 @@ namespace MDS.Core
 
         public IEnumerator Start()
         {
-            answerProcessor = GameObject.FindWithTag("IAnswerProcessor").GetComponent<IAnswerProcessor>();
-            if(answerProcessor == null)
+            
+            _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
+            if(_answerProcessors == null)
             {
-                Debug.LogError("IAnswerProcessor não encontrado na cena " + SceneManager.GetActiveScene().name);
+                LogError("ValidationActivator não encontrado");
             }
-            answerProcessor.OnProcessAnswer += ProcessResult;
-
+            foreach(var item in _answerProcessors)
+            {
+                item.OnValidateAnswer += ProcessResult;
+            }
+            
             foreach(var item in _actions.onStartActions)
             {
                 yield return item.Execute();
             }
-        }
-
-        public void Update()
-        {
-            if(Validador.ReadyToValidate())
-                answerProcessor.Enable();
-            else
-                answerProcessor.Disable();
         }
 
 
