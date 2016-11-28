@@ -5,7 +5,6 @@ using System.Collections;
 public class LoginInfo 
 {
 	public StatusInfo status;
-		
 	public string token;
 	public string api;
 	public string assets_url;

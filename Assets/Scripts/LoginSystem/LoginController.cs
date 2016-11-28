@@ -1,15 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
-using System;
+using System.Text;
+using System.Security.Cryptography;
+using UnityEngine.SceneManagement;
 
-public class LoginController : MonoBehaviour {
+public class LoginController : MDSBehaviour {
 
-	private string _url;
+    #region Variáveis
 
-    [Space(5)]
-    [Header("Dados Usuário")]
-    public LoginInfo loginInfo;
+    private string _url;
 
     [Space(5)]
     [Header("Campos")]
@@ -24,19 +24,38 @@ public class LoginController : MonoBehaviour {
     [SerializeField] private Text _fbText;
     [SerializeField] private Button _fbButton;
 
-    [Space(5)]
-    [Header("DEBUG")]
-    [SerializeField] private GameObject _DEBUGPanel;
+    public UserProfile m_UserProfile;
+
+    #endregion
+
+    #region Métodos Unity
+
+    protected override void Awake()
+    {
+        base.Awake();
+        m_UserProfile = UserProfile.Instance;
+    }
 
     void Start () {
-		_url = "https://stage-xms.xmile.com.br/api/gamelogin";
+		_url = "https://stage-xms.xmile.com.br/api/gamelogin2";
         if (PlayerPrefs.HasKey("rememberUser"))
             _userField.text = PlayerPrefs.GetString("rememberUser");
         if (PlayerPrefs.HasKey("rememberPass"))
+        {
             _passField.text = PlayerPrefs.GetString("rememberPass");
+            _rememberPass.isOn = true;
+        }
     }
 
-	public void Login()
+    #endregion
+
+    #region Ações dos botões
+
+    /// <summary>
+    /// Método chamado na operação de clique do botão Jogar.
+    /// Essa função executa a validação do login.
+    /// </summary>
+    public void Login()
 	{
         if (_userField.text == "" || _passField.text == "")
             OpenFeedbackPanel("Favor digitar usuário e senha.");
@@ -58,6 +77,25 @@ public class LoginController : MonoBehaviour {
         }
 	}
 
+    public void GuestLogin()
+    {
+        string guest = "{\"token\":\"Experimente\",\"api\":\"v1\",\"assets_url\":\"http://jogos.xmile.com.br/4/pt_br/\",\"assets_version\":\"1\",\"id\":99999,\"name\":\"Guest\",\"role\":\"Guest\"}";
+        print(guest);
+        PlayerPrefs.SetString("GuestLoginInfo", guest);
+        ////////////FadeToWhite////////////////
+        //Carregando próxima Scene
+        m_UserProfile.loginInfo = JsonUtility.FromJson<LoginInfo>(guest);
+        SceneManager.LoadScene("Splash", LoadSceneMode.Single);
+    }
+
+    #endregion
+
+    #region Paineis de Feedback
+
+    /// <summary>
+    /// Exibe painel com texto informativo
+    /// </summary>
+    /// <param name="text">Texto a ser exibido no painel</param>
     private void OpenFeedbackPanel(string text)
     {
         _fbText.text = text;
@@ -65,12 +103,18 @@ public class LoginController : MonoBehaviour {
         _feedBackPanel.SetActive(true);
     }
 
+    /// <summary>
+    /// Fecha painel informativo
+    /// </summary>
     public void CloseFeedbackPanel()
     {
         _fbText.text = "";
         _feedBackPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Exibe painel de Loading...
+    /// </summary>
     private void OpenLoadingPanel()
     {
         _fbText.text = "Carregando...";
@@ -78,29 +122,101 @@ public class LoginController : MonoBehaviour {
         _feedBackPanel.SetActive(true);
     }
 
+    #endregion
+
+    #region Validações (Online e Offline)
+
+    /// <summary>
+    /// Validação da ação de login
+    /// </summary>
+    /// <param name="www">Objeto WWW contendo informações de URL e Form com dados de usuário e senha</param>
+    /// <returns></returns>
     IEnumerator ValidateLogin(WWW www)
 	{
         OpenLoadingPanel();
-		yield return www;
+        //Tentando logar online
+        yield return www;
 		if (www.error == null)
 		{
+            //servidor respondeu
 			string wsReturn = www.text.Trim ();
-			JsonUtility.FromJsonOverwrite (wsReturn, loginInfo);
+            m_UserProfile.loginInfo = JsonUtility.FromJson<LoginInfo>(wsReturn);
             CloseFeedbackPanel();
-            switch (loginInfo.status.code)
+            switch (m_UserProfile.loginInfo.status.code)
             {
+                //Login efetuado com sucesso
                 case 0:
                     CloseFeedbackPanel();
-                    _DEBUGPanel.SetActive(true);
+                    //Criptografando a senha do usuário
+                    string MD5Password = GetMD5Hash(_passField.text);
+                    //Acrescentando a senha às informações do usuário e convertendo as infos para objeto
+                    wsReturn = MD5Password + "|" + wsReturn;
+                    //Criando chave no registro
+                    PlayerPrefs.SetString(_userField.text, wsReturn);
+                    ////////////FadeToWhite////////////////
+                    //Carregando próxima Scene
+                    SceneManager.LoadScene("Splash", LoadSceneMode.Single);
                     break;
+                //Erro de usuário e/ou senha
                 case 1:
-                    OpenFeedbackPanel(loginInfo.status.message);
+                    OpenFeedbackPanel(m_UserProfile.loginInfo.status.message);
                     break;
             }
-		} 
+        } 
 		else
 		{
-			Debug.LogError (www.error);
+            CloseFeedbackPanel();
+            //Servidor não respondeu
+            Debug.LogError (www.error);
+            //Verificando se possui dados offline
+            if (PlayerPrefs.HasKey(_userField.text))
+            {
+                string[] userData = PlayerPrefs.GetString(_userField.text).Split('|');
+                if (GetMD5Hash(_passField.text) == userData[0])
+                {
+                    //Realizando login offline
+                    Debug.Log("Realizando login offline...");
+                    m_UserProfile.loginInfo = JsonUtility.FromJson<LoginInfo>(userData[1]);
+                    print(userData[1]);
+                    CloseFeedbackPanel();
+                    ////////////FadeToWhite////////////////
+                    //Carregando próxima Scene
+                    SceneManager.LoadScene("Splash", LoadSceneMode.Single);
+                }
+                else
+                {
+                    OpenFeedbackPanel("Usuário ou senha inválidos.");
+                }
+            }
+            else
+            {
+                //Não conseguiu logar online e não possui informações de login offline anterior
+                OpenFeedbackPanel("Falha ao realizar login.");
+            }
 		}
 	}
+
+    #endregion
+
+    #region Segurança
+
+    /// <summary>
+    /// Método para gerar o MD5 de uma string
+    /// </summary>
+    /// <param name="text">Texto a ser gerado a Hash MD5</param>
+    /// <returns>MD5 Hash do texto informado</returns>
+    private string GetMD5Hash(string text)
+    {
+        MD5 md5Hash = MD5.Create();
+        // Converter a String para array de bytes
+        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+        // Cria-se um StringBuilder para recompôr a string.
+        StringBuilder sBuilder = new StringBuilder();
+        // Loop para formatar cada byte como uma String em hexadecimal
+        for (int i = 0; i < data.Length; i++)
+            sBuilder.Append(data[i].ToString("x2"));
+        return sBuilder.ToString();
+    }
+
+    #endregion
 }
