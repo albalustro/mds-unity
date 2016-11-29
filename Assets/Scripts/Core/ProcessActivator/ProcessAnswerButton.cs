@@ -8,7 +8,7 @@ using MDS.Validators.Interfaces;
 namespace MDS.Core.ProcessActivator
 {
 
-    [ExecuteInEditMode]
+    //[ExecuteInEditMode]
     [RequireComponent(typeof(BoxCollider2D))]
     public class ProcessAnswerButton : BaseValidationActivator
     {

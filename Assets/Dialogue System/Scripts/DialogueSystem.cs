@@ -1,5 +1,5 @@
 ﻿using UnityEngine;
-using UnityEditor;
+//using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
@@ -85,7 +85,7 @@ public class DialogueSystem : MDSBehaviour
         //DSGlobal.id = 0;      //Ainda não sei como utilizar
 
         //Carrega o scriptable object correspondente ao Game e Mundo escolhido pelo jogador (puxando pelo nome da Scene)
-        SODialogue = AssetDatabase.LoadAssetAtPath(_soPath, typeof(DialogueList)) as DialogueList;
+    //    SODialogue = AssetDatabase.LoadAssetAtPath(_soPath, typeof(DialogueList)) as DialogueList;
 
         //Gera a lista de diálogos pertinentes ao contexto atual
         _currentDialogues = new List<DialogueEntry>();
@@ -167,8 +167,8 @@ public class DialogueSystem : MDSBehaviour
         if (_currentEmotion != _currentDialogues[_currentDialogueIndex].emotion)
             ChangeEmotion();
         dialogue.SetText(_currentDialogues[_currentDialogueIndex].text.ToUpper());
-        AudioClip c = AssetDatabase.LoadAssetAtPath(_audioPath + _currentDialogues[_currentDialogueIndex].sound + ".mp3", typeof(AudioClip)) as AudioClip;
-        dialogue.PlayVoiceOver(c);
+   //     AudioClip c = AssetDatabase.LoadAssetAtPath(_audioPath + _currentDialogues[_currentDialogueIndex].sound + ".mp3", typeof(AudioClip)) as AudioClip;
+  //      dialogue.PlayVoiceOver(c);
     }
 
     /// <summary>
@@ -176,8 +176,8 @@ public class DialogueSystem : MDSBehaviour
     /// </summary>
     void ChangeEmotion()
     {
-        Sprite s = AssetDatabase.LoadAssetAtPath(_emotionPath + _currentDialogues[_currentDialogueIndex].emotion + ".png", typeof(Sprite)) as Sprite;
-        dialogue.SetEmotion(s);
+    //    Sprite s = AssetDatabase.LoadAssetAtPath(_emotionPath + _currentDialogues[_currentDialogueIndex].emotion + ".png", typeof(Sprite)) as Sprite;
+    //    dialogue.SetEmotion(s);
     }
 
     /// <summary>
