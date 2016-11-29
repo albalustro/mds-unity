@@ -133,19 +133,19 @@ namespace MDS.Gameplay.DragDrop
 				temp = slots.Where(s => s.draggableReference != null).ToList();
 
 
-			//switch(OperationLogic)
-			//{
-			//	case OperationLogic.AND:
-			//		ret = temp.All(s => s.Validate(acceptableAnswer));
-			//		break;
-			//	case OperationLogic.OR:
-			//		ret = temp.Any(s => s.Validate(acceptableAnswer));
-			//		break;
-			//}
+            switch(OperationLogic)
+            {
+                case OperationLogic.AND:
+                    ret = temp.All(s => s.Validate(acceptableAnswer));
+                    break;
+                case OperationLogic.OR:
+                    ret = temp.Any(s => s.Validate(acceptableAnswer));
+                    break;
+            }
 
 
 
-			if (_isGeneric)
+            if(_isGeneric)
 			{
 				var labels = temp[0].draggableReference.Labels;
 
@@ -163,7 +163,7 @@ namespace MDS.Gameplay.DragDrop
 				if(SpecificAmount.HasValue)
 				{
 					int qtde = temp.Where(s => s.Validate(acceptableAnswer)).ToList().Count;
-					ret = (qtde == SpecificAmount.Value);
+					ret = ret && (qtde == SpecificAmount.Value);
 				}
 				else
 				{
