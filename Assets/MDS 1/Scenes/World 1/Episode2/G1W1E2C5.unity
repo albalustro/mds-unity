@@ -120,15 +120,12 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 902962130}
   _serializedStateKeys:
-  - preActionsList
-  - validatorsList
-  - posVictoryActionsList
+  - Validador
+  - _actions
   _serializedStateValues:
-  - '[]'
-  - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '{"$content":0,"$type":"MDS.Validators.Validator"}'
+  - '{"onStartActions":[],"onErrorActions":[],"onVictoryActions":[]}'
   nextChallenge: {fileID: 0}
-  btn: {fileID: 1158356809}
 --- !u!4 &95057408
 Transform:
   m_ObjectHideFlags: 0
@@ -184,9 +181,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &146458681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -525,16 +528,20 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 25b0f19230d92c74e9033fea92109407, type: 3}
   - {fileID: 21300000, guid: df7e03c2c2e090a46a6c6c5bda4ae3b6, type: 3}
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
   _serializedStateValues:
-  - '{"releasedValue":0,"draggingValue":1}'
   - 
+  - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
+  - 
+  forcePreferredIndexOnDrop: 0
   Labels:
   - correio
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &360495716
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -644,6 +651,13 @@ MonoBehaviour:
   - '"AND"'
   - false
   - 0
+  _isGeneric: 0
+  _fadeAndFreezeOnDrop: 0
+  _animationTime: 0
+  _infinityBag: 0
+  _freezeAfterDrop: 0
+  _enableValidationOnlyIfSpecifcAmount: 0
+  _invalidLabels: []
 --- !u!61 &764629705
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -796,6 +810,13 @@ MonoBehaviour:
   - '"AND"'
   - true
   - 
+  _isGeneric: 0
+  _fadeAndFreezeOnDrop: 0
+  _animationTime: 0
+  _infinityBag: 0
+  _freezeAfterDrop: 0
+  _enableValidationOnlyIfSpecifcAmount: 0
+  _invalidLabels: []
 --- !u!61 &907039564
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -897,6 +918,13 @@ MonoBehaviour:
   - '"AND"'
   - true
   - 
+  _isGeneric: 0
+  _fadeAndFreezeOnDrop: 0
+  _animationTime: 0
+  _infinityBag: 0
+  _freezeAfterDrop: 0
+  _enableValidationOnlyIfSpecifcAmount: 0
+  _invalidLabels: []
 --- !u!61 &1111696006
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -956,7 +984,7 @@ GameObject:
   - 114: {fileID: 1158356809}
   - 61: {fileID: 1158356810}
   m_Layer: 0
-  m_Name: ProcessAnswerButton
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -992,7 +1020,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: d12d28f5391589942a83f50af956a6ec, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5882353}
+  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
   m_FlipX: 0
   m_FlipY: 0
 --- !u!4 &1158356808
@@ -1024,13 +1052,14 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: 6554454fb763f804eb238046bb02ec31, type: 3}
   upSprite: {fileID: 21300000, guid: d12d28f5391589942a83f50af956a6ec, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &1158356810
 BoxCollider2D:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1158356806}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1067,9 +1096,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &1618769855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1126,9 +1161,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &1661048780
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1402,9 +1443,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  draggableReference: {fileID: 0}
+  _serializedStateKeys:
+  - IsInitialSlot
+  - IsInstatiableInitialSlot
+  - _sprite
+  _serializedStateValues:
+  - false
+  - false
+  - 
+  _changeSprite: 0
 --- !u!61 &2023850186
 BoxCollider2D:
   m_ObjectHideFlags: 0
