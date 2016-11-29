@@ -104,7 +104,7 @@ namespace MDS.Core
             ValidatorResult _validatorResult = Validador.Validate();
             if(_validatorResult == ValidatorResult.Victory)
             {
-                Debug.Log("Correct!!");
+                Log("Correct!!");
                 StartCoroutine(Victory());
                 if(nextChallenge != null)
                 {
@@ -114,7 +114,7 @@ namespace MDS.Core
             }
             else
             {
-                Debug.Log("Wrong!!");
+                Log("Wrong!!");
                 StartCoroutine(Lose());
             }
         }
