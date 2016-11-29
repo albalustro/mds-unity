@@ -65,7 +65,7 @@ namespace MDS.Core
 
         public IEnumerator Start()
         {
-            
+
             _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
             if(_answerProcessors == null)
             {
@@ -75,7 +75,7 @@ namespace MDS.Core
             {
                 item.OnValidateAnswer += ProcessResult;
             }
-            
+
             foreach(var item in _actions.onStartActions)
             {
                 yield return item.Execute();
@@ -96,6 +96,15 @@ namespace MDS.Core
             foreach(var item in _actions.onErrorActions)
             {
                 yield return item.Execute();
+            }
+        }
+
+        public void OnDisable()
+        {
+            if(_answerProcessors == null) return;
+            foreach(var item in _answerProcessors)
+            {
+                item.OnValidateAnswer -= ProcessResult;
             }
         }
 
