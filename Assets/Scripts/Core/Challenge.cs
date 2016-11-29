@@ -87,8 +87,9 @@ namespace MDS.Core
         {
             foreach(var item in _actions.onVictoryActions)
             {
-                yield return item.Execute();
+				StartCoroutine(item.Execute());	
             }
+			yield return null;
         }
 
         IEnumerator Lose()

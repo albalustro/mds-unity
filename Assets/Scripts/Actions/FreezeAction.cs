@@ -9,11 +9,13 @@ namespace MDS.Actions
     public class FreezeAction : IAction
     {
 
-        public GameObject obj;
+        public GameObject[] obj;
 
         public IEnumerator Execute(Action callback = null)
         {
-            obj.GetComponent<Collider2D>().enabled = false;
+			for (int i = 0; i < obj.Length; i++) {
+				obj[i].GetComponent<Collider2D>().enabled = false;
+			}
             yield return null;
         }
     }
