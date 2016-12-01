@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
 using MDS.Core.Interfaces;
 using MDS.Core.ProcessActivator;
@@ -87,8 +87,9 @@ namespace MDS.Core
         {
             foreach(var item in _actions.onVictoryActions)
             {
-                yield return item.Execute();
+				StartCoroutine(item.Execute());	
             }
+			yield return null;
         }
 
         IEnumerator Lose()
@@ -113,7 +114,7 @@ namespace MDS.Core
             ValidatorResult _validatorResult = Validador.Validate();
             if(_validatorResult == ValidatorResult.Victory)
             {
-                Debug.Log("Correct!!");
+                Log("Correct!!");
                 StartCoroutine(Victory());
                 if(nextChallenge != null)
                 {
@@ -123,7 +124,7 @@ namespace MDS.Core
             }
             else
             {
-                Debug.Log("Wrong!!");
+                Log("Wrong!!");
                 StartCoroutine(Lose());
             }
         }
