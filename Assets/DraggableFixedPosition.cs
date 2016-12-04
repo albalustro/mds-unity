@@ -12,10 +12,11 @@ public class DraggableFixedPosition : MDSBehaviour {
 	private Draggable[] m_draggables;
 	private int countIndex = 0;
 
-	#if UNITY_EDITOR
+#if UNITY_EDITOR
 
-	void OnValidate()
+	protected override void OnValidate()
 	{
+		base.OnValidate();
 		if (m_setPositions) {
 			m_setPositions = false;
 			SetPreferedPositionIndex ();
