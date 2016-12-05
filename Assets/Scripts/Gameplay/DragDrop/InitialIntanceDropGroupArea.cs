@@ -10,6 +10,12 @@ namespace MDS.Gameplay.DragDrop
     public class InitialIntanceDropGroupArea : InitialDropGroupArea
     {
 
+		[SerializeField] private int? m_maxDraggables;
+		private int[] m_currentPerDraggable;
+
+//		[SerializeField] private Draggable[] m_newDraggable;
+//		[SerializeField] private int m_newDragIndex;
+
         public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
         {
             return false;
@@ -38,6 +44,18 @@ namespace MDS.Gameplay.DragDrop
                 }
             }
 
+			//cria uma referencia pra contar a quantidade de cada draggable
+			if (m_maxDraggables.HasValue) {
+				m_currentPerDraggable = new int[transform.childCount];
+				for (int i = 0; i < transform.childCount; i++) {
+					m_currentPerDraggable [i] = m_maxDraggables.Value;
+				}
+			}
+
+//			if (m_newDraggable.Length != 0) {
+//				m_newDragIndex = 0;
+//			}
+
         }
 
         private void DraggableAfterDropHandler(Draggable draggable, DropGroupSlot originalSlot)
@@ -51,19 +69,38 @@ namespace MDS.Gameplay.DragDrop
             if(originalSlot.IsInitialSlot == false)
                 return;
 
+			//Se tiver limite de draggable, pega a referencia criada no start e decrementa de acordo com o preferred initial index. Não deixa instanciar mais do draggable referenciado;
+			if (m_maxDraggables.HasValue) {
+				int index = draggable.PreferredInitialIndex.Value;
+				--m_currentPerDraggable [index];
+				if (m_currentPerDraggable [index] == 0)
+					return;
+			}
 
-            Draggable newDraggable = Instantiate(draggable);
-            newDraggable.OnAfterDrop += DraggableAfterDropHandler;
-            newDraggable.GetComponent<Collider2D>().enabled = true;
+			Draggable newDraggable = null;
 
-            if (draggable.transform.parent!=null)
-                newDraggable.transform.SetParent(draggable.transform.parent);
+//			if (m_newDraggable.Length != 0) {
+//				newDraggable = Instantiate (m_newDraggable [m_newDragIndex]);
+//				++m_newDragIndex;
+//				if (m_newDragIndex == m_newDraggable.Length) {
+//					m_newDragIndex = 0;
+//				}
+//			} else {
+				newDraggable = Instantiate (draggable);
+//			}
 
-            // o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
-            newDraggable.currentSlot = originalSlot;
-            originalSlot.draggableReference = newDraggable;
-            Vector3 pos = originalSlot.transform.position;
-            newDraggable.TweenGoto(pos, 0);
+			newDraggable.OnAfterDrop += DraggableAfterDropHandler;
+			newDraggable.GetComponent<Collider2D> ().enabled = true;
+
+			if (draggable.transform.parent != null)
+				newDraggable.transform.SetParent (draggable.transform.parent);
+
+			// o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
+			newDraggable.currentSlot = originalSlot;
+			originalSlot.draggableReference = newDraggable;
+			Vector3 pos = originalSlot.transform.position;
+			newDraggable.TweenGoto (pos, 0);
+
         }
         
     }
