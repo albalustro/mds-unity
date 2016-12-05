@@ -11,7 +11,7 @@ public class DownloadManager : Singleton<DownloadManager>{
     public bool useLocal = false;
     public bool cleanCache = true;
 
-    private WWW _www;
+    private AssetBundle _bundle;
 
     public void DownloadScene(string sceneName)
     {
@@ -34,25 +34,20 @@ public class DownloadManager : Singleton<DownloadManager>{
             string url = urlBase + sceneName;
 
             Log("Baixando " + url);
-            //_www = WWW.LoadFromCacheOrDownload(url, 1);
-            //yield return _www;
+
             UnityWebRequest request = UnityWebRequest.GetAssetBundle(url);
             yield return request.Send();
 
 
             Log("Terminou de baixar");
-            //if (_www.error!=null)
-            //{
-            //    LogError(_www.error);
-            //    yield return null;
-            //}
+
             if (request.isError)
             {
                 LogError(request.error);
             }
             else
             {
-                AssetBundle bundle = DownloadHandlerAssetBundle.GetContent(request);
+                _bundle = DownloadHandlerAssetBundle.GetContent(request);
             }
         }
         
@@ -60,10 +55,11 @@ public class DownloadManager : Singleton<DownloadManager>{
 
         Log("Após carregar a cena");
 
-        //_www.assetBundle.Unload(false);
-        //_www.Dispose();
-        //_www = null;
-
+        if(_bundle != null)
+        {
+            _bundle.Unload(false);
+            _bundle = null;
+        }
         
 
         Log("Tudo liberado..");

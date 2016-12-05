@@ -8,8 +8,6 @@ using FullInspector;
 
 namespace MDS.Actions{
 
-
-
 	public class SetAnimatorParameterAction : IAction {
 
 		public enum AnimatorParameterAction
