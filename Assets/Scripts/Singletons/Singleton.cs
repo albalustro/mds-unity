@@ -1,11 +1,15 @@
 ﻿using UnityEngine;
+using Newtonsoft.Json;
 
 public class Singleton<T> : MonoBehaviour where T : MonoBehaviour
 {
+	[System.NonSerialized]
 	private static T m_Instance;
+	[System.NonSerialized]
 	private static object m_Lock = new object();
-    private static bool m_ApplicationIsQuitting = false;
- 
+	[System.NonSerialized]
+	private static bool m_ApplicationIsQuitting = false;
+
 	public static T Instance
 	{
 		get
