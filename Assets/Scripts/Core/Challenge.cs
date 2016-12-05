@@ -1,4 +1,4 @@
-﻿using System.Linq;
+using System.Linq;
 using System.Collections;
 using MDS.Core.Interfaces;
 using MDS.Core.ProcessActivator;

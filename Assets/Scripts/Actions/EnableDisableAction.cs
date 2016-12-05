@@ -45,6 +45,9 @@ namespace MDS.Actions
             {
                 (_target as Behaviour).enabled = en;
             }
+			else if (_target as Renderer){
+				(_target as Renderer).enabled = en;
+			}
 
             if(callback != null)
                 callback();
