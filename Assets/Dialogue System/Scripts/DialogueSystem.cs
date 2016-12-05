@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-//using UnityEditor;
 using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
@@ -21,7 +20,7 @@ public class DialogueSystem : MDSBehaviour
     //Componente que gerencia o canvas
     public Dialogue dialogue;
     //Scriptable Object com todas as entradas de diálogo do Game/Mundo em questão
-    private DialogueList SODialogue;
+    public DialogueList SODialogue;
     //Caminhos para load do SO, voice over e emotion
     private string _soPath;
     private string _audioPath;
@@ -78,14 +77,21 @@ public class DialogueSystem : MDSBehaviour
     void InitializeDialogueSystem()
     {
         //caminho padrão para as pastas de voice over e emotions
-        _audioPath = "Assets/MDS " + game + "/Dialogue/World " + world + "/";
-        _emotionPath = "Assets/Dialogue System/Emotions/W" + world + "/guide_";
-        _soPath = "Assets/Dialogue System/SO/G" + game + "W" + world + ".asset";
+        //_audioPath = "Assets/MDS " + game + "/Dialogue/World " + world + "/";
+        _audioPath = "Audios/MDS " + game + "/World " + world + "/";
+        //_emotionPath = "Assets/Dialogue System/Emotions/W" + world + "/guide_";
+        _emotionPath = "Emotions/W" + world + "/guide_";
+        //_soPath = "Assets/Dialogue System/SO/G" + game + "W" + world + ".asset";
+        _soPath = "SO/G" + game + "W" + world;
 
         //DSGlobal.id = 0;      //Ainda não sei como utilizar
 
         //Carrega o scriptable object correspondente ao Game e Mundo escolhido pelo jogador (puxando pelo nome da Scene)
     //    SODialogue = AssetDatabase.LoadAssetAtPath(_soPath, typeof(DialogueList)) as DialogueList;
+
+        //SODialogue = AssetDatabase.LoadAssetAtPath(_soPath, typeof(DialogueList)) as DialogueList;
+        SODialogue = Resources.Load(_soPath, typeof(DialogueList)) as DialogueList;
+
 
         //Gera a lista de diálogos pertinentes ao contexto atual
         _currentDialogues = new List<DialogueEntry>();
@@ -169,6 +175,12 @@ public class DialogueSystem : MDSBehaviour
         dialogue.SetText(_currentDialogues[_currentDialogueIndex].text.ToUpper());
    //     AudioClip c = AssetDatabase.LoadAssetAtPath(_audioPath + _currentDialogues[_currentDialogueIndex].sound + ".mp3", typeof(AudioClip)) as AudioClip;
   //      dialogue.PlayVoiceOver(c);
+
+        //AudioClip c = AssetDatabase.LoadAssetAtPath(_audioPath + _currentDialogues[_currentDialogueIndex].sound + ".mp3", typeof(AudioClip)) as AudioClip;
+        AudioClip c = Resources.Load<AudioClip>(_audioPath + _currentDialogues[_currentDialogueIndex].sound);
+
+        dialogue.PlayVoiceOver(c);
+
     }
 
     /// <summary>
@@ -178,6 +190,11 @@ public class DialogueSystem : MDSBehaviour
     {
     //    Sprite s = AssetDatabase.LoadAssetAtPath(_emotionPath + _currentDialogues[_currentDialogueIndex].emotion + ".png", typeof(Sprite)) as Sprite;
     //    dialogue.SetEmotion(s);
+
+        //Sprite s = AssetDatabase.LoadAssetAtPath(_emotionPath + _currentDialogues[_currentDialogueIndex].emotion + ".png", typeof(Sprite)) as Sprite;
+        Sprite s = Resources.Load<Sprite>(_emotionPath + _currentDialogues[_currentDialogueIndex].emotion);
+        dialogue.SetEmotion(s);
+
     }
 
     /// <summary>
