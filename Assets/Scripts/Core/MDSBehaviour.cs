@@ -19,4 +19,10 @@ public class MDSBehaviour : BaseBehavior
     {
         Debug.LogFormat("Cena: {0} | GameObject: {2} => {1}", SceneManager.GetActiveScene().name, msg, gameObject.name);
     }
+
+	protected void Log(string msg)
+	{
+		Debug.LogFormat("{0} : {1}", gameObject.name, msg);
+	}
+
 }

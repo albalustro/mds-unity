@@ -18,11 +18,15 @@ namespace MDS.Core.ProcessActivator
         private string _label;
 
         [SerializeField]
-        private IValidatableGroup _group;
+        private IValidatableGroup[] _group;
+
+		[SerializeField]
+		private int[] _groupCurrentAmount;
 
         void Start()
         {
             Enable();
+			_groupCurrentAmount = new int[_group.Length];
         }
 
         public void Update()
@@ -31,7 +35,15 @@ namespace MDS.Core.ProcessActivator
             if(_isEnabled ==  false)
                 return;
 
-            if (_group.Count(_label) == _amount)
+
+			int count = 0;
+
+			for (int i = 0; i < _group.Length; i++) {
+				_groupCurrentAmount[i] = _group [i].Count (_label);
+				count += _groupCurrentAmount [i];
+			}
+
+			if (count == _amount)
             {
                 Disable();
                 FireValidation();

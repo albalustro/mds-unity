@@ -65,7 +65,7 @@ namespace MDS.Core
 
         public IEnumerator Start()
         {
-            
+
             _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
             if(_answerProcessors == null)
             {
@@ -75,7 +75,7 @@ namespace MDS.Core
             {
                 item.OnValidateAnswer += ProcessResult;
             }
-            
+
             foreach(var item in _actions.onStartActions)
             {
                 yield return item.Execute();
@@ -87,8 +87,9 @@ namespace MDS.Core
         {
             foreach(var item in _actions.onVictoryActions)
             {
-                yield return item.Execute();
+				StartCoroutine(item.Execute());	
             }
+			yield return null;
         }
 
         IEnumerator Lose()
@@ -99,12 +100,21 @@ namespace MDS.Core
             }
         }
 
+        public void OnDisable()
+        {
+            if(_answerProcessors == null) return;
+            foreach(var item in _answerProcessors)
+            {
+                item.OnValidateAnswer -= ProcessResult;
+            }
+        }
+
         void ProcessResult()
         {
             ValidatorResult _validatorResult = Validador.Validate();
             if(_validatorResult == ValidatorResult.Victory)
             {
-                Debug.Log("Correct!!");
+                Log("Correct!!");
                 StartCoroutine(Victory());
                 if(nextChallenge != null)
                 {
@@ -114,7 +124,7 @@ namespace MDS.Core
             }
             else
             {
-                Debug.Log("Wrong!!");
+                Log("Wrong!!");
                 StartCoroutine(Lose());
             }
         }

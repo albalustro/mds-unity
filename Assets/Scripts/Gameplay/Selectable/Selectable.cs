@@ -201,6 +201,20 @@ namespace MDS.Gameplay.Selectable
             }
         }
 
+		public void SetSelected()
+		{
+			_selected = true;
+			SetLocalPosition();
+			SetLocalScale();
+			SetZRotation();
+			SetSprite();
+			SetChildrenActivation();
+			if (_group != null)
+			{
+				_group.SelectItem(this);
+			}
+		}
+
         public void SetGroup(SelectableGroup group)
         {
             _group = group;
