@@ -1,32 +1,53 @@
 ﻿using UnityEngine;
-using System.Collections;
 using System.Text;
 using System.Security.Cryptography;
-using System;
-using System.Collections.Generic;
 using Newtonsoft.Json;
 
 public class PersistenceManager : Singleton<PersistenceManager> {
 
-	public UserProfile LoadLocalLoginInfo(string user)
+    public LoginInfo LoadLocalUserProfile(string user, ref string pass)
 	{
-		return JsonConvert.DeserializeObject<UserProfile>(PlayerPrefs.GetString(user));
+        AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(user));
+        LoginInfo li = aux.loginInfo;
+        pass = aux.pass;
+        return li;
 	}
 		
 	public void LoadConceptMap(UserProfile profile, ref ConceptMap cm)
 	{
-		if (!PlayerPrefs.HasKey(profile.login))
-			cm = null;
+        if (!PlayerPrefs.HasKey(profile.login))
+            cm = null;
+        else
+        {
+            AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(profile.login));
+            cm = aux.conceptMap;
+        }
 	}
 
 	public void SaveUserProfile(UserProfile profile)
 	{
-		List<object> serial = new List<object> ();
-		serial.Add (profile.pass);
-		serial.Add (profile.loginInfo);
-		serial.Add (profile.conceptMap);
-		PlayerPrefs.SetString (profile.login, JsonConvert.SerializeObject (serial));
-	}
+        AuxClass aux = new AuxClass();
+        aux.login  = profile.login;
+        aux.pass  = GetMD5Hash(profile.pass);
+        aux.loginInfo = profile.loginInfo;
+        aux.conceptMap = profile.conceptMap;
+		PlayerPrefs.SetString (profile.login, JsonConvert.SerializeObject (aux));
+    }
+
+    public bool HasKey(string key)
+    {
+        return PlayerPrefs.HasKey(key);
+    }
+
+    public string GetString(string key)
+    {
+        return PlayerPrefs.GetString(key);
+    }
+
+    public void SetString(string key, string value)
+    {
+        PlayerPrefs.SetString(key, value);
+    }
 
 	#region Segurança
 	/// <summary>
@@ -47,4 +68,12 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 		return sBuilder.ToString();
 	}
 	#endregion
+
+    public class AuxClass
+    {
+        public string login;
+        public string pass;
+        public LoginInfo loginInfo;
+        public ConceptMap conceptMap;
+    }
 }

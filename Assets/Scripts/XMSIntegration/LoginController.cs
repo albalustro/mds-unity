@@ -1,5 +1,4 @@
 ﻿using UnityEngine;
-using System.Collections;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
@@ -28,12 +27,11 @@ public class LoginController : MDSBehaviour {
 	}
 
     void Start () {
-		//DEVO COLOCAR ISSO NO PERSISTENCE???
-        if (PlayerPrefs.HasKey("rememberUser"))
-            _userField.text = PlayerPrefs.GetString("rememberUser");
-        if (PlayerPrefs.HasKey("rememberPass"))
+        if (PersistenceManager.Instance.HasKey("rememberUser"))
+            _userField.text = PersistenceManager.Instance.GetString("rememberUser");
+        if (PersistenceManager.Instance.HasKey("rememberPass"))
         {
-            _passField.text = PlayerPrefs.GetString("rememberPass");
+            _passField.text = PersistenceManager.Instance.GetString("rememberPass");
             _rememberPass.isOn = true;
         }
     }
@@ -46,11 +44,10 @@ public class LoginController : MDSBehaviour {
             OpenFeedbackPanel("Favor digitar usuário e senha.");
         else
         {
-			//DEVO COLOCAR ISSO NO PERSISTENCE???
 			if (_rememberUser.isOn)
-				PlayerPrefs.SetString("rememberUser", _userField.text);
+                PersistenceManager.Instance.SetString("rememberUser", _userField.text);
 			if (_rememberPass.isOn)
-				PlayerPrefs.SetString("rememberPass", _passField.text);
+                PersistenceManager.Instance.SetString("rememberPass", _passField.text);
 			ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, ReturnResponseLoginValidate);
 			OpenLoadingPanel();
         }
@@ -59,8 +56,7 @@ public class LoginController : MDSBehaviour {
     public void GuestLogin()
     {
         string guest = "{\"token\":\"Experimente\",\"api\":\"v1\",\"assets_url\":\"http://jogos.xmile.com.br/4/pt_br/\",\"assets_version\":\"1\",\"id\":99999,\"name\":\"Guest\",\"role\":\"Guest\"}";
-		//PRECISO GUARDAR ESSA CHAVE???
-		PlayerPrefs.SetString("GuestLoginInfo", guest);
+        PersistenceManager.Instance.SetString("GuestLoginInfo", guest);
 		UserProfile.Instance.loginInfo = JsonConvert.DeserializeObject<LoginInfo>(guest);
 		////////////FadeToWhite////////////////
 		//Carregando próxima Scene
@@ -74,17 +70,17 @@ public class LoginController : MDSBehaviour {
 		CloseFeedbackPanel ();
 		if (wsReturn == null) //Servidor nao respondeu, tentar efetuar o login offline
 		{
-			UserProfile userData = PersistenceManager.Instance.LoadLocalLoginInfo (_userField.text);
-			if (userData == null)
+            string pass = null;
+			LoginInfo loginData = PersistenceManager.Instance.LoadLocalUserProfile (_userField.text, ref pass);
+			if (loginData == null)
 				OpenFeedbackPanel("Falha ao realizar login.");
 			else
 			{
-				if (PersistenceManager.Instance.GetMD5Hash(_passField.text) == userData.pass)
+				if (PersistenceManager.Instance.GetMD5Hash(_passField.text) == pass)
 				{
-					LoginInfo loginInfo = userData.loginInfo;
-					loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
-					loginInfo.status.message = "Offline";
-					UserProfile.Instance.SetLoginInfo (_userField.text, _passField.text, loginInfo);
+					loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
+                    loginData.status.message = "Offline";
+					UserProfile.Instance.SetLoginInfo (_userField.text, _passField.text, loginData);
 				}
 				else
 					OpenFeedbackPanel("Usuário ou senha inválidos.");
@@ -97,7 +93,7 @@ public class LoginController : MDSBehaviour {
 			{
 			//Login efetuado com sucesso
 			case ConnectionResponse.OK:
-				//Enviando informações para o UserProfile
+                //Enviando informações para o UserProfile
 				UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginInfo);
 				break;
 			//Erro de usuário e/ou senha
