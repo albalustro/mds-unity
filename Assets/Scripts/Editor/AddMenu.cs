@@ -57,23 +57,23 @@ public class AddMenu : EditorWindow
         Caching.CleanCache();
     }
 
-    [MenuItem("MDS/Align Children/Vertical")]
+    [MenuItem("MDS/Align Selection/Vertical")]
     public static void VerticalSpacer()
     {
 
-        Transform transform = Selection.activeTransform;
+        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered);
 
-        Vector3 first = transform.GetChild(0).localPosition;
-        Vector3 last = transform.GetChild(transform.childCount - 1).localPosition;
+        Vector3 first = transform[0].localPosition;
+        Vector3 last = transform[(transform.Length - 1)].localPosition;
 
-        int max = transform.childCount - 1;
+        int max = transform.Length - 1;
         float step = (last.x - first.x) / max;
 
         for(int i = 1; i < max; i++)
         {
-            Vector3 cur = transform.GetChild(i).localPosition;
+            Vector3 cur = transform[i].localPosition;
             cur.x = first.x + i * step;
-            transform.GetChild(i).localPosition = cur;
+            transform[i].localPosition = cur;
         }
 
 
