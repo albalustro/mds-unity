@@ -5,59 +5,58 @@ using MDS.Core.Interfaces;
 
 namespace MDS.Actions
 {
-    public class EnableDisableAction : IAction
-    {
+	public class EnableDisableAction : BaseAction
+	{
 
-        public enum EAction
-        {
-            Enable,
-            Disable
-        }
+		public enum EAction
+		{
+			Enable,
+			Disable
+		}
 
-        [SerializeField]
-        private EAction _action;
+		[SerializeField]
+		private EAction _action;
 
-        [SerializeField]
-        private UnityEngine.Object _target;
+		[SerializeField]
+		private UnityEngine.Object _target;
 
-        public IEnumerator Execute(Action callback = null)
-        {
+		public override IEnumerator Execute()
+		{
+            yield return base.Execute();
+
 
             bool en = false;
 
-            switch(_action)
-            {
-                case EAction.Enable:
-                    en = true;
-                    break;
+			switch(_action)
+			{
+				case EAction.Enable:
+					en = true;
+					break;
 
-                case EAction.Disable:
-                    en = false;
-                    break;
+				case EAction.Disable:
+					en = false;
+					break;
 
-            }
+			}
 
-            if (_target is GameObject)
-            {
-                (_target as GameObject).SetActive(en);
-            }   
-            else if (_target is Behaviour)
-            {
-                (_target as Behaviour).enabled = en;
-            }
+			if (_target is GameObject)
+			{
+				(_target as GameObject).SetActive(en);
+			}   
+			else if (_target is Behaviour)
+			{
+				(_target as Behaviour).enabled = en;
+			}
 			else if (_target as Renderer){
 				(_target as Renderer).enabled = en;
 			}
 
-            if(callback != null)
-                callback();
+		
 
-            yield return null;
+		}
 
-        }
-
-      
-    }
+	  
+	}
 
 
 }

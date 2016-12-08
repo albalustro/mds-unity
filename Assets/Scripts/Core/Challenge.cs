@@ -16,6 +16,7 @@ namespace MDS.Core
     public class Challenge : MDSBehaviour
     {
 
+        // classe auxiliar (apenas para organizar o inspector)
         public class ChallengeActions
         {
             // ações executadas automaticamente quando
@@ -23,14 +24,23 @@ namespace MDS.Core
             // ex: sequencias de dialogos, animacoes, etc
             public IAction[] onStartActions;
 
-            // ações executadas quando responde errado
-            public IAction[] onErrorActions;
+            // ações executadas quando responde errado na primeira vez
+            public IAction[] onErrorActions_1;
+
+            // ações executadas quando responde errado na primeira vez
+            public IAction[] onErrorActions_2;
+
+            // ações executadas quando responde errado na primeira vez
+            public IAction[] onErrorActions_3;
 
             // ações executadas quando obtem sucesso na valicao
             public IAction[] onVictoryActions;
         }
 
+        #region Fields & Properties
 
+        private int _errorCount = 0;
+        
         // validadores do desafio
         public IValidator Validador;
 
@@ -40,24 +50,15 @@ namespace MDS.Core
 
         public ChallengeActions _actions;
 
+        #endregion
 
-        public static IValidator GetCurrentValidador()
-        {
-            Challenge[] challenges = FindObjectsOfType<Challenge>();
-            Challenge currentChallenge;
-            if(challenges.Length == 1)
-                currentChallenge = challenges[0];
-            else
-                currentChallenge = challenges.First(c => c.isActiveAndEnabled);
-
-            return currentChallenge.Validador;
-        }
-
+        #region Unity methods
 
         protected override void Awake()
         {
             base.Awake();
 
+            // Desabilita o próximo challenge, se ele existir
             if(nextChallenge != null)
                 nextChallenge.gameObject.SetActive(false);
 
@@ -76,32 +77,21 @@ namespace MDS.Core
                 item.OnValidateAnswer += ProcessResult;
             }
 
-            foreach(var item in _actions.onStartActions)
-            {
-                yield return item.Execute();
-            }
-        }
 
-
-        IEnumerator Victory()
-        {
-            foreach(var item in _actions.onVictoryActions)
+            for(int i = 0; i < _actions.onStartActions.Length; i++)
             {
-				StartCoroutine(item.Execute());	
+                if(_actions.onStartActions[i].waitFinish)
+                    yield return StartCoroutine(_actions.onStartActions[i].Execute());
+                else
+                    StartCoroutine(_actions.onStartActions[i].Execute());
             }
-			yield return null;
-        }
 
-        IEnumerator Lose()
-        {
-            foreach(var item in _actions.onErrorActions)
-            {
-                yield return item.Execute();
-            }
         }
 
         public void OnDisable()
         {
+            // quando o challenge é desabilidado, tb devemos
+            // parar de ouvir o evento que processa o resultado
             if(_answerProcessors == null) return;
             foreach(var item in _answerProcessors)
             {
@@ -109,9 +99,63 @@ namespace MDS.Core
             }
         }
 
+        #endregion
+
+        #region Private Methods
+
+        IEnumerator Victory()
+        {
+            for(int i = 0; i < _actions.onVictoryActions.Length; i++)
+            {
+                if(_actions.onVictoryActions[i].waitFinish)
+                    yield return StartCoroutine(_actions.onVictoryActions[i].Execute());
+                else
+                    StartCoroutine(_actions.onVictoryActions[i].Execute());
+            }
+        }
+
+        /// <summary>
+        /// Esse metodo irá executar as actions definidas para um dado erro.
+        /// </summary>
+        IEnumerator Lose(int index)
+        {
+            IAction[] actions;
+            switch(index)
+            {
+                case 1:
+                    actions = _actions.onErrorActions_1;
+                    break;
+                case 2:
+                    actions = _actions.onErrorActions_2;
+                    break;
+                case 3:
+                    actions = _actions.onErrorActions_3;
+                    break;
+                default:
+                    LogError("Error Index não definido");
+                    yield break;
+                    break;
+            }
+
+            for(int i = 0; i < actions.Length; i++)
+            {
+                if (actions[i]==null)
+                {
+                    LogError("Action não definida.");
+                    continue;
+                }
+
+                if(actions[i].waitFinish)
+                    yield return StartCoroutine(actions[i].Execute());
+                else
+                    StartCoroutine(actions[i].Execute());
+            }
+        }
+
         void ProcessResult()
         {
             ValidatorResult _validatorResult = Validador.Validate();
+
             if(_validatorResult == ValidatorResult.Victory)
             {
                 Log("Correct!!");
@@ -125,8 +169,30 @@ namespace MDS.Core
             else
             {
                 Log("Wrong!!");
-                StartCoroutine(Lose());
+                _errorCount++;
+                StartCoroutine(Lose(_errorCount));
             }
         }
+
+        #endregion
+
+        #region Static methods
+        /// <summary>
+        /// Metodo estatico que irá buscar o validador do challenge que estiver ativo na cena
+        /// </summary>
+        /// <returns>O Validador referente ao challenge ativo</returns>
+        public static IValidator GetCurrentValidador()
+        {
+            Challenge[] challenges = FindObjectsOfType<Challenge>();
+            Challenge currentChallenge;
+            if(challenges.Length == 1)
+                currentChallenge = challenges[0];
+            else
+                currentChallenge = challenges.First(c => c.isActiveAndEnabled);
+
+            return currentChallenge.Validador;
+        }
+
+        #endregion
     }
 }

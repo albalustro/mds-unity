@@ -10,7 +10,7 @@ namespace MDS.Gameplay.FSM
     public class RandomFSM : MDSBehaviour
     {
         
-        private RndState[] _states;
+        private RandomState[] _states;
 
 
         protected override void Awake()
@@ -22,11 +22,11 @@ namespace MDS.Gameplay.FSM
         private void InitializeStates()
         {
             int maxStates = transform.childCount;
-            _states = new RndState[maxStates];
+            _states = new RandomState[maxStates];
 
             for(int i = 0; i < maxStates; i++)
             {
-                _states[i] = transform.GetChild(i).GetComponent<RndState>();
+                _states[i] = transform.GetChild(i).GetComponent<RandomState>();
             }
         }
 
@@ -48,7 +48,7 @@ namespace MDS.Gameplay.FSM
 
 
 
-        public RndState GetCurrentState()
+        public RandomState GetCurrentState()
         {
             return _states.Where(s => s.gameObject.activeInHierarchy).First();
         }

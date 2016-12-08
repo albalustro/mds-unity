@@ -20,7 +20,7 @@ namespace MDS.Gameplay.FSM.State.Transition
 
         #region Methods IStateTransition
 
-        public override void Initialize(RndState state)
+        public override void Initialize(RandomState state)
         {
             base.Initialize(state);
             state.EnableEvent += OnEnable;

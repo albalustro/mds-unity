@@ -8,12 +8,13 @@ using FullInspector;
 
 namespace MDS.Actions{
 
-	public class SetAnimatorParameterAction : IAction {
+	public class SetAnimatorParameterAction : BaseAction
+	{
 
 		public enum AnimatorParameterAction
 		{
-			trigger,
-			integer,
+			Trigger,
+			Integer,
 		}
 
 		[SerializeField] private Animator m_anim;
@@ -21,24 +22,23 @@ namespace MDS.Actions{
 		[SerializeField] private string m_parameter;
 		[SerializeField] private int m_value;
 
-		public IEnumerator Execute(Action callback = null)
+		public override IEnumerator Execute()
 		{
+            yield return base.Execute();
 
-			switch (m_animatorAction) {
+
+            switch(m_animatorAction) {
 				
-			case AnimatorParameterAction.trigger:
+			case AnimatorParameterAction.Trigger:
 				m_anim.SetTrigger (m_parameter);
 				break;
 
-			case AnimatorParameterAction.integer:
-				if (m_value != null) {
-					m_anim.SetInteger (m_parameter, m_value);
-				}
+			case AnimatorParameterAction.Integer:
+				m_anim.SetInteger (m_parameter, m_value);
 				break;
 
 			}
 
-			yield return null;
 		}
 
 	}

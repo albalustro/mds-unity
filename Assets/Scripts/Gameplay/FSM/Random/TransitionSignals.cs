@@ -13,19 +13,22 @@ namespace MDS.Gameplay.FSM
         public IAction[] OnTransitionActions;
 
 
-        public void Emit()
+        public IEnumerator Emit(MonoBehaviour emiter)
         {
             if(OnTransition != null) 
                 OnTransition.Invoke();
 
             if(OnTransitionActions != null)
             {
-                foreach(var ac in OnTransitionActions)
+                for(int i = 0; i < OnTransitionActions.Length; i++)
                 {
-                    if(ac != null)
-                        ac.Execute();
+                    if(OnTransitionActions[i].waitFinish)
+                        yield return emiter.StartCoroutine(OnTransitionActions[i].Execute());
+                    else
+                        emiter.StartCoroutine(OnTransitionActions[i].Execute());
                 }
             }
+            yield return null;
         }
     }
 

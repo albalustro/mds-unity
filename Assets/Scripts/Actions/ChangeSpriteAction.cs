@@ -6,21 +6,22 @@ using System;
 namespace MDS.Actions{
 
 	[SerializeField]
-	public class ChangeSpriteAction : IAction {
+	public class ChangeSpriteAction : BaseAction {
 
 		[SerializeField] private GameObject m_obj;
 		[SerializeField] private Sprite m_newSprite;
 		[SerializeField] private bool m_lockCollider;
 
-		public IEnumerator Execute(Action callback = null)
+		public override IEnumerator Execute()
 		{
-			m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
+            yield return base.Execute();
+
+            m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
 
 			if (m_lockCollider) {
 				m_obj.GetComponent<Collider2D> ().enabled = false;
 			}
 
-			yield return null;
 		}
 
 

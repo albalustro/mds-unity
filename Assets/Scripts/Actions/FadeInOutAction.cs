@@ -7,25 +7,31 @@ using System;
 namespace MDS.Actions {
 
 	[SerializeField]
-	public class FadeInOutAction : IAction {
+	public class FadeInOutAction : BaseAction
+	{
 
 
 		[SerializeField] private GameObject m_obj;
 		[SerializeField] private bool m_fadeIn = false;
-		private int m_fadeTime = 2;
+		[SerializeField] private float m_fadeTime = 2;
 
 
-		public IEnumerator Execute(Action callback = null)
+		public override IEnumerator Execute()
 		{
-			if (m_fadeIn) {
-				LeanTween.alpha (m_obj, 0, 0f);
+			yield return base.Execute();
+			SpriteRenderer sr = m_obj.GetComponent<SpriteRenderer>();
+			Color c = sr.color;
+			if(m_fadeIn) {
+				c.a = 0;
+				sr.color = c;
 				LeanTween.alpha (m_obj, 1, m_fadeTime);
 			} else {
-				LeanTween.alpha (m_obj, 1, 0f);
+				c.a = 1;
+				sr.color = c;
 				LeanTween.alpha (m_obj, 0, m_fadeTime);
 			}
 
-			yield return null;
+			yield return new WaitForSeconds(m_fadeTime);
 		}
 
 

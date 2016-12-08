@@ -9,9 +9,7 @@ namespace MDS.Gameplay.FSM.State.Transition
 {
     public class RandomTransition : IStateTransition
     {
-        protected RndState _myState;
-
-        public GameObject[] _states;
+        protected RandomState _myState;
 
 
         public class ProbabilityDistribution<T>
@@ -78,11 +76,10 @@ namespace MDS.Gameplay.FSM.State.Transition
                 _rndStates.Normalize();
 
             _rndStates.PickRandom().SetActive(true);
-            //_states.GetRandom().SetActive(true);
             _myState.gameObject.SetActive(false);
         }
 
-        public void Initialize(RndState state)
+        public void Initialize(RandomState state)
         {
             _myState = state;
         }

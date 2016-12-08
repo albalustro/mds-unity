@@ -9,7 +9,7 @@ namespace MDS.Gameplay.FSM.State.Transition
     public interface IStateTransition
     {
 
-        void Initialize(RndState state);
+        void Initialize(RandomState state);
         void ExecuteTransition();
 
     }

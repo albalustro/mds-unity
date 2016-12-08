@@ -46,7 +46,7 @@ namespace MDS.Core.ProcessActivator
 			if (count == _amount)
             {
                 Disable();
-                FireValidation();
+                FireValidationEvent();
             }
         }
 

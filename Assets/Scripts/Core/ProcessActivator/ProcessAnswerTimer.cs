@@ -66,7 +66,7 @@ namespace MDS.Core.ProcessActivator
             OnTick.Invoke(_currentCounter);
 
             Disable();
-            FireValidation();
+            FireValidationEvent();
 
         }
 

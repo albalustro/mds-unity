@@ -11,7 +11,7 @@ namespace MDS.Gameplay.FSM.State.Transition
     public abstract class BaseStateTransition : IStateTransition
     {
 
-        protected RndState _myState;
+        protected RandomState _myState;
         public GameObject _nextState;
 
         public TransitionSignals exitStateSignals;
@@ -21,14 +21,14 @@ namespace MDS.Gameplay.FSM.State.Transition
         public virtual void ExecuteTransition()
         {
             if(exitStateSignals!=null)
-                exitStateSignals.Emit();
+                exitStateSignals.Emit(_myState);
 
             _nextState.SetActive(true);
             _myState.gameObject.SetActive(false);
 
         }
 
-        public virtual void Initialize(RndState state)
+        public virtual void Initialize(RandomState state)
         {
             _myState = state;
         }

@@ -8,7 +8,7 @@ using FullInspector;
 namespace MDS.Gameplay.FSM.State
 {
 
-    public class RndState : MDSBehaviour
+    public class RandomState : MDSBehaviour
     {
         public bool IsInitialState { get; internal set; }
 
@@ -49,7 +49,7 @@ namespace MDS.Gameplay.FSM.State
                 EnableEvent();
 
             if (enterStateSignals!=null)
-                enterStateSignals.Emit();
+                enterStateSignals.Emit(this);
         }
 
         public void OnDisable()
