@@ -22,6 +22,7 @@ namespace MDS.Gameplay.Tetris
         private void Start()
         {
             //defino o counter com o amount passado
+			Invoke("StartChallenge",0);
         }
 
         void StartChallenge()

@@ -8,16 +8,17 @@ public class Counter : MDSBehaviour
     private SpriteRenderer _firstDigit;
     [SerializeField]
     private SpriteRenderer _secondDigit;
-
     [SerializeField]
     private Sprite[] _numbers;
+	private int _amount;
 
     public void Start()
     {
-        if (_numbers.Length != 10)
-        {
-            Debug.LogError("Erro no vetor de números no Clock da cena <" + SceneManager.GetActiveScene().name + ">");
-        }
+
+//        if (_numbers.Length != 10)
+//        {
+//            Debug.LogError("Erro no vetor de números no Clock da cena <" + SceneManager.GetActiveScene().name + ">");
+//        }
     }
 
     /// <summary>
