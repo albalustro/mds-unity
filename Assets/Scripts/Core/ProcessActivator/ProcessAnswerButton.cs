@@ -64,7 +64,7 @@ namespace MDS.Core.ProcessActivator
 
         public void OnMouseUp()
         {
-            FireValidation();
+            FireValidationEvent();
             _spriteRenderer.sprite = upSprite;
         }
 

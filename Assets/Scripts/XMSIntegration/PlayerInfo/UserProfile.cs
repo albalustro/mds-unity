@@ -1,7 +1,4 @@
-﻿using UnityEngine;
-using System.Collections;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class UserProfile : Singleton<UserProfile>
 {
 	public string login;
@@ -33,16 +30,16 @@ public class UserProfile : Singleton<UserProfile>
 		if (loginInfo.status.code == ConnectionResponse.OK)
 			ConceptSyncer.Instance.SendConceptMapToServer (login, conceptToSend, ReceiveConceptMapFromSyncer);
 		else
-			ChangeConnectionStatus (ConnectionResponse.CONNECTION_OFFLINE);
+            loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
 	}
 
 	private void ReceiveConceptMapFromSyncer(ConceptMap cm)
 	{
 		if (cm == null)
-			ChangeConnectionStatus (ConnectionResponse.CONNECTION_OFFLINE);
+            loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
 		else
 		{
-			conceptMap = cm;
+            conceptMap = cm;
 			SaveUserProfile ();
 		}
 	}
@@ -77,10 +74,5 @@ public class UserProfile : Singleton<UserProfile>
 		{
 			conceptMap.worlds [i].episodes [0].liberationStatus = EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS;
 		}
-	}
-
-	public void ChangeConnectionStatus(ConnectionResponse c)
-	{
-		loginInfo.status.code = c;
 	}
 }

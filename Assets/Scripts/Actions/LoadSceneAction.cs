@@ -6,15 +6,17 @@ using UnityEngine.SceneManagement;
 
 namespace MDS.Actions
 {
-    public class LoadSceneAction : IAction
+    public class LoadSceneAction : BaseAction
     {
 
         public string sceneName { get; set; }
 
-        public IEnumerator Execute(Action callback = null)
+        public override IEnumerator Execute()
         {
+            yield return base.Execute();
+
             DownloadManager.Instance.DownloadScene(sceneName);
-            yield return null;
+
         }
     }
 }

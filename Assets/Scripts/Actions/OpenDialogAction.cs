@@ -3,17 +3,20 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using MDS.Core.Interfaces;
+using FullInspector;
 using UnityEngine;
 
 namespace MDS.Actions
 {
     [Serializable]
-    public class OpenDialogAction : IAction
+    public class OpenDialogAction : BaseAction
     {
         public Slug[] slugs { get; set; }
-        public IEnumerator Execute(Action callback)
+
+        public override IEnumerator Execute()
         {
+            yield return base.Execute();
+
             DialogueSystem.instance.ShowDialogueMessage(slugs);
             yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
         }

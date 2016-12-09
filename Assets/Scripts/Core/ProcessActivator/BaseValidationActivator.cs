@@ -27,7 +27,7 @@ namespace MDS.Core.ProcessActivator
            
         }
 
-        protected void FireValidation()
+        protected void FireValidationEvent()
         {
             if(OnValidateAnswer != null)
             {

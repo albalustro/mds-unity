@@ -26,7 +26,6 @@ public class ConnectionManager : Singleton<ConnectionManager>
 	IEnumerator ValidateLogin(WWW www)
 	{
 		LoginInfo info = new LoginInfo ();
-		//Tentando logar online
 		yield return www;
 		if (www.error == null)
 		{

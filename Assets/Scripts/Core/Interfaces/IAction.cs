@@ -8,7 +8,11 @@ namespace MDS.Core.Interfaces
     public interface IAction
     {
 
-        IEnumerator Execute(Action callback = null);
+        bool waitFinish { get; set; }
+        float delayBeforeExecution { get; set; }
+        IEnumerator Execute();
+
+        void Initialize(MonoBehaviour coroutineEmiter);
 
     }
 }
