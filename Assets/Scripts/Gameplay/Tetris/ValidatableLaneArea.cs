@@ -8,10 +8,5 @@ namespace MDS.Gameplay.Tetris
     public class ValidatableLaneArea : MDSBehaviour
     {
         public List<string> validLabel;
-
-        void Validate()
-        {
-
-        }
     }
 }

@@ -11,7 +11,12 @@ public class Counter : MDSBehaviour
     [SerializeField]
     private SpriteRenderer _lowDigit;
 
-    private int _currentValue;
+	private int _currentValue;
+	private int _startValue;
+
+	public int StartValue{
+		set { _startValue = value; }
+	}
 
     [SerializeField]
     private Sprite[] _numbers;
@@ -23,9 +28,16 @@ public class Counter : MDSBehaviour
             LogError("Erro no vetor de números no Counter");
         }
 
-        _currentValue = 0;
+		_currentValue = _startValue;
         Refresh();
     }
+
+	public void Reset(int num)
+	{
+		_startValue = num;
+		_currentValue = num;
+		Refresh ();
+	}
 
     public void Increment()
     {
@@ -33,6 +45,16 @@ public class Counter : MDSBehaviour
         Refresh();
     }
 
+	public void Decrement()
+	{
+		if (_currentValue == 0)
+		{
+			LogError ("Counter decrementando valor nulo.");
+			return;
+		}
+		_currentValue--;
+		Refresh();
+	}
 
     private void Refresh()
     {

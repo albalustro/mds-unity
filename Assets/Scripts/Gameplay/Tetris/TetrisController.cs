@@ -2,84 +2,157 @@
 using System.Collections.Generic;
 using UnityEngine;
 using FullInspector;
+using MDS.Utilities;
+using UnityEngine.Events;
 
 namespace MDS.Gameplay.Tetris
 {
     public class TetrisController : MDSBehaviour
     {
+		#region Variables
+		private LaneGroup _laneGroup;
+		private SpawnableGroup _spawnableGroup;
+		private Lane _currentLane;
+		private Spawnable _currentSpawnable;
+		private AnimationCurve timeCurve;
 
-        public LaneGroup laneGroup;
-        public SpawnableGroup spawnableGroup;
-        public Counter counter;
-        public int amount;
+		//Counter
+		private Counter _counter;
+		public bool hasCounter;
+		public UnityEvent events;
+		public int totalAmount;
+		private int _currentAmount;
 
-        private int _currentLaneIndex;
-        private bool _didChangeLastFrame;
-        private Spawnable _currentSpawnable;
+		//Lerping
+		public float totalTime;
+		private float _currentTotalTime;
+		private float _currentTime;
+		private bool _isAnimating;
+		#endregion
 
-        //Preciso de uma Action que inicie a mecânica quando o diálogo fechar
+		#region Unity Methods
+		protected override void Awake ()
+		{
+			base.Awake ();
+
+			_spawnableGroup = GameObject.FindObjectOfType<SpawnableGroup> ();
+			_laneGroup = GameObject.FindObjectOfType<LaneGroup> ();
+			foreach (var item in _laneGroup.lanes)
+				item.Controller = this;
+		}
 
         private void Start()
         {
-            //defino o counter com o amount passado
-			Invoke("StartChallenge",0);
+			if (hasCounter)
+			{
+				_counter = GameObject.FindObjectOfType<Counter> ();
+				_counter.Reset (totalAmount);
+			}
+			_currentTime = 0;
+			_currentAmount = totalAmount;
+			//Define os keyframes da curva de incremento da velocidade
+			Keyframe[] keys = new Keyframe[2];
+			keys [0] = new Keyframe (0, 1);
+			keys [1] = new Keyframe (1, 0.5f);
+			timeCurve = new AnimationCurve (keys);
+
+			SpawnNewItem();
         }
 
-        void StartChallenge()
+		void Update()
+		{
+			if (_isAnimating)
+				return;
+			_currentTime += Time.deltaTime;
+			if (TweenSpawnable()) 
+			{
+				if (_currentLane.Validate (_currentSpawnable))
+					StartCoroutine (VictoryAnimation());
+				else
+					StartCoroutine (LoseAnimation());	
+			}
+		}
+		#endregion
+
+		#region Gameplay mechanics
+        void SpawnNewItem()
         {
-            _currentSpawnable = SortNewSpawnable();
-            Lane la = SortNewLane(ref _currentLaneIndex);
-            _currentSpawnable.transform.position = la.spawnPosition.position;
-            _currentSpawnable.SetCurrentLane(la);
-            _currentSpawnable.gameObject.SetActive(true);
+			if (_currentAmount == 0)
+				return;
+			_currentTime = 0;
+			_currentSpawnable = SortNewSpawnable();
+			_currentLane = SortNewLane();
+			_currentSpawnable.transform.position = _currentLane.spawnPosition.position;
+			LeanTween.scale(_currentSpawnable.gameObject, Vector3.one, 0f);
+			LeanTween.alpha (_currentSpawnable.gameObject, 1, 0f);
+			_currentSpawnable.GetComponent<SpriteRenderer>().sortingOrder = 0;
+			_currentSpawnable.gameObject.SetActive(true);
+			float index = 1 - ((float)_currentAmount/(float)totalAmount);
+			_currentTotalTime = totalTime * timeCurve.Evaluate (index);
+			_currentAmount--;
+			if (events != null)
+				events.Invoke ();
         }
 
+		private bool TweenSpawnable()
+		{
+			float time = _currentTime / _currentTotalTime;
+			if (time > 1)
+			{
+				time = 1;
+				_currentSpawnable.transform.position = _currentLane.destinationPoint.transform.position;
+				return true;
+			}
+			_currentSpawnable.transform.position = Vector2.Lerp (_currentLane.spawnPosition.position, _currentLane.destinationPoint.transform.position, time);
+			return false;
+		}
 
-        #region Spawn New Item
+		public void ChangeLane(Lane l)
+		{
+			_currentLane = l;
+		}
+
         //Sorteia uma posição para criar o item
-        Lane SortNewLane(ref int laneIndex)
+        Lane SortNewLane()
         {
-            laneIndex = RandomInt(laneGroup.lanes.Count);
-            return laneGroup.lanes[laneIndex];
+			return _laneGroup.lanes.GetRandom();
         }
 
         //Sorteia um item a ser lançado nas lanes
         Spawnable SortNewSpawnable()
         {
-            return spawnableGroup.spawnables[RandomInt(spawnableGroup.spawnables.Count)];
+			return _spawnableGroup.spawnables.GetRandom();
         }
-
-        int RandomInt(int max)
-        {
-            return Random.Range(0, max);
-        }
-
-
         #endregion
 
-        void Update()
-        {
-            float input = Input.GetAxis("Horizontal");
-            if (Mathf.Abs(input) > 0.1f)
-            {
-                if (!_didChangeLastFrame)
-                {
-                    _didChangeLastFrame = true;
-                    _currentLaneIndex += Mathf.RoundToInt(Mathf.Sign(input));
-                    if (_currentLaneIndex < 0) _currentLaneIndex = 0;
-                    else if (_currentLaneIndex >= laneGroup.lanes.Count) _currentLaneIndex = laneGroup.lanes.Count - 1;
-                }
-            }
-            else
-            {
-                _didChangeLastFrame = false;
-            }
+		#region Pos Validation anims
+		IEnumerator VictoryAnimation()
+		{
+			_isAnimating = true;
+			LeanTween.alpha (_currentSpawnable.gameObject, 0, 0.5f);
+			yield return new WaitForSeconds (2);
+			SpawnNewItem();	
+			_isAnimating = false;
+		}
 
-
-            //Vector3 pos = transform.position;
-            //pos.x = Mathf.Lerp(pos.x, firstLandXPos + laneDistance * laneNumber, Time.deltaTime * sideSpeed);
-            //transform.position = pos;
-        }
-
+		IEnumerator LoseAnimation()
+		{
+			_isAnimating = true;
+			LeanTween.moveLocalY (_currentSpawnable.gameObject, _currentSpawnable.transform.localPosition.y + 1.5f, 0.3f)
+				.setOnComplete(() =>
+				{
+					LeanTween.scale(_currentSpawnable.gameObject, Vector3.one * 1.5f, 0.5f);
+					_currentSpawnable.GetComponent<SpriteRenderer>().sortingOrder = 3;
+					LeanTween.moveLocalY (_currentSpawnable.gameObject, _currentSpawnable.transform.localPosition.y - 5f, 0.5f).setEase(LeanTweenType.easeInBack)
+					.setOnComplete(() => 
+					{
+						LeanTween.alpha (_currentSpawnable.gameObject, 0, 0.5f);
+					});
+				});
+			yield return new WaitForSeconds (2);
+			SpawnNewItem();	
+			_isAnimating = false;
+		}
+		#endregion
     }
 }
