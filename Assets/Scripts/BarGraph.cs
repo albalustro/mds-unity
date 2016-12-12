@@ -2,8 +2,10 @@
 using System.Collections;
 using MDS.Validators.Interfaces;
 using UnityEngine.SceneManagement;
+using System;
 
-public class BarGraph : MDSBehaviour {
+public class BarGraph : MDSBehaviour, IValidatable
+{
 
     #region Fields & Properties
 
@@ -16,6 +18,8 @@ public class BarGraph : MDSBehaviour {
     private SpriteRenderer[] _barPositions;
 
     private bool _logError1 = true;
+
+    private int _amount;
 
     #endregion
 
@@ -35,20 +39,23 @@ public class BarGraph : MDSBehaviour {
 
     public void Update()
     {
-        int amount = _group.Count(_label);
+        if(_group == null) return;
 
-        if(amount > _barPositions.Length)
+        _amount = _group.Count(_label);
+
+        if(_amount > _barPositions.Length)
         {
             if(_logError1)
             {
                 LogError("BarGraph com menos posicoes que o necessário.");
                 _logError1 = false;
             }
+            _amount = _barPositions.Length;
             TurnOnBarGraph();
             return;
         }
 
-        TurnOnBarGraph(amount);
+        TurnOnBarGraph();
     }
 
     #endregion
@@ -65,23 +72,53 @@ public class BarGraph : MDSBehaviour {
 
     private void TurnOnBarGraph()
     {
-        foreach(var bar in _barPositions)
-        {
-            bar.enabled = true;
-        }
-    }
-
-    private void TurnOnBarGraph(int amount)
-    {
         for(int i = 0; i < _barPositions.Length; i++)
         {
-            if(amount >= (i + 1))
+            if(_amount >= (i + 1))
                 _barPositions[i].enabled = true;
             else
                 _barPositions[i].enabled = false;
         }
     }
 
+    public void Increment()
+    {
+        _amount++;
+        if(_amount > _barPositions.Length)
+            _amount = _barPositions.Length;
+        TurnOnBarGraph();
+    }
+    public void Decrement()
+    {
+        _amount--;
+        if(_amount < 0)
+            _amount = 0;
+        TurnOnBarGraph();
+    }
+
+    #endregion
+
+    #region IValidatable
+
+    public bool ReadyToValidate()
+    {
+        return true;
+    }
+
+    public bool Validate(string acceptableAnswer)
+    {
+        int value;
+
+        if(int.TryParse(acceptableAnswer, out value))
+            return _amount == value;
+
+        return false;
+    }
+
+    public int? GetNumericValue()
+    {
+        return _amount;
+    }
     #endregion
 
 
