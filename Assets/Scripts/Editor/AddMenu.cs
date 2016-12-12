@@ -57,8 +57,8 @@ public class AddMenu : EditorWindow
         Caching.CleanCache();
     }
 
-    [MenuItem("MDS/Align Selection/Vertical")]
-    public static void VerticalSpacer()
+    [MenuItem("MDS/Align Selection/Horizontal")]
+    public static void HorizontalSpacer()
     {
 
         Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered);
@@ -78,4 +78,26 @@ public class AddMenu : EditorWindow
 
 
     }
+
+	[MenuItem("MDS/Align Selection/Vertical")]
+	public static void VerticalSpacer()
+	{
+
+		Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered);
+
+		Vector3 first = transform[0].localPosition;
+		Vector3 last = transform[(transform.Length - 1)].localPosition;
+
+		int max = transform.Length - 1;
+		float step = (last.y - first.y) / max;
+
+		for(int i = 0; i < max; i++)
+		{
+			Vector3 cur = transform[i].localPosition;
+			cur.y = first.y + i * step;
+			transform[i].localPosition = cur;
+		}
+
+
+	}
 }
