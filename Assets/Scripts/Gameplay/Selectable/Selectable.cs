@@ -201,9 +201,13 @@ namespace MDS.Gameplay.Selectable
             }
         }
 
-		public void SetSelected()
+		public void SetSelected(bool n)
 		{
-			_selected = true;
+			if (n)
+				_selected = true;
+			else
+				_selected = false;
+			
 			SetLocalPosition();
 			SetLocalScale();
 			SetZRotation();
