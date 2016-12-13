@@ -61,7 +61,7 @@ public class AddMenu : EditorWindow
     public static void HorizontalSpacer()
     {
 
-        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered);
+        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t => t.position.x).ToArray() ;
 
         Vector3 first = transform[0].localPosition;
         Vector3 last = transform[(transform.Length - 1)].localPosition;
@@ -83,7 +83,7 @@ public class AddMenu : EditorWindow
 	public static void VerticalSpacer()
 	{
 
-		Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered);
+		Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t=>t.position.y).ToArray();
 
 		Vector3 first = transform[0].localPosition;
 		Vector3 last = transform[(transform.Length - 1)].localPosition;

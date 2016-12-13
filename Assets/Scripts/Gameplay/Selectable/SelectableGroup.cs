@@ -61,7 +61,7 @@ namespace MDS.Gameplay.Selectable
         [InspectorButton, InspectorTooltip("Use esse recurso para atribuir os filhos no vetor de Selectables")]
         public void SetupSelectables()
         {
-            _selectables = transform.GetComponentsInChildren<Selectable>();
+            _selectables = transform.GetComponentsInChildren<Selectable>(true);
             foreach(var s in _selectables)
             {
                 s.SetGroup(this);

@@ -39,7 +39,7 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (base.SetInSlot(draggable, ref slot))
                 {
-                    draggable.OnAfterDrop += DraggableAfterDropHandler;
+                    draggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
                     ret = true;
                 }
             }
@@ -50,7 +50,7 @@ namespace MDS.Gameplay.DragDrop
         {
             if (!slots.Any(s => s.draggableReference == draggable))
             {
-                draggable.OnAfterDrop -= DraggableAfterDropHandler;
+                draggable.OnAfterDrop.RemoveListener(DraggableAfterDropHandler);
                 OrganizeStack();
             }
         }

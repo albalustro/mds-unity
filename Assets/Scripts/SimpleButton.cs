@@ -29,26 +29,14 @@ public class SimpleButton : MDSBehaviour
             _spriteRenderer.sprite = downSprite;
     }
 
-    IEnumerator OnMouseUp()
+    void OnMouseUp()
     {
         if(_events != null)
             _events.Invoke();
 
         if(actions != null)
         {
-            for(int i = 0; i < actions.Length; i++)
-            {
-                if(actions[i] == null)
-                {
-                    LogError("Action não definida.");
-                    continue;
-                }
-
-                if(actions[i].waitFinish)
-                    yield return StartCoroutine(actions[i].Execute());
-                else
-                    StartCoroutine(actions[i].Execute());
-            }
+            ExecuteActions(actions);
         }
 
         _spriteRenderer.sprite = upSprite;

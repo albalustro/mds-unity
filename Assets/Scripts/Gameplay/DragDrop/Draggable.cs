@@ -4,6 +4,8 @@ using System.Collections;
 using System;
 using FullInspector;
 using System.Collections.Generic;
+using UnityEngine.Events;
+using MDS.Core.Interfaces;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -44,7 +46,9 @@ namespace MDS.Gameplay.DragDrop
 		[HideInInspector]
 		public bool instantiableDraggable;
 
-		public event Action<Draggable, DropGroupSlot> OnAfterDrop;
+        public UnityEvent<Draggable, DropGroupSlot> OnAfterDrop;
+
+        public IAction[] OnAfterDropActions;
 
 		protected override void Awake()
 		{
@@ -139,7 +143,9 @@ namespace MDS.Gameplay.DragDrop
 				if(group.SetInSlot(this, ref slot))
 				{
 					if(OnAfterDrop != null)
-						OnAfterDrop(this, originalSlot);
+						OnAfterDrop.Invoke(this, originalSlot);
+
+                    ExecuteActions(OnAfterDropActions);
 				}
 				else
 				// caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
@@ -220,6 +226,11 @@ namespace MDS.Gameplay.DragDrop
 				Gizmos.color = editorBoundColor;
 				Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
 			}
+
+            var bounds = GetComponent<Renderer>().bounds;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
+
 		}
 #endif
 

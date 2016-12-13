@@ -12,20 +12,8 @@ public class OnClickAction : MDSBehaviour {
 	public IAction[] m_onClickAction;
 
 
-	IEnumerator OnMouseUp()
+	void OnMouseUp()
 	{
-		for(int i = 0; i < m_onClickAction.Length; i++)
-		{
-			if(m_onClickAction[i] == null)
-			{
-				LogError("Action não definida.");
-				continue;
-			}
-
-			if(m_onClickAction[i].waitFinish)
-				yield return StartCoroutine(m_onClickAction[i].Execute());
-			else
-				StartCoroutine(m_onClickAction[i].Execute());
-		}
+        ExecuteActions(m_onClickAction);
 	}
 }
