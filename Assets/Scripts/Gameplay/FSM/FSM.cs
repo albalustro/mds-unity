@@ -15,6 +15,8 @@ namespace MDS.Gameplay.FSM
         public struct State
         {
             public Sprite stateSprite { get; set; }
+            public bool Rotate { get; set; }
+            public float ZAngle { get; set; }
             public List<string> Labels;
         }
 
@@ -33,6 +35,7 @@ namespace MDS.Gameplay.FSM
 
         private SpriteRenderer _spriteRenderer;
         private int _currentStateIndex;
+        private bool _animating;
 
         #region Unity 
 
@@ -55,10 +58,24 @@ namespace MDS.Gameplay.FSM
 
         public void OnMouseUp()
         {
+            if(_animating) return;
+
             if(++_currentStateIndex == states.Length)
                 _currentStateIndex = 0;
 
-            SetSprite();
+
+            if(states[_currentStateIndex].Rotate)
+            {
+                _animating = true;
+
+                LeanTween.rotateZ(gameObject, states[_currentStateIndex].ZAngle, 0.5f)
+                    .setEase(LeanTweenType.easeInCirc)
+                    .setOnComplete(() => _animating = false);
+            }
+            else
+            {
+                SetSprite();
+            }
         }
 
         #endregion
@@ -75,6 +92,39 @@ namespace MDS.Gameplay.FSM
             if (UnselectedStateIndex.HasValue)
                 _currentStateIndex = UnselectedStateIndex.Value;
             SetSprite();
+        }
+
+        [FullInspector.InspectorButton]
+        public void CreateRotationPatern()
+        {
+            Sprite s = GetComponent<SpriteRenderer>().sprite;
+
+
+            states = new State[4];
+
+            states[0] = new State();
+            states[0].Rotate = true;
+            states[0].stateSprite = s;
+            states[0].ZAngle = 0;
+            states[0].Labels = new List<string>() { "0" };
+
+            states[1] = new State();
+            states[1].Rotate = true;
+            states[1].stateSprite = s;
+            states[1].ZAngle = 90;
+            states[1].Labels = new List<string>() { "90" };
+
+            states[2] = new State();
+            states[2].Rotate = true;
+            states[2].stateSprite = s;
+            states[2].ZAngle = 180;
+            states[2].Labels = new List<string>() { "180" };
+
+            states[3] = new State();
+            states[3].Rotate = true;
+            states[3].stateSprite = s;
+            states[3].ZAngle = 270;
+            states[3].Labels = new List<string>() { "270" };
         }
 
         #endregion

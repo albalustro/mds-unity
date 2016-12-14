@@ -54,6 +54,8 @@ namespace MDS.Gameplay.Selectable
 
         #region Unity 
 
+
+
         protected override void Awake()
         {
             base.Awake();
@@ -122,8 +124,13 @@ namespace MDS.Gameplay.Selectable
                 _zRotation.UnselectedValue = 0;
             }
 
-            if(_spriteRenderer != null && _spriteRenderer.sprite == null)
-                _spriteRenderer.sprite = _sprite.UnselectedValue;
+            if(_spriteRenderer != null)
+            {
+                if(_spriteRenderer.sprite == null)
+                    _spriteRenderer.sprite = _sprite.UnselectedValue;
+                else
+                    _sprite.UnselectedValue = _spriteRenderer.sprite;
+            }
 
             if(_sprite.UnselectedValue != null && _sprite.SelectedValue == null)
                 _sprite.SelectedValue = _sprite.UnselectedValue;

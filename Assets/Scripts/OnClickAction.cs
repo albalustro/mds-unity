@@ -14,8 +14,6 @@ public class OnClickAction : MDSBehaviour {
 
 	void OnMouseUp()
 	{
-		for (int i = 0; i < m_onClickAction.Length; i++) {
-			StartCoroutine(m_onClickAction[i].Execute());
-		}
+        ExecuteActions(m_onClickAction);
 	}
 }

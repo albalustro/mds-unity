@@ -2,17 +2,33 @@
 using System.Collections;
 using System.Linq;
 using System;
+using FullInspector;
 
 namespace MDS.Gameplay.DragDrop
 {
     public class StackDropGroupArea : ValidatableDropGroupArea
     {
+        [InspectorCategory("Mechanics")]
+        public bool AsInitial = false;
+
         public override void Start()
         {
             base.Start();
             for (int i = 0; i < slots.Count; i++)
             {
                 Freeze(slots[i].gameObject);
+            }
+
+
+            if(AsInitial)
+            {
+                Draggable[] draggablesInScene = FindObjectsOfType<Draggable>();
+                DropGroupSlot dummy = null;
+                foreach(var drag in draggablesInScene)
+                {
+                    SetInSlot(drag, ref dummy);
+                }
+                OrganizeStack();
             }
         }
 
@@ -23,7 +39,7 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (base.SetInSlot(draggable, ref slot))
                 {
-                    draggable.OnAfterDrop += DraggableAfterDropHandler;
+                    draggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
                     ret = true;
                 }
             }
@@ -34,7 +50,7 @@ namespace MDS.Gameplay.DragDrop
         {
             if (!slots.Any(s => s.draggableReference == draggable))
             {
-                draggable.OnAfterDrop -= DraggableAfterDropHandler;
+                draggable.OnAfterDrop.RemoveListener(DraggableAfterDropHandler);
                 OrganizeStack();
             }
         }

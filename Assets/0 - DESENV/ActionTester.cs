@@ -8,15 +8,9 @@ public class ActionTester : MDSBehaviour
 
     public IAction[] actions;
 
-    public IEnumerator OnMouseUp()
+    public void OnMouseUp()
     {
-        for(int i = 0; i < actions.Length; i++)
-        {
-            if (actions[i].waitFinish)
-                yield return StartCoroutine(actions[i].Execute());
-            else
-                StartCoroutine(actions[i].Execute());
-        }
+        ExecuteActions(actions);
 
     }
 }

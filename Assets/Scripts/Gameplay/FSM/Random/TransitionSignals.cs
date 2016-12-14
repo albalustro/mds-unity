@@ -18,6 +18,7 @@ namespace MDS.Gameplay.FSM
             if(OnTransition != null) 
                 OnTransition.Invoke();
 
+
             if(OnTransitionActions != null)
             {
                 for(int i = 0; i < OnTransitionActions.Length; i++)

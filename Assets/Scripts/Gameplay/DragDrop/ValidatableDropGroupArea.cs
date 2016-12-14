@@ -5,6 +5,7 @@ using MDS.Validators.Enum;
 using FullInspector;
 using System.Collections.Generic;
 using System;
+using MDS.Core.Interfaces;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -71,7 +72,7 @@ namespace MDS.Gameplay.DragDrop
 		protected List<string> _invalidLabels;
 
 
-		public override void Start()
+        public override void Start()
 		{
 			base.Start();
 			if(slots.Count > 1 && _infinityBag)
@@ -210,8 +211,12 @@ namespace MDS.Gameplay.DragDrop
 			if(draggable.Labels.Any(l => _invalidLabels.Contains(l)))
 				return false;
 
+            // TODO: melhorar isso.. ta uma porcaria..
+            var organizer = GetComponent<GroupHOrganizer>();
+            if(organizer != null)
+                organizer.Organize(draggable);
 
-			bool ret = base.SetInSlot(draggable, ref slot);
+            bool ret = base.SetInSlot(draggable, ref slot);
 
 			if(ret && _freezeAfterDrop)
 			{
@@ -230,6 +235,8 @@ namespace MDS.Gameplay.DragDrop
 				Freeze(draggable.gameObject);
 				Freeze(slot.gameObject);
 			}
+
+           
 
 			return ret;
 		}

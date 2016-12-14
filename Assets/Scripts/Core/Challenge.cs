@@ -64,7 +64,7 @@ namespace MDS.Core
 
         }
 
-        public IEnumerator Start()
+        public void Start()
         {
 
             _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
@@ -78,13 +78,7 @@ namespace MDS.Core
             }
 
 
-            for(int i = 0; i < _actions.onStartActions.Length; i++)
-            {
-                if(_actions.onStartActions[i].waitFinish)
-                    yield return StartCoroutine(_actions.onStartActions[i].Execute());
-                else
-                    StartCoroutine(_actions.onStartActions[i].Execute());
-            }
+            ExecuteActions(_actions.onStartActions);
 
         }
 
@@ -103,21 +97,15 @@ namespace MDS.Core
 
         #region Private Methods
 
-        IEnumerator Victory()
+        void Victory()
         {
-            for(int i = 0; i < _actions.onVictoryActions.Length; i++)
-            {
-                if(_actions.onVictoryActions[i].waitFinish)
-                    yield return StartCoroutine(_actions.onVictoryActions[i].Execute());
-                else
-                    StartCoroutine(_actions.onVictoryActions[i].Execute());
-            }
+            ExecuteActions(_actions.onVictoryActions);
         }
 
         /// <summary>
         /// Esse metodo irá executar as actions definidas para um dado erro.
         /// </summary>
-        IEnumerator Lose(int index)
+        void Lose(int index)
         {
             IAction[] actions;
             switch(index)
@@ -133,23 +121,11 @@ namespace MDS.Core
                     break;
                 default:
                     LogError("Error Index não definido");
-                    yield break;
+                    return;
                     break;
             }
 
-            for(int i = 0; i < actions.Length; i++)
-            {
-                if (actions[i]==null)
-                {
-                    LogError("Action não definida.");
-                    continue;
-                }
-
-                if(actions[i].waitFinish)
-                    yield return StartCoroutine(actions[i].Execute());
-                else
-                    StartCoroutine(actions[i].Execute());
-            }
+            ExecuteActions(actions);
         }
 
         void ProcessResult()
@@ -159,7 +135,7 @@ namespace MDS.Core
             if(_validatorResult == ValidatorResult.Victory)
             {
                 Log("Correct!!");
-                StartCoroutine(Victory());
+                Victory();
                 if(nextChallenge != null)
                 {
                     nextChallenge.gameObject.SetActive(true);
@@ -170,7 +146,7 @@ namespace MDS.Core
             {
                 Log("Wrong!!");
                 _errorCount++;
-                StartCoroutine(Lose(_errorCount));
+                Lose(_errorCount);
             }
         }
 

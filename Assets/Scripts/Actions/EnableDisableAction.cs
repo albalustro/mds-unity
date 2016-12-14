@@ -18,7 +18,7 @@ namespace MDS.Actions
 		private EAction _action;
 
 		[SerializeField]
-		private UnityEngine.Object _target;
+		private UnityEngine.Object[] _targets;
 
 		public override IEnumerator Execute()
 		{
@@ -39,19 +39,22 @@ namespace MDS.Actions
 
 			}
 
-			if (_target is GameObject)
-			{
-				(_target as GameObject).SetActive(en);
-			}   
-			else if (_target is Behaviour)
-			{
-				(_target as Behaviour).enabled = en;
-			}
-			else if (_target as Renderer){
-				(_target as Renderer).enabled = en;
-			}
+            foreach(var target in _targets)
+            {
+                if(target is GameObject)
+                {
+                    (target as GameObject).SetActive(en);
+                }
+                else if(target is Behaviour)
+                {
+                    (target as Behaviour).enabled = en;
+                }
+                else if(target as Renderer)
+                {
+                    (target as Renderer).enabled = en;
+                }
 
-		
+            }
 
 		}
 

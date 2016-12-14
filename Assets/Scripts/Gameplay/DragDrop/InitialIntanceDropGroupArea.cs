@@ -29,7 +29,7 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (slot.draggableReference!=null)
                 {
-                    slot.draggableReference.OnAfterDrop += DraggableAfterDropHandler;
+                    slot.draggableReference.OnAfterDrop.AddListener(DraggableAfterDropHandler);
 
                     slot.draggableReference.instantiableDraggable = true;
 
@@ -89,7 +89,7 @@ namespace MDS.Gameplay.DragDrop
 				newDraggable = Instantiate (draggable);
 //			}
 
-			newDraggable.OnAfterDrop += DraggableAfterDropHandler;
+			newDraggable.OnAfterDrop.RemoveListener(DraggableAfterDropHandler);
 			newDraggable.GetComponent<Collider2D> ().enabled = true;
 
 			if (draggable.transform.parent != null)
