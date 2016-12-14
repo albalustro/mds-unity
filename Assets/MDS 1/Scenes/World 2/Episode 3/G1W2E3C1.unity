@@ -356,6 +356,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223000012944943118, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 1474648459}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
   m_IsPrefabParent: 0
@@ -1071,6 +1076,7 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 21300000, guid: f7401e03a9bd8124fbe37bfaf333373d, type: 3}
   - {fileID: 21300000, guid: f7401e03a9bd8124fbe37bfaf333373d, type: 3}
+  - {fileID: 518025365}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -1078,6 +1084,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - '{"SelectedValue":{"x":-9.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
@@ -1085,6 +1093,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 1
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1526,6 +1537,7 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 21300000, guid: 94d9a6985a9c5fc4d8552664198a4a76, type: 3}
   - {fileID: 21300000, guid: 94d9a6985a9c5fc4d8552664198a4a76, type: 3}
+  - {fileID: 856833844}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -1533,6 +1545,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - '{"SelectedValue":{"x":9.0,"y":0.0},"UnselectedValue":{"x":0.0,"y":0.0}}'
@@ -1540,6 +1554,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 1
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1995,7 +2012,7 @@ MonoBehaviour:
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions":[{"slugs":["error_less"],"$type":"MDS.Actions.OpenDialogAction"},{"slugs":["error_more"],"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &1089696435
 Transform:
@@ -2777,12 +2794,12 @@ Prefab:
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[5]
-      value: '"Single"'
+      value: '"Multiple"'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
       propertyPath: groupSelectionType
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 114000013519558850, guid: f90964bff41010240aa927cda8dd1e5d,
         type: 2}
@@ -3086,8 +3103,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1712952920}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 771521412}
   - _keys: []
     _values: []

@@ -9,7 +9,8 @@ public class MDSBehaviour : BaseBehavior
 
     protected void ExecuteActions(IAction[] a)
     {
-        StartCoroutine(exec(a));
+        if(a != null)
+            StartCoroutine(exec(a));
     }
 
 

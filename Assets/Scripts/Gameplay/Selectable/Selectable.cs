@@ -4,6 +4,7 @@ using System;
 using MDS.Validators.Interfaces;
 using System.Linq;
 using FullInspector;
+using MDS.Core.Interfaces;
 
 namespace MDS.Gameplay.Selectable
 {
@@ -14,6 +15,9 @@ namespace MDS.Gameplay.Selectable
         private SpriteRenderer _spriteRenderer;
 
         [SerializeField]
+        private bool _changeSprite = true;
+
+        [SerializeField, InspectorShowIf("_changeSprite")]
         private SelectionState<Sprite> _sprite;
 
         [SerializeField]
@@ -52,6 +56,13 @@ namespace MDS.Gameplay.Selectable
         [SerializeField, InspectorTooltip("Objectos que terão seu estado Active refletindo o inverso de Selected")]
         private GameObject[] _deactivateOnSelect;
 
+        [SerializeField]
+        private IAction[] _onSelectActions;
+
+        [SerializeField]
+        private IAction[] _onDeselectActions;
+
+
         #region Unity 
 
 
@@ -89,7 +100,7 @@ namespace MDS.Gameplay.Selectable
                 }
             }
 
-            ToggleSelect();
+            SetSelected(!_selected);
         }
 
         #if UNITY_EDITOR
@@ -142,6 +153,8 @@ namespace MDS.Gameplay.Selectable
 
         private void SetSprite()
         {
+            if(!_changeSprite) return;
+
             if(_selected)
                 _spriteRenderer.sprite = _sprite.SelectedValue;
             else
@@ -184,46 +197,24 @@ namespace MDS.Gameplay.Selectable
             transform.localRotation = Quaternion.Euler(0f, 0f, _startZRotation + z);
         }
 
-        public void SetUnselected()
-        {
-            _selected = false;
-            SetLocalPosition();
-            SetLocalScale();
-            SetZRotation();
-            SetSprite();
-            SetChildrenActivation();
-        }
-
-        private void ToggleSelect()
-        {
-            _selected = !_selected;
-            SetLocalPosition();
-            SetLocalScale();
-            SetZRotation();
-            SetSprite();
-            SetChildrenActivation();
-            if (_group != null)
-            {
-                _group.SelectItem(this);
-            }
-        }
-
-		public void SetSelected(bool n)
+		public void SetSelected(bool select, bool unselectOthers = true)
 		{
-			if (n)
-				_selected = true;
-			else
-				_selected = false;
-			
+		    _selected = select;
 			SetLocalPosition();
 			SetLocalScale();
 			SetZRotation();
 			SetSprite();
 			SetChildrenActivation();
-			if (_group != null)
+
+			if (unselectOthers && _group != null)
 			{
 				_group.SelectItem(this);
 			}
+
+            if(_selected)
+                ExecuteActions(_onSelectActions);
+            else
+                ExecuteActions(_onDeselectActions);
 		}
 
         public void SetGroup(SelectableGroup group)
