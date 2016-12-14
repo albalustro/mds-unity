@@ -7,16 +7,23 @@ using UnityEngine;
 
 namespace MDS.Gameplay.DragDrop
 {
+    public class Item
+    {
+        public DropGroupSlot slot;
+        public Draggable[] drags;
+        public int instanceAmount;
+        public int index;
+    }
+
     public class InitialIntanceDropGroupArea : InitialDropGroupArea
     {
 
 		[SerializeField] private int? m_maxDraggables;
 		private int[] m_currentPerDraggable;
-
         public bool changeItem;
-        private int _index;
         [InspectorShowIf("changeItem"), InspectorTooltip("Total de itens disponíveis para serem instanciados")]
-        public Draggable[] itens;
+        public Item[] itens;
+        [SerializeField] private Transform dropedItens;
 
         public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
         {
@@ -27,11 +34,13 @@ namespace MDS.Gameplay.DragDrop
         {
             if (changeItem)
             {
-                _index = 0;
-                Draggable newDraggable = null;
-                newDraggable = Instantiate(itens[_index]);
-                newDraggable.gameObject.SetActive(true);
-                newDraggable.PreferredInitialIndex = 0;
+                for (int i = 0; i < itens.Count(); i++)
+                {
+                    Draggable newDraggable = null;
+                    newDraggable = Instantiate(itens[i].drags[itens[i].index]);
+                    newDraggable.gameObject.SetActive(true);
+                    newDraggable.transform.SetParent(dropedItens);
+                }
             }
 
             base.Start();
@@ -60,8 +69,7 @@ namespace MDS.Gameplay.DragDrop
 
         private void DraggableAfterDropHandler(Draggable draggable, DropGroupSlot originalSlot)
         {
-            // Nao deveria cair nesse if uma vez que o metodo SetInSlot foi sobrescrito para nao deixar NADA 
-            // ser derrubado sobre si mesmo..
+            // Nao deveria cair nesse if uma vez que o metodo SetInSlot foi sobrescrito para nao deixar NADA ser derrubado sobre si mesmo..
             if (draggable.currentSlot.IsInitialSlot)
                 return;
 
@@ -81,29 +89,55 @@ namespace MDS.Gameplay.DragDrop
 
             if (changeItem)
             {
-                _index++;
-                if (_index >= itens.Count())
-                    _index = 0;
-                newDraggable = Instantiate(itens[_index]);
+                Item originalItem = itens.Single(i => i.slot == originalSlot);
+                originalItem.index++;
+                if (originalItem.instanceAmount > 0 && originalItem.index == originalItem.instanceAmount)
+                    return;
+                if (originalItem.index >= originalItem.drags.Count())
+                    originalItem.index = 0;
+                newDraggable = Instantiate(originalItem.drags[originalItem.index]);
                 newDraggable.gameObject.SetActive(true);
             }
             else
             {
                 newDraggable = Instantiate(draggable);
             }
+
 			newDraggable.OnAfterDrop += DraggableAfterDropHandler;
 			newDraggable.GetComponent<Collider2D> ().enabled = true;
 
-			if (draggable.transform.parent != null)
-				newDraggable.transform.SetParent (draggable.transform.parent);
+            newDraggable.transform.SetParent(dropedItens);
 
-			// o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
-			newDraggable.currentSlot = originalSlot;
+            newDraggable.currentSlot = originalSlot;
 			originalSlot.draggableReference = newDraggable;
 			Vector3 pos = originalSlot.transform.position;
 			newDraggable.TweenGoto (pos, 0);
 
         }
-        
+
+        public void ResetInitialInstanceGroup()
+        {
+            foreach (var item in itens)
+            {
+                if (item.slot.draggableReference != null)
+                {
+                    Destroy(item.slot.draggableReference.gameObject);
+                    item.slot.draggableReference = null;
+                }
+                item.index = 0;
+                Draggable newDraggable = null;
+                newDraggable = Instantiate(item.drags[0]);
+                newDraggable.gameObject.SetActive(true);
+                newDraggable.transform.SetParent(dropedItens);
+
+
+                newDraggable.OnAfterDrop += DraggableAfterDropHandler;
+                newDraggable.GetComponent<Collider2D>().enabled = true;
+                newDraggable.currentSlot = item.slot;
+                item.slot.draggableReference = newDraggable;
+                Vector3 pos = item.slot.transform.position;
+                newDraggable.TweenGoto(pos, 0);
+            }
+        }
     }
 }

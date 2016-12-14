@@ -246,6 +246,33 @@ namespace MDS.Gameplay.DragDrop
 			newSlot.transform.SetParent(transform,false);
 		}
 
+        public void ResetGroup()
+        {
+            //loop para destruir os dragreference de todos os slots e atribuir null
+            foreach (var slot in slots)
+            {
+                if (slot.draggableReference != null)
+                {
+                    Destroy(slot.draggableReference.gameObject);
+                    slot.draggableReference = null;
+                }
+            }
+            //se for infinity...
+            if (_infinityBag)
+            {
+                //loop para destruir todos os slots, mantendo 1
+                for (int i = 1; i < slots.Count; i++)
+                {
+                    Destroy(slots[i].gameObject);
+                    slots[i] = null;
+                }
+                slots.RemoveRange(1, slots.Count - 1);
+                if (_fadeAndFreezeOnDrop)
+                {
+                    slots[0].GetComponent<Collider2D>().enabled = true;
+                }
+            }
+        }
 		
 	}
 }

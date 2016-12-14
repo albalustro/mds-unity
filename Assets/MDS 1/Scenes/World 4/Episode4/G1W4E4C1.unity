@@ -542,7 +542,6 @@ MonoBehaviour:
   - {fileID: 370375217}
   - {fileID: 1507917601}
   - {fileID: 260258690}
-  - {fileID: 0}
   _values:
   - _keys: []
     _values: []
@@ -580,9 +579,6 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 260258690}
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
 --- !u!114 &493946156
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -607,16 +603,12 @@ MonoBehaviour:
   - {fileID: 370375217}
   - {fileID: 1507917601}
   - {fileID: 260258690}
-  - {fileID: 0}
   _values:
   - _keys: []
     _values: []
     _target: {fileID: 939258970}
-  - _keys:
-    - DefaultBehaviorEditor._isGeneric.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 2142302959}
   - _keys: []
     _values: []
@@ -648,9 +640,6 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 260258690}
-  - _keys: []
-    _values: []
-    _target: {fileID: 0}
 --- !u!4 &493946157
 Transform:
   m_ObjectHideFlags: 1
@@ -1165,6 +1154,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences:
+  - {fileID: 939258970}
   - {fileID: 934857062}
   - {fileID: 370375217}
   - {fileID: 1507917601}
@@ -1174,13 +1164,9 @@ MonoBehaviour:
   - itens
   _serializedStateValues:
   - 
-  - '[0,1,2,3]'
+  - '[{"slot":0,"drags":[1,2,3,4],"instanceAmount":0,"index":0}]'
   changeItem: 1
-  itens:
-  - {fileID: 934857062}
-  - {fileID: 370375217}
-  - {fileID: 1507917601}
-  - {fileID: 260258690}
+  dropedItens: {fileID: 1724719142}
 --- !u!4 &1450857648 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000010376572144, guid: 40cefe2c012511043816f1e29ed9710e,
@@ -1447,6 +1433,34 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.22, y: 2.53}
+--- !u!1 &1724719141
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1724719142}
+  m_Layer: 0
+  m_Name: DropedItens
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1724719142
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1724719141}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1778721764
 Prefab:
   m_ObjectHideFlags: 0
@@ -1457,7 +1471,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1494,7 +1508,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[],"onErrorActions_1":[{"dropArea":1,"initialGroup":2,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ResetInitial"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -1506,6 +1520,16 @@ Prefab:
       propertyPath: _objectReferences.Array.data[0]
       value: 
       objectReference: {fileID: 629330671}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 2142302959}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 1450857645}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
