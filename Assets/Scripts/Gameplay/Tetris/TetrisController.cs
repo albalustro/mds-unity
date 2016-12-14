@@ -37,12 +37,15 @@ namespace MDS.Gameplay.Tetris
 
 			_spawnableGroup = GameObject.FindObjectOfType<SpawnableGroup> ();
 			_laneGroup = GameObject.FindObjectOfType<LaneGroup> ();
-			foreach (var item in _laneGroup.lanes)
-				item.Controller = this;
+
 		}
 
         private void Start()
         {
+
+			foreach (var item in _laneGroup.lanes)
+				item.Controller = this;
+
 			if (hasCounter)
 			{
 				_counter = GameObject.FindObjectOfType<Counter> ();
