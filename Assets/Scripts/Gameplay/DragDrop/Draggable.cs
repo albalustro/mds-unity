@@ -141,13 +141,10 @@ namespace MDS.Gameplay.DragDrop
 				// entao deve voltar para a posicao de onde saiu.
 				DropGroupSlot originalSlot = currentSlot;
 				if(group.SetInSlot(this, ref slot))
-				{
-					if(OnAfterDrop != null)
-						OnAfterDrop.Invoke(this, originalSlot);
-
-                    ExecuteActions(OnAfterDropActions);
-				}
-				else
+                {
+                    ProcessSlotChanging(originalSlot);
+                }
+                else
 				// caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
 				{
 					TweenGoto(currentSlot.transform.position);
@@ -173,7 +170,15 @@ namespace MDS.Gameplay.DragDrop
 
 		}
 
-		public void TweenGoto(Vector3 pos, float speed = 0.5f)
+        public void ProcessSlotChanging(DropGroupSlot originalSlot)
+        {
+            if(OnAfterDrop != null)
+                OnAfterDrop.Invoke(this, originalSlot);
+
+            ExecuteActions(OnAfterDropActions);
+        }
+
+        public void TweenGoto(Vector3 pos, float speed = 0.5f)
 		{
 			_renderer.sortingOrder = 5;
 			LeanTween.move(gameObject, pos, speed)

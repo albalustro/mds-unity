@@ -100,8 +100,8 @@ namespace MDS.Gameplay.Selectable
         {
             for (int i = 0; i < _selectables.Length; i++)
             {
-                if (_selectables[i] != s)
-                    _selectables[i].SetUnselected();
+                if(_selectables[i] != s)
+                    _selectables[i].SetSelected(false, false);
             }
         }
 

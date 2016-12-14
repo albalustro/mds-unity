@@ -21,6 +21,7 @@ namespace MDS.Gameplay.DragDrop
                 {
                     oldSlot.draggableReference = oldDraggable;
                     oldDraggable.currentSlot = oldSlot;
+                    oldDraggable.ProcessSlotChanging(slot);
                     oldDraggable.TweenGoto(oldSlot.transform.position);
                 }
             }
