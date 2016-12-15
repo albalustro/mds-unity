@@ -49,12 +49,7 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (slot.draggableReference!=null)
                 {
-//<<<<<<< HEAD
                     slot.draggableReference.OnAfterDrop.AddListener(DraggableAfterDropHandler);
-
-//=======
-                    slot.draggableReference.OnAfterDrop += DraggableAfterDropHandler;
-//>>>>>>> Alex
                     slot.draggableReference.instantiableDraggable = true;
                     if (slot.draggableReference.PreferredInitialIndex.HasValue==false)
                         Debug.LogError("Para um InitialIntanceDropGroupArea, todos os Draggables DEVEM ter um PreferredInitialIndex");
@@ -137,7 +132,7 @@ namespace MDS.Gameplay.DragDrop
                 newDraggable.transform.SetParent(dropedItens);
 
 
-                newDraggable.OnAfterDrop += DraggableAfterDropHandler;
+                newDraggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
                 newDraggable.GetComponent<Collider2D>().enabled = true;
                 newDraggable.currentSlot = item.slot;
                 item.slot.draggableReference = newDraggable;
