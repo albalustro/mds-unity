@@ -48,6 +48,9 @@ namespace MDS.Gameplay.DragDrop
         [HideInInspector]
         public bool IsInstatiableInitialSlot { get; internal set; }
 
+		public bool notNullIfNumeric;
+		public int numericMultiplier;
+
         protected override void Awake()
         {
             base.Awake();
@@ -107,6 +110,9 @@ namespace MDS.Gameplay.DragDrop
             int result;
             if(IsTaken && int.TryParse(draggableReference.Labels[0], out result))
             {
+				if (numericMultiplier != 0) {
+					result *= numericMultiplier;
+				}
                 return result;
             }
             return null;

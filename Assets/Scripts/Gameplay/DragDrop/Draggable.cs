@@ -70,7 +70,9 @@ namespace MDS.Gameplay.DragDrop
 			if(changeSprite && spriteState.releasedFinalPositionValue == null)
 				spriteState.releasedFinalPositionValue = spriteState.releasedValue;
 
-
+//			if (OnAfterDrop == null) {
+//				OnAfterDrop = new UnityEvent<Draggable, DropGroupSlot>();
+//			}
 			
 		}
 

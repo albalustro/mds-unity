@@ -27,8 +27,12 @@ namespace MDS.Gameplay.DragDrop
                 return;
             }
 
-            if(slots == null || slots.Count == 0)
-                return;
+			FillSlots ();
+
+			if (slots == null || slots.Count == 0) {
+				Debug.Log ("estou sem slots!");
+				return;
+			}
 
             int amountSlots = slots.Count;
             int amountDraggables = draggablesInScene.Length;

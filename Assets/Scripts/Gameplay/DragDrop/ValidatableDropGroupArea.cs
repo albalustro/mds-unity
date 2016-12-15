@@ -191,15 +191,18 @@ namespace MDS.Gameplay.DragDrop
 			foreach(var s in slots)
 			{
 				temp = s.GetNumericValue();
-				if(temp.HasValue)
-				{
+				if (temp.HasValue) {
 					result += temp.Value;
 					hasResult = true;
+				} else {
+					if (s.notNullIfNumeric) {
+						return null;
+					}
 				}
-
 			}
-			if(hasResult)
+			if (hasResult) {
 				return result;
+			}
 			return null;
 		}
 

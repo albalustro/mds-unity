@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 using System.Collections;
 using MDS.Validators.Interfaces;
 using MDS.Validators.Enum;
@@ -26,17 +27,31 @@ public class MathValidador : MDSBehaviour, IValidator
 
     public bool compareConstante() { return !_compareTwoElements; }
 
+	public bool m_multiComparison;
+
+	[InspectorShowIf("m_multiComparison")]
+	public IValidatable[] m_validatables;
+
 
 
     public bool ReadyToValidate()
     {
-        int? firstArg = 0;
-        int? secondArg = 0;
+		bool ret = false;
 
-        firstArg = _validatableA.GetNumericValue();
-        secondArg = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
-       
-        return (firstArg.HasValue && secondArg.HasValue);
+		if (m_multiComparison) {
+			ret = m_validatables.All (v => v.GetNumericValue ().HasValue);
+		} else {
+			
+			int? firstArg = 0;
+			int? secondArg = 0;
+
+			firstArg = _validatableA.GetNumericValue();
+			secondArg = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
+
+			ret = firstArg.HasValue && secondArg.HasValue;
+		}
+
+		return (ret);
     }
 
     public ValidatorResult Validate()
@@ -47,41 +62,55 @@ public class MathValidador : MDSBehaviour, IValidator
 
         ValidatorResult result = ValidatorResult.Error; ;
 
-        int? firstArg = 0;
-        int? secondArg = 0;
+		if (m_multiComparison) {
 
-        firstArg = _validatableA.GetNumericValue();
-        secondArg = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
+			int quant = 0;
 
-        switch(_operation)
-        {
-            case Operation.Greater:
-                if(firstArg.Value > secondArg.Value)
-                    result = ValidatorResult.Victory;
-                break;
+			foreach (var item in m_validatables) {
+				quant = m_validatables.Where (v => v.GetNumericValue() == item.GetNumericValue()).Count();
+				if (quant > 1) {
+					result = ValidatorResult.Error;
+					return result;
+				}
+			}
 
-            case Operation.GreaterOrEqual:
-                if(firstArg.Value >= secondArg.Value)
-                    result = ValidatorResult.Victory;
-                break;
+			result = ValidatorResult.Victory;
 
-            case Operation.Equal:
-                if(firstArg.Value == secondArg.Value)
-                    result = ValidatorResult.Victory;
-                break;
+		} else {
+			int? firstArg = 0;
+			int? secondArg = 0;
 
-            case Operation.Lesser:
-                if(firstArg.Value < secondArg.Value)
-                    result = ValidatorResult.Victory;
-                break;
+			firstArg = _validatableA.GetNumericValue();
+			secondArg = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
 
-            case Operation.LesserOrEqual:
-                if(firstArg.Value <= secondArg.Value)
-                    result = ValidatorResult.Victory;
-                break;
-        }
+			switch(_operation)
+			{
+			case Operation.Greater:
+				if(firstArg.Value > secondArg.Value)
+					result = ValidatorResult.Victory;
+				break;
 
-        
+			case Operation.GreaterOrEqual:
+				if(firstArg.Value >= secondArg.Value)
+					result = ValidatorResult.Victory;
+				break;
+
+			case Operation.Equal:
+				if(firstArg.Value == secondArg.Value)
+					result = ValidatorResult.Victory;
+				break;
+
+			case Operation.Lesser:
+				if(firstArg.Value < secondArg.Value)
+					result = ValidatorResult.Victory;
+				break;
+
+			case Operation.LesserOrEqual:
+				if(firstArg.Value <= secondArg.Value)
+					result = ValidatorResult.Victory;
+				break;
+			}
+		}
 
         return result;
     }
