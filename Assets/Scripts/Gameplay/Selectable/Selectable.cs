@@ -24,7 +24,7 @@ namespace MDS.Gameplay.Selectable
         private bool _changeLocalPosition;
 
         [SerializeField, InspectorShowIf("_changeLocalPosition")]
-        private SelectionState<Vector2> _localPositionDisplacement;
+		public SelectionState<Vector2> _localPositionDisplacement;
 
 
 
