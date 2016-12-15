@@ -10,7 +10,13 @@ public class MDSBehaviour : BaseBehavior
     protected void ExecuteActions(IAction[] a)
     {
         if(a != null)
+        {
+            foreach(var action in a)
+            {
+                action.Initialize(this);
+            }
             StartCoroutine(exec(a));
+        }
     }
 
 

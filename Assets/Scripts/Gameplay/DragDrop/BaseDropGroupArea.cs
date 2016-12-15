@@ -31,8 +31,16 @@ namespace MDS.Gameplay.DragDrop
                 }
                 else // caso contrario, pega o primeiro que nao esteja ocupado e be happy..
                 {
-                    slot = slots.FirstOrDefault(s => s.IsTaken == false);
+                    //slot = slots.FirstOrDefault(s => s.IsTaken == false);
+                    slot = slots.FirstOrDefault(s => s.IsNotTakenAndHasAcceptableLabel(draggable.Labels));
                 }
+            }
+            else
+            {
+                // Caso recebeu um slot como parametro, deve certificar de que esse slot
+                // esta disponivel e os labels do draggable sao aceitaveis
+                if(!slot.IsNotTakenAndHasAcceptableLabel(draggable.Labels))
+                    slot = null;
             }
 
             // se, ainda assim, o slot continua nulo, significa que nao existe slot disponivel nesse grupo.. 
@@ -52,6 +60,7 @@ namespace MDS.Gameplay.DragDrop
                     return false;
                 }
             }
+
 
             // todo:
             // da forma como está, ainda é possível 'forçar' um draggable no slot inicial errado 

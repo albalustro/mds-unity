@@ -236,9 +236,7 @@ namespace MDS.Gameplay.DragDrop
 				Freeze(slot.gameObject);
 			}
 
-           
-
-			return ret;
+           return ret;
 		}
 
 		protected void Freeze(GameObject go)

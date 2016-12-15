@@ -5,6 +5,7 @@ using MDS.Validators;
 using System;
 using MDS.Validators.Interfaces;
 using FullInspector;
+using System.Linq;
 
 namespace MDS.Gameplay.DragDrop
 {
@@ -17,6 +18,11 @@ namespace MDS.Gameplay.DragDrop
 
         [SerializeField, InspectorShowIf("_changeSprite")]
         private SlotState<Sprite> _sprite;
+
+
+        [SerializeField]
+        private List<string> _acceptableLabels;
+
 
         private SpriteRenderer _spriteRenderer;
 
@@ -85,6 +91,34 @@ namespace MDS.Gameplay.DragDrop
             {
                 return draggableReference != null;
             }
+        }
+
+        public bool IsNotTakenAndHasAcceptableLabel(List<string> labels)
+        {
+            if(IsTaken)
+                return false;
+
+            if(!HasLabelsToBeValidated())
+                return true;
+
+            if(labels.Any(l => IsAcceptableLabel(l)))
+                return true;
+
+            return false;
+
+        }
+
+        internal bool HasLabelsToBeValidated()
+        {
+            return (_acceptableLabels != null && _acceptableLabels.Count > 0);
+        }
+
+        public bool IsAcceptableLabel(string label)
+        {
+            if(!HasLabelsToBeValidated())
+                return true;
+
+            return _acceptableLabels.Contains(label);
         }
 
         #region IValidatable
