@@ -156,7 +156,7 @@ namespace MDS.Gameplay.DragDrop
                 else
 				// caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
 				{
-                    if(OnGroupRefuseActions != null)
+                    if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length>0)
                         ExecuteActions(OnGroupRefuseActions);
                     else // PERIGOSO...
 					    TweenGoto(currentSlot.transform.position);
@@ -168,7 +168,7 @@ namespace MDS.Gameplay.DragDrop
 			{ // soltou fora de grupos
               // se for um draggable advindo de um instantiable initial group E nao estava no slot inicial
               // entao deve ser destruido..
-                if(OnInvalidAreaDropActions != null)
+                if(OnInvalidAreaDropActions != null && OnInvalidAreaDropActions.Length>0)
                     ExecuteActions(OnInvalidAreaDropActions);
                 else
                 {

@@ -1,0 +1,16 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using MDS.Actions;
+using MDS.Core.ProcessActivator;
+using UnityEngine;
+
+public class StartTimer : BaseAction
+{
+    public ProcessAnswerTimer timer;
+    public override IEnumerator Execute()
+    {
+        yield return base.Execute();
+        timer.Enable();
+    }
+
+}

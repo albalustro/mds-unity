@@ -20,6 +20,17 @@ namespace MDS.Actions
 		[SerializeField]
 		private UnityEngine.Object[] _targets;
 
+        public EnableDisableAction()
+        {
+
+        }
+
+        public EnableDisableAction(EAction actionDesired, UnityEngine.Object[] targets)
+        {
+            _action = actionDesired;
+            _targets = targets;
+        }
+
 		public override IEnumerator Execute()
 		{
             yield return base.Execute();

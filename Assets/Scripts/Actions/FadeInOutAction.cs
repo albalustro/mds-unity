@@ -10,8 +10,10 @@ namespace MDS.Actions {
 	public class FadeInOutAction : BaseAction
 	{
 
+        public bool selfTarget;
 
-		[SerializeField] private GameObject m_obj;
+        [FullInspector.InspectorHideIf("selfTarget")]
+        [SerializeField] private GameObject m_obj;
 		[SerializeField] private bool m_fadeIn = false;
 		[SerializeField] private float m_fadeTime = 2;
 
@@ -19,6 +21,10 @@ namespace MDS.Actions {
 		public override IEnumerator Execute()
 		{
 			yield return base.Execute();
+
+            if(selfTarget)
+                m_obj = _corotineHolder.gameObject;
+
 			SpriteRenderer sr = m_obj.GetComponent<SpriteRenderer>();
 			Color c = sr.color;
 			if(m_fadeIn) {
