@@ -18,6 +18,9 @@ namespace MDS.Core.ProcessActivator
         [SerializeField]
         private bool _countDown;
 
+        [SerializeField]
+        private bool _startOnStart =  true;
+
         public UnityEvent<int> OnTick;
 
 
@@ -32,7 +35,8 @@ namespace MDS.Core.ProcessActivator
 
             OnTick.Invoke(_currentCounter);
 
-            Enable();
+            if(_startOnStart)
+                Enable();
         }
 
      

@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -10,6 +11,7 @@ namespace MDS.Core.ProcessActivator
 {
     public abstract class BaseValidationActivator : MDSBehaviour, IValidationActivator
     {
+        public IAction[] preValidationActions;
 
         public event ValidateAnswerDelegate OnValidateAnswer;
 
@@ -29,8 +31,25 @@ namespace MDS.Core.ProcessActivator
 
         protected void FireValidationEvent()
         {
+            StartCoroutine(fve());   
+        }
+
+        private IEnumerator fve()
+        {
             if(OnValidateAnswer != null)
             {
+
+                if(preValidationActions != null)
+                {
+                    foreach(var action in preValidationActions)
+                    {
+                        if(action == null)
+                            LogError("Action nula no vetor");
+                        action.Initialize(this);
+                    }
+                    yield return exec(preValidationActions);
+                }
+
                 OnValidateAnswer();
             }
         }

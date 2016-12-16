@@ -13,6 +13,8 @@ public class MDSBehaviour : BaseBehavior
         {
             foreach(var action in a)
             {
+                if(action == null)
+                    LogError("Action nula no vetor");
                 action.Initialize(this);
             }
             StartCoroutine(exec(a));
@@ -20,7 +22,7 @@ public class MDSBehaviour : BaseBehavior
     }
 
 
-    private IEnumerator exec(IAction[] a)
+    protected IEnumerator exec(IAction[] a)
     {
         for(int i = 0; i < a.Length; i++)
         {

@@ -11,22 +11,30 @@ using MDS.Validators;
 public class MathValidador : MDSBehaviour, IValidator
 {
 
-    public enum Operation { Greater, GreaterOrEqual, Equal, Lesser, LesserOrEqual}
+	public enum Operation { Greater, GreaterOrEqual, Equal, Lesser, LesserOrEqual}
 
-    public IValidatable _validatableA;
+	public IValidatable _validatableA;
 
-    public Operation _operation;
+	public Operation _operation;
 
-    public bool _compareTwoElements = false;
+	public bool _compareTwoElements = false;
 
-    [InspectorShowIf("_compareTwoElements")]
-    public IValidatable _validatableB;
+	[InspectorShowIf("_compareTwoElements")]
+	public IValidatable _validatableB;
 
-    [InspectorShowIf("compareConstante")]
-    public int _constant = 0;
+	[InspectorShowIf("compareConstante")]
+	public int _constant = 0;
 
-    public bool compareConstante() { return !_compareTwoElements; }
+	public bool hasSecondComparison;
+	[InspectorShowIf("hasSecondComparison")]
+	public Operation secondOperation;
+	[InspectorShowIf("hasSecondComparison")]
+	public int secondConstant = 0;
 
+
+	public bool compareConstante() { return !_compareTwoElements; }
+
+	[InspectorTooltip("Use esse tipo de comparacao quando precisar que TODOS os elementos sejam diferentes uns dos outros")]
 	public bool m_multiComparison;
 
 	[InspectorShowIf("m_multiComparison")]
@@ -34,8 +42,8 @@ public class MathValidador : MDSBehaviour, IValidator
 
 
 
-    public bool ReadyToValidate()
-    {
+	public bool ReadyToValidate()
+	{
 		bool ret = false;
 
 		if (m_multiComparison) {
@@ -52,23 +60,26 @@ public class MathValidador : MDSBehaviour, IValidator
 		}
 
 		return (ret);
-    }
+	}
 
-    public ValidatorResult Validate()
-    {
+	public ValidatorResult Validate()
+	{
 
-        if(!ReadyToValidate())
-            return ValidatorResult.NotEnoughParameters;
+		if(!ReadyToValidate())
+			return ValidatorResult.NotEnoughParameters;
 
-        ValidatorResult result = ValidatorResult.Error; ;
+		ValidatorResult result = ValidatorResult.Error; ;
 
-		if (m_multiComparison) {
+		if(m_multiComparison)
+		{
 
 			int quant = 0;
 
-			foreach (var item in m_validatables) {
-				quant = m_validatables.Where (v => v.GetNumericValue() == item.GetNumericValue()).Count();
-				if (quant > 1) {
+			foreach(var item in m_validatables)
+			{
+				quant = m_validatables.Where(v => v.GetNumericValue() == item.GetNumericValue()).Count();
+				if(quant > 1)
+				{
 					result = ValidatorResult.Error;
 					return result;
 				}
@@ -76,7 +87,9 @@ public class MathValidador : MDSBehaviour, IValidator
 
 			result = ValidatorResult.Victory;
 
-		} else {
+		}
+		else
+		{
 			int? firstArg = 0;
 			int? secondArg = 0;
 
@@ -85,50 +98,90 @@ public class MathValidador : MDSBehaviour, IValidator
 
 			switch(_operation)
 			{
-			case Operation.Greater:
-				if(firstArg.Value > secondArg.Value)
-					result = ValidatorResult.Victory;
-				break;
+				case Operation.Greater:
+					if(firstArg.Value > secondArg.Value)
+						result = ValidatorResult.Victory;
+					break;
 
-			case Operation.GreaterOrEqual:
-				if(firstArg.Value >= secondArg.Value)
-					result = ValidatorResult.Victory;
-				break;
+				case Operation.GreaterOrEqual:
+					if(firstArg.Value >= secondArg.Value)
+						result = ValidatorResult.Victory;
+					break;
 
-			case Operation.Equal:
-				if(firstArg.Value == secondArg.Value)
-					result = ValidatorResult.Victory;
-				break;
+				case Operation.Equal:
+					if(firstArg.Value == secondArg.Value)
+						result = ValidatorResult.Victory;
+					break;
 
-			case Operation.Lesser:
-				if(firstArg.Value < secondArg.Value)
-					result = ValidatorResult.Victory;
-				break;
+				case Operation.Lesser:
+					if(firstArg.Value < secondArg.Value)
+						result = ValidatorResult.Victory;
+					break;
 
-			case Operation.LesserOrEqual:
-				if(firstArg.Value <= secondArg.Value)
-					result = ValidatorResult.Victory;
-				break;
+				case Operation.LesserOrEqual:
+					if(firstArg.Value <= secondArg.Value)
+						result = ValidatorResult.Victory;
+					break;
 			}
+
+
+			// second comparison
+
+			if(result == ValidatorResult.Victory && hasSecondComparison)
+			{
+				int thirdArg = secondConstant;
+                result = ValidatorResult.Error;
+
+				switch(secondOperation)
+				{
+					case Operation.Greater:
+						if(firstArg.Value > thirdArg)
+							result = ValidatorResult.Victory;
+						break;
+
+					case Operation.GreaterOrEqual:
+						if(firstArg.Value >= thirdArg)
+							result = ValidatorResult.Victory;
+						break;
+
+					case Operation.Equal:
+						if(firstArg.Value == thirdArg)
+							result = ValidatorResult.Victory;
+						break;
+
+					case Operation.Lesser:
+						if(firstArg.Value < thirdArg)
+							result = ValidatorResult.Victory;
+						break;
+
+					case Operation.LesserOrEqual:
+						if(firstArg.Value <= thirdArg)
+							result = ValidatorResult.Victory;
+						break;
+
+				}
+
+			}
+
 		}
 
-        return result;
-    }
+		return result;
+	}
 
 
-    public bool GetNumericValues(out int? A, out int? B)
-    {
-        A = _validatableA.GetNumericValue();
-        B = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
-        return (A.HasValue && B.HasValue);
-    }
+	public bool GetNumericValues(out int? A, out int? B)
+	{
+		A = _validatableA.GetNumericValue();
+		B = _compareTwoElements ? _validatableB.GetNumericValue() : _constant;
+		return (A.HasValue && B.HasValue);
+	}
 
-    private bool IsAGroup(IValidatable arg)
-    {
-        if(arg == null) return false;
+	private bool IsAGroup(IValidatable arg)
+	{
+		if(arg == null) return false;
 
-        return arg is IValidatableGroup;
-    }
+		return arg is IValidatableGroup;
+	}
 
 
 }

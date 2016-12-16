@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,28 +79,29 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &69100838
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 69100842}
-  - 212: {fileID: 69100841}
-  - 61: {fileID: 69100840}
-  - 114: {fileID: 69100839}
+  - component: {fileID: 69100842}
+  - component: {fileID: 69100841}
+  - component: {fileID: 69100840}
+  - component: {fileID: 69100839}
   m_Layer: 0
   m_Name: perfeitoestranho_release
   m_TagString: Untagged
@@ -129,6 +130,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -136,6 +139,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -170,7 +176,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -178,7 +186,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -198,21 +206,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.24025297, y: -1.25, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 428504924}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &142000091
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 142000092}
-  - 212: {fileID: 142000094}
-  - 61: {fileID: 142000093}
-  - 114: {fileID: 142000095}
+  - component: {fileID: 142000092}
+  - component: {fileID: 142000094}
+  - component: {fileID: 142000093}
+  - component: {fileID: 142000095}
   m_Layer: 0
   m_Name: monstrosemolhos_release
   m_TagString: Untagged
@@ -229,10 +237,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.23, y: 0.1, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2002799020}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &142000093
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -261,7 +269,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -269,7 +279,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -301,6 +311,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -308,6 +320,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -319,11 +334,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 175136365}
-  - 212: {fileID: 175136366}
-  - 114: {fileID: 175136364}
+  - component: {fileID: 175136365}
+  - component: {fileID: 175136366}
+  - component: {fileID: 175136364}
   m_Layer: 0
   m_Name: folha_inteira V
   m_TagString: Untagged
@@ -378,7 +393,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1823307097}
   - {fileID: 2093087461}
@@ -386,6 +400,7 @@ Transform:
   - {fileID: 1034595889}
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &175136366
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -400,7 +415,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -408,7 +425,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -424,12 +441,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 258034896}
-  - 212: {fileID: 258034895}
-  - 61: {fileID: 258034898}
-  - 114: {fileID: 258034897}
+  - component: {fileID: 258034896}
+  - component: {fileID: 258034895}
+  - component: {fileID: 258034898}
+  - component: {fileID: 258034897}
   m_Layer: 0
   m_Name: CheckAnswerButton
   m_TagString: Untagged
@@ -451,7 +468,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -459,7 +478,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -479,10 +498,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.32028, y: -1.1399018, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &258034897
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -519,12 +538,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 315891744}
-  - 212: {fileID: 315891743}
-  - 61: {fileID: 315891746}
-  - 114: {fileID: 315891745}
+  - component: {fileID: 315891744}
+  - component: {fileID: 315891743}
+  - component: {fileID: 315891746}
+  - component: {fileID: 315891745}
   m_Layer: 0
   m_Name: v_release
   m_TagString: Untagged
@@ -546,7 +565,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -554,7 +575,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -574,10 +595,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.63, y: -5.94, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 0
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &315891745
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -593,6 +614,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7d78cee7a149b1f468e65929b514a361, type: 3}
   - {fileID: 21300000, guid: 3434f6180532093479ac5a474b558a23, type: 3}
   - {fileID: 175136363}
+  - {fileID: 315891742}
+  - {fileID: 315891742}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -600,6 +623,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -607,6 +632,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -633,12 +661,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 339685349}
-  - 212: {fileID: 339685351}
-  - 61: {fileID: 339685350}
-  - 114: {fileID: 339685352}
+  - component: {fileID: 339685349}
+  - component: {fileID: 339685351}
+  - component: {fileID: 339685350}
+  - component: {fileID: 339685352}
   m_Layer: 0
   m_Name: perfeitocinzento_release
   m_TagString: Untagged
@@ -655,10 +683,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.28736997, y: -0.57, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 428504924}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &339685350
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -687,7 +715,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -695,7 +725,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -727,6 +757,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -734,6 +766,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -745,12 +780,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 387592487}
-  - 212: {fileID: 387592486}
-  - 61: {fileID: 387592485}
-  - 114: {fileID: 387592484}
+  - component: {fileID: 387592487}
+  - component: {fileID: 387592486}
+  - component: {fileID: 387592485}
+  - component: {fileID: 387592484}
   m_Layer: 0
   m_Name: tigredentesdeleite_release
   m_TagString: Untagged
@@ -779,6 +814,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -786,6 +823,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -820,7 +860,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -828,7 +870,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -848,19 +890,19 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.25595856, y: 0.18584028, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 823550622}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &417729109
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 417729111}
-  - 114: {fileID: 417729110}
+  - component: {fileID: 417729111}
+  - component: {fileID: 417729110}
   m_Layer: 0
   m_Name: fiBackupSceneStorage
   m_TagString: Untagged
@@ -889,20 +931,20 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &428504922
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 428504924}
-  - 212: {fileID: 428504925}
-  - 114: {fileID: 428504923}
+  - component: {fileID: 428504924}
+  - component: {fileID: 428504925}
+  - component: {fileID: 428504923}
   m_Layer: 0
   m_Name: folha_inteira P
   m_TagString: Untagged
@@ -957,7 +999,6 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1624919884}
   - {fileID: 1742397790}
@@ -965,6 +1006,7 @@ Transform:
   - {fileID: 69100842}
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &428504925
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -979,7 +1021,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -987,7 +1031,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1003,12 +1047,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 430872333}
-  - 212: {fileID: 430872332}
-  - 61: {fileID: 430872334}
-  - 114: {fileID: 430872335}
+  - component: {fileID: 430872333}
+  - component: {fileID: 430872332}
+  - component: {fileID: 430872334}
+  - component: {fileID: 430872335}
   m_Layer: 0
   m_Name: anaconda_release
   m_TagString: Untagged
@@ -1030,7 +1074,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1038,7 +1084,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1058,10 +1104,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.87367606, y: 1.276464, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 944342894}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &430872334
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1097,6 +1143,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1104,6 +1152,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1115,12 +1166,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 481083246}
-  - 212: {fileID: 481083245}
-  - 61: {fileID: 481083247}
-  - 114: {fileID: 481083248}
+  - component: {fileID: 481083246}
+  - component: {fileID: 481083245}
+  - component: {fileID: 481083247}
+  - component: {fileID: 481083248}
   m_Layer: 0
   m_Name: anajulia_release
   m_TagString: Untagged
@@ -1142,7 +1193,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1150,7 +1203,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1170,10 +1223,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.8943715, y: 0.6969913, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 944342894}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &481083247
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1209,6 +1262,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1216,6 +1271,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1227,13 +1285,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 483985683}
-  - 20: {fileID: 483985682}
-  - 92: {fileID: 483985681}
-  - 124: {fileID: 483985680}
-  - 81: {fileID: 483985679}
+  - component: {fileID: 483985683}
+  - component: {fileID: 483985682}
+  - component: {fileID: 483985681}
+  - component: {fileID: 483985680}
+  - component: {fileID: 483985679}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1305,21 +1363,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &531951326
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 531951327}
-  - 212: {fileID: 531951329}
-  - 61: {fileID: 531951328}
-  - 114: {fileID: 531951330}
+  - component: {fileID: 531951327}
+  - component: {fileID: 531951329}
+  - component: {fileID: 531951328}
+  - component: {fileID: 531951330}
   m_Layer: 0
   m_Name: diabrete_release
   m_TagString: Untagged
@@ -1336,10 +1394,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.54, y: 0.15, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2137772589}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &531951328
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1368,7 +1426,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1376,7 +1436,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1408,6 +1468,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1415,6 +1477,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1426,10 +1491,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 538760587}
-  - 212: {fileID: 538760586}
+  - component: {fileID: 538760587}
+  - component: {fileID: 538760586}
   m_Layer: 0
   m_Name: folha_inteira Null
   m_TagString: Untagged
@@ -1451,7 +1516,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1459,7 +1526,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1479,21 +1546,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &578880818
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 578880822}
-  - 212: {fileID: 578880821}
-  - 61: {fileID: 578880820}
-  - 114: {fileID: 578880819}
+  - component: {fileID: 578880822}
+  - component: {fileID: 578880821}
+  - component: {fileID: 578880820}
+  - component: {fileID: 578880819}
   m_Layer: 0
   m_Name: dracula_release
   m_TagString: Untagged
@@ -1522,6 +1589,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1529,6 +1598,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1563,7 +1635,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1571,7 +1645,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1591,21 +1665,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.57, y: -0.52, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2137772589}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &665487991
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 665487993}
-  - 212: {fileID: 665487992}
-  - 61: {fileID: 665487994}
-  - 114: {fileID: 665487995}
+  - component: {fileID: 665487993}
+  - component: {fileID: 665487992}
+  - component: {fileID: 665487994}
+  - component: {fileID: 665487995}
   m_Layer: 0
   m_Name: d_release
   m_TagString: Untagged
@@ -1627,7 +1701,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1635,7 +1711,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1655,10 +1731,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.53663, y: -2.5091321, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 3
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &665487994
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1688,6 +1764,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 902fb034e204c44479ce7acc5aa5873c, type: 3}
   - {fileID: 21300000, guid: f592912c0e56a0d41ab4994c18e20e79, type: 3}
   - {fileID: 2137772587}
+  - {fileID: 665487991}
+  - {fileID: 665487991}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -1695,6 +1773,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1702,6 +1782,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1748,6 +1831,10 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1000012824806454, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
+      propertyPath: m_Name
+      value: Marcadores
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
   m_IsPrefabParent: 0
@@ -1756,11 +1843,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 823550622}
-  - 212: {fileID: 823550623}
-  - 114: {fileID: 823550621}
+  - component: {fileID: 823550622}
+  - component: {fileID: 823550623}
+  - component: {fileID: 823550621}
   m_Layer: 0
   m_Name: folha_inteira T
   m_TagString: Untagged
@@ -1815,7 +1902,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 2026181696}
   - {fileID: 387592487}
@@ -1823,6 +1909,7 @@ Transform:
   - {fileID: 2058845228}
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &823550623
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1837,7 +1924,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1845,7 +1934,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1861,12 +1950,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 845427135}
-  - 212: {fileID: 845427137}
-  - 61: {fileID: 845427136}
-  - 114: {fileID: 845427138}
+  - component: {fileID: 845427135}
+  - component: {fileID: 845427137}
+  - component: {fileID: 845427136}
+  - component: {fileID: 845427138}
   m_Layer: 0
   m_Name: dartveider_release
   m_TagString: Untagged
@@ -1883,10 +1972,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.14861894, y: 1.4287705, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2137772589}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &845427136
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1915,7 +2004,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1923,7 +2014,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1955,6 +2046,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1962,6 +2055,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1973,12 +2069,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 845562923}
-  - 212: {fileID: 845562922}
-  - 61: {fileID: 845562921}
-  - 114: {fileID: 845562920}
+  - component: {fileID: 845562923}
+  - component: {fileID: 845562922}
+  - component: {fileID: 845562921}
+  - component: {fileID: 845562920}
   m_Layer: 0
   m_Name: barqueiro_release
   m_TagString: Untagged
@@ -2007,6 +2103,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2014,6 +2112,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2049,7 +2150,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2057,7 +2160,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2077,20 +2180,20 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.29999995, y: 1.52, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 890325564}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &890325563
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 890325564}
-  - 212: {fileID: 890325566}
-  - 114: {fileID: 890325565}
+  - component: {fileID: 890325564}
+  - component: {fileID: 890325566}
+  - component: {fileID: 890325565}
   m_Layer: 0
   m_Name: folha_inteira B
   m_TagString: Untagged
@@ -2107,7 +2210,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 845562923}
   - {fileID: 1641618217}
@@ -2115,6 +2217,7 @@ Transform:
   - {fileID: 928868017}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &890325565
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2167,7 +2270,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2175,7 +2280,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2191,12 +2296,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 928868017}
-  - 212: {fileID: 928868020}
-  - 61: {fileID: 928868019}
-  - 114: {fileID: 928868018}
+  - component: {fileID: 928868017}
+  - component: {fileID: 928868020}
+  - component: {fileID: 928868019}
+  - component: {fileID: 928868018}
   m_Layer: 0
   m_Name: boitata_release
   m_TagString: Untagged
@@ -2213,10 +2318,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.49, y: -0.52, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 890325564}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &928868018
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2238,6 +2343,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2245,6 +2352,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2279,7 +2389,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2287,7 +2399,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2314,11 +2426,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 944342894}
-  - 212: {fileID: 944342893}
-  - 114: {fileID: 944342895}
+  - component: {fileID: 944342894}
+  - component: {fileID: 944342893}
+  - component: {fileID: 944342895}
   m_Layer: 0
   m_Name: folha_inteira A
   m_TagString: Untagged
@@ -2340,7 +2452,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2348,7 +2462,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2368,7 +2482,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 430872333}
   - {fileID: 481083246}
@@ -2376,6 +2489,7 @@ Transform:
   - {fileID: 1751307091}
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &944342895
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2419,12 +2533,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1034595889}
-  - 212: {fileID: 1034595888}
-  - 61: {fileID: 1034595887}
-  - 114: {fileID: 1034595886}
+  - component: {fileID: 1034595889}
+  - component: {fileID: 1034595888}
+  - component: {fileID: 1034595887}
+  - component: {fileID: 1034595886}
   m_Layer: 0
   m_Name: viuvanegra_release
   m_TagString: Untagged
@@ -2453,6 +2567,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2460,6 +2576,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2494,7 +2613,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2502,7 +2623,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2522,21 +2643,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7, y: -1.1, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 175136365}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1049669933
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1049669937}
-  - 212: {fileID: 1049669936}
-  - 61: {fileID: 1049669935}
-  - 114: {fileID: 1049669934}
+  - component: {fileID: 1049669937}
+  - component: {fileID: 1049669936}
+  - component: {fileID: 1049669935}
+  - component: {fileID: 1049669934}
   m_Layer: 0
   m_Name: mumia_release
   m_TagString: Untagged
@@ -2565,6 +2686,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2572,6 +2695,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2606,7 +2732,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2614,7 +2742,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2634,21 +2762,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.2, y: -1.52, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2002799020}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1063974922
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1063974923}
-  - 212: {fileID: 1063974926}
-  - 61: {fileID: 1063974925}
-  - 114: {fileID: 1063974924}
+  - component: {fileID: 1063974923}
+  - component: {fileID: 1063974926}
+  - component: {fileID: 1063974925}
+  - component: {fileID: 1063974924}
   m_Layer: 0
   m_Name: boitanao_release
   m_TagString: Untagged
@@ -2665,10 +2793,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.42, y: 0.13894059, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 890325564}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1063974924
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2690,6 +2818,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2697,6 +2827,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2731,7 +2864,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2739,7 +2874,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2755,10 +2890,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1163159678}
-  - 114: {fileID: 1163159677}
+  - component: {fileID: 1163159678}
+  - component: {fileID: 1163159677}
   m_Layer: 0
   m_Name: Challenge
   m_TagString: Untagged
@@ -2779,16 +2914,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1193490887}
+  - {fileID: 1827068095}
   _serializedStateKeys:
-  - preActionsList
-  - validatorsList
-  - posVictoryActionsList
+  - Validador
+  - _actions
   _serializedStateValues:
-  - '[]'
-  - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '{"$content":0,"$type":"MDS.Validators.Validator"}'
+  - '{"onStartActions":[{"obj":[1],"m_set":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
   nextChallenge: {fileID: 0}
-  btn: {fileID: 258034897}
 --- !u!4 &1163159678
 Transform:
   m_ObjectHideFlags: 0
@@ -2798,19 +2931,19 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.150142, y: 0.9947634, z: 0.037109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1193490886
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1193490888}
-  - 114: {fileID: 1193490887}
+  - component: {fileID: 1193490888}
+  - component: {fileID: 1193490887}
   m_Layer: 0
   m_Name: Validador
   m_TagString: Untagged
@@ -2847,21 +2980,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.150142, y: 0.9947634, z: 0.037109375}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1246844742
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1246844744}
-  - 212: {fileID: 1246844743}
-  - 61: {fileID: 1246844745}
-  - 114: {fileID: 1246844746}
+  - component: {fileID: 1246844744}
+  - component: {fileID: 1246844743}
+  - component: {fileID: 1246844745}
+  - component: {fileID: 1246844746}
   m_Layer: 0
   m_Name: b_release
   m_TagString: Untagged
@@ -2883,7 +3016,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2891,7 +3026,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2911,10 +3046,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.5316944, y: -1.7147689, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 2
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1246844745
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2944,6 +3079,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: f4063dc96c09ca740b8936b4a27ffa98, type: 3}
   - {fileID: 21300000, guid: f6ed9baa09453754b8573741b21f0975, type: 3}
   - {fileID: 890325563}
+  - {fileID: 1246844742}
+  - {fileID: 1246844742}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -2951,6 +3088,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2958,6 +3097,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2970,12 +3112,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1247263274}
-  - 212: {fileID: 1247263276}
-  - 61: {fileID: 1247263275}
-  - 114: {fileID: 1247263277}
+  - component: {fileID: 1247263274}
+  - component: {fileID: 1247263276}
+  - component: {fileID: 1247263275}
+  - component: {fileID: 1247263277}
   m_Layer: 0
   m_Name: tigredentesdesabre_release
   m_TagString: Untagged
@@ -2992,10 +3134,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.21, y: -0.4738016, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 823550622}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1247263275
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3024,7 +3166,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3032,7 +3176,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3064,6 +3208,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3071,6 +3217,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3082,12 +3231,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1432922939}
-  - 212: {fileID: 1432922941}
-  - 61: {fileID: 1432922940}
-  - 114: {fileID: 1432922942}
+  - component: {fileID: 1432922939}
+  - component: {fileID: 1432922941}
+  - component: {fileID: 1432922940}
+  - component: {fileID: 1432922942}
   m_Layer: 0
   m_Name: viboravidente_release
   m_TagString: Untagged
@@ -3104,10 +3253,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.54, y: -0.5, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 175136365}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1432922940
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3136,7 +3285,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3144,7 +3295,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3176,6 +3327,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3183,6 +3336,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3194,12 +3350,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1443858729}
-  - 212: {fileID: 1443858731}
-  - 61: {fileID: 1443858730}
-  - 114: {fileID: 1443858732}
+  - component: {fileID: 1443858729}
+  - component: {fileID: 1443858731}
+  - component: {fileID: 1443858730}
+  - component: {fileID: 1443858732}
   m_Layer: 0
   m_Name: dentuco_release
   m_TagString: Untagged
@@ -3216,10 +3372,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.58, y: 0.73, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2137772589}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1443858730
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3248,7 +3404,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3256,7 +3414,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3288,6 +3446,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3295,6 +3455,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3306,12 +3469,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1489122823}
-  - 212: {fileID: 1489122825}
-  - 61: {fileID: 1489122824}
-  - 114: {fileID: 1489122826}
+  - component: {fileID: 1489122823}
+  - component: {fileID: 1489122825}
+  - component: {fileID: 1489122824}
+  - component: {fileID: 1489122826}
   m_Layer: 0
   m_Name: monstrocomolhos_release
   m_TagString: Untagged
@@ -3328,10 +3491,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.20046449, y: 0.88, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2002799020}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1489122824
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3360,7 +3523,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3368,7 +3533,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3400,6 +3565,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3407,6 +3574,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3418,12 +3588,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1577326854}
-  - 212: {fileID: 1577326853}
-  - 61: {fileID: 1577326855}
-  - 114: {fileID: 1577326856}
+  - component: {fileID: 1577326854}
+  - component: {fileID: 1577326853}
+  - component: {fileID: 1577326855}
+  - component: {fileID: 1577326856}
   m_Layer: 0
   m_Name: m_release
   m_TagString: Untagged
@@ -3445,7 +3615,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3453,7 +3625,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3473,10 +3645,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.526302, y: -3.2528217, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 4
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1577326855
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3506,6 +3678,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 7a440c05696b74c4e8ef8b12f6d4c6b9, type: 3}
   - {fileID: 21300000, guid: 2213f72f341918c4faecb8f3dc3abb85, type: 3}
   - {fileID: 2002799018}
+  - {fileID: 1577326852}
+  - {fileID: 1577326852}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -3513,6 +3687,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3520,6 +3696,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3532,12 +3711,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1624919884}
-  - 212: {fileID: 1624919886}
-  - 61: {fileID: 1624919885}
-  - 114: {fileID: 1624919887}
+  - component: {fileID: 1624919884}
+  - component: {fileID: 1624919886}
+  - component: {fileID: 1624919885}
+  - component: {fileID: 1624919887}
   m_Layer: 0
   m_Name: pefedido_release
   m_TagString: Untagged
@@ -3554,10 +3733,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.789, y: 0.87, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 428504924}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1624919885
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3586,7 +3765,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3594,7 +3775,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3626,6 +3807,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3633,6 +3816,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3644,10 +3830,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1633614083}
-  - 212: {fileID: 1633614082}
+  - component: {fileID: 1633614083}
+  - component: {fileID: 1633614082}
   m_Layer: 0
   m_Name: background1_1
   m_TagString: Untagged
@@ -3669,7 +3855,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3677,7 +3865,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3697,20 +3885,20 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1637755976
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1637755979}
-  - 114: {fileID: 1637755978}
-  - 114: {fileID: 1637755977}
+  - component: {fileID: 1637755979}
+  - component: {fileID: 1637755978}
+  - component: {fileID: 1637755977}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -3979,14 +4167,14 @@ MonoBehaviour:
   - {fileID: 1193490887}
   - {fileID: 1163159677}
   _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 932301961}
   - _keys:
     - DefaultBehaviorEditor.Overwritten.EditProperty
     _values:
     - _showDropdown: 0
       _serializedIsActive: 1
+    _target: {fileID: 932301961}
+  - _keys: []
+    _values: []
     _target: {fileID: 944342895}
   - _keys: []
     _values: []
@@ -4000,11 +4188,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1751307092}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 890325565}
   - _keys: []
     _values: []
@@ -4018,11 +4203,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 928868018}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 2137772590}
   - _keys: []
     _values: []
@@ -4108,35 +4290,20 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1034595886}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 2137772588}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 2002799019}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 823550621}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 428504923}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 175136364}
   - _keys: []
     _values: []
@@ -4153,21 +4320,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1641618216
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1641618217}
-  - 212: {fileID: 1641618220}
-  - 61: {fileID: 1641618219}
-  - 114: {fileID: 1641618218}
+  - component: {fileID: 1641618217}
+  - component: {fileID: 1641618220}
+  - component: {fileID: 1641618219}
+  - component: {fileID: 1641618218}
   m_Layer: 0
   m_Name: bichopapao_release
   m_TagString: Untagged
@@ -4184,10 +4351,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.15, y: 0.90591633, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 890325564}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1641618218
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4209,6 +4376,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4216,6 +4385,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4250,7 +4422,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4258,7 +4432,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4274,12 +4448,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1667296747}
-  - 212: {fileID: 1667296749}
-  - 61: {fileID: 1667296748}
-  - 114: {fileID: 1667296750}
+  - component: {fileID: 1667296747}
+  - component: {fileID: 1667296749}
+  - component: {fileID: 1667296748}
+  - component: {fileID: 1667296750}
   m_Layer: 0
   m_Name: p_release
   m_TagString: Untagged
@@ -4296,10 +4470,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.66, y: -4.897769, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 6
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1667296748
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4328,7 +4502,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4336,7 +4512,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4362,6 +4538,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 10dff7189409e12499ed08ec07ba5bc4, type: 3}
   - {fileID: 21300000, guid: 6eaeea10a3db22c46ae3bf6bff2bab66, type: 3}
   - {fileID: 428504922}
+  - {fileID: 1667296746}
+  - {fileID: 1667296746}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -4369,6 +4547,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4376,6 +4556,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4388,12 +4571,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1730684726}
-  - 212: {fileID: 1730684725}
-  - 61: {fileID: 1730684727}
-  - 114: {fileID: 1730684728}
+  - component: {fileID: 1730684726}
+  - component: {fileID: 1730684725}
+  - component: {fileID: 1730684727}
+  - component: {fileID: 1730684728}
   m_Layer: 0
   m_Name: t_release
   m_TagString: Untagged
@@ -4415,7 +4598,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4423,7 +4608,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4443,10 +4628,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 7.526305, y: -4.123902, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 5
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1730684727
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4476,6 +4661,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: c9016bb10ea54ec47ad87e1fa31a9cf3, type: 3}
   - {fileID: 21300000, guid: a79f9408e72e37e45a6dd159a21718e1, type: 3}
   - {fileID: 823550620}
+  - {fileID: 1730684724}
+  - {fileID: 1730684724}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -4483,6 +4670,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4490,6 +4679,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4502,12 +4694,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1742397790}
-  - 212: {fileID: 1742397792}
-  - 61: {fileID: 1742397791}
-  - 114: {fileID: 1742397793}
+  - component: {fileID: 1742397790}
+  - component: {fileID: 1742397792}
+  - component: {fileID: 1742397791}
+  - component: {fileID: 1742397793}
   m_Layer: 0
   m_Name: pegrande_release
   m_TagString: Untagged
@@ -4524,10 +4716,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.628, y: 0.19, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 428504924}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1742397791
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4556,7 +4748,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4564,7 +4758,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4596,6 +4790,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4603,6 +4799,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4614,12 +4813,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1747593188}
-  - 212: {fileID: 1747593187}
-  - 61: {fileID: 1747593189}
-  - 114: {fileID: 1747593190}
+  - component: {fileID: 1747593188}
+  - component: {fileID: 1747593187}
+  - component: {fileID: 1747593189}
+  - component: {fileID: 1747593190}
   m_Layer: 0
   m_Name: aranhagigante_release
   m_TagString: Untagged
@@ -4641,7 +4840,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4649,7 +4850,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4669,10 +4870,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.48046243, y: 0.13821386, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 944342894}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1747593189
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4708,6 +4909,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4715,6 +4918,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4726,12 +4932,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1751307091}
-  - 212: {fileID: 1751307090}
-  - 61: {fileID: 1751307093}
-  - 114: {fileID: 1751307092}
+  - component: {fileID: 1751307091}
+  - component: {fileID: 1751307090}
+  - component: {fileID: 1751307093}
+  - component: {fileID: 1751307092}
   m_Layer: 0
   m_Name: aranhapcaramba_release
   m_TagString: Untagged
@@ -4753,7 +4959,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4761,7 +4969,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4781,10 +4989,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.13898754, y: -0.43091136, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 944342894}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1751307092
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4806,6 +5014,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4813,6 +5023,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4838,12 +5051,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1823307097}
-  - 212: {fileID: 1823307099}
-  - 61: {fileID: 1823307098}
-  - 114: {fileID: 1823307100}
+  - component: {fileID: 1823307097}
+  - component: {fileID: 1823307099}
+  - component: {fileID: 1823307098}
+  - component: {fileID: 1823307100}
   m_Layer: 0
   m_Name: vampirobanguela_release
   m_TagString: Untagged
@@ -4860,10 +5073,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.27527308, y: 0.8, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 175136365}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1823307098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4892,7 +5105,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4900,7 +5115,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4932,6 +5147,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -4939,6 +5156,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -4950,12 +5170,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1827068097}
-  - 212: {fileID: 1827068096}
-  - 61: {fileID: 1827068098}
-  - 114: {fileID: 1827068099}
+  - component: {fileID: 1827068097}
+  - component: {fileID: 1827068096}
+  - component: {fileID: 1827068098}
+  - component: {fileID: 1827068099}
   m_Layer: 0
   m_Name: a_grab
   m_TagString: Untagged
@@ -4977,7 +5197,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4985,7 +5207,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5003,12 +5225,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1827068095}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 7.5897245, y: -0.88176894, z: -0.19414063}
+  m_LocalPosition: {x: 7.5897245, y: -0.8817687, z: -0.19414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 932301960}
-  m_RootOrder: 1
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1827068098
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5038,6 +5260,8 @@ MonoBehaviour:
   - {fileID: 21300000, guid: 8a71905be30023747a20ff594ee203fd, type: 3}
   - {fileID: 21300000, guid: 5ad1ef63a6fb36b46b1b63109819881b, type: 3}
   - {fileID: 944342892}
+  - {fileID: 1827068095}
+  - {fileID: 1827068095}
   _serializedStateKeys:
   - _sprite
   - _localPositionDisplacement
@@ -5045,6 +5269,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -5052,6 +5278,9 @@ MonoBehaviour:
   - 
   - '[2]'
   - '[]'
+  - '[{"obj":[3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  - '[{"obj":[4],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -5064,11 +5293,11 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2002799020}
-  - 212: {fileID: 2002799021}
-  - 114: {fileID: 2002799019}
+  - component: {fileID: 2002799020}
+  - component: {fileID: 2002799021}
+  - component: {fileID: 2002799019}
   m_Layer: 0
   m_Name: folha_inteira M
   m_TagString: Untagged
@@ -5123,7 +5352,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1489122823}
   - {fileID: 142000092}
@@ -5131,6 +5359,7 @@ Transform:
   - {fileID: 1049669937}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2002799021
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -5145,7 +5374,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5153,7 +5384,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5169,12 +5400,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2026181696}
-  - 212: {fileID: 2026181698}
-  - 61: {fileID: 2026181697}
-  - 114: {fileID: 2026181699}
+  - component: {fileID: 2026181696}
+  - component: {fileID: 2026181698}
+  - component: {fileID: 2026181697}
+  - component: {fileID: 2026181699}
   m_Layer: 0
   m_Name: tarantula_release
   m_TagString: Untagged
@@ -5191,10 +5422,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.81, y: 0.89259917, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 823550622}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2026181697
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5223,7 +5454,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5231,7 +5464,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5263,6 +5496,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -5270,6 +5505,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -5281,12 +5519,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2058845228}
-  - 212: {fileID: 2058845230}
-  - 61: {fileID: 2058845229}
-  - 114: {fileID: 2058845231}
+  - component: {fileID: 2058845228}
+  - component: {fileID: 2058845230}
+  - component: {fileID: 2058845229}
+  - component: {fileID: 2058845231}
   m_Layer: 0
   m_Name: triceratops_release
   m_TagString: Untagged
@@ -5303,10 +5541,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.7, y: -1.16, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 823550622}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2058845229
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5335,7 +5573,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5343,7 +5583,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5375,6 +5615,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -5382,6 +5624,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -5393,12 +5638,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2093087461}
-  - 212: {fileID: 2093087463}
-  - 61: {fileID: 2093087462}
-  - 114: {fileID: 2093087464}
+  - component: {fileID: 2093087461}
+  - component: {fileID: 2093087463}
+  - component: {fileID: 2093087462}
+  - component: {fileID: 2093087464}
   m_Layer: 0
   m_Name: velociraptor_release
   m_TagString: Untagged
@@ -5415,10 +5660,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.5, y: 0.16, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 175136365}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2093087462
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5447,7 +5692,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5455,7 +5702,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5487,6 +5734,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -5494,6 +5743,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -5505,12 +5757,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2137772589}
-  - 212: {fileID: 2137772591}
-  - 114: {fileID: 2137772590}
-  - 114: {fileID: 2137772588}
+  - component: {fileID: 2137772589}
+  - component: {fileID: 2137772591}
+  - component: {fileID: 2137772590}
+  - component: {fileID: 2137772588}
   m_Layer: 0
   m_Name: folha_inteira D
   m_TagString: Untagged
@@ -5557,7 +5809,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.46, y: -0.01, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 845427135}
   - {fileID: 1443858729}
@@ -5565,6 +5816,7 @@ Transform:
   - {fileID: 578880822}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2137772590
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5609,7 +5861,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5617,7 +5871,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5633,12 +5887,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2139604209}
-  - 212: {fileID: 2139604211}
-  - 61: {fileID: 2139604210}
-  - 114: {fileID: 2139604212}
+  - component: {fileID: 2139604209}
+  - component: {fileID: 2139604211}
+  - component: {fileID: 2139604210}
+  - component: {fileID: 2139604212}
   m_Layer: 0
   m_Name: mulasemcabeca_release
   m_TagString: Untagged
@@ -5655,10 +5909,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.32, y: -0.84, z: -0.05}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 2002799020}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &2139604210
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5687,7 +5941,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -5695,7 +5951,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -5727,6 +5983,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -5734,6 +5992,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0

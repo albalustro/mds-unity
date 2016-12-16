@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,28 +79,29 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &18558697
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 18558698}
-  - 212: {fileID: 18558699}
-  - 61: {fileID: 18558701}
-  - 114: {fileID: 18558700}
+  - component: {fileID: 18558698}
+  - component: {fileID: 18558699}
+  - component: {fileID: 18558701}
+  - component: {fileID: 18558700}
   m_Layer: 0
   m_Name: folhaseca_grab (3)
   m_TagString: Untagged
@@ -115,12 +116,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 18558697}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7223654, y: -0.2821455, z: -0.2}
+  m_LocalPosition: {x: 1.7223654, y: -0.2821455, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1372547039}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &18558699
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -135,7 +136,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -143,7 +146,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -167,16 +170,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - folha
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &18558701
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -196,10 +211,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 34919973}
-  - 212: {fileID: 34919972}
+  - component: {fileID: 34919973}
+  - component: {fileID: 34919972}
   m_Layer: 0
   m_Name: palcafloresazuis
   m_TagString: Untagged
@@ -221,7 +236,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -229,7 +246,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -249,10 +266,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.8684615, y: 0.92, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &88580012 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -326,12 +343,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 126353674}
-  - 212: {fileID: 126353675}
-  - 61: {fileID: 126353677}
-  - 114: {fileID: 126353676}
+  - component: {fileID: 126353674}
+  - component: {fileID: 126353675}
+  - component: {fileID: 126353677}
+  - component: {fileID: 126353676}
   m_Layer: 0
   m_Name: florazul_grab (3)
   m_TagString: Untagged
@@ -346,12 +363,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 126353673}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.3596346, y: 0.4600954, z: -0.2}
+  m_LocalPosition: {x: -1.3596346, y: 0.4600954, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 679986137}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &126353675
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -366,7 +383,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -374,7 +393,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -398,16 +417,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor azul
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &126353677
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -427,12 +458,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 142883337}
-  - 212: {fileID: 142883338}
-  - 61: {fileID: 142883339}
-  - 114: {fileID: 142883340}
+  - component: {fileID: 142883337}
+  - component: {fileID: 142883338}
+  - component: {fileID: 142883339}
+  - component: {fileID: 142883340}
   m_Layer: 0
   m_Name: flormarrom_grab
   m_TagString: Untagged
@@ -447,12 +478,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 142883336}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.7926023, y: -0.31295633, z: -0.2}
+  m_LocalPosition: {x: -2.7926023, y: -0.31295633, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &142883338
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -467,7 +498,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -475,7 +508,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -513,25 +546,37 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1 &152782851
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 152782853}
-  - 114: {fileID: 152782852}
+  - component: {fileID: 152782853}
+  - component: {fileID: 152782852}
   m_Layer: 0
   m_Name: Validador
   m_TagString: Untagged
@@ -584,10 +629,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.3610411, y: 0.41543928, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &155741001 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -662,12 +707,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 175003222}
-  - 212: {fileID: 175003223}
-  - 61: {fileID: 175003225}
-  - 114: {fileID: 175003224}
+  - component: {fileID: 175003222}
+  - component: {fileID: 175003223}
+  - component: {fileID: 175003225}
+  - component: {fileID: 175003224}
   m_Layer: 0
   m_Name: florazul_grab
   m_TagString: Untagged
@@ -682,12 +727,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 175003221}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.6464345, y: 0.4600954, z: -0.2}
+  m_LocalPosition: {x: -3.6464345, y: 0.4600954, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 679986137}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &175003223
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -702,7 +747,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -710,7 +757,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -734,16 +781,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor azul
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &175003225
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -928,10 +987,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 390748686}
-  - 114: {fileID: 390748685}
+  - component: {fileID: 390748686}
+  - component: {fileID: 390748685}
   m_Layer: 0
   m_Name: Challenge
   m_TagString: Untagged
@@ -952,16 +1011,32 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 152782852}
+  - {fileID: 855544834}
+  - {fileID: 855544833}
+  - {fileID: 855544836}
+  - {fileID: 175003222}
+  - {fileID: 1197392183}
+  - {fileID: 2145403009}
+  - {fileID: 1197392183}
+  - {fileID: 1777321831}
+  - {fileID: 1197392183}
+  - {fileID: 126353674}
+  - {fileID: 1197392183}
+  - {fileID: 405650124}
+  - {fileID: 1197392183}
+  - {fileID: 855544836}
+  - {fileID: 1197392183}
+  - {fileID: 34919973}
+  - {fileID: 1197392183}
+  - {fileID: 991977251}
+  - {fileID: 1197392182}
   _serializedStateKeys:
-  - preActionsList
-  - validatorsList
-  - posVictoryActionsList
+  - Validador
+  - _actions
   _serializedStateValues:
-  - '[]'
-  - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '{"$content":0,"$type":"MDS.Validators.Validator"}'
+  - '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"m_anim":1,"m_animatorAction":"Trigger","m_parameter":"move","m_value":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetAnimatorParameterAction"},{"selfTarget":false,"target":2,"duration":2.0,"destination":{"x":-1.39,"y":0.16,"z":-1.0},"easeType":"easeInBack","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MoveAction"},{"m_obj":[3],"m_newZPos":0.5,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.ChangeZAction"},{"m_obj":4,"m_parent":5,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":6,"m_parent":7,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":8,"m_parent":9,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":10,"m_parent":11,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":12,"m_parent":13,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":14,"m_parent":15,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":16,"m_parent":17,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.MakeParentAction"},{"m_obj":18,"m_fadeIn":false,"m_fadeTime":1.0,"delayBeforeExecution":3.0,"waitFinish":false,"$type":"MDS.Actions.FadeInOutAction"},{"m_anim":19,"m_animatorAction":"Trigger","m_parameter":"fall","m_value":1,"delayBeforeExecution":3.0,"waitFinish":false,"$type":"MDS.Actions.SetAnimatorParameterAction"}]}'
   nextChallenge: {fileID: 0}
-  btn: {fileID: 1556597330}
 --- !u!4 &390748686
 Transform:
   m_ObjectHideFlags: 0
@@ -971,21 +1046,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.3610411, y: 0.41543928, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &405650123
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 405650124}
-  - 212: {fileID: 405650125}
-  - 61: {fileID: 405650126}
-  - 114: {fileID: 405650127}
+  - component: {fileID: 405650124}
+  - component: {fileID: 405650125}
+  - component: {fileID: 405650126}
+  - component: {fileID: 405650127}
   m_Layer: 0
   m_Name: florazul_grab (4)
   m_TagString: Untagged
@@ -1000,12 +1075,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 405650123}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.63363457, y: 0.4600954, z: -0.2}
+  m_LocalPosition: {x: -0.63363457, y: 0.4600954, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 679986137}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &405650125
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1020,7 +1095,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1028,7 +1105,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1066,16 +1143,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor azul
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!1001 &455034803
 Prefab:
   m_ObjectHideFlags: 0
@@ -1194,10 +1283,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 545132363}
-  - 212: {fileID: 545132362}
+  - component: {fileID: 545132363}
+  - component: {fileID: 545132362}
   m_Layer: 0
   m_Name: mask
   m_TagString: Untagged
@@ -1219,7 +1308,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1227,7 +1318,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1245,12 +1336,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 545132361}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.83, y: -2.36, z: -0.1}
+  m_LocalPosition: {x: -0.83, y: -2.36, z: -0.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &560596247 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1268,12 +1359,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 670239714}
-  - 212: {fileID: 670239715}
-  - 61: {fileID: 670239717}
-  - 114: {fileID: 670239716}
+  - component: {fileID: 670239714}
+  - component: {fileID: 670239715}
+  - component: {fileID: 670239717}
+  - component: {fileID: 670239716}
   m_Layer: 0
   m_Name: flormarrom_grab (2)
   m_TagString: Untagged
@@ -1288,12 +1379,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 670239713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.93536544, y: 0.43064308, z: -0.2}
+  m_LocalPosition: {x: 0.93536544, y: 0.43064308, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &670239715
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1308,7 +1399,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1316,7 +1409,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1340,16 +1433,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &670239717
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1369,9 +1474,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 679986137}
+  - component: {fileID: 679986137}
   m_Layer: 0
   m_Name: Flores Azuis
   m_TagString: Untagged
@@ -1388,7 +1493,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.08036539, y: 2.9078808, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 175003222}
   - {fileID: 2145403009}
@@ -1397,6 +1501,7 @@ Transform:
   - {fileID: 405650124}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &768783167
 Prefab:
   m_ObjectHideFlags: 0
@@ -1617,15 +1722,97 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 124972246}
   m_Script: {fileID: 11500000, guid: 825f6ceaaa1f03342bb422942c28c0d0, type: 3}
+--- !u!1 &855544833
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 855544836}
+  - component: {fileID: 855544835}
+  - component: {fileID: 855544834}
+  m_Layer: 0
+  m_Name: monstroanimado_a
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &855544834
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 855544833}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 3107aaa934e9adc43bba5fbc593b292c, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!212 &855544835
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 855544833}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: 47376327c136d474ba4f37922b0ea038, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &855544836
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 855544833}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 3.82, y: 0.15, z: -1}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &860489675
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 860489677}
-  - 212: {fileID: 860489676}
+  - component: {fileID: 860489677}
+  - component: {fileID: 860489676}
   m_Layer: 0
   m_Name: background1_1
   m_TagString: Untagged
@@ -1647,7 +1834,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1655,7 +1844,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1673,12 +1862,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 860489675}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &912351566 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1792,10 +1981,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 991977253}
-  - 212: {fileID: 991977252}
+  - component: {fileID: 991977253}
+  - component: {fileID: 991977252}
   m_Layer: 0
   m_Name: buracotampado
   m_TagString: Untagged
@@ -1817,7 +2006,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1825,7 +2016,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1843,12 +2034,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 991977251}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.84, y: -0.91, z: -0.1}
+  m_LocalPosition: {x: -0.84, y: -0.91, z: 0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1030229863
 Prefab:
   m_ObjectHideFlags: 0
@@ -1993,6 +2184,52 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 353806932}
   m_Script: {fileID: 11500000, guid: 825f6ceaaa1f03342bb422942c28c0d0, type: 3}
+--- !u!1 &1197392181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1197392183}
+  - component: {fileID: 1197392182}
+  m_Layer: 0
+  m_Name: Falling
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!95 &1197392182
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197392181}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 9ecdda644f5020c45bfadde0aaaa4296, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+--- !u!4 &1197392183
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1197392181}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -1.33, y: -0.78, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1229252694 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -2004,9 +2241,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1294573145}
+  - component: {fileID: 1294573145}
   m_Layer: 0
   m_Name: Flores
   m_TagString: Untagged
@@ -2023,7 +2260,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.08036539, y: 2.9078808, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 142883337}
   - {fileID: 1851293947}
@@ -2034,6 +2270,7 @@ Transform:
   - {fileID: 1516938349}
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1296852754
 Prefab:
   m_ObjectHideFlags: 0
@@ -2188,12 +2425,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1363883314}
-  - 212: {fileID: 1363883315}
-  - 61: {fileID: 1363883317}
-  - 114: {fileID: 1363883316}
+  - component: {fileID: 1363883314}
+  - component: {fileID: 1363883315}
+  - component: {fileID: 1363883317}
+  - component: {fileID: 1363883316}
   m_Layer: 0
   m_Name: florvermelha_grab
   m_TagString: Untagged
@@ -2208,12 +2445,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1363883313}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.5870037, y: -0.3179524, z: -0.2}
+  m_LocalPosition: {x: -3.5870037, y: -0.3179524, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1363883315
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2228,7 +2465,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2236,7 +2475,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2260,16 +2499,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1363883317
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2289,9 +2540,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1372547039}
+  - component: {fileID: 1372547039}
   m_Layer: 0
   m_Name: Folhas Secas
   m_TagString: Untagged
@@ -2308,7 +2559,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.08036539, y: 2.9078808, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1890834242}
   - {fileID: 1516808774}
@@ -2316,6 +2566,7 @@ Transform:
   - {fileID: 18558698}
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1388105834
 Prefab:
   m_ObjectHideFlags: 0
@@ -2373,68 +2624,6 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1849711802}
   m_Script: {fileID: 11500000, guid: 26a2105bde567244fa1a0e64885f392d, type: 3}
---- !u!1 &1405098262
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1405098264}
-  - 212: {fileID: 1405098263}
-  m_Layer: 0
-  m_Name: monstrostandby
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &1405098263
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1405098262}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 47376327c136d474ba4f37922b0ea038, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!4 &1405098264
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1405098262}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.728633, y: 0.17103821, z: -0.5}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 11
 --- !u!1001 &1420269866
 Prefab:
   m_ObjectHideFlags: 0
@@ -2579,12 +2768,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1516808774}
-  - 212: {fileID: 1516808775}
-  - 61: {fileID: 1516808777}
-  - 114: {fileID: 1516808776}
+  - component: {fileID: 1516808774}
+  - component: {fileID: 1516808775}
+  - component: {fileID: 1516808777}
+  - component: {fileID: 1516808776}
   m_Layer: 0
   m_Name: folhaseca_grab (1)
   m_TagString: Untagged
@@ -2599,12 +2788,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516808773}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.1933654, y: -0.2821455, z: -0.2}
+  m_LocalPosition: {x: 0.1933654, y: -0.2821455, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1372547039}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1516808775
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2619,7 +2808,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2627,7 +2818,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2651,16 +2842,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - folha
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1516808777
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2680,12 +2883,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1516938349}
-  - 212: {fileID: 1516938350}
-  - 61: {fileID: 1516938352}
-  - 114: {fileID: 1516938351}
+  - component: {fileID: 1516938349}
+  - component: {fileID: 1516938350}
+  - component: {fileID: 1516938352}
+  - component: {fileID: 1516938351}
   m_Layer: 0
   m_Name: florrocha_grab (1)
   m_TagString: Untagged
@@ -2700,12 +2903,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1516938348}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.707723, y: 0.43064308, z: -0.2}
+  m_LocalPosition: {x: 1.707723, y: 0.43064308, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1516938350
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2720,7 +2923,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2728,7 +2933,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2752,16 +2957,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1516938352
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2781,10 +2998,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1541447291}
-  - 114: {fileID: 1541447290}
+  - component: {fileID: 1541447291}
+  - component: {fileID: 1541447290}
   m_Layer: 0
   m_Name: fiBackupSceneStorage
   m_TagString: Untagged
@@ -2813,23 +3030,23 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1556597327
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1556597329}
-  - 212: {fileID: 1556597328}
-  - 114: {fileID: 1556597330}
-  - 61: {fileID: 1556597331}
+  - component: {fileID: 1556597329}
+  - component: {fileID: 1556597328}
+  - component: {fileID: 1556597330}
+  - component: {fileID: 1556597331}
   m_Layer: 0
-  m_Name: button_up
+  m_Name: CheckAnswerButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2849,7 +3066,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2857,7 +3076,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2877,10 +3096,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 3.725696, y: -3.1211238, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1556597330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2897,6 +3116,7 @@ MonoBehaviour:
   _serializedStateValues: []
   downSprite: {fileID: 21300000, guid: cfcbe67ca8f2eec4399bccb9376b7fc9, type: 3}
   upSprite: {fileID: 21300000, guid: bfe659d62b109aa499ecc01a94b1be5c, type: 3}
+  enabledEffectGO: {fileID: 0}
 --- !u!61 &1556597331
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2916,12 +3136,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1577952089}
-  - 212: {fileID: 1577952090}
-  - 61: {fileID: 1577952092}
-  - 114: {fileID: 1577952091}
+  - component: {fileID: 1577952089}
+  - component: {fileID: 1577952090}
+  - component: {fileID: 1577952092}
+  - component: {fileID: 1577952091}
   m_Layer: 0
   m_Name: florvermelha_grab (1)
   m_TagString: Untagged
@@ -2936,12 +3156,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1577952088}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.2486346, y: -0.3179524, z: -0.2}
+  m_LocalPosition: {x: -1.2486346, y: -0.3179524, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1577952090
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2956,7 +3176,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2964,7 +3186,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2988,16 +3210,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1577952092
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3017,12 +3251,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1599548853}
-  - 212: {fileID: 1599548854}
-  - 61: {fileID: 1599548856}
-  - 114: {fileID: 1599548855}
+  - component: {fileID: 1599548853}
+  - component: {fileID: 1599548854}
+  - component: {fileID: 1599548856}
+  - component: {fileID: 1599548855}
   m_Layer: 0
   m_Name: flormarrom_grab (1)
   m_TagString: Untagged
@@ -3037,12 +3271,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1599548852}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.15592238, y: 0.43064308, z: -0.2}
+  m_LocalPosition: {x: 0.15592238, y: 0.43064308, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1599548854
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3057,7 +3291,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3065,7 +3301,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3089,16 +3325,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1599548856
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3124,10 +3372,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1617165780}
-  - 212: {fileID: 1617165779}
+  - component: {fileID: 1617165780}
+  - component: {fileID: 1617165779}
   m_Layer: 0
   m_Name: placaflores
   m_TagString: Untagged
@@ -3149,7 +3397,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3157,7 +3407,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3177,10 +3427,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.5126424, y: 0.88, z: -0.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1657549250
 Prefab:
   m_ObjectHideFlags: 0
@@ -3260,11 +3510,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1775246121}
-  - 114: {fileID: 1775246120}
-  - 114: {fileID: 1775246119}
+  - component: {fileID: 1775246121}
+  - component: {fileID: 1775246120}
+  - component: {fileID: 1775246119}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -3322,6 +3572,17 @@ MonoBehaviour:
   - {fileID: 1851293949}
   - {fileID: 1556597330}
   - {fileID: 390748685}
+  - {fileID: 2145403011}
+  - {fileID: 1777321833}
+  - {fileID: 126353676}
+  - {fileID: 1363883316}
+  - {fileID: 1577952091}
+  - {fileID: 1599548855}
+  - {fileID: 670239716}
+  - {fileID: 1516938351}
+  - {fileID: 1890834244}
+  - {fileID: 1516808776}
+  - {fileID: 2129256056}
   _values:
   - _keys: []
     _values: []
@@ -3437,6 +3698,39 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 390748685}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2145403011}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1777321833}
+  - _keys: []
+    _values: []
+    _target: {fileID: 126353676}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1363883316}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1577952091}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1599548855}
+  - _keys: []
+    _values: []
+    _target: {fileID: 670239716}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1516938351}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1890834244}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1516808776}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2129256056}
 --- !u!114 &1775246120
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3487,6 +3781,17 @@ MonoBehaviour:
   - {fileID: 1851293949}
   - {fileID: 1556597330}
   - {fileID: 390748685}
+  - {fileID: 2145403011}
+  - {fileID: 1777321833}
+  - {fileID: 126353676}
+  - {fileID: 1363883316}
+  - {fileID: 1577952091}
+  - {fileID: 1599548855}
+  - {fileID: 670239716}
+  - {fileID: 1516938351}
+  - {fileID: 1890834244}
+  - {fileID: 1516808776}
+  - {fileID: 2129256056}
   _values:
   - _keys: []
     _values: []
@@ -3611,6 +3916,39 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 390748685}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2145403011}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1777321833}
+  - _keys: []
+    _values: []
+    _target: {fileID: 126353676}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1363883316}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1577952091}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1599548855}
+  - _keys: []
+    _values: []
+    _target: {fileID: 670239716}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1516938351}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1890834244}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1516808776}
+  - _keys: []
+    _values: []
+    _target: {fileID: 2129256056}
 --- !u!4 &1775246121
 Transform:
   m_ObjectHideFlags: 1
@@ -3620,21 +3958,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1777321830
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1777321831}
-  - 212: {fileID: 1777321832}
-  - 61: {fileID: 1777321834}
-  - 114: {fileID: 1777321833}
+  - component: {fileID: 1777321831}
+  - component: {fileID: 1777321832}
+  - component: {fileID: 1777321834}
+  - component: {fileID: 1777321833}
   m_Layer: 0
   m_Name: florazul_grab (2)
   m_TagString: Untagged
@@ -3649,12 +3987,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1777321830}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.1236346, y: 0.4600954, z: -0.2}
+  m_LocalPosition: {x: -2.1236346, y: 0.4600954, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 679986137}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1777321832
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3669,7 +4007,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3677,7 +4017,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3701,16 +4041,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor azul
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1777321834
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3834,12 +4186,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1851293947}
-  - 212: {fileID: 1851293948}
-  - 61: {fileID: 1851293950}
-  - 114: {fileID: 1851293949}
+  - component: {fileID: 1851293947}
+  - component: {fileID: 1851293948}
+  - component: {fileID: 1851293950}
+  - component: {fileID: 1851293949}
   m_Layer: 0
   m_Name: florrocha_grab
   m_TagString: Untagged
@@ -3854,12 +4206,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1851293946}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.028178, y: -0.30296373, z: -0.2}
+  m_LocalPosition: {x: -2.028178, y: -0.30296373, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1294573145}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1851293948
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3874,7 +4226,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3882,7 +4236,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3906,16 +4260,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1851293950
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3935,12 +4301,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1890834242}
-  - 212: {fileID: 1890834243}
-  - 61: {fileID: 1890834245}
-  - 114: {fileID: 1890834244}
+  - component: {fileID: 1890834242}
+  - component: {fileID: 1890834243}
+  - component: {fileID: 1890834245}
+  - component: {fileID: 1890834244}
   m_Layer: 0
   m_Name: folhaseca_grab
   m_TagString: Untagged
@@ -3955,12 +4321,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1890834241}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0.51974165, y: -0.2821455, z: -0.2}
+  m_LocalPosition: {x: -0.51974165, y: -0.2821455, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1372547039}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1890834243
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3975,7 +4341,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3983,7 +4351,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4007,16 +4375,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - folha
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &1890834245
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4082,13 +4462,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1930845142}
-  - 20: {fileID: 1930845141}
-  - 92: {fileID: 1930845140}
-  - 124: {fileID: 1930845139}
-  - 81: {fileID: 1930845138}
+  - component: {fileID: 1930845142}
+  - component: {fileID: 1930845141}
+  - component: {fileID: 1930845140}
+  - component: {fileID: 1930845139}
+  - component: {fileID: 1930845138}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -4160,10 +4540,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1932559266
 Prefab:
   m_ObjectHideFlags: 0
@@ -4393,12 +4773,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2129256054}
-  - 212: {fileID: 2129256055}
-  - 61: {fileID: 2129256057}
-  - 114: {fileID: 2129256056}
+  - component: {fileID: 2129256054}
+  - component: {fileID: 2129256055}
+  - component: {fileID: 2129256057}
+  - component: {fileID: 2129256056}
   m_Layer: 0
   m_Name: folhaseca_grab (2)
   m_TagString: Untagged
@@ -4413,12 +4793,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2129256053}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.9503654, y: -0.2821455, z: -0.2}
+  m_LocalPosition: {x: 0.9503654, y: -0.2821455, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1372547039}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2129256055
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4433,7 +4813,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4441,7 +4823,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4465,16 +4847,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - folha
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &2129256057
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4494,12 +4888,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2145403009}
-  - 212: {fileID: 2145403010}
-  - 61: {fileID: 2145403012}
-  - 114: {fileID: 2145403011}
+  - component: {fileID: 2145403009}
+  - component: {fileID: 2145403010}
+  - component: {fileID: 2145403012}
+  - component: {fileID: 2145403011}
   m_Layer: 0
   m_Name: florazul_grab (1)
   m_TagString: Untagged
@@ -4514,12 +4908,12 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2145403008}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.8636346, y: 0.4600954, z: -0.2}
+  m_LocalPosition: {x: -2.8636346, y: 0.4600954, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 679986137}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2145403010
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4534,7 +4928,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4542,7 +4938,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4566,16 +4962,28 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences: []
   _serializedStateKeys:
+  - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
+  forcePreferredIndexOnDrop: 0
   Labels:
   - flor azul
   changeSprite: 0
   changeScale: 0
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
 --- !u!61 &2145403012
 BoxCollider2D:
   m_ObjectHideFlags: 0

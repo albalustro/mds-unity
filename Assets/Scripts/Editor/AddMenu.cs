@@ -13,7 +13,7 @@ public class AddMenu : EditorWindow
     {
         string sceneName = SceneManager.GetActiveScene().name;
 
-        string dialogPath = "Assets/Dialogue System/SO/" + sceneName.Substring(0, 4) + ".asset";
+        string dialogPath = "Assets/Dialogue System/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
 
         DialogueList list = AssetDatabase.LoadAssetAtPath<DialogueList>(dialogPath);
 

@@ -6,6 +6,9 @@ using MDS.Validators.Enum;
 using MDS.Validators.Interfaces;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MDS.Actions;
+using System;
+using System.Collections.Generic;
 
 namespace MDS.Core
 {
@@ -60,7 +63,9 @@ namespace MDS.Core
 
             // Desabilita o próximo challenge, se ele existir
             if(nextChallenge != null)
+            {
                 nextChallenge.gameObject.SetActive(false);
+            }
 
         }
 
@@ -68,9 +73,9 @@ namespace MDS.Core
         {
 
             _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
-            if(_answerProcessors == null)
+            if(_answerProcessors == null || _answerProcessors.Length==0)
             {
-                LogError("ValidationActivator não encontrado");
+                LogError("Nenhum 'CheckAnswer *' foi encontrado. Certifique-se de ter ao menos habilitado antes de habilitar o Challenge");
             }
             foreach(var item in _answerProcessors)
             {
@@ -99,6 +104,17 @@ namespace MDS.Core
 
         void Victory()
         {
+            if(nextChallenge != null)
+            {
+                //nextChallenge.gameObject.SetActive(true);
+                //gameObject.SetActive(false);
+                EnableDisableAction ac1 = new EnableDisableAction(EnableDisableAction.EAction.Enable, new[] { nextChallenge.gameObject }) ;
+                EnableDisableAction ac2 = new Actions.EnableDisableAction(EnableDisableAction.EAction.Disable, new[] { gameObject });
+                List<IAction> tmp = new List<Interfaces.IAction>(_actions.onVictoryActions);
+                tmp.Add(ac1);
+                tmp.Add(ac2);
+                _actions.onVictoryActions = tmp.ToArray();
+            }
             ExecuteActions(_actions.onVictoryActions);
         }
 
@@ -128,19 +144,15 @@ namespace MDS.Core
             ExecuteActions(actions);
         }
 
-        void ProcessResult()
+        public void ProcessResult()
         {
+
             ValidatorResult _validatorResult = Validador.Validate();
 
             if(_validatorResult == ValidatorResult.Victory)
             {
                 Log("Correct!!");
                 Victory();
-                if(nextChallenge != null)
-                {
-                    nextChallenge.gameObject.SetActive(true);
-                    gameObject.SetActive(false);
-                }
             }
             else
             {
@@ -159,14 +171,18 @@ namespace MDS.Core
         /// <returns>O Validador referente ao challenge ativo</returns>
         public static IValidator GetCurrentValidador()
         {
+            return GetActiveInstance().Validador;
+        }
+
+        public static Challenge GetActiveInstance()
+        {
             Challenge[] challenges = FindObjectsOfType<Challenge>();
             Challenge currentChallenge;
             if(challenges.Length == 1)
                 currentChallenge = challenges[0];
             else
                 currentChallenge = challenges.First(c => c.isActiveAndEnabled);
-
-            return currentChallenge.Validador;
+            return currentChallenge;
         }
 
         #endregion
