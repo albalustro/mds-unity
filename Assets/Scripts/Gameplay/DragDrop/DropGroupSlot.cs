@@ -26,7 +26,7 @@ namespace MDS.Gameplay.DragDrop
 
         private SpriteRenderer _spriteRenderer;
 
-        private Draggable _draggableReference;
+		public Draggable _draggableReference;
 
         [HideInInspector]
         public Draggable draggableReference
