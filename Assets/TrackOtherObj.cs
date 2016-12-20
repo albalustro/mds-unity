@@ -31,7 +31,7 @@ public class TrackOtherObj : MonoBehaviour {
 
 	void Update()
 	{
-		m_draggable = m_slot._draggableReference;
+		m_draggable = m_slot.draggableReference;
 
 		if (m_draggable != null) {
 			if (m_draggable.Labels [0] == m_thisLabel) {
