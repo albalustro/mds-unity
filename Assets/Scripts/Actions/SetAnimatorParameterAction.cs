@@ -15,12 +15,15 @@ namespace MDS.Actions{
 		{
 			Trigger,
 			Integer,
+			Bool
 		}
 
 		[SerializeField] private Animator m_anim;
 		[SerializeField] private AnimatorParameterAction m_animatorAction;
 		[SerializeField] private string m_parameter;
 		[SerializeField] private int m_value;
+		[SerializeField] private bool m_boolValue;
+		 
 
 		public override IEnumerator Execute()
 		{
@@ -36,7 +39,9 @@ namespace MDS.Actions{
 			case AnimatorParameterAction.Integer:
 				m_anim.SetInteger (m_parameter, m_value);
 				break;
-
+			case AnimatorParameterAction.Bool:
+				m_anim.SetBool (m_parameter, m_boolValue);
+				break;
 			}
 
 		}
