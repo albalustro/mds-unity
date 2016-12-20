@@ -29,6 +29,9 @@ public class MoveToAction : BaseAction {
 
 	private bool _animationComplete;
 
+	[SerializeField]
+	private bool m_useMemorizedGo;
+
 
 	public override IEnumerator Execute()
 	{
@@ -38,6 +41,10 @@ public class MoveToAction : BaseAction {
 			tmpGO = _corotineHolder.gameObject;
 		else {
 			tmpGO = m_obj;
+		}
+
+		if (m_useMemorizedGo) {
+			tmpGO = MemorizeMe.MemorizedGameObject;
 		}
 
 		LeanTween.move (tmpGO, m_destination.position, m_duration);

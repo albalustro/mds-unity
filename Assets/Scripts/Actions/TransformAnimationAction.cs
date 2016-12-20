@@ -29,6 +29,7 @@ public class TransformAnimationAction : BaseAction
 
     public float duration;
 
+	public bool useMemorizedGOPosition;
     public bool local;
     public Vector3 destination;
 
@@ -61,9 +62,13 @@ public class TransformAnimationAction : BaseAction
 
         switch(animationType)
         {
-            case TransformAnimationType.Position:
-                if(local)
-                    destination = target.transform.position + destination;
+		case TransformAnimationType.Position:
+			if (local)
+				destination = target.transform.position + destination;
+
+			if (useMemorizedGOPosition)
+				destination = MemorizeMe.m_transform;
+			
                 move = LeanTween.move(target, destination, duration);
                 break;
 
