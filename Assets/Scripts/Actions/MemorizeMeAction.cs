@@ -14,19 +14,14 @@ public class MemorizeMe : BaseAction
     [FullInspector.InspectorHideIf("selfTarget")]
     public GameObject GameObjectToBeMemorized;
 
-	[HideInInspector]
-	public static Vector2 m_transform;
-
     
 
     public override IEnumerator Execute()
     {
         yield return base.Execute();
 
-		if (selfTarget) {
-			GameObjectToBeMemorized = _corotineHolder.gameObject;
-			m_transform = GameObjectToBeMemorized.transform.position;
-		}
+        if(selfTarget)
+            GameObjectToBeMemorized = _corotineHolder.gameObject;
 
         MemorizedGameObject = GameObjectToBeMemorized;
 
