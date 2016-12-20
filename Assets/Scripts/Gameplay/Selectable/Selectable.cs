@@ -267,6 +267,11 @@ namespace MDS.Gameplay.Selectable
             return null;
         }
 
+        public GameObject GetGameObject()
+        {
+            return gameObject;
+        }
+
         #endregion
 
     }

@@ -64,8 +64,8 @@ namespace MDS.Actions
         }
 
 
-        [InspectorOrder(3)]
-        public List<slugSelector> sceneSlugs;
+        [ShowInInspector, InspectorOrder(3)]
+        private List<slugSelector> sceneSlugs;
 
 #endif
 
@@ -78,7 +78,9 @@ namespace MDS.Actions
             yield return base.Execute();
 
             DialogueSystem.instance.ShowDialogueMessage(slugs);
-            yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
+
+            if (waitFinish)
+                yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
         }
     }
 }

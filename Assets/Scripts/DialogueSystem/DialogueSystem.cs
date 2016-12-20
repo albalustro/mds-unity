@@ -6,6 +6,8 @@ using System.Linq;
 
 public class DialogueSystem : MDSBehaviour
 {
+
+    
     public static DialogueSystem instance = null;
 
     //Propriedades de um DialogueEntry

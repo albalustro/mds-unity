@@ -15,11 +15,21 @@ namespace MDS.Actions {
 		[SerializeField]
 		private Transform m_parent;
 
+		[SerializeField]
+		private bool m_resetPosition;
+
 		public override IEnumerator Execute()
 		{
 			yield return base.Execute();
 
-			m_obj.SetParent (m_parent);
+			if (m_parent == null) {
+				m_obj.parent = null;
+			} else {
+				m_obj.SetParent (m_parent);
+				if (m_resetPosition) {
+					m_obj.position = m_parent.position;
+				}
+			}
 
 		}
 

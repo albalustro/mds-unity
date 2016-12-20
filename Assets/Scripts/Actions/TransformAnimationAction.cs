@@ -20,17 +20,39 @@ public class TransformAnimationAction : BaseAction
     private bool IsScaleAnim { get { return animationType == TransformAnimationType.Scale; } }
     private bool IsRotationAnim { get { return animationType == TransformAnimationType.Rotation; } }
 
+    [FullInspector.InspectorHideIf("useMemorizedGameObjectAsTarget")]
     public bool selfTarget;
 
+    [FullInspector.InspectorHideIf("selfTarget")]
     public bool useMemorizedGameObjectAsTarget;
 
-    [FullInspector.InspectorHideIf("selfTarget")]
+    [FullInspector.InspectorHideIf("HideTarget")]
     public GameObject target;
+
+    private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget; } }
 
     public float duration;
 
+    [FullInspector.InspectorHideIf("HideDestination")]
     public bool local;
+
+    [FullInspector.InspectorHideIf("Hide_useSelfPositionAsDestination")]
+    public bool useSelfPositionAsDestination;
+
+    [FullInspector.InspectorHideIf("Hide_useMemorizedGOAsDestination")]
+    public bool useMemorizedGOAsDestination;
+
+    [FullInspector.InspectorHideIf("Hide_useThisTransformAsDestination")]
+    public Transform useThisTransformAsDestination;
+
+    [FullInspector.InspectorHideIf("HideDestination")]
     public Vector3 destination;
+    private bool HideDestination{ get { return useSelfPositionAsDestination || useMemorizedGOAsDestination || useThisTransformAsDestination!=null; } }
+    private bool Hide_useSelfPositionAsDestination { get { return useMemorizedGOAsDestination || useThisTransformAsDestination != null; } }
+    private bool Hide_useMemorizedGOAsDestination { get { return useSelfPositionAsDestination  || useThisTransformAsDestination != null; } }
+    private bool Hide_useThisTransformAsDestination { get { return useSelfPositionAsDestination || useMemorizedGOAsDestination; } }
+
+
 
     public LeanTweenType easeType;
 
@@ -42,6 +64,8 @@ public class TransformAnimationAction : BaseAction
     {
         yield return base.Execute();
 
+
+        // ALTERANDO O TARGET DA ANIMACAO
         if(selfTarget)
             target = _corotineHolder.gameObject;
 
@@ -54,6 +78,45 @@ public class TransformAnimationAction : BaseAction
                 yield break;
             }
         }
+
+
+        // ALTERANDO O DESTINO DA ANIMACAO
+        Transform tmp = null;
+        if(useSelfPositionAsDestination || useMemorizedGOAsDestination || useThisTransformAsDestination != null)
+        {
+            local = false;
+            
+            if(useSelfPositionAsDestination)
+            {
+                tmp = _corotineHolder.gameObject.transform;
+            }
+
+            if(useMemorizedGOAsDestination)
+            {
+                tmp = MemorizeMe.MemorizedGameObject.transform;
+            }
+
+            if(useThisTransformAsDestination != null)
+            {
+                destination = useThisTransformAsDestination.position;
+            }
+
+            switch(animationType)
+            {
+                case TransformAnimationType.Position:
+                    destination = tmp.position;
+                    break;
+                case TransformAnimationType.Scale:
+                    destination = tmp.lossyScale;
+                    break;
+                case TransformAnimationType.Rotation:
+                    destination = tmp.rotation.eulerAngles;
+                    break;
+                default:
+                    break;
+            }
+        }
+
 
         _animationComplete = false;
 

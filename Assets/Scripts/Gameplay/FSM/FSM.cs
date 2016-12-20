@@ -68,7 +68,7 @@ namespace MDS.Gameplay.FSM
             {
                 _animating = true;
 
-                LeanTween.rotateZ(gameObject, states[_currentStateIndex].ZAngle, 0.5f)
+                LeanTween.rotateZ(base.gameObject, states[_currentStateIndex].ZAngle, 0.5f)
                     .setEase(LeanTweenType.easeInCirc)
                     .setOnComplete(() => _animating = false);
             }
@@ -159,6 +159,11 @@ namespace MDS.Gameplay.FSM
                 return result;
             }
             return null;
+        }
+
+        public GameObject GetGameObject()
+        {
+            return gameObject;
         }
 
         #endregion

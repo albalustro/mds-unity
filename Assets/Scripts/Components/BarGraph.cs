@@ -119,6 +119,13 @@ public class BarGraph : MDSBehaviour, IValidatable
     {
         return _amount;
     }
+
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
+    }
+
     #endregion
 
 

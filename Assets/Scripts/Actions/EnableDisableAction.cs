@@ -20,6 +20,11 @@ namespace MDS.Actions
 		[SerializeField]
 		private UnityEngine.Object[] _targets;
 
+        [SerializeField]
+        private bool _includeChidren;
+        [SerializeField]
+        private bool _onlyChildren;
+
         public EnableDisableAction()
         {
 
@@ -54,7 +59,17 @@ namespace MDS.Actions
             {
                 if(target is GameObject)
                 {
-                    (target as GameObject).SetActive(en);
+                    var p = (target as GameObject).transform;
+                    if(_includeChidren || _onlyChildren)
+                    {
+                        for(int i = 0; i < p.childCount; i++)
+                        {
+                            p.GetChild(i).gameObject.SetActive(en);
+                        }
+                    }
+                    if(!_onlyChildren)
+                        p.gameObject.SetActive(en);
+
                 }
                 else if(target is Behaviour)
                 {
