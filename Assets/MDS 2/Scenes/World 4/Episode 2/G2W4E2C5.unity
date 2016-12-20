@@ -223,7 +223,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 21497791}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.491132, y: -2.7707393, z: -0.1}
+  m_LocalPosition: {x: 3.491132, y: -2.77, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -241,8 +241,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - '[]'
   downSprite: {fileID: 21300000, guid: 5d7924e2e0e64ef40aa119f9353a2d92, type: 3}
   upSprite: {fileID: 21300000, guid: 6fb5e2c11400f0a45861f028423a7f4a, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -593,6 +595,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000013199018780, guid: a88ddfbdccb255f4a82048f2b92e9116,
     type: 2}
   m_PrefabInternal: {fileID: 324834130}
+--- !u!1 &412646658 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1706996289}
 --- !u!1 &414312684
 GameObject:
   m_ObjectHideFlags: 0
@@ -680,13 +687,18 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
-  - '{"SelectedValue":{"x":1.1,"y":1.1},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 1
   _changeZRotation: 0
@@ -836,13 +848,18 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
-  - '{"SelectedValue":{"x":1.1,"y":1.1},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 1
   _changeZRotation: 0
@@ -864,6 +881,106 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3, y: 2.46}
+--- !u!1001 &469822777
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &475915132
 Prefab:
   m_ObjectHideFlags: 0
@@ -874,7 +991,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -915,7 +1032,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[],"onErrorActions_1":[{"slugs":["error3"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":true,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"obj":[1],"m_set":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"},{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["bug3"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":true,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"m_obj":3,"m_fadeIn":false,"m_fadeTime":2.0,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FadeInOutAction"},{"obj":[4],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -936,6 +1053,26 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1440586607}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 1440586607}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 1440586607}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 1440586607}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -950,6 +1087,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
     type: 2}
   m_PrefabInternal: {fileID: 475915132}
+--- !u!1 &505346591 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1822252973}
 --- !u!1 &554572097
 GameObject:
   m_ObjectHideFlags: 0
@@ -1037,13 +1179,18 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
-  - '{"SelectedValue":{"x":1.1,"y":1.1},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 1
   _changeZRotation: 0
@@ -1075,7 +1222,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1116,7 +1263,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[],"onErrorActions_1":[{"slugs":["error4"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":true,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"obj":[1],"m_set":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"},{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["bug4"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":true,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"m_obj":3,"m_fadeIn":false,"m_fadeTime":2.0,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FadeInOutAction"},{"obj":[4],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -1137,6 +1284,36 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 1622843158}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 1622843158}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 1622843158}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 1622843158}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[5]
+      value: 
+      objectReference: {fileID: 883311818}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[6]
+      value: 
+      objectReference: {fileID: 2130243554}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -1215,6 +1392,16 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &883311818 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1992290981}
+--- !u!1 &1153741958 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 475915132}
 --- !u!1001 &1436316772
 Prefab:
   m_ObjectHideFlags: 0
@@ -1374,13 +1561,18 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
-  - '{"SelectedValue":{"x":1.1,"y":1.1},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 1
   _changeZRotation: 0
@@ -1489,13 +1681,18 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
-  - '{"SelectedValue":{"x":1.1,"y":1.1},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 1
   _changeZRotation: 0
@@ -1527,7 +1724,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1564,7 +1761,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"obj":[1],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"sceneSlugs":[{"useThis":true,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":true,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"obj":[1],"m_set":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"},{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["bug1"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":true,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"m_obj":3,"m_fadeIn":false,"m_fadeTime":2.0,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.FadeInOutAction"},{"obj":[4],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_Name
@@ -1590,6 +1787,31 @@ Prefab:
       propertyPath: _objectReferences.Array.data[1]
       value: 
       objectReference: {fileID: 414312684}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 414312684}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 414312684}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 414312684}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[5]
+      value: 
+      objectReference: {fileID: 505346591}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[6]
+      value: 
+      objectReference: {fileID: 412646658}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -1732,20 +1954,182 @@ MonoBehaviour:
   - {fileID: 454087571}
   - {fileID: 1440586610}
   _values:
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.0.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.1.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.2.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.3.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.4.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.5.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.6.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.7.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.8.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.9.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.10.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.11.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.12.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.13.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1706996290}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.0.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.1.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.2.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.3.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.4.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.5.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.6.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.7.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.8.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.9.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.10.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.11.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.12.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.13.slug.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1822252974}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 475915133}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 710184199}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.0.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.1.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.2.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.3.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.4.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.5.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.6.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.7.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.8.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.9.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.10.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.11.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.12.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty.13.slug.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.3.AbstractTypeEditor.sceneSlugs.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1992290982}
   - _keys: []
     _values: []
@@ -1809,7 +2193,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -1850,7 +2234,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[],"onErrorActions_1":[{"slugs":["error2"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":true,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"obj":[1],"m_set":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"},{"obj":[2],"m_set":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["bug2"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":true,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"m_obj":3,"m_fadeIn":false,"m_fadeTime":2.0,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FadeInOutAction"},{"obj":[4],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -1871,6 +2255,36 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 554572097}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 554572097}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 554572097}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 554572097}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[5]
+      value: 
+      objectReference: {fileID: 1153741958}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[6]
+      value: 
+      objectReference: {fileID: 505346591}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -1967,7 +2381,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2008,7 +2422,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["bug5"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":true,"slug":"bug5"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"obj":[1],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"selfTarget":false,"m_obj":2,"m_fadeIn":false,"m_fadeTime":2.0,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.FadeInOutAction"},{"slugs":["victory"],"sceneSlugs":[{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"error3"},{"useThis":false,"slug":"error4"},{"useThis":false,"slug":"error5"},{"useThis":false,"slug":"bug1"},{"useThis":false,"slug":"bug2"},{"useThis":false,"slug":"bug3"},{"useThis":false,"slug":"bug4"},{"useThis":false,"slug":"bug5"},{"useThis":true,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -2024,6 +2438,16 @@ Prefab:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 454087568}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 454087568}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -2102,3 +2526,8 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2130243554 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 710184198}
