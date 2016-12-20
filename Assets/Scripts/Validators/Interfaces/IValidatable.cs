@@ -1,5 +1,6 @@
 ﻿
 using FullInspector;
+using UnityEngine;
 
 namespace MDS.Validators.Interfaces
 {
@@ -8,6 +9,8 @@ namespace MDS.Validators.Interfaces
 
         bool ReadyToValidate();
         bool Validate(string acceptableAnswer);
-        int? GetNumericValue(); 
+        int? GetNumericValue();
+
+        GameObject GetGameObject();
     }
 }

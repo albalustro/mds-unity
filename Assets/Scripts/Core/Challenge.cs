@@ -73,15 +73,17 @@ namespace MDS.Core
         {
 
             _answerProcessors = FindObjectsOfType<BaseValidationActivator>();
-            if(_answerProcessors == null || _answerProcessors.Length==0)
+            if(_answerProcessors == null || _answerProcessors.Length == 0)
             {
-                LogError("Nenhum 'CheckAnswer *' foi encontrado. Certifique-se de ter ao menos habilitado antes de habilitar o Challenge");
+                LogWarning("Nenhum 'CheckAnswer *' foi encontrado. Certifique-se de ter ao menos habilitado antes de habilitar o Challenge");
             }
-            foreach(var item in _answerProcessors)
+            else
             {
-                item.OnValidateAnswer += ProcessResult;
+                foreach(var item in _answerProcessors)
+                {
+                    item.OnValidateAnswer += ProcessResult;
+                }
             }
-
 
             ExecuteActions(_actions.onStartActions);
 

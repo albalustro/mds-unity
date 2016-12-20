@@ -84,7 +84,7 @@ namespace MDS.Gameplay.DragDrop
 
         public void FillSlots()
         {
-            slots = transform.GetComponentsInChildren<DropGroupSlot>().ToList();
+            slots = transform.GetComponentsInChildren<DropGroupSlot>(true).ToList();
         }
 
 

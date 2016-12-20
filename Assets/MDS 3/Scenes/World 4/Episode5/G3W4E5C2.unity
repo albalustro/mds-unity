@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,16 +79,17 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1001 &265765161
 Prefab:
@@ -192,12 +193,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
+      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -209,6 +210,11 @@ Prefab:
       propertyPath: btn
       value: 
       objectReference: {fileID: 2093209879}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[0]
+      value: '{"$content":0,"$type":"MDS.Validators.Validator"}'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -223,13 +229,13 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 321610437}
-  - 20: {fileID: 321610436}
-  - 92: {fileID: 321610435}
-  - 124: {fileID: 321610434}
-  - 81: {fileID: 321610433}
+  - component: {fileID: 321610437}
+  - component: {fileID: 321610436}
+  - component: {fileID: 321610435}
+  - component: {fileID: 321610434}
+  - component: {fileID: 321610433}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -301,10 +307,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &341677499
 Prefab:
   m_ObjectHideFlags: 0
@@ -370,12 +376,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 421656413}
-  - 212: {fileID: 421656414}
-  - 61: {fileID: 421656416}
-  - 114: {fileID: 421656415}
+  - component: {fileID: 421656413}
+  - component: {fileID: 421656414}
+  - component: {fileID: 421656416}
+  - component: {fileID: 421656417}
   m_Layer: 10
   m_Name: maria_02
   m_TagString: Untagged
@@ -392,10 +398,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.31, y: 1.91, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &421656414
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -410,7 +416,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -418,7 +426,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -429,31 +437,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &421656415
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 421656412}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &421656416
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -468,6 +451,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.76, y: 0.24}
+--- !u!114 &421656417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 421656412}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 1c43be74864edf94ba5f120189927588, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &519935860
 Prefab:
   m_ObjectHideFlags: 0
@@ -533,10 +555,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 522175207}
-  - 212: {fileID: 522175206}
+  - component: {fileID: 522175207}
+  - component: {fileID: 522175206}
+  - component: {fileID: 522175209}
+  - component: {fileID: 522175208}
   m_Layer: 0
   m_Name: carimbo_maria
   m_TagString: Untagged
@@ -558,7 +582,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -566,13 +592,13 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: fe56a47e9376de7479220601a006f455, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -583,22 +609,75 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 522175205}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.0230296, y: -2.2589307, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.1255379, y: -3.19, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_Father: {fileID: 1426517391}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &522175208
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 522175205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: fe56a47e9376de7479220601a006f455, type: 3}
+  - {fileID: 21300000, guid: fe56a47e9376de7479220601a006f455, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - 
+  - '[]'
+  - '[]'
+  - '[{"selfTarget":true,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  - '[{"selfTarget":false,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  _changeSprite: 1
+  _changeLocalPosition: 0
+  _changeLocalScale: 1
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
+--- !u!61 &522175209
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 522175205}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.64, y: 1.32}
 --- !u!1 &595510853
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 595510855}
-  - 114: {fileID: 595510854}
+  - component: {fileID: 595510855}
+  - component: {fileID: 595510854}
   m_Layer: 0
   m_Name: fiBackupSceneStorage
   m_TagString: Untagged
@@ -627,10 +706,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &613821998
 Prefab:
   m_ObjectHideFlags: 0
@@ -696,12 +775,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 619006568}
-  - 212: {fileID: 619006569}
-  - 61: {fileID: 619006570}
-  - 114: {fileID: 619006571}
+  - component: {fileID: 619006568}
+  - component: {fileID: 619006569}
+  - component: {fileID: 619006570}
+  - component: {fileID: 619006572}
   m_Layer: 10
   m_Name: jose_06
   m_TagString: Untagged
@@ -718,10 +797,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3786395, y: 1.7047989, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &619006569
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -736,7 +815,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -744,7 +825,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -769,7 +850,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.3, y: 0.28}
---- !u!114 &619006571
+--- !u!114 &619006572
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -777,23 +858,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 619006567}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 3984dff999ac11c4a83af27a4907cffa, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &656200717
 Prefab:
   m_ObjectHideFlags: 0
@@ -859,12 +954,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 666165050}
-  - 212: {fileID: 666165051}
-  - 61: {fileID: 666165053}
-  - 114: {fileID: 666165052}
+  - component: {fileID: 666165050}
+  - component: {fileID: 666165051}
+  - component: {fileID: 666165053}
+  - component: {fileID: 666165054}
   m_Layer: 10
   m_Name: maria_08
   m_TagString: Untagged
@@ -881,10 +976,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.3472712, y: -0.648667, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 16
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &666165051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -899,7 +994,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -907,7 +1004,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -918,31 +1015,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &666165052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 666165049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &666165053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -957,17 +1029,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.24}
+--- !u!114 &666165054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 666165049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 865511ecf17d9f54fa91221d70b9666b, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &698639586
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 698639587}
-  - 212: {fileID: 698639588}
-  - 61: {fileID: 698639590}
-  - 114: {fileID: 698639589}
+  - component: {fileID: 698639587}
+  - component: {fileID: 698639588}
+  - component: {fileID: 698639590}
+  - component: {fileID: 698639591}
   m_Layer: 10
   m_Name: maria_10
   m_TagString: Untagged
@@ -984,10 +1095,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.328292, y: -1.0851969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &698639588
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1002,7 +1113,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1010,7 +1123,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1021,31 +1134,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &698639589
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 698639586}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &698639590
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1060,6 +1148,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.24}
+--- !u!114 &698639591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 698639586}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: eed8dae63ac0b8f4483c042ea39c137f, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &826069373
 Prefab:
   m_ObjectHideFlags: 0
@@ -1245,11 +1372,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 837113808}
-  - 114: {fileID: 837113807}
-  - 114: {fileID: 837113806}
+  - component: {fileID: 837113808}
+  - component: {fileID: 837113807}
+  - component: {fileID: 837113806}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -1269,7 +1396,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keys:
-  - {fileID: 1555563428}
   - {fileID: 1880643968}
   - {fileID: 1156033829}
   - {fileID: 1895583403}
@@ -1291,27 +1417,16 @@ MonoBehaviour:
   - {fileID: 1835620061}
   - {fileID: 341677500}
   - {fileID: 1566422402}
-  - {fileID: 941651212}
-  - {fileID: 907589602}
-  - {fileID: 1494441712}
-  - {fileID: 1280644405}
-  - {fileID: 619006571}
-  - {fileID: 1322526218}
-  - {fileID: 1490661722}
-  - {fileID: 2046974813}
-  - {fileID: 913020424}
-  - {fileID: 421656415}
-  - {fileID: 1516176598}
-  - {fileID: 1553073906}
-  - {fileID: 1566459757}
-  - {fileID: 1238453636}
   - {fileID: 2129089459}
   - {fileID: 286121625}
   - {fileID: 2093209879}
+  - {fileID: 1555563429}
+  - {fileID: 1816801442}
+  - {fileID: 522175208}
+  - {fileID: 1426517389}
+  - {fileID: 941651213}
+  - {fileID: 1781950677}
   _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 1555563428}
   - _keys: []
     _values: []
     _target: {fileID: 1880643968}
@@ -1377,48 +1492,6 @@ MonoBehaviour:
     _target: {fileID: 1566422402}
   - _keys: []
     _values: []
-    _target: {fileID: 941651212}
-  - _keys: []
-    _values: []
-    _target: {fileID: 907589602}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1494441712}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1280644405}
-  - _keys: []
-    _values: []
-    _target: {fileID: 619006571}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1322526218}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1490661722}
-  - _keys: []
-    _values: []
-    _target: {fileID: 2046974813}
-  - _keys: []
-    _values: []
-    _target: {fileID: 913020424}
-  - _keys: []
-    _values: []
-    _target: {fileID: 421656415}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1516176598}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1553073906}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1566459757}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1238453636}
-  - _keys: []
-    _values: []
     _target: {fileID: 2129089459}
   - _keys: []
     _values: []
@@ -1426,6 +1499,24 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 2093209879}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1555563429}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1816801442}
+  - _keys: []
+    _values: []
+    _target: {fileID: 522175208}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1426517389}
+  - _keys: []
+    _values: []
+    _target: {fileID: 941651213}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1781950677}
 --- !u!114 &837113807
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1438,7 +1529,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _keys:
-  - {fileID: 1555563428}
   - {fileID: 1880643968}
   - {fileID: 1156033829}
   - {fileID: 1895583403}
@@ -1460,27 +1550,16 @@ MonoBehaviour:
   - {fileID: 1835620061}
   - {fileID: 341677500}
   - {fileID: 1566422402}
-  - {fileID: 941651212}
-  - {fileID: 907589602}
-  - {fileID: 1494441712}
-  - {fileID: 1280644405}
-  - {fileID: 619006571}
-  - {fileID: 1322526218}
-  - {fileID: 1490661722}
-  - {fileID: 2046974813}
-  - {fileID: 913020424}
-  - {fileID: 421656415}
-  - {fileID: 1516176598}
-  - {fileID: 1553073906}
-  - {fileID: 1566459757}
-  - {fileID: 1238453636}
   - {fileID: 2129089459}
   - {fileID: 286121625}
   - {fileID: 2093209879}
+  - {fileID: 1555563429}
+  - {fileID: 1816801442}
+  - {fileID: 522175208}
+  - {fileID: 1426517389}
+  - {fileID: 941651213}
+  - {fileID: 1781950677}
   _values:
-  - _keys: []
-    _values: []
-    _target: {fileID: 1555563428}
   - _keys: []
     _values: []
     _target: {fileID: 1880643968}
@@ -1546,48 +1625,6 @@ MonoBehaviour:
     _target: {fileID: 1566422402}
   - _keys: []
     _values: []
-    _target: {fileID: 941651212}
-  - _keys: []
-    _values: []
-    _target: {fileID: 907589602}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1494441712}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1280644405}
-  - _keys: []
-    _values: []
-    _target: {fileID: 619006571}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1322526218}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1490661722}
-  - _keys: []
-    _values: []
-    _target: {fileID: 2046974813}
-  - _keys: []
-    _values: []
-    _target: {fileID: 913020424}
-  - _keys: []
-    _values: []
-    _target: {fileID: 421656415}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1516176598}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1553073906}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1566459757}
-  - _keys: []
-    _values: []
-    _target: {fileID: 1238453636}
-  - _keys: []
-    _values: []
     _target: {fileID: 2129089459}
   - _keys: []
     _values: []
@@ -1595,6 +1632,27 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 2093209879}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1555563429}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1816801442}
+  - _keys: []
+    _values: []
+    _target: {fileID: 522175208}
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 1426517389}
+  - _keys: []
+    _values: []
+    _target: {fileID: 941651213}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1781950677}
 --- !u!4 &837113808
 Transform:
   m_ObjectHideFlags: 1
@@ -1604,10 +1662,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &852258571
 Prefab:
   m_ObjectHideFlags: 0
@@ -1673,12 +1731,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 907589599}
-  - 212: {fileID: 907589600}
-  - 61: {fileID: 907589601}
-  - 114: {fileID: 907589602}
+  - component: {fileID: 907589599}
+  - component: {fileID: 907589600}
+  - component: {fileID: 907589601}
+  - component: {fileID: 907589603}
   m_Layer: 10
   m_Name: jose_03
   m_TagString: Untagged
@@ -1695,10 +1753,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3976192, y: 0.33827043, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &907589600
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1713,7 +1771,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1721,7 +1781,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1746,7 +1806,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.3, y: 0.28}
---- !u!114 &907589602
+--- !u!114 &907589603
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1754,34 +1814,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 907589598}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: b6c5cd793213b6e4caef94dbbedc5a0c, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &913020421
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 913020422}
-  - 212: {fileID: 913020423}
-  - 61: {fileID: 913020425}
-  - 114: {fileID: 913020424}
+  - component: {fileID: 913020422}
+  - component: {fileID: 913020423}
+  - component: {fileID: 913020425}
+  - component: {fileID: 913020426}
   m_Layer: 10
   m_Name: maria_01
   m_TagString: Untagged
@@ -1798,10 +1872,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.2713532, y: 2.3311243, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &913020423
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1816,7 +1890,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1824,7 +1900,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1835,31 +1911,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &913020424
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 913020421}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &913020425
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1874,17 +1925,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.76, y: 0.24}
+--- !u!114 &913020426
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 913020421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: a797c14fe460b6d43b1b09dfd71e076e, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &941651208
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 941651209}
-  - 212: {fileID: 941651210}
-  - 61: {fileID: 941651211}
-  - 114: {fileID: 941651212}
+  - component: {fileID: 941651209}
+  - component: {fileID: 941651210}
+  - component: {fileID: 941651211}
+  - component: {fileID: 941651213}
   m_Layer: 10
   m_Name: jose_02
   m_TagString: Untagged
@@ -1901,10 +1991,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3976192, y: -0.13621879, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &941651210
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1919,7 +2009,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1927,7 +2019,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1952,7 +2044,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.3, y: 0.3}
---- !u!114 &941651212
+--- !u!114 &941651213
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -1960,23 +2052,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 941651208}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 30a614015d2d67a4ca3c155bacad4a78, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &965077294
 Prefab:
   m_ObjectHideFlags: 0
@@ -2162,12 +2268,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1138270829}
-  - 212: {fileID: 1138270830}
-  - 61: {fileID: 1138270832}
-  - 114: {fileID: 1138270831}
+  - component: {fileID: 1138270829}
+  - component: {fileID: 1138270830}
+  - component: {fileID: 1138270832}
+  - component: {fileID: 1138270833}
   m_Layer: 10
   m_Name: maria_07
   m_TagString: Untagged
@@ -2184,10 +2290,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.3472712, y: -0.21213686, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 15
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1138270830
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2202,7 +2308,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2210,7 +2318,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2221,31 +2329,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &1138270831
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1138270828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &1138270832
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2260,6 +2343,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.76, y: 0.26}
+--- !u!114 &1138270833
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1138270828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: fc96aea95dedafd448a8f37648b27a55, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &1156033828
 Prefab:
   m_ObjectHideFlags: 0
@@ -2325,12 +2447,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1238453634}
-  - 212: {fileID: 1238453635}
-  - 61: {fileID: 1238453637}
-  - 114: {fileID: 1238453636}
+  - component: {fileID: 1238453634}
+  - component: {fileID: 1238453635}
+  - component: {fileID: 1238453637}
+  - component: {fileID: 1238453638}
   m_Layer: 10
   m_Name: maria_06
   m_TagString: Untagged
@@ -2347,10 +2469,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.2903323, y: 0.20541346, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1238453635
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2365,7 +2487,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2373,7 +2497,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2384,31 +2508,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &1238453636
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1238453633}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &1238453637
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2423,17 +2522,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.28}
+--- !u!114 &1238453638
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1238453633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 688c4067bc865284798c66a849f77a14, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1280644401
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1280644402}
-  - 212: {fileID: 1280644403}
-  - 61: {fileID: 1280644404}
-  - 114: {fileID: 1280644405}
+  - component: {fileID: 1280644402}
+  - component: {fileID: 1280644403}
+  - component: {fileID: 1280644404}
+  - component: {fileID: 1280644406}
   m_Layer: 10
   m_Name: jose_05
   m_TagString: Untagged
@@ -2450,10 +2588,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3976192, y: 1.2492892, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1280644403
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2468,7 +2606,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2476,7 +2616,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2501,7 +2641,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.28, y: 0.28}
---- !u!114 &1280644405
+--- !u!114 &1280644406
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2509,34 +2649,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1280644401}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 584b71d9c2787264888ed37e872b1b02, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1322526214
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1322526215}
-  - 212: {fileID: 1322526216}
-  - 61: {fileID: 1322526217}
-  - 114: {fileID: 1322526218}
+  - component: {fileID: 1322526215}
+  - component: {fileID: 1322526216}
+  - component: {fileID: 1322526217}
+  - component: {fileID: 1322526219}
   m_Layer: 10
   m_Name: jose_07
   m_TagString: Untagged
@@ -2553,10 +2707,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.435578, y: -0.6107079, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1322526216
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2571,7 +2725,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2579,7 +2735,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2604,7 +2760,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.26, y: 0.28}
---- !u!114 &1322526218
+--- !u!114 &1322526219
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2612,32 +2768,126 @@ MonoBehaviour:
   m_GameObject: {fileID: 1322526214}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 8a37ec0e2bb182c44b009747ebeedb20, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
+--- !u!1 &1426517388
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1426517391}
+  - component: {fileID: 1426517390}
+  - component: {fileID: 1426517389}
+  m_Layer: 0
+  m_Name: carimbos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1426517389
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426517388}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99aecdf6a358bf4d943cad3fe24e874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 1816801442}
+  - {fileID: 522175208}
+  _serializedStateKeys:
+  - Overwritten
+  - OperationLogic
+  - AcceptEmptyAsCorrectAnswer
+  - SpecificAmount
+  - _maxSelected
+  - groupSelectionType
+  - _selectables
+  _serializedStateValues:
+  - false
+  - '"AND"'
+  - false
+  - 
+  - 
+  - '"Single"'
+  - '[0,1]'
+  groupSelectionType: 0
+  _selectables:
+  - {fileID: 1816801442}
+  - {fileID: 522175208}
+--- !u!61 &1426517390
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426517388}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1}
+--- !u!4 &1426517391
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1426517388}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.102508396, y: 0.24715854, z: 0.021484375}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1816801441}
+  - {fileID: 522175207}
+  m_Father: {fileID: 0}
+  m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1441896923
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1441896925}
-  - 212: {fileID: 1441896924}
+  - component: {fileID: 1441896925}
+  - component: {fileID: 1441896924}
   m_Layer: 0
   m_Name: npc
   m_TagString: Untagged
@@ -2659,7 +2909,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2667,7 +2919,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2687,21 +2939,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -4.5, y: -3.3, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1490661718
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1490661719}
-  - 212: {fileID: 1490661720}
-  - 61: {fileID: 1490661721}
-  - 114: {fileID: 1490661722}
+  - component: {fileID: 1490661719}
+  - component: {fileID: 1490661720}
+  - component: {fileID: 1490661721}
+  - component: {fileID: 1490661723}
   m_Layer: 10
   m_Name: jose_08
   m_TagString: Untagged
@@ -2718,10 +2970,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.36, y: 2.1792877, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1490661720
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2736,7 +2988,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2744,7 +2998,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2769,7 +3023,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.3, y: 0.28}
---- !u!114 &1490661722
+--- !u!114 &1490661723
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2777,34 +3031,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 1490661718}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 2731bada7e2221f4b8aff9fb44bd08ea, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1494441708
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1494441709}
-  - 212: {fileID: 1494441710}
-  - 61: {fileID: 1494441711}
-  - 114: {fileID: 1494441712}
+  - component: {fileID: 1494441709}
+  - component: {fileID: 1494441710}
+  - component: {fileID: 1494441711}
+  - component: {fileID: 1494441713}
   m_Layer: 10
   m_Name: jose_04
   m_TagString: Untagged
@@ -2821,10 +3089,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3786395, y: 0.81275934, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1494441710
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -2839,7 +3107,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2847,7 +3117,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2872,7 +3142,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.3, y: 0.28}
---- !u!114 &1494441712
+--- !u!114 &1494441713
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -2880,32 +3150,46 @@ MonoBehaviour:
   m_GameObject: {fileID: 1494441708}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: a2bf36d8b2d46104ea097b6d5091bb60, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1501693623
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1501693625}
-  - 212: {fileID: 1501693624}
+  - component: {fileID: 1501693625}
+  - component: {fileID: 1501693624}
   m_Layer: 0
   m_Name: background1_1
   m_TagString: Untagged
@@ -2927,7 +3211,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2935,7 +3221,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2955,21 +3241,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1516176595
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1516176596}
-  - 212: {fileID: 1516176597}
-  - 61: {fileID: 1516176599}
-  - 114: {fileID: 1516176598}
+  - component: {fileID: 1516176596}
+  - component: {fileID: 1516176597}
+  - component: {fileID: 1516176599}
+  - component: {fileID: 1516176600}
   m_Layer: 10
   m_Name: maria_03
   m_TagString: Untagged
@@ -2986,10 +3272,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.252374, y: 1.4580643, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1516176597
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3004,7 +3290,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3012,7 +3300,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3023,31 +3311,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &1516176598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1516176595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &1516176599
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3062,6 +3325,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.24}
+--- !u!114 &1516176600
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1516176595}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 144e3f474d7630f4ba0a772acc2cb3ba, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &1518193219
 Prefab:
   m_ObjectHideFlags: 0
@@ -3127,12 +3429,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1553073904}
-  - 212: {fileID: 1553073905}
-  - 61: {fileID: 1553073907}
-  - 114: {fileID: 1553073906}
+  - component: {fileID: 1553073904}
+  - component: {fileID: 1553073905}
+  - component: {fileID: 1553073907}
+  - component: {fileID: 1553073908}
   m_Layer: 10
   m_Name: maria_04
   m_TagString: Untagged
@@ -3149,10 +3451,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.25, y: 1.0025549, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1553073905
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3167,7 +3469,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3175,7 +3479,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3186,31 +3490,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &1553073906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1553073903}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &1553073907
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3225,17 +3504,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.26}
+--- !u!114 &1553073908
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1553073903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 0b778ba4c5816b84baead54239824732, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &1555563424
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1555563425}
-  - 212: {fileID: 1555563426}
-  - 61: {fileID: 1555563427}
-  - 114: {fileID: 1555563428}
+  - component: {fileID: 1555563425}
+  - component: {fileID: 1555563426}
+  - component: {fileID: 1555563427}
+  - component: {fileID: 1555563429}
   m_Layer: 10
   m_Name: jose_01
   m_TagString: Untagged
@@ -3252,10 +3570,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.2837417, y: 2.95745, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1555563426
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3270,7 +3588,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3278,7 +3598,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3303,7 +3623,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.26, y: 0.3}
---- !u!114 &1555563428
+--- !u!114 &1555563429
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -3311,23 +3631,37 @@ MonoBehaviour:
   m_GameObject: {fileID: 1555563424}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &1566422401
 Prefab:
   m_ObjectHideFlags: 0
@@ -3393,12 +3727,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1566459755}
-  - 212: {fileID: 1566459756}
-  - 61: {fileID: 1566459758}
-  - 114: {fileID: 1566459757}
+  - component: {fileID: 1566459755}
+  - component: {fileID: 1566459756}
+  - component: {fileID: 1566459758}
+  - component: {fileID: 1566459759}
   m_Layer: 10
   m_Name: maria_05
   m_TagString: Untagged
@@ -3415,10 +3749,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.27, y: 0.57, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 13
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &1566459756
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -3433,7 +3767,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3441,7 +3777,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3452,31 +3788,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &1566459757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1566459754}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &1566459758
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3491,6 +3802,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.26}
+--- !u!114 &1566459759
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1566459754}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 5374cfb0e5cdf904a86f1204960ca94d, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &1616998652
 Prefab:
   m_ObjectHideFlags: 0
@@ -3556,9 +3906,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1781950676}
+  - component: {fileID: 1781950676}
+  - component: {fileID: 1781950677}
   m_Layer: 0
   m_Name: Contatos
   m_TagString: Untagged
@@ -3575,7 +3926,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1555563425}
   - {fileID: 941651209}
@@ -3598,16 +3948,49 @@ Transform:
   - {fileID: 698639587}
   - {fileID: 2005033299}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1781950677
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1781950675}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d99aecdf6a358bf4d943cad3fe24e874, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys:
+  - Overwritten
+  - OperationLogic
+  - AcceptEmptyAsCorrectAnswer
+  - SpecificAmount
+  - _maxSelected
+  - groupSelectionType
+  - _selectables
+  _serializedStateValues:
+  - false
+  - '"AND"'
+  - false
+  - 
+  - 
+  - '"Single"'
+  - '[]'
+  groupSelectionType: 0
+  _selectables: []
 --- !u!1 &1816801439
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1816801441}
-  - 212: {fileID: 1816801440}
+  - component: {fileID: 1816801441}
+  - component: {fileID: 1816801440}
+  - component: {fileID: 1816801443}
+  - component: {fileID: 1816801442}
   m_Layer: 0
   m_Name: carimbo_jose
   m_TagString: Untagged
@@ -3629,7 +4012,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3637,13 +4022,13 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 7d875965465e75346a96e2d8f5e5d93e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -3654,13 +4039,66 @@ Transform:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1816801439}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.3736334, y: -2.3347354, z: 0}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.271125, y: -3.27, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_Father: {fileID: 1426517391}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1816801442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816801439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 7d875965465e75346a96e2d8f5e5d93e, type: 3}
+  - {fileID: 21300000, guid: 7d875965465e75346a96e2d8f5e5d93e, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - '{"SelectedValue":{"x":1.2,"y":1.2},"UnselectedValue":{"x":1.0,"y":1.0}}'
+  - 
+  - '[]'
+  - '[]'
+  - '[{"selfTarget":true,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  - '[{"selfTarget":false,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  _changeSprite: 1
+  _changeLocalPosition: 0
+  _changeLocalScale: 1
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
+--- !u!61 &1816801443
+BoxCollider2D:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1816801439}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_UsedByEffector: 0
+  m_Offset: {x: 0, y: 0}
+  serializedVersion: 2
+  m_Size: {x: 1.66, y: 1.28}
 --- !u!1001 &1835620060
 Prefab:
   m_ObjectHideFlags: 0
@@ -3758,7 +4196,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010376572144, guid: 40cefe2c012511043816f1e29ed9710e, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 61000010752869668, guid: 40cefe2c012511043816f1e29ed9710e,
         type: 2}
@@ -3769,6 +4207,10 @@ Prefab:
         type: 2}
       propertyPath: m_Size.y
       value: 4.65
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010115548068, guid: 40cefe2c012511043816f1e29ed9710e, type: 2}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 40cefe2c012511043816f1e29ed9710e, type: 2}
@@ -3969,12 +4411,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2005033299}
-  - 212: {fileID: 2005033300}
-  - 61: {fileID: 2005033302}
-  - 114: {fileID: 2005033301}
+  - component: {fileID: 2005033299}
+  - component: {fileID: 2005033300}
+  - component: {fileID: 2005033302}
+  - component: {fileID: 2005033303}
   m_Layer: 10
   m_Name: jose_10
   m_TagString: Untagged
@@ -3991,10 +4433,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2, y: 2.78, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 19
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2005033300
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4009,7 +4451,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4017,7 +4461,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4028,31 +4472,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &2005033301
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2005033298}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &2005033302
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4067,17 +4486,56 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.26, y: 0.28}
+--- !u!114 &2005033303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2005033298}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 71cb76f730c63d64694b465b30d952a2, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &2046974809
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2046974810}
-  - 212: {fileID: 2046974811}
-  - 61: {fileID: 2046974812}
-  - 114: {fileID: 2046974813}
+  - component: {fileID: 2046974810}
+  - component: {fileID: 2046974811}
+  - component: {fileID: 2046974812}
+  - component: {fileID: 2046974814}
   m_Layer: 10
   m_Name: jose_09
   m_TagString: Untagged
@@ -4094,10 +4552,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3406804, y: 2.558879, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2046974811
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4112,7 +4570,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4120,7 +4580,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4145,7 +4605,7 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.28, y: 0.3}
---- !u!114 &2046974813
+--- !u!114 &2046974814
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
@@ -4153,34 +4613,48 @@ MonoBehaviour:
   m_GameObject: {fileID: 2046974809}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: 7271a006e7e4330469bbc51b9bf702b5, type: 3}
   _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
   - 
   - 
-  forcePreferredIndexOnDrop: 0
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
   Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1 &2093209878
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2093209882}
-  - 212: {fileID: 2093209881}
-  - 61: {fileID: 2093209880}
-  - 114: {fileID: 2093209879}
+  - component: {fileID: 2093209882}
+  - component: {fileID: 2093209881}
+  - component: {fileID: 2093209880}
+  - component: {fileID: 2093209879}
   m_Layer: 0
   m_Name: CheckAnswerButton
   m_TagString: Untagged
@@ -4200,8 +4674,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: f5f6e21ee8096704792098d01bacf44c, type: 3}
   upSprite: {fileID: 21300000, guid: 1f2671e5e7cf73043b55abb6de9660d4, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -4233,7 +4709,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4241,7 +4719,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4261,21 +4739,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 4.06, y: -2.74, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2124239049
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2124239050}
-  - 212: {fileID: 2124239051}
-  - 61: {fileID: 2124239053}
-  - 114: {fileID: 2124239052}
+  - component: {fileID: 2124239050}
+  - component: {fileID: 2124239051}
+  - component: {fileID: 2124239053}
+  - component: {fileID: 2124239054}
   m_Layer: 10
   m_Name: maria_09
   m_TagString: Untagged
@@ -4292,10 +4770,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.1698642, y: -1.0472375, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1781950676}
   m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &2124239051
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -4310,7 +4788,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -4318,7 +4798,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -4329,31 +4809,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!114 &2124239052
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2124239049}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 595dea411101bc24a9d173dc5e68b8c0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys:
-  - PreferredInitialIndex
-  - spriteState
-  - scaleState
-  _serializedStateValues:
-  - 
-  - 
-  - 
-  forcePreferredIndexOnDrop: 0
-  Labels: []
-  changeSprite: 0
-  changeScale: 0
-  currentSlot: {fileID: 0}
 --- !u!61 &2124239053
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4368,6 +4823,45 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 3.74, y: 0.24}
+--- !u!114 &2124239054
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2124239049}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4ee5b3251fc81b4e93cac1a1debbfca, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences:
+  - {fileID: 21300000, guid: 4c7a44e5aa8b09041b459696ff12596f, type: 3}
+  - {fileID: 21300000, guid: e527b0a43d3d74e4b980b0b13f109b83, type: 3}
+  _serializedStateKeys:
+  - _sprite
+  - _localPositionDisplacement
+  - _localScale
+  - _zRotation
+  - _activateOnSelect
+  - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
+  _serializedStateValues:
+  - '{"SelectedValue":0,"UnselectedValue":1}'
+  - 
+  - 
+  - 
+  - '[]'
+  - '[]'
+  - '[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":true,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.283742,"y":2.95745,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}]'
+  - '[]'
+  _changeSprite: 0
+  _changeLocalPosition: 0
+  _changeLocalScale: 0
+  _changeZRotation: 0
+  Labels: []
+  _activateOnSelect: []
+  _deactivateOnSelect: []
 --- !u!1001 &2129089458
 Prefab:
   m_ObjectHideFlags: 0
@@ -4410,7 +4904,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013199018780, guid: a88ddfbdccb255f4a82048f2b92e9116, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}

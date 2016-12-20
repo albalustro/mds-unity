@@ -35,7 +35,7 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         Vector3 destination = _startPosition;
         destination.y = -_currentItemIndex;
 
-        LeanTween.moveLocal(gameObject, destination, 0.3f).setEase(LeanTweenType.easeInOutCubic);
+        LeanTween.moveLocal(base.gameObject, destination, 0.3f).setEase(LeanTweenType.easeInOutCubic);
     }
 
     public string GetCurrentValue()
@@ -93,6 +93,11 @@ public class CarrousselItem : MDSBehaviour, IValidatable
             return result;
         }
         return null;
+    }
+
+    public GameObject GetGameObject()
+    {
+        return gameObject;
     }
 
     #endregion

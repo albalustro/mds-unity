@@ -9,174 +9,183 @@ using System.Linq;
 
 namespace MDS.Gameplay.DragDrop
 {
-    [RequireComponent(typeof(BoxCollider2D))]
-    public class DropGroupSlot : MDSBehaviour, IValidatable
-    {
+	[RequireComponent(typeof(BoxCollider2D))]
+	public class DropGroupSlot : MDSBehaviour, IValidatable
+	{
 
-        [SerializeField]
-        private bool _changeSprite;
+		[SerializeField]
+		private bool _changeSprite;
 
-        [SerializeField, InspectorShowIf("_changeSprite")]
-        private SlotState<Sprite> _sprite;
-
-
-        [SerializeField]
-        private List<string> _acceptableLabels;
+		[SerializeField, InspectorShowIf("_changeSprite")]
+		private SlotState<Sprite> _sprite;
 
 
-        private SpriteRenderer _spriteRenderer;
+		[SerializeField]
+		private List<string> _acceptableLabels;
 
-        private Draggable _draggableReference;
 
-        [HideInInspector]
-        public Draggable draggableReference
-        {
-            get
-            {
-                return _draggableReference;
-            }
-            set
-            {
-                _draggableReference = value;
-                if (_changeSprite)
-                {
-                    if(_draggableReference == null)
-                        _spriteRenderer.sprite = _sprite.EmptyValue;
-                    else
-                        _spriteRenderer.sprite = _sprite.FilledValue;
-                }
-            }
-        }
+		private SpriteRenderer _spriteRenderer;
 
-        [HideInInspector]
-        public bool IsInitialSlot { get; internal set; }
+		private Draggable _draggableReference;
 
-        [HideInInspector]
-        public bool IsInstatiableInitialSlot { get; internal set; }
+		[HideInInspector]
+		public Draggable draggableReference
+		{
+			get
+			{
+				return _draggableReference;
+			}
+			set
+			{
+				_draggableReference = value;
+				if (_changeSprite)
+				{
+					if(_draggableReference == null)
+						_spriteRenderer.sprite = _sprite.EmptyValue;
+					else
+						_spriteRenderer.sprite = _sprite.FilledValue;
+				}
+			}
+		}
+
+		[HideInInspector]
+		public bool IsInitialSlot { get; internal set; }
+
+		[HideInInspector]
+		public bool IsInstatiableInitialSlot { get; internal set; }
 
 		public bool notNullIfNumeric;
 		public int numericMultiplier;
 
-        protected override void Awake()
-        {
-            base.Awake();
+		protected override void Awake()
+		{
+			base.Awake();
 
-            gameObject.layer = LayerMask.NameToLayer("GroupSlot");
+			base.gameObject.layer = LayerMask.NameToLayer("GroupSlot");
 
-            GetComponent<BoxCollider2D>().isTrigger = true;
+			GetComponent<BoxCollider2D>().isTrigger = true;
 
-            if(GetComponentInParent<InitialDropGroupArea>() != null)
-                IsInitialSlot = true;
-            else
-                IsInitialSlot = false;
+			if(GetComponentInParent<InitialDropGroupArea>() != null)
+				IsInitialSlot = true;
+			else
+				IsInitialSlot = false;
 
-            if(GetComponentInParent<InitialIntanceDropGroupArea>() != null)
-                IsInstatiableInitialSlot = true;
-            else
-                IsInstatiableInitialSlot = false;
+			if(GetComponentInParent<InitialIntanceDropGroupArea>() != null)
+				IsInstatiableInitialSlot = true;
+			else
+				IsInstatiableInitialSlot = false;
 
-            if (_changeSprite)
-            {
-                _spriteRenderer = GetComponent<SpriteRenderer>();
-                if(_spriteRenderer == null)
-                {
-                    _spriteRenderer = gameObject.AddComponent<SpriteRenderer>();
-                    _spriteRenderer.sortingLayerName = "DropGroup";
-                    _spriteRenderer.sortingOrder = 1;
-                }
-                _spriteRenderer.sprite = _sprite.EmptyValue;
-            }
-        }
+			if (_changeSprite)
+			{
+				_spriteRenderer = GetComponent<SpriteRenderer>();
+				if(_spriteRenderer == null)
+				{
+                    _spriteRenderer = base.gameObject.AddComponent<SpriteRenderer>();
+					_spriteRenderer.sortingLayerName = "DropGroup";
+					_spriteRenderer.sortingOrder = 1;
+				}
+				_spriteRenderer.sprite = _sprite.EmptyValue;
+			}
+		}
 
-        public bool IsTaken
-        {
-            get
-            {
-                return draggableReference != null;
-            }
-        }
+		public bool IsTaken
+		{
+			get
+			{
+				return draggableReference != null;
+			}
+		}
 
-        public bool IsNotTakenAndHasAcceptableLabel(List<string> labels)
-        {
-            if(IsTaken)
-                return false;
+		public bool IsNotTakenAndHasAcceptableLabel(List<string> labels)
+		{
+			if(IsTaken)
+				return false;
 
-            if(!HasLabelsToBeValidated())
-                return true;
+			if(!HasLabelsToBeValidated())
+				return true;
 
-            if(labels.Any(l => IsAcceptableLabel(l)))
-                return true;
+			if(labels.Any(l => IsAcceptableLabel(l)))
+				return true;
 
-            return false;
+			return false;
 
-        }
+		}
 
-        internal bool HasLabelsToBeValidated()
-        {
-            return (_acceptableLabels != null && _acceptableLabels.Count > 0);
-        }
+		internal bool HasLabelsToBeValidated()
+		{
+			return (_acceptableLabels != null && _acceptableLabels.Count > 0);
+		}
 
-        public bool IsAcceptableLabel(string label)
-        {
-            if(!HasLabelsToBeValidated())
-                return true;
+		public bool IsAcceptableLabel(string label)
+		{
+			if(!HasLabelsToBeValidated())
+				return true;
 
-            return _acceptableLabels.Contains(label);
-        }
+			return _acceptableLabels.Contains(label);
+		}
 
-        #region IValidatable
+		#region IValidatable
 
-        public bool ReadyToValidate()
-        {
-            return IsTaken;
-        }
+		public bool ReadyToValidate()
+		{
+			return IsTaken;
+		}
 
-        public bool Validate(string acceptableAnswer)
-        {
-            if(!ReadyToValidate())
-                return false;
+		public bool Validate(string acceptableAnswer)
+		{
+			if(!ReadyToValidate())
+				return false;
 
-            return draggableReference.Labels.Contains(acceptableAnswer);
-        }
+			if(acceptableAnswer.Equals("*"))
+				return true;
 
-        public int? GetNumericValue()
-        {
-            int result;
-            if(IsTaken && int.TryParse(draggableReference.Labels[0], out result))
-            {
+			return draggableReference.Labels.Contains(acceptableAnswer);
+		}
+
+		public int? GetNumericValue()
+		{
+			int result;
+			if(IsTaken && int.TryParse(draggableReference.Labels[0], out result))
+			{
 				if (numericMultiplier != 0) {
 					result *= numericMultiplier;
 				}
-                return result;
-            }
-            return null;
+				return result;
+			}
+			return null;
+		}
+
+        public GameObject GetGameObject()
+        {
+            return gameObject;
         }
+
         #endregion
 
         #region Unity Editor Only
 
 #if UNITY_EDITOR
         Color editorBoundColor = Color.yellow;
-        void OnDrawGizmos()
-        {
-            BoxCollider2D box = GetComponent<BoxCollider2D>();
-            if(box != null)
-            {
-                Gizmos.color = editorBoundColor;
-                Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
-            }
-        }
+		void OnDrawGizmos()
+		{
+			BoxCollider2D box = GetComponent<BoxCollider2D>();
+			if(box != null)
+			{
+				Gizmos.color = editorBoundColor;
+				Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
+			}
+		}
 
-        
+		
 #endif
 
-        #endregion
-    }
+		#endregion
+	}
 
-    public class SlotState<T>
-    {
-        public T FilledValue { get; set; }
-        public T EmptyValue { get; set; }
-    }
+	public class SlotState<T>
+	{
+		public T FilledValue { get; set; }
+		public T EmptyValue { get; set; }
+	}
 
 }
