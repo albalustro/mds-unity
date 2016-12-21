@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using FullInspector;
 using MDS.Core.Interfaces;
+using MDS.Core;
 
 
 public class ContinuousMove : MDSBehaviour
@@ -21,35 +22,48 @@ public class ContinuousMove : MDSBehaviour
 
 	private Vector2 m_startPosition;
 
-	[SerializeField]
-	private bool m_destroyOnMaxDistance;
+
 
 	[SerializeField]
-	[InspectorShowIf("m_changeHeight")]
 	private bool m_changeHeight;
 
-	[SerializeField]
-	private float m_YOffSet;
+	[FullInspector.InspectorShowIf("m_changeHeight")]
+	public float m_YOffSet;
 
 	[SerializeField]
 	private bool m_changeSpeed;
 
 	[SerializeField]
-	private float m_speedVariation;
-
-	public bool m_freezeOnMaxDistance;
 	private bool m_isFreezed = false;
 
+	[FullInspector.InspectorShowIf("m_changeSpeed")]
+	public float m_speedVariation;
+
+	[FullInspector.InspectorDivider()]
+
+	[SerializeField]
+	private bool m_destroyOnMaxDistance;
+
+	public bool m_freezeOnMaxDistance;
+
+	[SerializeField]
+	private bool m_travelLimit;
+
+	[FullInspector.InspectorShowIf("m_travelLimit")]
+	public int m_travel;
 
 
 
 	public IAction[] m_onMaxDistanceAction;
 
-
 	void Start()
 	{
 		m_startPosition = transform.position;
 		m_currentSpeed = _movingSpeed;
+
+		if (m_travelLimit) {
+			ResetPosition ();
+		}
 	}
 
     // Update is called once per frame
@@ -77,6 +91,12 @@ public class ContinuousMove : MDSBehaviour
 	{
 
 		ExecuteActions(m_onMaxDistanceAction);
+		--m_travel;
+
+		if (m_travel < 0) {
+			m_isFreezed = true;
+			Challenge.GetActiveInstance().ProcessResult();
+		}
 
 		if (m_freezeOnMaxDistance) {
 			m_isFreezed = true;
@@ -103,4 +123,12 @@ public class ContinuousMove : MDSBehaviour
         enabled = false;
     }
 
+	public void Freeze(int n)
+	{
+		if (n == 0) {
+			m_isFreezed = true;
+		} else {
+			m_isFreezed = false;
+		}
+	}
 }
