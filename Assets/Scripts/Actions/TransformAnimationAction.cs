@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FullInspector;
 using MDS.Actions;
+using MDS.Gameplay.DragDrop;
 using UnityEngine;
 
 public class TransformAnimationAction : BaseAction
@@ -20,16 +22,22 @@ public class TransformAnimationAction : BaseAction
     private bool IsScaleAnim { get { return animationType == TransformAnimationType.Scale; } }
     private bool IsRotationAnim { get { return animationType == TransformAnimationType.Rotation; } }
 
-    [FullInspector.InspectorHideIf("useMemorizedGameObjectAsTarget")]
+    [InspectorHideIf("Hide_selfTarget")]
     public bool selfTarget;
+    private bool Hide_selfTarget { get { return useMemorizedGameObjectAsTarget || _useSlotContentAsTarget != null; } }
 
-    [FullInspector.InspectorHideIf("selfTarget")]
+    [InspectorHideIf("Hide_useMemorizedGameObjectAsTarget")]
     public bool useMemorizedGameObjectAsTarget;
+    private bool Hide_useMemorizedGameObjectAsTarget { get { return selfTarget || _useSlotContentAsTarget != null; } }
 
-    [FullInspector.InspectorHideIf("HideTarget")]
+
+    [SerializeField, InspectorHideIf("Hide_useSlotContentAsTarget")]
+    private DropGroupSlot _useSlotContentAsTarget;
+    private bool Hide_useSlotContentAsTarget { get { return selfTarget || useMemorizedGameObjectAsTarget; } }
+
+    [InspectorHideIf("HideTarget")]
     public GameObject target;
-
-    private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget; } }
+    private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || _useSlotContentAsTarget!=null; } }
 
     public float duration;
 
@@ -79,6 +87,15 @@ public class TransformAnimationAction : BaseAction
             }
         }
 
+        if (_useSlotContentAsTarget!=null)
+        {
+            target = _useSlotContentAsTarget.draggableReference.gameObject;
+            if (target==null)
+            {
+                Debug.LogError("Tentando animar conteudo de slot sem haver um..");
+                yield break;
+            }
+        }
 
         // ALTERANDO O DESTINO DA ANIMACAO
         Transform tmp = null;
@@ -98,7 +115,7 @@ public class TransformAnimationAction : BaseAction
 
             if(useThisTransformAsDestination != null)
             {
-                destination = useThisTransformAsDestination.position;
+                tmp = useThisTransformAsDestination;
             }
 
             switch(animationType)

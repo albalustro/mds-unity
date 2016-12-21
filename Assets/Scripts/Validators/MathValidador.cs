@@ -37,13 +37,23 @@ public class MathValidador : MDSBehaviour, IValidator
 	[InspectorTooltip("Use esse tipo de comparacao quando precisar que TODOS os elementos sejam diferentes uns dos outros")]
 	public bool m_multiComparison;
 
+    [InspectorShowIf("m_multiComparison"), InspectorComment("Para multicomparação ou todos devem ter o mesmo valor ou todos devem ter valores diferentes uns dos outros, não se repetindo nenhum valor")]
+    public bool _allShouldHasSameValue;
+
 	[InspectorShowIf("m_multiComparison")]
 	public IValidatable[] m_validatables;
 
+    [InspectorShowIf("m_multiComparison")]
+    public bool AlwaysReadyToValidate { get; set; }
 
 
-	public bool ReadyToValidate()
+
+    public bool ReadyToValidate()
 	{
+        if(AlwaysReadyToValidate)
+            return true;
+
+
 		bool ret = false;
 
 		if (m_multiComparison) {
@@ -72,18 +82,33 @@ public class MathValidador : MDSBehaviour, IValidator
 
 		if(m_multiComparison)
 		{
+            IValidatable[] tmp = m_validatables;
 
-			int quant = 0;
 
-			foreach(var item in m_validatables)
-			{
-				quant = m_validatables.Where(v => v.GetNumericValue() == item.GetNumericValue()).Count();
-				if(quant > 1)
-				{
-					result = ValidatorResult.Error;
-					return result;
-				}
-			}
+            if(!_allShouldHasSameValue)
+            {
+                int quant = 0;
+                foreach(var item in tmp)
+                {
+                    quant = tmp.Where(v => v.GetNumericValue() == item.GetNumericValue()).Count();
+                    if(quant > 1)
+                    {
+                        result = ValidatorResult.Error;
+                        return result;
+                    }
+                }
+            }
+            else // all should be EQUAL
+            {
+                if(!tmp[0].GetNumericValue().HasValue)
+                    return ValidatorResult.Error;
+
+                int refValue = tmp[0].GetNumericValue().Value;
+                if (tmp.Any(v=> !v.GetNumericValue().HasValue ||  v.GetNumericValue().Value != refValue))
+                {
+                    return ValidatorResult.Error;
+                }
+            }
 
 			result = ValidatorResult.Victory;
 

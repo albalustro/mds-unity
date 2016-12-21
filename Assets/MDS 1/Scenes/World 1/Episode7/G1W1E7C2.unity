@@ -335,10 +335,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 0
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
   - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  - 
+  - 
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - placa
@@ -375,13 +383,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 2108281810}
+  - {fileID: 1753173818}
+  - {fileID: 1273084753}
+  - {fileID: 1216557403}
+  - {fileID: 1273084753}
+  - {fileID: 888272705}
+  - {fileID: 1273084753}
   - {fileID: 2055125873}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[],"onErrorActions":[],"onVictoryActions":[{"m_anim":1,"m_animatorAction":"trigger","m_parameter":"RightAnswer","m_value":0,"$type":"MDS.Actions.SetAnimatorParameterAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":1,"_draggableTarget":null,"_dropArea":2,"_slot":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":3,"_draggableTarget":null,"_dropArea":4,"_slot":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":5,"_draggableTarget":null,"_dropArea":6,"_slot":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"m_anim":7,"m_animatorAction":"Trigger","m_parameter":"RightAnswer","m_value":0,"m_boolValue":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetAnimatorParameterAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &294732251
 Transform:
@@ -630,10 +644,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 1
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
   - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  - 
+  - 
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - trapezio
@@ -833,8 +855,17 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 2108281810}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.3.AbstractTypeEditor._dropArea.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 294732250}
   - _keys: []
     _values: []
@@ -1077,10 +1108,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 3
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
   - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  - 
+  - 
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -1469,10 +1508,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 4
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
   - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  - 
+  - 
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bola
@@ -1480,6 +1527,106 @@ MonoBehaviour:
   changeScale: 1
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
+--- !u!1001 &1130271743
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 13
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1216557402
 Prefab:
   m_ObjectHideFlags: 0
@@ -1819,8 +1966,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: 5e204c046b26e914aa29d6d1c9bba0b2, type: 3}
   upSprite: {fileID: 21300000, guid: 105c017062d48ac48967f0897a4d227a, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -2331,10 +2480,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 2
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
   - '{"releasedValue":1.0,"draggingValue":1.3,"releasedFinalPositionValue":1.3}'
+  - 
+  - 
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo

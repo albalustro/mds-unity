@@ -14,8 +14,11 @@ namespace MDS.Actions
         public override IEnumerator Execute()
         {
             yield return base.Execute();
-            dropArea.ResetGroup();
-            initialGroup.ResetInitialInstanceGroup();
+            if (dropArea!=null)
+                dropArea.ResetGroup();
+
+            if (initialGroup!=null)
+                initialGroup.ResetInitialInstanceGroup();
         }
     }
 }

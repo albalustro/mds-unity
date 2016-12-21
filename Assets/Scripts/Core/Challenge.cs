@@ -84,7 +84,7 @@ namespace MDS.Core
                     item.OnValidateAnswer += ProcessResult;
                 }
             }
-
+            
             ExecuteActions(_actions.onStartActions);
 
         }

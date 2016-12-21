@@ -28,6 +28,19 @@ namespace MDS.Actions
             public string slug;
         }
 
+        public class slugSelectorComparer : IEqualityComparer<slugSelector>
+        {
+            public bool Equals(slugSelector x, slugSelector y)
+            {
+                return x.slug.Equals(y.slug);
+            }
+
+            public int GetHashCode(slugSelector obj)
+            {
+                return obj.slug.GetHashCode();
+            }
+        }
+
         [InspectorButton, InspectorOrder(0)]
         public void GetSlugs()
         {
@@ -44,7 +57,10 @@ namespace MDS.Actions
             string challenge = sceneName.Substring(7, 1);
 
             sceneSlugs = list.dialogueList.Where(i => i.episode == episode && i.minigame == challenge)
-                              .Select((s) => new slugSelector() { slug = s.slug }).ToList();
+                .Select((s) => new slugSelector() { slug = s.slug })
+                .Distinct(new slugSelectorComparer())
+                .ToList();
+            
 
         }
 
@@ -61,6 +77,8 @@ namespace MDS.Actions
             }
 
             slugs = slugList.ToArray();
+
+            sceneSlugs = null;
         }
 
 

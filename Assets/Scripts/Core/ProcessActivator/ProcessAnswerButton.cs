@@ -76,7 +76,8 @@ namespace MDS.Core.ProcessActivator
 
         public void Update()
         {
-            if(_validador == null)
+            //TODO: ficar verificando o validator atual é bem ruim.. preciso providenciar um modo mais performatico de fazer isso
+            //if(_validador == null)
                 _validador = Challenge.GetCurrentValidador();
 
             if(_validador.ReadyToValidate())

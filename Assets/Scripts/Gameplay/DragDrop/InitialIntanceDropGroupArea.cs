@@ -103,10 +103,13 @@ namespace MDS.Gameplay.DragDrop
                 newDraggable = Instantiate(draggable);
             }
 
-			newDraggable.OnAfterDrop.RemoveListener(DraggableAfterDropHandler);
+            newDraggable.name = draggable.name;
+            draggable.OnAfterDrop.RemoveAllListeners();
+            newDraggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
 			newDraggable.GetComponent<Collider2D> ().enabled = true;
 
-            newDraggable.transform.SetParent(dropedItens);
+            if (dropedItens!=null)
+                newDraggable.transform.SetParent(dropedItens);
 
 			// o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
 			newDraggable.currentSlot = originalSlot;
