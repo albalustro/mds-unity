@@ -4,6 +4,8 @@ using System.Collections.Generic;
 using MDS.Core.Interfaces;
 using System;
 using FullInspector;
+using UnityEngine.Events;
+
 
 
 namespace MDS.Actions{
@@ -11,11 +13,14 @@ namespace MDS.Actions{
 	public class SetAnimatorParameterAction : BaseAction
 	{
 
+		public UnityEvent<Animator> CallFunctionOnAnimatedObject;
+
 		public enum AnimatorParameterAction
 		{
 			Trigger,
 			Integer,
-			Bool
+			Bool, 
+			None
 		}
 
 		[SerializeField] private Animator m_anim;
@@ -29,19 +34,20 @@ namespace MDS.Actions{
 		{
             yield return base.Execute();
 
-
-            switch(m_animatorAction) {
+			if (m_animatorAction != AnimatorParameterAction.None) {
+				switch (m_animatorAction) {
 				
-			case AnimatorParameterAction.Trigger:
-				m_anim.SetTrigger (m_parameter);
-				break;
+				case AnimatorParameterAction.Trigger:
+					m_anim.SetTrigger (m_parameter);
+					break;
 
-			case AnimatorParameterAction.Integer:
-				m_anim.SetInteger (m_parameter, m_value);
-				break;
-			case AnimatorParameterAction.Bool:
-				m_anim.SetBool (m_parameter, m_boolValue);
-				break;
+				case AnimatorParameterAction.Integer:
+					m_anim.SetInteger (m_parameter, m_value);
+					break;
+				case AnimatorParameterAction.Bool:
+					m_anim.SetBool (m_parameter, m_boolValue);
+					break;
+				}
 			}
 
 		}
