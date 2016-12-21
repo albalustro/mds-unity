@@ -10,6 +10,9 @@ namespace FullInspector.Rotorz.ReorderableList {
     /// </summary>
     public interface IReorderableListAdaptor {
 
+        void Copy(int index);
+        void Paste();
+
         /// <summary>
         /// Gets count of elements in list.
         /// </summary>

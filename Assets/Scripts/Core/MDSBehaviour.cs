@@ -7,6 +7,11 @@ using MDS.Core.Interfaces;
 public class MDSBehaviour : BaseBehavior  
 {
 
+    public static void ExternalExecuteActions(MDSBehaviour actionExecutioner, IAction[] actions)
+    {
+        actionExecutioner.ExecuteActions(actions);
+    }
+
     protected void ExecuteActions(IAction[] a)
     {
         if(a != null)
