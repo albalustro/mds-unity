@@ -43,6 +43,15 @@ namespace FullInspector.Internal {
         public virtual bool CanRemove(int index) {
             return true;
         }
+
+
+        public void Copy(int index)
+        {
+
+        }
+
+        public void Paste() { }
+
         public void Add() {
             T item = DefaultItemGenerator();
             List.Add(item);

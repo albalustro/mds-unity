@@ -1106,6 +1106,9 @@ namespace FullInspector.Rotorz.ReorderableList {
 
         #region Context Menu
 
+        protected static readonly GUIContent commandCOPY = new GUIContent("COPIAR");
+        protected static readonly GUIContent commandPASTE = new GUIContent("COLAR");
+
         /// <summary>
         /// Content for "Move to Top" command.
         /// </summary>
@@ -1182,6 +1185,12 @@ namespace FullInspector.Rotorz.ReorderableList {
         /// <param name="adaptor">Reorderable list adaptor.</param>
         protected virtual void AddItemsToMenu(GenericMenu menu, int itemIndex, IReorderableListAdaptor adaptor) {
             if ((flags & ReorderableListFlags.DisableReordering) == 0) {
+
+
+                menu.AddItem(commandCOPY, false, defaultContextHandler, commandCOPY);
+                menu.AddItem(commandPASTE, false, defaultContextHandler, commandPASTE);
+                menu.AddSeparator("");
+
                 if (itemIndex > 0)
                     menu.AddItem(commandMoveToTop, false, defaultContextHandler, commandMoveToTop);
                 else
@@ -1245,6 +1254,13 @@ namespace FullInspector.Rotorz.ReorderableList {
         /// <returns>A value of <c>true</c> if command was known; otherwise /c>.</returns>
         protected virtual bool HandleCommand(string commandName, int itemIndex, IReorderableListAdaptor adaptor) {
             switch (commandName) {
+                case "COPIAR":
+                    CopiarItem(adaptor, itemIndex);
+                    return true;
+                case "COLAR":
+                    PasteItem(adaptor);
+                    return true;
+
                 case "Move to Top":
                     MoveItem(adaptor, itemIndex, 0);
                     return true;
@@ -1357,6 +1373,19 @@ namespace FullInspector.Rotorz.ReorderableList {
 
             return totalHeight;
         }
+
+
+        protected void CopiarItem(IReorderableListAdaptor adaptor, int index)
+        {
+            adaptor.Copy(index);
+        }
+
+        protected void PasteItem(IReorderableListAdaptor adaptor)
+        {
+            adaptor.Paste();
+            GUI.changed = true;
+        }
+
 
         /// <summary>
         /// Move item from source index to destination index.

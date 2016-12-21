@@ -6,6 +6,9 @@ namespace MDS.Core.Interfaces
 {
 
     public interface IAction
+#if UNITY_EDITOR
+        : ICloneable
+#endif
     {
 
         bool waitFinish { get; set; }

@@ -24,16 +24,16 @@ public class TransformAnimationAction : BaseAction
 
     [InspectorHideIf("Hide_selfTarget")]
     public bool selfTarget;
-    private bool Hide_selfTarget { get { return useMemorizedGameObjectAsTarget || _useSlotContentAsTarget != null; } }
+    private bool Hide_selfTarget { get { return useMemorizedGameObjectAsTarget || _useSlotContentAsTarget != null || target != null; } }
 
     [InspectorHideIf("Hide_useMemorizedGameObjectAsTarget")]
     public bool useMemorizedGameObjectAsTarget;
-    private bool Hide_useMemorizedGameObjectAsTarget { get { return selfTarget || _useSlotContentAsTarget != null; } }
+    private bool Hide_useMemorizedGameObjectAsTarget { get { return selfTarget || _useSlotContentAsTarget != null || target != null; } }
 
 
     [SerializeField, InspectorHideIf("Hide_useSlotContentAsTarget")]
     private DropGroupSlot _useSlotContentAsTarget;
-    private bool Hide_useSlotContentAsTarget { get { return selfTarget || useMemorizedGameObjectAsTarget; } }
+    private bool Hide_useSlotContentAsTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || target!=null; } }
 
     [InspectorHideIf("HideTarget")]
     public GameObject target;
