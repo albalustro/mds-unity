@@ -12,6 +12,7 @@ namespace FullInspector.Internal {
         public delegate float ItemHeight(T item, fiGraphMetadataChild metadata);
         public delegate T ItemDrawer(Rect position, T item, fiGraphMetadataChild metadata);
 
+
         /// <summary>
         /// Returns the height of the given element.
         /// </summary>
@@ -76,6 +77,10 @@ namespace FullInspector.Internal {
         public virtual bool CanRemove(int index) {
             return true;
         }
+
+        public void Copy(int index) { }
+        public void Paste() { }
+
 
         public void Add(T item) {
             _collection.Add(item);

@@ -32,6 +32,9 @@ namespace FullInspector.Internal {
             return _backingAdaptor.CanRemove(MapIndex(index));
         }
 
+        public void Copy(int index) { }
+        public void Paste() { }
+
         public void Add() {
             _backingAdaptor.Add();
         }

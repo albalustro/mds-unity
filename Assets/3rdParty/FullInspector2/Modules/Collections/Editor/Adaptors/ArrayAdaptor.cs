@@ -16,9 +16,34 @@ namespace FullInspector.Internal {
         private fiGraphMetadata _metadata;
         private T[] _array;
 
+        private static T _copyBuffer;
+
         public T[] StoredArray {
             get {
                 return _array;
+            }
+        }
+
+        public void Copy(int index)
+        {
+            _copyBuffer = _array[index];
+            if(_copyBuffer != null && typeof(T).IsImplementationOf(typeof(ICloneable)))
+            {
+                _copyBuffer = (T)((_array[index]) as ICloneable).Clone();
+            }
+        }
+
+        public void Paste()
+        {
+            if(_copyBuffer == null) return;
+  
+            Insert(0);
+
+            _array[0] = _copyBuffer;
+
+            if(_copyBuffer != null && typeof(T).IsImplementationOf(typeof(ICloneable)))
+            {
+                _copyBuffer = (T)(_copyBuffer as ICloneable).Clone();
             }
         }
 
@@ -61,7 +86,14 @@ namespace FullInspector.Internal {
 
         public void Duplicate(int index) {
             T current = _array[index];
+
+            if(current != null && typeof(T).IsImplementationOf(typeof(ICloneable)))
+            {
+                current = (T)((_array[index]) as ICloneable).Clone();
+            }
+
             Insert(index);
+
             _array[index] = current;
         }
 

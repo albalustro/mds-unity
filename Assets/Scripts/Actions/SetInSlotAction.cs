@@ -64,18 +64,22 @@ namespace MDS.Actions
             if (useSlotContentAsTarget!=null)
             {
                 d = useSlotContentAsTarget.draggableReference;
-                if(d == null)
-                    _corotineHolder.GetComponent<MDSBehaviour>().LogError("useSlotContentAsTarget sem que o slot tenha um elemento Draggable ");
+//                if(d == null)
+//                    _corotineHolder.GetComponent<MDSBehaviour>().LogError("useSlotContentAsTarget sem que o slot tenha um elemento Draggable ");
             }
 
-            if (!HasSpecificSlot)
+
+            if(d != null)
             {
-                DropGroupSlot slot = null;
-                g.SetInSlot(d, ref slot);
-            }
-            else
-            {
-                DraggableUtilities.SetDraggableInSlot(d, _slot);
+                if(!HasSpecificSlot)
+                {
+                    DropGroupSlot slot = null;
+                    g.SetInSlot(d, ref slot);
+                }
+                else
+                {
+                    DraggableUtilities.SetDraggableInSlot(d, _slot);
+                }
             }
 
         }

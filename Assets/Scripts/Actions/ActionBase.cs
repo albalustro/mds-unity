@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FullInspector;
 using MDS.Core.Interfaces;
 using UnityEngine;
 
@@ -12,7 +13,7 @@ namespace MDS.Actions
     {
 
         public float delayBeforeExecution { get; set; }
-       
+
         public bool waitFinish { get; set; }
 
         protected MonoBehaviour _corotineHolder;
@@ -29,5 +30,16 @@ namespace MDS.Actions
             _corotineHolder = coroutineHolder;
         }
 
+#if UNITY_EDITOR
+        public IAction Clone()
+        {
+             return (IAction)this.MemberwiseClone(); 
+        }
+
+        object ICloneable.Clone()
+        {
+            return Clone();
+        }
+#endif
     }
 }
