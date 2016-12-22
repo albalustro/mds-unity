@@ -136,7 +136,7 @@ namespace MDS.Gameplay.DragDrop
 			if(!ReadyToValidate())
 				return false;
 
-			if(acceptableAnswer.Equals("*"))
+			if(string.IsNullOrEmpty(acceptableAnswer) || acceptableAnswer.Equals("*"))
 				return true;
 
 			return draggableReference.Labels.Contains(acceptableAnswer);
