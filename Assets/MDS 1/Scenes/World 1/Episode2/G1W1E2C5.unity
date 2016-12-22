@@ -121,17 +121,17 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 902962130}
   - {fileID: 1661048779}
-  - {fileID: 1618769854}
   - {fileID: 360495712}
   - {fileID: 2023850187}
   - {fileID: 360495715}
   - {fileID: 2023850185}
+  - {fileID: 1618769854}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"_conditionedDialogues":[{"_slot":1,"_labels":["correio"],"Dialogue":{"slugs":["banco"],"delayBeforeExecution":0.0,"waitFinish":false},"$type":"MDS.Actions.DialogConditions.SlotHasLabelCondition"},{"_slot":2,"_labels":["correio"],"Dialogue":{"slugs":["supermercado"],"delayBeforeExecution":0.0,"waitFinish":false},"$type":"MDS.Actions.DialogConditions.SlotHasLabelCondition"}],"HasFallback":false,"fallbackDialogue":{"slugs":[],"delayBeforeExecution":0.0,"waitFinish":false},"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.ConditionalDialogueAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":3,"duration":1.5,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":4,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"easeInOutBack","destroyOnComplete":false,"delayBeforeExecution":0.15,"waitFinish":true,"$type":"TransformAnimationAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":5,"_dropArea":null,"_slot":6,"delayBeforeExecution":0.15,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"delayBeforeExecution":0.2,"waitFinish":false,"$type":"InvokeValidation"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"_conditionedActions":[{"_slot":1,"_labels":["correio"],"Actions":[{"slugs":["banco"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":2,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":3,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":4,"_dropArea":null,"_slot":5,"delayBeforeExecution":0.5,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"delayBeforeExecution":0.0,"waitFinish":false,"$type":"InvokeValidation"}],"$type":"MDS.Actions.DialogConditions.SlotHasLabelCondition"},{"_slot":6,"_labels":["correio"],"Actions":[{"slugs":["supermercado"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"$type":"MDS.Actions.DialogConditions.SlotHasLabelCondition"}],"HasFallback":false,"_fallbackActions":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ConditionalAction"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &95057408
 Transform:
@@ -316,8 +316,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 146458680}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 764629704}
   - _keys: []
     _values: []
@@ -336,16 +339,13 @@ MonoBehaviour:
     _target: {fileID: 902962130}
   - _keys:
     - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor._conditionedDialogues.EditProperty.0.AbstractTypeEditor.Dialogue.EditProperty
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor._conditionedDialogues.EditProperty.1.AbstractTypeEditor.Dialogue.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor._conditionedActions.EditProperty.0.AbstractTypeEditor.Actions.EditProperty.2.AbstractTypeEditor.selfTarget.EditProperty
     - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
     _values:
     - _showDropdown: 1
       _serializedIsActive: 0
-    - _showDropdown: 1
-      _serializedIsActive: 0
-    - _showDropdown: 1
-      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
     - _showDropdown: 1
       _serializedIsActive: 0
     _target: {fileID: 95057407}
@@ -540,7 +540,7 @@ MonoBehaviour:
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":null}'
-  - 
+  - '{"releasedValue":1.0,"draggingValue":1.0,"releasedFinalPositionValue":0.6}'
   - 
   - '[]'
   - '[]'
@@ -549,7 +549,7 @@ MonoBehaviour:
   Labels:
   - correio
   changeSprite: 1
-  changeScale: 0
+  changeScale: 1
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!61 &360495716
