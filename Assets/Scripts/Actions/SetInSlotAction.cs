@@ -38,6 +38,9 @@ namespace MDS.Actions
         private DropGroupSlot _slot;
         private bool HasSpecificSlot { get { return _slot != null; } }
 
+		[SerializeField]
+		private bool m_makeDraggableChildrenOfSlot;
+
         public override IEnumerator Execute()
         {
             yield return base.Execute();
@@ -80,6 +83,10 @@ namespace MDS.Actions
                 {
                     DraggableUtilities.SetDraggableInSlot(d, _slot);
                 }
+
+				if (m_makeDraggableChildrenOfSlot) {
+					_draggableTarget.transform.SetParent (g.transform);
+				}
             }
 
         }

@@ -2,6 +2,8 @@
 using System.Collections;
 using MDS.Core.Interfaces;
 using System;
+using MDS.Gameplay.DragDrop;
+
 
 
 namespace MDS.Actions {
@@ -14,6 +16,7 @@ namespace MDS.Actions {
 
         [FullInspector.InspectorHideIf("selfTarget")]
 		[SerializeField] private GameObject[] m_target;
+		[SerializeField] private DropGroupSlot m_useDropSlotAsTarget;
 		[SerializeField] private bool m_fadeIn = false;
 		[SerializeField] private float m_fadeTime = 2;
 
@@ -26,6 +29,11 @@ namespace MDS.Actions {
 			if (selfTarget) {
 				m_target = new GameObject[1];
 				m_target [0] = _corotineHolder.gameObject;
+			}
+
+			if (m_useDropSlotAsTarget) {
+				m_target = new GameObject[1];
+				m_target[0] = m_useDropSlotAsTarget.draggableReference.gameObject;
 			}
 
 			for (int i = 0; i < m_target.Length; i++) {
