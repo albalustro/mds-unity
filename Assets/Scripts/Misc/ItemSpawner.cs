@@ -18,6 +18,7 @@ public class ItemSpawner : MDSBehaviour {
 	private GameObject[] _spawnPrefabs;
 	[SerializeField]
 	private Transform[] _instantiatePositionRef;
+	private ContinuousMove currentMovingObj;
 
 	public IEnumerator Start()
 	{
@@ -36,6 +37,13 @@ public class ItemSpawner : MDSBehaviour {
 			}
 			var obj = Instantiate(_spawnPrefabs.GetRandom());
 			obj.transform.position = _instantiatePositionRef.GetRandom().position;
+			currentMovingObj = obj.GetComponent<ContinuousMove> ();
 		}
+	}
+
+	void OnDisable()
+	{
+		if (currentMovingObj != null)
+			currentMovingObj.enabled = false;
 	}
 }

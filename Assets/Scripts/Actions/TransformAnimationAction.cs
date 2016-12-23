@@ -52,19 +52,12 @@ public class TransformAnimationAction : BaseAction
     [FullInspector.InspectorHideIf("Hide_useThisTransformAsDestination")]
     public Transform useThisTransformAsDestination;
 
-	[FullInspector.InspectorHideIf("HideDestination"), InspectorTooltip("Incrementa em X, Y ou Z a partir da posição atual")]
-	public bool increment;
-	[FullInspector.InspectorShowIf("increment"), InspectorTooltip("Vetor a ser incrementado na posição atual")]
-	public Vector3 fator;
-
     [FullInspector.InspectorHideIf("HideDestination")]
     public Vector3 destination;
     private bool HideDestination{ get { return useSelfPositionAsDestination || useMemorizedGOAsDestination || useThisTransformAsDestination!=null; } }
     private bool Hide_useSelfPositionAsDestination { get { return useMemorizedGOAsDestination || useThisTransformAsDestination != null; } }
     private bool Hide_useMemorizedGOAsDestination { get { return useSelfPositionAsDestination  || useThisTransformAsDestination != null; } }
     private bool Hide_useThisTransformAsDestination { get { return useSelfPositionAsDestination || useMemorizedGOAsDestination; } }
-
-
 
     public LeanTweenType easeType;
 
@@ -147,19 +140,16 @@ public class TransformAnimationAction : BaseAction
         {
 			case TransformAnimationType.Position:
 				if (local)
-					destination = target.transform.position + destination;
-				if (increment)
-				{
-					move = LeanTween.move(target, target.transform.position + fator, duration);
-				}
+					move = LeanTween.move(target, target.transform.position + destination, duration);
 				else
 					move = LeanTween.move(target, destination, duration);
                 break;
 
             case TransformAnimationType.Rotation:
                 if(local)
-                    destination = target.transform.rotation.eulerAngles + destination;
-				move = LeanTween.rotate(target, destination, duration);
+					move = LeanTween.rotate(target, target.transform.rotation.eulerAngles + destination, duration);
+				else
+					move = LeanTween.rotate(target, destination, duration);
                 break;
 
             case TransformAnimationType.Scale:

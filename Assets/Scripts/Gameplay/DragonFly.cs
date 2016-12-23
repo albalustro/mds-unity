@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DragonFly : MonoBehaviour {
+public class DragonFly : MDSBehaviour {
 
 	[SerializeField]
 	private ScrollBG _scrollBG;

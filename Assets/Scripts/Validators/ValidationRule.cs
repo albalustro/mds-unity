@@ -27,7 +27,11 @@ namespace MDS.Validators
         [InspectorShowIf("OverrideGroupParameters")]
         public int? SpecificAmount { get; set; }
 
-        [InspectorOrder(5)]
+		[InspectorOrder(5)]
+		[InspectorShowIf("OverrideGroupParameters")]
+		public bool isGeneric { get; set; }
+
+        [InspectorOrder(6)]
         [InspectorHideIf("IsRuleGroup")]
         public string CorrectAnswer;
 
@@ -41,6 +45,7 @@ namespace MDS.Validators
                 group.OperationLogic = OperationLogic;
                 group.SpecificAmount = SpecificAmount;
                 group.AcceptEmptyAsCorrectAnswer = AcceptEmptyAsCorrectAnswer;
+				group.isGeneric = isGeneric;
             }
 
             if(IsRuleGroup())
@@ -52,6 +57,7 @@ namespace MDS.Validators
                     group.OperationLogic = rule.OperationLogic;
                     group.SpecificAmount = rule.SpecificAmount;
                     group.AcceptEmptyAsCorrectAnswer = rule.AcceptEmptyAsCorrectAnswer;
+					group.isGeneric = rule.isGeneric;
                 }
 
             }

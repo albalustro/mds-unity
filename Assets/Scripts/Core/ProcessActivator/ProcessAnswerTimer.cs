@@ -32,8 +32,8 @@ namespace MDS.Core.ProcessActivator
             if(_countDown)
                 _currentCounter = _seconds;
 
-
-            OnTick.Invoke(_currentCounter);
+			if (OnTick != null)
+	            OnTick.Invoke(_currentCounter);
 
             if(_startOnStart)
                 Enable();
