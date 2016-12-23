@@ -12,10 +12,9 @@ public class TransformAnimationAction : BaseAction
     {
         Position,
         Scale,
-        Rotation
+        Rotation,
     }
-
-
+		
     public TransformAnimationType animationType;
 
     private bool IsPositionAnim { get { return animationType == TransformAnimationType.Position; } }
@@ -52,6 +51,11 @@ public class TransformAnimationAction : BaseAction
 
     [FullInspector.InspectorHideIf("Hide_useThisTransformAsDestination")]
     public Transform useThisTransformAsDestination;
+
+	[FullInspector.InspectorHideIf("HideDestination"), InspectorTooltip("Incrementa em X, Y ou Z a partir da posição atual")]
+	public bool increment;
+	[FullInspector.InspectorShowIf("increment"), InspectorTooltip("Vetor a ser incrementado na posição atual")]
+	public Vector3 fator;
 
     [FullInspector.InspectorHideIf("HideDestination")]
     public Vector3 destination;
@@ -137,26 +141,30 @@ public class TransformAnimationAction : BaseAction
 
         _animationComplete = false;
 
-        LTDescr move = null;
+		LTDescr move = null;
 
         switch(animationType)
         {
-            case TransformAnimationType.Position:
-                if(local)
-                    destination = target.transform.position + destination;
-                move = LeanTween.move(target, destination, duration);
+			case TransformAnimationType.Position:
+				if (local)
+					destination = target.transform.position + destination;
+				if (increment)
+				{
+					move = LeanTween.move(target, target.transform.position + fator, duration);
+				}
+				else
+					move = LeanTween.move(target, destination, duration);
                 break;
 
             case TransformAnimationType.Rotation:
                 if(local)
                     destination = target.transform.rotation.eulerAngles + destination;
-                move = LeanTween.rotate(target, destination, duration);
+				move = LeanTween.rotate(target, destination, duration);
                 break;
 
             case TransformAnimationType.Scale:
                 move = LeanTween.scale(target, destination, duration);
                 break;
-
             default:
                 break;
         }

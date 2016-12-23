@@ -13,6 +13,12 @@ public class ContinuousMove : MDSBehaviour
     private float _movingSpeed;
 	private float m_currentSpeed;
 
+	public float CurrentSpeed
+	{
+		get { return m_currentSpeed; }
+		set { m_currentSpeed = value; }
+	}
+
     [SerializeField]
     private Vector3 _direction;
 
@@ -52,7 +58,7 @@ public class ContinuousMove : MDSBehaviour
 	[FullInspector.InspectorShowIf("m_travelLimit")]
 	public int m_travel;
 
-
+	public bool nonInteractable;
 
 	public IAction[] m_onMaxDistanceAction;
 
@@ -93,9 +99,12 @@ public class ContinuousMove : MDSBehaviour
 		ExecuteActions(m_onMaxDistanceAction);
 		--m_travel;
 
-		if (m_travel < 0) {
-			m_isFreezed = true;
-			Challenge.GetActiveInstance().ProcessResult();
+		if (m_travelLimit)
+		{
+			if (m_travel < 0) {
+				m_isFreezed = true;
+				Challenge.GetActiveInstance().ProcessResult();
+			}	
 		}
 
 		if (m_freezeOnMaxDistance) {
@@ -120,6 +129,8 @@ public class ContinuousMove : MDSBehaviour
 
     public void OnMouseDown()
     {
+		if (nonInteractable)
+			return;
         enabled = false;
     }
 
