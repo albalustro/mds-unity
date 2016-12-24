@@ -20,7 +20,9 @@ namespace MDS.Gameplay.DragDrop
 
 		[SerializeField] private int? m_maxDraggables;
 		private int[] m_currentPerDraggable;
-        public bool changeItem;
+		[InspectorComment("Usado em casos onde necessita-se trocar o parent. O clone fica parenteado pelo pai do drag modelo e este vai para um novo gameobject")]
+		public bool changeParent;
+		public bool changeItem;
         [InspectorShowIf("changeItem"), InspectorTooltip("Total de itens disponíveis para serem instanciados")]
         public Item[] itens;
         [SerializeField] private Transform dropedItens;
@@ -110,6 +112,12 @@ namespace MDS.Gameplay.DragDrop
 
             if (dropedItens!=null)
                 newDraggable.transform.SetParent(dropedItens);
+
+			if (changeParent)
+			{
+				newDraggable.transform.SetParent(draggable.transform.parent);
+				draggable.transform.SetParent(dropedItens);
+			}
 
 			// o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
 			newDraggable.currentSlot = originalSlot;

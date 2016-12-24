@@ -12,10 +12,9 @@ public class TransformAnimationAction : BaseAction
     {
         Position,
         Scale,
-        Rotation
+        Rotation,
     }
-
-
+		
     public TransformAnimationType animationType;
 
     private bool IsPositionAnim { get { return animationType == TransformAnimationType.Position; } }
@@ -59,8 +58,6 @@ public class TransformAnimationAction : BaseAction
     private bool Hide_useSelfPositionAsDestination { get { return useMemorizedGOAsDestination || useThisTransformAsDestination != null; } }
     private bool Hide_useMemorizedGOAsDestination { get { return useSelfPositionAsDestination  || useThisTransformAsDestination != null; } }
     private bool Hide_useThisTransformAsDestination { get { return useSelfPositionAsDestination || useMemorizedGOAsDestination; } }
-
-
 
     public LeanTweenType easeType;
 
@@ -137,26 +134,27 @@ public class TransformAnimationAction : BaseAction
 
         _animationComplete = false;
 
-        LTDescr move = null;
+		LTDescr move = null;
 
         switch(animationType)
         {
-            case TransformAnimationType.Position:
-                if(local)
-                    destination = target.transform.position + destination;
-                move = LeanTween.move(target, destination, duration);
+			case TransformAnimationType.Position:
+				if (local)
+					move = LeanTween.move(target, target.transform.position + destination, duration);
+				else
+					move = LeanTween.move(target, destination, duration);
                 break;
 
             case TransformAnimationType.Rotation:
                 if(local)
-                    destination = target.transform.rotation.eulerAngles + destination;
-                move = LeanTween.rotate(target, destination, duration);
+					move = LeanTween.rotate(target, target.transform.rotation.eulerAngles + destination, duration);
+				else
+					move = LeanTween.rotate(target, destination, duration);
                 break;
 
             case TransformAnimationType.Scale:
                 move = LeanTween.scale(target, destination, duration);
                 break;
-
             default:
                 break;
         }

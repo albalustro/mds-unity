@@ -15,6 +15,7 @@ namespace MDS.Validators.Interfaces
 
         bool Overwritten { get; set; }
 
+		bool isGeneric { get; set; }
 
         int Count(string label);
 
