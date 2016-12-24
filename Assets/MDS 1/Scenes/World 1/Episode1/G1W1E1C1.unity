@@ -125,10 +125,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 9
   _isGeneric: 1
@@ -136,6 +138,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 0
   _invalidLabels: []
 --- !u!61 &10016991
@@ -291,10 +294,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -302,6 +313,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1463903534}
   instantiableDraggable: 0
 --- !u!61 &31686023
@@ -400,10 +413,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -411,6 +432,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1908736506}
   instantiableDraggable: 0
 --- !u!61 &39738414
@@ -494,7 +517,7 @@ Transform:
   m_GameObject: {fileID: 102725694}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.09754, y: -2.5309434, z: -1}
-  m_LocalScale: {x: 0.8658579, y: 0.8658579, z: 0.8658579}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 656769372}
   m_RootOrder: 5
@@ -550,10 +573,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -561,6 +592,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 2007349196}
   instantiableDraggable: 0
 --- !u!61 &102725698
@@ -615,6 +648,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &135166241
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -693,6 +729,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &142993949
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -789,10 +828,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -800,6 +847,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1102726134}
   instantiableDraggable: 0
 --- !u!61 &144296304
@@ -854,6 +903,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &185050574
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -932,6 +984,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &209528961
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -972,7 +1027,7 @@ Transform:
   m_GameObject: {fileID: 211318643}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3875399, y: -1.8509433, z: -1}
-  m_LocalScale: {x: 0.90000004, y: 0.90000004, z: 0.90000004}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 0
@@ -1028,10 +1083,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -1039,6 +1102,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 868135397}
   instantiableDraggable: 0
 --- !u!61 &211318647
@@ -1150,6 +1215,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &263562570
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1748,8 +1816,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1463903534}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1628235560}
   - _keys: []
     _values: []
@@ -1799,8 +1870,14 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 231858543}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 613896669}
   - _keys: []
     _values: []
@@ -1946,6 +2023,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &348196547
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2055,10 +2135,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -2066,6 +2154,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1615630166}
   instantiableDraggable: 0
 --- !u!61 &372268605
@@ -2108,7 +2198,7 @@ Transform:
   m_GameObject: {fileID: 376336193}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.79754, y: -1.8509433, z: -1}
-  m_LocalScale: {x: 0.8208918, y: 0.8208918, z: 0.8208918}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 578143458}
   m_RootOrder: 0
@@ -2164,10 +2254,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -2175,6 +2273,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 489336279}
   instantiableDraggable: 0
 --- !u!61 &376336197
@@ -2273,10 +2373,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -2284,6 +2392,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 263562569}
   instantiableDraggable: 0
 --- !u!61 &378211282
@@ -2338,6 +2448,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &421635123
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2364,6 +2477,70 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1761354704}
   m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &488795972
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 488795974}
+  - component: {fileID: 488795973}
+  m_Layer: 0
+  m_Name: resultado_errado
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!212 &488795973
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488795972}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 0
+  m_ReflectionProbeUsage: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingOrder: 0
+  m_Sprite: {fileID: 21300000, guid: c332cece740666446abfdf1883ebfdb9, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+--- !u!4 &488795974
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 488795972}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0.44, y: 1.1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &489336278
 GameObject:
@@ -2403,6 +2580,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &489336280
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2429,6 +2609,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1761354704}
   m_RootOrder: 20
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &514546102
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 514546103}
+  m_Layer: 0
+  m_Name: Left
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &514546103
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 514546102}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -3.9295592, y: 1.8571723, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076108437}
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &578143457
 GameObject:
@@ -2490,12 +2698,97 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 231858543}
+  - {fileID: 1193082330}
+  - {fileID: 514546103}
+  - {fileID: 825905517}
+  - {fileID: 514546103}
+  - {fileID: 1623976232}
+  - {fileID: 514546103}
+  - {fileID: 671152640}
+  - {fileID: 514546103}
+  - {fileID: 1317473008}
+  - {fileID: 514546103}
+  - {fileID: 1090655298}
+  - {fileID: 514546103}
+  - {fileID: 1202841168}
+  - {fileID: 514546103}
+  - {fileID: 956027725}
+  - {fileID: 514546103}
+  - {fileID: 2070842516}
+  - {fileID: 514546103}
+  - {fileID: 144296300}
+  - {fileID: 1174568729}
+  - {fileID: 911067894}
+  - {fileID: 1436310489}
+  - {fileID: 378211278}
+  - {fileID: 39738410}
+  - {fileID: 2011596352}
+  - {fileID: 372268601}
+  - {fileID: 1204765418}
+  - {fileID: 1698018309}
+  - {fileID: 718892482}
+  - {fileID: 620673552}
+  - {fileID: 211318643}
+  - {fileID: 1220067895}
+  - {fileID: 1372688189}
+  - {fileID: 1526063713}
+  - {fileID: 1080066187}
+  - {fileID: 2030837655}
+  - {fileID: 31686019}
+  - {fileID: 1232999784}
+  - {fileID: 886916421}
+  - {fileID: 939773032}
+  - {fileID: 1576187120}
+  - {fileID: 102725694}
+  - {fileID: 376336193}
+  - {fileID: 1436668647}
+  - {fileID: 1857638119}
+  - {fileID: 885616543}
+  - {fileID: 1003718455}
+  - {fileID: 1533216420}
+  - {fileID: 1003718455}
+  - {fileID: 1019533213}
+  - {fileID: 1003718455}
+  - {fileID: 1587635759}
+  - {fileID: 1003718455}
+  - {fileID: 997890022}
+  - {fileID: 1003718455}
+  - {fileID: 1848716857}
+  - {fileID: 1003718455}
+  - {fileID: 673793505}
+  - {fileID: 1003718455}
+  - {fileID: 209528960}
+  - {fileID: 1003718455}
+  - {fileID: 722457153}
+  - {fileID: 1003718455}
+  - {fileID: 672238644}
+  - {fileID: 745053795}
+  - {fileID: 142993948}
+  - {fileID: 745053795}
+  - {fileID: 1531846233}
+  - {fileID: 745053795}
+  - {fileID: 618760207}
+  - {fileID: 745053795}
+  - {fileID: 2020285437}
+  - {fileID: 745053795}
+  - {fileID: 1692860357}
+  - {fileID: 745053795}
+  - {fileID: 1556374150}
+  - {fileID: 745053795}
+  - {fileID: 1120125619}
+  - {fileID: 745053795}
+  - {fileID: 1075544399}
+  - {fileID: 745053795}
+  - {fileID: 488795972}
+  - {fileID: 488795972}
+  - {fileID: 2123048524}
+  - {fileID: 1003718455}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions":[{"slugs":["error1"],"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":1,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":2,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.1,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":3,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":4,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.2,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":5,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":6,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.3,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":7,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":8,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.4,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":9,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":10,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.5,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":11,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":12,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.6,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":13,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":14,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.7,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":15,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":16,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.8,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":17,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":18,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.9,"waitFinish":false,"$type":"TransformAnimationAction"},{"selfTarget":false,"m_target":[19,20,21,22,23,24,25,26,27,28,29,30,31,32,33,34,35,36,37,38,39,40,41,42,43,44,45],"m_useDropSlotAsTarget":null,"m_fadeIn":false,"m_fadeTime":1.0,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FadeInOutAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":46,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":47,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":48,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":49,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.1,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":50,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":51,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.2,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":52,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":53,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.3,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":54,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":55,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.4,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":56,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":57,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.5,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":58,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":59,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.6,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":60,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":61,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.7,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":62,"target":null,"m_targets":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":63,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.8,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":64,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":65,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":66,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":67,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.1,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":68,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":69,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.2,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":70,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":71,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.3,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":72,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":73,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.4,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":74,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":75,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.5,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":76,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":77,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.6,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":78,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":79,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.7,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":80,"target":null,"m_targets":null,"duration":0.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":81,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.8,"waitFinish":false,"$type":"TransformAnimationAction"},{"_action":"Enable","_targets":[82],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":83,"m_targets":null,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":84,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"easeInOutExpo","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"m_targets":null,"duration":5.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.2,"y":0.2,"z":0.2},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},null,null],"onErrorActions_2":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"m_targets":[],"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":85,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},null],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &613896670
 Transform:
@@ -2561,6 +2854,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &618760208
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2613,6 +2909,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &619400367
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2666,7 +2965,7 @@ Transform:
   m_GameObject: {fileID: 620673552}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.1575403, y: -1.8509433, z: -1}
-  m_LocalScale: {x: 0.7387064, y: 0.7387064, z: 0.7387064}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1069256998}
   m_RootOrder: 5
@@ -2722,10 +3021,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -2733,6 +3040,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1224850514}
   instantiableDraggable: 0
 --- !u!61 &620673556
@@ -2787,6 +3096,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &635619355
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2899,6 +3211,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &671152641
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2964,6 +3279,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &672238645
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3029,6 +3347,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &673793506
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3069,7 +3390,7 @@ Transform:
   m_GameObject: {fileID: 718892482}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.1575403, y: -1.1309433, z: -1}
-  m_LocalScale: {x: 0.66699445, y: 0.66699445, z: 0.66699445}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1069256998}
   m_RootOrder: 4
@@ -3125,10 +3446,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -3136,6 +3465,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 421635122}
   instantiableDraggable: 0
 --- !u!61 &718892486
@@ -3203,6 +3534,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &722457154
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3217,6 +3551,34 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.54, y: 0.58}
+--- !u!1 &745053794
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 745053795}
+  m_Layer: 0
+  m_Name: Right
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &745053795
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 745053794}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -0.8650862, y: 1.8571723, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076108437}
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &825905515
 GameObject:
   m_ObjectHideFlags: 0
@@ -3268,6 +3630,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &825905518
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3384,6 +3749,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &868135398
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3449,6 +3817,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &873711528
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3527,6 +3898,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &885616544
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3567,7 +3941,7 @@ Transform:
   m_GameObject: {fileID: 886916421}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.55754, y: -1.1309433, z: -1}
-  m_LocalScale: {x: 1.045334, y: 1.0453342, z: 1.0453342}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 656769372}
   m_RootOrder: 2
@@ -3623,10 +3997,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -3634,6 +4016,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 635619354}
   instantiableDraggable: 0
 --- !u!61 &886916425
@@ -3676,7 +4060,7 @@ Transform:
   m_GameObject: {fileID: 911067894}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.90754, y: -1.0909431, z: -1}
-  m_LocalScale: {x: 0.6822933, y: 0.6822933, z: 0.6822933}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 1072433462}
   m_RootOrder: 2
@@ -3732,10 +4116,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -3743,6 +4135,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 982790491}
   instantiableDraggable: 0
 --- !u!61 &911067898
@@ -3797,6 +4191,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &911507663
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3906,10 +4303,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -3917,6 +4322,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 911507662}
   instantiableDraggable: 0
 --- !u!61 &939773036
@@ -3984,6 +4391,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &956027726
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4036,6 +4446,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &982790492
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4114,6 +4527,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &997890023
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4128,6 +4544,34 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.54, y: 0.58}
+--- !u!1 &1003718454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1003718455}
+  m_Layer: 0
+  m_Name: Middle
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1003718455
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1003718454}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 2.2604408, y: 1.8571723, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076108437}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1019533211
 GameObject:
   m_ObjectHideFlags: 0
@@ -4179,6 +4623,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1019533214
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4265,6 +4712,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1069410723
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4377,6 +4827,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1075544400
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4391,6 +4844,38 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.54, y: 0.58}
+--- !u!1 &1076108436
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1076108437}
+  m_Layer: 0
+  m_Name: SpotReferences
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1076108437
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1076108436}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0.7195592, y: 0.42282775, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2123048524}
+  - {fileID: 514546103}
+  - {fileID: 1003718455}
+  - {fileID: 745053795}
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1080066187
 GameObject:
   m_ObjectHideFlags: 0
@@ -4417,7 +4902,7 @@ Transform:
   m_GameObject: {fileID: 1080066187}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.36754, y: -1.0909431, z: -1}
-  m_LocalScale: {x: 0.89, y: 0.89, z: 0.89}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 4
@@ -4473,10 +4958,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -4484,6 +4977,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1796866617}
   instantiableDraggable: 0
 --- !u!61 &1080066191
@@ -4551,6 +5046,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1090655299
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4603,6 +5101,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1100923740
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4668,6 +5169,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1102726135
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4746,6 +5250,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1120125620
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4786,7 +5293,7 @@ Transform:
   m_GameObject: {fileID: 1174568729}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.71754, y: -1.0909431, z: -1}
-  m_LocalScale: {x: 0.80171573, y: 0.80171573, z: 0.80171573}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 1072433462}
   m_RootOrder: 1
@@ -4842,10 +5349,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -4853,6 +5368,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1661412665}
   instantiableDraggable: 0
 --- !u!61 &1174568733
@@ -4920,6 +5437,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1193082331
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4985,6 +5505,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1202841169
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5025,7 +5548,7 @@ Transform:
   m_GameObject: {fileID: 1204765418}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.71754, y: -0.45094317, z: -1}
-  m_LocalScale: {x: 0.87, y: 0.87, z: 0.87}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 1069256998}
   m_RootOrder: 2
@@ -5081,10 +5604,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -5092,6 +5623,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 619400366}
   instantiableDraggable: 0
 --- !u!61 &1204765422
@@ -5134,7 +5667,7 @@ Transform:
   m_GameObject: {fileID: 1220067895}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3875399, y: -0.45094317, z: -1}
-  m_LocalScale: {x: 0.77699435, y: 0.77699435, z: 0.77699435}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 1
@@ -5190,10 +5723,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -5201,6 +5742,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 135166240}
   instantiableDraggable: 0
 --- !u!61 &1220067899
@@ -5255,6 +5798,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1224850515
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5308,7 +5854,7 @@ Transform:
   m_GameObject: {fileID: 1232999784}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.0975401, y: -0.45094317, z: -1}
-  m_LocalScale: {x: 0.63857025, y: 0.63857025, z: 0.63857025}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 656769372}
   m_RootOrder: 1
@@ -5364,10 +5910,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -5375,6 +5929,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 2133014658}
   instantiableDraggable: 0
 --- !u!61 &1232999788
@@ -5442,6 +5998,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1317473009
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5482,7 +6041,7 @@ Transform:
   m_GameObject: {fileID: 1372688189}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.91754, y: -0.45094317, z: -1}
-  m_LocalScale: {x: 0.82488424, y: 0.82488406, z: 0.82488406}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 2
@@ -5538,10 +6097,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -5549,6 +6116,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1069410722}
   instantiableDraggable: 0
 --- !u!61 &1372688193
@@ -5680,10 +6249,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -5691,6 +6268,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 185050573}
   instantiableDraggable: 0
 --- !u!61 &1436310493
@@ -5733,7 +6312,7 @@ Transform:
   m_GameObject: {fileID: 1436668647}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.17754, y: -0.45094317, z: -1}
-  m_LocalScale: {x: 0.6200001, y: 0.6200001, z: 0.6200001}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 12}
   m_Children: []
   m_Father: {fileID: 578143458}
   m_RootOrder: 1
@@ -5789,10 +6368,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -5800,6 +6387,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 348196546}
   instantiableDraggable: 0
 --- !u!61 &1436668651
@@ -5867,6 +6456,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1463903535
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5907,7 +6499,7 @@ Transform:
   m_GameObject: {fileID: 1526063713}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.73754, y: 0.3390569, z: -1}
-  m_LocalScale: {x: 0.91, y: 0.90999997, z: 0.90999997}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 3
@@ -5963,10 +6555,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - triangulo
@@ -5974,6 +6574,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 2008137373}
   instantiableDraggable: 0
 --- !u!61 &1526063717
@@ -6041,6 +6643,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1531846234
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6106,6 +6711,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1533216421
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6154,10 +6762,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 9
   _isGeneric: 1
@@ -6165,6 +6775,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 0
   _invalidLabels: []
 --- !u!61 &1547474133
@@ -6289,6 +6900,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1556374151
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6329,7 +6943,7 @@ Transform:
   m_GameObject: {fileID: 1576187120}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.41754, y: 0.3390569, z: -1}
-  m_LocalScale: {x: 0.6518742, y: 0.651874, z: 0.651874}
+  m_LocalScale: {x: 0.6, y: 0.6, z: 1}
   m_Children: []
   m_Father: {fileID: 656769372}
   m_RootOrder: 4
@@ -6385,10 +6999,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -6396,6 +7018,8 @@ MonoBehaviour:
   - pequeno
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1822447237}
   instantiableDraggable: 0
 --- !u!61 &1576187124
@@ -6463,6 +7087,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1587635760
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6515,6 +7142,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1615630167
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6593,6 +7223,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1623976233
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6641,10 +7274,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 9
   _isGeneric: 1
@@ -6652,6 +7287,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 0
   _invalidLabels: []
 --- !u!61 &1628235561
@@ -6763,6 +7399,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1654452365
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6828,6 +7467,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1661412666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -6906,6 +7548,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1692860358
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7002,10 +7647,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -7013,6 +7666,8 @@ MonoBehaviour:
   - grande
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1654452364}
   instantiableDraggable: 0
 --- !u!61 &1698018313
@@ -7107,8 +7762,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: 79575a3bdfa43ab4aad83e1c37ed28ce, type: 3}
   upSprite: {fileID: 21300000, guid: f65b0fcd134b63142b884e94432a8489, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -7285,6 +7942,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1796866618
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7350,6 +8010,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1822447238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7428,6 +8091,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1848716858
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7468,7 +8134,7 @@ Transform:
   m_GameObject: {fileID: 1857638119}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.70754, y: 0.3390569, z: -1}
-  m_LocalScale: {x: 0.78, y: 0.78, z: 0.78}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 578143458}
   m_RootOrder: 2
@@ -7524,10 +8190,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -7535,6 +8209,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 873711527}
   instantiableDraggable: 0
 --- !u!61 &1857638123
@@ -7589,6 +8265,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1908736507
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7654,6 +8333,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1960361795
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7725,6 +8407,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2007349197
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7790,6 +8475,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2008137374
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -7843,7 +8531,7 @@ Transform:
   m_GameObject: {fileID: 2011596352}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.40099, y: 0.3390569, z: -1}
-  m_LocalScale: {x: 0.7452811, y: 0.7452809, z: 0.7452809}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 1069256998}
   m_RootOrder: 0
@@ -7899,10 +8587,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - retangulo
@@ -7910,6 +8606,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1960361794}
   instantiableDraggable: 0
 --- !u!61 &2011596356
@@ -7977,6 +8675,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2020285438
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8051,7 +8752,7 @@ Transform:
   m_GameObject: {fileID: 2030837655}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.1675396, y: 0.3390569, z: -1}
-  m_LocalScale: {x: 0.78, y: 0.78, z: 0.78}
+  m_LocalScale: {x: 0.8, y: 0.8, z: 1}
   m_Children: []
   m_Father: {fileID: 2030795372}
   m_RootOrder: 5
@@ -8107,10 +8808,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - quadrado
@@ -8118,6 +8827,8 @@ MonoBehaviour:
   - medio
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1100923739}
   instantiableDraggable: 0
 --- !u!61 &2030837659
@@ -8236,6 +8947,11 @@ Prefab:
       propertyPath: spreadCustomCurve.m_RotationOrder
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223000012944943118, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 321610436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
   m_IsPrefabParent: 0
@@ -8354,6 +9070,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2070842517
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -8368,6 +9087,34 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.54, y: 0.58}
+--- !u!1 &2123048523
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 2123048524}
+  m_Layer: 0
+  m_Name: Done
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2123048524
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 2123048523}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.8104408, y: -3.1728277, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1076108437}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2133014657
 GameObject:
   m_ObjectHideFlags: 0
@@ -8406,6 +9153,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2133014659
 BoxCollider2D:
   m_ObjectHideFlags: 0
