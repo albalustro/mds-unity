@@ -12,20 +12,42 @@ namespace MDS.Actions{
 	public class SetSelected : BaseAction
 	{
 
-//		[InspectorHideIf("Hide_m_useMemorizedGo")]
 		public bool m_useMemorizedGo;
-//		private bool Hide_m_useMemorizedGo { get { return obj != null;} }
 
 		[FullInspector.InspectorHideIf("m_useMemorizedGo")]
 		public GameObject[] obj;
 
-
 		[SerializeField]
 		private bool m_set;
+
+		[SerializeField, Tooltip("Drag SelectableGroup to here if you want to Lock/Unlock all selectable colliders")]
+		private Transform m_groupTransform;
+		private bool ShowLockUnlockButton {get {return m_groupTransform != null;}}
+
+
+		[InspectorShowIf("ShowLockUnlockButton")]
+		[SerializeField]
+		private bool m_unselectAll = false;
+
+		[SerializeField, InspectorTooltip("Check this if you want to lock/unlock the selected group")]
+		[InspectorShowIf("ShowLockUnlockButton")]
+		private bool m_lockGroup;
+
+
 
 		public override IEnumerator Execute()
 		{
 			yield return base.Execute();
+
+			if (m_groupTransform != null) {
+				foreach (Transform child in m_groupTransform) {
+					child.GetComponent<Collider2D> ().enabled = !m_lockGroup;
+					if (m_unselectAll) {
+						child.GetComponent<Selectable> ().SetSelected (false);
+					}
+				}
+			}
+
 
 			if (!m_useMemorizedGo) {
 
@@ -36,6 +58,9 @@ namespace MDS.Actions{
 				GameObject tmpGo = MemorizeMe.MemorizedGameObject;
 				tmpGo.GetComponent<Selectable> ().SetSelected (m_set);
 			}
+
+
+
 
 		}
 

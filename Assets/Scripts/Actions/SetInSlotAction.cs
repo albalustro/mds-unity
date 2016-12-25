@@ -27,6 +27,7 @@ namespace MDS.Actions
         private Draggable _draggableTarget;
         private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || useSlotContentAsTarget!=null; } }
 
+		public GameObject[] m_multipleDraggables;
 
         [InspectorDivider, InspectorHeader("Destination")]
         
@@ -71,23 +72,39 @@ namespace MDS.Actions
 //                    _corotineHolder.GetComponent<MDSBehaviour>().LogError("useSlotContentAsTarget sem que o slot tenha um elemento Draggable ");
             }
 
+			if (m_multipleDraggables != null) {
+				for (int i = 0; i < m_multipleDraggables.Length; i++) {
+					d = m_multipleDraggables [i].GetComponent<Draggable>();
 
-            if(d != null)
-            {
-                if(!HasSpecificSlot)
-                {
-                    DropGroupSlot slot = null;
-                    g.SetInSlot(d, ref slot);
-                }
-                else
-                {
-                    DraggableUtilities.SetDraggableInSlot(d, _slot);
-                }
-
-				if (m_makeDraggableChildrenOfSlot) {
-					_draggableTarget.transform.SetParent (g.transform);
+					if(!HasSpecificSlot)
+					{
+						DropGroupSlot slot = null;
+						g.SetInSlot(d, ref slot);
+					}
+					else
+					{
+						DraggableUtilities.SetDraggableInSlot(d, _slot);
+					}
 				}
-            }
+			} else {
+				if(d != null)
+				{
+					if(!HasSpecificSlot)
+					{
+						DropGroupSlot slot = null;
+						g.SetInSlot(d, ref slot);
+					}
+					else
+					{
+						DraggableUtilities.SetDraggableInSlot(d, _slot);
+					}
+
+					if (m_makeDraggableChildrenOfSlot) {
+						_draggableTarget.transform.SetParent (g.transform);
+					}
+				}
+			}
+            
 
         }
     }

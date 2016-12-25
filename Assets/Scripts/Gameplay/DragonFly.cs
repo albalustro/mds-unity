@@ -1,6 +1,8 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using MDS.Actions;
+using MDS.Core.Interfaces;
 
 public class DragonFly : MDSBehaviour {
 
@@ -9,6 +11,11 @@ public class DragonFly : MDSBehaviour {
 	private ContinuousMove _continuousMove;
 	private float normalSpeed;
 	public float slowSpeed;
+
+	[SerializeField]
+	private IAction[] m_onCollisionAction;
+
+	private bool m_playerHasBeenWarned = false;
 
 	void Start()
 	{
@@ -21,6 +28,13 @@ public class DragonFly : MDSBehaviour {
 		{
 			_continuousMove = other.GetComponent<ContinuousMove> ();
 			StartCoroutine (ReduceSpeed ());
+
+			if (!m_playerHasBeenWarned) {
+				ExecuteActions (m_onCollisionAction);
+			}
+
+			m_playerHasBeenWarned = true;
+
 		}
 	}
 
