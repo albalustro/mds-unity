@@ -13,6 +13,9 @@ public class CarrousselItem : MDSBehaviour, IValidatable
     [SerializeField, InspectorTooltip("Use esse valor para indicar que o Item não é validável")]
     private string invalidValue;
 
+    [SerializeField, InspectorTooltip("Multiplicador usado ao buscar o valor numerico")]
+    private int? _numericMultiplier;
+
     private int _currentItemIndex;
     private int _maxItemIndex;
 
@@ -90,6 +93,8 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         int result;
         if(ReadyToValidate() && int.TryParse(GetCurrentValue(), out result))
         {
+            if(_numericMultiplier.HasValue == true)
+                result *= _numericMultiplier.Value;
             return result;
         }
         return null;

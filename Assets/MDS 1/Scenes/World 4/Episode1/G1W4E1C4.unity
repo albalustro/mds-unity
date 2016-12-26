@@ -184,8 +184,11 @@ MonoBehaviour:
   - {fileID: 314718014}
   - {fileID: 863667189}
   _values:
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 668809265}
   - _keys: []
     _values: []
@@ -358,7 +361,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[{"slugs":["intro"],"sceneSlugs":[{"useThis":true,"slug":"intro"},{"useThis":false,"slug":"intro"},{"useThis":false,"slug":"error0"},{"useThis":false,"slug":"error1"},{"useThis":false,"slug":"error2"},{"useThis":false,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"_action":"Enable","_targets":[1],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"slugs":["error0"],"sceneSlugs":[{"useThis":true,"slug":"error0"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["error1"],"sceneSlugs":[{"useThis":true,"slug":"error1"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[{"slugs":["error2"],"sceneSlugs":[{"useThis":true,"slug":"error2"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"sceneSlugs":[{"useThis":true,"slug":"victory"}],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"_action":"Enable","_targets":[1],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"slugs":["error0"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[{"slugs":["error2"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -584,7 +587,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
@@ -681,7 +684,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d99aecdf6a358bf4d943cad3fe24e874, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _objectReferences: []
+  _objectReferences:
+  - {fileID: 1568106724}
+  - {fileID: 1173779624}
+  - {fileID: 1670688068}
+  - {fileID: 1951165484}
+  - {fileID: 582188287}
+  - {fileID: 2074916418}
   _serializedStateKeys:
   - Overwritten
   - OperationLogic
@@ -694,12 +703,18 @@ MonoBehaviour:
   - false
   - '"AND"'
   - false
-  - 
+  - 2
   - 2
   - '"Multiple"'
-  - '[]'
+  - '[0,1,2,3,4,5]'
   groupSelectionType: 1
-  _selectables: []
+  _selectables:
+  - {fileID: 1568106724}
+  - {fileID: 1173779624}
+  - {fileID: 1670688068}
+  - {fileID: 1951165484}
+  - {fileID: 582188287}
+  - {fileID: 2074916418}
 --- !u!1 &800026262
 GameObject:
   m_ObjectHideFlags: 0
@@ -774,7 +789,7 @@ Prefab:
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 4000013199018780, guid: a88ddfbdccb255f4a82048f2b92e9116, type: 2}
       propertyPath: m_LocalPosition.x
@@ -811,13 +826,23 @@ Prefab:
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"}]'
+      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"OperationLogic":"AND","EnableValidationIgnoreRuleIfTargetIsDisabled":false,"ValidationIgnoreRuleIfTargetIsDisabled":false,"AlwaysReadyToValidate":true,"rules":[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.Selectable.Selectable"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.Selectable.Selectable"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"}],"$type":"MDS.Validators.ValidationRulesGroup"},"OverrideGroupParameters":false,"CorrectAnswer":null}]'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _objectReferences.Array.data[0]
       value: 
       objectReference: {fileID: 668809265}
+    - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 582188287}
+    - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 2074916418}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a88ddfbdccb255f4a82048f2b92e9116, type: 2}
   m_IsPrefabParent: 0
@@ -1132,7 +1157,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
@@ -1337,6 +1362,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223000012944943118, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 321610436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
   m_IsPrefabParent: 0
@@ -1453,7 +1483,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
@@ -1675,7 +1705,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
@@ -1862,7 +1892,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
@@ -2000,7 +2030,7 @@ MonoBehaviour:
   - '[2]'
   - '[]'
   - '[]'
-  - '[{"_action":"Disable","_targets":[3],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"_action":"Disable","_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0

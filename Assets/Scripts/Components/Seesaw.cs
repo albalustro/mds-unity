@@ -63,92 +63,52 @@ public class Seesaw : MDSBehaviour {
 		}
     }
 
-	IEnumerator TipTheScales(int myState){
-		if (myState == -1){
-				Vector3 temp;
-				yield return new WaitForSeconds (0.5f);
-				foreach(var slotA in slotsA)
-				{
-					temp = slotA.transform.position;
-					temp.y = min_PosY;
-					slotA.transform.position = temp;
-					temp.z = -1;
-					if (slotA.draggableReference != null){
-						slotA.draggableReference.transform.position = temp;
-					}
-				}
+    IEnumerator TipTheScales(int myState)
+    {
 
-				foreach(var slotB in slotsB)
-				{
-					temp = slotB.transform.position;
-					temp.y = max_PosY;
-					slotB.transform.position = temp;
-					temp.z = -1;
-					if (slotB.draggableReference != null) {
-						slotB.draggableReference.transform.position = temp;
-					}
-				}
+        if(myState == -1)
+        {
+            SetPosition(min_PosY, max_PosY);
+            yield return new WaitForSeconds(0.5f);
+            scaleState = -1;
+        }
 
-				scaleState = -1;
-		}
+        if(myState == 0)
+        {
+            SetPosition(balanced_PosY, balanced_PosY);
+            yield return new WaitForSeconds(0.5f);
+            scaleState = 0;
+        }
 
-		if (myState == 0){
-				Vector3 temp;
-				yield return new WaitForSeconds (0.5f);
-				foreach(var slotA in slotsA)
-				{
-					temp = slotA.transform.position;
-					temp.y = balanced_PosY;
-					slotA.transform.position = temp;
-					temp.z = -1;
-					if (slotA.draggableReference != null) {
-						slotA.draggableReference.transform.position = temp;
-					}
-				}
+        if(myState == 1)
+        {
+            SetPosition(max_PosY, min_PosY);
+            yield return new WaitForSeconds(0.5f);
+            scaleState = 1;
+        }
 
-				foreach(var slotB in slotsB)
-				{
-					temp = slotB.transform.position;
-					temp.y = balanced_PosY;
-					slotB.transform.position = temp;
-					temp.z = -1;
-					if (slotB.draggableReference != null) {
-						slotB.draggableReference.transform.position = temp;
-					}
-				}
-
-				scaleState = 0;
-		}
-
-		if (myState == 1){
-				Vector3 temp;
-				yield return new WaitForSeconds (0.5f);
-				foreach(var slotA in slotsA)
-				{
-					temp = slotA.transform.position;
-					temp.y = max_PosY;
-					slotA.transform.position = temp;
-					temp.z = -1;
-					if (slotA.draggableReference != null) {
-						slotA.draggableReference.transform.position = temp;
-					}
-				}
-
-				foreach(var slotB in slotsB)
-				{
-					temp = slotB.transform.position;
-					temp.y = min_PosY;
-					slotB.transform.position = temp;
-					temp.z = -1;
-					if (slotB.draggableReference != null) {
-						slotB.draggableReference.transform.position = temp;
-					}
-				}
-
-				scaleState = 1;
-		}
+    }
 
 
+    void SetPosition(float a_y, float b_y)
+    {
 
-	}
+        foreach(var slotA in slotsA)
+        {
+            LeanTween.moveY(slotA.gameObject, a_y, 0.5f);
+            if(slotA.draggableReference != null)
+            {
+                LeanTween.moveLocalY(slotA.draggableReference.gameObject, a_y, 0.5f);
+            }
+        }
+
+        foreach(var slotB in slotsB)
+        {
+            LeanTween.moveY(slotB.gameObject, b_y, 0.5f);
+            if(slotB.draggableReference != null)
+            {
+                LeanTween.moveLocalY(slotB.draggableReference.gameObject, b_y, 0.5f);
+            }
+        }
+    }
 }
