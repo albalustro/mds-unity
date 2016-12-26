@@ -39,8 +39,8 @@ public class ContinuousMove : MDSBehaviour
 	[SerializeField]
 	private bool m_changeSpeed;
 
-	[SerializeField]
-	private bool m_isFreezed = false;
+	[HideInInspector]
+	public bool m_isFreezed = false;
 
 	[FullInspector.InspectorShowIf("m_changeSpeed")]
 	public float m_speedVariation;
@@ -93,7 +93,7 @@ public class ContinuousMove : MDSBehaviour
 		}
     }
 
-	void ResetPosition()
+	public void ResetPosition()
 	{
 
 		ExecuteActions(m_onMaxDistanceAction);
@@ -134,12 +134,4 @@ public class ContinuousMove : MDSBehaviour
         enabled = false;
     }
 
-	public void Freeze(int n)
-	{
-		if (n == 0) {
-			m_isFreezed = true;
-		} else {
-			m_isFreezed = false;
-		}
-	}
 }

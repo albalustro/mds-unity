@@ -13,9 +13,9 @@ public class BirdController : MDSBehaviour {
 
 	public IAction[] m_onCounterZeroAction;
 
-	private bool m_hasBeenHit;
-
 	private ContinuousMove m_move;
+
+	private bool trackMovement = true;
 
 	void Awake()
 	{
@@ -25,6 +25,7 @@ public class BirdController : MDSBehaviour {
 	public void SetCounter()
 	{
 		--m_counter;
+		m_move.m_freezeOnMaxDistance = true;
 		if (m_counter <= 0) {
 			m_move.m_freezeOnMaxDistance = true;
 			ExecuteActions(m_onCounterZeroAction);
