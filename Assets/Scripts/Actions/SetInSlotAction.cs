@@ -86,25 +86,24 @@ namespace MDS.Actions
 						DraggableUtilities.SetDraggableInSlot(d, _slot);
 					}
 				}
-			} else {
-				if(d != null)
-				{
-					if(!HasSpecificSlot)
-					{
-						DropGroupSlot slot = null;
-						g.SetInSlot(d, ref slot);
-					}
-					else
-					{
-						DraggableUtilities.SetDraggableInSlot(d, _slot);
-					}
+			} 
 
-					if (m_makeDraggableChildrenOfSlot) {
-						_draggableTarget.transform.SetParent (g.transform);
-					}
+			if(d != null)
+			{
+				if(!HasSpecificSlot)
+				{
+					DropGroupSlot slot = null;
+					g.SetInSlot(d, ref slot);
+				}
+				else
+				{
+					DraggableUtilities.SetDraggableInSlot(d, _slot);
+				}
+
+				if (m_makeDraggableChildrenOfSlot) {
+					_draggableTarget.transform.SetParent (g.transform);
 				}
 			}
-            
 
         }
     }
