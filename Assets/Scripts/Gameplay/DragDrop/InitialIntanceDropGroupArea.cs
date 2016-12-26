@@ -51,6 +51,10 @@ namespace MDS.Gameplay.DragDrop
             {
                 if (slot.draggableReference!=null)
                 {
+                    if (slot.draggableReference.OnAfterDrop==null)
+                    {
+                        LogError("OnAfterDrop está nulo em " + slot.draggableReference.name +". Bug do inspector?");
+                    }
                     slot.draggableReference.OnAfterDrop.AddListener(DraggableAfterDropHandler);
                     slot.draggableReference.instantiableDraggable = true;
                     if (slot.draggableReference.PreferredInitialIndex.HasValue==false)

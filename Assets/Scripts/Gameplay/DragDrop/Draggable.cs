@@ -9,267 +9,278 @@ using MDS.Core.Interfaces;
 
 namespace MDS.Gameplay.DragDrop
 {
-	[RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
-	public class Draggable : MDSBehaviour
-	{
-		[InspectorTooltip("Se o draggable tiver um indice preferencial na hora de ser ajustado no group inicial, use esse campo")]
-		public int? PreferredInitialIndex;
+    [RequireComponent(typeof(SpriteRenderer), typeof(BoxCollider2D))]
+    public class Draggable : MDSBehaviour
+    {
+        [InspectorTooltip("Se o draggable tiver um indice preferencial na hora de ser ajustado no group inicial, use esse campo")]
+        public int? PreferredInitialIndex;
 
-		private bool ShowForcePreferredIndex
-		{
-			get
-			{
-				return (PreferredInitialIndex.HasValue);
-			}
-		}
+        private bool ShowForcePreferredIndex
+        {
+            get
+            {
+                return (PreferredInitialIndex.HasValue);
+            }
+        }
 
-		[InspectorShowIf("ShowForcePreferredIndex"), InspectorTooltip("Esse atributo fará com que apenas o slot de indice = PreferredInitialIndex receba esse draggable")]
-		public bool forcePreferredIndexOnDrop;
+        [InspectorShowIf("ShowForcePreferredIndex"), InspectorTooltip("Esse atributo fará com que apenas o slot de indice = PreferredInitialIndex receba esse draggable")]
+        public bool forcePreferredIndexOnDrop;
 
-		public List<string> Labels;
+        public List<string> Labels;
 
-		public bool changeSprite;
-		public bool changeScale;
-		public bool activeWhileDragging;
+        public bool changeSprite;
+        public bool changeScale;
+        public bool activeWhileDragging;
 
-		[InspectorShowIf("changeSprite"), InspectorTooltip("Sprites usadas em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja nulo, o sprite releasedValue será usado.")]
-		public DraggableState<Sprite> spriteState;
+        [InspectorShowIf("changeSprite"), InspectorTooltip("Sprites usadas em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja nulo, o sprite releasedValue será usado.")]
+        public DraggableState<Sprite> spriteState;
 
-		[InspectorShowIf("changeScale"), InspectorTooltip("Valores de escala do sprite em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja 0, o valor releasedValue será usado.")]
-		public DraggableState<float> scaleState;
+        [InspectorShowIf("changeScale"), InspectorTooltip("Valores de escala do sprite em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja 0, o valor releasedValue será usado.")]
+        public DraggableState<float> scaleState;
 
-		[InspectorShowIf("activeWhileDragging"), InspectorTooltip("Ativa um GameObject específico enquanto arrasta o draggable")]
-		public GameObject m_activatedWhileDragging;
+        [InspectorShowIf("activeWhileDragging"), InspectorTooltip("Ativa um GameObject específico enquanto arrasta o draggable")]
+        public GameObject m_activatedWhileDragging;
 
-		private Vector3 _touchOffset;
-		private SpriteRenderer _renderer;
+        private Vector3 _touchOffset;
+        private SpriteRenderer _renderer;
 
-		[HideInInspector]
-		public DropGroupSlot currentSlot;
+        [HideInInspector]
+        public DropGroupSlot currentSlot;
 
-		[HideInInspector]
-		public bool instantiableDraggable;
+        [HideInInspector]
+        public bool instantiableDraggable;
 
-		public UnityEvent<Draggable, DropGroupSlot> OnAfterDrop;
+        [ShowInInspector, SerializeField, InspectorCollapsedFoldout]
+        public MyUnityEvent OnAfterDrop;
 
 		public IAction[] OnAfterDropActions;
 
-		[InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o grupo recusar o draggable, *AUTOMATICAMENTE* o draggable deixa de voltar para o slot de onde foi arrastado")]
-		public IAction[] OnGroupRefuseActions;
+        [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o grupo recusar o draggable, *AUTOMATICAMENTE* o draggable deixa de voltar para o slot de onde foi arrastado")]
+        public IAction[] OnGroupRefuseActions;
 
-		[InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
-		public IAction[] OnInvalidAreaDropActions;
-
-
-		protected override void Awake()
-		{
-			base.Awake();
-
-			gameObject.layer = LayerMask.NameToLayer("Draggable");
-
-			_renderer = this.GetComponent<SpriteRenderer>();
+        [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
+        public IAction[] OnInvalidAreaDropActions;
 
 
-			if (changeScale && (scaleState.draggingValue <= 0f
-						|| scaleState.releasedValue <= 0)) {
-				scaleState.draggingValue = scaleState.releasedValue = 1f;
-			}
+        protected override void Awake()
+        {
+            base.Awake();
 
-			if(changeScale && scaleState.releasedFinalPositionValue == 0)
-				scaleState.releasedFinalPositionValue = scaleState.releasedValue;
+            gameObject.layer = LayerMask.NameToLayer("Draggable");
 
-			if(changeSprite && spriteState.releasedFinalPositionValue == null)
-				spriteState.releasedFinalPositionValue = spriteState.releasedValue;
-
-//			if (OnAfterDrop == null) {
-//				OnAfterDrop = new UnityEvent<Draggable, DropGroupSlot>();
-//			}
-			
-		}
-
-		public void OnMouseDown()
-		{
-			_renderer.sortingOrder = 5;
-			_touchOffset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
-
-			if(changeScale)
-				LeanTween.scale(gameObject, Vector3.one * scaleState.draggingValue, 0.5f).setEase(LeanTweenType.easeOutElastic);
-
-			if(changeSprite)
-				_renderer.sprite = spriteState.draggingValue;
-
-			if (activeWhileDragging)
-				m_activatedWhileDragging.SetActive (true);
-
-		}
-
-		public void OnMouseDrag()
-		{
-			Vector3 curVer = new Vector3();
-			Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _touchOffset;
-			transform.position = Vector3.SmoothDamp(transform.position, newPos, ref curVer, 0.05f);
-		}
-
-		public void OnMouseUp()
-		{
-
-			BaseDropGroupArea group = null;
-			DropGroupSlot slot = null;
-
-			Vector3 mousePos = Input.mousePosition;
-			mousePos.z = 10;
-			Vector2 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
-			RaycastHit2D hitGroup = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
-														LayerMask.GetMask(new[] { "Group" }));
-
-			// Verifica se soltou sobre um group qualquer
-			if(hitGroup)
-			{
-				group = hitGroup.transform.GetComponent<BaseDropGroupArea>();
-
-				RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
-												LayerMask.GetMask(new[] { "GroupSlot" }));
-
-				// verifica se soltou sobre um slot especifico
-				if(hitSlot)
-				{
-					slot = hitSlot.transform.GetComponent<DropGroupSlot>();
-
-					// se o slot é um slot do grupo inicial e o draggable é forçado a voltar para
-					// o slot de indice preferencial, anula o slot encontrado
-					if(slot.IsInitialSlot && forcePreferredIndexOnDrop)
-						slot = null;
-
-				}
+            _renderer = this.GetComponent<SpriteRenderer>();
 
 
-				// se for um draggable que saiu de um [initial intantiable group] e foi derrubado
-				//  sobre um slot específico e esse slot já esta ocupado, *não* deve fazer swap entre 
-				//  os elementos, que é comportamento padrao. 
-				// Porem tb nao deve procurar um slot vazio.
-				if( currentSlot.IsInstatiableInitialSlot && slot && slot.IsTaken)
-				{
-					TweenGoto(currentSlot.transform.position);
-					return;
-				}
+            if(changeScale && (scaleState.draggingValue <= 0f
+                        || scaleState.releasedValue <= 0)) {
+                scaleState.draggingValue = scaleState.releasedValue = 1f;
+            }
 
-				// caso o grupo aceite o draggable, invocar o evento
-				// entao deve voltar para a posicao de onde saiu.
-				DropGroupSlot originalSlot = currentSlot;
-				if(group.SetInSlot(this, ref slot))
-				{
-					ProcessSlotChanging(originalSlot);
-				}
-				else
-				// caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
-				{
-					if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length>0)
-						ExecuteActions(OnGroupRefuseActions);
-					else // PERIGOSO...
-						TweenGoto(currentSlot.transform.position);
-				}
+            if(changeScale && scaleState.releasedFinalPositionValue == 0)
+                scaleState.releasedFinalPositionValue = scaleState.releasedValue;
 
+            if(changeSprite && spriteState.releasedFinalPositionValue == null)
+                spriteState.releasedFinalPositionValue = spriteState.releasedValue;
 
-			}
-			else
-			{ // soltou fora de grupos
-			  // se for um draggable advindo de um instantiable initial group E nao estava no slot inicial
-			  // entao deve ser destruido..
-				if(OnInvalidAreaDropActions != null && OnInvalidAreaDropActions.Length>0)
-					ExecuteActions(OnInvalidAreaDropActions);
-				else
-				{
-					if(instantiableDraggable && !currentSlot.IsInstatiableInitialSlot)
-					{
-						currentSlot.draggableReference = null;
-						FadeAndDestroy();
-					}
-					else
-					{
-						TweenGoto(currentSlot.transform.position);
-					}
-				}
-			}
+            //			if (OnAfterDrop == null) {
+            //				OnAfterDrop = new UnityEvent<Draggable, DropGroupSlot>();
+            //			}
 
-		}
+        }
 
-		public void ProcessSlotChanging(DropGroupSlot originalSlot)
-		{
-			if(OnAfterDrop != null)
-				OnAfterDrop.Invoke(this, originalSlot);
+        public void OnMouseDown()
+        {
+            _renderer.sortingOrder = 5;
+            _touchOffset = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
 
-			ExecuteActions(OnAfterDropActions);
-		}
+            if(changeScale)
+                LeanTween.scale(gameObject, Vector3.one * scaleState.draggingValue, 0.5f).setEase(LeanTweenType.easeOutElastic);
 
-		public void TweenGoto(Vector3 pos, float speed = 0.5f)
-		{
-			_renderer.sortingOrder = 5;
-			LeanTween.move(gameObject, pos, speed)
-				.setEase(LeanTweenType.easeOutCubic)
-				.setOnComplete(() =>
-				{
-					_renderer.sortingOrder = 0;
-					if(changeSprite)
-					{
-						if(!currentSlot.IsInitialSlot)
-							_renderer.sprite = spriteState.releasedFinalPositionValue;
-						else
-							_renderer.sprite = spriteState.releasedValue;
-							
-					}
+            if(changeSprite)
+                _renderer.sprite = spriteState.draggingValue;
+
+            if(activeWhileDragging)
+                m_activatedWhileDragging.SetActive(true);
+
+        }
+
+        public void OnMouseDrag()
+        {
+            Vector3 curVer = new Vector3();
+            Vector3 newPos = Camera.main.ScreenToWorldPoint(Input.mousePosition) - _touchOffset;
+            transform.position = Vector3.SmoothDamp(transform.position, newPos, ref curVer, 0.05f);
+        }
+
+        public void OnMouseUp()
+        {
+
+            BaseDropGroupArea group = null;
+            DropGroupSlot slot = null;
+
+            Vector3 mousePos = Input.mousePosition;
+            mousePos.z = 10;
+            Vector2 screenPos = Camera.main.ScreenToWorldPoint(mousePos);
+            RaycastHit2D hitGroup = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
+                                                        LayerMask.GetMask(new[] { "Group" }));
+
+            // Verifica se soltou sobre um group qualquer
+            if(hitGroup)
+            {
+                group = hitGroup.transform.GetComponent<BaseDropGroupArea>();
+
+                RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
+                                                LayerMask.GetMask(new[] { "GroupSlot" }));
+
+                // verifica se soltou sobre um slot especifico
+                if(hitSlot)
+                {
+                    slot = hitSlot.transform.GetComponent<DropGroupSlot>();
+
+                    // se o slot é um slot do grupo inicial e o draggable é forçado a voltar para
+                    // o slot de indice preferencial, anula o slot encontrado
+                    if(slot.IsInitialSlot && forcePreferredIndexOnDrop)
+                        slot = null;
+
+                }
 
 
-					if(changeScale)
-					{
-						float value = scaleState.releasedValue;
-						if(!currentSlot.IsInitialSlot)
-							value = scaleState.releasedFinalPositionValue;
-						LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
-					}
-					
-					if(activeWhileDragging){
-						if(m_activatedWhileDragging != null){
-								m_activatedWhileDragging.SetActive(false);
-						}
-					}
+                // se for um draggable que saiu de um [initial intantiable group] e foi derrubado
+                //  sobre um slot específico e esse slot já esta ocupado, *não* deve fazer swap entre 
+                //  os elementos, que é comportamento padrao. 
+                // Porem tb nao deve procurar um slot vazio.
+                if(currentSlot.IsInstatiableInitialSlot && slot && slot.IsTaken)
+                {
+                    TweenGoto(currentSlot.transform.position);
+                    return;
+                }
 
-					pos.z = -1;
-					transform.position = pos;
-				});
-		}
+                // caso o grupo aceite o draggable, invocar o evento
+                // entao deve voltar para a posicao de onde saiu.
+                DropGroupSlot originalSlot = currentSlot;
+                if(group.SetInSlot(this, ref slot))
+                {
+                    ProcessSlotChanging(originalSlot);
+                }
+                else
+                // caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
+                {
+                    if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length > 0)
+                        ExecuteActions(OnGroupRefuseActions);
+                    else // PERIGOSO...
+                        TweenGoto(currentSlot.transform.position);
+                }
 
-		public void FadeAndDestroy()
-		{
-			_renderer.sortingOrder = 5;
 
-			LeanTween.alpha(gameObject, 0, 0.25f);
-			LeanTween.scale(gameObject, Vector3.zero, 0.25f)
-				.setEase(LeanTweenType.easeOutCubic)
-				.setOnComplete(() =>
-				{
-					_renderer.sortingOrder = 0;
-					Destroy(gameObject);
-				});
-		}
+            }
+            else
+            { // soltou fora de grupos
+              // se for um draggable advindo de um instantiable initial group E nao estava no slot inicial
+              // entao deve ser destruido..
+                if(OnInvalidAreaDropActions != null && OnInvalidAreaDropActions.Length > 0)
+                    ExecuteActions(OnInvalidAreaDropActions);
+                else
+                {
+                    if(instantiableDraggable && !currentSlot.IsInstatiableInitialSlot)
+                    {
+                        currentSlot.draggableReference = null;
+                        FadeAndDestroy();
+                    }
+                    else
+                    {
+                        TweenGoto(currentSlot.transform.position);
+                    }
+                }
+            }
+
+        }
+
+        public void ProcessSlotChanging(DropGroupSlot originalSlot)
+        {
+            if(OnAfterDrop != null)
+                OnAfterDrop.Invoke(this, originalSlot);
+
+            ExecuteActions(OnAfterDropActions);
+        }
+
+        public void TweenGoto(Vector3 pos, float speed = 0.5f)
+        {
+            _renderer.sortingOrder = 5;
+            LeanTween.move(gameObject, pos, speed)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setOnComplete(() =>
+                {
+                    _renderer.sortingOrder = 0;
+                    if(changeSprite)
+                    {
+                        if(!currentSlot.IsInitialSlot)
+                            _renderer.sprite = spriteState.releasedFinalPositionValue;
+                        else
+                            _renderer.sprite = spriteState.releasedValue;
+
+                    }
+
+
+                    if(changeScale)
+                    {
+                        float value = scaleState.releasedValue;
+                        if(!currentSlot.IsInitialSlot)
+                            value = scaleState.releasedFinalPositionValue;
+                        LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
+                    }
+
+                    if(activeWhileDragging) {
+                        if(m_activatedWhileDragging != null) {
+                            m_activatedWhileDragging.SetActive(false);
+                        }
+                    }
+
+                    pos.z = -1;
+                    transform.position = pos;
+                });
+        }
+
+        public void FadeAndDestroy()
+        {
+            _renderer.sortingOrder = 5;
+
+            LeanTween.alpha(gameObject, 0, 0.25f);
+            LeanTween.scale(gameObject, Vector3.zero, 0.25f)
+                .setEase(LeanTweenType.easeOutCubic)
+                .setOnComplete(() =>
+                {
+                    _renderer.sortingOrder = 0;
+                    Destroy(gameObject);
+                });
+        }
 
 #if UNITY_EDITOR
-		Color editorBoundColor = Color.blue;
-		void OnDrawGizmos()
-		{
-			BoxCollider2D box = GetComponent<BoxCollider2D>();
-			if(box != null)
-			{
-				Gizmos.color = editorBoundColor;
-				Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
-			}
+        Color editorBoundColor = Color.blue;
+        void OnDrawGizmos()
+        {
+            BoxCollider2D box = GetComponent<BoxCollider2D>();
+            if(box != null)
+            {
+                Gizmos.color = editorBoundColor;
+                Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
+            }
 
-			var bounds = GetComponent<Renderer>().bounds;
-			Gizmos.color = Color.red;
-			Gizmos.DrawWireCube(bounds.center, bounds.size);
+            var bounds = GetComponent<Renderer>().bounds;
+            Gizmos.color = Color.red;
+            Gizmos.DrawWireCube(bounds.center, bounds.size);
 
-		}
+        }
 #endif
 
-	}
+    }
+
+
+    [Serializable]
+    public class MyUnityEvent : UnityEvent<Draggable, DropGroupSlot>
+    {
+        public MyUnityEvent()
+        {
+
+        }
+    }
 
 }

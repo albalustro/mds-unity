@@ -10,9 +10,16 @@ namespace MDS.Actions.DialogConditions
 {
     public class SlotHasLabelCondition : ConditionedActionBase
     {
+        [InspectorComment("Utilize um slot OU um grupo.")]
         [InspectorCategory("Condition")]
-        [SerializeField]
+        [SerializeField, InspectorHideIf("HideSlot")]
         private DropGroupSlot _slot;
+        private bool HideSlot { get { return _group != null; } }
+
+        [InspectorCategory("Condition")]
+        [SerializeField, InspectorHideIf("HideGroup")]
+        private ValidatableDropGroupArea _group;
+        private bool HideGroup { get { return _slot != null; } }
 
         [InspectorCategory("Condition")]
         [SerializeField]
@@ -20,21 +27,23 @@ namespace MDS.Actions.DialogConditions
 
         public override bool IsConditionSatisfied()
         {
-            bool ret = false;
-            
-            if(_slot.draggableReference != null)
+            if(_slot != null)
             {
-                foreach(var label in _labels)
+                if(_slot.draggableReference != null)
                 {
-                    if(_slot.draggableReference.Labels.Contains(label))
-                    {
-                        ret = true;
-                        break;
-                    }
+                    if(_labels.Any(label => _slot.draggableReference.Labels.Contains(label)))
+                        return true;
+                    return false;
                 }
             }
 
-            return ret;
+            if (_group!=null)
+            {
+                if(_labels.Any(label => _group.Validate(label)))
+                    return true;
+            }
+
+            return false;
 
         }
     }
