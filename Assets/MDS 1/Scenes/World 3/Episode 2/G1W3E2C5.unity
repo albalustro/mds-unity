@@ -138,7 +138,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &51467095
 Prefab:
@@ -233,7 +233,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &76440830
 GameObject:
@@ -269,7 +269,7 @@ Transform:
   - {fileID: 2103857206}
   - {fileID: 701398029}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &76440832
 MonoBehaviour:
@@ -287,10 +287,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 
   _isGeneric: 0
@@ -298,6 +300,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 0
   _invalidLabels: []
 --- !u!61 &76440833
@@ -456,12 +459,16 @@ MonoBehaviour:
   - scaleState
   - OnAfterDrop
   - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
   - '[]'
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bird
@@ -566,12 +573,16 @@ MonoBehaviour:
   - scaleState
   - OnAfterDrop
   - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
   - '[]'
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bird
@@ -791,7 +802,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &611073042
 GameObject:
@@ -832,7 +843,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &701398027
 GameObject:
@@ -923,6 +934,9 @@ MonoBehaviour:
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &701398031
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1040,6 +1054,9 @@ MonoBehaviour:
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!1001 &749755955
 Prefab:
   m_ObjectHideFlags: 0
@@ -1050,7 +1067,7 @@ Prefab:
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
@@ -1087,7 +1104,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012568056842, guid: b1aff325daa729144be83df9d403a877, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
@@ -1102,7 +1119,7 @@ Prefab:
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[0]
-      value: '[{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"}]'
+      value: '[]'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
@@ -1113,6 +1130,11 @@ Prefab:
         type: 2}
       propertyPath: _groupCurrentAmount.Array.data[0]
       value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[1]
+      value: '[]'
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: b1aff325daa729144be83df9d403a877, type: 2}
@@ -1218,12 +1240,16 @@ MonoBehaviour:
   - scaleState
   - OnAfterDrop
   - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
   - '[]'
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bird
@@ -1334,6 +1360,9 @@ MonoBehaviour:
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!114 &932535196 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -1438,12 +1467,16 @@ MonoBehaviour:
   - scaleState
   - OnAfterDrop
   - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
   - '[]'
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bird
@@ -1560,6 +1593,7 @@ MonoBehaviour:
   - {fileID: 57451453}
   - {fileID: 36044744}
   - {fileID: 1915986805}
+  - {fileID: 1536664496}
   _values:
   - _keys: []
     _values: []
@@ -1621,6 +1655,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1915986805}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1536664496}
 --- !u!114 &1296213562
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1653,6 +1690,7 @@ MonoBehaviour:
   - {fileID: 57451453}
   - {fileID: 36044744}
   - {fileID: 1915986805}
+  - {fileID: 1536664496}
   _values:
   - _keys: []
     _values: []
@@ -1714,6 +1752,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1915986805}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1536664496}
 --- !u!4 &1296213563
 Transform:
   m_ObjectHideFlags: 1
@@ -1725,7 +1766,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1336532027
 Prefab:
@@ -1764,7 +1805,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010376572144, guid: 40cefe2c012511043816f1e29ed9710e, type: 2}
       propertyPath: m_RootOrder
-      value: 2
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 61000010752869668, guid: 40cefe2c012511043816f1e29ed9710e,
         type: 2}
@@ -1885,12 +1926,16 @@ MonoBehaviour:
   - scaleState
   - OnAfterDrop
   - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
   - '[]'
+  - 
+  - 
   forcePreferredIndexOnDrop: 0
   Labels:
   - bird
@@ -1929,8 +1974,14 @@ Transform:
   - {fileID: 873031163}
   - {fileID: 427780825}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1536664496 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114924196152936010, guid: a9dca2709aeed084abe192d6da53bfba,
+    type: 2}
+  m_PrefabInternal: {fileID: 1972450743}
+  m_Script: {fileID: 11500000, guid: c54565756c260af47bb2cd5d7dc8ac1f, type: 3}
 --- !u!114 &1761518793 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -2040,6 +2091,9 @@ MonoBehaviour:
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!1 &1911522714
 GameObject:
   m_ObjectHideFlags: 0
@@ -2233,6 +2287,86 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1972450743
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 114924196152936010, guid: a9dca2709aeed084abe192d6da53bfba,
+        type: 2}
+      propertyPath: _objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.9633245
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.4963393
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4689812174735150, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.033
+      objectReference: {fileID: 0}
+    - target: {fileID: 4053484047873756, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0.728
+      objectReference: {fileID: 0}
+    - target: {fileID: 212389135512346684, guid: a9dca2709aeed084abe192d6da53bfba,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: c5a5d450fc2cbf04a96aa2cf64ba6fa3,
+        type: 3}
+    - target: {fileID: 4452136066276116, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 2.14
+      objectReference: {fileID: 0}
+    - target: {fileID: 114924196152936010, guid: a9dca2709aeed084abe192d6da53bfba,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[0]
+      value: '{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114924196152936010, guid: a9dca2709aeed084abe192d6da53bfba,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 76440832}
+    - target: {fileID: 114924196152936010, guid: a9dca2709aeed084abe192d6da53bfba,
+        type: 2}
+      propertyPath: _label
+      value: bird
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &2103857204
 GameObject:
   m_ObjectHideFlags: 0
@@ -2336,3 +2470,6 @@ MonoBehaviour:
   - false
   - '{"FilledValue":0,"EmptyValue":1}'
   _changeSprite: 1
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
