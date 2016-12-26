@@ -39,8 +39,10 @@ namespace MDS.Gameplay.DragDrop
             {
                 // Caso recebeu um slot como parametro, deve certificar de que esse slot
                 // esta disponivel e os labels do draggable sao aceitaveis
-                if(!slot.IsNotTakenAndHasAcceptableLabel(draggable.Labels))
+                //if(!slot.IsNotTakenAndHasAcceptableLabel(draggable.Labels))
+                if(slot.AreAcceptableLabels(draggable.Labels) == false)
                     slot = null;
+
             }
 
             // se, ainda assim, o slot continua nulo, significa que nao existe slot disponivel nesse grupo.. 

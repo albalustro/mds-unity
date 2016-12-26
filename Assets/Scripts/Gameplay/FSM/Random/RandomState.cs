@@ -49,7 +49,7 @@ namespace MDS.Gameplay.FSM.State
                 EnableEvent();
 
             if (enterStateSignals!=null)
-                enterStateSignals.Emit(this);
+                StartCoroutine(enterStateSignals.Emit(this));
         }
 
         public void OnDisable()

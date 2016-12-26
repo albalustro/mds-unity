@@ -46,18 +46,18 @@ namespace MDS.Gameplay.DragDrop
 		[HideInInspector]
 		public bool instantiableDraggable;
 
-        public UnityEvent<Draggable, DropGroupSlot> OnAfterDrop;
+		public UnityEvent<Draggable, DropGroupSlot> OnAfterDrop;
 
-        public IAction[] OnAfterDropActions;
+		public IAction[] OnAfterDropActions;
 
-        [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o grupo recusar o draggable, *AUTOMATICAMENTE* o draggable deixa de voltar para o slot de onde foi arrastado")]
-        public IAction[] OnGroupRefuseActions;
+		[InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o grupo recusar o draggable, *AUTOMATICAMENTE* o draggable deixa de voltar para o slot de onde foi arrastado")]
+		public IAction[] OnGroupRefuseActions;
 
-        [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
-        public IAction[] OnInvalidAreaDropActions;
+		[InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
+		public IAction[] OnInvalidAreaDropActions;
 
 
-        protected override void Awake()
+		protected override void Awake()
 		{
 			base.Awake();
 
@@ -150,51 +150,51 @@ namespace MDS.Gameplay.DragDrop
 				// entao deve voltar para a posicao de onde saiu.
 				DropGroupSlot originalSlot = currentSlot;
 				if(group.SetInSlot(this, ref slot))
-                {
-                    ProcessSlotChanging(originalSlot);
-                }
-                else
+				{
+					ProcessSlotChanging(originalSlot);
+				}
+				else
 				// caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
 				{
-                    if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length>0)
-                        ExecuteActions(OnGroupRefuseActions);
-                    else // PERIGOSO...
-					    TweenGoto(currentSlot.transform.position);
+					if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length>0)
+						ExecuteActions(OnGroupRefuseActions);
+					else // PERIGOSO...
+						TweenGoto(currentSlot.transform.position);
 				}
 
 
 			}
 			else
 			{ // soltou fora de grupos
-              // se for um draggable advindo de um instantiable initial group E nao estava no slot inicial
-              // entao deve ser destruido..
-                if(OnInvalidAreaDropActions != null && OnInvalidAreaDropActions.Length>0)
-                    ExecuteActions(OnInvalidAreaDropActions);
-                else
-                {
-                    if(instantiableDraggable && !currentSlot.IsInstatiableInitialSlot)
-                    {
-                        currentSlot.draggableReference = null;
-                        FadeAndDestroy();
-                    }
-                    else
-                    {
-                        TweenGoto(currentSlot.transform.position);
-                    }
-                }
+			  // se for um draggable advindo de um instantiable initial group E nao estava no slot inicial
+			  // entao deve ser destruido..
+				if(OnInvalidAreaDropActions != null && OnInvalidAreaDropActions.Length>0)
+					ExecuteActions(OnInvalidAreaDropActions);
+				else
+				{
+					if(instantiableDraggable && !currentSlot.IsInstatiableInitialSlot)
+					{
+						currentSlot.draggableReference = null;
+						FadeAndDestroy();
+					}
+					else
+					{
+						TweenGoto(currentSlot.transform.position);
+					}
+				}
 			}
 
 		}
 
-        public void ProcessSlotChanging(DropGroupSlot originalSlot)
-        {
-            if(OnAfterDrop != null)
-                OnAfterDrop.Invoke(this, originalSlot);
+		public void ProcessSlotChanging(DropGroupSlot originalSlot)
+		{
+			if(OnAfterDrop != null)
+				OnAfterDrop.Invoke(this, originalSlot);
 
-            ExecuteActions(OnAfterDropActions);
-        }
+			ExecuteActions(OnAfterDropActions);
+		}
 
-        public void TweenGoto(Vector3 pos, float speed = 0.5f)
+		public void TweenGoto(Vector3 pos, float speed = 0.5f)
 		{
 			_renderer.sortingOrder = 5;
 			LeanTween.move(gameObject, pos, speed)
@@ -248,9 +248,9 @@ namespace MDS.Gameplay.DragDrop
 				Gizmos.DrawWireCube(box.bounds.center, box.bounds.size);
 			}
 
-            var bounds = GetComponent<Renderer>().bounds;
-            Gizmos.color = Color.red;
-            Gizmos.DrawWireCube(bounds.center, bounds.size);
+			var bounds = GetComponent<Renderer>().bounds;
+			Gizmos.color = Color.red;
+			Gizmos.DrawWireCube(bounds.center, bounds.size);
 
 		}
 #endif

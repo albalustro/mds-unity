@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FullInspector;
 using MDS.Actions;
@@ -38,6 +39,11 @@ public class TransformAnimationAction : BaseAction
     [InspectorHideIf("HideTarget")]
     public GameObject target;
     private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || _useSlotContentAsTarget!=null; } }
+
+
+    [InspectorTooltip("Todos os targets vão usar o mesmos parametros e serão animados simultaneamente")]
+    public GameObject[] multipleTargets;
+
 
     public float duration;
 
@@ -137,38 +143,96 @@ public class TransformAnimationAction : BaseAction
 
         _animationComplete = false;
 
-        LTDescr move = null;
+        
 
         switch(animationType)
         {
             case TransformAnimationType.Position:
-                if(local)
-                    destination = target.transform.position + destination;
-                move = LeanTween.move(target, destination, duration);
+
+                if (target!=null)
+                    ApplyPositionAnimation(target);
+
+                if(multipleTargets != null && multipleTargets.Length > 0)
+                {
+                    foreach(var t in multipleTargets)
+                    {
+                        if(t != null)
+                            ApplyPositionAnimation(t);
+                    }
+                }
+
                 break;
 
             case TransformAnimationType.Rotation:
-                if(local)
-                    destination = target.transform.rotation.eulerAngles + destination;
-                move = LeanTween.rotate(target, destination, duration);
+
+                if (target!=null)
+                    ApplayRototationAnimation(target);
+
+                if(multipleTargets != null && multipleTargets.Length > 0)
+                {
+                    foreach(var t in multipleTargets)
+                    {
+                        if(t != null)
+                            ApplayRototationAnimation(t);
+                    }
+                }
+
                 break;
 
             case TransformAnimationType.Scale:
-                move = LeanTween.scale(target, destination, duration);
+
+                if(target != null)
+                    ApplayScaleAnimation(target);
+
+                if(multipleTargets != null && multipleTargets.Length > 0)
+                {
+                    foreach(var t in multipleTargets)
+                    {
+                        if(t != null)
+                            ApplayScaleAnimation(t);
+                    }
+                }
+                
+
                 break;
 
             default:
                 break;
         }
 
-        move.setEase(easeType);
-        move.setDestroyOnComplete(destroyOnComplete);
-        move.setOnComplete(() => _animationComplete = true);
 
         if(waitFinish)
             yield return new WaitWhile(() => _animationComplete != true);
 
     }
 
+    private void ApplayScaleAnimation(GameObject go)
+    {
+        LeanTween.scale(go, destination, duration)
+                .setEase(easeType)
+                .setDestroyOnComplete(destroyOnComplete)
+                .setOnComplete(() => _animationComplete = true);
+    }
 
+    private void ApplayRototationAnimation(GameObject go)
+    {
+        if(local)
+            destination = go.transform.rotation.eulerAngles + destination;
+
+        LeanTween.rotate(go, destination, duration)
+                .setEase(easeType)
+                .setDestroyOnComplete(destroyOnComplete)
+                .setOnComplete(() => _animationComplete = true);
+    }
+
+    private void ApplyPositionAnimation(GameObject go)
+    {
+        if(local)
+            destination = go.transform.position + destination;
+
+        LeanTween.move(go, destination, duration)
+                .setEase(easeType)
+                .setDestroyOnComplete(destroyOnComplete)
+                .setOnComplete(() => _animationComplete = true);
+    }
 }

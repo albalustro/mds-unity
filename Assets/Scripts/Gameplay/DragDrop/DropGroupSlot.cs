@@ -101,17 +101,11 @@ namespace MDS.Gameplay.DragDrop
 			if(IsTaken)
 				return false;
 
-			if(!HasLabelsToBeValidated())
-				return true;
-
-			if(labels.Any(l => IsAcceptableLabel(l)))
-				return true;
-
-			return false;
+            return AreAcceptableLabels(labels);
 
 		}
 
-		internal bool HasLabelsToBeValidated()
+		public bool HasLabelsToBeValidated()
 		{
 			return (_acceptableLabels != null && _acceptableLabels.Count > 0);
 		}
@@ -123,6 +117,18 @@ namespace MDS.Gameplay.DragDrop
 
 			return _acceptableLabels.Contains(label);
 		}
+
+        public bool AreAcceptableLabels(List<string> labels)
+        {
+            if(!HasLabelsToBeValidated())
+                return true;
+
+            if(labels.Any(l => IsAcceptableLabel(l)))
+                return true;
+
+            return false;
+        }
+
 
 		#region IValidatable
 

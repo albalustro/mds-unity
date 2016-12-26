@@ -20,8 +20,8 @@ namespace MDS.Gameplay.FSM.State.Transition
 
         public virtual void ExecuteTransition()
         {
-            if(exitStateSignals!=null)
-                exitStateSignals.Emit(_myState);
+            if(exitStateSignals != null)
+                _myState.StartCoroutine(exitStateSignals.Emit(_myState));
 
             _nextState.SetActive(true);
             _myState.gameObject.SetActive(false);
