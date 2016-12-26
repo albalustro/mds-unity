@@ -251,16 +251,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 4
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - lilas
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &120886235
@@ -345,10 +355,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 10
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
@@ -356,6 +374,8 @@ MonoBehaviour:
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!61 &120886239
@@ -419,7 +439,7 @@ Prefab:
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null}]'
+      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":true,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":true,"CorrectAnswer":null}]'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
@@ -450,6 +470,7 @@ GameObject:
   - component: {fileID: 282450242}
   - component: {fileID: 282450243}
   - component: {fileID: 282450244}
+  - component: {fileID: 282450245}
   m_Layer: 0
   m_Name: cor_release
   m_TagString: Untagged
@@ -540,6 +561,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -547,6 +570,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -554,6 +580,21 @@ MonoBehaviour:
   - cor
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &282450245
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 282450240}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1 &297489567
 GameObject:
   m_ObjectHideFlags: 0
@@ -565,6 +606,7 @@ GameObject:
   - component: {fileID: 297489569}
   - component: {fileID: 297489570}
   - component: {fileID: 297489571}
+  - component: {fileID: 297489572}
   m_Layer: 0
   m_Name: lilas_release
   m_TagString: Untagged
@@ -655,6 +697,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -662,6 +706,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -669,6 +716,21 @@ MonoBehaviour:
   - lilas
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &297489572
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 297489567}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1 &321610432
 GameObject:
   m_ObjectHideFlags: 0
@@ -1033,10 +1095,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 3
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
@@ -1045,6 +1115,8 @@ MonoBehaviour:
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &500223279
@@ -1143,16 +1215,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 5
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - verde
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &568156968
@@ -1166,6 +1248,7 @@ GameObject:
   - component: {fileID: 568156970}
   - component: {fileID: 568156972}
   - component: {fileID: 568156971}
+  - component: {fileID: 568156973}
   m_Layer: 0
   m_Name: bichos_release
   m_TagString: Untagged
@@ -1242,6 +1325,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1249,6 +1334,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1270,6 +1358,21 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1.2, y: 0.45}
+--- !u!114 &568156973
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 568156968}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1001 &617318752
 Prefab:
   m_ObjectHideFlags: 0
@@ -1445,7 +1548,7 @@ Prefab:
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null}]'
+      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":true,"CorrectAnswer":null}]'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
@@ -1470,6 +1573,7 @@ GameObject:
   - component: {fileID: 755347179}
   - component: {fileID: 755347180}
   - component: {fileID: 755347181}
+  - component: {fileID: 755347182}
   m_Layer: 0
   m_Name: colecionadores_release
   m_TagString: Untagged
@@ -1560,6 +1664,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1567,6 +1673,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1574,6 +1683,26 @@ MonoBehaviour:
   - colecionadores
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &755347182
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 755347177}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
+--- !u!1 &758001559 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 1853875148}
 --- !u!1001 &848913119
 Prefab:
   m_ObjectHideFlags: 0
@@ -1786,10 +1915,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 9
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
@@ -1797,6 +1934,8 @@ MonoBehaviour:
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &939388542
@@ -1914,6 +2053,7 @@ GameObject:
   - component: {fileID: 1036989180}
   - component: {fileID: 1036989181}
   - component: {fileID: 1036989182}
+  - component: {fileID: 1036989183}
   m_Layer: 0
   m_Name: verde_release
   m_TagString: Untagged
@@ -2004,6 +2144,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2011,6 +2153,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2018,6 +2163,21 @@ MonoBehaviour:
   - verde
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &1036989183
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1036989178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1 &1043465110
 GameObject:
   m_ObjectHideFlags: 0
@@ -2114,18 +2274,28 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 6
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
-  - verde
   - pequeno
+  - verde
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &1134640145
@@ -2162,16 +2332,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 11
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - verde
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!61 &1134640147
@@ -2300,6 +2480,106 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1173500133}
   m_Script: {fileID: 11500000, guid: 825f6ceaaa1f03342bb422942c28c0d0, type: 3}
+--- !u!1001 &1241379631
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1244868556
 GameObject:
   m_ObjectHideFlags: 0
@@ -2568,16 +2848,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 1
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - lilas
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &1358748429
@@ -2676,16 +2966,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 7
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - verde
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!114 &1393448197 stripped
@@ -2790,16 +3090,26 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 0
   - '{"releasedValue":null,"draggingValue":null,"releasedFinalPositionValue":null}'
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - colecionadores
   - lilas
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1 &1428683952
@@ -2813,6 +3123,7 @@ GameObject:
   - component: {fileID: 1428683954}
   - component: {fileID: 1428683955}
   - component: {fileID: 1428683956}
+  - component: {fileID: 1428683957}
   m_Layer: 0
   m_Name: grandes_release
   m_TagString: Untagged
@@ -2903,6 +3214,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2910,6 +3223,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2917,6 +3233,21 @@ MonoBehaviour:
   - grandes
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &1428683957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1428683952}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1001 &1483372663
 Prefab:
   m_ObjectHideFlags: 0
@@ -3112,6 +3443,7 @@ GameObject:
   - component: {fileID: 1538636004}
   - component: {fileID: 1538636005}
   - component: {fileID: 1538636006}
+  - component: {fileID: 1538636007}
   m_Layer: 0
   m_Name: pequenos_release
   m_TagString: Untagged
@@ -3202,6 +3534,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3209,6 +3543,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3216,6 +3553,21 @@ MonoBehaviour:
   - pequenos
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &1538636007
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1538636002}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1001 &1554180473
 Prefab:
   m_ObjectHideFlags: 0
@@ -3321,6 +3673,11 @@ Prefab:
         type: 2}
       propertyPath: _isGeneric
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[0]
+      value: false
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
@@ -3504,6 +3861,7 @@ GameObject:
   - component: {fileID: 1716588818}
   - component: {fileID: 1716588819}
   - component: {fileID: 1716588820}
+  - component: {fileID: 1716588821}
   m_Layer: 0
   m_Name: convidados_release
   m_TagString: Untagged
@@ -3594,6 +3952,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3601,6 +3961,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3608,6 +3971,26 @@ MonoBehaviour:
   - convidados
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &1716588821
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1716588816}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
+--- !u!1 &1721677896 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1000012059810524, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+    type: 2}
+  m_PrefabInternal: {fileID: 2110133484}
 --- !u!1 &1839996064
 GameObject:
   m_ObjectHideFlags: 0
@@ -3704,10 +4087,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 8
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
@@ -3716,6 +4107,8 @@ MonoBehaviour:
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1001 &1853875148
@@ -3765,7 +4158,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+      value: '{"onStartActions":[{"slugs":["request1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1_1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["error1_2"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -3796,6 +4189,11 @@ Prefab:
       propertyPath: m_Name
       value: 2 - Challenge
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[1]
+      value: 
+      objectReference: {fileID: 939388544}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -3810,6 +4208,7 @@ GameObject:
   - component: {fileID: 1861580878}
   - component: {fileID: 1861580879}
   - component: {fileID: 1861580880}
+  - component: {fileID: 1861580881}
   m_Layer: 0
   m_Name: tamanho_release
   m_TagString: Untagged
@@ -3900,6 +4299,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -3907,6 +4308,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -3914,6 +4318,21 @@ MonoBehaviour:
   - tamanho
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!114 &1861580881
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1861580876}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234eff3cd380d475f8b2ea52fb8cce4f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _objectReferences: []
+  _serializedStateKeys: []
+  _serializedStateValues: []
+  validator: {fileID: 338216775}
 --- !u!1001 &1871700974
 Prefab:
   m_ObjectHideFlags: 0
@@ -4172,8 +4591,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: 4d6a810e59633104db92d51c72364de3, type: 3}
   upSprite: {fileID: 21300000, guid: 45389fbfcc8730d4db4ad6448dfe2518, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -4332,6 +4753,12 @@ MonoBehaviour:
   - {fileID: 1861580880}
   - {fileID: 1036989182}
   - {fileID: 568156971}
+  - {fileID: 755347182}
+  - {fileID: 1716588821}
+  - {fileID: 282450245}
+  - {fileID: 1428683957}
+  - {fileID: 297489572}
+  - {fileID: 1538636007}
   _values:
   - _keys: []
     _values: []
@@ -4477,6 +4904,24 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 568156971}
+  - _keys: []
+    _values: []
+    _target: {fileID: 755347182}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1716588821}
+  - _keys: []
+    _values: []
+    _target: {fileID: 282450245}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1428683957}
+  - _keys: []
+    _values: []
+    _target: {fileID: 297489572}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1538636007}
 --- !u!114 &1986294501
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -4537,6 +4982,12 @@ MonoBehaviour:
   - {fileID: 1861580880}
   - {fileID: 1036989182}
   - {fileID: 568156971}
+  - {fileID: 755347182}
+  - {fileID: 1716588821}
+  - {fileID: 282450245}
+  - {fileID: 1428683957}
+  - {fileID: 297489572}
+  - {fileID: 1538636007}
   _values:
   - _keys: []
     _values: []
@@ -4544,8 +4995,17 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 2096348654}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 2110133485}
   - _keys: []
     _values: []
@@ -4592,8 +5052,14 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 617318753}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._fadeAndFreezeOnDrop.EditProperty
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1572702099}
   - _keys: []
     _values: []
@@ -4646,8 +5112,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1244868558}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1393448197}
   - _keys: []
     _values: []
@@ -4685,6 +5154,24 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 568156971}
+  - _keys: []
+    _values: []
+    _target: {fileID: 755347182}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1716588821}
+  - _keys: []
+    _values: []
+    _target: {fileID: 282450245}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1428683957}
+  - _keys: []
+    _values: []
+    _target: {fileID: 297489572}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1538636007}
 --- !u!4 &1986294502
 Transform:
   m_ObjectHideFlags: 1
@@ -4794,10 +5281,18 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 2
   - 
   - 
+  - 
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - bichos
@@ -4805,6 +5300,8 @@ MonoBehaviour:
   - convidados
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
   instantiableDraggable: 0
 --- !u!1001 &2110133484
@@ -4817,7 +5314,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 2
+      value: 33
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -4854,7 +5351,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"_action":"Enable","_target":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error0_1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":1,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":2,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":3,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":4,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":5,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":6,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":7,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":8,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":9,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":10,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":11,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":12,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_2":[{"slugs":["error0_2"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":13,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":14,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":15,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":16,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":17,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":18,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":19,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":20,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":21,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":22,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":23,"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":24,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[25,26,27,28,29,30],"_dropArea":31,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":1.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_3":[],"onVictoryActions":[{"_action":"Enable","_targets":[32],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -4889,7 +5386,172 @@ Prefab:
         type: 2}
       propertyPath: _objectReferences.Array.data[1]
       value: 
+      objectReference: {fileID: 379538714}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[2]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[3]
+      value: 
+      objectReference: {fileID: 1578507760}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[4]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[5]
+      value: 
+      objectReference: {fileID: 848913120}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[6]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[7]
+      value: 
+      objectReference: {fileID: 1554180474}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[8]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[9]
+      value: 
+      objectReference: {fileID: 1872030383}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[10]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[11]
+      value: 
+      objectReference: {fileID: 1316246266}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[12]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[13]
+      value: 
+      objectReference: {fileID: 379538714}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[14]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[15]
+      value: 
+      objectReference: {fileID: 1578507760}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[16]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[17]
+      value: 
+      objectReference: {fileID: 848913120}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[18]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[19]
+      value: 
+      objectReference: {fileID: 1554180474}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[20]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[21]
+      value: 
+      objectReference: {fileID: 1872030383}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[22]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[23]
+      value: 
+      objectReference: {fileID: 1316246266}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[24]
+      value: 
+      objectReference: {fileID: 334807183}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[25]
+      value: 
+      objectReference: {fileID: 1416870117}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[26]
+      value: 
+      objectReference: {fileID: 1330757013}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[27]
+      value: 
+      objectReference: {fileID: 89802907}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[28]
+      value: 
+      objectReference: {fileID: 500223279}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[29]
+      value: 
+      objectReference: {fileID: 1358748429}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[30]
+      value: 
+      objectReference: {fileID: 1134640145}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[31]
+      value: 
+      objectReference: {fileID: 1572702099}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[32]
+      value: 
       objectReference: {fileID: 939388542}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[33]
+      value: 
+      objectReference: {fileID: 758001559}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[34]
+      value: 
+      objectReference: {fileID: 1721677896}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0

@@ -176,10 +176,19 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 0
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - A
@@ -978,8 +987,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: 0c68ace057271b7498acc9b60aef5256, type: 3}
   upSprite: {fileID: 21300000, guid: a8e964e29225f3a4ca14267c0f8f13b8, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -1114,6 +1125,7 @@ MonoBehaviour:
   - {fileID: 1685842337}
   - {fileID: 1926922497}
   - {fileID: 1235839814}
+  - {fileID: 657311422}
   _values:
   - _keys: []
     _values: []
@@ -1187,6 +1199,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1235839814}
+  - _keys: []
+    _values: []
+    _target: {fileID: 657311422}
 --- !u!114 &603165010
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1223,6 +1238,7 @@ MonoBehaviour:
   - {fileID: 1685842337}
   - {fileID: 1926922497}
   - {fileID: 1235839814}
+  - {fileID: 657311422}
   _values:
   - _keys: []
     _values: []
@@ -1239,8 +1255,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 237854413}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.changeParent.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 808474056}
   - _keys: []
     _values: []
@@ -1279,10 +1298,37 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 463432108}
   - _keys:
-    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor.dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor.initialGroup.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor.dropedItensParent.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0.AbstractTypeEditor.dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0.AbstractTypeEditor.initialGroup.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0.AbstractTypeEditor.dropedItensParent.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.0.AbstractTypeEditor.dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.0.AbstractTypeEditor.initialGroup.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.0.AbstractTypeEditor.dropedItensParent.EditProperty
     _values:
     - _showDropdown: 1
       _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1448772007}
   - _keys: []
     _values: []
@@ -1302,6 +1348,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1235839814}
+  - _keys: []
+    _values: []
+    _target: {fileID: 657311422}
 --- !u!4 &603165011
 Transform:
   m_ObjectHideFlags: 1
@@ -1314,6 +1363,34 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &657311421
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 657311422}
+  m_Layer: 0
+  m_Name: NewInstanceItensParent
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657311422
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 657311421}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &808474053
 Prefab:
@@ -1392,8 +1469,13 @@ MonoBehaviour:
   _objectReferences: []
   _serializedStateKeys:
   - m_maxDraggables
+  - itens
   _serializedStateValues:
   - 
+  - 
+  changeParent: 1
+  changeItem: 0
+  dropedItens: {fileID: 657311422}
 --- !u!1001 &813397155
 Prefab:
   m_ObjectHideFlags: 0
@@ -1689,10 +1771,19 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 2
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - C
@@ -1829,10 +1920,19 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 1
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - B
@@ -2011,7 +2111,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 6
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -2058,7 +2158,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[],"onErrorActions_1":[{"m_obj":1,"m_newSprite":2,"m_lockCollider":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ChangeSpriteAction"},{"m_obj":3,"m_newSprite":4,"m_lockCollider":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.ChangeSpriteAction"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"m_anim":5,"m_animatorAction":"Trigger","m_parameter":"RightAnswer","m_value":0,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetAnimatorParameterAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"m_obj":1,"m_newSprite":2,"m_lockCollider":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ChangeSpriteAction"},{"m_obj":3,"m_newSprite":4,"m_lockCollider":false,"delayBeforeExecution":2.0,"waitFinish":false,"$type":"MDS.Actions.ChangeSpriteAction"},{"dropArea":null,"initialGroup":null,"dropedItensParent":5,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ResetInitial"},{"slugs":["error_1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"dropArea":null,"initialGroup":null,"dropedItensParent":6,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ResetInitial"},{"slugs":["error_2"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[{"dropArea":null,"initialGroup":null,"dropedItensParent":7,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.ResetInitial"},{"slugs":["hint"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"CallFunctionOnAnimatedObject":null,"m_anim":8,"m_animatorAction":"Trigger","m_parameter":"RightAnswer","m_value":0,"m_boolValue":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetAnimatorParameterAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -2096,6 +2196,71 @@ Prefab:
         type: 2}
       propertyPath: _objectReferences.Array.data[5]
       value: 
+      objectReference: {fileID: 657311422}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[6]
+      value: 
+      objectReference: {fileID: 657311422}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[7]
+      value: 
+      objectReference: {fileID: 657311422}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[8]
+      value: 
+      objectReference: {fileID: 821833933}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[9]
+      value: 
+      objectReference: {fileID: 813397156}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[10]
+      value: 
+      objectReference: {fileID: 821833933}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[11]
+      value: 
+      objectReference: {fileID: 813397156}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[12]
+      value: 
+      objectReference: {fileID: 821833933}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[13]
+      value: 
+      objectReference: {fileID: 813397156}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[14]
+      value: 
+      objectReference: {fileID: 821833933}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[15]
+      value: 
+      objectReference: {fileID: 813397156}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[16]
+      value: 
+      objectReference: {fileID: 821833933}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[17]
+      value: 
+      objectReference: {fileID: 813397156}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[18]
+      value: 
       objectReference: {fileID: 821833933}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
@@ -2106,6 +2271,106 @@ MonoBehaviour:
     type: 2}
   m_PrefabInternal: {fileID: 1448772006}
   m_Script: {fileID: 11500000, guid: 08e432b864c26764d93e1fd802ce35de, type: 3}
+--- !u!1001 &1467133156
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_RootOrder
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Pivot.y
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1685842334
 GameObject:
   m_ObjectHideFlags: 0
@@ -2191,10 +2456,19 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 3
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - D
@@ -2493,10 +2767,19 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 4
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
   - E

@@ -13,10 +13,9 @@ public class TransformAnimationAction : BaseAction
     {
         Position,
         Scale,
-        Rotation
+        Rotation,
     }
-
-
+		
     public TransformAnimationType animationType;
 
     private bool IsPositionAnim { get { return animationType == TransformAnimationType.Position; } }
@@ -65,8 +64,6 @@ public class TransformAnimationAction : BaseAction
     private bool Hide_useSelfPositionAsDestination { get { return useMemorizedGOAsDestination || useThisTransformAsDestination != null; } }
     private bool Hide_useMemorizedGOAsDestination { get { return useSelfPositionAsDestination  || useThisTransformAsDestination != null; } }
     private bool Hide_useThisTransformAsDestination { get { return useSelfPositionAsDestination || useMemorizedGOAsDestination; } }
-
-
 
     public LeanTweenType easeType;
 
@@ -143,7 +140,6 @@ public class TransformAnimationAction : BaseAction
 
         _animationComplete = false;
 
-        
 
         switch(animationType)
         {
@@ -195,7 +191,6 @@ public class TransformAnimationAction : BaseAction
                 
 
                 break;
-
             default:
                 break;
         }
@@ -216,19 +211,23 @@ public class TransformAnimationAction : BaseAction
 
     private void ApplayRototationAnimation(GameObject go)
     {
+		Vector3 dest = destination;
+		
         if(local)
-            destination = go.transform.rotation.eulerAngles + destination;
-
-        LeanTween.rotate(go, destination, duration)
-                .setEase(easeType)
-                .setDestroyOnComplete(destroyOnComplete)
-                .setOnComplete(() => _animationComplete = true);
+			dest += go.transform.rotation.eulerAngles;
+		
+		LeanTween.rotate(go,  dest, duration)
+			.setEase(easeType)
+			.setDestroyOnComplete(destroyOnComplete)
+			.setOnComplete(() => _animationComplete = true);
     }
 
     private void ApplyPositionAnimation(GameObject go)
     {
+		Vector3 dest = destination;
+		
         if(local)
-            destination = go.transform.position + destination;
+            dest += go.transform.position;
 
         LeanTween.move(go, destination, duration)
                 .setEase(easeType)

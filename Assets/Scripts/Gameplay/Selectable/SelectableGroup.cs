@@ -17,6 +17,13 @@ namespace MDS.Gameplay.Selectable
             Multiple
         }
 
+		[HideInInspector]
+		//Usado propriedade para nao alterar o acesso (privado) da variavel
+		public bool isGeneric { 
+			get { return false; }
+			set {  }	//apenas para implelentar interface
+		}
+
         [SerializeField, InspectorTooltip("Propriedade para indicar quantos elementos podem estar selecionados simultaneamente")]
         private int? _maxSelected;
         private int _curSelectedAmount;

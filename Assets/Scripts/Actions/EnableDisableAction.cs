@@ -25,9 +25,11 @@ namespace MDS.Actions
         [SerializeField]
         private bool _onlyChildren;
 
+		[SerializeField]
+		private bool m_destroyOnDisable;
+
         public EnableDisableAction()
         {
-
         }
 
         public EnableDisableAction(EAction actionDesired, UnityEngine.Object[] targets)
@@ -54,33 +56,38 @@ namespace MDS.Actions
 					break;
 
 			}
+			if (m_destroyOnDisable) {
+				for (int i = 0; i < _targets.Length; i++) {
+					LeanTween.Destroy (_targets [i]);
+				}
+			} else {
+				foreach(var target in _targets)
+				{
+					if(target is GameObject)
+					{
+						var p = (target as GameObject).transform;
+						if(_includeChidren || _onlyChildren)
+						{
+							for(int i = 0; i < p.childCount; i++)
+							{
+								p.GetChild(i).gameObject.SetActive(en);
+							}
+						}
+						if(!_onlyChildren)
+							p.gameObject.SetActive(en);
 
-            foreach(var target in _targets)
-            {
-                if(target is GameObject)
-                {
-                    var p = (target as GameObject).transform;
-                    if(_includeChidren || _onlyChildren)
-                    {
-                        for(int i = 0; i < p.childCount; i++)
-                        {
-                            p.GetChild(i).gameObject.SetActive(en);
-                        }
-                    }
-                    if(!_onlyChildren)
-                        p.gameObject.SetActive(en);
-
-                }
-                else if(target is Behaviour)
-                {
-                    (target as Behaviour).enabled = en;
-                }
-                else if(target as Renderer)
-                {
-                    (target as Renderer).enabled = en;
-                }
-
-            }
+					}
+					else if(target is Behaviour)
+					{
+						(target as Behaviour).enabled = en;
+					}
+					else if(target as Renderer)
+					{
+						(target as Renderer).enabled = en;
+					}
+				}
+			}
+            
 
 		}
 

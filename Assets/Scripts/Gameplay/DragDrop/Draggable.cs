@@ -30,12 +30,16 @@ namespace MDS.Gameplay.DragDrop
 
 		public bool changeSprite;
 		public bool changeScale;
+		public bool activeWhileDragging;
 
 		[InspectorShowIf("changeSprite"), InspectorTooltip("Sprites usadas em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja nulo, o sprite releasedValue será usado.")]
 		public DraggableState<Sprite> spriteState;
 
 		[InspectorShowIf("changeScale"), InspectorTooltip("Valores de escala do sprite em cada estágio do processo de drag & drop. Caso o releasedFinalPositionValue seja 0, o valor releasedValue será usado.")]
 		public DraggableState<float> scaleState;
+
+		[InspectorShowIf("activeWhileDragging"), InspectorTooltip("Ativa um GameObject específico enquanto arrasta o draggable")]
+		public GameObject m_activatedWhileDragging;
 
 		private Vector3 _touchOffset;
 		private SpriteRenderer _renderer;
@@ -93,6 +97,9 @@ namespace MDS.Gameplay.DragDrop
 
 			if(changeSprite)
 				_renderer.sprite = spriteState.draggingValue;
+
+			if (activeWhileDragging)
+				m_activatedWhileDragging.SetActive (true);
 
 		}
 
@@ -208,6 +215,7 @@ namespace MDS.Gameplay.DragDrop
 							_renderer.sprite = spriteState.releasedFinalPositionValue;
 						else
 							_renderer.sprite = spriteState.releasedValue;
+							
 					}
 
 
@@ -218,6 +226,13 @@ namespace MDS.Gameplay.DragDrop
 							value = scaleState.releasedFinalPositionValue;
 						LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
 					}
+					
+					if(activeWhileDragging){
+						if(m_activatedWhileDragging != null){
+								m_activatedWhileDragging.SetActive(false);
+						}
+					}
+
 					pos.z = -1;
 					transform.position = pos;
 				});

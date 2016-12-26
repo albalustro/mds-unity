@@ -184,12 +184,14 @@ MonoBehaviour:
   - 2
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
-  - 
-  - 
-  - 
-  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '[{"selfTarget":true,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
-  Labels: []
+  Labels:
+  - errada
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
@@ -286,8 +288,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - '[]'
   downSprite: {fileID: 21300000, guid: d4e0173c10be265419b971b00ea59d73, type: 3}
   upSprite: {fileID: 21300000, guid: eac32f886317fc548a5f4675121c1726, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -353,10 +357,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 
   _isGeneric: 0
@@ -364,6 +370,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 0
   _invalidLabels: []
 --- !u!212 &302224866
@@ -546,6 +553,7 @@ MonoBehaviour:
   - {fileID: 109730563}
   - {fileID: 1476632704}
   - {fileID: 838786166}
+  - {fileID: 1775043160}
   _values:
   - _keys: []
     _values: []
@@ -592,6 +600,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 838786166}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1775043160}
 --- !u!114 &382903266
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -619,9 +630,13 @@ MonoBehaviour:
   - {fileID: 109730563}
   - {fileID: 1476632704}
   - {fileID: 838786166}
+  - {fileID: 1775043160}
   _values:
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.OnAfterDrop.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1356886905}
   - _keys:
     - DefaultBehaviorEditor.slots.EditProperty
@@ -658,18 +673,30 @@ MonoBehaviour:
     _target: {fileID: 2113102001}
   - _keys:
     - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty
     _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     - _showDropdown: 1
       _serializedIsActive: 0
     _target: {fileID: 1108738825}
   - _keys: []
     _values: []
     _target: {fileID: 298425910}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.OnAfterDrop.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1410129034}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.OnAfterDrop.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 109730563}
   - _keys: []
     _values: []
@@ -677,6 +704,9 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 838786166}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1775043160}
 --- !u!4 &382903267
 Transform:
   m_ObjectHideFlags: 1
@@ -1001,6 +1031,11 @@ Prefab:
       propertyPath: m_Pivot.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 223000012944943118, guid: de446ca41b6da644d9acc8aed82d4b9f,
+        type: 2}
+      propertyPath: m_Camera
+      value: 
+      objectReference: {fileID: 321610436}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
   m_IsPrefabParent: 0
@@ -1033,12 +1068,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 2113102001}
+  - {fileID: 1803063008}
+  - {fileID: 1803063008}
+  - {fileID: 1803063008}
+  - {fileID: 1410129031}
+  - {fileID: 1358720663}
+  - {fileID: 1410129034}
+  - {fileID: 302224865}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"target":null,"duration":2.0,"local":true,"destination":{"x":3.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.8,"y":0.8,"z":0.8},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":3.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":1,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}],"onErrorActions_2":[{"slugs":["error2"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.8,"y":0.8,"z":0.8},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":3.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":2,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}],"onErrorActions_3":[{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":1.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.8,"y":0.8,"z":0.8},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":true,"_useSlotContentAsTarget":null,"target":null,"duration":3.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":3,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":true,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"slugs":["error3"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":4,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":5,"destination":{"x":0.0,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":6,"_dropArea":7,"_slot":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &1108738826
 Transform:
@@ -1282,12 +1324,14 @@ MonoBehaviour:
   - 1
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
-  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
   - '[{"selfTarget":true,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
   - '[]'
   - '[]'
   forcePreferredIndexOnDrop: 0
-  Labels: []
+  Labels:
+  - errada
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
@@ -1467,7 +1511,8 @@ MonoBehaviour:
   - 0
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
-  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
   - '[]'
   - '[]'
   - '[]'
@@ -1627,11 +1672,12 @@ MonoBehaviour:
   - '{"releasedValue":0,"draggingValue":1,"releasedFinalPositionValue":2}'
   - 
   - 
-  - 
-  - 
-  - 
+  - '[{"selfTarget":true,"GameObjectToBeMemorized":null,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MemorizeMe"}]'
+  - '[]'
+  - '[]'
   forcePreferredIndexOnDrop: 0
-  Labels: []
+  Labels:
+  - errada
   changeSprite: 1
   changeScale: 0
   currentSlot: {fileID: 0}
@@ -1650,6 +1696,40 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 2.18, y: 2.96}
+--- !u!114 &1775043160 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014140788158, guid: de446ca41b6da644d9acc8aed82d4b9f,
+    type: 2}
+  m_PrefabInternal: {fileID: 1034171284}
+  m_Script: {fileID: 11500000, guid: 7cc34d89657a1ac4b8a8901ddc09102e, type: 3}
+--- !u!1 &1803063007
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1803063008}
+  m_Layer: 0
+  m_Name: EndRiverPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 5132851093641282708, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1803063008
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1803063007}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 5.74, y: 0.44, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 12
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1950637123
 GameObject:
   m_ObjectHideFlags: 0

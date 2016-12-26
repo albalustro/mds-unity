@@ -21,6 +21,7 @@ public class DialogueSystem : MDSBehaviour
     public static bool isActive;
     //Componente que gerencia o canvas
     public Dialogue dialogue;
+	private Canvas canvas;
     //Scriptable Object com todas as entradas de diálogo do Game/Mundo em questão
     public DialogueList SODialogue;
     //Caminhos para load do SO, voice over e emotion
@@ -49,7 +50,8 @@ public class DialogueSystem : MDSBehaviour
             Destroy(gameObject);
 
         audioSource = GetComponent<AudioSource>(); //<<<<<<<<<< provisório até implementarmos o singleton do Audio Manager
-
+		canvas = GetComponentInParent<Canvas>();
+		canvas.worldCamera = Camera.main;
         //Será substituído pelo componente de parse de scene
         game = SceneManager.GetActiveScene().name.Substring(1, 1);
         world = SceneManager.GetActiveScene().name.Substring(3, 1);
