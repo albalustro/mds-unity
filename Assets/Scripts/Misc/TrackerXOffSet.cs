@@ -8,19 +8,33 @@ public class TrackerXOffSet : MonoBehaviour {
 	[SerializeField]
 	private Transform m_xGlobalPosition;
 
-	private Selectable m_selectable;
+	private Selectable _selectable;
+
+	float _initialLocalX, _yInitialOffset;
 
 
 	void Awake()
 	{
-		m_selectable = GetComponent<Selectable> ();
+		_selectable = GetComponent<Selectable>();
+		_initialLocalX = transform.localPosition.x;
+        _yInitialOffset = transform.localPosition.y;
 	}
 
 	void Update()
 	{
-		float onSelectedPosition = m_xGlobalPosition.position.x - transform.position.x;
-		Vector2 newPos = new Vector2 (onSelectedPosition, -0.3f);
-		m_selectable._localPositionDisplacement.SelectedValue = newPos;
+		Vector3 pos = transform.position;
+		if (_selectable.Selected)
+		{
+			pos.x = m_xGlobalPosition.position.x;
+            pos.y = transform.parent.position.y - 0.3f + _yInitialOffset;
+		}
+		else
+		{
+			pos.x = transform.parent.position.x + _initialLocalX;
+            pos.y = transform.parent.position.y + _yInitialOffset;
+
+        }
+		transform.position = pos;
 	}
 
 }

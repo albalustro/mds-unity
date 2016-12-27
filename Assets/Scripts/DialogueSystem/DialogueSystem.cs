@@ -4,11 +4,9 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-public class DialogueSystem : MDSBehaviour
+public class DialogueSystem : Singleton<DialogueSystem>
 {
 
-    
-    public static DialogueSystem instance = null;
 
     //Propriedades de um DialogueEntry
     public static string game;
@@ -43,11 +41,6 @@ public class DialogueSystem : MDSBehaviour
     protected override void Awake()
     {
         base.Awake();
-
-        if (instance == null)
-            instance = this;
-        else if (instance != this)
-            Destroy(gameObject);
 
         audioSource = GetComponent<AudioSource>(); //<<<<<<<<<< provisório até implementarmos o singleton do Audio Manager
 		canvas = GetComponentInParent<Canvas>();

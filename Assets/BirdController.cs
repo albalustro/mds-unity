@@ -17,9 +17,11 @@ public class BirdController : MDSBehaviour {
 
 	private ContinuousMove m_move;
 
-	void Awake()
-	{
-		m_move = GameObject.FindObjectOfType<ContinuousMove>();
+    protected override void Awake()
+    {
+        base.Awake();
+
+        m_move = GameObject.FindObjectOfType<ContinuousMove>();
 	}
 
 	public void SetCounter()

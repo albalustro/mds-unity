@@ -95,10 +95,10 @@ namespace MDS.Actions
         {
             yield return base.Execute();
 
-            DialogueSystem.instance.ShowDialogueMessage(slugs);
+            DialogueSystem.Instance.ShowDialogueMessage(slugs);
 
             if (waitFinish)
-                yield return new WaitWhile(DialogueSystem.instance.IsDialogueOpen);
+                yield return new WaitWhile(DialogueSystem.Instance.IsDialogueOpen);
         }
     }
 }

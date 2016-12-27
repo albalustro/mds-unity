@@ -11,26 +11,28 @@ namespace MDS.Actions{
 	[Serializable]
 	public class SetSelected : BaseAction
 	{
-
+        [InspectorComment("Selecionar qual(is) objeto(os) serão alvos do select/unselect ")]
+        [InspectorOrder(3)]
 		public bool m_useMemorizedGo;
 
-		[FullInspector.InspectorHideIf("m_useMemorizedGo")]
+		[FullInspector.InspectorHideIf("m_useMemorizedGo"), InspectorOrder(4)]
 		public GameObject[] obj;
 
-		[SerializeField]
+		[SerializeField, InspectorOrder(5), InspectorName("Select/Unselect")]
 		private bool m_set;
 
-		[SerializeField, Tooltip("Drag SelectableGroup to here if you want to Lock/Unlock all selectable colliders")]
+        [InspectorComment("Abaixo use o grupo para fazer unselect/lock em todos os elementos do grupo")]
+		[SerializeField,InspectorOrder(0), Tooltip("Drag SelectableGroup to here if you want to Lock/Unlock all selectable colliders")]
 		private Transform m_groupTransform;
 		private bool ShowLockUnlockButton {get {return m_groupTransform != null;}}
 
 
 		[InspectorShowIf("ShowLockUnlockButton")]
-		[SerializeField]
+		[SerializeField, InspectorOrder(2)]
 		private bool m_unselectAll = false;
 
 		[SerializeField, InspectorTooltip("Check this if you want to lock/unlock the selected group")]
-		[InspectorShowIf("ShowLockUnlockButton")]
+		[InspectorShowIf("ShowLockUnlockButton"), InspectorOrder(1)]
 		private bool m_lockGroup;
 
 
@@ -40,12 +42,18 @@ namespace MDS.Actions{
 			yield return base.Execute();
 
 			if (m_groupTransform != null) {
-				foreach (Transform child in m_groupTransform) {
-					child.GetComponent<Collider2D> ().enabled = !m_lockGroup;
-					if (m_unselectAll) {
-						child.GetComponent<Selectable> ().SetSelected (false);
-					}
-				}
+                foreach(Transform child in m_groupTransform.GetComponentsInChildren<Transform>())
+                {
+                    Collider2D col = child.GetComponent<Collider2D>();
+                    if(col != null)
+                        col.enabled = !m_lockGroup;
+                    if(m_unselectAll)
+                    {
+                        Selectable sel = child.GetComponent<Selectable>();
+                        if(sel != null)
+                            sel.SetSelected(false);
+                    }
+                }
 			}
 
 
