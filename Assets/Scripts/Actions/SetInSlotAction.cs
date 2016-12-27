@@ -23,6 +23,12 @@ namespace MDS.Actions
         private DropGroupSlot useSlotContentAsTarget;
         private bool Hide_useSlotContentAsTarget { get { return selfTarget || useMemorizedGameObjectAsTarget; } }
 
+		[SerializeField]
+		private ValidatableDropGroupArea _DropAreaSlotsContentAsTargets;
+
+		[SerializeField]
+		private DropGroupSlot[] m_multipleSlotsAsTargets;
+
         [SerializeField, InspectorHideIf("HideTarget")]
         private Draggable _draggableTarget;
         private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || useSlotContentAsTarget!=null; } }
@@ -46,10 +52,22 @@ namespace MDS.Actions
         {
             yield return base.Execute();
 
+			if (_DropAreaSlotsContentAsTargets != null) {
+				m_multipleSlotsAsTargets = _DropAreaSlotsContentAsTargets.GetComponentsInChildren<DropGroupSlot> ();
+			}
+
+			if(m_multipleSlotsAsTargets != null){
+				if (_dropArea == null) {
+					_corotineHolder.GetComponent<MDSBehaviour> ().LogError ("Multiplos slots só podem ser colocado em um DropGroupArea");
+					yield break;
+				}
+			}
+
 
             Draggable d = _draggableTarget;
             BaseDropGroupArea g = _dropArea;
-
+			DropGroupSlot slot = null;
+			DropGroupSlot tempDropGroupSlot = null;
 
             if(selfTarget)
             {
@@ -72,27 +90,46 @@ namespace MDS.Actions
 //                    _corotineHolder.GetComponent<MDSBehaviour>().LogError("useSlotContentAsTarget sem que o slot tenha um elemento Draggable ");
             }
 
+			if (m_multipleSlotsAsTargets != null) {
+				for (int i = 0; i < m_multipleSlotsAsTargets.Length; i++) {
+
+					tempDropGroupSlot = m_multipleSlotsAsTargets [i].GetComponent<DropGroupSlot> ();
+					if (tempDropGroupSlot != null) {
+						d = tempDropGroupSlot.draggableReference;
+						if(d != null){
+							slot = null;
+							g.SetInSlot(d, ref slot);
+						}
+					}
+				}
+
+			}
+
 			if (m_multipleDraggables != null) {
 				for (int i = 0; i < m_multipleDraggables.Length; i++) {
 					d = m_multipleDraggables [i].GetComponent<Draggable>();
 
 					if(!HasSpecificSlot)
 					{
-						DropGroupSlot slot = null;
+						slot = null;
 						g.SetInSlot(d, ref slot);
+						Debug.Log (d.name + " " + slot.name);
 					}
 					else
 					{
 						DraggableUtilities.SetDraggableInSlot(d, _slot);
 					}
 				}
+
+				d = null;
+
 			} 
 
 			if(d != null)
 			{
 				if(!HasSpecificSlot)
 				{
-					DropGroupSlot slot = null;
+					slot = null;
 					g.SetInSlot(d, ref slot);
 				}
 				else

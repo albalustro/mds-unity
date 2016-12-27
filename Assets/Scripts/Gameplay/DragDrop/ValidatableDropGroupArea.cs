@@ -315,6 +315,20 @@ namespace MDS.Gameplay.DragDrop
 				}
 			}
 		}
-		
+
+		public bool AnySlotHasLabel(string label)
+		{
+			foreach (var slot in slots)
+			{
+				if (slot.draggableReference != null)
+				{
+					if (slot.draggableReference.Labels.Contains (label))
+						return true;
+				}
+			}
+
+			return false;
+		}
+
 	}
 }
