@@ -102,6 +102,7 @@ namespace MDS.Actions
 						}
 					}
 				}
+
 			}
 
 			if (m_multipleDraggables != null) {
@@ -110,13 +111,18 @@ namespace MDS.Actions
 
 					if(!HasSpecificSlot)
 					{
+						slot = null;
 						g.SetInSlot(d, ref slot);
+						Debug.Log (d.name + " " + slot.name);
 					}
 					else
 					{
 						DraggableUtilities.SetDraggableInSlot(d, _slot);
 					}
 				}
+
+				d = null;
+
 			} 
 
 			if(d != null)
