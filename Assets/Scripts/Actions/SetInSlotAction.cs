@@ -56,7 +56,7 @@ namespace MDS.Actions
 				m_multipleSlotsAsTargets = _DropAreaSlotsContentAsTargets.GetComponentsInChildren<DropGroupSlot> ();
 			}
 
-			if(m_multipleSlotsAsTargets != null){
+			if(m_multipleSlotsAsTargets != null && m_multipleSlotsAsTargets.Length > 0){
 				if (_dropArea == null) {
 					_corotineHolder.GetComponent<MDSBehaviour> ().LogError ("Multiplos slots só podem ser colocado em um DropGroupArea");
 					yield break;
@@ -86,11 +86,9 @@ namespace MDS.Actions
             if (useSlotContentAsTarget!=null)
             {
                 d = useSlotContentAsTarget.draggableReference;
-//                if(d == null)
-//                    _corotineHolder.GetComponent<MDSBehaviour>().LogError("useSlotContentAsTarget sem que o slot tenha um elemento Draggable ");
             }
 
-			if (m_multipleSlotsAsTargets != null) {
+			if (m_multipleSlotsAsTargets != null && m_multipleSlotsAsTargets.Length > 0) {
 				for (int i = 0; i < m_multipleSlotsAsTargets.Length; i++) {
 
 					tempDropGroupSlot = m_multipleSlotsAsTargets [i].GetComponent<DropGroupSlot> ();
@@ -105,7 +103,7 @@ namespace MDS.Actions
 
 			}
 
-			if (m_multipleDraggables != null) {
+			if (m_multipleDraggables != null && m_multipleDraggables.Length > 0) {
 				for (int i = 0; i < m_multipleDraggables.Length; i++) {
 					d = m_multipleDraggables [i].GetComponent<Draggable>();
 
@@ -113,16 +111,13 @@ namespace MDS.Actions
 					{
 						slot = null;
 						g.SetInSlot(d, ref slot);
-						Debug.Log (d.name + " " + slot.name);
 					}
 					else
 					{
 						DraggableUtilities.SetDraggableInSlot(d, _slot);
 					}
 				}
-
 				d = null;
-
 			} 
 
 			if(d != null)

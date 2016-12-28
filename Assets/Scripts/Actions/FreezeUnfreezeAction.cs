@@ -10,9 +10,13 @@ namespace MDS.Actions
 	public class FreezeUnfreezeAction : BaseAction
 	{
 
+		[FullInspector.InspectorTooltip("Dá lock nos draggables dos slots do grupo selecionado")]
+		[FullInspector.InspectorName("DropGroupDraggableContent")]
 		public GameObject m_freezeEntireGroup;
 		private bool FreezeOrUnfreezeEntireGroup {get {return m_freezeEntireGroup != null;}}
 
+		[FullInspector.InspectorTooltip("Dá lock nos filhos do GameObject selecionado")]
+		[FullInspector.InspectorName("ChildrensOfThisGO")]
 		public GameObject m_freezeGroupContent;
 
 
@@ -25,7 +29,7 @@ namespace MDS.Actions
 		{
 			yield return base.Execute();
 
-			if (FreezeOrUnfreezeEntireGroup != null) {
+			if (m_freezeEntireGroup != null) {
 				DropGroupSlot[] dGroup = m_freezeGroupContent.GetComponentsInChildren<DropGroupSlot> ();
 				if (dGroup != null) {
 					for (int i = 0; i < dGroup.Length; i++) {
@@ -44,10 +48,10 @@ namespace MDS.Actions
 			}
 
 			if (m_freezeGroupContent != null) {
-				DropGroupSlot[] d = m_freezeGroupContent.GetComponentsInChildren<DropGroupSlot> ();
-				for (int i = 0; i < d.Length; i++) {
-					if (d [i] != null) {
-						d [i].GetComponent<Collider2D> ().enabled = unfreeze;
+				Collider2D[] col = m_freezeGroupContent.GetComponentsInChildren<Collider2D> ();
+				for (int i = 0; i < col.Length; i++) {
+					if (col [i] != null) {
+						col [i].GetComponent<Collider2D> ().enabled = unfreeze;
 					}
 				}
 
