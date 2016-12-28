@@ -127,7 +127,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 20531474}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -197,7 +197,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"chave"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"pilha"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"canudo"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"moeda"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"pistao"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"chave"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"pilha"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"canudo"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"moeda"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":"pistao"}]'
   OperationLogic: 0
 --- !u!4 &40499303
 Transform:
@@ -210,7 +210,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &57351989
 GameObject:
@@ -291,6 +291,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -303,9 +304,9 @@ MonoBehaviour:
   - 17
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -314,8 +315,26 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &57351993
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -366,7 +385,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 68450231}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -641,7 +660,7 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '"AND"'
-  - true
+  - false
   - false
   - 
   _isGeneric: 0
@@ -850,94 +869,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &321610432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 321610437}
-  - component: {fileID: 321610436}
-  - component: {fileID: 321610435}
-  - component: {fileID: 321610434}
-  - component: {fileID: 321610433}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &321610433
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!124 &321610434
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!92 &321610435
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!20 &321610436
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &321610437
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &359015112
 GameObject:
@@ -1043,7 +975,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 369331903}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1179,7 +1111,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 391946647}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1358,6 +1290,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -1370,9 +1303,9 @@ MonoBehaviour:
   - 6
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -1381,8 +1314,26 @@ MonoBehaviour:
   - canudo
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &408978300
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1476,6 +1427,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -1488,9 +1440,9 @@ MonoBehaviour:
   - 10
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -1499,8 +1451,26 @@ MonoBehaviour:
   - pilha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &419709196
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1594,6 +1564,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -1606,9 +1577,9 @@ MonoBehaviour:
   - 14
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -1617,8 +1588,26 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &435777681
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1669,7 +1658,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 448689741}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -1738,7 +1727,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4364942206566332, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
       propertyPath: m_RootOrder
-      value: 15
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 4053484047873756, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
       propertyPath: m_LocalPosition.y
@@ -1808,7 +1797,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011972471874, guid: d8424bd8ca1faac49b4e543296232f36, type: 2}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 114000012977476030, guid: d8424bd8ca1faac49b4e543296232f36,
         type: 2}
@@ -1924,6 +1913,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -1936,9 +1926,9 @@ MonoBehaviour:
   - 7
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -1947,8 +1937,26 @@ MonoBehaviour:
   - canudo
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &592943647
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2066,7 +2074,7 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '"AND"'
-  - true
+  - false
   - false
   - 
   _isGeneric: 0
@@ -2113,7 +2121,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 648417860}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2181,7 +2189,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 658663798}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -2594,8 +2602,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 40499302}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 621689752}
   - _keys: []
     _values: []
@@ -2618,11 +2629,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 391946650}
-  - _keys:
-    - DefaultBehaviorEditor._isGeneric.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 1015899971}
   - _keys: []
     _values: []
@@ -2657,8 +2665,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 369331906}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 709679278}
   - _keys: []
     _values: []
@@ -2687,8 +2698,47 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1324787074}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.3.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.3.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.4.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.4.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.5.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.5.AbstractTypeEditor._dropArea.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1796011864}
   - _keys: []
     _values: []
@@ -2809,7 +2859,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &709679274
 GameObject:
@@ -2915,7 +2965,7 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '"AND"'
-  - true
+  - false
   - false
   - 
   _isGeneric: 0
@@ -3030,7 +3080,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 819122677}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -3101,7 +3151,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &830580158
 GameObject:
@@ -3196,6 +3246,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -3208,9 +3259,9 @@ MonoBehaviour:
   - 8
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -3219,8 +3270,26 @@ MonoBehaviour:
   - pilha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &842431100
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,7 +3326,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 842431100}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -3334,7 +3403,7 @@ Transform:
   - {fileID: 1466779224}
   - {fileID: 57351990}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &858567042
 MonoBehaviour:
@@ -3591,7 +3660,7 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '"AND"'
-  - true
+  - false
   - false
   - 
   _isGeneric: 0
@@ -3823,6 +3892,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -3835,9 +3905,9 @@ MonoBehaviour:
   - 13
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -3846,8 +3916,26 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1118852660
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3862,6 +3950,48 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.5, y: 0.5}
+--- !u!1001 &1163236906
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 14
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1204943971
 GameObject:
   m_ObjectHideFlags: 0
@@ -4015,6 +4145,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4027,9 +4158,9 @@ MonoBehaviour:
   - 1
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4038,8 +4169,26 @@ MonoBehaviour:
   - chave
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1258611941
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4133,6 +4282,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4145,9 +4295,9 @@ MonoBehaviour:
   - 11
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4156,8 +4306,26 @@ MonoBehaviour:
   - pilha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1269513708
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4251,6 +4419,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4263,9 +4432,9 @@ MonoBehaviour:
   - 3
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4274,8 +4443,26 @@ MonoBehaviour:
   - pistao
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1324787075
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4369,6 +4556,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4381,9 +4569,9 @@ MonoBehaviour:
   - 15
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4392,8 +4580,26 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1326409825
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4444,7 +4650,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1329734317}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -4512,7 +4718,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1359271078}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -4623,6 +4829,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4635,9 +4842,9 @@ MonoBehaviour:
   - 4
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4646,8 +4853,26 @@ MonoBehaviour:
   - pistao
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1366194703
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4755,6 +4980,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4767,9 +4993,9 @@ MonoBehaviour:
   - 2
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4778,8 +5004,26 @@ MonoBehaviour:
   - pistao
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1429928852
 GameObject:
   m_ObjectHideFlags: 0
@@ -4816,7 +5060,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1429928852}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -4927,6 +5171,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -4939,9 +5184,9 @@ MonoBehaviour:
   - 16
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -4950,8 +5195,26 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1466779227
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -4992,7 +5255,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1497375005
 GameObject:
@@ -5141,6 +5404,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -5153,9 +5417,9 @@ MonoBehaviour:
   - 9
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -5164,8 +5428,26 @@ MonoBehaviour:
   - pilha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1497732562
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -5180,106 +5462,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 0.23999998, y: 0.65999997}
---- !u!1001 &1508264803
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 14
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &1520270034
 GameObject:
   m_ObjectHideFlags: 0
@@ -5316,7 +5498,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1520270034}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -5385,7 +5567,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012973078656, guid: 58aaa0efd28dba84ca6337d3e097226c, type: 2}
       propertyPath: m_RootOrder
-      value: 13
+      value: 12
       objectReference: {fileID: 0}
     - target: {fileID: 4000011219678666, guid: 58aaa0efd28dba84ca6337d3e097226c, type: 2}
       propertyPath: m_LocalScale.x
@@ -5446,7 +5628,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1598480565}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -5593,7 +5775,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012568056842, guid: b1aff325daa729144be83df9d403a877, type: 2}
       propertyPath: m_RootOrder
-      value: 11
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 114000012599510142, guid: b1aff325daa729144be83df9d403a877,
         type: 2}
@@ -5767,7 +5949,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1698236590}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -5892,6 +6074,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -5904,9 +6087,9 @@ MonoBehaviour:
   - 0
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -5915,8 +6098,26 @@ MonoBehaviour:
   - chave
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1774921615
 GameObject:
   m_ObjectHideFlags: 0
@@ -6000,7 +6201,7 @@ BoxCollider2D:
   m_UsedByEffector: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Size: {x: 1.4, y: 1.11}
+  m_Size: {x: 1.4, y: 1.74}
 --- !u!114 &1774921619
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6022,7 +6223,7 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '"AND"'
-  - true
+  - false
   - false
   - 
   _isGeneric: 0
@@ -6075,13 +6276,55 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 40499302}
   - {fileID: 1795174576}
+  - {fileID: 1763209640}
+  - {fileID: 1258611937}
+  - {fileID: 1376879770}
+  - {fileID: 1324787071}
+  - {fileID: 1366194699}
+  - {fileID: 1845403231}
+  - {fileID: 408978296}
+  - {fileID: 592943643}
+  - {fileID: 830580158}
+  - {fileID: 1497732558}
+  - {fileID: 419709192}
+  - {fileID: 1269513704}
+  - {fileID: 2144530383}
+  - {fileID: 1118852656}
+  - {fileID: 435777677}
+  - {fileID: 1326409821}
+  - {fileID: 1466779223}
+  - {fileID: 57351989}
+  - {fileID: 1846907708}
+  - {fileID: 1763209640}
+  - {fileID: 1258611937}
+  - {fileID: 621689752}
+  - {fileID: 1376879770}
+  - {fileID: 1324787071}
+  - {fileID: 1366194699}
+  - {fileID: 709679278}
+  - {fileID: 1845403231}
+  - {fileID: 408978296}
+  - {fileID: 592943643}
+  - {fileID: 1015899971}
+  - {fileID: 830580158}
+  - {fileID: 1497732558}
+  - {fileID: 419709192}
+  - {fileID: 1269513704}
+  - {fileID: 1774921619}
+  - {fileID: 2144530383}
+  - {fileID: 1118852656}
+  - {fileID: 435777677}
+  - {fileID: 1326409821}
+  - {fileID: 1466779223}
+  - {fileID: 57351989}
+  - {fileID: 159977785}
   - {fileID: 1795174576}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"timer":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"StartTimer"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"timer":2,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"StopTimer"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"timer":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"StartTimer"}],"onErrorActions_1":[{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19],"_dropArea":20,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[21,22],"_dropArea":23,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":1.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[24,25,26],"_dropArea":27,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[28,29,30],"_dropArea":31,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[32,33,34,35],"_dropArea":36,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_draggableTarget":null,"m_multipleDraggables":[37,38,39,40,41,42],"_dropArea":43,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"delayBeforeExecution":0.0,"waitFinish":false,"$type":"InvokeValidation"}],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"timer":44,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"StopTimer"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &1796011865
 Transform:
@@ -6094,7 +6337,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1845403231
 GameObject:
@@ -6189,6 +6432,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -6201,9 +6445,9 @@ MonoBehaviour:
   - 5
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -6212,8 +6456,26 @@ MonoBehaviour:
   - canudo
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1846907706
 GameObject:
   m_ObjectHideFlags: 0
@@ -6261,7 +6523,7 @@ Transform:
   - {fileID: 1929939234}
   - {fileID: 126038434}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1846907708
 MonoBehaviour:
@@ -6498,7 +6760,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1931149499}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6592,7 +6854,7 @@ Transform:
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1970569581
 GameObject:
@@ -6630,7 +6892,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1970569581}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6693,7 +6955,7 @@ Transform:
   - {fileID: 159977782}
   - {fileID: 709679275}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2041395007
 GameObject:
@@ -6742,7 +7004,7 @@ BoxCollider2D:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2041395007}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 0
@@ -6856,6 +7118,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1786868336}
+  - {fileID: 0}
   _serializedStateKeys:
   - PreferredInitialIndex
   - spriteState
@@ -6868,9 +7131,9 @@ MonoBehaviour:
   - 12
   - 
   - 
-  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
-    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics,
-    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null","$type":"FullInspector.Generated.Generated_UnityEngine_Events_UnityEvent_MDS_Gameplay_DragDrop_Draggable_MDS_Gameplay_DragDrop_DropGroupSlot__NoGenerics"}'
+  - '{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":1,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+    UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
   - '[]'
   - '[]'
@@ -6879,5 +7142,23 @@ MonoBehaviour:
   - moeda
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1044298062}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1786868336}
+        m_MethodName: IncrementStep
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
