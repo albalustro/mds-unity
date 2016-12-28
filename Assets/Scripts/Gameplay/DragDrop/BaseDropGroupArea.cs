@@ -32,7 +32,13 @@ namespace MDS.Gameplay.DragDrop
                 else // caso contrario, pega o primeiro que nao esteja ocupado e be happy..
                 {
                     //slot = slots.FirstOrDefault(s => s.IsTaken == false);
-                    slot = slots.FirstOrDefault(s => s.IsNotTakenAndHasAcceptableLabel(draggable.Labels));
+//                    slot = slots.FirstOrDefault(s => s.IsNotTakenAndHasAcceptableLabel(draggable.Labels));
+					for (int i = 0; i < slots.Count; i++) {
+						if (slots [i].IsNotTakenAndHasAcceptableLabel(draggable.Labels)) {
+							slot = slots [i];
+							break;
+						}
+					}
                 }
             }
             else
