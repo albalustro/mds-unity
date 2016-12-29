@@ -19,13 +19,11 @@ namespace MDS.Actions{
 		public override IEnumerator Execute()
 		{
             yield return base.Execute();
-
 			if (m_useMemorizedObj) {
 				m_obj = MemorizeMe.MemorizedGameObject;
 			} 
 
 			m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
-
 
 			if (m_lockCollider) {
 				m_obj.GetComponent<Collider2D> ().enabled = false;
