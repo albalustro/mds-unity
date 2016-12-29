@@ -91,106 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1001 &32721316
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &68613498
 GameObject:
   m_ObjectHideFlags: 0
@@ -242,6 +142,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &68613501
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -338,8 +241,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 5
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -347,8 +259,15 @@ MonoBehaviour:
   - iao
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1941471089}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &73796276
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -414,6 +333,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &95162678
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -479,6 +401,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &124831763
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -575,8 +500,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 6
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -584,8 +518,15 @@ MonoBehaviour:
   - inha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 710716376}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &207060923
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -651,6 +592,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &269104476
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -747,8 +691,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 3
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -756,8 +709,15 @@ MonoBehaviour:
   - aca
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 2062532237}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &364498072
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -823,6 +783,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &411196097
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -919,8 +882,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 1
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -928,8 +900,15 @@ MonoBehaviour:
   - inha
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1464815717}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &446139747
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -995,6 +974,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &447677455
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1091,8 +1073,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 9
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -1100,8 +1091,15 @@ MonoBehaviour:
   - aca
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 269104475}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &452337386
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1153,7 +1151,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61000010280536550, guid: 7431c541446b2da48932c6a545b57ab2,
         type: 2}
@@ -1241,6 +1239,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &560922556
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1306,6 +1307,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &603990960
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1371,6 +1375,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &630891160
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1419,10 +1426,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 2
   _isGeneric: 1
@@ -1430,6 +1439,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 1
   _invalidLabels: []
 --- !u!61 &673480417
@@ -1494,7 +1504,7 @@ Transform:
   - {fileID: 68613499}
   - {fileID: 560922554}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &710716374
 GameObject:
@@ -1547,6 +1557,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &710716377
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1643,8 +1656,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 8
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -1652,8 +1674,15 @@ MonoBehaviour:
   - iao
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 2019369928}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &863729488
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1719,6 +1748,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &886686612
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1771,7 +1803,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.ValidatableDropGroupArea"},"OverrideGroupParameters":false,"CorrectAnswer":null}]'
   OperationLogic: 0
 --- !u!4 &960187725
 Transform:
@@ -1868,8 +1900,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 4
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -1877,8 +1918,15 @@ MonoBehaviour:
   - ala
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1799222075}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1084783549
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1975,8 +2023,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 7
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -1984,8 +2041,15 @@ MonoBehaviour:
   - ano
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 447677454}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1236671094
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2057,6 +2121,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1303147969
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2122,6 +2189,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1366788399
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2187,6 +2257,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1408222603
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2356,6 +2429,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1464815718
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2404,10 +2480,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 2
   _isGeneric: 1
@@ -2415,6 +2493,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 1
   _invalidLabels: []
 --- !u!61 &1521893538
@@ -2479,7 +2558,7 @@ Transform:
   - {fileID: 630891158}
   - {fileID: 95162676}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1522167589
 GameObject:
@@ -2515,10 +2594,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 2
   _isGeneric: 1
@@ -2526,6 +2607,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 1
   _invalidLabels: []
 --- !u!61 &1522167591
@@ -2590,7 +2672,7 @@ Transform:
   - {fileID: 1366788397}
   - {fileID: 603990958}
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1546031909
 GameObject:
@@ -2621,12 +2703,67 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 960187724}
+  - {fileID: 2129879401}
+  - {fileID: 1425224346}
+  - {fileID: 1521893537}
+  - {fileID: 1425224346}
+  - {fileID: 1766142526}
+  - {fileID: 1425224346}
+  - {fileID: 673480416}
+  - {fileID: 1425224346}
+  - {fileID: 1522167590}
+  - {fileID: 1425224346}
+  - {fileID: 2129879401}
+  - {fileID: 1425224346}
+  - {fileID: 1521893537}
+  - {fileID: 1425224346}
+  - {fileID: 1766142526}
+  - {fileID: 1425224346}
+  - {fileID: 673480416}
+  - {fileID: 1425224346}
+  - {fileID: 1522167590}
+  - {fileID: 1425224346}
+  - {fileID: 2129879401}
+  - {fileID: 1425224346}
+  - {fileID: 1521893537}
+  - {fileID: 1425224346}
+  - {fileID: 1766142526}
+  - {fileID: 1425224346}
+  - {fileID: 673480416}
+  - {fileID: 1425224346}
+  - {fileID: 1522167590}
+  - {fileID: 1425224346}
+  - {fileID: 1084783545}
+  - {fileID: 1976275397}
+  - {fileID: 2129879401}
+  - {fileID: 446139743}
+  - {fileID: 207060919}
+  - {fileID: 1521893537}
+  - {fileID: 863729484}
+  - {fileID: 73796272}
+  - {fileID: 1766142526}
+  - {fileID: 1608556724}
+  - {fileID: 1236671090}
+  - {fileID: 673480416}
+  - {fileID: 364498068}
+  - {fileID: 452337382}
+  - {fileID: 1522167590}
+  - {fileID: 1084783545}
+  - {fileID: 1976275397}
+  - {fileID: 446139743}
+  - {fileID: 207060919}
+  - {fileID: 863729484}
+  - {fileID: 73796272}
+  - {fileID: 1608556724}
+  - {fileID: 1236671090}
+  - {fileID: 364498068}
+  - {fileID: 452337382}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions":[{"slugs":["error1"],"$type":"MDS.Actions.OpenDialogAction"},{"slugs":["error2"],"$type":"MDS.Actions.OpenDialogAction"},{"slugs":["error3"],"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":1,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":2,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":3,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":4,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":5,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":6,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":7,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":8,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":9,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":10,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_2":[{"slugs":["error2"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":11,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":12,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":13,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":14,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":15,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":16,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":17,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":18,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":19,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":20,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_3":[{"slugs":["error3"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":21,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":22,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":23,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":24,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":25,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":26,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":27,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":28,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":29,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":30,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[31,32],"_dropArea":33,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[34,35],"_dropArea":36,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[37,38],"_dropArea":39,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[40,41],"_dropArea":42,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[43,44],"_dropArea":45,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"obj":[46,47,48,49,50,51,52,53,54,55],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"}],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &1546031911
 Transform:
@@ -2866,8 +3003,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 2
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -2875,8 +3021,15 @@ MonoBehaviour:
   - ano
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 411196096}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1608556728
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2942,6 +3095,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1654422351
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2956,6 +3112,48 @@ BoxCollider2D:
   m_Offset: {x: 0, y: -0.09}
   serializedVersion: 2
   m_Size: {x: 0.7, y: 1.65}
+--- !u!1001 &1739221485
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &1766142525
 GameObject:
   m_ObjectHideFlags: 0
@@ -2990,10 +3188,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 2
   _isGeneric: 1
@@ -3001,6 +3201,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 1
   _invalidLabels: []
 --- !u!61 &1766142527
@@ -3065,7 +3266,7 @@ Transform:
   - {fileID: 886686610}
   - {fileID: 1654422349}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1799222073
 GameObject:
@@ -3118,6 +3319,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1799222076
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3132,93 +3336,6 @@ BoxCollider2D:
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
   m_Size: {x: 1, y: 1.46}
---- !u!1 &1858112663
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1858112668}
-  - component: {fileID: 1858112667}
-  - component: {fileID: 1858112666}
-  - component: {fileID: 1858112665}
-  - component: {fileID: 1858112664}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1858112664
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858112663}
-  m_Enabled: 1
---- !u!124 &1858112665
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858112663}
-  m_Enabled: 1
---- !u!92 &1858112666
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858112663}
-  m_Enabled: 1
---- !u!20 &1858112667
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858112663}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &1858112668
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1858112663}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1941471088
 GameObject:
   m_ObjectHideFlags: 0
@@ -3257,6 +3374,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &1941471090
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3553,8 +3673,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 73796275}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 2129879401}
   - _keys: []
     _values: []
@@ -3562,8 +3685,44 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 124831762}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.1.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.1.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.2.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.2.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.3.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.3.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.4.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.4.AbstractTypeEditor._dropArea.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.5.AbstractTypeEditor.selfTarget.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.5.AbstractTypeEditor._dropArea.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1546031910}
   - _keys: []
     _values: []
@@ -3572,11 +3731,8 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 1302899417}
   - _keys:
-    - DefaultBehaviorEditor.slots.EditProperty
-    - DefaultBehaviorEditor.Overwritten.EditProperty
+    - DefaultBehaviorEditor._isGeneric.EditProperty
     _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
     - _showDropdown: 0
       _serializedIsActive: 1
     _target: {fileID: 1521893537}
@@ -3598,8 +3754,11 @@ MonoBehaviour:
     - _showDropdown: 0
       _serializedIsActive: 1
     _target: {fileID: 673480416}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1522167590}
   - _keys: []
     _values: []
@@ -3699,8 +3858,17 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
   - 0
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
+  - 
   - 
   - 
   forcePreferredIndexOnDrop: 0
@@ -3708,8 +3876,15 @@ MonoBehaviour:
   - ala
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 1408222602}
   instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1976275401
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3775,6 +3950,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2019369929
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3840,6 +4018,9 @@ MonoBehaviour:
   - false
   - 
   _changeSprite: 0
+  _acceptableLabels: []
+  notNullIfNumeric: 0
+  numericMultiplier: 0
 --- !u!61 &2062532238
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -3888,10 +4069,12 @@ MonoBehaviour:
   - Overwritten
   - OperationLogic
   - AcceptEmptyAsCorrectAnswer
+  - IgnoreDisabledSlots
   - SpecificAmount
   _serializedStateValues:
   - false
   - '"AND"'
+  - false
   - false
   - 2
   _isGeneric: 1
@@ -3899,6 +4082,7 @@ MonoBehaviour:
   _animationTime: 0
   _infinityBag: 0
   _freezeAfterDrop: 0
+  _alwaysEnableValidation: 0
   _enableValidationOnlyIfSpecifcAmount: 1
   _invalidLabels: []
 --- !u!61 &2129879402
@@ -3963,5 +4147,5 @@ Transform:
   - {fileID: 1303147967}
   - {fileID: 124831761}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
