@@ -138,5 +138,18 @@ namespace MDS.Actions
 			}
 
         }
+
+
+
+        public SetInSlotAction()
+        {
+
+        }
+
+        public SetInSlotAction(Draggable target, BaseDropGroupArea destination )
+        {
+            _draggableTarget = target;
+            _dropArea = destination;
+        }
     }
 }

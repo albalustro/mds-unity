@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using FullInspector;
 using MDS.Actions;
 using MDS.Gameplay.DragDrop;
@@ -40,6 +41,9 @@ public class TransformAnimationAction : BaseAction
     private bool HideTarget { get { return selfTarget || useMemorizedGameObjectAsTarget || _useSlotContentAsTarget!=null; } }
 
 
+    [SerializeField]
+    private ValidatableDropGroupArea _DropAreaSlotsContentAsTargets;
+
     [InspectorTooltip("Todos os targets vão usar o mesmos parametros e serão animados simultaneamente")]
     public GameObject[] multipleTargets;
 
@@ -74,6 +78,15 @@ public class TransformAnimationAction : BaseAction
     public override IEnumerator Execute()
     {
         yield return base.Execute();
+
+        if(_DropAreaSlotsContentAsTargets != null)
+        {
+            var slots = _DropAreaSlotsContentAsTargets.GetComponentsInChildren<DropGroupSlot>().ToArray();
+
+            multipleTargets = (from s in slots
+                               where s.draggableReference != null
+                               select s.draggableReference.gameObject).ToArray();
+        }
 
 
         // ALTERANDO O TARGET DA ANIMACAO

@@ -77,7 +77,7 @@ public class PolyNav2D : MonoBehaviour {
 	//some initializing
 	void Awake(){
 		_current = this;
-		masterCollider.enabled = false;
+		//masterCollider.enabled = false;
 		GenerateMap(true);
 	}
 

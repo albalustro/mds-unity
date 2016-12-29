@@ -9,6 +9,10 @@ using UnityEngine.SceneManagement;
 using MDS.Actions;
 using System;
 using System.Collections.Generic;
+using FullInspector;
+using MDS.Gameplay.DragDrop;
+
+using MDS.Utilities;
 
 namespace MDS.Core
 {
@@ -18,6 +22,80 @@ namespace MDS.Core
 
     public class Challenge : MDSBehaviour
     {
+
+#if UNITY_EDITOR
+
+        void OnGUI()
+        {
+            GUILayout.BeginVertical();
+
+            if(GUILayout.Button("Start", GUILayout.Width(100), GUILayout.Height(80)))
+                ExecuteActionsStart();
+
+            if(GUILayout.Button("Error 1", GUILayout.Width(100), GUILayout.Height(80)))
+                ExecuteActions1();
+
+            if(GUILayout.Button("Error 2", GUILayout.Width(100), GUILayout.Height(80)))
+                ExecuteActions2();
+
+            if(GUILayout.Button("Error 3", GUILayout.Width(100), GUILayout.Height(80)))
+                ExecuteActions3();
+
+            if(GUILayout.Button("Victory", GUILayout.Width(100), GUILayout.Height(80)))
+                ExecuteActionsVic();
+
+            if (GUILayout.Button("Random Draggable Populate", GUILayout.Width(100), GUILayout.Height(80)))
+            {
+                var initGroup = FindObjectOfType<InitialDropGroupArea>();
+
+                List<BaseDropGroupArea> others = FindObjectsOfType<BaseDropGroupArea>().ToList();
+                others.Remove(initGroup);
+
+                foreach(var slot in initGroup.GetComponentsInChildren<DropGroupSlot>())
+                {
+                    if (slot.draggableReference!=null)
+                    {
+
+                        IAction[] xpto = new IAction[1];
+                        xpto[0] = new SetInSlotAction(slot.draggableReference, others.GetRandom());
+                        ExecuteActions(xpto);
+
+                    }
+                }
+            }
+
+
+            GUILayout.EndVertical();
+        }
+
+        [InspectorButton, InspectorName("Executar Start")]
+        private void ExecuteActionsStart()
+        {
+            ExecuteActions(_actions.onStartActions);
+        }
+        [InspectorButton, InspectorName("Executar Erro 1")]
+        private void ExecuteActions1()
+        {
+            ExecuteActions(_actions.onErrorActions_1);
+        }
+        [InspectorButton, InspectorName("Executar Erro 2")]
+        private void ExecuteActions2()
+        {
+            ExecuteActions(_actions.onErrorActions_2);
+        }
+        [InspectorButton, InspectorName("Executar Erro 3")]
+        private void ExecuteActions3()
+        {
+            ExecuteActions(_actions.onErrorActions_3);
+        }
+        [InspectorButton, InspectorName("Executar Vitoria")]
+        private void ExecuteActionsVic()
+        {
+            ExecuteActions(_actions.onVictoryActions);
+        }
+
+#endif
+
 
         // classe auxiliar (apenas para organizar o inspector)
         public class ChallengeActions
