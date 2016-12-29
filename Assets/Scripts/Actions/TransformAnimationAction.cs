@@ -242,7 +242,8 @@ public class TransformAnimationAction : BaseAction
         if(local)
             dest += go.transform.position;
 
-        LeanTween.move(go, destination, duration)
+
+		LeanTween.move(go, dest, duration)
                 .setEase(easeType)
                 .setDestroyOnComplete(destroyOnComplete)
                 .setOnComplete(() => _animationComplete = true);
