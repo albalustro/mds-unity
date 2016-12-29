@@ -16,6 +16,7 @@ namespace MDS.Actions.DialogConditions
         private DropGroupSlot _slot;
         private bool HideSlot { get { return _group != null; } }
 
+		[InspectorComment("Verifica se existe qualquer um dos labels em qualquer um dos slots do grupo")]
         [InspectorCategory("Condition")]
         [SerializeField, InspectorHideIf("HideGroup")]
         private ValidatableDropGroupArea _group;
@@ -39,8 +40,13 @@ namespace MDS.Actions.DialogConditions
 
             if (_group!=null)
             {
-                if(_labels.Any(label => _group.Validate(label)))
-                    return true;
+//                if(_labels.Any(label => _group.Validate(label)))
+//                    return true;
+				if(_labels.Any(label => _group.AnySlotHasLabel(label))){
+					return true;
+				}
+					
+
             }
 
             return false;
