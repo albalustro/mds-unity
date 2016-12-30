@@ -26,9 +26,11 @@ namespace MDS.Actions{
 
 			m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
 
-
-			if (m_lockCollider) {
-				m_obj.GetComponent<Collider2D> ().enabled = false;
+			Collider2D col = m_obj.GetComponent<Collider2D> ();
+			if (col != null) {
+				if (m_lockCollider) {
+					col.enabled = false;
+				}
 			}
 
 		}

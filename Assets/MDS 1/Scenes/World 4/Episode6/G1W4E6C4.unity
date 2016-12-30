@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,28 +79,29 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!1 &1070931
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1070932}
-  - 212: {fileID: 1070934}
-  - 61: {fileID: 1070933}
-  - 114: {fileID: 1070935}
+  - component: {fileID: 1070932}
+  - component: {fileID: 1070934}
+  - component: {fileID: 1070933}
+  - component: {fileID: 1070935}
   m_Layer: 0
   m_Name: Gravata (5)
   m_TagString: Untagged
@@ -117,10 +118,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0.455, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1070933
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -149,7 +150,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -157,7 +160,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -189,6 +192,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -196,6 +201,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -207,12 +215,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 154077537}
-  - 222: {fileID: 154077540}
-  - 114: {fileID: 154077539}
-  - 114: {fileID: 154077538}
+  - component: {fileID: 154077537}
+  - component: {fileID: 154077540}
+  - component: {fileID: 154077539}
+  - component: {fileID: 154077538}
   m_Layer: 0
   m_Name: 6
   m_TagString: Untagged
@@ -229,10 +237,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 5.97}
@@ -291,12 +299,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 190029002}
-  - 222: {fileID: 190029005}
-  - 114: {fileID: 190029004}
-  - 114: {fileID: 190029003}
+  - component: {fileID: 190029002}
+  - component: {fileID: 190029005}
+  - component: {fileID: 190029004}
+  - component: {fileID: 190029003}
   m_Layer: 0
   m_Name: 4
   m_TagString: Untagged
@@ -313,10 +321,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 4}
@@ -375,10 +383,10 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 241175241}
-  - 114: {fileID: 241175240}
+  - component: {fileID: 241175241}
+  - component: {fileID: 241175240}
   m_Layer: 0
   m_Name: fiBackupSceneStorage
   m_TagString: Untagged
@@ -407,23 +415,23 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &243908643
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 243908644}
-  - 61: {fileID: 243908649}
-  - 222: {fileID: 243908648}
-  - 114: {fileID: 243908647}
-  - 114: {fileID: 243908646}
-  - 114: {fileID: 243908645}
+  - component: {fileID: 243908644}
+  - component: {fileID: 243908649}
+  - component: {fileID: 243908648}
+  - component: {fileID: 243908647}
+  - component: {fileID: 243908646}
+  - component: {fileID: 243908645}
   m_Layer: 0
   m_Name: Carroussel Window
   m_TagString: Untagged
@@ -440,11 +448,11 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1182918599}
   m_Father: {fileID: 1177212328}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 4.23, y: -1.8800001}
@@ -528,12 +536,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 244708867}
-  - 212: {fileID: 244708869}
-  - 61: {fileID: 244708868}
-  - 114: {fileID: 244708870}
+  - component: {fileID: 244708867}
+  - component: {fileID: 244708869}
+  - component: {fileID: 244708868}
+  - component: {fileID: 244708870}
   m_Layer: 0
   m_Name: Gravata (7)
   m_TagString: Untagged
@@ -550,10 +558,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.324, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &244708868
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -582,7 +590,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -590,7 +600,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -622,6 +632,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -629,6 +641,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -640,10 +655,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 273699159}
-  - 212: {fileID: 273699158}
+  - component: {fileID: 273699159}
+  - component: {fileID: 273699158}
   m_Layer: 0
   m_Name: radio_up
   m_TagString: Untagged
@@ -665,7 +680,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -673,7 +690,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -693,21 +710,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.39, y: 0.55, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &311921134
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 311921135}
-  - 222: {fileID: 311921138}
-  - 114: {fileID: 311921137}
-  - 114: {fileID: 311921136}
+  - component: {fileID: 311921135}
+  - component: {fileID: 311921138}
+  - component: {fileID: 311921137}
+  - component: {fileID: 311921136}
   m_Layer: 0
   m_Name: '?'
   m_TagString: Untagged
@@ -724,10 +741,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 11
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 10.53}
@@ -781,104 +798,17 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 311921134}
---- !u!1 &321610432
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 321610437}
-  - 20: {fileID: 321610436}
-  - 92: {fileID: 321610435}
-  - 124: {fileID: 321610434}
-  - 81: {fileID: 321610433}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &321610433
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!124 &321610434
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!92 &321610435
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
---- !u!20 &321610436
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &321610437
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 321610432}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1 &331781012
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 331781013}
-  - 212: {fileID: 331781015}
-  - 61: {fileID: 331781014}
-  - 114: {fileID: 331781016}
+  - component: {fileID: 331781013}
+  - component: {fileID: 331781015}
+  - component: {fileID: 331781014}
+  - component: {fileID: 331781016}
   m_Layer: 0
   m_Name: Gravata (1)
   m_TagString: Untagged
@@ -895,10 +825,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -3.15, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &331781014
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -927,7 +857,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -935,7 +867,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -967,6 +899,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -974,6 +908,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -985,12 +922,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 417100362}
-  - 212: {fileID: 417100364}
-  - 61: {fileID: 417100363}
-  - 114: {fileID: 417100365}
+  - component: {fileID: 417100362}
+  - component: {fileID: 417100364}
+  - component: {fileID: 417100363}
+  - component: {fileID: 417100365}
   m_Layer: 0
   m_Name: Gravata (4)
   m_TagString: Untagged
@@ -1007,10 +944,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.404, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &417100363
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1039,7 +976,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1047,7 +986,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1079,6 +1018,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1086,23 +1027,96 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
   Labels: []
   _activateOnSelect: []
   _deactivateOnSelect: []
+--- !u!1001 &518540020
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 3.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: -3.13
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4000013877914686, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_RootOrder
+      value: 9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1000010937014706, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+      propertyPath: m_Name
+      value: CheckAnswerButton
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000014260703102, guid: 7431c541446b2da48932c6a545b57ab2,
+        type: 2}
+      propertyPath: upSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50a721a0d4fe49e4a96946b4aa6e0f17,
+        type: 3}
+    - target: {fileID: 212000014287798760, guid: 7431c541446b2da48932c6a545b57ab2,
+        type: 2}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 50a721a0d4fe49e4a96946b4aa6e0f17,
+        type: 3}
+    - target: {fileID: 114000014260703102, guid: 7431c541446b2da48932c6a545b57ab2,
+        type: 2}
+      propertyPath: downSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 736550a068786b345b744040d798513e,
+        type: 3}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 7431c541446b2da48932c6a545b57ab2, type: 2}
+  m_IsPrefabParent: 0
+--- !u!114 &518540021 stripped
+MonoBehaviour:
+  m_PrefabParentObject: {fileID: 114000014260703102, guid: 7431c541446b2da48932c6a545b57ab2,
+    type: 2}
+  m_PrefabInternal: {fileID: 518540020}
+  m_Script: {fileID: 11500000, guid: e456e60bf3d95a348be2962065630b09, type: 3}
 --- !u!1 &624341618
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 624341619}
-  - 222: {fileID: 624341622}
-  - 114: {fileID: 624341621}
-  - 114: {fileID: 624341620}
+  - component: {fileID: 624341619}
+  - component: {fileID: 624341622}
+  - component: {fileID: 624341621}
+  - component: {fileID: 624341620}
   m_Layer: 0
   m_Name: 1
   m_TagString: Untagged
@@ -1119,10 +1133,10 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 1}
@@ -1181,12 +1195,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 631860145}
-  - 222: {fileID: 631860148}
-  - 114: {fileID: 631860147}
-  - 114: {fileID: 631860146}
+  - component: {fileID: 631860145}
+  - component: {fileID: 631860148}
+  - component: {fileID: 631860147}
+  - component: {fileID: 631860146}
   m_Layer: 0
   m_Name: 5
   m_TagString: Untagged
@@ -1203,10 +1217,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 5}
@@ -1265,12 +1279,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 828619053}
-  - 222: {fileID: 828619056}
-  - 114: {fileID: 828619055}
-  - 114: {fileID: 828619054}
+  - component: {fileID: 828619053}
+  - component: {fileID: 828619056}
+  - component: {fileID: 828619055}
+  - component: {fileID: 828619054}
   m_Layer: 0
   m_Name: 9
   m_TagString: Untagged
@@ -1287,10 +1301,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 8.97}
@@ -1349,12 +1363,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 848615370}
-  - 222: {fileID: 848615373}
-  - 114: {fileID: 848615372}
-  - 114: {fileID: 848615371}
+  - component: {fileID: 848615370}
+  - component: {fileID: 848615373}
+  - component: {fileID: 848615372}
+  - component: {fileID: 848615371}
   m_Layer: 0
   m_Name: 0
   m_TagString: Untagged
@@ -1371,10 +1385,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -1433,10 +1447,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 884470905}
-  - 212: {fileID: 884470904}
+  - component: {fileID: 884470905}
+  - component: {fileID: 884470904}
   m_Layer: 0
   m_Name: botao_npc_up
   m_TagString: Untagged
@@ -1458,7 +1472,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1466,7 +1482,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1486,21 +1502,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.68, y: -3.3, z: -1}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &925711895
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 925711896}
-  - 212: {fileID: 925711898}
-  - 61: {fileID: 925711897}
-  - 114: {fileID: 925711899}
+  - component: {fileID: 925711896}
+  - component: {fileID: 925711898}
+  - component: {fileID: 925711897}
+  - component: {fileID: 925711899}
   m_Layer: 0
   m_Name: Gravata
   m_TagString: Untagged
@@ -1517,10 +1533,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -4.07, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &925711897
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1549,7 +1565,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1557,7 +1575,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1589,6 +1607,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1596,6 +1616,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1607,12 +1630,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 970502839}
-  - 212: {fileID: 970502841}
-  - 61: {fileID: 970502840}
-  - 114: {fileID: 970502842}
+  - component: {fileID: 970502839}
+  - component: {fileID: 970502841}
+  - component: {fileID: 970502840}
+  - component: {fileID: 970502842}
   m_Layer: 0
   m_Name: Gravata (3)
   m_TagString: Untagged
@@ -1629,10 +1652,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -1.334, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &970502840
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1661,7 +1684,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1669,7 +1694,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1701,6 +1726,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1708,6 +1735,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1719,12 +1749,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 985259635}
-  - 222: {fileID: 985259638}
-  - 114: {fileID: 985259637}
-  - 114: {fileID: 985259636}
+  - component: {fileID: 985259635}
+  - component: {fileID: 985259638}
+  - component: {fileID: 985259637}
+  - component: {fileID: 985259636}
   m_Layer: 0
   m_Name: 3
   m_TagString: Untagged
@@ -1741,10 +1771,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 3}
@@ -1798,6 +1828,48 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 985259634}
+--- !u!1001 &1059271342
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 10
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &1062501078
 Prefab:
   m_ObjectHideFlags: 0
@@ -1840,12 +1912,12 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013199018780, guid: a88ddfbdccb255f4a82048f2b92e9116, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"CarrousselItem"},"OverrideGroupParameters":false,"CorrectAnswer":"5"}]'
+      value: '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"CarrousselItem"},"OverrideGroupParameters":false,"CorrectAnswer":"5"}]'
       objectReference: {fileID: 0}
     - target: {fileID: 114000013648937872, guid: a88ddfbdccb255f4a82048f2b92e9116,
         type: 2}
@@ -1866,12 +1938,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1166195149}
-  - 212: {fileID: 1166195148}
-  - 61: {fileID: 1166195147}
-  - 114: {fileID: 1166195146}
+  - component: {fileID: 1166195149}
+  - component: {fileID: 1166195148}
+  - component: {fileID: 1166195147}
+  - component: {fileID: 1166195146}
   m_Layer: 0
   m_Name: Gravata (9)
   m_TagString: Untagged
@@ -1900,6 +1972,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1907,6 +1981,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1941,7 +2018,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1949,7 +2028,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1969,19 +2048,19 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.954, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1177212327
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1177212328}
-  - 223: {fileID: 1177212329}
+  - component: {fileID: 1177212328}
+  - component: {fileID: 1177212329}
   m_Layer: 0
   m_Name: Carroussel
   m_TagString: Untagged
@@ -1998,11 +2077,11 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: -1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 243908644}
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: -1.75, y: 0.48}
@@ -2032,10 +2111,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1182918599}
-  - 114: {fileID: 1182918598}
+  - component: {fileID: 1182918599}
+  - component: {fileID: 1182918598}
   m_Layer: 0
   m_Name: 5
   m_TagString: Untagged
@@ -2055,8 +2134,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - _numericMultiplier
+  _serializedStateValues:
+  - 
   firstValue: 0
   invalidValue: -1
 --- !u!224 &1182918599
@@ -2068,7 +2149,6 @@ RectTransform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 848615370}
   - {fileID: 624341619}
@@ -2084,6 +2164,7 @@ RectTransform:
   - {fileID: 311921135}
   m_Father: {fileID: 243908644}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
@@ -2094,12 +2175,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1261220941}
-  - 222: {fileID: 1261220944}
-  - 114: {fileID: 1261220943}
-  - 114: {fileID: 1261220942}
+  - component: {fileID: 1261220941}
+  - component: {fileID: 1261220944}
+  - component: {fileID: 1261220943}
+  - component: {fileID: 1261220942}
   m_Layer: 0
   m_Name: 2
   m_TagString: Untagged
@@ -2116,10 +2197,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 2}
@@ -2178,10 +2259,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1331546547}
-  - 114: {fileID: 1331546548}
+  - component: {fileID: 1331546547}
+  - component: {fileID: 1331546548}
   m_Layer: 0
   m_Name: Gravatas
   m_TagString: Untagged
@@ -2198,7 +2279,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 925711896}
   - {fileID: 331781013}
@@ -2211,7 +2291,8 @@ Transform:
   - {fileID: 1696573818}
   - {fileID: 1166195149}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1331546548
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,12 +2328,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1351409787}
-  - 212: {fileID: 1351409789}
-  - 61: {fileID: 1351409788}
-  - 114: {fileID: 1351409790}
+  - component: {fileID: 1351409787}
+  - component: {fileID: 1351409789}
+  - component: {fileID: 1351409788}
+  - component: {fileID: 1351409790}
   m_Layer: 0
   m_Name: Gravata (6)
   m_TagString: Untagged
@@ -2269,10 +2350,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.367, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1351409788
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2301,7 +2382,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2309,7 +2392,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2341,6 +2424,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2348,6 +2433,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2359,12 +2447,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1553509235}
-  - 212: {fileID: 1553509237}
-  - 61: {fileID: 1553509236}
-  - 114: {fileID: 1553509238}
+  - component: {fileID: 1553509235}
+  - component: {fileID: 1553509237}
+  - component: {fileID: 1553509236}
+  - component: {fileID: 1553509238}
   m_Layer: 0
   m_Name: Gravata (2)
   m_TagString: Untagged
@@ -2381,10 +2469,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -2.3, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1553509236
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2413,7 +2501,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2421,7 +2511,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2453,6 +2543,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2460,6 +2552,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2471,12 +2566,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1599979738}
-  - 222: {fileID: 1599979741}
-  - 114: {fileID: 1599979740}
-  - 114: {fileID: 1599979739}
+  - component: {fileID: 1599979738}
+  - component: {fileID: 1599979741}
+  - component: {fileID: 1599979740}
+  - component: {fileID: 1599979739}
   m_Layer: 0
   m_Name: 7
   m_TagString: Untagged
@@ -2493,10 +2588,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 6.97}
@@ -2592,23 +2687,28 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: btn
       value: 
-      objectReference: {fileID: 2045297598}
+      objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
+      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error_more","hint1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["error_less","hint2"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[{"slugs":["lasterror","hint3"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[0]
       value: 
       objectReference: {fileID: 1062501079}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[0]
+      value: '{"$content":0,"$type":"MDS.Validators.Validator"}'
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
   m_IsPrefabParent: 0
@@ -2623,12 +2723,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1696573818}
-  - 212: {fileID: 1696573820}
-  - 61: {fileID: 1696573819}
-  - 114: {fileID: 1696573821}
+  - component: {fileID: 1696573818}
+  - component: {fileID: 1696573820}
+  - component: {fileID: 1696573819}
+  - component: {fileID: 1696573821}
   m_Layer: 0
   m_Name: Gravata (8)
   m_TagString: Untagged
@@ -2645,10 +2745,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.157, y: 2.37, z: 0.00390625}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1331546547}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1696573819
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2677,7 +2777,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2685,7 +2787,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2717,6 +2819,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2724,6 +2828,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2735,12 +2842,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 1907093500}
-  - 222: {fileID: 1907093503}
-  - 114: {fileID: 1907093502}
-  - 114: {fileID: 1907093501}
+  - component: {fileID: 1907093500}
+  - component: {fileID: 1907093503}
+  - component: {fileID: 1907093502}
+  - component: {fileID: 1907093501}
   m_Layer: 0
   m_Name: 8
   m_TagString: Untagged
@@ -2757,10 +2864,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 7.97}
@@ -2819,10 +2926,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1969357479}
-  - 212: {fileID: 1969357478}
+  - component: {fileID: 1969357479}
+  - component: {fileID: 1969357478}
   m_Layer: 0
   m_Name: background1_1
   m_TagString: Untagged
@@ -2844,7 +2951,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2852,7 +2961,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2872,21 +2981,21 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2023081524
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 224: {fileID: 2023081525}
-  - 222: {fileID: 2023081528}
-  - 114: {fileID: 2023081527}
-  - 114: {fileID: 2023081526}
+  - component: {fileID: 2023081525}
+  - component: {fileID: 2023081528}
+  - component: {fileID: 2023081527}
+  - component: {fileID: 2023081526}
   m_Layer: 0
   m_Name: 10
   m_TagString: Untagged
@@ -2903,10 +3012,10 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.7057936, y: 0.7057938, z: 0.7057938}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 1182918599}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 9.79}
@@ -2960,111 +3069,16 @@ CanvasRenderer:
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 2023081524}
---- !u!1 &2045297595
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 2045297597}
-  - 212: {fileID: 2045297596}
-  - 61: {fileID: 2045297599}
-  - 114: {fileID: 2045297598}
-  m_Layer: 0
-  m_Name: CheckAnswerButton
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!212 &2045297596
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2045297595}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 0
-  m_ReflectionProbeUsage: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 50a721a0d4fe49e4a96946b4aa6e0f17, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.5}
-  m_FlipX: 0
-  m_FlipY: 0
---- !u!4 &2045297597
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2045297595}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.2, y: -3.13, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 10
---- !u!114 &2045297598
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2045297595}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e456e60bf3d95a348be2962065630b09, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
-  downSprite: {fileID: 21300000, guid: 736550a068786b345b744040d798513e, type: 3}
-  upSprite: {fileID: 21300000, guid: 50a721a0d4fe49e4a96946b4aa6e0f17, type: 3}
-  enabledEffectGO: {fileID: 0}
---- !u!61 &2045297599
-BoxCollider2D:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 2045297595}
-  m_Enabled: 0
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_UsedByEffector: 0
-  m_Offset: {x: 0, y: 0}
-  serializedVersion: 2
-  m_Size: {x: 3.06, y: 1.22}
 --- !u!1 &2051313770
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 2051313773}
-  - 114: {fileID: 2051313772}
-  - 114: {fileID: 2051313771}
+  - component: {fileID: 2051313773}
+  - component: {fileID: 2051313772}
+  - component: {fileID: 2051313771}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -3106,7 +3120,7 @@ MonoBehaviour:
   - {fileID: 631860146}
   - {fileID: 1062501079}
   - {fileID: 1610702142}
-  - {fileID: 2045297598}
+  - {fileID: 518540021}
   _values:
   - _keys: []
     _values: []
@@ -3176,7 +3190,7 @@ MonoBehaviour:
     _target: {fileID: 1610702142}
   - _keys: []
     _values: []
-    _target: {fileID: 2045297598}
+    _target: {fileID: 518540021}
 --- !u!114 &2051313772
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -3211,7 +3225,7 @@ MonoBehaviour:
   - {fileID: 631860146}
   - {fileID: 1062501079}
   - {fileID: 1610702142}
-  - {fileID: 2045297598}
+  - {fileID: 518540021}
   _values:
   - _keys:
     - DefaultBehaviorEditor.Overwritten.EditProperty
@@ -3284,7 +3298,7 @@ MonoBehaviour:
     _target: {fileID: 1610702142}
   - _keys: []
     _values: []
-    _target: {fileID: 2045297598}
+    _target: {fileID: 518540021}
 --- !u!4 &2051313773
 Transform:
   m_ObjectHideFlags: 1
@@ -3294,7 +3308,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
