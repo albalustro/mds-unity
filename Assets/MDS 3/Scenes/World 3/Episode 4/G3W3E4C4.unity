@@ -1,15 +1,15 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!29 &1
-SceneSettings:
+OcclusionCullingSettings:
   m_ObjectHideFlags: 0
-  m_PVSData: 
-  m_PVSObjectsArray: []
-  m_PVSPortalsArray: []
+  serializedVersion: 2
   m_OcclusionBakeSettings:
     smallestOccluder: 5
     smallestHole: 0.25
     backfaceThreshold: 100
+  m_SceneGUID: 00000000000000000000000000000000
+  m_OcclusionCullingData: {fileID: 0}
 --- !u!104 &2
 RenderSettings:
   m_ObjectHideFlags: 0
@@ -79,16 +79,17 @@ NavMeshSettings:
   m_ObjectHideFlags: 0
   m_BuildSettings:
     serializedVersion: 2
+    agentTypeID: 0
     agentRadius: 0.5
     agentHeight: 2
     agentSlope: 45
     agentClimb: 0.4
     ledgeDropHeight: 0
     maxJumpAcrossDistance: 0
-    accuratePlacement: 0
     minRegionArea: 2
-    cellSize: 0.16666667
     manualCellSize: 0
+    cellSize: 0.16666667
+    accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
 --- !u!114 &85288808 stripped
 MonoBehaviour:
@@ -157,12 +158,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 151170197}
-  - 212: {fileID: 151170196}
-  - 61: {fileID: 151170198}
-  - 114: {fileID: 151170199}
+  - component: {fileID: 151170197}
+  - component: {fileID: 151170196}
+  - component: {fileID: 151170198}
+  - component: {fileID: 151170199}
   m_Layer: 10
   m_Name: I
   m_TagString: Untagged
@@ -184,7 +185,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -192,7 +195,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -212,10 +215,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.7940154, y: -2.0396285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &151170198
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -246,7 +249,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -255,18 +267,26 @@ MonoBehaviour:
   - I
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &253403285
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 253403287}
-  - 212: {fileID: 253403286}
-  - 61: {fileID: 253403288}
-  - 114: {fileID: 253403289}
+  - component: {fileID: 253403287}
+  - component: {fileID: 253403286}
+  - component: {fileID: 253403288}
+  - component: {fileID: 253403289}
   m_Layer: 10
   m_Name: v
   m_TagString: Untagged
@@ -288,7 +308,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -296,7 +318,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -316,10 +338,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.0640155, y: -2.7996285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &253403288
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -350,7 +372,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -359,7 +390,15 @@ MonoBehaviour:
   - v
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &253485937 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -445,10 +484,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 439032069}
-  - 114: {fileID: 439032068}
+  - component: {fileID: 439032069}
+  - component: {fileID: 439032068}
   m_Layer: 0
   m_Name: Validador
   m_TagString: Untagged
@@ -483,7 +522,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"e"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"f"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"g"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"t"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"v"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":5,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"B"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":6,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"D"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":7,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"H"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":8,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"I"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":9,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"T"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"e"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":1,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"f"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":2,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"g"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":3,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"t"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":4,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"v"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":5,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"B"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":6,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"D"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":7,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"H"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":8,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"I"},{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":9,"$type":"MDS.Gameplay.DragDrop.DropGroupSlot"},"OverrideGroupParameters":false,"CorrectAnswer":"T"}]'
   OperationLogic: 0
 --- !u!4 &439032069
 Transform:
@@ -494,10 +533,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 2.734, y: 0.462, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &498879289
 Prefab:
   m_ObjectHideFlags: 0
@@ -620,12 +659,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 644552374}
-  - 212: {fileID: 644552373}
-  - 61: {fileID: 644552375}
-  - 114: {fileID: 644552376}
+  - component: {fileID: 644552374}
+  - component: {fileID: 644552373}
+  - component: {fileID: 644552375}
+  - component: {fileID: 644552376}
   m_Layer: 10
   m_Name: f
   m_TagString: Untagged
@@ -647,7 +686,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -655,7 +696,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -675,10 +716,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.2940154, y: -2.0396285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 3
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &644552375
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -709,7 +750,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -718,7 +768,15 @@ MonoBehaviour:
   - f
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &705525459 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c,
@@ -735,11 +793,11 @@ GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 713661545}
-  - 114: {fileID: 713661544}
-  - 114: {fileID: 713661543}
+  - component: {fileID: 713661545}
+  - component: {fileID: 713661544}
+  - component: {fileID: 713661543}
   m_Layer: 0
   m_Name: fiPersistentEditorStorage
   m_TagString: Untagged
@@ -1064,8 +1122,77 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1863383233}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.2
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.2
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.2
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.3
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.4
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.5
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.6
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.7
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.8
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.9
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.10
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.11
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.12
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.13
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_3.EditProperty.14
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1888475449}
 --- !u!4 &713661545
 Transform:
@@ -1076,10 +1203,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &716420654
 Prefab:
   m_ObjectHideFlags: 0
@@ -1147,9 +1274,9 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 727014497}
+  - component: {fileID: 727014497}
   m_Layer: 0
   m_Name: Draggables
   m_TagString: Untagged
@@ -1166,7 +1293,6 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.2140155, y: 0.9396285, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1090341632}
   - {fileID: 1292696661}
@@ -1180,6 +1306,7 @@ Transform:
   - {fileID: 1486287664}
   m_Father: {fileID: 0}
   m_RootOrder: 6
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &751867721
 Prefab:
   m_ObjectHideFlags: 0
@@ -1553,7 +1680,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 61000012786014370, guid: 625ad63284e045d4cb7969aee276fd8c,
         type: 2}
@@ -1573,12 +1700,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 974209248}
-  - 212: {fileID: 974209247}
-  - 61: {fileID: 974209249}
-  - 114: {fileID: 974209250}
+  - component: {fileID: 974209248}
+  - component: {fileID: 974209247}
+  - component: {fileID: 974209249}
+  - component: {fileID: 974209250}
   m_Layer: 10
   m_Name: D
   m_TagString: Untagged
@@ -1600,7 +1727,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1608,7 +1737,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1628,10 +1757,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 3.3340154, y: -2.7996285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &974209249
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1662,7 +1791,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -1671,18 +1809,26 @@ MonoBehaviour:
   - D
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1009138511
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1009138513}
-  - 212: {fileID: 1009138512}
-  - 61: {fileID: 1009138514}
-  - 114: {fileID: 1009138515}
+  - component: {fileID: 1009138513}
+  - component: {fileID: 1009138512}
+  - component: {fileID: 1009138514}
+  - component: {fileID: 1009138515}
   m_Layer: 10
   m_Name: g
   m_TagString: Untagged
@@ -1704,7 +1850,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1712,7 +1860,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1732,10 +1880,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.7840154, y: -2.7996285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1009138514
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1766,7 +1914,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -1775,7 +1932,15 @@ MonoBehaviour:
   - g
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1001 &1040102737
 Prefab:
   m_ObjectHideFlags: 0
@@ -1842,10 +2007,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1046293221}
-  - 212: {fileID: 1046293220}
+  - component: {fileID: 1046293221}
+  - component: {fileID: 1046293220}
   m_Layer: 0
   m_Name: background1_1
   m_TagString: Untagged
@@ -1867,7 +2032,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1875,7 +2042,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1895,21 +2062,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1090341630
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1090341632}
-  - 212: {fileID: 1090341631}
-  - 61: {fileID: 1090341633}
-  - 114: {fileID: 1090341634}
+  - component: {fileID: 1090341632}
+  - component: {fileID: 1090341631}
+  - component: {fileID: 1090341633}
+  - component: {fileID: 1090341634}
   m_Layer: 10
   m_Name: e
   m_TagString: Untagged
@@ -1931,7 +2098,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -1939,7 +2108,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -1959,10 +2128,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.0440155, y: -2.0396285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1090341633
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -1993,7 +2162,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -2002,100 +2180,21 @@ MonoBehaviour:
   - e
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1092805786 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
     type: 2}
   m_PrefabInternal: {fileID: 1956172246}
   m_Script: {fileID: 11500000, guid: 825f6ceaaa1f03342bb422942c28c0d0, type: 3}
---- !u!1 &1104807941
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
-  m_Component:
-  - 4: {fileID: 1104807946}
-  - 20: {fileID: 1104807945}
-  - 92: {fileID: 1104807944}
-  - 124: {fileID: 1104807943}
-  - 81: {fileID: 1104807942}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1104807942
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1104807941}
-  m_Enabled: 1
---- !u!124 &1104807943
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1104807941}
-  m_Enabled: 1
---- !u!92 &1104807944
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1104807941}
-  m_Enabled: 1
---- !u!20 &1104807945
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1104807941}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &1104807946
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1104807941}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
 --- !u!1001 &1123162350
 Prefab:
   m_ObjectHideFlags: 0
@@ -2208,6 +2307,48 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
   m_IsPrefabParent: 0
+--- !u!1001 &1250133350
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!114 &1251546918 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -2277,12 +2418,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1292696661}
-  - 212: {fileID: 1292696660}
-  - 61: {fileID: 1292696662}
-  - 114: {fileID: 1292696663}
+  - component: {fileID: 1292696661}
+  - component: {fileID: 1292696660}
+  - component: {fileID: 1292696662}
+  - component: {fileID: 1292696663}
   m_Layer: 10
   m_Name: T_mai
   m_TagString: Untagged
@@ -2304,7 +2445,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2312,7 +2455,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2332,10 +2475,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.6240156, y: -2.7996285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1292696662
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2366,7 +2509,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -2375,7 +2527,15 @@ MonoBehaviour:
   - T
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!114 &1294990529 stripped
 MonoBehaviour:
   m_PrefabParentObject: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
@@ -2425,7 +2585,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000010376572144, guid: 40cefe2c012511043816f1e29ed9710e, type: 2}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 61000010752869668, guid: 40cefe2c012511043816f1e29ed9710e,
         type: 2}
@@ -2451,12 +2611,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1486287664}
-  - 212: {fileID: 1486287663}
-  - 61: {fileID: 1486287666}
-  - 114: {fileID: 1486287665}
+  - component: {fileID: 1486287664}
+  - component: {fileID: 1486287663}
+  - component: {fileID: 1486287666}
+  - component: {fileID: 1486287665}
   m_Layer: 10
   m_Name: B
   m_TagString: Untagged
@@ -2478,7 +2638,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2486,7 +2648,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2506,10 +2668,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.2540154, y: -2.0396285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1486287665
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2526,7 +2688,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -2535,7 +2706,15 @@ MonoBehaviour:
   - B
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!61 &1486287666
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2611,12 +2790,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1631546628}
-  - 212: {fileID: 1631546627}
-  - 61: {fileID: 1631546629}
-  - 114: {fileID: 1631546630}
+  - component: {fileID: 1631546628}
+  - component: {fileID: 1631546627}
+  - component: {fileID: 1631546629}
+  - component: {fileID: 1631546630}
   m_Layer: 10
   m_Name: t
   m_TagString: Untagged
@@ -2638,7 +2817,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2646,7 +2827,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2666,10 +2847,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 1.6640155, y: -2.0396285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1631546629
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2700,7 +2881,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -2709,7 +2899,15 @@ MonoBehaviour:
   - t
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!4 &1633457413 stripped
 Transform:
   m_PrefabParentObject: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c,
@@ -2855,12 +3053,12 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1717707040}
-  - 212: {fileID: 1717707039}
-  - 61: {fileID: 1717707041}
-  - 114: {fileID: 1717707042}
+  - component: {fileID: 1717707040}
+  - component: {fileID: 1717707039}
+  - component: {fileID: 1717707041}
+  - component: {fileID: 1717707042}
   m_Layer: 10
   m_Name: H
   m_TagString: Untagged
@@ -2882,7 +3080,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -2890,7 +3090,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2910,10 +3110,10 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 2.2140155, y: -2.7996285, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 727014497}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &1717707041
 BoxCollider2D:
   m_ObjectHideFlags: 0
@@ -2944,7 +3144,16 @@ MonoBehaviour:
   - PreferredInitialIndex
   - spriteState
   - scaleState
+  - OnAfterDrop
+  - OnAfterDropActions
+  - OnGroupRefuseActions
+  - OnInvalidAreaDropActions
   _serializedStateValues:
+  - 
+  - 
+  - 
+  - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
+    Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - 
   - 
   - 
@@ -2953,16 +3162,24 @@ MonoBehaviour:
   - H
   changeSprite: 0
   changeScale: 0
+  activeWhileDragging: 0
+  m_activatedWhileDragging: {fileID: 0}
   currentSlot: {fileID: 0}
+  instantiableDraggable: 0
+  OnAfterDrop:
+    m_PersistentCalls:
+      m_Calls: []
+    m_TypeName: MDS.Gameplay.DragDrop.MyUnityEvent, Assembly-CSharp, Version=0.0.0.0,
+      Culture=neutral, PublicKeyToken=null
 --- !u!1 &1747403064
 GameObject:
   m_ObjectHideFlags: 1
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1747403066}
-  - 114: {fileID: 1747403065}
+  - component: {fileID: 1747403066}
+  - component: {fileID: 1747403065}
   m_Layer: 0
   m_Name: fiBackupSceneStorage
   m_TagString: Untagged
@@ -2991,21 +3208,21 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1863383230
 GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1863383232}
-  - 212: {fileID: 1863383231}
-  - 61: {fileID: 1863383234}
-  - 114: {fileID: 1863383233}
+  - component: {fileID: 1863383232}
+  - component: {fileID: 1863383231}
+  - component: {fileID: 1863383234}
+  - component: {fileID: 1863383233}
   m_Layer: 0
   m_Name: CheckAnswerButton
   m_TagString: Untagged
@@ -3027,7 +3244,9 @@ SpriteRenderer:
   m_ReflectionProbeUsage: 0
   m_Materials:
   - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_SubsetIndices: 
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
   m_StaticBatchRoot: {fileID: 0}
   m_ProbeAnchor: {fileID: 0}
   m_LightProbeVolumeOverride: {fileID: 0}
@@ -3035,7 +3254,7 @@ SpriteRenderer:
   m_PreserveUVs: 0
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
-  m_SelectedWireframeHidden: 1
+  m_SelectedEditorRenderState: 0
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -3055,10 +3274,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.07350317, y: -3.1069465, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1863383233
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3071,8 +3290,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - 
   downSprite: {fileID: 21300000, guid: 064a351b425b92c4495f3b2319ed0980, type: 3}
   upSprite: {fileID: 21300000, guid: 6d5af47642fdf8d45be51be467f7a8da, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -3209,10 +3430,10 @@ GameObject:
   m_ObjectHideFlags: 0
   m_PrefabParentObject: {fileID: 0}
   m_PrefabInternal: {fileID: 0}
-  serializedVersion: 4
+  serializedVersion: 5
   m_Component:
-  - 4: {fileID: 1888475450}
-  - 114: {fileID: 1888475449}
+  - component: {fileID: 1888475450}
+  - component: {fileID: 1888475449}
   m_Layer: 0
   m_Name: Challenge
   m_TagString: Untagged
@@ -3233,16 +3454,55 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 439032068}
+  - {fileID: 705525460}
+  - {fileID: 923584816}
+  - {fileID: 1633457414}
+  - {fileID: 923584816}
+  - {fileID: 1633457414}
+  - {fileID: 923584816}
+  - {fileID: 705525460}
+  - {fileID: 923584816}
+  - {fileID: 705525460}
+  - {fileID: 923584816}
+  - {fileID: 1633457414}
+  - {fileID: 923584816}
+  - {fileID: 1486287665}
+  - {fileID: 411641153}
+  - {fileID: 974209250}
+  - {fileID: 906580682}
+  - {fileID: 1717707042}
+  - {fileID: 943786737}
+  - {fileID: 151170199}
+  - {fileID: 1251546918}
+  - {fileID: 1292696663}
+  - {fileID: 85288808}
+  - {fileID: 1090341634}
+  - {fileID: 1638099285}
+  - {fileID: 644552376}
+  - {fileID: 369970416}
+  - {fileID: 1009138515}
+  - {fileID: 1887540282}
+  - {fileID: 1631546630}
+  - {fileID: 405667457}
+  - {fileID: 253403289}
+  - {fileID: 253485937}
+  - {fileID: 1090341630}
+  - {fileID: 1292696659}
+  - {fileID: 974209246}
+  - {fileID: 644552372}
+  - {fileID: 1009138511}
+  - {fileID: 1717707038}
+  - {fileID: 151170195}
+  - {fileID: 1631546626}
+  - {fileID: 253403285}
+  - {fileID: 1486287662}
   _serializedStateKeys:
-  - preActionsList
-  - validatorsList
-  - posVictoryActionsList
+  - Validador
+  - _actions
   _serializedStateValues:
-  - '[]'
-  - '[{"$content":0,"$type":"MDS.Validators.Validator"}]'
-  - '[]'
+  - '{"$content":0,"$type":"MDS.Validators.Validator"}'
+  - '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"_duration":1.0,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":1,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":2,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":3,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":4,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_2":[{"slugs":["error2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":5,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":6,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.0,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":7,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":8,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"}],"onErrorActions_3":[{"slugs":["error3"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":9,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":10,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":11,"m_multipleSlotsAsTargets":[],"_draggableTarget":null,"m_multipleDraggables":[],"_dropArea":12,"_slot":null,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":13,"m_multipleDraggables":[],"_dropArea":null,"_slot":14,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":15,"m_multipleDraggables":[],"_dropArea":null,"_slot":16,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":17,"m_multipleDraggables":[],"_dropArea":null,"_slot":18,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":19,"m_multipleDraggables":[],"_dropArea":null,"_slot":20,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":21,"m_multipleDraggables":[],"_dropArea":null,"_slot":22,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":23,"m_multipleDraggables":[],"_dropArea":null,"_slot":24,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":25,"m_multipleDraggables":[],"_dropArea":null,"_slot":26,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":27,"m_multipleDraggables":[],"_dropArea":null,"_slot":28,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":29,"m_multipleDraggables":[],"_dropArea":null,"_slot":30,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"_duration":1.5,"selfTarget":false,"useMemorizedGameObjectAsTarget":false,"useSlotContentAsTarget":null,"_DropAreaSlotsContentAsTargets":null,"m_multipleSlotsAsTargets":[],"_draggableTarget":31,"m_multipleDraggables":[],"_dropArea":null,"_slot":32,"m_makeDraggableChildrenOfSlot":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetInSlotAction"},{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"obj":[33,34,35,36,37,38,39,40,41,42],"unfreeze":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetRedConcept"}],"onVictoryActions":[{"slugs":["victory"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
-  btn: {fileID: 1863383233}
 --- !u!4 &1888475450
 Transform:
   m_ObjectHideFlags: 0
@@ -3252,10 +3512,10 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -1.1417, y: 1.024666, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 10
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1956172246
 Prefab:
   m_ObjectHideFlags: 0

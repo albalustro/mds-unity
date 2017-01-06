@@ -192,6 +192,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -199,6 +201,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -258,6 +263,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -265,6 +272,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -354,7 +364,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"voce"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"voce"}]'
   OperationLogic: 0
 --- !u!4 &214552213
 Transform:
@@ -421,6 +431,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -428,6 +440,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -518,7 +533,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"11-5"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"11-5"}]'
   OperationLogic: 0
 --- !u!4 &272331129
 Transform:
@@ -585,6 +600,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -592,6 +609,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -817,8 +837,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - '[]'
   downSprite: {fileID: 21300000, guid: b690e30c051bd0e478ccbd0a63be622c, type: 3}
   upSprite: {fileID: 21300000, guid: a5aa47a373f40af4f939068f91d000cb, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -873,7 +895,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011688627654, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_RootOrder
-      value: 9
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 1000012824806454, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_Name
@@ -992,17 +1014,62 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 272331128}
-  - {fileID: 710815822}
   - {fileID: 1310680585}
-  - {fileID: 980282269}
   - {fileID: 924552540}
+  - {fileID: 980282269}
+  - {fileID: 710815822}
+  - {fileID: 710815824}
+  - {fileID: 977728271}
+  - {fileID: 710815824}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"_action":"Enable","_target":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Disable","_target":2,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_target":3,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Disable","_target":4,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+  - '{"onStartActions":[{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[1,2],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[3,4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}],"onErrorActions_1":[{"slugs":["error2_1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":5,"m_unselectAll":true,"m_lockGroup":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"slugs":["error2_2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[6],"m_set":true,"m_groupTransform":7,"m_unselectAll":true,"m_lockGroup":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
+--- !u!1001 &971396312
+Prefab:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1 &977728271
 GameObject:
   m_ObjectHideFlags: 0
@@ -1055,6 +1122,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1062,6 +1131,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1216,7 +1288,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"6"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"6"}]'
   OperationLogic: 0
 --- !u!4 &1052947588
 Transform:
@@ -1293,7 +1365,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1229717410
 GameObject:
@@ -1362,7 +1434,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011688627654, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_RootOrder
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
@@ -1404,7 +1476,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011688627654, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_RootOrder
-      value: 8
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 1000012824806454, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_Name
@@ -1485,6 +1557,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1492,6 +1566,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1548,93 +1625,6 @@ SpriteRenderer:
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
---- !u!1 &1519168013
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 1519168018}
-  - component: {fileID: 1519168017}
-  - component: {fileID: 1519168016}
-  - component: {fileID: 1519168015}
-  - component: {fileID: 1519168014}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &1519168014
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519168013}
-  m_Enabled: 1
---- !u!124 &1519168015
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519168013}
-  m_Enabled: 1
---- !u!92 &1519168016
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519168013}
-  m_Enabled: 1
---- !u!20 &1519168017
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519168013}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &1519168018
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1519168013}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1568208263
 GameObject:
   m_ObjectHideFlags: 0
@@ -1687,6 +1677,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1694,6 +1686,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -1793,15 +1788,18 @@ MonoBehaviour:
   _objectReferences:
   - {fileID: 1052947587}
   - {fileID: 1662622990}
-  - {fileID: 1310680585}
   - {fileID: 531216216}
+  - {fileID: 1310680585}
   - {fileID: 924552540}
+  - {fileID: 1310680587}
+  - {fileID: 1345042950}
+  - {fileID: 1310680587}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"_action":"Disable","_target":1,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_target":2,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Disable","_target":3,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_target":4,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+  - '{"onStartActions":[{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[1,2],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[3,4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}],"onErrorActions_1":[{"slugs":["error1_1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":5,"m_unselectAll":true,"m_lockGroup":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"slugs":["error1_2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[6],"m_set":true,"m_groupTransform":7,"m_unselectAll":true,"m_lockGroup":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 941308243}
 --- !u!1 &1662622990 stripped
 GameObject:
@@ -1939,6 +1937,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1946,6 +1946,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
@@ -2022,7 +2025,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2101671480
 GameObject:
@@ -2053,12 +2056,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 214552212}
+  - {fileID: 663780938}
+  - {fileID: 1853256933}
+  - {fileID: 663780938}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[]}'
+  - '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["error0_1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":1,"m_unselectAll":true,"m_lockGroup":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"slugs":["error0_2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[2],"m_set":true,"m_groupTransform":3,"m_unselectAll":true,"m_lockGroup":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory0"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 1601359758}
 --- !u!4 &2101671482
 Transform:
@@ -2211,8 +2217,11 @@ MonoBehaviour:
   - {fileID: 272331128}
   - {fileID: 941308243}
   _values:
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.Overwritten.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 663780937}
   - _keys: []
     _values: []
@@ -2229,20 +2238,44 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 214552212}
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_groupTransform.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_useMemorizedGo.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0
+    - 1
+    - 1.AbstractTypeEditor.m_groupTransform.EditProperty
+    - 1.AbstractTypeEditor.m_useMemorizedGo.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    _target: {fileID: 2101671481}
   - _keys: []
     _values: []
-    _target: {fileID: 2101671481}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
     _target: {fileID: 1310680586}
-  - _keys:
-    - DefaultBehaviorEditor.Overwritten.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 710815823}
   - _keys: []
     _values: []
@@ -2265,14 +2298,44 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1052947587}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1601359758}
   - _keys: []
     _values: []
     _target: {fileID: 272331128}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 941308243}
 --- !u!4 &2108727945
 Transform:
@@ -2285,7 +2348,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2109031229
 GameObject:
@@ -2374,6 +2437,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -2381,6 +2446,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - 
+  - 
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
