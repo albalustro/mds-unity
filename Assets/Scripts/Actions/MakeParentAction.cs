@@ -2,6 +2,7 @@
 using UnityEngine;
 using MDS.Core.Interfaces;
 using System;
+using MDS.Gameplay.DragDrop;
 
 
 namespace MDS.Actions {
@@ -16,6 +17,9 @@ namespace MDS.Actions {
 		private Transform m_parent;
 
 		[SerializeField]
+		private DropGroupSlot m_dropSlotContentAsTarget;
+
+		[SerializeField]
 		private bool m_resetPosition;
 
 		public override IEnumerator Execute()
@@ -23,12 +27,34 @@ namespace MDS.Actions {
             if(byPass) yield break;
             yield return base.Execute();
 
-			if (m_parent == null) {
-				m_obj.parent = null;
-			} else {
+			Draggable d = null;
+
+			if (m_dropSlotContentAsTarget != null) {
+				d = m_dropSlotContentAsTarget.draggableReference;
+				if (d != null) {
+					d.gameObject.transform.SetParent (m_parent);
+				}
+			}
+
+			if (m_obj != null) {
 				m_obj.SetParent (m_parent);
-				if (m_resetPosition) {
+			}
+
+
+			if (m_parent == null) {
+				if(m_obj != null)
+					m_obj.parent = null;
+				if (d != null)
+					d.transform.SetParent (null);
+			} 
+
+
+			if (m_resetPosition) {
+				if (m_obj != null) {
 					m_obj.position = m_parent.position;
+				}
+				if (d != null) {
+					d.transform.position = m_parent.position;
 				}
 			}
 
