@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MDS.Actions;
 using MDS.Core.Interfaces;
+using FullInspector;
 
 public class DragonFly : MDSBehaviour {
 
@@ -13,7 +14,8 @@ public class DragonFly : MDSBehaviour {
 	public float slowSpeed;
 
 	[SerializeField]
-	private IAction[] m_onCollisionAction;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] m_onCollisionAction;
 
 	private bool m_playerHasBeenWarned = false;
 

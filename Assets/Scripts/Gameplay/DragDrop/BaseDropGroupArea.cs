@@ -13,7 +13,7 @@ namespace MDS.Gameplay.DragDrop
 
         protected List<DropGroupSlot> slots;
 
-        public virtual bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
+        public virtual bool SetInSlot(Draggable draggable, ref DropGroupSlot slot, float duration = 0.5f)
         {
             // se chegou aqui com slot nulo, vamos procurar um slot para ele. possivelmente soltou o draggable sobre
             //  o grupo e nao sobre um slot especifico.
@@ -73,7 +73,7 @@ namespace MDS.Gameplay.DragDrop
             // todo:
             // da forma como está, ainda é possível 'forçar' um draggable no slot inicial errado 
             // simplesmente fazendo o swap (soltando um draggable em um slot final ocupado por outro draggable)
-            DraggableUtilities.SetDraggableInSlot(draggable, slot);
+            DraggableUtilities.SetDraggableInSlot(draggable, slot, duration);
 
             return true;
 

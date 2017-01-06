@@ -60,7 +60,8 @@ public class ContinuousMove : MDSBehaviour
 
 	public bool nonInteractable;
 
-	public IAction[] m_onMaxDistanceAction;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    public IAction[] m_onMaxDistanceAction;
 
 	void Start()
 	{

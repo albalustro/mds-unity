@@ -9,6 +9,7 @@ namespace MDS.Actions.DialogConditions
     public abstract class ConditionedActionBase : IActionCondition
     {
         [InspectorCategory("Actions")]
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         public IAction[] Actions { get; set; }
         public abstract bool IsConditionSatisfied();
 

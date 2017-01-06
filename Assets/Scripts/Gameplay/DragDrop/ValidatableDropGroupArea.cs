@@ -242,7 +242,7 @@ namespace MDS.Gameplay.DragDrop
 
 		#endregion
 
-		public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
+		public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot, float duration = 0.5f)
 		{
 
 			if(draggable.Labels.Any(l => _invalidLabels.Contains(l)))
@@ -253,7 +253,7 @@ namespace MDS.Gameplay.DragDrop
 			if(organizer != null)
 				organizer.Organize(draggable);
 
-			bool ret = base.SetInSlot(draggable, ref slot);
+			bool ret = base.SetInSlot(draggable, ref slot, duration);
 
 			if(ret && _freezeAfterDrop)
 			{

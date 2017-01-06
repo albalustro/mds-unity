@@ -32,12 +32,12 @@ namespace MDS.Gameplay.DragDrop
             }
         }
 
-        public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
+        public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot, float duration = 0.5f)
         {
             bool ret = false;
             if (!slots.Any(s => s.draggableReference == draggable))
             {
-                if (base.SetInSlot(draggable, ref slot))
+                if (base.SetInSlot(draggable, ref slot, duration))
                 {
                     draggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
                     ret = true;

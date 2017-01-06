@@ -53,11 +53,14 @@ namespace MDS.Gameplay.DragDrop
         [ShowInInspector, SerializeField, InspectorCollapsedFoldout]
         public MyUnityEvent OnAfterDrop;
 
-		public IAction[] OnAfterDropActions;
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+        public IAction[] OnAfterDropActions;
 
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o grupo recusar o draggable, *AUTOMATICAMENTE* o draggable deixa de voltar para o slot de onde foi arrastado")]
         public IAction[] OnGroupRefuseActions;
 
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
         public IAction[] OnInvalidAreaDropActions;
 

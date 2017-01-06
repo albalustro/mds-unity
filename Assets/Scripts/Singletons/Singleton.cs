@@ -15,9 +15,11 @@ public class Singleton<T> : MDSBehaviour where T : MDSBehaviour
 				if (m_Instance == null)
 				{
 					m_Instance = (T) FindObjectOfType(typeof(T));
- 
-					if ( FindObjectsOfType(typeof(T)).Length > 1 )
-						return m_Instance;
+
+                    if(FindObjectsOfType(typeof(T)).Length > 1)
+                    {
+                        return m_Instance;
+                    }
  
 					if (m_Instance == null)
 					{

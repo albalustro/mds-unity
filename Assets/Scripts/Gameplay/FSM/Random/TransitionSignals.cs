@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FullInspector;
 using MDS.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
@@ -10,6 +11,7 @@ namespace MDS.Gameplay.FSM
     {
 
         public UnityEvent OnTransition;
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         public IAction[] OnTransitionActions;
 
 

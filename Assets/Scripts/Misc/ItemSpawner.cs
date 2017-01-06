@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using MDS.Core.Interfaces;
 using MDS.Utilities;
+using FullInspector;
 
 public class ItemSpawner : MDSBehaviour {
 
@@ -11,7 +12,8 @@ public class ItemSpawner : MDSBehaviour {
 	private bool HasAmount { get { return _amount.HasValue; } }
 	private int _currentAmount;
 	[SerializeField, FullInspector.InspectorShowIf("HasAmount")]
-	private IAction[] OnFinishActions;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] OnFinishActions;
 	[SerializeField]
 	private float _spawnInterval = 3f;
 	[SerializeField]

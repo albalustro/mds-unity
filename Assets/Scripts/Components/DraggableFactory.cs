@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FullInspector;
 using MDS.Core.Interfaces;
 using MDS.Gameplay.DragDrop;
 using MDS.Utilities;
@@ -12,6 +13,7 @@ public class DraggableFactory : MDSBehaviour
     private bool HasAmount { get { return _amount.HasValue; } }
     private int _currentAmount;
     [SerializeField, FullInspector.InspectorShowIf("HasAmount")]
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] OnFinishActions;
 
 

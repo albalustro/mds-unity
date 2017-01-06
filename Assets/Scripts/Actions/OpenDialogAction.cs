@@ -6,6 +6,7 @@ using System.Text;
 using FullInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MDS.Utilities;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -44,24 +45,33 @@ namespace MDS.Actions
         [InspectorButton, InspectorOrder(0)]
         public void GetSlugs()
         {
+            Scene curScene = SceneManager.GetActiveScene();
+
             sceneSlugs = new List<slugSelector>();
-            string sceneName = SceneManager.GetActiveScene().name;
+            string sceneName = curScene.name;
 
             string dialogPath = "Assets/Dialogue System/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
 
             DialogueList list = AssetDatabase.LoadAssetAtPath<DialogueList>(dialogPath);
 
+
             string game = sceneName.Substring(1, 1);
             string world = sceneName.Substring(3, 1);
             string episode = sceneName.Substring(5, 1);
-            string challenge = sceneName.Substring(7, 1);
+            string challenge = "";
+            if(curScene.IsChallenge())
+            {
+                challenge = sceneName.Substring(7, 1);
+            }
+            else if (curScene.IsEpisode())
+            {
+            // nao precisa fazer nada    
+            }
 
             sceneSlugs = list.dialogueList.Where(i => i.episode == episode && i.minigame == challenge)
-                .Select((s) => new slugSelector() { slug = s.slug })
-                .Distinct(new slugSelectorComparer())
-                .ToList();
-            
-
+                    .Select((s) => new slugSelector() { slug = s.slug })
+                    .Distinct(new slugSelectorComparer())
+                    .ToList();
         }
 
         [InspectorButton, InspectorOrder(1)]
@@ -90,15 +100,20 @@ namespace MDS.Actions
 
         public Slug[] slugs { get; set; }
 
+        public override void Initialize(MonoBehaviour coroutineHolder)
+        {
+            base.Initialize(coroutineHolder);
+            // Esse tipo de actions SEMPRE deverá aguardar que seja encerrado..
+            // por isso deverá se comportar como se o wait finish marcado
+            waitFinish = true;
+        }
 
         public override IEnumerator Execute()
         {
+            if(byPass) yield break;
             yield return base.Execute();
-
             DialogueSystem.Instance.ShowDialogueMessage(slugs);
-
-            if (waitFinish)
-                yield return new WaitWhile(DialogueSystem.Instance.IsDialogueOpen);
+            yield return new WaitWhile(DialogueSystem.Instance.IsDialogueOpen);
         }
     }
 }

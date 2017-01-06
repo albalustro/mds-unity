@@ -9,7 +9,7 @@ namespace MDS.Interactable
     public class MoveInteraction : InteractableBase
     {
 
-        PlayerEpisodeController _player;
+        protected PlayerEpisodeController _player;
 
         protected override void Awake()
         {
@@ -19,7 +19,7 @@ namespace MDS.Interactable
 
         public override void Interact()
         {
-            var pos = Camera.main.ScreenToWorldPoint( Input.mousePosition);
+            var pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             
             _player.Move(pos);
         }
