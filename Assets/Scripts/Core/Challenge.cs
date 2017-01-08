@@ -13,6 +13,7 @@ using FullInspector;
 using MDS.Gameplay.DragDrop;
 
 using MDS.Utilities;
+using MDS.Core.SceneManagement;
 
 namespace MDS.Core
 {
@@ -103,34 +104,43 @@ namespace MDS.Core
             // ações executadas automaticamente quando
             // entra no desafio (ANTES do desafio ser jogado)
             // ex: sequencias de dialogos, animacoes, etc
+            [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
             public IAction[] onStartActions;
 
             // ações executadas quando responde errado na primeira vez
+            [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
             public IAction[] onErrorActions_1;
 
             // ações executadas quando responde errado na primeira vez
+            [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
             public IAction[] onErrorActions_2;
 
             // ações executadas quando responde errado na primeira vez
+            [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
             public IAction[] onErrorActions_3;
 
             // ações executadas quando obtem sucesso na valicao
+            [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
             public IAction[] onVictoryActions;
         }
 
         #region Fields & Properties
 
-        private int _errorCount = 0;
-        
-        // validadores do desafio
+        // propriedade usada para rastrear o conceito obtido pelo jogador
+        // ao jogar um desafio.
+        // Deve ser iniciado com GREEN no inicio do desafio e, ao sair,
+        // será verificado o seu valor para atualizacao do mapa de conceitos 
+        // do PlayerInfo.
+        // Feito como variavel static pois a cena onde o valor sera verificado
+        // não existe Challenge. Devera ser feito no episodio ou no mapa
+        public static ConceptTypes ChallengeConcept;
+
         public IValidator Validador;
-
         public Challenge nextChallenge;
-
-        private IValidationActivator[] _answerProcessors;
-
         public ChallengeActions _actions;
 
+        private IValidationActivator[] _answerProcessors;
+        private int _errorCount = 0;
         #endregion
 
         #region Unity methods
@@ -184,18 +194,28 @@ namespace MDS.Core
 
         void Victory()
         {
+            List<IAction> tmp = new List<Interfaces.IAction>(_actions.onVictoryActions);
+
+            // se tem um proximo challenge, inserir as actions para desabilitar/habilitar
+            // os challenges relacionados
             if(nextChallenge != null)
             {
-                //nextChallenge.gameObject.SetActive(true);
-                //gameObject.SetActive(false);
                 EnableDisableAction ac1 = new EnableDisableAction(EnableDisableAction.EAction.Enable, new[] { nextChallenge.gameObject }) ;
-                EnableDisableAction ac2 = new Actions.EnableDisableAction(EnableDisableAction.EAction.Disable, new[] { gameObject });
-                List<IAction> tmp = new List<Interfaces.IAction>(_actions.onVictoryActions);
+                EnableDisableAction ac2 = new EnableDisableAction(EnableDisableAction.EAction.Disable, new[] { gameObject });
                 tmp.Add(ac1);
-                tmp.Add(ac2);
-                _actions.onVictoryActions = tmp.ToArray();
+                tmp.Add(ac2);                
             }
+            // caso contrario, colocar a actions que termina a cena
+            else
+            {
+                FinishChallenge ac = new FinishChallenge();
+                tmp.Add(ac);
+            }
+            _actions.onVictoryActions = tmp.ToArray();
+
             ExecuteActions(_actions.onVictoryActions);
+
+            
         }
 
         /// <summary>
@@ -218,8 +238,15 @@ namespace MDS.Core
                 default:
                     LogError("Error Index não definido");
                     return;
-                    break;
+                    
             }
+
+
+            // colocando conceito amarelo para qq erro será sobrescrito
+            // pela action que coloca conceito vermelho.
+            // dessa forma nao precisa se preocupar se o desafio tem 1, 2 ou 3 erros
+            // ou ainda se há multiplos challenges
+            Challenge.ChallengeConcept = ConceptTypes.CONCEPT_YELLOW;
 
             ExecuteActions(actions);
         }

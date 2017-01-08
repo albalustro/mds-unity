@@ -10,6 +10,7 @@ public class InvokeValidation : BaseAction
     
     public override IEnumerator Execute()
     {
+        if(byPass) yield break;
         yield return base.Execute();
         Challenge.GetActiveInstance().ProcessResult();
     }

@@ -20,11 +20,24 @@ namespace MDS.Actions {
 		[SerializeField] private bool m_fadeIn = false;
 		[SerializeField] private float m_fadeTime = 2;
 
+        public FadeInOutAction()
+        {
 
+        }
+
+        public FadeInOutAction(bool fadein, float fadeTime, GameObject[] targets, bool wait, float delay)
+        {
+            m_fadeIn = fadein;
+            m_fadeTime = fadeTime;
+            m_target = targets;
+            delayBeforeExecution = delay;
+            waitFinish = wait;
+        }
 
 		public override IEnumerator Execute()
 		{
-			yield return base.Execute();
+            if(byPass) yield break;
+            yield return base.Execute();
 
 			if (selfTarget) {
 				m_target = new GameObject[1];
@@ -36,18 +49,27 @@ namespace MDS.Actions {
 				m_target[0] = m_useDropSlotAsTarget.draggableReference.gameObject;
 			}
 
+            float alphaDestination = m_fadeIn ? 1f : 0f;
+
 			for (int i = 0; i < m_target.Length; i++) {
 				SpriteRenderer sr = m_target[i].GetComponent<SpriteRenderer>();
-				Color c = sr.color;
-				if(m_fadeIn) {
-					c.a = 0;
-					sr.color = c;
-					LeanTween.alpha (m_target[i], 1, m_fadeTime);
-				} else {
-					c.a = 1;
-					sr.color = c;
-					LeanTween.alpha (m_target[i], 0, m_fadeTime);
-				}
+                if(sr != null)
+                {
+                    Color c = sr.color;
+                    c.a = 1f - alphaDestination;
+                    sr.color = c;
+                    LeanTween.alpha(m_target[i], alphaDestination, m_fadeTime);
+                }
+                else
+                {
+                    CanvasGroup canvasGroup = m_target[i].GetComponent<CanvasGroup>();
+                    if(canvasGroup != null)
+                    {
+                        canvasGroup.alpha = 1f - alphaDestination;
+                        LeanTween.alphaCanvas(canvasGroup, alphaDestination, m_fadeTime);
+                    }
+                }
+
 
 			}
 

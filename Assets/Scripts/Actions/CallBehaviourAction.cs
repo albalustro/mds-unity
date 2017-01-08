@@ -13,7 +13,8 @@ public class CallBehaviourAction : BaseAction {
 
 	public override IEnumerator Execute()
 	{
-		yield return base.Execute();
+        if(byPass) yield break;
+        yield return base.Execute();
 		m_callFunctionOnGameObject.Invoke ();
 	}
 

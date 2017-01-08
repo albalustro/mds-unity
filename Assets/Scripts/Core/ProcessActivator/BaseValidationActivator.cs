@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using FullInspector;
 using MDS.Core;
 using MDS.Core.Interfaces;
 using UnityEngine;
@@ -11,6 +12,7 @@ namespace MDS.Core.ProcessActivator
 {
     public abstract class BaseValidationActivator : MDSBehaviour, IValidationActivator
     {
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         public IAction[] preValidationActions;
 
         public event ValidateAnswerDelegate OnValidateAnswer;

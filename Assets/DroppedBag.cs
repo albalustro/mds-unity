@@ -4,6 +4,7 @@ using UnityEngine;
 using MDS.Actions;
 using MDS.Core.Interfaces;
 using MDS.Core;
+using FullInspector;
 
 public class DroppedBag : MDSBehaviour {
 
@@ -13,7 +14,8 @@ public class DroppedBag : MDSBehaviour {
 	[SerializeField]
 	private float m_fallSpeed;
 
-	public IAction[] m_onFallAction;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    public IAction[] m_onFallAction;
 
 	private bool m_isFalling;
 

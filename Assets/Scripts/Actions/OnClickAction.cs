@@ -3,13 +3,12 @@ using System.Collections.Generic;
 using UnityEngine;
 using MDS.Core;
 using MDS.Core.Interfaces;
-
-
+using FullInspector;
 
 public class OnClickAction : MDSBehaviour {
 
-
-	public IAction[] m_onClickAction;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    public IAction[] m_onClickAction;
 
 
 	void OnMouseUp()

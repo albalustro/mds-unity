@@ -77,6 +77,8 @@ public class TransformAnimationAction : BaseAction
 
     public override IEnumerator Execute()
     {
+        if(byPass) yield break;
+
         yield return base.Execute();
 
         if(_DropAreaSlotsContentAsTargets != null)

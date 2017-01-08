@@ -91,93 +91,6 @@ NavMeshSettings:
     cellSize: 0.16666667
     accuratePlacement: 0
   m_NavMeshData: {fileID: 0}
---- !u!1 &189187831
-GameObject:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  serializedVersion: 5
-  m_Component:
-  - component: {fileID: 189187836}
-  - component: {fileID: 189187835}
-  - component: {fileID: 189187834}
-  - component: {fileID: 189187833}
-  - component: {fileID: 189187832}
-  m_Layer: 0
-  m_Name: Main Camera
-  m_TagString: MainCamera
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!81 &189187832
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189187831}
-  m_Enabled: 1
---- !u!124 &189187833
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189187831}
-  m_Enabled: 1
---- !u!92 &189187834
-Behaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189187831}
-  m_Enabled: 1
---- !u!20 &189187835
-Camera:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189187831}
-  m_Enabled: 1
-  serializedVersion: 2
-  m_ClearFlags: 1
-  m_BackGroundColor: {r: 0.19215687, g: 0.3019608, b: 0.4745098, a: 0}
-  m_NormalizedViewPortRect:
-    serializedVersion: 2
-    x: 0
-    y: 0
-    width: 1
-    height: 1
-  near clip plane: 0.3
-  far clip plane: 1000
-  field of view: 60
-  orthographic: 1
-  orthographic size: 3.8
-  m_Depth: -1
-  m_CullingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_RenderingPath: -1
-  m_TargetTexture: {fileID: 0}
-  m_TargetDisplay: 0
-  m_TargetEye: 3
-  m_HDR: 0
-  m_OcclusionCulling: 1
-  m_StereoConvergence: 10
-  m_StereoSeparation: 0.022
-  m_StereoMirrorMode: 0
---- !u!4 &189187836
-Transform:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 189187831}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -10}
-  m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
-  m_Father: {fileID: 0}
-  m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &338829873
 GameObject:
   m_ObjectHideFlags: 0
@@ -279,6 +192,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -286,35 +201,58 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
   Labels:
-  - 
+  - CDC
   _activateOnSelect: []
   _deactivateOnSelect: []
---- !u!1 &353455555 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1000012824806454, guid: f90964bff41010240aa927cda8dd1e5d,
-    type: 2}
-  m_PrefabInternal: {fileID: 421294176}
---- !u!95 &353455556
-Animator:
-  serializedVersion: 3
+--- !u!1001 &419000291
+Prefab:
   m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 353455555}
-  m_Enabled: 1
-  m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b8290cedf5e31c844b6179fe1a0b397c, type: 2}
-  m_CullingMode: 0
-  m_UpdateMode: 0
-  m_ApplyRootMotion: 0
-  m_LinearVelocityBlending: 0
-  m_WarningMessage: 
-  m_HasTransformHierarchy: 1
-  m_AllowConstantClipSamplingOptimization: 1
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4364713153280814, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
+  m_IsPrefabParent: 0
 --- !u!1001 &421294176
 Prefab:
   m_ObjectHideFlags: 0
@@ -352,7 +290,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4000011688627654, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f90964bff41010240aa927cda8dd1e5d, type: 2}
@@ -386,11 +324,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1089238160}
-  - {fileID: 1306411087}
-  - {fileID: 1306411087}
+  - {fileID: 1465601203}
   - {fileID: 722007248}
+  - {fileID: 722007248}
+  - {fileID: 722007248}
+  - {fileID: 722007248}
+  - {fileID: 1465601203}
   - {fileID: 338829873}
-  - {fileID: 353455556}
+  - {fileID: 338829873}
+  - {fileID: 338829873}
+  - {fileID: 338829873}
+  - {fileID: 338829873}
+  - {fileID: 338829873}
+  - {fileID: 1465601202}
+  - {fileID: 1306411087}
+  - {fileID: 1465601202}
+  - {fileID: 1306411087}
+  - {fileID: 1306411087}
+  - {fileID: 1306411087}
   - {fileID: 992753040}
   - {fileID: 880810257}
   _serializedStateKeys:
@@ -398,7 +349,7 @@ MonoBehaviour:
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions":[{"slugs":["error1"],"$type":"MDS.Actions.OpenDialogAction"},{"slugs":["error2"],"$type":"MDS.Actions.OpenDialogAction"},{"obj":1,"$type":"MDS.Actions.SetSelected"},{"obj":[2,3,4],"$type":"MDS.Actions.FreezeAction"}],"onVictoryActions":[{"slugs":["victory"],"$type":"MDS.Actions.OpenDialogAction"},{"m_anim":5,"m_animatorAction":"trigger","m_parameter":"win","m_value":1,"$type":"MDS.Actions.SetAnimatorParameterAction"},{"_action":"Disable","_target":6,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_target":7,"$type":"MDS.Actions.EnableDisableAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"_conditionedActions":[{"_selectableGroup":1,"_labels":["CDE"],"Actions":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":2,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":3,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":2.2,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":4,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.2,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":5,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.4,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}],"$type":"MDS.Actions.DialogConditions.SelectableSingleHasLabelCondition","$id":"3"},{"_selectableGroup":6,"_labels":["CDC"],"Actions":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":7,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":8,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":2.2,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":9,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"slugs":["error1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":10,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.4,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":11,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.4,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.2,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":12,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.4,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}],"$type":"MDS.Actions.DialogConditions.SelectableSingleHasLabelCondition","$id":"9"}],"HasFallback":false,"_fallbackActions":null,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.ConditionalAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":13,"m_unselectAll":true,"m_lockGroup":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"_conditionedActions":[{"$ref":"3"},{"$ref":"9"}],"HasFallback":false,"_fallbackActions":null,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.ConditionalAction"},{"m_useMemorizedGo":false,"obj":[14],"m_set":true,"m_groupTransform":15,"m_unselectAll":true,"m_lockGroup":true,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":16,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":17,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":-2.2,"y":0.0,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":18,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.8,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.1,"z":0.0},"easeType":"notUsed","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","_targets":[19],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_targets":[20],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.EnableDisableAction"},{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &673018214
 Transform:
@@ -413,106 +364,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1001 &678990916
-Prefab:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 0}
-    m_Modifications:
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_RootOrder
-      value: 9
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_SizeDelta.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMin.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 224000012859590722, guid: de446ca41b6da644d9acc8aed82d4b9f,
-        type: 2}
-      propertyPath: m_Pivot.y
-      value: 0
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_ParentPrefab: {fileID: 100100000, guid: de446ca41b6da644d9acc8aed82d4b9f, type: 2}
-  m_IsPrefabParent: 0
 --- !u!1 &722007248
 GameObject:
   m_ObjectHideFlags: 0
@@ -577,7 +428,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1465601202}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!61 &722007251
 BoxCollider2D:
@@ -614,6 +465,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -621,11 +474,14 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0
   Labels:
-  - 
+  - CDE
   _activateOnSelect: []
   _deactivateOnSelect: []
 --- !u!1 &769889566
@@ -749,7 +605,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &992753040
 GameObject:
@@ -875,7 +731,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1040890734}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 5.78, y: -3.3919487, z: -0.1}
+  m_LocalPosition: {x: 4.15, y: -3.3919487, z: -0.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -893,8 +749,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _objectReferences: []
-  _serializedStateKeys: []
-  _serializedStateValues: []
+  _serializedStateKeys:
+  - preValidationActions
+  _serializedStateValues:
+  - '[]'
   downSprite: {fileID: 21300000, guid: 5c559b15b8d6f81449db171c4c02f81c, type: 3}
   upSprite: {fileID: 21300000, guid: 6fbfe9824ab2ecf4085fd50c61188a13, type: 3}
   enabledEffectGO: {fileID: 0}
@@ -946,7 +804,7 @@ MonoBehaviour:
   - Rules
   _serializedStateValues:
   - '"AND"'
-  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"}]'
+  - '[{"OperationLogic":"AND","AcceptEmptyAsCorrectAnswer":false,"SpecificAmount":null,"isGeneric":false,"ValidatableObject":{"$content":0,"$type":"MDS.Gameplay.Selectable.SelectableGroup"},"OverrideGroupParameters":false,"CorrectAnswer":"certo"}]'
   OperationLogic: 0
 --- !u!4 &1089238161
 Transform:
@@ -1060,8 +918,32 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1089238160}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0.AbstractTypeEditor._conditionedActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_groupTransform.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_useMemorizedGo.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0.AbstractTypeEditor._conditionedActions.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 673018213}
 --- !u!4 &1147017516
 Transform:
@@ -1136,11 +1018,11 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1306411087}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 2.3500204, y: -0.8620751, z: -0.09414063}
+  m_LocalPosition: {x: 2.37, y: -0.82, z: -0.09414063}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1465601202}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1306411090
 MonoBehaviour:
@@ -1163,6 +1045,8 @@ MonoBehaviour:
   - _zRotation
   - _activateOnSelect
   - _deactivateOnSelect
+  - _onSelectActions
+  - _onDeselectActions
   _serializedStateValues:
   - '{"SelectedValue":0,"UnselectedValue":1}'
   - 
@@ -1170,6 +1054,9 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
+  - '[]'
+  - '[]'
+  _changeSprite: 1
   _changeLocalPosition: 0
   _changeLocalScale: 0
   _changeZRotation: 0

@@ -17,7 +17,8 @@ public class LockSelectableGroup : BaseAction {
 
 	public override IEnumerator Execute()
 	{
-		yield return base.Execute();
+        if(byPass) yield break;
+        yield return base.Execute();
 
 		foreach (Transform child in m_groupTransform) {
 			child.GetComponent<Collider2D>().enabled = m_lockGroup;

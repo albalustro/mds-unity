@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using FullInspector;
 using MDS.Core.Interfaces;
 using UnityEngine;
 using UnityEngine.Events;
@@ -14,6 +15,7 @@ public class SimpleButton : MDSBehaviour
 
     private SpriteRenderer _spriteRenderer;
 
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     public IAction[] actions;
     public UnityEvent _events;
 

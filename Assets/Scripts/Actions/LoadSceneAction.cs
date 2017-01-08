@@ -13,6 +13,7 @@ namespace MDS.Actions
 
         public override IEnumerator Execute()
         {
+            if(byPass) yield break;
             yield return base.Execute();
 
             DownloadManager.Instance.DownloadScene(sceneName);

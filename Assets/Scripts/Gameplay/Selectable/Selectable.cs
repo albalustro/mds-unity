@@ -57,9 +57,11 @@ namespace MDS.Gameplay.Selectable
         private GameObject[] _deactivateOnSelect;
 
         [SerializeField]
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         private IAction[] _onSelectActions;
 
         [SerializeField]
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         private IAction[] _onDeselectActions;
 
 
