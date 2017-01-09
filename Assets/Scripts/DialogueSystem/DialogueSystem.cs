@@ -165,7 +165,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
         dialogue.SetText(_currentDialogues[_currentDialogueIndex].text.ToUpper());
         AudioClip c = Resources.Load<AudioClip>(_audioPath + _currentDialogues[_currentDialogueIndex].sound);
 
-        dialogue.PlayVoiceOver(c);
+        //dialogue.PlayVoiceOver(c);
 
     }
 
