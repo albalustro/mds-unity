@@ -104,11 +104,11 @@ namespace MDS.Core.SceneManagement
         private void LoadChallengeLocal(int index, Scene curScene)
         {
             string challengeSceneName = curScene.name + "C" + index.ToString();
-            _loadingObj.SetActive(true);
-            _loadingObj.transform.position = Camera.main.transform.position;
+            //_loadingObj.SetActive(true);
+            //_loadingObj.transform.position = Camera.main.transform.position;
             _goAfterChallengeSceneName = SceneManager.GetActiveScene().name;
             SceneManager.LoadScene(challengeSceneName);
-            _loadingObj.SetActive(false);
+            //_loadingObj.SetActive(false);
 
         }
 
