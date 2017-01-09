@@ -19,6 +19,8 @@ namespace MDS.Actions
 		[FullInspector.InspectorName("ChildrensOfThisGO")]
 		public GameObject m_freezeGroupContent;
 
+		[SerializeField]
+		private bool _useMemorizedObjAsTarget;
 
 		[FullInspector.InspectorHideIf("FreezeOrUnfreezeEntireGroup")]
 		public GameObject[] obj;
@@ -40,6 +42,12 @@ namespace MDS.Actions
 					}
 				}
 
+			}
+
+
+			if (_useMemorizedObjAsTarget) {
+				GameObject tmpGo = MemorizeMe.MemorizedGameObject;
+				tmpGo.GetComponent<Collider2D> ().enabled = false;
 			}
 
 			if (obj != null) {
