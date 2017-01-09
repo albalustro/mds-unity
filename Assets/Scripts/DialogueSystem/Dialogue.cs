@@ -1,7 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
-[RequireComponent(typeof(AudioSource))]
 public class Dialogue : MDSBehaviour {
 
     //fala do personagem (guia)
