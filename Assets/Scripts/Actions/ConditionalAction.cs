@@ -19,10 +19,12 @@ namespace MDS.Actions
         private bool HasFallback;
 
         [SerializeField, InspectorShowIf("HasFallback"), InspectorComment("Actions que serão executadas se nenhuma das condições acima for satisfeita")]
+        [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
         private IAction[] _fallbackActions;
 
         public override IEnumerator Execute()
         {
+            if(byPass) yield break;
             yield return base.Execute();
 
             IActionCondition actionCondition = _conditionedActions.FirstOrDefault(c => c.IsConditionSatisfied());

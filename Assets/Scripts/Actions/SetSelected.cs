@@ -39,7 +39,8 @@ namespace MDS.Actions{
 
 		public override IEnumerator Execute()
 		{
-			yield return base.Execute();
+            if(byPass) yield break;
+            yield return base.Execute();
 
 			if (m_groupTransform != null) {
                 foreach(Transform child in m_groupTransform.GetComponentsInChildren<Transform>())

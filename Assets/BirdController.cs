@@ -11,7 +11,8 @@ public class BirdController : MDSBehaviour {
 	[SerializeField]
 	private int m_counter = 2;
 
-	public IAction[] m_onCounterZeroAction;
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    public IAction[] m_onCounterZeroAction;
 
 	private ContinuousMove m_move;
 private bool trackMovement = true;

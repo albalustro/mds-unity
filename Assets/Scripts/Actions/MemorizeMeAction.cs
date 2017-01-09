@@ -18,6 +18,7 @@ public class MemorizeMe : BaseAction
 
     public override IEnumerator Execute()
     {
+        if(byPass) yield break;
         yield return base.Execute();
 
         if(selfTarget)

@@ -9,8 +9,10 @@ namespace MDS.Actions
     public class SetInSlotAction : BaseAction
     {
 
-        [InspectorDivider, InspectorHeader("Target")]
+        [SerializeField]
+        private float _duration = 1.5f;
 
+        [InspectorDivider, InspectorHeader("Target")]
         [SerializeField,  InspectorHideIf("Hide_selfTarget")]
         private bool selfTarget;
         private bool Hide_selfTarget { get { return useMemorizedGameObjectAsTarget || useSlotContentAsTarget != null; } }
@@ -50,6 +52,7 @@ namespace MDS.Actions
 
         public override IEnumerator Execute()
         {
+            if(byPass) yield break;
             yield return base.Execute();
 
 			if (_DropAreaSlotsContentAsTargets != null) {
@@ -110,11 +113,11 @@ namespace MDS.Actions
 					if(!HasSpecificSlot)
 					{
 						slot = null;
-						g.SetInSlot(d, ref slot);
+						g.SetInSlot(d, ref slot, _duration);
 					}
 					else
 					{
-						DraggableUtilities.SetDraggableInSlot(d, _slot);
+						DraggableUtilities.SetDraggableInSlot(d, _slot, _duration);
 					}
 				}
 				d = null;
@@ -125,11 +128,11 @@ namespace MDS.Actions
 				if(!HasSpecificSlot)
 				{
 					slot = null;
-					g.SetInSlot(d, ref slot);
+					g.SetInSlot(d, ref slot, _duration);
 				}
 				else
 				{
-					DraggableUtilities.SetDraggableInSlot(d, _slot);
+					DraggableUtilities.SetDraggableInSlot(d, _slot, _duration);
 				}
 
 				if (m_makeDraggableChildrenOfSlot) {

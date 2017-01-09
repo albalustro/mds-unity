@@ -27,7 +27,7 @@ namespace MDS.Gameplay.DragDrop
         public Item[] itens;
         [SerializeField] private Transform dropedItens;
 
-        public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot)
+        public override bool SetInSlot(Draggable draggable, ref DropGroupSlot slot, float duration = 0.5f)
         {
             return false;
         }

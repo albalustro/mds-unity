@@ -27,7 +27,8 @@ namespace MDS.Actions
 
 		public override IEnumerator Execute()
 		{
-			yield return base.Execute();
+            if(byPass) yield break;
+            yield return base.Execute();
 
 			if (m_freezeEntireGroup != null) {
 				DropGroupSlot[] dGroup = m_freezeGroupContent.GetComponentsInChildren<DropGroupSlot> ();

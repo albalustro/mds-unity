@@ -24,7 +24,8 @@ namespace MDS.Actions {
 
 		public override IEnumerator Execute()
 		{
-			yield return base.Execute();
+            if(byPass) yield break;
+            yield return base.Execute();
 
 			Draggable d = null;
 

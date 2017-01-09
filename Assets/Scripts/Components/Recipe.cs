@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using FullInspector;
 using MDS.Core.Interfaces;
 using MDS.Gameplay.DragDrop;
 using UnityEngine;
@@ -9,7 +10,7 @@ public class Recipe : MDSBehaviour {
 
     public bool _debugActions;
 
-
+    [InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     public IAction[] _onRecipeComplete;
 
 	DropGroupSlot[] _slots;

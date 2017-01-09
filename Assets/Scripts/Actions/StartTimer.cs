@@ -9,6 +9,7 @@ public class StartTimer : BaseAction
     public ProcessAnswerTimer timer;
     public override IEnumerator Execute()
     {
+        if(byPass) yield break;
         yield return base.Execute();
         timer.Enable();
     }
