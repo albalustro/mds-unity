@@ -13,6 +13,8 @@ public class CarrousselItem : MDSBehaviour, IValidatable
     [SerializeField, InspectorTooltip("Use esse valor para indicar que o Item não é validável")]
     private string invalidValue;
 
+ 
+
     [SerializeField, InspectorTooltip("Multiplicador usado ao buscar o valor numerico")]
     private int? _numericMultiplier;
 
@@ -21,6 +23,15 @@ public class CarrousselItem : MDSBehaviour, IValidatable
 
     private Vector3 _startPosition;
 
+    
+
+    private CarrousselWindow _parentWindow;
+
+    public void Initialize(CarrousselWindow carrousselWindow)
+    {
+        _parentWindow = carrousselWindow;
+    }
+
     public void Start()
     {
         _currentItemIndex = 0;
@@ -28,8 +39,12 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         _maxItemIndex = transform.childCount-1;
     }
 
-
     public void MoveNext()
+    {
+        MoveNext(.25f);
+    }
+
+    internal void MoveNext(float _transitionTime)
     {
         _currentItemIndex++;
         if(_currentItemIndex > _maxItemIndex)
@@ -38,12 +53,17 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         Vector3 destination = _startPosition;
         destination.y = -_currentItemIndex;
 
-        LeanTween.moveLocal(base.gameObject, destination, 0.3f).setEase(LeanTweenType.easeInOutCubic);
+        LeanTween.moveLocal(base.gameObject, destination, _transitionTime).setEase(LeanTweenType.easeInOutCubic);
     }
 
     public string GetCurrentValue()
     {
         return transform.GetChild(_currentItemIndex).GetComponent<CarrousselItemValue>().value;
+    }
+
+    public void Freeze()
+    {
+        _parentWindow.Freeze();
     }
 
     [InspectorButton]

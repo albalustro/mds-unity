@@ -28,7 +28,7 @@ public class UserProfile : Singleton<UserProfile>
 	private void SendConceptMapToSyncer(ConceptMap conceptToSend)
 	{
 		if (loginInfo.status.code == ConnectionResponse.OK)
-			ConceptSyncer.Instance.SendConceptMapToServer (login, conceptToSend, ReceiveConceptMapFromSyncer);
+			ConceptSyncer.Instance.SendConceptMapToServer (loginInfo.token, conceptToSend, ReceiveConceptMapFromSyncer);
 		else
             loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
 	}

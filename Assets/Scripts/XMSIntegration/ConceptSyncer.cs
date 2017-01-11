@@ -1,15 +1,22 @@
 ﻿using UnityEngine;
 using System.Collections;
 using System;
+using MDS.ScriptableObjects;
 
 public class ConceptSyncer : Singleton<ConceptSyncer>
 {
-	private Action<ConceptMap> sendConceptCallback;
+    private ConnectionConfig _config;
+    private Action<ConceptMap> sendConceptCallback;
 
-	public void SendConceptMapToServer(string login, ConceptMap cm, Action<ConceptMap> callback)
+    public void Initialize(ConnectionConfig config)
+    {
+        _config = config;
+    }
+
+    public void SendConceptMapToServer(string token, ConceptMap cm, Action<ConceptMap> callback)
 	{
 		sendConceptCallback = callback;
-		ConnectionManager.Instance.DoSincronize (login, cm, ReceiveConceptMapFromServer);
+		ConnectionManager.Instance.DoSincronize (token, cm, ReceiveConceptMapFromServer);
 	}
 
 	public void ReceiveConceptMapFromServer(ConceptMap s)
