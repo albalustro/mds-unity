@@ -21,13 +21,18 @@ namespace MDS.Core.SceneManagement
             }
         }
 
-        private ChallengeStatusInEpisode[] _challengeStatus = new ChallengeStatusInEpisode[5]; 
+        [SerializeField]
+        private ChallengeStatusInEpisode[] _challengeStatus = new ChallengeStatusInEpisode[5];
+
+        [SerializeField]
+        private bool _debugMode = false;
 
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
 
+            if(_debugMode) return;
             _challengeStatus[0] = ChallengeStatusInEpisode.Available;
             for(int i = 1; i < 5; i++)
             {
