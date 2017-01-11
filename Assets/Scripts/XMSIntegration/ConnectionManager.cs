@@ -2,24 +2,29 @@
 using System.Collections;
 using System;
 using Newtonsoft.Json;
+using MDS.ScriptableObjects;
 
 public class ConnectionManager : Singleton<ConnectionManager> 
 {
-	private string _url;
+    private ConnectionConfig _config;
 	private Action<LoginInfo> doLoginCallback;
 	private Action<ConceptMap> sendConceptCallback;
+
+    public void Initialize(ConnectionConfig config)
+    {
+        _config = config;
+    }
 
 	#region Login
 	public void DoLogin(string user, string pass, Action<LoginInfo> callback)
 	{
 		doLoginCallback = callback;
-		_url = "https://stage-xms.xmile.com.br/api/gamelogin";
 		WWWForm loginForm = new WWWForm();
 		loginForm.AddField("login", user);
 		loginForm.AddField("password", pass);
 		loginForm.AddField("game", "4");
 		loginForm.AddField("season_id", "1");
-		WWW www = new WWW(_url, loginForm);
+		WWW www = new WWW(_config.loginURL, loginForm);
 		StartCoroutine(ValidateLogin(www));
 	}
 		
@@ -39,14 +44,13 @@ public class ConnectionManager : Singleton<ConnectionManager>
 	#endregion
 
 	#region ConceptMap
-	public void DoSincronize(string l, ConceptMap cm, Action<ConceptMap> callback)
+	public void DoSincronize(string token, ConceptMap cm, Action<ConceptMap> callback)
 	{
 		sendConceptCallback = callback;
-		_url = "http://localhost/xms.php";
 		WWWForm conceptForm = new WWWForm();
-		conceptForm.AddField("login", l);
-		conceptForm.AddField("conceptMap", JsonConvert.SerializeObject(cm));
-		WWW www = new WWW(_url, conceptForm);
+		conceptForm.AddField("token", token);
+        conceptForm.AddField("conceptMap", JsonConvert.SerializeObject(cm));
+		WWW www = new WWW(_config.conceptURL, conceptForm);
 		StartCoroutine(SincronizeConcept(www));
 	}
 		
