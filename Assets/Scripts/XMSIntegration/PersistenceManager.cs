@@ -49,6 +49,16 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         PlayerPrefs.SetString(key, value);
     }
 
+	public int GetGameIndex()
+	{
+		return PlayerPrefs.GetInt ("GameIndex");
+	}
+
+	public void SetGameIndex(int index)
+	{
+		PlayerPrefs.SetInt ("GameIndex", index);
+	}
+
 	#region Segurança
 	/// <summary>
 	/// Método para gerar o MD5 de uma string

@@ -7,6 +7,7 @@ public class LoginController : MDSBehaviour {
 
     #region Variáveis
 	public static LoginController instance;
+	private int currentGameIndex;
     [SerializeField] private InputField _userField;
 	[SerializeField] private InputField _passField;
     [SerializeField] private Toggle _rememberUser;
@@ -34,6 +35,8 @@ public class LoginController : MDSBehaviour {
             _passField.text = PersistenceManager.Instance.GetString("rememberPass");
             _rememberPass.isOn = true;
         }
+
+		//currentGameIndex = PersistenceManager.Instance.GetGameIndex ();
     }
     #endregion
 
@@ -102,6 +105,9 @@ public class LoginController : MDSBehaviour {
 				break;
 			}
 		}
+
+		//string roomToLoad = "G" + currentGameIndex + "Room";
+		//SceneManager.LoadScene (roomToLoad, LoadSceneMode.Single);
 	}
 
     #region Paineis de Feedback
