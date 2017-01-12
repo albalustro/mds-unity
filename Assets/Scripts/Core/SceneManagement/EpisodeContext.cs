@@ -49,8 +49,7 @@ namespace MDS.Core.SceneManagement
             if(curScene.IsChallenge() == false)
                 return;
 
-            int index;
-            index = int.Parse(curScene.name.Substring(7, 1))-1;
+            int index = curScene.GetChallengeIndex() - 1;
 
             _challengeStatus[index] = ChallengeStatusInEpisode.Done;
             if(index < 4)

@@ -32,6 +32,33 @@ namespace MDS.Utilities
             return scene.name.ToUpper().Contains("MAP");
         }
 
+        /// <summary>
+        /// Retorna, convertido em inteiro, o valor que esta no nome 
+        /// da cena, exatamente como estiver lá
+        /// </summary>
+        public static int GetWorldIndex(this Scene sceneName)
+        {
+            return int.Parse(sceneName.name.Substring(3, 1));
+        }
+
+        /// <summary>
+        /// Retorna, convertido em inteiro, o valor que esta no nome 
+        /// da cena, exatamente como estiver lá
+        /// </summary>
+        public static int GetEpisodeIndex(this Scene sceneName)
+        {
+            return int.Parse(sceneName.name.Substring(5, 1));
+        }
+
+        /// <summary>
+        /// Retorna, convertido em inteiro, o valor que esta no nome 
+        /// da cena, exatamente como estiver lá
+        /// </summary>
+        public static int GetChallengeIndex(this Scene sceneName)
+        {
+            return int.Parse(sceneName.name.Substring(7, 1));
+        }
+
         public static string GetEpisodeTitle(this Scene scene)
         {
             if(scene.IsEpisode() == false && scene.IsChallenge()==false) return string.Empty;

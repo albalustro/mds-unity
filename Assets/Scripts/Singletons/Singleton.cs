@@ -5,7 +5,13 @@ public class Singleton<T> : MDSBehaviour where T : MDSBehaviour
 	private static T m_Instance;
 	private static object m_Lock = new object();
 
-	public static T Instance
+    protected override void Awake()
+    {
+        base.Awake();
+        DontDestroyOnLoad(gameObject);
+    }
+
+    public static T Instance
 	{
 		get
 		{
@@ -18,6 +24,7 @@ public class Singleton<T> : MDSBehaviour where T : MDSBehaviour
 
                     if(FindObjectsOfType(typeof(T)).Length > 1)
                     {
+                        DontDestroyOnLoad(m_Instance);
                         return m_Instance;
                     }
  

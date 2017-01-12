@@ -118,8 +118,10 @@ public class LoginController : MDSBehaviour {
 			}
 		}
 
-		//string roomToLoad = "G" + currentGameIndex + "Room";
-		//SceneManager.LoadScene (roomToLoad, LoadSceneMode.Single);
+#if MDS1
+        string roomToLoad = "G1Room";
+#endif
+        SceneManager.LoadScene (roomToLoad, LoadSceneMode.Single);
 	}
 
     #region Paineis de Feedback
