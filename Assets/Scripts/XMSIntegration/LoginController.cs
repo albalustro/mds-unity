@@ -2,12 +2,20 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
+using MDS.ScriptableObjects;
 
 public class LoginController : MDSBehaviour {
 
     #region Variáveis
 	public static LoginController instance;
+<<<<<<< HEAD
 	private int currentGameIndex;
+=======
+
+    [SerializeField]
+    private ConnectionConfig _connectionConfiguration;
+
+>>>>>>> master
     [SerializeField] private InputField _userField;
 	[SerializeField] private InputField _passField;
     [SerializeField] private Toggle _rememberUser;
@@ -28,6 +36,10 @@ public class LoginController : MDSBehaviour {
 	}
 
     void Start () {
+
+        ConnectionManager.Instance.Initialize(_connectionConfiguration);
+        ConceptSyncer.Instance.Initialize(_connectionConfiguration);
+
         if (PersistenceManager.Instance.HasKey("rememberUser"))
             _userField.text = PersistenceManager.Instance.GetString("rememberUser");
         if (PersistenceManager.Instance.HasKey("rememberPass"))

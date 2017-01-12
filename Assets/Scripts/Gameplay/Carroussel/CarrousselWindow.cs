@@ -14,6 +14,7 @@ public class CarrousselWindow : MDSBehaviour
         _carrousseItem = GetComponentInChildren<CarrousselItem>();
         if(_carrousseItem == null)
             Debug.LogError("CarrousselWindow sem CarrousselItem filho");
+        _carrousseItem.Initialize(this);
     }
 
     public void OnMouseUp()
@@ -21,4 +22,8 @@ public class CarrousselWindow : MDSBehaviour
         _carrousseItem.MoveNext();
     }
 
+    public void Freeze()
+    {
+        GetComponent<Collider2D>().enabled = false;
+    }
 }
