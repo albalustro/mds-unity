@@ -66,9 +66,12 @@ public class DialogueSystem : Singleton<DialogueSystem>
             minigame = "";
             slug = "minigame" + challenge;
         }
-        InitializeDialogueSystem();
-
     }
+
+	void Start()
+	{
+		InitializeDialogueSystem();
+	}
 
     void InitializeDialogueSystem()
     {

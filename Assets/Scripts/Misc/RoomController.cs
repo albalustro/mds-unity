@@ -18,26 +18,44 @@ public class RoomController : MDSBehaviour {
 	private GameObject nextButton;
 	[SerializeField]
 	private GameObject backButton;
+	[SerializeField]
+	private GameObject dialogueCanvas;
+	[SerializeField]
+	private GameObject hudCanvas;
+	private string currentGameIndex;
 
-	void Start () {
-		AudioController.Instance.PlayTheme (_theme);
+	protected override void Awake ()
+	{
+		base.Awake ();
+		dialogueCanvas.SetActive (false);
+		hudCanvas.SetActive (true);
 	}
 
+	void Start()
+	{
+		currentGameIndex = SceneManager.GetActiveScene().name.Substring(1, 1);
+		AudioController.Instance.PlayTheme (_theme);
+	}
+		
 	public void ChangeScene(int scene)
 	{
 		switch (scene)
 		{
 		case 1:
-			Log ("Carregando mundo " + scene);
+			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			SceneManager.LoadScene ("G" + currentGameIndex + "W1EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 2:
-			Log ("Carregando mundo " + scene);
+			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			SceneManager.LoadScene ("G" + currentGameIndex + "W2EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 3:
-			Log ("Carregando mundo " + scene);
+			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			SceneManager.LoadScene ("G" + currentGameIndex + "W3EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 4:
-			Log ("Carregando mundo " + scene);
+			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			SceneManager.LoadScene ("G" + currentGameIndex + "W4EpisodeMap", LoadSceneMode.Single);
 			break;
 		default:
 			LogWarning ("Cena de mundo nao encontrado.");
