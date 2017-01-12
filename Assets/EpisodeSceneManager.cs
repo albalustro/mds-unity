@@ -144,5 +144,9 @@ public class EpisodeSceneManager : MDSBehaviour {
         _target.position = newPos;
     }
 
+	public void SetCameraPosition(Vector3 position)
+	{
+		_target.position = position;
+	}
 
 }
