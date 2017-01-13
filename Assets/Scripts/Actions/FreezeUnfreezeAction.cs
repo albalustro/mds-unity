@@ -33,7 +33,7 @@ namespace MDS.Actions
             yield return base.Execute();
 
 			if (m_freezeEntireGroup != null) {
-				DropGroupSlot[] dGroup = m_freezeGroupContent.GetComponentsInChildren<DropGroupSlot> ();
+				DropGroupSlot[] dGroup = m_freezeEntireGroup.GetComponentsInChildren<DropGroupSlot> ();
 				if (dGroup != null) {
 					for (int i = 0; i < dGroup.Length; i++) {
 						if (dGroup [i].draggableReference != null) {
