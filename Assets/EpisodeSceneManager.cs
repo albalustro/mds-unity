@@ -13,31 +13,61 @@ using MDS.Utilities;
 
 public class EpisodeSceneManager : MDSBehaviour {
 
+    [InspectorCategory("General")]
     public float cameraSpeed = 2f;
 
+    [InspectorCategory("General")]
     public float rightX;
+    [InspectorCategory("General")]
     public float leftX;
 
+    [InspectorCategory("General")]
     public float topY;
+    [InspectorCategory("General")]
     public float bottomY;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] StartEpisodeActions;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ComingFromChallenge1Actions;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ComingFromChallenge2Actions;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ComingFromChallenge3Actions;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ComingFromChallenge4Actions;
 
+    [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ComingFromChallenge5Actions;
+
+
+    [InspectorComment(CommentType.Info, "As actions abaixo são executadas de forma acumulativa. Por exemplo, quando voltar vindo do challenge 3, as actions 1, 2 e 3 são executadas antes da 'ComingFromChallenge3")]
+
+    [InspectorCategory("Persistent Actions")]
+    [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] ExecuteAfterChallenge1Actions;
+
+    [InspectorCategory("Persistent Actions")]
+    [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] ExecuteAfterChallenge2Actions;
+
+    [InspectorCategory("Persistent Actions")]
+    [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] ExecuteAfterChallenge3Actions;
+
+    [InspectorCategory("Persistent Actions")]
+    [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+    private IAction[] ExecuteAfterChallenge4Actions;
 
 
     private GameObject _titleGO;
@@ -111,22 +141,36 @@ public class EpisodeSceneManager : MDSBehaviour {
                 break;
 
             case 1:
+                ExecuteActions(ExecuteAfterChallenge1Actions);
                 ExecuteActions(ComingFromChallenge1Actions);
                 break;
 
             case 2:
+                ExecuteActions(ExecuteAfterChallenge1Actions);
+                ExecuteActions(ExecuteAfterChallenge2Actions);
                 ExecuteActions(ComingFromChallenge2Actions);
                 break;
 
             case 3:
+                ExecuteActions(ExecuteAfterChallenge1Actions);
+                ExecuteActions(ExecuteAfterChallenge2Actions);
+                ExecuteActions(ExecuteAfterChallenge3Actions);
                 ExecuteActions(ComingFromChallenge3Actions);
                 break;
 
             case 4:
+                ExecuteActions(ExecuteAfterChallenge1Actions);
+                ExecuteActions(ExecuteAfterChallenge2Actions);
+                ExecuteActions(ExecuteAfterChallenge3Actions);
+                ExecuteActions(ExecuteAfterChallenge4Actions);
                 ExecuteActions(ComingFromChallenge4Actions);
                 break;
 
             case 5:
+                ExecuteActions(ExecuteAfterChallenge1Actions);
+                ExecuteActions(ExecuteAfterChallenge2Actions);
+                ExecuteActions(ExecuteAfterChallenge3Actions);
+                ExecuteActions(ExecuteAfterChallenge4Actions);
                 ExecuteActions(ComingFromChallenge5Actions);
                 break;
         }

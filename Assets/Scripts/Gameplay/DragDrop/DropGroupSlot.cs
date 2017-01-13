@@ -6,12 +6,15 @@ using System;
 using MDS.Validators.Interfaces;
 using FullInspector;
 using System.Linq;
+using MDS.Core.Interfaces;
 
 namespace MDS.Gameplay.DragDrop
 {
 	[RequireComponent(typeof(BoxCollider2D))]
 	public class DropGroupSlot : MDSBehaviour, IValidatable
 	{
+        [SerializeField]
+        private IAction[] OnAfterDropValidDraggableActions;
 
 		[SerializeField]
 		private bool _changeSprite;
@@ -43,8 +46,10 @@ namespace MDS.Gameplay.DragDrop
 					if(_draggableReference == null)
 						_spriteRenderer.sprite = _sprite.EmptyValue;
 					else
-						_spriteRenderer.sprite = _sprite.FilledValue;
+                    	_spriteRenderer.sprite = _sprite.FilledValue;
 				}
+                if(_draggableReference != null)
+                    ExecuteActions(OnAfterDropValidDraggableActions);
 			}
 		}
 

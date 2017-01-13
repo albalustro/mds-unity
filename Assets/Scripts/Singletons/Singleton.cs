@@ -8,7 +8,7 @@ public class Singleton<T> : MDSBehaviour where T : MDSBehaviour
     protected override void Awake()
     {
         base.Awake();
-        DontDestroyOnLoad(gameObject);
+        DontDestroyOnLoad(gameObject.transform.root);
     }
 
     public static T Instance

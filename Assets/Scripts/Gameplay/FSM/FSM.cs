@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using MDS.Validators;
 using System.Linq;
 using MDS.Validators.Interfaces;
+using FullInspector;
 
 namespace MDS.Gameplay.FSM
 {
@@ -20,7 +21,9 @@ namespace MDS.Gameplay.FSM
             public List<string> Labels;
         }
 
+        [InspectorCollapsedFoldout]
         public State[] states;
+
         public int? UnselectedStateIndex;
 
         public bool Selected
@@ -32,6 +35,8 @@ namespace MDS.Gameplay.FSM
                 return true;
             }
         }
+
+        
 
         private SpriteRenderer _spriteRenderer;
         private int _currentStateIndex;
@@ -60,23 +65,10 @@ namespace MDS.Gameplay.FSM
         {
             if(_animating) return;
 
-            if(++_currentStateIndex == states.Length)
-                _currentStateIndex = 0;
-
-
-            if(states[_currentStateIndex].Rotate)
-            {
-                _animating = true;
-
-                LeanTween.rotateZ(base.gameObject, states[_currentStateIndex].ZAngle, 0.5f)
-                    .setEase(LeanTweenType.easeInCirc)
-                    .setOnComplete(() => _animating = false);
-            }
-            else
-            {
-                SetSprite();
-            }
+            GoNextState(0.5f);
         }
+
+       
 
         #endregion
 
@@ -94,6 +86,7 @@ namespace MDS.Gameplay.FSM
             SetSprite();
         }
 
+#if UNITY_EDITOR
         [FullInspector.InspectorButton]
         public void CreateRotationPatern()
         {
@@ -126,7 +119,33 @@ namespace MDS.Gameplay.FSM
             states[3].ZAngle = 270;
             states[3].Labels = new List<string>() { "270" };
         }
+#endif
 
+        public void Freeze()
+        {
+            GetComponent<Collider2D>().enabled = false;
+        }
+
+        public void GoNextState(float _transitionTime)
+        {
+
+            if(++_currentStateIndex == states.Length)
+                _currentStateIndex = 0;
+
+
+            if(states[_currentStateIndex].Rotate)
+            {
+                _animating = true;
+
+                LeanTween.rotateZ(base.gameObject, states[_currentStateIndex].ZAngle, _transitionTime)
+                    .setEase(LeanTweenType.easeInCirc)
+                    .setOnComplete(() => _animating = false);
+            }
+            else
+            {
+                SetSprite();
+            }
+        }
         #endregion
 
         #region IValidatable

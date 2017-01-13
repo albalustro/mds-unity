@@ -47,7 +47,7 @@ namespace MDS.Actions
         private DropGroupSlot _slot;
         private bool HasSpecificSlot { get { return _slot != null; } }
 
-		[SerializeField]
+		[SerializeField, Tooltip("Só funciona para configurações em que o target do SetInSlot é único e não o conteúdo de um grupo")]
 		private bool m_makeDraggableChildrenOfSlot;
 
         public override IEnumerator Execute()
@@ -67,28 +67,32 @@ namespace MDS.Actions
 			}
 
 
-            Draggable d = _draggableTarget;
+            Draggable draggabableToBeSetInSlot = _draggableTarget;
+            DropGroupSlot originalDraggableSlot = null;
             BaseDropGroupArea g = _dropArea;
 			DropGroupSlot slot = null;
 			DropGroupSlot tempDropGroupSlot = null;
 
             if(selfTarget)
             {
-                d = _corotineHolder.GetComponent<Draggable>();
-                if(d == null)
+                draggabableToBeSetInSlot = _corotineHolder.GetComponent<Draggable>();
+                if(draggabableToBeSetInSlot == null)
                     _corotineHolder.GetComponent<MDSBehaviour>().LogError("selfTarget sem que o objeto tenha um elemento Draggable ");
+                originalDraggableSlot = draggabableToBeSetInSlot.currentSlot;
             }
 
             if (useMemorizedGameObjectAsTarget)
             {
-                d = MemorizeMe.MemorizedGameObject.GetComponent<Draggable>();
-                if(d == null)
+                draggabableToBeSetInSlot = MemorizeMe.MemorizedGameObject.GetComponent<Draggable>();
+                if(draggabableToBeSetInSlot == null)
                      _corotineHolder.GetComponent<MDSBehaviour>().LogError("useMemorizedGameObjectAsTarget sem que o objeto tenha um elemento Draggable ");
+                originalDraggableSlot = draggabableToBeSetInSlot.currentSlot;
             }
 
             if (useSlotContentAsTarget!=null)
             {
-                d = useSlotContentAsTarget.draggableReference;
+                draggabableToBeSetInSlot = useSlotContentAsTarget.draggableReference;
+                originalDraggableSlot = draggabableToBeSetInSlot.currentSlot;
             }
 
 			if (m_multipleSlotsAsTargets != null && m_multipleSlotsAsTargets.Length > 0) {
@@ -96,47 +100,51 @@ namespace MDS.Actions
 
 					tempDropGroupSlot = m_multipleSlotsAsTargets [i].GetComponent<DropGroupSlot> ();
 					if (tempDropGroupSlot != null) {
-						d = tempDropGroupSlot.draggableReference;
-						if(d != null){
-							slot = null;
-							g.SetInSlot(d, ref slot);
+						draggabableToBeSetInSlot = tempDropGroupSlot.draggableReference;
+                        if(draggabableToBeSetInSlot != null) { 
+                            originalDraggableSlot = tempDropGroupSlot;
+                            slot = null;
+                            if(g.SetInSlot(draggabableToBeSetInSlot, ref slot))
+                                draggabableToBeSetInSlot.ProcessSlotChanging(originalDraggableSlot);
 						}
 					}
 				}
-
-			}
+                draggabableToBeSetInSlot = null;
+            }
 
 			if (m_multipleDraggables != null && m_multipleDraggables.Length > 0) {
 				for (int i = 0; i < m_multipleDraggables.Length; i++) {
-					d = m_multipleDraggables [i].GetComponent<Draggable>();
-
-					if(!HasSpecificSlot)
+					draggabableToBeSetInSlot = m_multipleDraggables [i].GetComponent<Draggable>();
+                    originalDraggableSlot = draggabableToBeSetInSlot.currentSlot;
+                    if(!HasSpecificSlot)
 					{
 						slot = null;
-						g.SetInSlot(d, ref slot, _duration);
+                        if(g.SetInSlot(draggabableToBeSetInSlot, ref slot, _duration))
+                            draggabableToBeSetInSlot.ProcessSlotChanging(originalDraggableSlot);
 					}
 					else
 					{
-						DraggableUtilities.SetDraggableInSlot(d, _slot, _duration);
+						DraggableUtilities.SetDraggableInSlot(draggabableToBeSetInSlot, _slot, _duration);
 					}
 				}
-				d = null;
+				draggabableToBeSetInSlot = null;
 			} 
 
-			if(d != null)
+			if(draggabableToBeSetInSlot != null)
 			{
 				if(!HasSpecificSlot)
 				{
 					slot = null;
-					g.SetInSlot(d, ref slot, _duration);
+                    if(g.SetInSlot(draggabableToBeSetInSlot, ref slot, _duration))
+                        draggabableToBeSetInSlot.ProcessSlotChanging(originalDraggableSlot);
 				}
 				else
 				{
-					DraggableUtilities.SetDraggableInSlot(d, _slot, _duration);
+					DraggableUtilities.SetDraggableInSlot(draggabableToBeSetInSlot, _slot, _duration);
 				}
 
 				if (m_makeDraggableChildrenOfSlot) {
-					_draggableTarget.transform.SetParent (g.transform);
+                    draggabableToBeSetInSlot.transform.SetParent (g.transform);
 				}
 			}
 
