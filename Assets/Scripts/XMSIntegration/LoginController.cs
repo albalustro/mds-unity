@@ -8,13 +8,8 @@ public class LoginController : MDSBehaviour {
 
     #region Variáveis
 	public static LoginController instance;
-
-
     [SerializeField]
     private ConnectionConfig _connectionConfiguration;
-
-
-	private int currentGameIndex;
 
     [SerializeField] private InputField _userField;
 	[SerializeField] private InputField _passField;
