@@ -39,14 +39,15 @@ namespace MDS.Core.SceneManagement
         {
             Scene curScene = SceneManager.GetActiveScene();
 
+            _goAfterChallengeSceneName = curScene.name;
+
             if(curScene.IsMap())
             {
 
             }
             else if(curScene.IsEpisode())
             {
-                _goAfterChallengeSceneName = curScene.name;
-
+                
                 // iniciando a variavel que sera usada para verificar o conceito 
                 // adquirido no desafio que esta sendo aberto nesse momento
                 Challenge.ChallengeConcept = ConceptTypes.CONCEPT_GREEN;
@@ -66,6 +67,7 @@ namespace MDS.Core.SceneManagement
 
         public void GoBackAfterChallenge()
         {
+            UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
             SceneManager.LoadScene(_goAfterChallengeSceneName);
         }
 

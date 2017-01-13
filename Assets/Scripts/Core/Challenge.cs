@@ -69,27 +69,27 @@ namespace MDS.Core
             GUILayout.EndVertical();
         }
 
-        [InspectorButton, InspectorName("Executar Start")]
+       
         private void ExecuteActionsStart()
         {
             ExecuteActions(_actions.onStartActions);
         }
-        [InspectorButton, InspectorName("Executar Erro 1")]
+        
         private void ExecuteActions1()
         {
             ExecuteActions(_actions.onErrorActions_1);
         }
-        [InspectorButton, InspectorName("Executar Erro 2")]
+       
         private void ExecuteActions2()
         {
             ExecuteActions(_actions.onErrorActions_2);
         }
-        [InspectorButton, InspectorName("Executar Erro 3")]
+        
         private void ExecuteActions3()
         {
             ExecuteActions(_actions.onErrorActions_3);
         }
-        [InspectorButton, InspectorName("Executar Vitoria")]
+      
         private void ExecuteActionsVic()
         {
             ExecuteActions(_actions.onVictoryActions);
