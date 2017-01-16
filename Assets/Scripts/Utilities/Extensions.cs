@@ -32,6 +32,11 @@ namespace MDS.Utilities
             return scene.name.ToUpper().Contains("MAP");
         }
 
+		public static bool IsRoom(this Scene scene)
+		{
+			return scene.name.ToUpper().Contains("ROOM");
+		}
+
         /// <summary>
         /// Retorna, convertido em inteiro, o valor que esta no nome 
         /// da cena, exatamente como estiver lá
