@@ -3,6 +3,7 @@ using UnityEngine.SceneManagement;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using MDS.Utilities;
 
 public class DialogueSystem : Singleton<DialogueSystem>
 {
@@ -45,51 +46,50 @@ public class DialogueSystem : Singleton<DialogueSystem>
         audioSource = GetComponent<AudioSource>(); //<<<<<<<<<< provisório até implementarmos o singleton do Audio Manager
 		canvas = GetComponentInParent<Canvas>();
 		canvas.worldCamera = Camera.main;
-        //Será substituído pelo componente de parse de scene
-        game = SceneManager.GetActiveScene().name.Substring(1, 1);
-        world = SceneManager.GetActiveScene().name.Substring(3, 1);
-        episode = SceneManager.GetActiveScene().name.Substring(5, 1);
-
-        //Verifica se a scene aberta é de episódio ou de challenge
-        if (SceneManager.GetActiveScene().name.Length > 6)
-        {
-            //Scene de Challenge
-            slug = "intro";
-            challenge = Convert.ToInt32(SceneManager.GetActiveScene().name.Substring(7, 1));
-            minigame = challenge.ToString();
-        }
-        else
-        {
-            //Scene de Episódio
-            if (challenge == 0)
-                challenge = 1;
-            minigame = "";
-            slug = "minigame" + challenge;
-        }
     }
-
-	void Start()
-	{
-		InitializeDialogueSystem();
-	}
 
     void InitializeDialogueSystem()
     {
+		Scene scene = SceneManager.GetActiveScene ();
+		#if MDS1
+		game = "1";
+		#endif
+		#if MDS2
+		game = "2";
+		#endif
+		#if MDS3
+		game = "3";
+		#endif
+		if (!scene.IsRoom())
+			world = scene.GetWorldIndex ().ToString();
+
+		if (scene.IsEpisode ())
+		{
+			//Cena de Episode
+			episode = scene.GetEpisodeIndex().ToString();
+			minigame = "";
+			slug = "minigame" + challenge;
+		}
+		else if (scene.IsChallenge())
+		{
+			//Cena de Challenge
+			slug = "intro";
+			challenge = scene.GetChallengeIndex ();
+			minigame = challenge.ToString ();
+		}
+
         //caminho padrão para as pastas de voice over e emotions
-
         _audioPath = "Audios/MDS " + game + "/World " + world + "/";
-
         _emotionPath = "Emotions/W" + world + "/guide_";
-
         _soPath = "SO/G" + game + "W" + world;
-
-        SODialogue = Resources.Load(_soPath, typeof(DialogueList)) as DialogueList;
+		SODialogue = Resources.Load(_soPath, typeof(DialogueList)) as DialogueList;
 
 
         //Gera a lista de diálogos pertinentes ao contexto atual
         _currentDialogues = new List<DialogueEntry>();
         _currentDialogues.Clear();
-        _currentDialogues = GetDialoguesForCurrentContext(slug, minigame);
+		if (!SceneManager.GetActiveScene ().IsRoom())
+			_currentDialogues = GetDialoguesForCurrentContext(slug, minigame);
     }
 
     /// <summary>
@@ -129,8 +129,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     /// </summary>
     public void NextDialogue()
     {
-        audioSource.clip = nextBtnClickFx;
-        audioSource.Play();
+		AudioController.Instance.PlaySoundFX (nextBtnClickFx);
         _currentDialogueIndex++;
         if (_currentDialogueIndex >= _currentDialogues.Count)
             CloseDialogueBox();
@@ -144,6 +143,7 @@ public class DialogueSystem : Singleton<DialogueSystem>
     /// <param name="_slugs">Slugs do dialogo a ser exibido</param>
     public void ShowDialogueMessage(Slug[] _slugs)
     {
+		InitializeDialogueSystem ();
         _currentDialogues.Clear();
         for (int i = 0; i < _slugs.Length; i++)
         {
@@ -200,17 +200,4 @@ public class DialogueSystem : Singleton<DialogueSystem>
     {
         return SODialogue.dialogueList.Where(d => d.episode == episode && d.slug == _slug && d.minigame == _minigame).ToList();
     }
-
-    /// <summary>
-    /// Retorna o indice do array de diálogos conforme contexto atual
-    /// </summary>
-    /// <returns>Número inteiro, índice do array de diálogos</returns>
-    //private int GetCurrentDialogue(bool c)
-    //{
-    //    return _dialogues.Select((e, i) => new { Word = e, Index = i }).First(x => x.Word.episode == DSGlobal.episode).Index;
-    //    if (c)
-    //        return Array.FindIndex<DialogueEntry>(_dialogues, d => d.episode == DSGlobal.episode && d.slug == DSGlobal.slug && d.minigame == DSGlobal.minigame && DSGlobal.challenge == true);
-    //    else
-    //        return Array.FindIndex<DialogueEntry>(_dialogues, d => d.episode == DSGlobal.episode && d.slug == DSGlobal.slug && d.minigame == "");
-    //}
 }

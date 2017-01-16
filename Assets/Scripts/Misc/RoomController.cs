@@ -27,7 +27,7 @@ public class RoomController : MDSBehaviour {
 	protected override void Awake ()
 	{
 		base.Awake ();
-		dialogueCanvas.SetActive (false);
+		//dialogueCanvas.SetActive (false);
 		hudCanvas.SetActive (true);
 	}
 
@@ -39,6 +39,7 @@ public class RoomController : MDSBehaviour {
 		
 	public void ChangeScene(int scene)
 	{
+		_worldSelectionMask.SetActive (false);
 		switch (scene)
 		{
 		case 1:
