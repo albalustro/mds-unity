@@ -13,6 +13,17 @@ using MDS.Utilities;
 
 public class EpisodeSceneManager : MDSBehaviour {
 
+    public bool StaticCamera { get; set; }
+
+    public class ParallaxItem
+    {
+        public Transform target;
+        public float multiplier;
+    }
+
+    [SerializeField, InspectorCategory("Parallax")]
+    private List<ParallaxItem> _parallaxItens;
+
     [InspectorCategory("General")]
     public float cameraSpeed = 2f;
 
@@ -74,7 +85,6 @@ public class EpisodeSceneManager : MDSBehaviour {
     private Transform _player;
     private Transform _target;
     private EpisodeContext _context;
-
 
 
     protected override void Awake()
@@ -178,6 +188,8 @@ public class EpisodeSceneManager : MDSBehaviour {
 
     void Update()
     {
+        if(StaticCamera) return;
+
         Vector3 newPos = _target.position;
         float x = Mathf.Clamp(_player.position.x, leftX, rightX);
         float y = Mathf.Clamp(_player.position.y, bottomY, topY);
@@ -186,6 +198,17 @@ public class EpisodeSceneManager : MDSBehaviour {
         newPos.y = Mathf.MoveTowards(newPos.y, y, cameraSpeed * Time.deltaTime);
 
         _target.position = newPos;
+
+        float diffX = newPos.x - x;
+
+        foreach(var item in _parallaxItens)
+        {
+            float newX = item.target.position.x + diffX * item.multiplier;
+            Vector3 newPosition = item.target.position;
+            newPosition.x = newX;
+            item.target.position = newPosition;
+        } 
+
     }
 
 	public void SetCameraPosition(Vector3 position)
