@@ -5,11 +5,11 @@ public class Singleton<T> : MDSBehaviour where T : MDSBehaviour
 	private static T m_Instance;
 	private static object m_Lock = new object();
 
-    protected override void Awake()
-    {
-        base.Awake();
-        DontDestroyOnLoad(gameObject.transform.root);
-    }
+    //protected override void Awake()
+    //{
+    //    base.Awake();
+    //    DontDestroyOnLoad(gameObject.transform.root);
+    //}
 
     public static T Instance
 	{
