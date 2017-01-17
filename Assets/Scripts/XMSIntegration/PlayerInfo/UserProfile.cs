@@ -8,7 +8,12 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class UserProfile : Singleton<UserProfile>
 {
-	public string login;
+
+#if UNITY_EDITOR
+    public bool debugMode = false;
+#endif
+
+    public string login;
 	public string pass;
     public LoginInfo loginInfo;
 
@@ -17,6 +22,21 @@ public class UserProfile : Singleton<UserProfile>
     [SerializeField, ShowInInspector]
     private ConceptMap _conceptMap;
     public ConceptMap conceptMap { get { return _conceptMap; } }
+
+    protected override void Awake()
+    {
+        base.Awake();
+        if(UserProfile.Instance != this)
+            Destroy(gameObject.transform.root.gameObject);
+        else
+        {
+            DontDestroyOnLoad(gameObject.transform.root);
+#if UNITY_EDITOR
+            if(debugMode)
+                SetConceptMapAtFirstAccess();
+#endif
+        }
+    }
 
     //code: t000m000e000d000
     public void UpdateConcept(Scene challengeScene, ConceptTypes newConcept, DateTime startDate)

@@ -50,7 +50,7 @@ namespace MDS.Actions
             sceneSlugs = new List<slugSelector>();
             string sceneName = curScene.name;
 
-            string dialogPath = "Assets/Dialogue System/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
+            string dialogPath = "Assets/DialogueSystem/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
 
             DialogueList list = AssetDatabase.LoadAssetAtPath<DialogueList>(dialogPath);
 

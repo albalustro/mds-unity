@@ -15,6 +15,9 @@ public class SetCameraPosition : BaseAction {
 	[SerializeField]
 	private float? _newRightX, _newLeftX, _newTopY, _newBottomY;
 
+    [SerializeField]
+    private bool _staticCameraPosition;
+
 	public override IEnumerator Execute()
 	{
 		if(byPass) yield break;
@@ -27,7 +30,9 @@ public class SetCameraPosition : BaseAction {
 			if(_changeCamPosition)
 				sceneManager.SetCameraPosition (_camNewPosition);
 
-			if (_newRightX.HasValue)
+            sceneManager.StaticCamera = _staticCameraPosition;
+
+            if (_newRightX.HasValue)
 				sceneManager.rightX = _newRightX.Value;
 
 			if (_newLeftX.HasValue) {
