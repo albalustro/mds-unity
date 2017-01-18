@@ -113,9 +113,9 @@ public class LoginController : MDSBehaviour {
 			}
 		}
 
-#if MDS1
+
         string roomToLoad = "G1Room";
-#endif
+
         SceneManager.LoadScene (roomToLoad, LoadSceneMode.Single);
 	}
 

@@ -55,20 +55,22 @@ namespace MDS.Actions
             DialogueList list = AssetDatabase.LoadAssetAtPath<DialogueList>(dialogPath);
 
 
-            string game = sceneName.Substring(1, 1);
-            string world = sceneName.Substring(3, 1);
-            string episode = sceneName.Substring(5, 1);
+            string game = curScene.GetGameIndex().ToString();// sceneName.Substring(1, 1);
+            string world = curScene.GetWorldIndex().ToString(); // sceneName.Substring(3, 1);
+            string episode = curScene.GetEpisodeIndex().ToString();// sceneName.Substring(5, 1);
             string challenge = "";
             if(curScene.IsChallenge())
             {
-                challenge = sceneName.Substring(7, 1);
+                challenge = curScene.GetChallengeIndex().ToString();// sceneName.Substring(7, 1);
             }
             else if (curScene.IsEpisode())
             {
             // nao precisa fazer nada    
             }
 
-            sceneSlugs = list.dialogueList.Where(i => i.episode == episode && i.minigame == challenge)
+            sceneSlugs = list.dialogueList.Where(i =>   i.season == game 
+                                                     && i.episode == episode 
+                                                     && i.minigame == challenge)
                     .Select((s) => new slugSelector() { slug = s.slug })
                     .Distinct(new slugSelectorComparer())
                     .ToList();
