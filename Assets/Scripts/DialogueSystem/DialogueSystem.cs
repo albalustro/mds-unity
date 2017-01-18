@@ -51,16 +51,10 @@ public class DialogueSystem : Singleton<DialogueSystem>
     void InitializeDialogueSystem()
     {
 		Scene scene = SceneManager.GetActiveScene ();
-		#if MDS1
-		game = "1";
-		#endif
-		#if MDS2
-		game = "2";
-		#endif
-		#if MDS3
-		game = "3";
-		#endif
-		if (!scene.IsRoom())
+
+        game = scene.GetGameIndex().ToString();
+
+        if(!scene.IsRoom())
 			world = scene.GetWorldIndex ().ToString();
 
 		if (scene.IsEpisode ())

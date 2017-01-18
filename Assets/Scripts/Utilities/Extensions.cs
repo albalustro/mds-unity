@@ -37,6 +37,11 @@ namespace MDS.Utilities
 			return scene.name.ToUpper().Contains("ROOM");
 		}
 
+        public static int GetGameIndex(this Scene scene)
+        {
+            return int.Parse(scene.name.Substring(1, 1));
+        }
+
         /// <summary>
         /// Retorna, convertido em inteiro, o valor que esta no nome 
         /// da cena, exatamente como estiver lá

@@ -10,15 +10,44 @@ using MDS.Actions;
 using Newtonsoft.Json;
 using UnityEngine.UI;
 using MDS.Utilities;
+using System;
 
 public class EpisodeSceneManager : MDSBehaviour {
 
     public bool StaticCamera { get; set; }
 
+    [Serializable]
     public class ParallaxItem
     {
+        [InspectorOrder(0)]
         public Transform target;
-        public float multiplier;
+        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(1)]
+        public Vector3 rightPosition;
+        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(3)]
+        public Vector3 leftPostion;
+
+        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(2), InspectorButton]
+        void CaptureRightPosition()
+        {
+            rightPosition = target.position;
+        }
+
+        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(4), InspectorButton]
+        void CaptureLeftPosition()
+        {
+            leftPostion = target.position;
+        }
+
+
+        private bool ShowCaptureButtons()
+        {
+            return target != null;
+        }
+
+        internal void SetTargetPosition(float t)
+        {
+            target.position = Vector3.Lerp(rightPosition, leftPostion, t);
+        }
     }
 
     [SerializeField, InspectorCategory("Parallax")]
@@ -184,6 +213,8 @@ public class EpisodeSceneManager : MDSBehaviour {
                 ExecuteActions(ComingFromChallenge5Actions);
                 break;
         }
+
+        
     }
 
     void Update()
@@ -199,15 +230,15 @@ public class EpisodeSceneManager : MDSBehaviour {
 
         _target.position = newPos;
 
-        float diffX = newPos.x - x;
+
+        float t = (newPos.x - rightX) / (leftX - rightX);
+
 
         foreach(var item in _parallaxItens)
         {
-            float newX = item.target.position.x + diffX * item.multiplier;
-            Vector3 newPosition = item.target.position;
-            newPosition.x = newX;
-            item.target.position = newPosition;
-        } 
+            item.SetTargetPosition(t);    
+        }
+
 
     }
 
