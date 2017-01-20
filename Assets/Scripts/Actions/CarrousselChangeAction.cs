@@ -7,7 +7,7 @@ namespace MDS.Actions
     public class CarrousselChangeAction : BaseAction
     {
         [SerializeField]
-        private CarrousselItem _carrousselItem;
+        private CarrousselItem[] _carrousselItem;
 
         [SerializeField]
         private string _value;
@@ -24,14 +24,18 @@ namespace MDS.Actions
 
             yield return base.Execute();
 
-            if(_freeze)
-                _carrousselItem.Freeze();
+			for (int i = 0; i < _carrousselItem.Length; i++) {
+				if(_freeze)
+					_carrousselItem[i].Freeze();
 
-            while(_carrousselItem.GetCurrentValue().Equals(_value)==false)
-            {
-                _carrousselItem.MoveNext(_transitionTime);
-                yield return new WaitForSeconds(_transitionTime);
-            }
+				while(_carrousselItem[i].GetCurrentValue().Equals(_value)==false)
+				{
+					_carrousselItem[i].MoveNext(_transitionTime);
+					yield return new WaitForSeconds(_transitionTime);
+				}
+			}
+
+            
 
         }
 
