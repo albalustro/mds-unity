@@ -25,16 +25,10 @@ public class MapSceneButtonController : MDSBehaviour {
 	public void LoadEpisodeScene()
 	{
 		Scene scene = SceneManager.GetActiveScene ();
-		#if MDS1
-		int gameIndex = 1;
-		#endif
-		#if MDS2
-		int gameIndex = 2;
-		#endif
-		#if MDS3
-		int gameIndex = 3;
-		#endif
-		int worldIndex = Extensions.GetWorldIndex (scene);
+
+        int gameIndex = scene.GetGameIndex();
+
+        int worldIndex = scene.GetWorldIndex ();
 		//SceneLoader.Instance.
 		//Fazer a chamada da cena usando o SceneLoader
 		SceneManager.LoadScene ("G" + gameIndex + "W" + worldIndex + "E" + episodeIndex, LoadSceneMode.Single);
