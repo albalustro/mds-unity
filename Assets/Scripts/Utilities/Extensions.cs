@@ -69,11 +69,17 @@ namespace MDS.Utilities
             return int.Parse(sceneName.name.Substring(7, 1));
         }
 
-        public static string GetEpisodeTitle(this Scene scene)
+		public static string GetEpisodeTitle(this Scene scene, int episodeIndex = 0)
         {
-            if(scene.IsEpisode() == false && scene.IsChallenge()==false) return string.Empty;
+			if(scene.IsEpisode() == false && scene.IsChallenge()==false && scene.IsMap() == false) return string.Empty;
 
             string episodeName = scene.name.Substring(0,6);
+
+			if (scene.IsMap () && episodeIndex > 0)
+			{
+				episodeName = episodeName.Remove (5, 1);
+				episodeName = episodeName + episodeIndex.ToString ();
+			}
 
             string json = "{" +
             "\"G1W1E1\": \"POR UM FIO\"," +
@@ -176,7 +182,6 @@ namespace MDS.Utilities
             Dictionary<string, string> titles = JsonConvert.DeserializeObject<Dictionary<string, string>>(json);
 
             return titles[episodeName];
-
         }
 
     }

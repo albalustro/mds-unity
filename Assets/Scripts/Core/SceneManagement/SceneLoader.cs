@@ -65,6 +65,21 @@ namespace MDS.Core.SceneManagement
             }
         }
 
+		public void LoadEpisodeScene(int episodeIndex)
+		{
+			Scene scene = SceneManager.GetActiveScene ();
+			int gameIndex = scene.GetGameIndex();
+			int worldIndex = scene.GetWorldIndex ();
+			SceneManager.LoadScene ("G" + gameIndex + "W" + worldIndex + "E" + episodeIndex, LoadSceneMode.Single);
+		}
+
+		public void LoadRoomScene()
+		{
+			Scene scene = SceneManager.GetActiveScene ();
+			int gameIndex = scene.GetGameIndex();
+			SceneManager.LoadScene ("G" + gameIndex + "Room", LoadSceneMode.Single);
+		}
+
         public void GoBackAfterChallenge()
         {
             UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
@@ -115,6 +130,8 @@ namespace MDS.Core.SceneManagement
 
 
         }
+
+
 
 #if UNITY_EDITOR
 

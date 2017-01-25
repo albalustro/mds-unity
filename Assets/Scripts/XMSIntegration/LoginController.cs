@@ -3,6 +3,7 @@ using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using MDS.ScriptableObjects;
+using MDS.Core.SceneManagement;
 
 public class LoginController : MDSBehaviour {
 
@@ -42,8 +43,6 @@ public class LoginController : MDSBehaviour {
             _passField.text = PersistenceManager.Instance.GetString("rememberPass");
             _rememberPass.isOn = true;
         }
-
-		//currentGameIndex = PersistenceManager.Instance.GetGameIndex ();
     }
     #endregion
 
@@ -70,9 +69,8 @@ public class LoginController : MDSBehaviour {
 		UserProfile.Instance.loginInfo = JsonConvert.DeserializeObject<LoginInfo>(guest);
 		////////////FadeToWhite////////////////
 		//Carregando próxima Scene
-        SceneManager.LoadScene("Splash", LoadSceneMode.Single);
+        //SceneManager.LoadScene("Splash", LoadSceneMode.Single);
     }
-
     #endregion
 
 	public void ReturnResponseLoginValidate(LoginInfo wsReturn)
@@ -113,14 +111,10 @@ public class LoginController : MDSBehaviour {
 			}
 		}
 
-
-        string roomToLoad = "G1Room";
-
-        SceneManager.LoadScene (roomToLoad, LoadSceneMode.Single);
+		SceneLoader.Instance.LoadRoomScene ();
 	}
 
     #region Paineis de Feedback
-
     /// <summary>
     /// Exibe painel com texto informativo
     /// </summary>
@@ -150,7 +144,6 @@ public class LoginController : MDSBehaviour {
         _fbButton.gameObject.SetActive(false);
         _feedBackPanel.SetActive(true);
     }
-
     #endregion
 
 }
