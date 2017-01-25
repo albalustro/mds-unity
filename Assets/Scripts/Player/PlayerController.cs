@@ -1,4 +1,5 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using FullInspector;
 using UnityEngine;
@@ -20,8 +21,22 @@ namespace MDS.Player
 
         private void Start()
         {
-            _animController.ResetAvatar();
+            _animController.RestoreOriginalAvatar();
         }
+
+        public void SetAvatar(PlayerAvatar? avatar, bool setMounted = false, bool setIdleBack = false)
+        {
+            if (avatar.HasValue)
+                _animController.SetAvatar(avatar.Value);
+            _animController.SetMounted(setMounted);
+            _animController.SetIdleBack(setIdleBack);
+        }
+
+        public void RestoreOriginalAvatar()
+        {
+            _animController.RestoreOriginalAvatar();
+        }
+
 #if UNITY_EDITOR
 
         [InspectorButton]

@@ -7,13 +7,15 @@ namespace MDS.Player
 {
     public class PlayerAnimController : MDSBehaviour
     {
-
+        public static PlayerAvatar OriginalAvatar
+        {
+            set
+            {
+                _originalAvatar = value;
+            }
+        }
         public static PlayerAvatar Avatar
         {
-            //get
-            //{
-            //    return _avatar;
-            //}
             set
             {
                 _avatar = value;
@@ -28,15 +30,15 @@ namespace MDS.Player
         private const string paramBackName = "back";
         private const string paramIdleBackName = "idle_back";
         private const string paramMountedName = "mounted";
-        private const string paramRobotName = "robot";
+
 
         private readonly int paramAvatarHash = Animator.StringToHash(paramAvatarName);
         private readonly int paramWalkingHash = Animator.StringToHash(paramWalkingName);
         private readonly int paramBackHash = Animator.StringToHash(paramBackName);
         private readonly int paramIdleBackHash = Animator.StringToHash(paramIdleBackName);
         private readonly int paramMountedHash = Animator.StringToHash(paramMountedName);
-        private readonly int paramRobotHash = Animator.StringToHash(paramRobotName);
 
+        private static PlayerAvatar _originalAvatar = PlayerAvatar.Blup;
         private static PlayerAvatar _avatar = PlayerAvatar.Blup;
         
         protected override void Awake()
@@ -57,9 +59,11 @@ namespace MDS.Player
             _spriteRenderer.flipX = direction.x > 0;
         }
 
-        public void ResetAvatar()
+        public void RestoreOriginalAvatar()
         {
-            SetAvatar(_avatar);
+            SetAvatar(_originalAvatar);
+            SetMounted(false);
+            SetIdleBack(false);
         }
 
         public void SetAvatar(PlayerAvatar avatar)
@@ -73,9 +77,9 @@ namespace MDS.Player
             _animator.SetBool( paramMountedHash, isMounted);
         }
 
-        public void SetRobot(bool isRobot)
+        public void SetIdleBack(bool isIdleBack)
         {
-            _animator.SetBool(paramRobotHash, isRobot);
+            _animator.SetBool(paramIdleBackHash, isIdleBack);
         }
     }
 }
