@@ -23,9 +23,9 @@ public class CarrousselItem : MDSBehaviour, IValidatable
 
     private Vector3 _startPosition;
 
-    
-
     private CarrousselWindow _parentWindow;
+	public bool isFreezed { get { return _parentWindow.isFreezed; } }
+
 
     public void Initialize(CarrousselWindow carrousselWindow)
     {
