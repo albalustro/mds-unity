@@ -42,7 +42,7 @@ namespace MDS.Player
             foreach(var item in avatarSelectionList)
             {
                 if(item.Value.go == avatar)
-                    Select(item.Value);
+                    Select(item.Value, item.Key);
                 else
                     Unselect(item.Value);
             }
@@ -56,12 +56,13 @@ namespace MDS.Player
             value.isSelected = false;
         }
 
-        private void Select(Selection value)
+        private void Select(Selection value, PlayerAvatar avatar)
         {
             LeanTween.scale(value.go, 1.2f * Vector3.one, 0.3f);
             LeanTween.moveLocal(value.go, value.selectedLocalPosition, 0.3f);
             value.go.GetComponent<Renderer>().sortingOrder = 15;
             value.isSelected = true;
+            PlayerAnimController.OriginalAvatar = avatar;
         }
     }
 }
