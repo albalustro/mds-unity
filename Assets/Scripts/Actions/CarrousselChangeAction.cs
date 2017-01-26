@@ -21,10 +21,12 @@ namespace MDS.Actions
         private bool _freeze;
 
         [SerializeField]
-        private float _transitionTime = .2f;
+        private float _transitionTime = .1f;
 
 		[SerializeField]
 		private bool _ignoreFreezed;
+
+		private int _count;
 
         public override IEnumerator Execute()
         {
@@ -40,10 +42,14 @@ namespace MDS.Actions
 				_carrousselItem = _carrousselItem.Where (i => !i.isFreezed).ToArray();
 			}
 
+			_count = _carrousselItem.Length;
+
 			for (int i = 0; i < _carrousselItem.Length; i++) {
 				_corotineHolder.StartCoroutine (InternalExecute(i));
 			}
 
+			if(waitFinish)
+				yield return new WaitWhile(() => _count > 0);
             
 
         }
@@ -58,6 +64,8 @@ namespace MDS.Actions
 				_carrousselItem[i].MoveNext(_transitionTime);
 				yield return new WaitForSeconds(_transitionTime);
 			}
+
+			--_count;
 		}
 
 
