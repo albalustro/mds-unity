@@ -4,6 +4,9 @@ using System.Linq;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using MDS.Utilities;
+using MDS.DialogueSystem;
+using System;
 
 public class AddMenu : EditorWindow
 {
@@ -11,38 +14,66 @@ public class AddMenu : EditorWindow
     [MenuItem("MDS/Sound/Create")]
     public static void Create()
     {
-        string sceneName = SceneManager.GetActiveScene().name;
+        Scene currScene = SceneManager.GetActiveScene();
 
-        string dialogPath = "Assets/Dialogue System/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
+        if (currScene.IsChallenge()== false && currScene.IsEpisode()==false)
+        {
+            EditorUtility.DisplayDialog("Erro", "Somente Challenge e Episode terão dialogos", "Blz.. entendi..");
+            return;
+        }
+
+        List<string> soundList = GetSounds(currScene);
+
+        AudioClipHolder audioHolder = GetAudioHolder();
+
+        string game = currScene.GetGameIndex().ToString();
+        string world = currScene.GetWorldIndex().ToString();
+        string audioPath;
+
+        foreach(var sound in soundList)
+        {
+            audioPath = "Assets/MDS" + game + "/Dialogue/World" + world + "/" + sound + ".mp3";
+            if (File.Exists(audioPath))
+                audioHolder.Add(sound, AssetDatabase.LoadAssetAtPath<AudioClip>(audioPath));
+            else
+                Debug.LogError("Arquivo de audio não encontrado: " + audioPath);
+        }
+
+       
+    }
+
+    private static List<string> GetSounds(Scene currScene)
+    {
+        string sceneName = currScene.name;
+
+        string dialogPath = "Assets/DialogueSystem/Resources/SO/" + sceneName.Substring(0, 4) + ".asset";
 
         DialogueList list = AssetDatabase.LoadAssetAtPath<DialogueList>(dialogPath);
 
 
-        string game = sceneName.Substring(1, 1);
-        string world = sceneName.Substring(3, 1);
-        string episode = sceneName.Substring(5, 1);
-        string challenge = sceneName.Substring(7, 1);
-
-        List<string> sounds = list.dialogueList.Where(i => i.episode == episode && i.minigame == challenge).Select(s=>s.sound).ToList();
-
-        string audioPath;
-        foreach(var sound in sounds)
+        string game = currScene.GetGameIndex().ToString();
+        string world = currScene.GetWorldIndex().ToString();
+        string episode = currScene.GetEpisodeIndex().ToString();
+        string challenge = "";
+        if(currScene.IsChallenge())
         {
-            audioPath = "Assets/MDS " + game + "/Dialogue/World " + world + "/" + sound + ".mp3";
-            if (File.Exists(audioPath))
-            {
-                Debug.Log(audioPath);
-                GameObject go = new GameObject(sound);
-                AudioSource a = go.AddComponent<AudioSource>();
-                a.clip = AssetDatabase.LoadAssetAtPath<AudioClip>(audioPath);
-            }
-            else
-            {
-                Debug.LogError("Arquivo de audio não encontrado: " + audioPath);
-            }
+            challenge = currScene.GetChallengeIndex().ToString();
         }
+            return list.dialogueList
+                                .Where(i => i.episode == episode && i.minigame == challenge)
+                                .Select(s => s.sound)
+                                .ToList();
+    }
 
-       
+    private static AudioClipHolder GetAudioHolder()
+    {
+        AudioClipHolder ret = GameObject.FindObjectOfType<AudioClipHolder>();
+        if (ret == null)
+        {
+            GameObject go = new GameObject("_AUDIO HOLDER_");
+            ret = go.AddComponent<AudioClipHolder>();
+        }
+        return ret;
     }
 
     [MenuItem("MDS/PlayerPref/Reset Playerprefs")]

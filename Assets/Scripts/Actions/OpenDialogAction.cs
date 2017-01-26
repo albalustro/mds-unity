@@ -7,6 +7,7 @@ using FullInspector;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
+using MDS.DialogueSystem;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -114,8 +115,8 @@ namespace MDS.Actions
         {
             if(byPass) yield break;
             yield return base.Execute();
-            DialogueSystem.Instance.ShowDialogueMessage(slugs);
-            yield return new WaitWhile(DialogueSystem.Instance.IsDialogueOpen);
+            MDS.DialogueSystem.DialogueSystem.Instance.ShowDialogueMessage(slugs);
+            yield return new WaitWhile(MDS.DialogueSystem.DialogueSystem.Instance.IsDialogueOpen);
         }
     }
 }
