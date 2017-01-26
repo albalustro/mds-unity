@@ -190,7 +190,7 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
-  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   - '[]'
   _changeSprite: 1
   _changeLocalPosition: 0
@@ -322,7 +322,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.size
-      value: 7
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 4000012725153744, guid: 1245a1f2c53fd884ca6a1849b95bc3e9, type: 2}
       propertyPath: m_LocalPosition.x
@@ -359,7 +359,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["pipeMinigameError1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["pipeMinigameError2"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_3":[],"onVictoryActions":[{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"obj":[1,2,3],"unfreeze":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"obj":[4,5,6],"unfreeze":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"slugs":["pipeMinigameCompleted"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[{"slugs":["pipeMinigameError1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_2":[{"slugs":["pipeMinigameError2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"_fsm":1,"_value":"0","_freeze":true,"_transitionTime":0.2,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FSMChangeAction"},{"_fsm":2,"_value":"0","_freeze":true,"_transitionTime":0.2,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FSMChangeAction"},{"_fsm":3,"_value":"0","_freeze":true,"_transitionTime":0.2,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FSMChangeAction"}],"onErrorActions_3":[],"onVictoryActions":[{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"_useMemorizedObjAsTarget":false,"obj":[4,5,6],"unfreeze":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"m_freezeEntireGroup":null,"m_freezeGroupContent":null,"_useMemorizedObjAsTarget":false,"obj":[7,8,9],"unfreeze":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.FreezeUnfreezeAction"},{"slugs":["pipeMinigameCompleted"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -397,50 +397,55 @@ Prefab:
         type: 2}
       propertyPath: _objectReferences.Array.data[1]
       value: 
-      objectReference: {fileID: 1984679877}
+      objectReference: {fileID: 1984679880}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[2]
       value: 
-      objectReference: {fileID: 1571811214}
+      objectReference: {fileID: 1571811217}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[3]
       value: 
-      objectReference: {fileID: 1634766994}
+      objectReference: {fileID: 1634766997}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[4]
       value: 
-      objectReference: {fileID: 968415117}
+      objectReference: {fileID: 1984679877}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[5]
       value: 
-      objectReference: {fileID: 1995158682}
+      objectReference: {fileID: 1571811214}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[6]
       value: 
-      objectReference: {fileID: 149323938}
+      objectReference: {fileID: 1634766994}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[7]
       value: 
-      objectReference: {fileID: 877475390}
+      objectReference: {fileID: 968415117}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[8]
       value: 
-      objectReference: {fileID: 1090254577}
+      objectReference: {fileID: 1995158682}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[9]
       value: 
-      objectReference: {fileID: 877475390}
+      objectReference: {fileID: 149323938}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _objectReferences.Array.data[10]
+      value: 
+      objectReference: {fileID: 877475390}
+    - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[11]
       value: 
       objectReference: {fileID: 1090254577}
     m_RemovedComponents: []
@@ -667,7 +672,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":1,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":2,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":3,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}],"onErrorActions_1":[{"slugs":["faucetMinigameError1"],"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":4,"m_unselectAll":true,"m_lockGroup":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"slugs":["faucetMinigameError2"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[5],"m_set":true,"m_groupTransform":6,"m_unselectAll":true,"m_lockGroup":true,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+      value: '{"onStartActions":[{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":1,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":2,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"},{"animationType":"Scale","selfTarget":false,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":3,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":1.0,"y":1.0,"z":1.0},"easeType":"easeInOutBounce","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"TransformAnimationAction"}],"onErrorActions_1":[{"slugs":["faucetMinigameError1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[],"m_set":false,"m_groupTransform":4,"m_unselectAll":true,"m_lockGroup":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_2":[{"slugs":["faucetMinigameError2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"m_useMemorizedGo":false,"obj":[5],"m_set":true,"m_groupTransform":6,"m_unselectAll":true,"m_lockGroup":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.SetSelected"}],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
@@ -871,8 +876,32 @@ MonoBehaviour:
     _values: []
     _target: {fileID: 162556481}
   - _keys:
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0.AbstractTypeEditor.sceneSlugs.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.2
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.3
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.2
     _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     - _showDropdown: 1
       _serializedIsActive: 0
     _target: {fileID: 363621569}
@@ -885,23 +914,38 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1571811217}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.states.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 1
     _target: {fileID: 1634766997}
   - _keys:
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_groupTransform.EditProperty
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1.AbstractTypeEditor.m_useMemorizedGo.EditProperty
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1.AbstractTypeEditor.m_groupTransform.EditProperty
-    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1.AbstractTypeEditor.m_useMemorizedGo.EditProperty
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.2
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_1.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onErrorActions_2.EditProperty.1
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
     _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    - _showDropdown: 0
-      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 877475391}
   - _keys: []
     _values: []
@@ -1050,7 +1094,7 @@ MonoBehaviour:
   - '{"SelectedValue":0.0,"UnselectedValue":0.0}'
   - '[]'
   - '[]'
-  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   - '[]'
   _changeSprite: 1
   _changeLocalPosition: 0
@@ -2087,7 +2131,7 @@ MonoBehaviour:
   - 
   - '[]'
   - '[]'
-  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
+  - '[{"animationType":"Rotation","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":null,"duration":2.0,"local":false,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":0.0,"z":-720.0},"easeType":"easeInOutElastic","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[2,3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
   - '[]'
   _changeSprite: 1
   _changeLocalPosition: 0

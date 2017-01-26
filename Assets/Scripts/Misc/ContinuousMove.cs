@@ -98,10 +98,11 @@ public class ContinuousMove : MDSBehaviour
 	{
 
 		ExecuteActions(m_onMaxDistanceAction);
-		--m_travel;
 
 		if (m_travelLimit)
 		{
+			--m_travel;
+
 			if (m_travel < 0) {
 				m_isFreezed = true;
 				Challenge.GetActiveInstance().ProcessResult();
@@ -134,5 +135,17 @@ public class ContinuousMove : MDSBehaviour
 			return;
         enabled = false;
     }
+
+
+	public void FreezeUnfreeze(int n)
+	{
+		if (n == 1) {
+			m_freezeOnMaxDistance = true;
+		} else {
+			m_freezeOnMaxDistance = false;
+			m_isFreezed = false;
+		}
+
+	}
 
 }
