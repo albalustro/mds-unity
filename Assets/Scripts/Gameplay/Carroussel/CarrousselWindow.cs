@@ -8,6 +8,7 @@ using System.Collections.Generic;
 public class CarrousselWindow : MDSBehaviour
 {
     private CarrousselItem _carrousseItem;
+	public bool isFreezed { get { return !GetComponent<Collider2D> ().enabled; } }
 
     public void Start()
     {

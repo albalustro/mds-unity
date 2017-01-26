@@ -33,7 +33,8 @@ public class UserProfile : Singleton<UserProfile>
             DontDestroyOnLoad(gameObject.transform.root);
 #if UNITY_EDITOR
             if(debugMode)
-                SetConceptMapAtFirstAccess();
+				if (conceptMap == null) 
+                	SetConceptMapAtFirstAccess();
 #endif
         }
     }
@@ -68,7 +69,7 @@ public class UserProfile : Singleton<UserProfile>
         SendConceptMapToSyncer();
     }
 
-    private EpisodeLiberationTypes CheckNextEpisodeLiberationStatus(ConceptEpisode cEpisode)
+    public EpisodeLiberationTypes CheckNextEpisodeLiberationStatus(ConceptEpisode cEpisode)
     {
         if(cEpisode.challenges.All(c => c.concept == ConceptTypes.CONCEPT_GREEN))
             return EpisodeLiberationTypes.ALLOW_BY_CONCEPT;

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+using System.Linq;
 
 /// <summary>
 /// Informações sobre o Episódio para composição do mapa de conceitos
@@ -10,4 +11,19 @@ public class ConceptEpisode
 {
 	public ConceptChallenge[] challenges;
 	public EpisodeLiberationTypes liberationStatus;
+
+	public bool CheckEpisodeComplete()
+	{
+		return challenges.All(c => c.concept == ConceptTypes.CONCEPT_GREEN);
+	}
+
+	public bool CheckChallengeComplete(int challengeIndex)
+	{
+		return challenges [challengeIndex].concept == ConceptTypes.CONCEPT_GREEN;
+	}
+
+	public bool CheckDirectAccessToChallenge(int challengeIndex)
+	{
+		return challenges.All(c => c.concept != ConceptTypes.CONCEPT_NOT_PLAYED);
+	}
 }
