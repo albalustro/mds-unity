@@ -28,8 +28,8 @@ private bool trackMovement = true;
 	{
 		--m_counter;
 		m_move.m_freezeOnMaxDistance = true;
+
 		if (m_counter <= 0) {
-			m_move.m_freezeOnMaxDistance = true;
 			ExecuteActions(m_onCounterZeroAction);
 		}
 	}
