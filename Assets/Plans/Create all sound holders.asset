@@ -15,6 +15,20 @@ MonoBehaviour:
   firstEntry: {fileID: 114654214440223576}
   hideInExecutionWindow: 0
   description: 
+--- !u!114 &114083982453326310
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2e716dc6c1dc44510b48cd9a02e13bd5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  automationPlanEntryId: cc745933-a6a8-491a-b8f2-f53245321d81
+  nextEntry: {fileID: 114518764139545044}
+  action: {fileID: 11400000, guid: b825b1a5c37066d48ab58f93f533c655, type: 2}
 --- !u!114 &114360317003511112
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -30,31 +44,38 @@ MonoBehaviour:
   - bounds:
       serializedVersion: 2
       x: 20
-      y: 40
+      y: 41
       width: 200
       height: 72
     data: {fileID: 114654214440223576}
   - bounds:
       serializedVersion: 2
-      x: 240
-      y: 40
+      x: 281
+      y: 44
       width: 200
       height: 57
     data: {fileID: 114518764139545044}
   - bounds:
       serializedVersion: 2
-      x: 240
-      y: 132
+      x: 281
+      y: 136
       width: 200
       height: 57
     data: {fileID: 114577921258389050}
   - bounds:
       serializedVersion: 2
-      x: 240
-      y: 209
+      x: 281
+      y: 213
       width: 200
       height: 57
     data: {fileID: 114373739177552528}
+  - bounds:
+      serializedVersion: 2
+      x: 26
+      y: 160
+      width: 200
+      height: 57
+    data: {fileID: 114083982453326310}
   references:
   - source: {fileID: 114518764139545044}
     sourceProperty: nextEntry
@@ -63,10 +84,13 @@ MonoBehaviour:
     sourceProperty: nextEntry
     target: {fileID: 114373739177552528}
   - source: {fileID: 114654214440223576}
-    sourceProperty: nextEntry
-    target: {fileID: 114518764139545044}
-  - source: {fileID: 114654214440223576}
     sourceProperty: startOfSubtree
+    target: {fileID: 114083982453326310}
+  - source: {fileID: 114654214440223576}
+    sourceProperty: nextEntry
+    target: {fileID: 114083982453326310}
+  - source: {fileID: 114083982453326310}
+    sourceProperty: nextEntry
     target: {fileID: 114518764139545044}
 --- !u!114 &114373739177552528
 MonoBehaviour:
@@ -122,11 +146,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   automationPlanEntryId: 2a4ac6b4-5508-46d9-8fca-2c006ca010d6
-  nextEntry: {fileID: 114518764139545044}
-  startOfSubtree: {fileID: 114518764139545044}
+  nextEntry: {fileID: 114083982453326310}
+  startOfSubtree: {fileID: 114083982453326310}
   filePropertyName:
     useExpression: 0
-    expression: 
+    expression: file
     propertyValue: file
   indexPropertyName:
     useExpression: 0
@@ -139,9 +163,9 @@ MonoBehaviour:
   baseDirectory:
     useExpression: 0
     expression: 
-    propertyValue: C:/XMILE/Projetos/MdS Unity/Misterio dos Sonhos/Assets/MDS1/Scenes/World1/Episode1
+    propertyValue: C:/XMILE/Projetos/MdS Unity/Misterio dos Sonhos/Assets/
   includes:
   - useExpression: 0
     expression: '*.unity'
-    propertyValue: '*.unity'
+    propertyValue: MDS*/Scenes/World*/**/*.unity
   excludes: []

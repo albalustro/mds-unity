@@ -62,7 +62,7 @@ public class CreateSceneAudioHolder : UTAction {
             challenge = currScene.GetChallengeIndex().ToString();
         }
         return list.dialogueList
-                            .Where(i => i.episode == episode && i.minigame == challenge)
+                            .Where(i => i.episode == episode && i.minigame == challenge && !string.IsNullOrEmpty(i.sound))
                             .Select(s => s.sound)
                             .ToList();
     }

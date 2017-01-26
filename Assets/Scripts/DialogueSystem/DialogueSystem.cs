@@ -70,6 +70,7 @@ namespace MDS.DialogueSystem
             {
                 //Cena de Challenge
                 slug = "intro";
+                episode = scene.GetEpisodeIndex().ToString();
                 challenge = scene.GetChallengeIndex();
                 minigame = challenge.ToString();
             }
