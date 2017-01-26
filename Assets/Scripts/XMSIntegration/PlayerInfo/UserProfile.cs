@@ -33,7 +33,8 @@ public class UserProfile : Singleton<UserProfile>
             DontDestroyOnLoad(gameObject.transform.root);
 #if UNITY_EDITOR
             if(debugMode)
-                SetConceptMapAtFirstAccess();
+				if (conceptMap == null) 
+                	SetConceptMapAtFirstAccess();
 #endif
         }
     }

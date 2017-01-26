@@ -153,7 +153,7 @@ namespace MDS.Gameplay.Tetris
         {
             Log("Antes do dialogo");
             yield return new WaitForSeconds(0.1f);
-            yield return new WaitWhile(DialogueSystem.Instance.IsDialogueOpen);
+            yield return new WaitWhile(MDS.DialogueSystem.DialogueSystem.Instance.IsDialogueOpen);
             Log("Depois do dialogo fechar, aguardando 1,5s");
             yield return new WaitForSeconds(1.5f);
             _isPreAnimating = false;
