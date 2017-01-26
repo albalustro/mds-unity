@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioListener))]
@@ -126,8 +127,15 @@ public class AudioController : Singleton<AudioController>
 		_ThemeSource.Stop ();
 		_ThemeSource.clip = null;
 
-		_VoiceOverSource.Stop ();
-		_VoiceOverSource.clip = null;
+        // removido pois o mute nao muta o voice over
+		//_VoiceOverSource.Stop ();
+		//_VoiceOverSource.clip = null;
 	}
+
+    internal void StopVoiceOver()
+    {
+        _VoiceOverSource.Stop();
+        _VoiceOverSource.clip = null;
+    }
 }
 

@@ -108,6 +108,7 @@ namespace MDS.DialogueSystem
         void CloseDialogueBox()
         {
             dialogue.gameObject.SetActive(false);
+            AudioController.Instance.StopVoiceOver();
             isActive = false;
         }
 

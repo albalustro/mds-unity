@@ -34,7 +34,7 @@ namespace MDS.Gameplay.DragDrop
                     //slot = slots.FirstOrDefault(s => s.IsTaken == false);
 //                    slot = slots.FirstOrDefault(s => s.IsNotTakenAndHasAcceptableLabel(draggable.Labels));
 					for (int i = 0; i < slots.Count; i++) {
-						if (slots [i].IsNotTakenAndHasAcceptableLabel(draggable.Labels)) {
+						if (slots [i].IsNotTakenAndHasAcceptableLabel(draggable.Labels) && slots[i].gameObject.activeInHierarchy==true) {
 							slot = slots [i];
 							break;
 						}
@@ -52,7 +52,7 @@ namespace MDS.Gameplay.DragDrop
             }
 
             // se, ainda assim, o slot continua nulo, significa que nao existe slot disponivel nesse grupo.. 
-            if(slot == null)
+            if(slot == null || slot.gameObject.activeInHierarchy==false)
                 return false;
 
             // Ok, slot disponivel, go ahead..

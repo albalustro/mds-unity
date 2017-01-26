@@ -26,7 +26,6 @@ namespace MDS.Gameplay.DragDrop
 		[SerializeField]
 		private List<string> _acceptableLabels;
 
-
 		private SpriteRenderer _spriteRenderer;
 
 		private Draggable _draggableReference;
@@ -62,7 +61,10 @@ namespace MDS.Gameplay.DragDrop
 		public bool notNullIfNumeric;
 		public int numericMultiplier;
 
-		protected override void Awake()
+
+        private InitialDropGroupArea _initialDropGroupArea;
+
+        protected override void Awake()
 		{
 			base.Awake();
 
@@ -91,7 +93,10 @@ namespace MDS.Gameplay.DragDrop
 				}
 				_spriteRenderer.sprite = _sprite.EmptyValue;
 			}
-		}
+
+            _initialDropGroupArea = FindObjectOfType<InitialDropGroupArea>();
+
+        }
 
 		public bool IsTaken
 		{
@@ -103,6 +108,7 @@ namespace MDS.Gameplay.DragDrop
 
 		public bool IsNotTakenAndHasAcceptableLabel(List<string> labels)
 		{
+
 			if(IsTaken)
 				return false;
 
@@ -134,10 +140,18 @@ namespace MDS.Gameplay.DragDrop
             return false;
         }
 
+        private void OnDisable()
+        {
+            if (draggableReference!=null)
+            {
+                DropGroupSlot dummy=null;
+                _initialDropGroupArea.SetInSlot(draggableReference, ref dummy);
+            }
+        }
 
-		#region IValidatable
+        #region IValidatable
 
-		public bool ReadyToValidate()
+        public bool ReadyToValidate()
 		{
 			return IsTaken;
 		}
