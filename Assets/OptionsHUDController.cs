@@ -53,13 +53,13 @@ public class OptionsHUDController : MonoBehaviour {
 	{
 		if (_optionsHUDPanelOn)
 		{
-			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-35, -15, 0), 0.7f).setEase(LeanTweenType.easeInQuint);
+			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-35, -10, 0), 0.7f).setEase(LeanTweenType.easeInQuint);
 			_optionsHUDPanelOn = false;
 		} 
 		else
 		{
 			float w = _transformOptionsHUDPanel.rect.width;
-			LeanTween.move (_transformOptionsHUDPanel, new Vector3(-w, -15, 0), 0.7f).setEase(LeanTweenType.easeInQuint);
+			LeanTween.move (_transformOptionsHUDPanel, new Vector3(-w, -10, 0), 0.7f).setEase(LeanTweenType.easeInQuint);
 			_optionsHUDPanelOn = true;
 		}
 	}
