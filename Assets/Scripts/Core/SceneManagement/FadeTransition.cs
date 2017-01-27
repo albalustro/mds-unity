@@ -11,7 +11,7 @@ namespace MDS.Core.SceneManagement
 
 	public class FadeTransition : Singleton<FadeTransition>
 	{
-		public float m_FadeTime = 0.5f;
+		public float FadeTime = 0.5f;
 		private int m_DrawDepth = -1000;
 		private Texture2D m_fadeOutTexture;
 		private FadeDirection m_FadeDirection = FadeDirection.In;
@@ -36,9 +36,9 @@ namespace MDS.Core.SceneManagement
 		void OnGUI()
 		{
 			if (m_FadeDirection == FadeDirection.Out)
-				m_CurrentAlphaColor = Mathf.Lerp(0.0f, 1.0f, ((Time.time - m_StartTime) / m_FadeTime));
+				m_CurrentAlphaColor = Mathf.Lerp(0.0f, 1.0f, ((Time.time - m_StartTime) / FadeTime));
 			else
-				m_CurrentAlphaColor = Mathf.Lerp(1.0f, 0.0f, ((Time.time - m_StartTime) / m_FadeTime));
+				m_CurrentAlphaColor = Mathf.Lerp(1.0f, 0.0f, ((Time.time - m_StartTime) / FadeTime));
 
 			GUI.color = new Color(GUI.color.r, GUI.color.g, GUI.color.b, m_CurrentAlphaColor);
 			GUI.depth = m_DrawDepth;
@@ -49,7 +49,7 @@ namespace MDS.Core.SceneManagement
 		{
 			m_StartTime = Time.time;
 			m_FadeDirection = fadeDirection;
-			return m_FadeTime;
+			return FadeTime;
 		}
 
 		void OnEnable()

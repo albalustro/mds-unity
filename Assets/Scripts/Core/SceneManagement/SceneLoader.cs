@@ -39,29 +39,41 @@ namespace MDS.Core.SceneManagement
 			_FadeTransition = FadeTransition.Instance;
         }
 
+        public void LoadLogin()
+        {
+            StartCoroutine(LoadSceneByIndex(1));
+        }
 
-		public void LoadScene(string sceneNameToLoad)
+
+        public void LoadScene(string sceneNameToLoad)
 		{
 			StartCoroutine("Loading", sceneNameToLoad);
 		}
 
-		IEnumerator Loading(string name)
-		{
-			yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
+        IEnumerator LoadSceneByIndex(int index)
+        {
+            yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
 
-			if (!name.Equals("Quit"))
-			{
-				SceneManager.LoadScene(name);
-			}
-			else
-			{
-				#if UNITY_EDITOR
-				UnityEditor.EditorApplication.isPlaying = false;
-				#else
+            SceneManager.LoadScene(index);
+        }
+
+        IEnumerator Loading(string name)
+        {
+            yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
+
+            if(!name.Equals("Quit"))
+            {
+                SceneManager.LoadScene(name);
+            }
+            else
+            {
+#if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+#else
 				Application.Quit();
-				#endif
-			}
-		}
+#endif
+            }
+        }
 
 		public void Quit()
 		{
