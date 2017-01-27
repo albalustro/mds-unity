@@ -3,6 +3,7 @@ using System.Collections;
 using MDS.Core.Interfaces;
 using System;
 using FullInspector;
+using UnityEngine.UI;
 
 namespace MDS.Actions{
 
@@ -24,7 +25,10 @@ namespace MDS.Actions{
 				m_obj = MemorizeMe.MemorizedGameObject;
 			} 
 
-			m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
+			if(m_obj.GetComponent<SpriteRenderer> () != null)
+				m_obj.GetComponent<SpriteRenderer> ().sprite = m_newSprite;
+			else if(m_obj.GetComponent<Image> () != null)
+				m_obj.GetComponent<Image> ().sprite = m_newSprite;
 
 			Collider2D col = m_obj.GetComponent<Collider2D> ();
 			if (col != null) {
