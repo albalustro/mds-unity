@@ -33,6 +33,7 @@ public class RoomController : MDSBehaviour {
 
 	void Start()
 	{
+		_charSelectionMask.SetActive (true);
 		currentGameIndex = SceneManager.GetActiveScene().name.Substring(1, 1);
 		AudioController.Instance.PlayTheme (_theme);
 	}
@@ -43,19 +44,23 @@ public class RoomController : MDSBehaviour {
 		switch (scene)
 		{
 		case 1:
-			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			_charSelectionMask.SetActive (false);
+			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W1EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 2:
-			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			_charSelectionMask.SetActive (false);
+			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W2EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 3:
-			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			_charSelectionMask.SetActive (false);
+			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W3EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 4:
-			Log ("Carregando G" + currentGameIndex + "W1EpisodeMap");
+			_charSelectionMask.SetActive (false);
+			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W4EpisodeMap", LoadSceneMode.Single);
 			break;
 		default:

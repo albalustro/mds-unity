@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.Audio;
 
 [RequireComponent(typeof(AudioListener))]
@@ -72,7 +73,7 @@ public class AudioController : Singleton<AudioController>
 		_ThemeSource.volume = _ThemeVolume;
 	}
 
-	public bool ThemeIsOn
+	public bool ThemeOn
 	{
 		get
 		{
@@ -86,21 +87,7 @@ public class AudioController : Singleton<AudioController>
 		}
 	}
 
-	public bool VoceOverIsOn
-	{
-		get
-		{
-			return _VoiceOverStatus;
-		}
-
-		set
-		{
-			_VoiceOverStatus = value;
-			_VoiceOverSource.mute = !_VoiceOverStatus;
-		}
-	}
-
-	public bool SoundFXIsOn
+	public bool SoundFXOn
 	{
 		get
 		{
@@ -114,20 +101,25 @@ public class AudioController : Singleton<AudioController>
 		}
 	}
 
-	public void StopAllSounds()
+	public void Mute()
 	{
-		_SoundFXSource = gameObject.AddComponent<AudioSource>();
-		_VoiceOverSource = gameObject.AddComponent<AudioSource>();
-		_ThemeSource = gameObject.AddComponent<AudioSource>();
-
 		_SoundFXSource.Stop();
 		_SoundFXSource.clip = null;
 
 		_ThemeSource.Stop ();
-		_ThemeSource.clip = null;
-
-		_VoiceOverSource.Stop ();
-		_VoiceOverSource.clip = null;
 	}
+
+	public void UnMute()
+	{
+		ThemeOn = true;
+		SoundFXOn = true;
+		_ThemeSource.Play ();
+	}
+
+    internal void StopVoiceOver()
+    {
+        _VoiceOverSource.Stop();
+        _VoiceOverSource.clip = null;
+    }
 }
 
