@@ -705,6 +705,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1692980820}
     m_Modifications:
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -754,7 +759,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013409963228, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_Name
-      value: Agua - Validatable DropGroupArea
+      value: Comida
       objectReference: {fileID: 0}
     - target: {fileID: 61000012786014370, guid: 625ad63284e045d4cb7969aee276fd8c,
         type: 2}
@@ -775,6 +780,16 @@ Prefab:
         type: 2}
       propertyPath: m_Offset.y
       value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[0]
+      value: Sol
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[1]
+      value: Agua
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
@@ -1298,6 +1313,8 @@ MonoBehaviour:
   - {fileID: 722702457}
   - {fileID: 2118947746}
   - {fileID: 1510489413}
+  - {fileID: 682340730}
+  - {fileID: 390285321}
   _values:
   - _keys: []
     _values: []
@@ -1383,6 +1400,12 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1510489413}
+  - _keys: []
+    _values: []
+    _target: {fileID: 682340730}
+  - _keys: []
+    _values: []
+    _target: {fileID: 390285321}
 --- !u!114 &597287007
 MonoBehaviour:
   m_ObjectHideFlags: 1
@@ -1423,6 +1446,8 @@ MonoBehaviour:
   - {fileID: 722702457}
   - {fileID: 2118947746}
   - {fileID: 1510489413}
+  - {fileID: 682340730}
+  - {fileID: 390285321}
   _values:
   - _keys: []
     _values: []
@@ -1454,35 +1479,41 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1429862656}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._timeToChangeState.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1929403486}
-  - _keys:
-    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._timeToChangeState.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 1849266706}
-  - _keys:
-    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._timeToChangeState.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
-    _target: {fileID: 1692980821}
   - _keys: []
     _values: []
+    _target: {fileID: 1849266706}
+  - _keys: []
+    _values: []
+    _target: {fileID: 1692980821}
+  - _keys:
+    - DefaultBehaviorEditor._fadeAndFreezeOnDrop.EditProperty
+    - DefaultBehaviorEditor._animationTime.EditProperty
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1580616014}
   - _keys: []
     _values: []
     _target: {fileID: 1538415205}
+  - _keys: []
+    _values: []
+    _target: {fileID: 708816035}
   - _keys:
     - DefaultBehaviorEditor._isGeneric.EditProperty
     _values:
     - _showDropdown: 0
       _serializedIsActive: 1
-    _target: {fileID: 708816035}
-  - _keys: []
-    _values: []
     _target: {fileID: 2110720466}
   - _keys: []
     _values: []
@@ -1490,11 +1521,8 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1468325644}
-  - _keys:
-    - DefaultBehaviorEditor.changeParent.EditProperty
-    _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+  - _keys: []
+    _values: []
     _target: {fileID: 1268559357}
   - _keys: []
     _values: []
@@ -1520,6 +1548,45 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1510489413}
+  - _keys:
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._timeToChangeState.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 682340730}
+  - _keys:
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.0.NormalizedProbability.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.0.MinPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.0.MaxPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.1.NormalizedProbability.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.1.MinPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.1.MaxPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.2.NormalizedProbability.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.2.MinPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.distribution.EditProperty.2.MaxPercent.EditProperty
+    - DefaultBehaviorEditor._transitions.EditProperty.0.AbstractTypeEditor._rndStates.EditProperty.isNormalized.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    - _showDropdown: 0
+      _serializedIsActive: 1
+    _target: {fileID: 390285321}
 --- !u!4 &597287008
 Transform:
   m_ObjectHideFlags: 1
@@ -1633,6 +1700,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 2110720465}
     m_Modifications:
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1667,8 +1739,20 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
-      value: Agua - DropGroupSlot
+      value: Comida - DropGroupSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: '[{"m_callFunctionOnGameObject":{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+        UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"UnityEngine.Events.UnityEvent,
+        UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"},"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"CallBehaviourAction"}]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1510489413}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
   m_IsPrefabParent: 0
@@ -2382,6 +2466,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 708816034}
     m_Modifications:
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -2418,6 +2507,18 @@ Prefab:
       propertyPath: m_Name
       value: Agua - DropGroupSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: '[{"m_callFunctionOnGameObject":{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+        UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"UnityEngine.Events.UnityEvent,
+        UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"},"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"CallBehaviourAction"}]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1510489413}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
   m_IsPrefabParent: 0
@@ -4356,6 +4457,16 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1580616013}
     m_Modifications:
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _acceptableLabels.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.size
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4000012121578430, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4392,6 +4503,23 @@ Prefab:
       propertyPath: m_Name
       value: Sol - DropGroupSlot
       objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: '[{"m_callFunctionOnGameObject":{"m_PersistentCalls":{"m_Calls":[{"m_Target":0,"m_MethodName":"IncrementStep","m_Mode":"Void","m_Arguments":{"m_ObjectArgument":null,"m_ObjectArgumentAssemblyTypeName":"UnityEngine.Object,
+        UnityEngine","m_IntArgument":0,"m_FloatArgument":0.0,"m_StringArgument":"","m_BoolArgument":false},"m_CallState":"RuntimeOnly"}]},"m_TypeName":"UnityEngine.Events.UnityEvent,
+        UnityEngine, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"},"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"CallBehaviourAction"}]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _acceptableLabels.Array.data[0]
+      value: Sol
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _objectReferences.Array.data[0]
+      value: 
+      objectReference: {fileID: 1510489413}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
   m_IsPrefabParent: 0
@@ -4413,6 +4541,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1849266708}
     m_Modifications:
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -4462,7 +4595,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013409963228, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_Name
-      value: Agua - Validatable DropGroupArea
+      value: Agua
       objectReference: {fileID: 0}
     - target: {fileID: 61000012786014370, guid: 625ad63284e045d4cb7969aee276fd8c,
         type: 2}
@@ -4483,6 +4616,16 @@ Prefab:
         type: 2}
       propertyPath: m_Offset.y
       value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[0]
+      value: Sol
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[1]
+      value: Comida
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
@@ -4611,6 +4754,10 @@ Prefab:
         type: 2}
       propertyPath: _serializedStateValues.Array.data[0]
       value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 4452136066276116, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
+      propertyPath: m_LocalPosition.y
+      value: 3.699
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a9dca2709aeed084abe192d6da53bfba, type: 2}
@@ -5396,6 +5543,11 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 1929403488}
     m_Modifications:
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.size
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 4000013634438892, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -5445,7 +5597,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 1000013409963228, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
       propertyPath: m_Name
-      value: Sol -Validatable DropGroupArea
+      value: Sol
       objectReference: {fileID: 0}
     - target: {fileID: 61000012786014370, guid: 625ad63284e045d4cb7969aee276fd8c,
         type: 2}
@@ -5466,6 +5618,16 @@ Prefab:
         type: 2}
       propertyPath: m_Offset.y
       value: -0.32
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[0]
+      value: Agua
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _invalidLabels.Array.data[1]
+      value: Comida
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
@@ -6041,7 +6203,7 @@ Prefab:
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
       propertyPath: _serializedStateValues.Array.data[1]
-      value: '{"onStartActions":[{"slugs":["intro"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+      value: '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
       objectReference: {fileID: 0}
     - target: {fileID: 114000012919354998, guid: 1245a1f2c53fd884ca6a1849b95bc3e9,
         type: 2}
