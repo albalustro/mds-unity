@@ -23,6 +23,8 @@ namespace MDS.Core.SceneManagement
         private AssetBundle _assetbundle;
         private string _goAfterChallengeSceneName;
 
+		private FadeTransition _FadeTransition;
+
         protected override void Awake()
         {
             base.Awake();
@@ -33,7 +35,39 @@ namespace MDS.Core.SceneManagement
                 DontDestroyOnLoad(gameObject);
                 gameObject.name = "__ SCENE LOADER __";
             }
+
+			_FadeTransition = FadeTransition.Instance;
         }
+
+
+		public void LoadScene(string sceneNameToLoad)
+		{
+			StartCoroutine("Loading", sceneNameToLoad);
+		}
+
+		IEnumerator Loading(string name)
+		{
+			yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
+
+			if (!name.Equals("Quit"))
+			{
+				SceneManager.LoadScene(name);
+			}
+			else
+			{
+				#if UNITY_EDITOR
+				UnityEditor.EditorApplication.isPlaying = false;
+				#else
+				Application.Quit();
+				#endif
+			}
+		}
+
+		public void Quit()
+		{
+			StartCoroutine("Loading", "Quit");
+		}
+
 
         public void LoadChallenge(int index)
         {
@@ -70,20 +104,28 @@ namespace MDS.Core.SceneManagement
 			Scene scene = SceneManager.GetActiveScene ();
 			int gameIndex = scene.GetGameIndex();
 			int worldIndex = scene.GetWorldIndex ();
-			SceneManager.LoadScene ("G" + gameIndex + "W" + worldIndex + "E" + episodeIndex, LoadSceneMode.Single);
+			LoadScene ("G" + gameIndex + "W" + worldIndex + "E" + episodeIndex);
 		}
 
 		public void LoadRoomScene()
 		{
 			Scene scene = SceneManager.GetActiveScene ();
 			int gameIndex = scene.GetGameIndex();
-			SceneManager.LoadScene ("G" + gameIndex + "Room", LoadSceneMode.Single);
+			LoadScene ("G" + gameIndex + "Room");
+		}
+
+		public void LoadMapScene()
+		{
+			Scene scene = SceneManager.GetActiveScene ();
+			int gameIndex = scene.GetGameIndex();
+			int worldIndex = scene.GetWorldIndex ();
+			LoadScene ("G" + gameIndex + "W" + worldIndex + "EpisodeMap");
 		}
 
         public void GoBackAfterChallenge()
         {
             UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
-            SceneManager.LoadScene(_goAfterChallengeSceneName);
+            LoadScene(_goAfterChallengeSceneName);
         }
 
         private void LoadChallengeWebGL(int index, Scene curScene)
@@ -95,7 +137,7 @@ namespace MDS.Core.SceneManagement
             if(_assetbundle != null && _assetbundle.GetAllScenePaths().Any(path =>
                                                     path.Contains(challengeSceneName)))
             {
-                SceneManager.LoadScene(challengeSceneName);
+                LoadScene(challengeSceneName);
             }
             else
             {
@@ -106,7 +148,7 @@ namespace MDS.Core.SceneManagement
                     {
                         if(error == false)
                         {
-                            SceneManager.LoadScene(challengeSceneName);
+                            LoadScene(challengeSceneName);
                             _loadingObj.SetActive(false);
                         }
                         else
@@ -125,7 +167,7 @@ namespace MDS.Core.SceneManagement
 //            _loadingObj.SetActive(true);
 //            _loadingObj.transform.position = Camera.main.transform.position;
             _goAfterChallengeSceneName = SceneManager.GetActiveScene().name;
-            SceneManager.LoadScene(challengeSceneName);
+            LoadScene(challengeSceneName);
 //            _loadingObj.SetActive(false);
 
 

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using MDS.Utilities;
 
 public class RoomController : MDSBehaviour {
 
@@ -34,33 +35,31 @@ public class RoomController : MDSBehaviour {
 	void Start()
 	{
 		_charSelectionMask.SetActive (true);
+		Scene scene = SceneManager.GetActiveScene ();
+		if(scene.IsRoom())
+			nextButton.SetActive (true);
 		currentGameIndex = SceneManager.GetActiveScene().name.Substring(1, 1);
 		AudioController.Instance.PlayTheme (_theme);
 	}
 		
 	public void ChangeScene(int scene)
 	{
+		nextButton.SetActive (false);
+		backButton.SetActive (false);
+		_charSelectionMask.SetActive (false);
 		_worldSelectionMask.SetActive (false);
 		switch (scene)
 		{
 		case 1:
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W1EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 2:
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W2EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 3:
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W3EpisodeMap", LoadSceneMode.Single);
 			break;
 		case 4:
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (false);
 			SceneManager.LoadScene ("G" + currentGameIndex + "W4EpisodeMap", LoadSceneMode.Single);
 			break;
 		default:
