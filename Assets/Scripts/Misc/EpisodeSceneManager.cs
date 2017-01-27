@@ -145,7 +145,7 @@ public class EpisodeSceneManager : MDSBehaviour {
         poly2DTransform.position = newPolyNav2DPosition;
     }
 
-    private void Start()
+	private IEnumerator Start()
     {
         // iniciado com 5 apenas para a sequencia do switch ficar 'bonitinha'
         // se nenhum dos challenges estiver com status available é de se supor que
@@ -160,6 +160,10 @@ public class EpisodeSceneManager : MDSBehaviour {
                 break;
             }
         }
+
+		yield return null;
+
+		SetCameraStartPosition ();
 
         switch(currentAvailableChallengeIndex)
         {
@@ -241,6 +245,18 @@ public class EpisodeSceneManager : MDSBehaviour {
 
 
     }
+
+	private void SetCameraStartPosition()
+	{
+		Vector3 newPos = _target.position;
+		float x = Mathf.Clamp(_player.position.x, leftX, rightX);
+		float y = Mathf.Clamp(_player.position.y, bottomY, topY);
+
+		newPos.x = x;
+		newPos.y = y;
+		_target.position = newPos;
+
+	}
 
 	public void SetCameraPosition(Vector3 position)
 	{

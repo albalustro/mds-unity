@@ -64,7 +64,7 @@ public class ChallengeLinkInEpisode : MDSBehaviour {
 
     }
 
-    private void Start()
+	private void Start()
     {
         Refresh();
 
@@ -72,6 +72,7 @@ public class ChallengeLinkInEpisode : MDSBehaviour {
         {
             var p = GameObject.FindGameObjectWithTag("Player");
             var m = GameObject.FindGameObjectWithTag("Mediator");
+
 
             p.transform.position = _startChallengePlayerPosition.position;
             m.transform.position = _startChallengeMediatorPosition.position;

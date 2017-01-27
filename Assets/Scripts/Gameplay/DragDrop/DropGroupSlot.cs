@@ -30,6 +30,8 @@ namespace MDS.Gameplay.DragDrop
 
 		private Draggable _draggableReference;
 
+		[SerializeField] private bool _removeDraggableOnDisable = false;
+
 		[HideInInspector]
 		public Draggable draggableReference
 		{
@@ -142,6 +144,11 @@ namespace MDS.Gameplay.DragDrop
 
         private void OnDisable()
         {
+
+			if (!_removeDraggableOnDisable)
+				return;
+
+
             if (draggableReference!=null)
             {
                 DropGroupSlot dummy=null;
