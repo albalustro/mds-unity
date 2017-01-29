@@ -25,6 +25,10 @@ namespace MDS.Core.ProcessActivator
         [SerializeField, InspectorTooltip("GameObject (child) que será acionado quando estiver habilitado. Se mais de um efeito for necessário, coloque todos como filhos de um GO comum e use-o nessa propriedade")]
         private GameObject enabledEffectGO;
 
+        [SerializeField]
+        private GameObject _particlesPrefab;
+        private GameObject _particlesInstance;
+
         private IValidator _validador;
 
         protected override void Awake()
@@ -33,6 +37,10 @@ namespace MDS.Core.ProcessActivator
            
             _spriteRenderer = GetComponent<SpriteRenderer>();
             _collider = GetComponent<BoxCollider2D>();
+
+            _particlesInstance = Instantiate(_particlesPrefab, transform.position, Quaternion.identity, transform);
+            _particlesInstance.GetComponent<ParticleSystemRenderer>().sortingOrder = GetComponent<Renderer>().sortingOrder + 1;
+            _particlesInstance.SetActive(false);
         }
 
         void Start()
@@ -49,6 +57,10 @@ namespace MDS.Core.ProcessActivator
 
             if(enabledEffectGO != null)
                 enabledEffectGO.SetActive(false);
+
+            if(_particlesInstance != null)
+                _particlesInstance.SetActive(false);
+
         }
 
         public override void Enable()
@@ -60,6 +72,9 @@ namespace MDS.Core.ProcessActivator
 
             if(enabledEffectGO != null)
                 enabledEffectGO.SetActive(true);
+
+            if(_particlesInstance != null)
+                _particlesInstance.SetActive(true);
         }
 
         public void OnMouseUp()

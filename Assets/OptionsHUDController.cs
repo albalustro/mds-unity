@@ -58,7 +58,7 @@ public class OptionsHUDController : MonoBehaviour {
 
 	public void QuitGame()
 	{
-		SceneLoader.Instance.LoadScene ("Quit");
+        SceneLoader.Instance.Quit();
 	}
 
 	//Tela cheia (WebGL e Desktop)

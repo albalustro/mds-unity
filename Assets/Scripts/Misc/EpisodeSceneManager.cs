@@ -129,6 +129,8 @@ public class EpisodeSceneManager : MDSBehaviour {
         _titleGO.SetActive(false);
 
 
+        // Para o context existir, deve estar voltando de um desafio.
+        // Caso não exista, acabou de entrar no episodio e precisa criar o contexto.
         _context = GameObject.FindObjectOfType<EpisodeContext>();
         if (_context == null)
         {

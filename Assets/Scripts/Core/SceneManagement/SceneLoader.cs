@@ -10,158 +10,243 @@ using UnityEngine.SceneManagement;
 
 namespace MDS.Core.SceneManagement
 {
+    /// <summary>
+    /// Esse singleton é responsavel por carregar as cenas pertinentes, de acordo com
+    /// o metodo chamado, os parametros passados e com o contexto (cena a partir de onde
+    /// o metodo do SceneLoader foi chamado)
+    /// Todos os metodos publicos são contextualizados, (LoadLogin, LoadRoom, LoadChallenge, etc)
+    /// </summary>
     public class SceneLoader : Singleton<SceneLoader>
     {
-        public string remoteUrlBase = "https://s3-sa-east-1.amazonaws.com/jogosxmile/newmds/";
-        public string localUrlBase = "file://C:\\XMILE\\Projetos\\MdS Unity\\Misterio dos Sonhos\\Build\\AssetBundles\\";
-
-        public bool useLocal = true;
-        public bool byPassAssetbundles = true;
-
-        [SerializeField] private GameObject _loadingObj;
+        [FullInspector.InspectorComment("Atribua a configuração pertinente: produção / desenvolvimento")]
+        ScriptableObjects.ConnectionConfig _connectionConfig;
 
         private AssetBundle _assetbundle;
-        private string _goAfterChallengeSceneName;
+        private bool _backToMap;
+        private int _backToEpisodeIndex;
 
-		private FadeTransition _FadeTransition;
+        private FadeTransition _fadeTransitionInstance;
+
+#if UNITY_EDITOR
+        public bool byPassAssetbundles = true;
+#endif
+
+        #region Unity Methods
 
         protected override void Awake()
         {
             base.Awake();
+
             if(SceneLoader.Instance != this)
                 Destroy(gameObject);
             else
-            {
                 DontDestroyOnLoad(gameObject);
-                gameObject.name = "__ SCENE LOADER __";
-            }
 
-			_FadeTransition = FadeTransition.Instance;
+            _fadeTransitionInstance = FadeTransition.Instance;
         }
 
+        #endregion
+
+        #region PUBLIC LOAD SCENES METHODS
+
+        /// <summary>
+        /// Esse é o metodo publico chamado após a cena de splash
+        /// (pode tb ser usado para voltar à cena de login ao clicar no computador das cenas de quarto)
+        /// </summary>
         public void LoadLogin()
         {
+            // Estamos assumindo que, em qualquer build, a cena de login sera a segunda, sempre.
             StartCoroutine(LoadSceneByIndex(1));
         }
 
-
-        public void LoadScene(string sceneNameToLoad)
-		{
-			StartCoroutine("Loading", sceneNameToLoad);
-		}
-
-        IEnumerator LoadSceneByIndex(int index)
-        {
-            yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
-
-            SceneManager.LoadScene(index);
-        }
-
-        IEnumerator Loading(string name)
-        {
-            yield return new WaitForSeconds(_FadeTransition.BeginFade(FadeDirection.Out));
-
-            if(!name.Equals("Quit"))
-            {
-                SceneManager.LoadScene(name);
-            }
-            else
-            {
-#if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-#else
-				Application.Quit();
-#endif
-            }
-        }
-
-		public void Quit()
-		{
-			StartCoroutine("Loading", "Quit");
-		}
-
-
-        public void LoadChallenge(int index)
+        /// <summary>
+        /// Metodo publico usado para carregar e abrir uma cena de desafio
+        /// Ao finalizar a cena, o SceneLoader se encarregará de voltar para a cena correta (mapa ou episodio)
+        ///     caso use o metodo GoBackAfterChallenge();
+        /// </summary>
+        /// <param name="challengeIndex">Indice do desafio a ser carregado. Valores válidos entre 1 e 5</param>
+        public void LoadChallenge(int challengeIndex, int episodeIndex)
         {
             Scene curScene = SceneManager.GetActiveScene();
+            _backToMap = curScene.IsMap();
+            _backToEpisodeIndex = episodeIndex;
 
-            _goAfterChallengeSceneName = curScene.name;
+            // iniciando a variavel que sera usada para verificar o conceito 
+            // adquirido no desafio que esta sendo aberto nesse momento
+            Challenge.ChallengeConcept = ConceptTypes.CONCEPT_GREEN;
 
-            if(curScene.IsMap())
-            {
+            int game = curScene.GetGameIndex();
+            int world = curScene.GetWorldIndex();
 
-            }
-            else if(curScene.IsEpisode())
-            {
-                
-                // iniciando a variavel que sera usada para verificar o conceito 
-                // adquirido no desafio que esta sendo aberto nesse momento
-                Challenge.ChallengeConcept = ConceptTypes.CONCEPT_GREEN;
+            string challengeSceneName = string.Format("G{0}W{1}E{2}C{3}", 
+                                game, world, episodeIndex, challengeIndex);
 
 #if UNITY_WEBGL
 #if UNITY_EDITOR
-                if(byPassAssetbundles)
-                    LoadChallengeWebGLSim(index, curScene);
-                else
+            if(byPassAssetbundles)
+                LoadSceneWebGLSim(challengeSceneName);
+            else
 #endif
-                    LoadChallengeWebGL(index, curScene);
+                LoadSceneWebGL(challengeSceneName);
 #else
-                LoadChallengeLocal(index, curScene);
+                LoadScene(challengeSceneName);
 #endif
-            }
         }
 
-		public void LoadEpisodeScene(int episodeIndex)
-		{
-			Scene scene = SceneManager.GetActiveScene ();
-			int gameIndex = scene.GetGameIndex();
-			int worldIndex = scene.GetWorldIndex ();
-			LoadScene ("G" + gameIndex + "W" + worldIndex + "E" + episodeIndex);
-		}
+        /// <summary>
+        /// Metodo que carrega uma cena de episodio a partir de seu indice (entre 1 e 8)
+        /// ** SOMENTE FUNCIONA A PARTIR DO MAPA **
+        /// </summary>
+        /// <param name="episodeIndex">Indice do episodio que deve ser carregado</param>
+        public void LoadEpisodeScene(int episodeIndex)
+        {
+            Scene scene = SceneManager.GetActiveScene();
 
-		public void LoadRoomScene()
-		{
-			Scene scene = SceneManager.GetActiveScene ();
-			int gameIndex = scene.GetGameIndex();
-			LoadScene ("G" + gameIndex + "Room");
-		}
+            //if(scene.IsMap() == false)
+            //{
+            //    LogError("Tentativa de carregar uma cena de episodio sem que estivesse no mapa.");
+            //    return;
+            //}
 
-		public void LoadMapScene()
-		{
-			Scene scene = SceneManager.GetActiveScene ();
-			int gameIndex = scene.GetGameIndex();
-			int worldIndex = scene.GetWorldIndex ();
-			LoadScene ("G" + gameIndex + "W" + worldIndex + "EpisodeMap");
-		}
+            int game = scene.GetGameIndex();
+            int world = scene.GetWorldIndex();
 
+            string challengeSceneName = string.Format("G{0}W{1}E{2}",
+                                                game, world, episodeIndex);
+
+#if UNITY_WEBGL
+#if UNITY_EDITOR
+            if(byPassAssetbundles)
+                LoadSceneWebGLSim(challengeSceneName);
+            else
+#endif
+                LoadSceneWebGL(challengeSceneName);
+#else
+                LoadScene(challengeSceneName);
+#endif
+
+        }
+
+        /// <summary>
+        /// Metodo que carrega a cena de escolha de avatar (quarto)
+        /// </summary>
+        public void LoadRoomScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            int gameIndex = scene.GetGameIndex();
+            LoadScene("G" + gameIndex + "Room");
+        }
+
+        /// <summary>
+        /// Metodo para carregar o mapa relacionado com a cena atual.
+        /// ** SO FUNCIONA CASO A CENA ATUAL SEJA UM EPISODE OU UM CHALLENGE **
+        /// </summary>
+        public void LoadMapScene()
+        {
+            Scene scene = SceneManager.GetActiveScene();
+            int gameIndex = scene.GetGameIndex();
+            int worldIndex = scene.GetWorldIndex();
+            LoadScene("G" + gameIndex + "W" + worldIndex + "EpisodeMap");
+        }
+
+        /// <summary>
+        /// Metodo que cuidará de carregar MAP ou EPISODE após *concluir* um desafio.
+        /// Neste método o Conceito obtido no challenge já é atualizao no user profile
+        /// </summary>
         public void GoBackAfterChallenge()
         {
-            UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
-            LoadScene(_goAfterChallengeSceneName);
+            Scene curScene = SceneManager.GetActiveScene();
+            if(curScene.IsChallenge())
+                UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
+            else
+                LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
+
+            if(_backToMap)
+                LoadMapScene();
+            else
+                LoadEpisodeScene(_backToEpisodeIndex);
         }
 
-        private void LoadChallengeWebGL(int index, Scene curScene)
-        {
+        #endregion
 
-            string challengeSceneName = curScene.name + "C" + index.ToString();
-            string assetBundleName = curScene.name.ToLower();
+        #region Quit Game (nao deveria estar em outro lugar??)
+
+        public void Quit()
+        {
+            StartCoroutine(InternalQuit());
+        }
+
+        private IEnumerator InternalQuit()
+        {
+            yield return new WaitForSeconds(_fadeTransitionInstance.BeginFade(FadeDirection.Out));
+
+#if UNITY_EDITOR
+            UnityEditor.EditorApplication.isPlaying = false;
+#else
+			Application.Quit();
+#endif
+        }
+
+        #endregion
+
+        #region PRIVATE (UNDER THE HOOD) LOAD SCENES METHODS
+
+        /// <summary>
+        /// Esse método interno é usado para carregar qualquer cena (exceto a de login que é carregada pelo buildIndex)
+        /// </summary>
+        /// <param name="sceneNameToLoad">Nome da cena a ser carregada</param>
+        void LoadScene(string sceneNameToLoad)
+        {
+            StartCoroutine(Loading(sceneNameToLoad));
+        }
+
+        /// <summary>
+        /// Esse metodo carrega a cena pelo indice no build settings
+        /// Antes da cena ser efetivamente carregada, aguarda o fade terminar
+        /// </summary>
+        IEnumerator LoadSceneByIndex(int index)
+        {
+            yield return new WaitForSeconds(_fadeTransitionInstance.BeginFade(FadeDirection.Out));
+            SceneManager.LoadScene(index);
+        }
+
+        /// <summary>
+        /// Esse é o metodo que, efetivamente efetua o fade out e carrega a proxima cena
+        /// </summary>
+        /// <param name="name">Nome da cena a ser carregada</param>
+        IEnumerator Loading(string name)
+        {
+            yield return new WaitForSeconds(_fadeTransitionInstance.BeginFade(FadeDirection.Out));
+            SceneManager.LoadScene(name);
+        }
+
+
+        #region Load WEBGL
+
+        /// <summary>
+        /// Esse metodo so devera ser chamado para carregar EPISODIO E CHALLENGE
+        /// Ambos estao dentro do mesmo assetbundle cujo nome é o mesmo nome do
+        ///    episodio porem com todas as letras minuculas
+        /// </summary>
+        void LoadSceneWebGL(string sceneName)
+        {
+            string assetBundleName = sceneName.Substring(0, 6).ToLower();
 
             if(_assetbundle != null && _assetbundle.GetAllScenePaths().Any(path =>
-                                                    path.Contains(challengeSceneName)))
+                                                    path.Contains(sceneName)))
             {
-                LoadScene(challengeSceneName);
+                Log("Carregando " + sceneName + " do assetbundle em memoria");
+                LoadScene(sceneName);
             }
             else
             {
-                _loadingObj.SetActive(true);
-                _loadingObj.transform.position = Camera.main.transform.position;
+                Log("Cena " + sceneName + " não esta carregada no assetbundle, iniciando download");
                 StartCoroutine(Download(assetBundleName,
                     (error) =>
                     {
                         if(error == false)
                         {
-                            LoadScene(challengeSceneName);
-                            _loadingObj.SetActive(false);
+                            LoadScene(sceneName);
                         }
                         else
                         {
@@ -171,31 +256,24 @@ namespace MDS.Core.SceneManagement
 
             }
         }
+       
+        #endregion
 
-        private void LoadChallengeLocal(int index, Scene curScene)
+        #region Load LOCAL
+
+        private void LoadEpisodeLocal(int index)
         {
-            string challengeSceneName = curScene.name + "C" + index.ToString();
-
-//            _loadingObj.SetActive(true);
-//            _loadingObj.transform.position = Camera.main.transform.position;
-            _goAfterChallengeSceneName = SceneManager.GetActiveScene().name;
-            LoadScene(challengeSceneName);
-//            _loadingObj.SetActive(false);
-
 
         }
 
+        #endregion
 
-
+        #region Load WEBGL simulation (in editor)
 #if UNITY_EDITOR
-
-        private void LoadChallengeWebGLSim(int index, Scene curScene)
+        private void LoadSceneWebGLSim(string sceneName)
         {
-
-            string challengeSceneName = curScene.name + "C" + index.ToString();
-            string assetBundleName = curScene.name.ToLower();
-
-            LoadSceneInPlayMode(challengeSceneName, assetBundleName);
+            string assetBundleName = sceneName.Substring(0,6).ToLower();
+            LoadSceneInPlayMode(sceneName, assetBundleName);
         }
 
         /// <summary>
@@ -217,6 +295,11 @@ namespace MDS.Core.SceneManagement
 
         }
 #endif
+        #endregion
+
+        #endregion
+
+        #region ASSETBUNDLE
 
         private IEnumerator Download(string assetBundleName, Action<bool> callback)
         {
@@ -224,7 +307,7 @@ namespace MDS.Core.SceneManagement
             while(!Caching.ready)
                 yield return null;
 
-            string urlBase = useLocal ? localUrlBase : remoteUrlBase;
+            string urlBase = _connectionConfig.assetbundlesURL;
 
             string plataform = "WebGL\\";
 
@@ -234,7 +317,7 @@ namespace MDS.Core.SceneManagement
 
             string url = urlBase + plataform + assetBundleName;
 
-            Log("Baixando " + url);
+            Log("Baixando assetbundle em: " + url);
 
             using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url))
             {
@@ -261,5 +344,6 @@ namespace MDS.Core.SceneManagement
 
         }
 
+        #endregion
     }
 }

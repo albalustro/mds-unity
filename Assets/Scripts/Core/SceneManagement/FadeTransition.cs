@@ -18,7 +18,17 @@ namespace MDS.Core.SceneManagement
 		private float m_CurrentAlphaColor = 1.0f;
 		private float m_StartTime;
 
-		void Start()
+        protected override void Awake()
+        {
+            base.Awake();
+
+            if(FadeTransition.Instance != this)
+                Destroy(gameObject);
+            else
+                DontDestroyOnLoad(gameObject);
+        }
+
+        void Start()
 		{
 			m_fadeOutTexture = new Texture2D(2, 2);
 

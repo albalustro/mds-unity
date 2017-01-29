@@ -24,15 +24,20 @@ namespace MDS.Core.SceneManagement
         [SerializeField]
         private ChallengeStatusInEpisode[] _challengeStatus = new ChallengeStatusInEpisode[5];
 
+#if UNITY_EDITOR
         [SerializeField]
         private bool _debugMode = false;
+#endif
 
         protected override void Awake()
         {
             base.Awake();
             DontDestroyOnLoad(gameObject);
 
+#if UNITY_EDITOR
             if(_debugMode) return;
+#endif
+
             _challengeStatus[0] = ChallengeStatusInEpisode.Available;
             for(int i = 1; i < 5; i++)
             {

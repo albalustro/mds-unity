@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using FullInspector;
 using MDS.Core.SceneManagement;
+using MDS.Utilities;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -37,8 +38,7 @@ namespace MDS.Interactable
         {
             if(Vector2.Distance(_player.transform.position, _interationPosition) < 1f)
             {
-                //EpisodeSceneManager.LoadChallengeScene(_challengeSceneIndex);
-                SceneLoader.Instance.LoadChallenge(_challengeSceneIndex);
+                SceneLoader.Instance.LoadChallenge(_challengeSceneIndex, SceneManager.GetActiveScene().GetEpisodeIndex());
                 return;
             }
 

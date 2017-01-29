@@ -7,6 +7,9 @@ using UnityEngine.SceneManagement;
 using MDS.Utilities;
 using MDS.DialogueSystem;
 using System;
+using UnityEditor.SceneManagement;
+
+
 
 public class AddMenu : EditorWindow
 {
@@ -16,7 +19,7 @@ public class AddMenu : EditorWindow
     {
         Scene currScene = SceneManager.GetActiveScene();
 
-        if (currScene.IsChallenge()== false && currScene.IsEpisode()==false)
+        if(currScene.IsChallenge() == false && currScene.IsEpisode() == false)
         {
             EditorUtility.DisplayDialog("Erro", "Somente Challenge e Episode terão dialogos", "Blz.. entendi..");
             return;
@@ -33,13 +36,13 @@ public class AddMenu : EditorWindow
         foreach(var sound in soundList)
         {
             audioPath = "Assets/MDS" + game + "/Dialogue/World" + world + "/" + sound + ".mp3";
-            if (File.Exists(audioPath))
+            if(File.Exists(audioPath))
                 audioHolder.Add(sound, AssetDatabase.LoadAssetAtPath<AudioClip>(audioPath));
             else
                 Debug.LogError("Arquivo de audio não encontrado: " + audioPath);
         }
 
-       
+
     }
 
     private static List<string> GetSounds(Scene currScene)
@@ -59,16 +62,16 @@ public class AddMenu : EditorWindow
         {
             challenge = currScene.GetChallengeIndex().ToString();
         }
-            return list.dialogueList
-                                .Where(i => i.episode == episode && i.minigame == challenge)
-                                .Select(s => s.sound)
-                                .ToList();
+        return list.dialogueList
+                            .Where(i => i.episode == episode && i.minigame == challenge)
+                            .Select(s => s.sound)
+                            .ToList();
     }
 
     private static AudioClipHolder GetAudioHolder()
     {
         AudioClipHolder ret = GameObject.FindObjectOfType<AudioClipHolder>();
-        if (ret == null)
+        if(ret == null)
         {
             GameObject go = new GameObject("_AUDIO HOLDER_");
             ret = go.AddComponent<AudioClipHolder>();
@@ -92,7 +95,7 @@ public class AddMenu : EditorWindow
     public static void HorizontalSpacer()
     {
 
-        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t => t.position.x).ToArray() ;
+        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t => t.position.x).ToArray();
 
         Vector3 first = transform[0].localPosition;
         Vector3 last = transform[(transform.Length - 1)].localPosition;
@@ -110,25 +113,64 @@ public class AddMenu : EditorWindow
 
     }
 
-	[MenuItem("MDS/Align Selection/Vertical")]
-	public static void VerticalSpacer()
-	{
+    [MenuItem("MDS/Align Selection/Vertical")]
+    public static void VerticalSpacer()
+    {
 
-		Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t=>t.position.y).ToArray();
+        Transform[] transform = Selection.GetTransforms(SelectionMode.Unfiltered).OrderBy(t => t.position.y).ToArray();
 
-		Vector3 first = transform[0].localPosition;
-		Vector3 last = transform[(transform.Length - 1)].localPosition;
+        Vector3 first = transform[0].localPosition;
+        Vector3 last = transform[(transform.Length - 1)].localPosition;
 
-		int max = transform.Length - 1;
-		float step = (last.y - first.y) / max;
+        int max = transform.Length - 1;
+        float step = (last.y - first.y) / max;
 
-		for(int i = 0; i < max; i++)
-		{
-			Vector3 cur = transform[i].localPosition;
-			cur.y = first.y + i * step;
-			transform[i].localPosition = cur;
-		}
+        for(int i = 0; i < max; i++)
+        {
+            Vector3 cur = transform[i].localPosition;
+            cur.y = first.y + i * step;
+            transform[i].localPosition = cur;
+        }
 
 
-	}
+    }
+
+    
+    [MenuItem("MDS/Run _F5")]
+    public static void RunFromSplash()
+    {
+        string loadSceneName = EditorSceneManager.GetActiveScene().path;
+        PlayerPrefs.SetString("_loadSceneName", loadSceneName);
+        EditorSceneManager.SaveCurrentModifiedScenesIfUserWantsTo();
+        
+        EditorSceneManager.OpenScene("Assets/Common/Scenes/splash.unity");
+        EditorApplication.ExecuteMenuItem("Edit/Play");
+    }
+
+
+}
+
+[InitializeOnLoad]
+public static class SceneModeTracker
+{
+    
+
+    static SceneModeTracker()
+    {
+        EditorApplication.playmodeStateChanged += OnPlayModeStateChanged;
+    }
+
+    private static void OnPlayModeStateChanged()
+    {
+        if(!EditorApplication.isPlayingOrWillChangePlaymode &&
+             !EditorApplication.isPlaying)
+        {
+            string loadSceneName = PlayerPrefs.GetString("_loadSceneName", "");
+            if(!string.IsNullOrEmpty(loadSceneName))
+            {
+                EditorSceneManager.OpenScene(loadSceneName);
+                PlayerPrefs.DeleteKey("_loadSceneName");
+            }
+        }
+    }
 }

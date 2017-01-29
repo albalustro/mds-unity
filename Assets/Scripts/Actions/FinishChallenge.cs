@@ -12,7 +12,8 @@ namespace MDS.Actions
         {
             if(byPass) yield break;
             yield return base.Execute();
-            EpisodeContext.Instance.SetCurrentChallengeDone();
+            if (EpisodeContext.Instance!=null)
+                EpisodeContext.Instance.SetCurrentChallengeDone();
             SceneLoader.Instance.GoBackAfterChallenge();
         }
     }
