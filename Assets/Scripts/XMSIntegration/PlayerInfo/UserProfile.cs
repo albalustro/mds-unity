@@ -23,14 +23,15 @@ public class UserProfile : Singleton<UserProfile>
     private ConceptMap _conceptMap;
     public ConceptMap conceptMap { get { return _conceptMap; } }
 
+
     protected override void Awake()
     {
         base.Awake();
         if(UserProfile.Instance != this)
-            Destroy(gameObject.transform.root.gameObject);
+            Destroy(gameObject);
         else
         {
-            DontDestroyOnLoad(gameObject.transform.root);
+            DontDestroyOnLoad(gameObject);
 #if UNITY_EDITOR
             if(debugMode)
 				if (conceptMap == null) 

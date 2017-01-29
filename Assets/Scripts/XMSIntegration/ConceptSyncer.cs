@@ -8,6 +8,17 @@ public class ConceptSyncer : Singleton<ConceptSyncer>
     private ConnectionConfig _config;
     private Action<ConceptMap> sendConceptCallback;
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if(ConceptSyncer.Instance != this)
+            Destroy(gameObject);
+        else
+            DontDestroyOnLoad(gameObject);
+    }
+
+
     public void Initialize(ConnectionConfig config)
     {
         _config = config;

@@ -5,6 +5,16 @@ using Newtonsoft.Json;
 
 public class PersistenceManager : Singleton<PersistenceManager> {
 
+    protected override void Awake()
+    {
+        base.Awake();
+
+        if(PersistenceManager.Instance != this)
+            Destroy(gameObject);
+        else
+            DontDestroyOnLoad(gameObject);
+    }
+
     public LoginInfo LoadLocalUserProfile(string user, ref string pass)
 	{
         AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(user));

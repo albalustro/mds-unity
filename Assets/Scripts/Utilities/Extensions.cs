@@ -37,6 +37,11 @@ namespace MDS.Utilities
 			return scene.name.ToUpper().Contains("ROOM");
 		}
 
+        public static bool IsLogin(this Scene scene)
+        {
+            return scene.name.ToUpper().Contains("LOGIN");
+        }
+
         public static int GetGameIndex(this Scene scene)
         {
             return int.Parse(scene.name.Substring(1, 1));

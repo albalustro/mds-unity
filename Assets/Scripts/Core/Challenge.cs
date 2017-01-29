@@ -126,13 +126,11 @@ namespace MDS.Core
 
         #region Fields & Properties
 
-        // propriedade usada para rastrear o conceito obtido pelo jogador
+        // Propriedade usada para rastrear o conceito obtido pelo jogador
         // ao jogar um desafio.
-        // Deve ser iniciado com GREEN no inicio do desafio e, ao sair,
+        // É iniciado com GREEN (no SceneLoader), antes de abrir a cena do desafio e, ao sair,
         // será verificado o seu valor para atualizacao do mapa de conceitos 
-        // do PlayerInfo.
-        // Feito como variavel static pois a cena onde o valor sera verificado
-        // não existe Challenge. Devera ser feito no episodio ou no mapa
+        // do PlayerInfo. (tambémo no sceneLoader, no metodo GoBackAfterChallenge)
         public static ConceptTypes ChallengeConcept;
 
         public IValidator Validador;

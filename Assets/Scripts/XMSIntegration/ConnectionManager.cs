@@ -6,17 +6,25 @@ using MDS.ScriptableObjects;
 
 public class ConnectionManager : Singleton<ConnectionManager> 
 {
+    [SerializeField]
     private ConnectionConfig _config;
+
 	private Action<LoginInfo> doLoginCallback;
 	private Action<ConceptMap> sendConceptCallback;
 
-    public void Initialize(ConnectionConfig config)
+    protected override void Awake()
     {
-        _config = config;
+        base.Awake();
+
+        if(ConnectionManager.Instance != this)
+            Destroy(gameObject);
+        else
+            DontDestroyOnLoad(gameObject);
     }
 
-	#region Login
-	public void DoLogin(string user, string pass, Action<LoginInfo> callback)
+
+    #region Login
+    public void DoLogin(string user, string pass, Action<LoginInfo> callback)
 	{
 		doLoginCallback = callback;
 		WWWForm loginForm = new WWWForm();
