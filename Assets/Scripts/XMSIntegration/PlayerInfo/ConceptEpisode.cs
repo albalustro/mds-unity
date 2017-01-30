@@ -19,7 +19,7 @@ public class ConceptEpisode
 
 	public bool CheckChallengeComplete(int challengeIndex)
 	{
-		return challenges [challengeIndex].concept == ConceptTypes.CONCEPT_GREEN;
+		return challenges[challengeIndex].concept == ConceptTypes.CONCEPT_GREEN;
 	}
 
 	public bool CheckDirectAccessToChallenge(int challengeIndex)
