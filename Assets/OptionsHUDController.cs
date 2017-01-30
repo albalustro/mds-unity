@@ -34,6 +34,12 @@ public class OptionsHUDController : MonoBehaviour {
 //		#endif
 
 		Scene scene = SceneManager.GetActiveScene ();
+        if(scene.IsLogin())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
 		if (scene.IsRoom ())
 		{
 			_backBtn.SetActive (false);
