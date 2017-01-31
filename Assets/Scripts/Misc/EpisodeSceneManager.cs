@@ -217,12 +217,13 @@ public class EpisodeSceneManager : MDSBehaviour {
                 ExecuteActions(ExecuteAfterChallenge3Actions);
                 ExecuteActions(ExecuteAfterChallenge4Actions);
                 ExecuteActions(ComingFromChallenge5Actions);
+
                 break;
         }
 
         
     }
-
+    
     void Update()
     {
         if(StaticCamera) return;

@@ -29,6 +29,7 @@ namespace MDS.Core.SceneManagement
 
 #if UNITY_EDITOR
         public bool byPassAssetbundles = true;
+        public bool destroyDebugObjectsOnSceneLoad = false;
 #endif
 
         #region Unity Methods
@@ -43,6 +44,7 @@ namespace MDS.Core.SceneManagement
                 DontDestroyOnLoad(gameObject);
 
             _fadeTransitionInstance = FadeTransition.Instance;
+
         }
 
         #endregion
@@ -157,7 +159,8 @@ namespace MDS.Core.SceneManagement
         {
             Scene curScene = SceneManager.GetActiveScene();
             if(curScene.IsChallenge())
-                UserProfile.Instance.UpdateConcept(SceneManager.GetActiveScene(), Challenge.ChallengeConcept, DateTime.Now);
+                UserProfile.Instance.UpdateConcept(curScene, 
+                            Challenge.ChallengeConcept, DateTime.Now);
             else
                 LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
 
@@ -345,5 +348,8 @@ namespace MDS.Core.SceneManagement
         }
 
         #endregion
+
+
+        
     }
 }

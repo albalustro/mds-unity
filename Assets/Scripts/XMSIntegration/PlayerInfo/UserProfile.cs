@@ -11,6 +11,7 @@ public class UserProfile : Singleton<UserProfile>
 
 #if UNITY_EDITOR
     public bool debugMode = false;
+    public bool forceFirstAccessConceptMap = false;
 #endif
 
     public string login;
@@ -22,7 +23,6 @@ public class UserProfile : Singleton<UserProfile>
     [SerializeField, ShowInInspector]
     private ConceptMap _conceptMap;
     public ConceptMap conceptMap { get { return _conceptMap; } }
-
 
     protected override void Awake()
     {
@@ -52,8 +52,9 @@ public class UserProfile : Singleton<UserProfile>
         c = challengeScene.GetChallengeIndex() - 1;
 
         var curChallenge = _conceptMap.worlds[w].episodes[e].challenges[c];
-        curChallenge.concept = newConcept;
-        curChallenge.startDate = startDate.ToString();
+        if (newConcept > curChallenge.concept)
+            curChallenge.concept = newConcept;
+        curChallenge.startDate = startDate.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
         // atualiza a liberacao do proximo episodio
         if(e < _conceptMap.worlds[w].episodes.Length - 1)
@@ -88,8 +89,12 @@ public class UserProfile : Singleton<UserProfile>
 	private void SincronizeConceptMapOnLogin()
 	{
 		PersistenceManager.Instance.LoadConceptMap (this, ref _conceptMap);
-		if (_conceptMap == null)
-			SetConceptMapAtFirstAccess ();
+#if UNITY_EDITOR
+        if(_conceptMap == null || forceFirstAccessConceptMap)
+#else
+        if(_conceptMap == null)
+#endif
+            SetConceptMapAtFirstAccess ();
 		SaveUserProfile ();
 		SendConceptMapToSyncer ();
 	}
@@ -123,6 +128,7 @@ public class UserProfile : Singleton<UserProfile>
 
 	private void SetConceptMapAtFirstAccess()
 	{
+
 		_conceptMap = new ConceptMap();
 		_conceptMap.worlds = new ConceptWorld[4];
 		for (int w = 0; w < 4; w++)
