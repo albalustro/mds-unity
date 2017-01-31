@@ -66,6 +66,11 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         _parentWindow.Freeze();
     }
 
+	public void Unfreeze()
+	{
+		_parentWindow.Unfreeze();
+	}
+
     [InspectorButton]
     public void SetupChildrenValue()
     {

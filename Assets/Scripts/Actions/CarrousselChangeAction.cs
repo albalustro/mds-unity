@@ -20,6 +20,9 @@ namespace MDS.Actions
         [SerializeField]
         private bool _freeze;
 
+		[SerializeField]
+		private bool _unfreeze;
+
         [SerializeField]
         private float _transitionTime = .1f;
 
@@ -58,6 +61,9 @@ namespace MDS.Actions
 		{
 			if(_freeze)
 				_carrousselItem[i].Freeze();
+
+			if(_unfreeze)
+				_carrousselItem[i].Unfreeze();
 
 			while(_carrousselItem[i].GetCurrentValue().Equals(_value)==false)
 			{

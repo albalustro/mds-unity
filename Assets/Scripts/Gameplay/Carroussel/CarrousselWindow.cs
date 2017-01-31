@@ -23,8 +23,15 @@ public class CarrousselWindow : MDSBehaviour
         _carrousseItem.MoveNext();
     }
 
-    public void Freeze()
+	public void Freeze()
     {
         GetComponent<Collider2D>().enabled = false;
     }
+
+	public void Unfreeze()
+	{
+		GetComponent<Collider2D>().enabled = true;
+	}
+
+
 }

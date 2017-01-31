@@ -3,6 +3,7 @@ using System.Collections;
 using MDS.Core.Interfaces;
 using System;
 using MDS.Gameplay.DragDrop;
+using System.Linq;
 
 
 
@@ -19,6 +20,9 @@ namespace MDS.Actions {
 		[SerializeField] private DropGroupSlot m_useDropSlotAsTarget;
 		[SerializeField] private bool m_fadeIn = false;
 		[SerializeField] private float m_fadeTime = 2;
+
+		[SerializeField]
+		private ValidatableDropGroupArea _DropAreaSlotsContentAsTargets;
 
         public FadeInOutAction()
         {
@@ -39,16 +43,29 @@ namespace MDS.Actions {
             if(byPass) yield break;
             yield return base.Execute();
 
-			if (selfTarget) {
-				m_target = new GameObject[1];
-				m_target [0] = _corotineHolder.gameObject;
-			}
 
-			if (m_useDropSlotAsTarget) {
-				m_target = new GameObject[1];
-				m_target[0] = m_useDropSlotAsTarget.draggableReference.gameObject;
-			}
+			if (_DropAreaSlotsContentAsTargets != null) {
+				var slots = _DropAreaSlotsContentAsTargets.GetComponentsInChildren<DropGroupSlot> ().ToArray ();
 
+				m_target = (from s in slots
+				            where s.draggableReference != null
+				            select s.draggableReference.gameObject).ToArray ();
+				
+			} else {
+				
+
+				if (selfTarget) {
+					m_target = new GameObject[1];
+					m_target [0] = _corotineHolder.gameObject;
+				}
+
+				if (m_useDropSlotAsTarget) {
+					m_target = new GameObject[1];
+					m_target[0] = m_useDropSlotAsTarget.draggableReference.gameObject;
+				}
+
+			}
+				
             float alphaDestination = m_fadeIn ? 1f : 0f;
 
 			for (int i = 0; i < m_target.Length; i++) {
