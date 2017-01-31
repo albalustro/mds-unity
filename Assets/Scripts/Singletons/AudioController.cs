@@ -60,6 +60,7 @@ public class AudioController : Singleton<AudioController>
 			return;
 
 		_VoiceOverSource.clip = clip;
+		_ThemeSource.volume *= 0.65f;
 		_VoiceOverSource.Play();
 	}
 
