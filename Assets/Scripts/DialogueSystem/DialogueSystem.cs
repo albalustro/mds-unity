@@ -109,6 +109,7 @@ namespace MDS.DialogueSystem
         {
             dialogue.gameObject.SetActive(false);
             AudioController.Instance.StopVoiceOver();
+			AudioController.Instance.ResetVolumes ();
             isActive = false;
         }
 

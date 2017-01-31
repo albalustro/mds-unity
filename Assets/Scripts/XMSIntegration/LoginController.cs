@@ -4,6 +4,7 @@ using UnityEngine.SceneManagement;
 using Newtonsoft.Json;
 using MDS.ScriptableObjects;
 using MDS.Core.SceneManagement;
+using MDS.Utilities;
 
 public class LoginController : MDSBehaviour {
 
@@ -17,6 +18,7 @@ public class LoginController : MDSBehaviour {
     [SerializeField] private GameObject _feedBackPanel;
     [SerializeField] private Text _fbText;
     [SerializeField] private Button _fbButton;
+	[SerializeField] private AudioClip[] ambientSound;
     #endregion
 
     #region Métodos Unity
@@ -38,6 +40,7 @@ public class LoginController : MDSBehaviour {
             _passField.text = PersistenceManager.Instance.GetString("rememberPass");
             _rememberPass.isOn = true;
         }
+		AudioController.Instance.PlayTheme (ambientSound.GetRandom());
     }
     #endregion
 

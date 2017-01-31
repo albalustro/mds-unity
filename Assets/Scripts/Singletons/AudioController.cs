@@ -8,8 +8,8 @@ public class AudioController : Singleton<AudioController>
 	private AudioSource _SoundFXSource = new AudioSource();
 	private AudioSource _VoiceOverSource = new AudioSource();
 	private AudioSource _ThemeSource = new AudioSource();
-	private float _ThemeVolume = 0.4f;
-	private float _VoiceOverVolume = 0.4f;
+	private float _ThemeVolume = 0.75f;
+	private float _VoiceOverVolume = 0.75f;
 	private float _SoundFXVolume = 1.0f;
 	private bool _ThemeStatus;
 	private bool _VoiceOverStatus;
@@ -60,7 +60,7 @@ public class AudioController : Singleton<AudioController>
 			return;
 
 		_VoiceOverSource.clip = clip;
-		_ThemeSource.volume *= 0.65f;
+		_ThemeSource.volume = 0.45f;
 		_VoiceOverSource.Play();
 	}
 
@@ -71,7 +71,13 @@ public class AudioController : Singleton<AudioController>
 
 		_ThemeSource.clip = clip;
 		_ThemeSource.Play();
-		_ThemeSource.volume = _ThemeVolume;
+	}
+
+	public void ResetVolumes()
+	{
+		_ThemeVolume = 0.75f;
+		_VoiceOverVolume = 0.75f;
+		_SoundFXVolume = 1.0f;
 	}
 
 	public bool ThemeOn
