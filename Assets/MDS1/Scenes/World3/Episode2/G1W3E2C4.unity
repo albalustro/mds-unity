@@ -504,6 +504,11 @@ Prefab:
       propertyPath: _invalidLabels.Array.data[0]
       value: no
       objectReference: {fileID: 0}
+    - target: {fileID: 114000010196450884, guid: 625ad63284e045d4cb7969aee276fd8c,
+        type: 2}
+      propertyPath: _freezeAfterDrop
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 625ad63284e045d4cb7969aee276fd8c, type: 2}
   m_IsPrefabParent: 0
@@ -725,12 +730,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _objectReferences:
   - {fileID: 1440197839}
+  - {fileID: 1885767315}
+  - {fileID: 21300000, guid: cfe860c07fed4224fb9716674f95f7f8, type: 3}
   _serializedStateKeys:
   - Validador
   - _actions
   _serializedStateValues:
   - '{"$content":0,"$type":"MDS.Validators.Validator"}'
-  - '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"slugs":["victory"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
+  - '{"onStartActions":[{"slugs":["intro"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}],"onErrorActions_1":[],"onErrorActions_2":[],"onErrorActions_3":[],"onVictoryActions":[{"m_useMemorizedObj":false,"m_obj":1,"m_newSprite":2,"m_lockCollider":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"MDS.Actions.ChangeSpriteAction"},{"slugs":["victory"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]}'
   nextChallenge: {fileID: 0}
 --- !u!4 &303093978
 Transform:
@@ -792,6 +799,11 @@ Prefab:
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
       value: DropGroupSlot (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000012474362318, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
@@ -935,7 +947,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
-  - '[]'
+  - '[{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.5,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":1.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-5.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}]'
   - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
@@ -998,6 +1010,11 @@ Prefab:
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
       value: DropGroupSlot (2)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000012474362318, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
@@ -1210,20 +1227,50 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 20664248}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.OnGroupRefuseActions.EditProperty.0
+    - DefaultBehaviorEditor.OnGroupRefuseActions.EditProperty.1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1990030509}
-  - _keys: []
-    _values: []
+  - _keys:
+    - 0
+    - 1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1544273910}
-  - _keys: []
-    _values: []
+  - _keys:
+    - 0
+    - 1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 325568125}
-  - _keys: []
-    _values: []
+  - _keys:
+    - 0
+    - 1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1475448846}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor.OnGroupRefuseActions.EditProperty.0
+    - DefaultBehaviorEditor.OnGroupRefuseActions.EditProperty.1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1624853673}
   - _keys: []
     _values: []
@@ -1255,8 +1302,11 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 48331082}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._isGeneric.EditProperty
+    _values:
+    - _showDropdown: 0
+      _serializedIsActive: 1
     _target: {fileID: 1401496548}
   - _keys: []
     _values: []
@@ -1279,8 +1329,17 @@ MonoBehaviour:
   - _keys: []
     _values: []
     _target: {fileID: 1440197839}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._actions.EditProperty.onStartActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.0
+    - DefaultBehaviorEditor._actions.EditProperty.onVictoryActions.EditProperty.1
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 303093977}
   - _keys: []
     _values: []
@@ -1345,6 +1404,11 @@ Prefab:
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
       value: DropGroupSlot (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000012474362318, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
@@ -2052,6 +2116,196 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 51
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 86
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 121
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 156
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMin.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchorMax.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.x
+      value: 191
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_AnchoredPosition.y
+      value: -29
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 224712432231525488, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.x
+      value: 214
+      objectReference: {fileID: 0}
+    - target: {fileID: 224712432231525488, guid: 8c161acc8e79cc24f878f79c737adc51,
+        type: 2}
+      propertyPath: m_SizeDelta.y
+      value: 58
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
   m_IsPrefabParent: 0
@@ -2294,7 +2548,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
-  - '[]'
+  - '[{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.5,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":1.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-5.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}]'
   - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
@@ -2425,7 +2679,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
-  - '[]'
+  - '[{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.5,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":1.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-5.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}]'
   - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
@@ -2542,7 +2796,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
-  - '[]'
+  - '[{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.5,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":1.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-5.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}]'
   - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
@@ -2674,6 +2928,11 @@ Prefab:
     - target: {fileID: 1000010333883938, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
       propertyPath: m_Name
       value: DropGroupSlot (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000012474362318, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
@@ -2949,7 +3208,7 @@ MonoBehaviour:
   - '{"m_PersistentCalls":{"m_Calls":[]},"m_TypeName":"MDS.Gameplay.DragDrop.MyUnityEvent,
     Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null"}'
   - '[]'
-  - '[]'
+  - '[{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":0.5,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":1.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"},{"animationType":"Position","selfTarget":true,"useMemorizedGameObjectAsTarget":false,"_useSlotContentAsTarget":null,"target":null,"_DropAreaSlotsContentAsTargets":null,"multipleTargets":[],"duration":1.0,"local":true,"useSelfPositionAsDestination":false,"useMemorizedGOAsDestination":false,"useThisTransformAsDestination":null,"destination":{"x":0.0,"y":-5.0,"z":0.0},"easeType":"easeInBack","destroyOnComplete":true,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":true,"$type":"TransformAnimationAction"}]'
   - '[]'
   forcePreferredIndexOnDrop: 0
   Labels:
@@ -3041,6 +3300,16 @@ Prefab:
         type: 2}
       propertyPath: m_Size.x
       value: 0.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 114000012223707474, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[2]
+      value: '[]'
+      objectReference: {fileID: 0}
+    - target: {fileID: 61000012474362318, guid: 89d3cdcd0dbd34149840f3e0586d8814,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 89d3cdcd0dbd34149840f3e0586d8814, type: 2}
