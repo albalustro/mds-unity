@@ -34,7 +34,7 @@ namespace MDS.Gameplay.FSM
         {
             _fsmList = transform.GetComponentsInChildren<RandomFSM>();
 
-            StartGame();
+//            StartGame();
         }
 
 

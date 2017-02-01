@@ -25,6 +25,9 @@ namespace MDS.Gameplay.FSM
             {
                 for(int i = 0; i < OnTransitionActions.Length; i++)
                 {
+
+					OnTransitionActions [i].Initialize (emiter);
+
                     if(OnTransitionActions[i].waitFinish)
                         yield return emiter.StartCoroutine(OnTransitionActions[i].Execute());
                     else

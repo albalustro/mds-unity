@@ -62,7 +62,6 @@ namespace MDS.Gameplay.FSM.State.Transition
             public T PickRandom()
             {
                 float percent = UnityEngine.Random.Range(0f, 1f);
-                Debug.Log(percent);
                 T element = distribution.Single(d => percent>= d.MinPercent && percent< d.MaxPercent).Element;
                 return element;
             }

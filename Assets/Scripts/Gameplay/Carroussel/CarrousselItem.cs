@@ -26,6 +26,8 @@ public class CarrousselItem : MDSBehaviour, IValidatable
     private CarrousselWindow _parentWindow;
 	public bool isFreezed { get { return _parentWindow.isFreezed; } }
 
+	[SerializeField]
+	private AudioClip _changeSound;
 
     public void Initialize(CarrousselWindow carrousselWindow)
     {
@@ -54,6 +56,9 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         destination.y = -_currentItemIndex;
 
         LeanTween.moveLocal(base.gameObject, destination, _transitionTime).setEase(LeanTweenType.easeInOutCubic);
+
+		if(_transitionTime > 0.2f)
+			AudioController.Instance.PlaySoundFX (_changeSound);
     }
 
     public string GetCurrentValue()

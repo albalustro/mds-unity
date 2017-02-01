@@ -66,6 +66,8 @@ public class EpisodeSceneManager : MDSBehaviour {
     [InspectorCategory("General")]
     public float bottomY;
 
+
+
     [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] StartEpisodeActions;
@@ -92,6 +94,10 @@ public class EpisodeSceneManager : MDSBehaviour {
 
 
     [InspectorComment(CommentType.Info, "As actions abaixo são executadas de forma acumulativa. Por exemplo, quando voltar vindo do challenge 3, as actions 1, 2 e 3 são executadas antes da 'ComingFromChallenge3")]
+
+	[InspectorCategory("Persistent Actions")]
+	[SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+	private IAction[] PreTitleEpisodeActions;
 
     [InspectorCategory("Persistent Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
@@ -148,6 +154,11 @@ public class EpisodeSceneManager : MDSBehaviour {
 			poly2DTransform[i].transform.position = newPolyNav2DPosition;	
 		}
 
+		Debug.Log ("OI");
+		ExecuteActions (PreTitleEpisodeActions);
+		Debug.Log ("xiiiii");
+
+
     }
 
 	private IEnumerator Start()
@@ -169,6 +180,7 @@ public class EpisodeSceneManager : MDSBehaviour {
 		yield return null;
 
 		SetCameraStartPosition ();
+
 
         switch(currentAvailableChallengeIndex)
         {

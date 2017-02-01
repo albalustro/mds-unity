@@ -21,7 +21,7 @@ namespace MDS.Player
 
         private void Start()
         {
-            _animController.RestoreOriginalAvatar();
+//            _animController.RestoreOriginalAvatar();
         }
 
         public void SetAvatar(PlayerAvatar? avatar, bool setMounted = false, bool setIdleBack = false)
