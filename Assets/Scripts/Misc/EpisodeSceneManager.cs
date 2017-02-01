@@ -66,6 +66,13 @@ public class EpisodeSceneManager : MDSBehaviour {
     [InspectorCategory("General")]
     public float bottomY;
 
+	[InspectorCategory("General")]
+	public AudioClip episodeTheme;
+
+	[InspectorCategory("One Time Actions")]
+	[SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+	private IAction[] BeforeTitleActions;
+
     [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] StartEpisodeActions;
@@ -115,7 +122,6 @@ public class EpisodeSceneManager : MDSBehaviour {
     private Transform _target;
     private EpisodeContext _context;
 
-
     protected override void Awake()
     {
         base.Awake();
@@ -149,6 +155,8 @@ public class EpisodeSceneManager : MDSBehaviour {
 
 	private IEnumerator Start()
     {
+		AudioController.Instance.PlayTheme (episodeTheme);
+
         // iniciado com 5 apenas para a sequencia do switch ficar 'bonitinha'
         // se nenhum dos challenges estiver com status available é de se supor que
         // todos estao como done (mas nao vamos verificar). Portanto, esse Start
@@ -169,14 +177,16 @@ public class EpisodeSceneManager : MDSBehaviour {
 
         switch(currentAvailableChallengeIndex)
         {
-            case 0:
-                float t1 = 0f; ;
-                float t0 = Time.realtimeSinceStartup;
-                _titleGO.GetComponentInChildren<Text>().text = SceneManager.GetActiveScene().GetEpisodeTitle();
-                t1 = Time.realtimeSinceStartup;
+		case 0:
+			float t1 = 0f;
+			;
+			float t0 = Time.realtimeSinceStartup;
+			_titleGO.GetComponentInChildren<Text> ().text = SceneManager.GetActiveScene ().GetEpisodeTitle ();
+			t1 = Time.realtimeSinceStartup;
                 //Log("Tempo para decodificar o titulo: " + (t1 - t0).ToString());
 
-                List<IAction> actions = new List<IAction>();
+			List<IAction> actions = new List<IAction> ();
+				actions.AddRange (BeforeTitleActions);
                 actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, new[] { _titleGO }));
                 actions.Add(new FadeInOutAction(true, 2f, new[] { _titleGO }, true, 1f));
                 actions.Add(new FadeInOutAction(false, 2f, new[] { _titleGO }, true, 2f));
