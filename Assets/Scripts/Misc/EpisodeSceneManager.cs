@@ -179,7 +179,6 @@ public class EpisodeSceneManager : MDSBehaviour {
         {
 		case 0:
 			float t1 = 0f;
-			;
 			float t0 = Time.realtimeSinceStartup;
 			_titleGO.GetComponentInChildren<Text> ().text = SceneManager.GetActiveScene ().GetEpisodeTitle ();
 			t1 = Time.realtimeSinceStartup;

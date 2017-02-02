@@ -30,7 +30,14 @@ public class AudioController : Singleton<AudioController>
 			Destroy(gameObject);
 		else
 			DontDestroyOnLoad(gameObject);
-		
+
+#if UNITY_EDITOR
+		if (audioMixer == null) {
+			audioMixer =  Resources.Load("AudioMixer", typeof(AudioMixer)) as AudioMixer;
+		}
+
+#endif
+
 		_SoundFXSource = gameObject.AddComponent<AudioSource>();
 		_VoiceOverSource = gameObject.AddComponent<AudioSource>();
 		_ThemeSource = gameObject.AddComponent<AudioSource>();
