@@ -222,6 +222,7 @@ namespace MDS.Core
         void Lose(int index)
         {
             IAction[] actions;
+
             switch(index)
             {
                 case 1:

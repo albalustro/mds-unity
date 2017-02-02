@@ -84,6 +84,7 @@ public class LoginController : MDSBehaviour {
 					loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
                     loginData.status.message = "Offline";
 					UserProfile.Instance.SetLoginInfo (_userField.text, _passField.text, loginData);
+					SceneLoader.Instance.LoadRoomScene ();
 				}
 				else
 					OpenFeedbackPanel("Usuário ou senha inválidos.");
@@ -98,6 +99,7 @@ public class LoginController : MDSBehaviour {
 			case ConnectionResponse.OK:
                 //Enviando informações para o UserProfile
 				UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginInfo);
+				SceneLoader.Instance.LoadRoomScene ();
 				break;
 			//Erro de usuário e/ou senha
 			case ConnectionResponse.LOGIN_ERROR:
@@ -105,8 +107,6 @@ public class LoginController : MDSBehaviour {
 				break;
 			}
 		}
-
-		SceneLoader.Instance.LoadRoomScene ();
 	}
 
     #region Paineis de Feedback

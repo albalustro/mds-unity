@@ -28,12 +28,18 @@ public class OptionsHUDController : MonoBehaviour {
 		//_restoreMaskBtn = GameObject.Find ("RestoreMaskHUDBtn");
 		_tutorialBtn = GameObject.Find ("TutorialHUDBtn");
 
-//		#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
-//			_fullScreenBtn.SetActive (false);
-//			_quitGameBtn.SetActive(false);
-//		#endif
+		#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
+			_fullScreenBtn.SetActive (false);
+			_quitGameBtn.SetActive(false);
+		#endif
 
 		Scene scene = SceneManager.GetActiveScene ();
+        if(scene.IsLogin())
+        {
+            gameObject.SetActive(false);
+            return;
+        }
+
 		if (scene.IsRoom ())
 		{
 			_backBtn.SetActive (false);

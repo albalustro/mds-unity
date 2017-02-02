@@ -10,7 +10,12 @@ public class KeyController : MonoBehaviour {
 	public CanvasGroup keyPanel;
 	public Text episodeTitle;
 	public GameObject clickBlocker;
-	public GameObject[] challengeCrystals;
+	public ChallengeSelectionByKey challengeSelectionByKey;
+
+	void Start()
+	{
+		keyPanel.transform.GetComponent<Canvas> ().worldCamera = Camera.main;
+	}
 
 	public void OpenKeyPanel(int episodeIndex)
 	{
@@ -19,6 +24,7 @@ public class KeyController : MonoBehaviour {
 		LeanTween.alphaCanvas(keyPanel,1,0.3f).setOnComplete(() =>
 		{
 			clickBlocker.SetActive(true);
+			StartCoroutine (challengeSelectionByKey.ConfigureCrystalsOnKey(episodeIndex));
 		});
 		episodeTitle.text = SceneManager.GetActiveScene().GetEpisodeTitle(episodeIndex);	//seta o titulo do episodio
 		//configura os cristais
@@ -31,6 +37,7 @@ public class KeyController : MonoBehaviour {
 		{
 			clickBlocker.SetActive(true);
 			keyPanel.gameObject.SetActive (false);
+			challengeSelectionByKey.UnSetCrystals();
 		});
 
 	}

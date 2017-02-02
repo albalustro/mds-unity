@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
 using MDS.Core.SceneManagement;
+using UnityEngine.UI;
 
 public class MapSceneButtonController : MDSBehaviour {
 
-	public  SpriteRenderer episodeIndexRenderer;
-	public  Sprite episodeIndexNormal;
-	public  Sprite episodeIndexCompleted;
-	public  Sprite episodeIndexLocked;
-	public  int episodeIndex;
-	public  GameObject keyBase;
+	public SpriteRenderer episodeIndexRenderer;
+	public Sprite episodeIndexNormal;
+	public Sprite episodeIndexCompleted;
+	public Sprite episodeIndexLocked;
+	public int episodeIndex;
+	public GameObject keyBase;
 	public GameObject keyColliderGO;
-	public  GameObject locked;		//cadeado
-	public  GameObject letter;		//letter
+	public GameObject locked;		//cadeado
+	public GameObject letter;		//letter
+	public GameObject crystalsHolder;
 
 	private Collider2D _btnCollider;
 	private Animator _anim;
@@ -76,9 +78,19 @@ public class MapSceneButtonController : MDSBehaviour {
 				}
 			}
 		}
+
+		StartCoroutine(SetupCrystals (w, e));
 	}
 		
-
+	private IEnumerator SetupCrystals(int w, int e)
+	{
+		yield return new WaitForSeconds (0.5f);
+		for (int i = 0; i < 5; i++)
+		{
+			if (UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckChallengeComplete (i))
+				crystalsHolder.transform.GetChild (i).gameObject.SetActive (true);
+		}
+	}
 
 	public void LoadEpisode()
 	{
