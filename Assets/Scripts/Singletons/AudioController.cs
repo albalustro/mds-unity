@@ -1,6 +1,9 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.Audio;
+using MDS.Utilities;
+using UnityEngine.SceneManagement;
+using FullInspector;
 
 [RequireComponent(typeof(AudioListener))]
 public class AudioController : Singleton<AudioController>
@@ -8,34 +11,41 @@ public class AudioController : Singleton<AudioController>
 	private AudioSource _SoundFXSource = new AudioSource();
 	private AudioSource _VoiceOverSource = new AudioSource();
 	private AudioSource _ThemeSource = new AudioSource();
-	private float _ThemeVolume = 0.4f;
-	private float _VoiceOverVolume = 0.4f;
+	private float _ThemeVolume = 0.75f;
+	private float _VoiceOverVolume = 0.75f;
 	private float _SoundFXVolume = 1.0f;
 	private bool _ThemeStatus;
 	private bool _VoiceOverStatus;
 	private bool _SoundFXStatus;
+	[InspectorTooltip("Valores entre -80 e -10, sendo -80 => sem volume"), SerializeField, InspectorRange(-80, -10)]
+	private float _themeVolWhileVoiceOverIsPlaying;
 
-	public AudioMixerGroup themeMixer;
-	public AudioMixerGroup soundFXMixer;
-	public AudioMixerGroup voiceOverMixer;
+	public AudioMixer audioMixer;
 
-	void Awake()
+	protected override void Awake()
 	{
+		base.Awake();
+
+		if(AudioController.Instance != this)
+			Destroy(gameObject);
+		else
+			DontDestroyOnLoad(gameObject);
+		
 		_SoundFXSource = gameObject.AddComponent<AudioSource>();
 		_VoiceOverSource = gameObject.AddComponent<AudioSource>();
 		_ThemeSource = gameObject.AddComponent<AudioSource>();
 
 		_SoundFXSource.loop = false;
 		_SoundFXSource.volume = _SoundFXVolume;
-		_SoundFXSource.outputAudioMixerGroup = soundFXMixer;
+		_SoundFXSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups ("Master")[3];
 
 		_VoiceOverSource.loop = false;
 		_VoiceOverSource.volume = _VoiceOverVolume;
-		_VoiceOverSource.outputAudioMixerGroup = voiceOverMixer;
+		_VoiceOverSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups ("Master")[2];
 
 		_ThemeSource.loop = true;
 		_ThemeSource.volume = _ThemeVolume;
-		_ThemeSource.outputAudioMixerGroup = themeMixer;
+		_ThemeSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups ("Master")[1];
 	}
 
 	void Start()
@@ -60,6 +70,8 @@ public class AudioController : Singleton<AudioController>
 			return;
 
 		_VoiceOverSource.clip = clip;
+		//reduz o volume do theme
+		audioMixer.SetFloat("ThemeVol", _themeVolWhileVoiceOverIsPlaying);
 		_VoiceOverSource.Play();
 	}
 
@@ -70,7 +82,6 @@ public class AudioController : Singleton<AudioController>
 
 		_ThemeSource.clip = clip;
 		_ThemeSource.Play();
-		_ThemeSource.volume = _ThemeVolume;
 	}
 
 	public bool ThemeOn
@@ -120,6 +131,9 @@ public class AudioController : Singleton<AudioController>
     {
         _VoiceOverSource.Stop();
         _VoiceOverSource.clip = null;
+		//restaura o volume do theme
+		audioMixer.SetFloat("ThemeVol", 0);
     }
+
 }
 

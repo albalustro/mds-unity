@@ -66,7 +66,12 @@ public class EpisodeSceneManager : MDSBehaviour {
     [InspectorCategory("General")]
     public float bottomY;
 
+	[InspectorCategory("General")]
+	public AudioClip episodeTheme;
 
+	[InspectorCategory("One Time Actions")]
+	[SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
+	private IAction[] BeforeTitleActions;
 
     [InspectorCategory("One Time Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
@@ -95,10 +100,6 @@ public class EpisodeSceneManager : MDSBehaviour {
 
     [InspectorComment(CommentType.Info, "As actions abaixo são executadas de forma acumulativa. Por exemplo, quando voltar vindo do challenge 3, as actions 1, 2 e 3 são executadas antes da 'ComingFromChallenge3")]
 
-	[InspectorCategory("Persistent Actions")]
-	[SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
-	private IAction[] PreTitleEpisodeActions;
-
     [InspectorCategory("Persistent Actions")]
     [SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
     private IAction[] ExecuteAfterChallenge1Actions;
@@ -120,7 +121,6 @@ public class EpisodeSceneManager : MDSBehaviour {
     private Transform _player;
     private Transform _target;
     private EpisodeContext _context;
-
 
     protected override void Awake()
     {
@@ -148,21 +148,15 @@ public class EpisodeSceneManager : MDSBehaviour {
         // isso irá garantir que o colider do polynav2d esteja atras de todos os demais...
         var allColliders = FindObjectsOfType<Collider2D>();
         var maxColliderZ = allColliders.Max(c => c.transform.position.z);
-		PolyNav2D[] poly2DTransform = GetComponentsInChildren<PolyNav2D>(true);
-		for (int i = 0; i < poly2DTransform.Length; i++) {
-			Vector3 newPolyNav2DPosition = new Vector3 ( poly2DTransform[i].transform.position.x, poly2DTransform[i].transform.position.y, maxColliderZ + 1);
-			poly2DTransform[i].transform.position = newPolyNav2DPosition;	
-		}
-
-		Debug.Log ("OI");
-		ExecuteActions (PreTitleEpisodeActions);
-		Debug.Log ("xiiiii");
-
-
+        Transform poly2DTransform = GetComponentInChildren<PolyNav2D>().transform;
+        Vector3 newPolyNav2DPosition = new Vector3 ( poly2DTransform.position.x, poly2DTransform.position.y, maxColliderZ + 1);
+        poly2DTransform.position = newPolyNav2DPosition;
     }
 
 	private IEnumerator Start()
     {
+		AudioController.Instance.PlayTheme (episodeTheme);
+
         // iniciado com 5 apenas para a sequencia do switch ficar 'bonitinha'
         // se nenhum dos challenges estiver com status available é de se supor que
         // todos estao como done (mas nao vamos verificar). Portanto, esse Start
@@ -181,17 +175,18 @@ public class EpisodeSceneManager : MDSBehaviour {
 
 		SetCameraStartPosition ();
 
-
         switch(currentAvailableChallengeIndex)
         {
-            case 0:
-                float t1 = 0f; ;
-                float t0 = Time.realtimeSinceStartup;
-                _titleGO.GetComponentInChildren<Text>().text = SceneManager.GetActiveScene().GetEpisodeTitle();
-                t1 = Time.realtimeSinceStartup;
+		case 0:
+			float t1 = 0f;
+			;
+			float t0 = Time.realtimeSinceStartup;
+			_titleGO.GetComponentInChildren<Text> ().text = SceneManager.GetActiveScene ().GetEpisodeTitle ();
+			t1 = Time.realtimeSinceStartup;
                 //Log("Tempo para decodificar o titulo: " + (t1 - t0).ToString());
 
-                List<IAction> actions = new List<IAction>();
+			List<IAction> actions = new List<IAction> ();
+				actions.AddRange (BeforeTitleActions);
                 actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, new[] { _titleGO }));
                 actions.Add(new FadeInOutAction(true, 2f, new[] { _titleGO }, true, 1f));
                 actions.Add(new FadeInOutAction(false, 2f, new[] { _titleGO }, true, 2f));
@@ -232,13 +227,12 @@ public class EpisodeSceneManager : MDSBehaviour {
                 ExecuteActions(ExecuteAfterChallenge3Actions);
                 ExecuteActions(ExecuteAfterChallenge4Actions);
                 ExecuteActions(ComingFromChallenge5Actions);
-
                 break;
         }
 
         
     }
-    
+
     void Update()
     {
         if(StaticCamera) return;
