@@ -46,7 +46,6 @@ public class MDSBehaviour : BaseBehavior
 
 	protected void PlaySFX(AudioClip clip)
 	{
-		Debug.Log ("tocou");
 		AudioController.Instance.PlaySoundFX (clip);
 	}
 

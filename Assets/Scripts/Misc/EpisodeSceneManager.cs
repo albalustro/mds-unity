@@ -148,9 +148,14 @@ public class EpisodeSceneManager : MDSBehaviour {
         // isso irá garantir que o colider do polynav2d esteja atras de todos os demais...
         var allColliders = FindObjectsOfType<Collider2D>();
         var maxColliderZ = allColliders.Max(c => c.transform.position.z);
-        Transform poly2DTransform = GetComponentInChildren<PolyNav2D>().transform;
-        Vector3 newPolyNav2DPosition = new Vector3 ( poly2DTransform.position.x, poly2DTransform.position.y, maxColliderZ + 1);
-        poly2DTransform.position = newPolyNav2DPosition;
+
+
+		PolyNav2D[] poly2DTransform = GetComponentsInChildren<PolyNav2D>(true);
+		for (int i = 0; i < poly2DTransform.Length; i++) {
+			Vector3 newPolyNav2DPosition = new Vector3 ( poly2DTransform[i].transform.position.x, poly2DTransform[i].transform.position.y, maxColliderZ + 1);
+			poly2DTransform[i].transform.position = newPolyNav2DPosition;    
+		}
+        
     }
 
 	private IEnumerator Start()
