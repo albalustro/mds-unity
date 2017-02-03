@@ -185,7 +185,10 @@ public class EpisodeSceneManager : MDSBehaviour {
                 //Log("Tempo para decodificar o titulo: " + (t1 - t0).ToString());
 
 			List<IAction> actions = new List<IAction> ();
+
+			if (BeforeTitleActions != null)
 				actions.AddRange (BeforeTitleActions);
+			
                 actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, new[] { _titleGO }));
                 actions.Add(new FadeInOutAction(true, 2f, new[] { _titleGO }, true, 1f));
                 actions.Add(new FadeInOutAction(false, 2f, new[] { _titleGO }, true, 2f));

@@ -61,7 +61,6 @@ public class ConnectionManager : Singleton<ConnectionManager>
         conceptForm.AddField("conceptMap", json);
 		WWW www = new WWW(_config.conceptURL, conceptForm);
 		StartCoroutine(SincronizeConcept(www));
-        Debug.Log(json);
 	}
 		
 	IEnumerator SincronizeConcept(WWW www)
@@ -72,7 +71,6 @@ public class ConnectionManager : Singleton<ConnectionManager>
 		{
 			string wsReturn = www.text.Trim ();
 			cm = JsonConvert.DeserializeObject<ConceptMap> (wsReturn);
-            Debug.Log(wsReturn);
 		}
 		else
 			cm = null;

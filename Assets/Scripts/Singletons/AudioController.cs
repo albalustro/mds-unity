@@ -34,6 +34,7 @@ public class AudioController : Singleton<AudioController>
 #if UNITY_EDITOR
 		if (audioMixer == null) {
 			audioMixer =  Resources.Load("AudioMixer", typeof(AudioMixer)) as AudioMixer;
+			_themeVolWhileVoiceOverIsPlaying = -20;
 		}
 
 #endif
