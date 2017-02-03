@@ -105,6 +105,10 @@ namespace MDS.Gameplay.DragDrop
             if(activeWhileDragging)
                 m_activatedWhileDragging.SetActive(true);
 
+			if (AudioController.Instance != null && SFXController.instance != null) {
+				PlaySFX (SFXController.instance._draggableDrag);
+			}
+
         }
 
         public void OnMouseDrag()
@@ -133,6 +137,8 @@ namespace MDS.Gameplay.DragDrop
 
                 RaycastHit2D hitSlot = Physics2D.Raycast(screenPos, Vector2.zero, 20f,
                                                 LayerMask.GetMask(new[] { "GroupSlot" }));
+
+
 
                 // verifica se soltou sobre um slot especifico
                 if(hitSlot)
@@ -163,6 +169,7 @@ namespace MDS.Gameplay.DragDrop
                 if(group.SetInSlot(this, ref slot))
                 {
                     ProcessSlotChanging(originalSlot);
+
                 }
                 else
                 // caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
@@ -193,6 +200,10 @@ namespace MDS.Gameplay.DragDrop
                         TweenGoto(currentSlot.transform.position);
                     }
                 }
+
+				if (AudioController.Instance != null && SFXController.instance != null) {
+					PlaySFX (SFXController.instance._releaseOutOfGroup);
+				}
             }
 
         }
@@ -203,6 +214,9 @@ namespace MDS.Gameplay.DragDrop
                 OnAfterDrop.Invoke(this, originalSlot);
 
             ExecuteActions(OnAfterDropActions);
+			if (AudioController.Instance != null && SFXController.instance != null) {
+				PlaySFX (SFXController.instance._releaseInGroup);
+			}
         }
 
         public void TweenGoto(Vector3 pos, float speed = 0.5f)

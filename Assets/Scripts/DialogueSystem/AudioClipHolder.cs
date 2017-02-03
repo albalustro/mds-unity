@@ -6,12 +6,21 @@ using UnityEngine;
 
 namespace MDS.DialogueSystem
 {
+
+
     public class AudioClipHolder : MDSBehaviour
     {
         private static AudioClipHolder _instance;
 
         [SerializeField]
         private Dictionary<string, AudioClip> _audioLib = new Dictionary<string, AudioClip>();
+
+		void Awake()
+		{
+			if (GameObject.FindObjectOfType<SFXController>() == null) {
+				Instantiate(Resources.Load ("_SFXCONTROLLER_"));
+			}
+		}
 
         private void Start()
         {
@@ -47,6 +56,8 @@ namespace MDS.DialogueSystem
             return _instance._audioLib[audioName];
 
         }
+
+
 
     }
 }

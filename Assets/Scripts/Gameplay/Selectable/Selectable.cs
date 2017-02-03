@@ -208,6 +208,10 @@ namespace MDS.Gameplay.Selectable
 			SetSprite();
 			SetChildrenActivation();
 
+			if (AudioController.Instance != null && SFXController.instance != null) {
+				PlaySFX (SFXController.instance._inputClick);
+			}
+
 			if (unselectOthers && _group != null)
 			{
 				_group.SelectItem(this);

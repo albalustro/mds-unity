@@ -208,6 +208,9 @@ namespace MDS.Core
             {
                 FinishChallenge ac = new FinishChallenge();
                 tmp.Add(ac);
+				if (AudioController.Instance != null && SFXController.instance != null) {
+					PlaySFX (SFXController.instance._won);
+				}
             }
             _actions.onVictoryActions = tmp.ToArray();
 
@@ -222,6 +225,10 @@ namespace MDS.Core
         void Lose(int index)
         {
             IAction[] actions;
+
+			if (AudioController.Instance != null && SFXController.instance != null) {
+				PlaySFX (SFXController.instance._inputClick);
+			}
 
             switch(index)
             {
