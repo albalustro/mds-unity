@@ -26,7 +26,6 @@ public class CarrousselItem : MDSBehaviour, IValidatable
     private CarrousselWindow _parentWindow;
 	public bool isFreezed { get { return _parentWindow.isFreezed; } }
 
-	[SerializeField]
 	private AudioClip _changeSound;
 
     public void Initialize(CarrousselWindow carrousselWindow)
@@ -39,6 +38,7 @@ public class CarrousselItem : MDSBehaviour, IValidatable
         _currentItemIndex = 0;
         _startPosition = transform.localPosition; 
         _maxItemIndex = transform.childCount-1;
+		_changeSound = SFXController.instance._carrousselChange;
     }
 
     public void MoveNext()

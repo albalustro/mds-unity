@@ -44,6 +44,11 @@ public class MDSBehaviour : BaseBehavior
         }
     }
 
+	protected void PlaySFX(AudioClip clip)
+	{
+		AudioController.Instance.PlaySoundFX (clip);
+	}
+
     // colocado como public para que as actions tenham acesso ao metodo..
     public void LogError(string msg)
     {

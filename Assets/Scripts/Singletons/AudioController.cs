@@ -68,6 +68,7 @@ public class AudioController : Singleton<AudioController>
 		if (!clip)
 			return;
 
+		_SoundFXSource.Stop ();
 		_SoundFXSource.clip = clip;
 		_SoundFXSource.Play();
 	}
