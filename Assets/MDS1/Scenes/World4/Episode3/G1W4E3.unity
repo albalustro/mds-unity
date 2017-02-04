@@ -288,10 +288,37 @@ MonoBehaviour:
   - {fileID: 1078371509}
   _values:
   - _keys:
-    - DefaultBehaviorEditor.ExecuteAfterChallenge1Actions.EditProperty
+    - DefaultBehaviorEditor.StartEpisodeActions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge1Actions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge2Actions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge2Actions.EditProperty.1
+    - DefaultBehaviorEditor.ComingFromChallenge3Actions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge3Actions.EditProperty.1
+    - DefaultBehaviorEditor.ComingFromChallenge4Actions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge4Actions.EditProperty.1
+    - DefaultBehaviorEditor.ComingFromChallenge5Actions.EditProperty.0
+    - DefaultBehaviorEditor.ComingFromChallenge5Actions.EditProperty.1
     _values:
-    - _showDropdown: 0
-      _serializedIsActive: 1
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 800931579}
   - _keys: []
     _values: []
@@ -344,8 +371,11 @@ MonoBehaviour:
     - _showDropdown: 1
       _serializedIsActive: 1
     _target: {fileID: 502345865}
-  - _keys: []
-    _values: []
+  - _keys:
+    - DefaultBehaviorEditor._conceptMap.EditProperty
+    _values:
+    - _showDropdown: 1
+      _serializedIsActive: 0
     _target: {fileID: 1315881507}
   - _keys: []
     _values: []
@@ -7809,6 +7839,7 @@ MonoBehaviour:
   _serializedStateKeys:
   - StaticCamera
   - _parallaxItens
+  - BeforeTitleActions
   - StartEpisodeActions
   - ComingFromChallenge1Actions
   - ComingFromChallenge2Actions
@@ -7822,12 +7853,13 @@ MonoBehaviour:
   _serializedStateValues:
   - false
   - '[{"target":0,"rightPosition":{"x":2.5,"y":2.24,"z":1.0},"leftPostion":{"x":-2.5,"y":2.24,"z":1.0}},{"target":1,"rightPosition":{"x":1.51,"y":1.73,"z":0.8},"leftPostion":{"x":-1.47,"y":1.73,"z":0.8}},{"target":2,"rightPosition":{"x":0.63,"y":1.68,"z":0.6},"leftPostion":{"x":-0.65,"y":1.68,"z":0.6}}]'
+  - '[]'
   - '[{"slugs":["minigame1"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]'
   - '[{"slugs":["minigame2"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]'
   - '[{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[3],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"slugs":["minigame3"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]'
   - '[{"_action":"Disable","m_useMemorizedGoAsTarget":false,"_targets":[4],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"},{"slugs":["minigame4"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]'
   - '[{"slugs":["minigame5"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"_action":"Enable","m_useMemorizedGoAsTarget":false,"_targets":[5],"_includeChidren":false,"_onlyChildren":false,"m_destroyOnDisable":false,"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.EnableDisableAction"}]'
-  - '[{"slugs":["final"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"}]'
+  - '[{"slugs":["final"],"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"MDS.Actions.OpenDialogAction"},{"byPass":false,"delayBeforeExecution":0.0,"waitFinish":false,"$type":"GotoMapSceneAction"}]'
   - '[]'
   - '[]'
   - '[]'
@@ -7847,6 +7879,7 @@ MonoBehaviour:
   leftX: -2.46
   topY: 0
   bottomY: 0
+  episodeTheme: {fileID: 8300000, guid: 492622ad7c713d948958034df6a9dacb, type: 3}
 --- !u!4 &800931580
 Transform:
   m_ObjectHideFlags: 0
@@ -7982,6 +8015,191 @@ Prefab:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.size
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[0].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[1].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[2].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[3].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[4].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[5].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[6].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[7].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[0].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[1].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[2].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[3].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[4].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[5].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[6].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[7].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[0].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[1].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[2].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[3].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[4].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[5].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[6].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[7].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[0].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[1].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[2].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[3].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[4].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[5].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[6].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[7].challenges.Array.size
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 4244760648195200, guid: e34313fa68cdd7e4e8fa71f28bd0ae29, type: 2}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -8048,6 +8266,41 @@ Prefab:
         type: 2}
       propertyPath: _challengeStatus.Array.data[4]
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _serializedStateValues.Array.data[1]
+      value: '{"worlds":[{"episodes":[{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"ALLOW_BY_FIRST_ACCESS"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"}]},{"episodes":[{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"ALLOW_BY_FIRST_ACCESS"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"}]},{"episodes":[{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"ALLOW_BY_FIRST_ACCESS"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"}]},{"episodes":[{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"ALLOW_BY_FIRST_ACCESS"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"},{"challenges":[{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null},{"concept":"CONCEPT_NOT_PLAYED","startDate":null,"endDate":null}],"liberationStatus":"BLOCK_BY_CONCEPT"}]}]}'
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[0].episodes.Array.data[0].liberationStatus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[1].episodes.Array.data[0].liberationStatus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[2].episodes.Array.data[0].liberationStatus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[0].liberationStatus
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[2].challenges.Array.data[0].concept
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 114564464674849988, guid: e34313fa68cdd7e4e8fa71f28bd0ae29,
+        type: 2}
+      propertyPath: _conceptMap.worlds.Array.data[3].episodes.Array.data[2].challenges.Array.data[0].startDate
+      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: e34313fa68cdd7e4e8fa71f28bd0ae29, type: 2}
@@ -14919,7 +15172,7 @@ Prefab:
     - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -14929,7 +15182,7 @@ Prefab:
     - target: {fileID: 224431155610950110, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -14949,7 +15202,7 @@ Prefab:
     - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -14959,7 +15212,7 @@ Prefab:
     - target: {fileID: 224439078324738068, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -14979,7 +15232,7 @@ Prefab:
     - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -14989,7 +15242,7 @@ Prefab:
     - target: {fileID: 224228778532841242, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15009,7 +15262,7 @@ Prefab:
     - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15019,7 +15272,7 @@ Prefab:
     - target: {fileID: 224788317492154140, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15039,7 +15292,7 @@ Prefab:
     - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15049,7 +15302,7 @@ Prefab:
     - target: {fileID: 224727944926820890, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15069,7 +15322,7 @@ Prefab:
     - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_AnchoredPosition.y
-      value: -29
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15079,7 +15332,7 @@ Prefab:
     - target: {fileID: 224550496585272060, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 30
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 224787250296944964, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
@@ -15114,12 +15367,12 @@ Prefab:
     - target: {fileID: 224712432231525488, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.x
-      value: 249
+      value: 214
       objectReference: {fileID: 0}
     - target: {fileID: 224712432231525488, guid: 8c161acc8e79cc24f878f79c737adc51,
         type: 2}
       propertyPath: m_SizeDelta.y
-      value: 58
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 8c161acc8e79cc24f878f79c737adc51, type: 2}
