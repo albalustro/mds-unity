@@ -18,10 +18,15 @@ public class SelectableToValidationRule_G3W1E1C1 : MDSBehaviour {
 	}
 	
 	void OnMouseUp()
-	{
-		for (int i = 0; i < selectable.Labels.Length; i++)
-		{
-			validator.Rules [i].CorrectAnswer = selectable.Labels [i];
-		}
-	}
+    {
+        FixRules();
+    }
+
+    public void FixRules()
+    {
+        for(int i = 0; i < selectable.Labels.Length; i++)
+        {
+            validator.Rules[i].CorrectAnswer = selectable.Labels[i];
+        }
+    }
 }

@@ -3,6 +3,7 @@ using MDS.Validators.Interfaces;
 using FullInspector;
 using MDS.Validators.Enum;
 using System.Linq;
+using MDS.Gameplay.DragDrop;
 
 namespace MDS.Validators
 {
@@ -27,25 +28,43 @@ namespace MDS.Validators
         [InspectorShowIf("OverrideGroupParameters")]
         public int? SpecificAmount { get; set; }
 
-		[InspectorOrder(5)]
+        [InspectorOrder(5)]
+        [InspectorShowIf("OverrideGroupParameters")]
+        public bool EnableValidationOnlyIfSpecifcAmount;
+
+        [InspectorOrder(6)]
 		[InspectorShowIf("OverrideGroupParameters")]
 		public bool isGeneric { get; set; }
 
-        [InspectorOrder(6)]
+        [InspectorOrder(7)]
         [InspectorHideIf("IsRuleGroup")]
         public string CorrectAnswer;
 
-
-        public bool IsSatisfied()
+        public bool ReadyToValidate()
         {
+            SetupOverrideParams();
 
+            if(!ValidatableObject.ReadyToValidate())
+                return false;
+
+            return true;
+
+        }
+
+        private void SetupOverrideParams()
+        {
             if(OverrideGroupParameters && IsAGroup())
             {
                 IValidatableGroup group = ValidatableObject as IValidatableGroup;
                 group.OperationLogic = OperationLogic;
                 group.SpecificAmount = SpecificAmount;
+                // gambis feita as pressas... close your eyes..
+                ValidatableDropGroupArea gg = group as ValidatableDropGroupArea;
+                if(gg != null)
+                    gg.SetEnableValidationOnlyIfSpecifcAmount(EnableValidationOnlyIfSpecifcAmount);
+                // fim da gambis
                 group.AcceptEmptyAsCorrectAnswer = AcceptEmptyAsCorrectAnswer;
-				group.isGeneric = isGeneric;
+                group.isGeneric = isGeneric;
             }
 
             if(IsRuleGroup())
@@ -57,14 +76,21 @@ namespace MDS.Validators
                     group.OperationLogic = rule.OperationLogic;
                     group.SpecificAmount = rule.SpecificAmount;
                     group.AcceptEmptyAsCorrectAnswer = rule.AcceptEmptyAsCorrectAnswer;
-					group.isGeneric = rule.isGeneric;
+                    // gambis feita as pressas... close your eyes..
+                    ValidatableDropGroupArea gg = group as ValidatableDropGroupArea;
+                    if(gg != null)
+                        gg.SetEnableValidationOnlyIfSpecifcAmount(EnableValidationOnlyIfSpecifcAmount);
+                    // fim da gambis
+                    group.isGeneric = rule.isGeneric;
                 }
 
             }
+        }
 
-            if(!ValidatableObject.ReadyToValidate())
-                return false;
+        public bool IsSatisfied()
+        {
 
+            if(!ReadyToValidate()) return false;
             return ValidatableObject.Validate(CorrectAnswer);
         }
 
