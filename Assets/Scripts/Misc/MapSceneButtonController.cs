@@ -68,11 +68,13 @@ public class MapSceneButtonController : MDSBehaviour {
 				locked.SetActive (true);
 				_anim.SetInteger ("Status", 0);
 				episodeIndexRenderer.sprite = episodeIndexLocked;
+
+				//EPISÓDIO LIBERADO PELO PROFESSOR
 				if (liberationStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER)
 				{
 					letter.SetActive (true);
 					keyBase.SetActive (true);
-					_btnCollider.enabled = true;
+					//_btnCollider.enabled = true;
 					if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge (episodeIndex))
 						keyColliderGO.SetActive (false);
 				}
@@ -98,7 +100,10 @@ public class MapSceneButtonController : MDSBehaviour {
 	}
 
 
-	//Chave abrir caixa de dialogo com sistema de chave		OK
-	//Fazer metodo para saber se um episodio está completo	OK
-	//Fazer metodo para saber se um challenge esá liberado	OK
+	public void ChangeButtonConceptTemporarilyToNormal()
+	{
+		_anim.SetInteger ("Status", 1);
+		episodeIndexRenderer.sprite = episodeIndexNormal;
+		_btnCollider.enabled = true;
+	}
 }
