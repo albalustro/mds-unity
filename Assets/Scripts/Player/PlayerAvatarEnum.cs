@@ -10,6 +10,7 @@ namespace MDS.Player
         Robot,
         Trog,
         Tufo,
-        Tuti
+        Tuti,
+		NimbusShip
     }
 }
