@@ -157,7 +157,9 @@ public class EpisodeSceneManager : MDSBehaviour {
 		}
 
 		GameObject mediator = GameObject.FindGameObjectWithTag ("Mediator");
-		mediator.AddComponent<FlipMediadorByPlayerPosition> ();
+
+		if(mediator.GetComponent<FlipMediadorByPlayerPosition>() == null)
+			mediator.AddComponent<FlipMediadorByPlayerPosition> ();
         
     }
 

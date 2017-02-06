@@ -12,6 +12,7 @@ namespace MDS.Player
         Tufo,
         Tuti,
 		NimbusShip,
-		PirateShip
+		PirateShip,
+		Baleia
     }
 }

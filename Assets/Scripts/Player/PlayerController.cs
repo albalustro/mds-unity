@@ -21,13 +21,14 @@ namespace MDS.Player
 
         private void Start()
         {
-//            _animController.RestoreOriginalAvatar();
+            RestoreOriginalAvatar();
         }
 
         public void SetAvatar(PlayerAvatar? avatar, bool setMounted = false, bool setIdleBack = false)
         {
             if (avatar.HasValue)
                 _animController.SetAvatar(avatar.Value);
+
             _animController.SetMounted(setMounted);
             _animController.SetIdleBack(setIdleBack);
         }
@@ -97,6 +98,12 @@ namespace MDS.Player
 		void SetPirateShip()
 		{
 			_animController.SetAvatar(PlayerAvatar.PirateShip );
+		}
+
+		[InspectorButton]
+		void SetBaleia()
+		{
+			_animController.SetAvatar(PlayerAvatar.Baleia );
 		}
 
 #endif
