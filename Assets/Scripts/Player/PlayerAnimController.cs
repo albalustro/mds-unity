@@ -65,7 +65,10 @@ namespace MDS.Player
             _animator.SetBool(paramWalkingHash, walking);
             _animator.SetBool(paramBackHash, direction.y > 0);
 
-            _spriteRenderer.flipX = ShouldFlipX ? direction.x <= 0 : direction.x > 0;
+            bool mounted = _animator.GetBool(paramMountedHash);
+
+            _spriteRenderer.flipX = mounted? false : ( ShouldFlipX ? direction.x <= 0 : direction.x > 0);
+
         }
 
         public void RestoreOriginalAvatar()
