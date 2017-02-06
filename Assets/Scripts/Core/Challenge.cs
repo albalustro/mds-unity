@@ -168,6 +168,7 @@ namespace MDS.Core
                 foreach(var item in _answerProcessors)
                 {
                     item.OnValidateAnswer += ProcessResult;
+                    item.Enable(); 
                 }
             }
             
@@ -212,10 +213,22 @@ namespace MDS.Core
 					PlaySFX (SFXController.instance._won);
 				}
             }
-            _actions.onVictoryActions = tmp.ToArray();
 
-            ExecuteActions(_actions.onVictoryActions);
 
+            List<UnityEngine.Object> vList = new List<UnityEngine.Object>();
+            foreach(var item in _answerProcessors)
+            {
+                vList.Add((BaseValidationActivator)item.Behaviour);
+                Collider2D c2D = item.Behaviour.GetComponent<Collider2D>();
+                if(c2D != null)
+                    vList.Add(c2D);
+            }
+            tmp.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, vList.ToArray()));
+
+
+            //_actions.onVictoryActions = tmp.ToArray();
+            //ExecuteActions(_actions.onVictoryActions);
+            ExecuteActions(tmp.ToArray());
             
         }
 
@@ -224,7 +237,7 @@ namespace MDS.Core
         /// </summary>
         void Lose(int index)
         {
-            IAction[] actions;
+            List<IAction> actions = new List<IAction>();
 
 			if (AudioController.Instance != null && SFXController.instance != null) {
 				PlaySFX (SFXController.instance._inputClick);
@@ -233,13 +246,13 @@ namespace MDS.Core
             switch(index)
             {
                 case 1:
-                    actions = _actions.onErrorActions_1;
+                    actions.AddRange( _actions.onErrorActions_1);
                     break;
                 case 2:
-                    actions = _actions.onErrorActions_2;
+                    actions.AddRange( _actions.onErrorActions_2);
                     break;
                 case 3:
-                    actions = _actions.onErrorActions_3;
+                    actions.AddRange( _actions.onErrorActions_3);
                     break;
                 default:
                     LogError("Error Index não definido");
@@ -247,14 +260,24 @@ namespace MDS.Core
                     
             }
 
+            List<UnityEngine.Object> vList = new List<UnityEngine.Object>();
+            foreach(var item in _answerProcessors)
+            {
+                vList.Add((BaseValidationActivator)item.Behaviour);
+                Collider2D c2D = item.Behaviour.GetComponent<Collider2D>();
+                if(c2D != null)
+                    vList.Add(c2D);
+            }
+            actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, vList.ToArray()));
 
             // colocando conceito amarelo para qq erro será sobrescrito
             // pela action que coloca conceito vermelho.
             // dessa forma nao precisa se preocupar se o desafio tem 1, 2 ou 3 erros
             // ou ainda se há multiplos challenges
             Challenge.ChallengeConcept = ConceptTypes.CONCEPT_YELLOW;
+                                   
+            ExecuteActions(actions.ToArray());
 
-            ExecuteActions(actions);
         }
 
         public void ProcessResult()

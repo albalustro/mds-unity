@@ -19,7 +19,7 @@ namespace MDS.Gameplay.DragDrop
 		[SerializeField, InspectorOrder(0), InspectorTooltip("Com essa propriedade ativa, a validação usará um algoritmo diferente: o primeiro elemento define o LABEL que TODOS OS DEMAIS deverão ter para que a validação tenha sucesso. Caso o primeiro elemento tenha mais de um label, todos serão testados da mesma maneira")]
 		private bool _isGeneric;
 
-		[HideInInspector]
+        [HideInInspector]
 		//Usado propriedade para nao alterar o acesso (privado) da variavel
 		public bool isGeneric { 
 			get { return _isGeneric; }
@@ -79,12 +79,20 @@ namespace MDS.Gameplay.DragDrop
 			}
 		}
 
-		[InspectorCategory("Mechanics")]
+        // feito por método para nao quebrar as cenas alterando uma variavel
+        public void SetEnableValidationOnlyIfSpecifcAmount(bool value)
+        {
+            _enableValidationOnlyIfSpecifcAmount = value;
+        }
+
+        [InspectorCategory("Mechanics")]
 		[SerializeField, InspectorTooltip("Lista de labels que serão recusados. Se o draggable tiver um desses labels, não será aceito por esse grupo")]
 		protected List<string> _invalidLabels;
 
+        private string _lastValidatedLabel = string.Empty;
 
-		public override void Start()
+
+        public override void Start()
 		{
 			base.Start();
 			if(slots.Count > 1 && _infinityBag)
@@ -182,8 +190,9 @@ namespace MDS.Gameplay.DragDrop
 				foreach (var l in labels)
 				{
 					ret = temp.All(s => s.Validate(l));
-					if (ret)
-					{
+                    if(ret)
+                    { 
+                        _lastValidatedLabel = l;
 						break;
 					}
 				}
@@ -330,5 +339,11 @@ namespace MDS.Gameplay.DragDrop
 			return false;
 		}
 
-	}
+
+        public string GetGenericValidatedLabel()
+        {
+            return _lastValidatedLabel;
+        }
+
+    }
 }

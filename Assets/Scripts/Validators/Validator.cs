@@ -32,11 +32,11 @@ namespace MDS.Validators
             switch(OperationLogic)
             {
                 case OperationLogic.AND:
-                    ret = Rules.All(r => r.ValidatableObject.ReadyToValidate());
+                    ret = Rules.All(r => r.ReadyToValidate());
                     break;
 
 			case OperationLogic.OR:
-				ret = Rules.Any (r => r.ValidatableObject.ReadyToValidate ());
+				ret = Rules.Any (r => r.ReadyToValidate ());
 				//Debug.Log (ret);
                     break;
             }
