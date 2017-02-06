@@ -69,22 +69,22 @@ public class Seesaw : MDSBehaviour {
         if(myState == -1)
         {
             SetPosition(min_PosY, max_PosY);
+			scaleState = -1;
             yield return new WaitForSeconds(0.5f);
-            scaleState = -1;
         }
 
         if(myState == 0)
         {
             SetPosition(balanced_PosY, balanced_PosY);
+			scaleState = 0;
             yield return new WaitForSeconds(0.5f);
-            scaleState = 0;
         }
 
         if(myState == 1)
         {
             SetPosition(max_PosY, min_PosY);
+			scaleState = 1;
             yield return new WaitForSeconds(0.5f);
-            scaleState = 1;
         }
 
     }
