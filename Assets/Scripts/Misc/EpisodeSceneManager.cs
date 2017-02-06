@@ -155,6 +155,9 @@ public class EpisodeSceneManager : MDSBehaviour {
 			Vector3 newPolyNav2DPosition = new Vector3 ( poly2DTransform[i].transform.position.x, poly2DTransform[i].transform.position.y, maxColliderZ + 1);
 			poly2DTransform[i].transform.position = newPolyNav2DPosition;    
 		}
+
+		GameObject mediator = GameObject.FindGameObjectWithTag ("Mediator");
+		mediator.AddComponent<FlipMediadorByPlayerPosition> ();
         
     }
 

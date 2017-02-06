@@ -93,6 +93,12 @@ namespace MDS.Player
 			_animController.SetAvatar(PlayerAvatar.NimbusShip );
 		}
 
+		[InspectorButton]
+		void SetPirateShip()
+		{
+			_animController.SetAvatar(PlayerAvatar.PirateShip );
+		}
+
 #endif
 
     }

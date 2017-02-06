@@ -8,12 +8,15 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 	private Vector3 targetPosition;
 	private SpriteRenderer renderer;
 	[FullInspector.InspectorTooltip("Set this to only flip GO if its Mediator")]
-	[SerializeField] private bool _isMediator;
+	private bool _isMediator;
 
 	void Start () {
 		playerTransform = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform> ();
 		renderer = GetComponent<SpriteRenderer> ();
 		StartCoroutine (CheckFlip ());
+		if (gameObject.tag == "Mediator")
+			_isMediator = true;
+			
 	}
 
 	IEnumerator CheckFlip () {

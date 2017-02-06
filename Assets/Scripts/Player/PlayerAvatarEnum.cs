@@ -11,6 +11,7 @@ namespace MDS.Player
         Trog,
         Tufo,
         Tuti,
-		NimbusShip
+		NimbusShip,
+		PirateShip
     }
 }
