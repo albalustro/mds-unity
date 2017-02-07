@@ -20,15 +20,12 @@ public class RoomController : MDSBehaviour {
 	[SerializeField]
 	private GameObject backButton;
 	[SerializeField]
-	private GameObject dialogueCanvas;
-	[SerializeField]
 	private GameObject hudCanvas;
 	private string currentGameIndex;
 
 	protected override void Awake ()
 	{
 		base.Awake ();
-		//dialogueCanvas.SetActive (false);
 		hudCanvas.SetActive (true);
 	}
 

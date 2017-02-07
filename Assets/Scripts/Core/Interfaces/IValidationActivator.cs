@@ -8,6 +8,7 @@ namespace MDS.Core.Interfaces
 
     public interface IValidationActivator
     {
+        MDSBehaviour Behaviour { get; }
 
         event ValidateAnswerDelegate OnValidateAnswer;
 

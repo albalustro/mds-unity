@@ -40,7 +40,16 @@ namespace MDS.Player
 
         private static PlayerAvatar _originalAvatar = PlayerAvatar.Blup;
         private static PlayerAvatar _avatar = PlayerAvatar.Blup;
-        
+
+
+        public bool ShouldFlipX
+        {
+            get
+            {
+                return _avatar != PlayerAvatar.Blup;
+            }
+        }
+
         protected override void Awake()
         {
             base.Awake();
@@ -56,7 +65,10 @@ namespace MDS.Player
             _animator.SetBool(paramWalkingHash, walking);
             _animator.SetBool(paramBackHash, direction.y > 0);
 
-            _spriteRenderer.flipX = direction.x > 0;
+            bool mounted = _animator.GetBool(paramMountedHash);
+
+            _spriteRenderer.flipX = mounted? false : ( ShouldFlipX ? direction.x <= 0 : direction.x > 0);
+
         }
 
         public void RestoreOriginalAvatar()

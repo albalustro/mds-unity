@@ -20,7 +20,8 @@ public class MDSBehaviour : BaseBehavior
             {
                 if(action == null)
                     LogError("Action nula no vetor");
-                action.Initialize(this);
+                else
+                    action.Initialize(this);
             }
             StartCoroutine(exec(a));
         }

@@ -20,9 +20,11 @@ namespace MDS.DialogueSystem
         public static int id;
         public static int challenge = 1;
         public static bool isActive;
+		public static Slug[] lastSlugsPlayed;
         //Componente que gerencia o canvas
         public Dialogue dialogue;
-        private Canvas canvas;
+		private Canvas canvas;
+		public RepeatDialogueButtonController repeatDialogueButton;
         //Scriptable Object com todas as entradas de diálogo do Game/Mundo em questão
         public DialogueList SODialogue;
         //Caminhos para load do SO, voice over e emotion
@@ -99,6 +101,7 @@ namespace MDS.DialogueSystem
             dialogue.gameObject.SetActive(true);
             isActive = true;
             ChangeDialog();
+			repeatDialogueButton.ChangeInteractable (false);
         }
 
         /// <summary>
@@ -110,6 +113,7 @@ namespace MDS.DialogueSystem
             dialogue.gameObject.SetActive(false);
             AudioController.Instance.StopVoiceOver();
             isActive = false;
+			repeatDialogueButton.ChangeInteractable (true);
         }
 
         /// <summary>
@@ -154,7 +158,16 @@ namespace MDS.DialogueSystem
                 return;
             }
             OpenDialogueBox();
+			lastSlugsPlayed = _slugs;
         }
+
+		/// <summary>
+		/// Repeats the last slug played.
+		/// </summary>
+		public void RepeatLastSlugPlayed()
+		{
+			ShowDialogueMessage (lastSlugsPlayed);
+		}
 
         /// <summary>
         /// Altera o texto da caixa de diálogo e toca o som correspondente
