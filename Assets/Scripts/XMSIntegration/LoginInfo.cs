@@ -4,6 +4,11 @@ using System.Collections;
 [System.Serializable]
 public class LoginInfo 
 {
+    public LoginInfo()
+    {
+
+    }
+
 	public StatusInfo status;
 	public string token;
 	public string api;

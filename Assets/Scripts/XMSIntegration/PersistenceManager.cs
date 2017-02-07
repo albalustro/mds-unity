@@ -91,6 +91,10 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 
     public class AuxClass
     {
+        public AuxClass()
+        {
+
+        }
         public string login;
         public string pass;
         public LoginInfo loginInfo;

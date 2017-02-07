@@ -8,6 +8,10 @@ using System.Collections;
 [System.Serializable]
 public class ConceptChallenge
 {
+    public ConceptChallenge()
+    {
+
+    }
 	public ConceptTypes concept;
 	public string startDate;
 	public string endDate;

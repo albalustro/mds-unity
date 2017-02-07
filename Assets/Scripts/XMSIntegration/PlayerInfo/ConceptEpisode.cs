@@ -9,6 +9,10 @@ using System.Linq;
 [System.Serializable]
 public class ConceptEpisode 
 {
+    public ConceptEpisode()
+    {
+
+    }
 	public ConceptChallenge[] challenges;
 	public EpisodeLiberationTypes liberationStatus;
 

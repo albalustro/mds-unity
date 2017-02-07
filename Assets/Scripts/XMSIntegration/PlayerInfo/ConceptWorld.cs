@@ -8,5 +8,9 @@ using System.Collections;
 [System.Serializable]
 public class ConceptWorld 
 {
+    public ConceptWorld()
+    {
+
+    }
 	public ConceptEpisode[] episodes;
 }
