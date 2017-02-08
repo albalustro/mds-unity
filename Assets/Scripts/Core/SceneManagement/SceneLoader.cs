@@ -233,6 +233,14 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         void LoadSceneWebGL(string sceneName)
         {
+            Log("Caching.compressionEnabled = " + Caching.compressionEnabled.ToString());
+            Log("Caching.enabled = " + Caching.enabled.ToString());
+            Log("Caching.expirationDelay = " + Caching.expirationDelay.ToString());
+            Log("Caching.maximumAvailableDiskSpace = " + Caching.maximumAvailableDiskSpace.ToString());
+            Log("Caching.spaceAvailable = " + Caching.spaceFree.ToString());
+            Log("Caching.spaceOccupied = " + Caching.spaceOccupied.ToString());
+
+
             string assetBundleName = sceneName.Substring(0, 6).ToLower();
 
             if(_assetbundle != null && _assetbundle.GetAllScenePaths().Any(path =>
@@ -254,6 +262,7 @@ namespace MDS.Core.SceneManagement
                         else
                         {
                             // todo: tratar erro
+                            LogError(string.Format("Nao foi possivel baixar o assetbundle {0}. ", assetBundleName));
                         }
                     }));
 
@@ -307,8 +316,8 @@ namespace MDS.Core.SceneManagement
         private IEnumerator Download(string assetBundleName, Action<bool> callback)
         {
 
-            while(!Caching.ready)
-                yield return null;
+            //while(!Caching.ready)
+            //    yield return null;
 
             string urlBase = _connectionConfig.assetbundlesURL;
 

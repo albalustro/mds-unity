@@ -44,8 +44,8 @@ public class ConnectionManager : Singleton<ConnectionManager>
 		{
 			string wsReturn = www.text.Trim ();
             Log(wsReturn);
-            //info = JsonConvert.DeserializeObject<LoginInfo> (wsReturn);
-            info = null;
+            info = JsonConvert.DeserializeObject<LoginInfo> (wsReturn);
+            Log("info é nulo?? : " + (info == null).ToString());
 		}
 		else
 			info = null;
