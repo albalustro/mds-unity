@@ -18,9 +18,6 @@ namespace MDS.Core.SceneManagement
     /// </summary>
     public class SceneLoader : Singleton<SceneLoader>
     {
-        [FullInspector.InspectorComment("Atribua a configuração pertinente: produção / desenvolvimento")]
-        ScriptableObjects.ConnectionConfig _connectionConfig;
-
         private AssetBundle _assetbundle;
         private bool _backToMap;
         private int _backToEpisodeIndex;
@@ -319,7 +316,7 @@ namespace MDS.Core.SceneManagement
             //while(!Caching.ready)
             //    yield return null;
 
-            string urlBase = _connectionConfig.assetbundlesURL;
+            string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
 
             string plataform = "WebGL\\";
 

@@ -5,7 +5,7 @@ using MDS.ScriptableObjects;
 
 public class ConceptSyncer : Singleton<ConceptSyncer>
 {
-    private ConnectionConfig _config;
+
     private Action<ConceptMap> sendConceptCallback;
 
     protected override void Awake()
@@ -19,10 +19,6 @@ public class ConceptSyncer : Singleton<ConceptSyncer>
     }
 
 
-    public void Initialize(ConnectionConfig config)
-    {
-        _config = config;
-    }
 
     public void SendConceptMapToServer(string token, ConceptMap cm, Action<ConceptMap> callback)
 	{

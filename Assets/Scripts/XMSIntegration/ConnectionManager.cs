@@ -4,8 +4,10 @@ using System;
 using Newtonsoft.Json;
 using MDS.ScriptableObjects;
 
-public class ConnectionManager : Singleton<ConnectionManager> 
+public class ConnectionManager : Singleton<ConnectionManager>
 {
+    public ConnectionConfig connectionConfig { get { return _config; } }
+
     [SerializeField]
     private ConnectionConfig _config;
 

@@ -15,8 +15,10 @@ namespace MDS.DialogueSystem
         [SerializeField]
         private Dictionary<string, AudioClip> _audioLib = new Dictionary<string, AudioClip>();
 
-		void Awake()
-		{
+        protected override void Awake()
+        {
+            base.Awake();
+        
 			if (GameObject.FindObjectOfType<SFXController>() == null) {
 				Instantiate(Resources.Load ("_SFXCONTROLLER_"));
 			}
