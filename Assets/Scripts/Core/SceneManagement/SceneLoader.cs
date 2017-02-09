@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using MDS.Utilities;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
@@ -18,6 +19,10 @@ namespace MDS.Core.SceneManagement
     /// </summary>
     public class SceneLoader : Singleton<SceneLoader>
     {
+        public UnityEvent OnStartLoad;
+        public UnityEvent<float> OnLoadProgressUpdate;
+        public UnityEvent OnEndLoad;
+
         private AssetBundle _assetbundle;
         private bool _backToMap;
         private int _backToEpisodeIndex;
@@ -330,8 +335,15 @@ namespace MDS.Core.SceneManagement
 
             using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url))
             {
+                OnStartLoad.Invoke();
 
-                yield return request.Send();
+                request.Send();
+                while(!request.isDone)
+                {
+                    OnLoadProgressUpdate.Invoke(request.downloadProgress);
+                    yield return null;
+                }
+                OnEndLoad.Invoke();
 
                 Log("Terminou de baixar");
 
