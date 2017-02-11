@@ -20,6 +20,8 @@ public class RoomController : MDSBehaviour {
 	[SerializeField]
 	private GameObject backButton;
 	[SerializeField]
+	private GameObject closeMaskButton;
+	[SerializeField]
 	private GameObject hudCanvas;
 	private string currentGameIndex;
 
@@ -33,14 +35,18 @@ public class RoomController : MDSBehaviour {
 	{
 		_charSelectionMask.SetActive (true);
 		Scene scene = SceneManager.GetActiveScene ();
-		if(scene.IsRoom())
+		if (scene.IsRoom ())
+		{
 			nextButton.SetActive (true);
+			closeMaskButton.SetActive (true);
+		}
 		currentGameIndex = SceneManager.GetActiveScene().name.Substring(1, 1);
 		AudioController.Instance.PlayTheme (_theme);
 	}
 		
 	public void ChangeScene(int scene)
 	{
+		closeMaskButton.SetActive (false);
 		nextButton.SetActive (false);
 		backButton.SetActive (false);
 		_charSelectionMask.SetActive (false);
@@ -87,5 +93,31 @@ public class RoomController : MDSBehaviour {
 			_charSelectionMask.SetActive (true);
 			nextButton.SetActive (true);
 		}
+	}
+
+	public void CloseMaskButton()
+	{
+		if (_charSelectionMask.activeSelf || _worldSelectionMask.activeSelf)
+		{
+			closeMaskButton.SetActive (false);
+			_charSelectionMask.SetActive (false);
+			_worldSelectionMask.SetActive (false);
+			nextButton.SetActive (false);
+			_hotlinks.SetActive (false);
+			backButton.SetActive (false);
+		} 
+	}
+
+	public void RestartMask()
+	{
+		if (!_charSelectionMask.activeSelf && !_worldSelectionMask.activeSelf)
+		{
+			closeMaskButton.SetActive (true);
+			_charSelectionMask.SetActive (true);
+			_worldSelectionMask.SetActive (false);
+			nextButton.SetActive (true);
+			_hotlinks.SetActive (false);
+			backButton.SetActive (false);
+		} 
 	}
 }

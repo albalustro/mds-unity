@@ -25,8 +25,8 @@ public class OptionsHUDController : MonoBehaviour {
 		_backBtn = GameObject.Find ("BackHUDBtn");
 		_fullScreenBtn = GameObject.Find ("FullScreenHUDBtn");
 		_quitGameBtn = GameObject.Find ("QuitGameHUDBtn");
-		//_restoreMaskBtn = GameObject.Find ("RestoreMaskHUDBtn");
-		_tutorialBtn = GameObject.Find ("TutorialHUDBtn");
+		_restoreMaskBtn = GameObject.Find ("RestoreMaskHUDBtn");
+		//_tutorialBtn = GameObject.Find ("TutorialHUDBtn");
 
 		#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
 			_fullScreenBtn.SetActive (false);
