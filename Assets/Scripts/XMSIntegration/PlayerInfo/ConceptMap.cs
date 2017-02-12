@@ -8,5 +8,9 @@ using System.Collections;
 [System.Serializable]
 public class ConceptMap 
 {
+    public ConceptMap()
+    {
+
+    }
 	public ConceptWorld[] worlds;
 }

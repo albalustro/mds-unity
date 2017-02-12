@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using MDS.Utilities;
 using UnityEngine;
+using UnityEngine.Events;
 using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 
@@ -18,8 +19,9 @@ namespace MDS.Core.SceneManagement
     /// </summary>
     public class SceneLoader : Singleton<SceneLoader>
     {
-        [FullInspector.InspectorComment("Atribua a configuração pertinente: produção / desenvolvimento")]
-        ScriptableObjects.ConnectionConfig _connectionConfig;
+        public UnityEvent OnStartLoad;
+        public UnityEvent<float> OnLoadProgressUpdate;
+        public UnityEvent OnEndLoad;
 
         private AssetBundle _assetbundle;
         private bool _backToMap;
@@ -233,6 +235,14 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         void LoadSceneWebGL(string sceneName)
         {
+            Log("Caching.compressionEnabled = " + Caching.compressionEnabled.ToString());
+            Log("Caching.enabled = " + Caching.enabled.ToString());
+            Log("Caching.expirationDelay = " + Caching.expirationDelay.ToString());
+            Log("Caching.maximumAvailableDiskSpace = " + Caching.maximumAvailableDiskSpace.ToString());
+            Log("Caching.spaceAvailable = " + Caching.spaceFree.ToString());
+            Log("Caching.spaceOccupied = " + Caching.spaceOccupied.ToString());
+
+
             string assetBundleName = sceneName.Substring(0, 6).ToLower();
 
             if(_assetbundle != null && _assetbundle.GetAllScenePaths().Any(path =>
@@ -254,6 +264,7 @@ namespace MDS.Core.SceneManagement
                         else
                         {
                             // todo: tratar erro
+                            LogError(string.Format("Nao foi possivel baixar o assetbundle {0}. ", assetBundleName));
                         }
                     }));
 
@@ -307,10 +318,10 @@ namespace MDS.Core.SceneManagement
         private IEnumerator Download(string assetBundleName, Action<bool> callback)
         {
 
-            while(!Caching.ready)
-                yield return null;
+            //while(!Caching.ready)
+            //    yield return null;
 
-            string urlBase = _connectionConfig.assetbundlesURL;
+            string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
 
             string plataform = "WebGL\\";
 
@@ -324,8 +335,15 @@ namespace MDS.Core.SceneManagement
 
             using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url))
             {
+                OnStartLoad.Invoke();
 
-                yield return request.Send();
+                request.Send();
+                while(!request.isDone)
+                {
+                    OnLoadProgressUpdate.Invoke(request.downloadProgress);
+                    yield return null;
+                }
+                OnEndLoad.Invoke();
 
                 Log("Terminou de baixar");
 

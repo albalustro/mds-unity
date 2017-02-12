@@ -4,8 +4,10 @@ using System;
 using Newtonsoft.Json;
 using MDS.ScriptableObjects;
 
-public class ConnectionManager : Singleton<ConnectionManager> 
+public class ConnectionManager : Singleton<ConnectionManager>
 {
+    public ConnectionConfig connectionConfig { get { return _config; } }
+
     [SerializeField]
     private ConnectionConfig _config;
 
@@ -43,7 +45,9 @@ public class ConnectionManager : Singleton<ConnectionManager>
 		if (www.error == null)
 		{
 			string wsReturn = www.text.Trim ();
-			info = JsonConvert.DeserializeObject<LoginInfo> (wsReturn);
+            Log(wsReturn);
+            info = JsonConvert.DeserializeObject<LoginInfo> (wsReturn);
+            Log("info é nulo?? : " + (info == null).ToString());
 		}
 		else
 			info = null;
