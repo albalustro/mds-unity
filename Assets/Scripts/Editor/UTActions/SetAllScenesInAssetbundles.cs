@@ -10,8 +10,30 @@ using UnityEngine.SceneManagement;
 
 namespace MDS.Editor.UTActions
 {
+    public class ClearAllAssetbundles : UTAction
+    {
+        [MenuItem("Assets/Create/uTomate/MDS/CLEAR ALL Scenes Assetbundles", false, 2000)]
+        public static void AddAction()
+        {
+            Create<ClearAllAssetbundles>();
+        }
+
+        public override IEnumerator Execute(UTContext context)
+        {
+            string[] abNames = AssetDatabase.GetAllAssetBundleNames();
+
+            for(int i = 0; i < abNames.Length; i++)
+            {
+                AssetDatabase.RemoveAssetBundleName(abNames[i], true);
+            }
+
+            yield return null;
+        }
+    }
+
     public class SetAllScenesInAssetbundles : UTAction
     {
+
         [MenuItem("Assets/Create/uTomate/MDS/Fix ALL Scenes Assetbundles", false, 2000)]
         public static void AddAction()
         {
