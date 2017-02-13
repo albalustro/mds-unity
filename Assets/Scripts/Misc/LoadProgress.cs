@@ -74,16 +74,30 @@ public class LoadProgress : MDSBehaviour {
         _text.text = "";
         _textSize.text = "0 / 0";
 
-        int wIndex = SceneManager.GetActiveScene().GetWorldIndex() - 1;
-        _animator.SetInteger("world", wIndex);
+        Scene curScene = SceneManager.GetActiveScene();
+
+        int wIndex = 4;
+        if(!curScene.name.Equals("splash"))
+            wIndex = curScene.GetWorldIndex() - 1;            
+        
+
+        
         _bgImage.sprite = _backgroundsSprites[wIndex];
         _progressBarBG.sprite = _progressBarSprites[wIndex];
         _progressBarFill.sprite = _progressBarSprites[wIndex];
+        StartCoroutine(LazySetAnim(wIndex));
+    }
 
+    private IEnumerator LazySetAnim(int wIndex)
+    {
+        yield return new WaitForEndOfFrame();
+        if (_animator.isActiveAndEnabled)
+            _animator.SetInteger("world", wIndex);
     }
 
     public void UpdateProgressBar(float percent)
     {
+        Debug.Log(percent);
         _progressBarFill.fillAmount = percent;
         _textSize.text = string.Format("{0:0.00}%", percent*100f);
         if(percent < .1f)

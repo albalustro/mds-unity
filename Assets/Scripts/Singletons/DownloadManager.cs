@@ -2,8 +2,10 @@
 using System.Collections;
 using UnityEngine.SceneManagement;
 using UnityEngine.Networking;
+using System;
 
-public class DownloadManager : Singleton<DownloadManager>{
+public class DownloadManager : Singleton<DownloadManager>
+{
 
     public string remoteUrlBase = "https://s3-sa-east-1.amazonaws.com/jogosxmile/newmds/";
     public string localUrlBase = "file://D:\\XMILE\\Projetos\\MdS Unity\\Misterio dos Sonhos\\Build\\WebGL\\AssetBundles\\";
@@ -15,54 +17,59 @@ public class DownloadManager : Singleton<DownloadManager>{
 
     public void DownloadScene(string sceneName)
     {
-        StartCoroutine(Download(sceneName));
+        StartCoroutine(InternalDownloadScene(sceneName));
     }
 
-    private IEnumerator Download(string sceneName)
+
+    private IEnumerator InternalDownloadScene(string sceneName)
     {
         if(sceneName != "Inicio")
         {
-            
-            while(!Caching.ready)
-                yield return null;
-
-            if(cleanCache)
-                Caching.CleanCache();
-
-            string urlBase = useLocal ? localUrlBase : remoteUrlBase;
-
-            string url = urlBase + sceneName;
-
-            Log("Baixando " + url);
-
-            UnityWebRequest request = UnityWebRequest.GetAssetBundle(url);
-            yield return request.Send();
-
-
-            Log("Terminou de baixar");
-
-            if (request.isError)
-            {
-                LogError(request.error);
-            }
-            else
-            {
-                _bundle = DownloadHandlerAssetBundle.GetContent(request);
-            }
+            yield return Download(sceneName);
         }
-        
-        SceneManager.LoadScene(sceneName);
 
-        Log("Após carregar a cena");
-
-        if(_bundle != null)
+        if (_bundle!=null)
         {
+            _bundle.LoadAllAssets();
             _bundle.Unload(false);
             _bundle = null;
         }
-        
 
-        Log("Tudo liberado..");
+        SceneManager.LoadScene(sceneName);
+
+    }
+
+    private IEnumerator Download(string assetbundleName)
+    {
+
+        while(!Caching.ready)
+            yield return null;
+
+        if(cleanCache)
+            Caching.CleanCache();
+
+        string urlBase = useLocal ? localUrlBase : remoteUrlBase;
+
+        string url = urlBase + assetbundleName;
+
+        Log("Baixando " + url);
+
+        UnityWebRequest request = UnityWebRequest.GetAssetBundle(url);
+        yield return request.Send();
+
+
+        Log("Terminou de baixar");
+
+        if(request.isError)
+        {
+            LogError(request.error);
+        }
+        else
+        {
+            _bundle = DownloadHandlerAssetBundle.GetContent(request);
+        }
     }
 
 }
+
+

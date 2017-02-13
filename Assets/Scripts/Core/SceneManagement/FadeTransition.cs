@@ -12,11 +12,25 @@ namespace MDS.Core.SceneManagement
 	public class FadeTransition : Singleton<FadeTransition>
 	{
 		public float FadeTime = 0.5f;
-		private int m_DrawDepth = -1000;
+
+
+        public Color FadeColor {
+            get { return _fadeColor; }
+            set
+            {
+                _fadeColor = value;
+                SetFadeColor(_fadeColor);
+            }
+        }
+
+        [SerializeField]
+        private Color _fadeColor;
+        private int m_DrawDepth = -1000;
 		private Texture2D m_fadeOutTexture;
 		private FadeDirection m_FadeDirection = FadeDirection.In;
 		private float m_CurrentAlphaColor = 1.0f;
 		private float m_StartTime;
+        
 
         protected override void Awake()
         {
@@ -30,20 +44,26 @@ namespace MDS.Core.SceneManagement
 
         void Start()
 		{
-			m_fadeOutTexture = new Texture2D(2, 2);
-
-			for (var mip = 0; mip < 2; ++mip)
-			{
-				for (var cols = 0; cols < 2; ++cols)
-				{
-					m_fadeOutTexture.SetPixel(cols, mip, Color.black);
-				}
-			}
-
-			m_fadeOutTexture.Apply();
+            SetFadeColor(FadeColor);
 		}
 
-		void OnGUI()
+        private void SetFadeColor(Color color)
+        {
+            m_fadeOutTexture = new Texture2D(2, 2);
+
+            for(var mip = 0; mip < 2; ++mip)
+            {
+                for(var cols = 0; cols < 2; ++cols)
+                {
+                    m_fadeOutTexture.SetPixel(cols, mip, color);
+                }
+            }
+
+            m_fadeOutTexture.Apply();
+
+        }
+
+        void OnGUI()
 		{
 			if (m_FadeDirection == FadeDirection.Out)
 				m_CurrentAlphaColor = Mathf.Lerp(0.0f, 1.0f, ((Time.time - m_StartTime) / FadeTime));

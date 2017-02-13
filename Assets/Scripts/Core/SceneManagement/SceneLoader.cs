@@ -23,7 +23,14 @@ namespace MDS.Core.SceneManagement
         public UnityEvent<float> OnLoadProgressUpdate;
         public UnityEvent OnEndLoad;
 
-        private AssetBundle _assetbundle;
+        private AssetBundle[] _bundles = new AssetBundle[3];
+        private enum AssetBundleIndex
+        {
+            Essential = 0,
+            Player = 1,
+            Episode = 2
+        }
+
         private bool _backToMap;
         private int _backToEpisodeIndex;
 
@@ -52,6 +59,45 @@ namespace MDS.Core.SceneManagement
         #endregion
 
         #region PUBLIC LOAD SCENES METHODS
+    
+
+        public IEnumerator DownloadInitialAssetbundles()
+        {
+            if(_bundles[(int)AssetBundleIndex.Essential] == null)
+            {
+                yield return Download("essentials", (int)AssetBundleIndex.Essential,
+                    (error) =>
+                    {
+                        if(error == false)
+                        {
+                        }
+                        else
+                        {
+                        // todo: tratar erro
+                        LogError("Nao foi possivel baixar o assetbundle ESSENTIALS");
+                        }
+                    });
+            }
+
+            if(_bundles[(int)AssetBundleIndex.Player] == null)
+            {
+                yield return Download("player", (int)AssetBundleIndex.Player,
+                    (error) =>
+                    {
+                        if(error == false)
+                        {
+                        }
+                        else
+                        {
+                        // todo: tratar erro
+                        LogError("Nao foi possivel baixar o assetbundle PLAYER");
+                        }
+                    });
+            }
+
+            _bundles[(int)AssetBundleIndex.Essential].LoadAllAssets();
+            _bundles[(int)AssetBundleIndex.Player].LoadAllAssets();
+        }
 
         /// <summary>
         /// Esse é o metodo publico chamado após a cena de splash
@@ -82,7 +128,7 @@ namespace MDS.Core.SceneManagement
             int game = curScene.GetGameIndex();
             int world = curScene.GetWorldIndex();
 
-            string challengeSceneName = string.Format("G{0}W{1}E{2}C{3}", 
+            string challengeSceneName = string.Format("G{0}W{1}E{2}C{3}",
                                 game, world, episodeIndex, challengeIndex);
 
 #if UNITY_WEBGL
@@ -91,7 +137,7 @@ namespace MDS.Core.SceneManagement
                 LoadSceneWebGLSim(challengeSceneName);
             else
 #endif
-                LoadSceneWebGL(challengeSceneName);
+                StartCoroutine(LoadSceneWebGL(challengeSceneName));
 #else
                 LoadScene(challengeSceneName);
 #endif
@@ -124,7 +170,7 @@ namespace MDS.Core.SceneManagement
                 LoadSceneWebGLSim(challengeSceneName);
             else
 #endif
-                LoadSceneWebGL(challengeSceneName);
+                StartCoroutine(LoadSceneWebGL(challengeSceneName));
 #else
                 LoadScene(challengeSceneName);
 #endif
@@ -161,7 +207,7 @@ namespace MDS.Core.SceneManagement
         {
             Scene curScene = SceneManager.GetActiveScene();
             if(curScene.IsChallenge())
-                UserProfile.Instance.UpdateConcept(curScene, 
+                UserProfile.Instance.UpdateConcept(curScene,
                             Challenge.ChallengeConcept, DateTime.Now);
             else
                 LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
@@ -233,44 +279,46 @@ namespace MDS.Core.SceneManagement
         /// Ambos estao dentro do mesmo assetbundle cujo nome é o mesmo nome do
         ///    episodio porem com todas as letras minuculas
         /// </summary>
-        void LoadSceneWebGL(string sceneName)
+        IEnumerator LoadSceneWebGL(string sceneName)
         {
-            Log("Caching.compressionEnabled = " + Caching.compressionEnabled.ToString());
-            Log("Caching.enabled = " + Caching.enabled.ToString());
-            Log("Caching.expirationDelay = " + Caching.expirationDelay.ToString());
-            Log("Caching.maximumAvailableDiskSpace = " + Caching.maximumAvailableDiskSpace.ToString());
-            Log("Caching.spaceAvailable = " + Caching.spaceFree.ToString());
-            Log("Caching.spaceOccupied = " + Caching.spaceOccupied.ToString());
 
+            yield return DownloadInitialAssetbundles();
 
             string assetBundleName = sceneName.Substring(0, 6).ToLower();
 
-            if(_assetbundle != null && _assetbundle.GetAllScenePaths().Any(path =>
-                                                    path.Contains(sceneName)))
+            var b = _bundles[(int)AssetBundleIndex.Episode];
+            if(b != null)
             {
-                Log("Carregando " + sceneName + " do assetbundle em memoria");
-                LoadScene(sceneName);
+                if(b.GetAllScenePaths().Any(path => path.Contains(sceneName)))
+                {
+                    Log("Carregando " + sceneName + " do assetbundle em memoria");
+                    LoadScene(sceneName);
+                    yield break;
+                }
+                else
+                {
+                    _bundles[(int)AssetBundleIndex.Episode].Unload(false);
+                    _bundles[(int)AssetBundleIndex.Episode] = null;
+                }
             }
-            else
-            {
-                Log("Cena " + sceneName + " não esta carregada no assetbundle, iniciando download");
-                StartCoroutine(Download(assetBundleName,
-                    (error) =>
-                    {
-                        if(error == false)
-                        {
-                            LoadScene(sceneName);
-                        }
-                        else
-                        {
-                            // todo: tratar erro
-                            LogError(string.Format("Nao foi possivel baixar o assetbundle {0}. ", assetBundleName));
-                        }
-                    }));
 
-            }
+            Log("Cena " + sceneName + " não esta carregada no assetbundle, iniciando download");
+            //StartCoroutine(Download(assetBundleName, _episodeBundle,
+            yield return (Download(assetBundleName, (int)AssetBundleIndex.Episode,
+                (error) =>
+                {
+                    if(error == false)
+                    {
+                        LoadScene(sceneName);
+                    }
+                    else
+                    {
+                        // todo: tratar erro
+                        LogError(string.Format("Nao foi possivel baixar o assetbundle {0}. ", assetBundleName));
+                    }
+                }));
+
         }
-       
         #endregion
 
         #region Load LOCAL
@@ -286,7 +334,7 @@ namespace MDS.Core.SceneManagement
 #if UNITY_EDITOR
         private void LoadSceneWebGLSim(string sceneName)
         {
-            string assetBundleName = sceneName.Substring(0,6).ToLower();
+            string assetBundleName = sceneName.Substring(0, 6).ToLower();
             LoadSceneInPlayMode(sceneName, assetBundleName);
         }
 
@@ -315,25 +363,25 @@ namespace MDS.Core.SceneManagement
 
         #region ASSETBUNDLE
 
-        private IEnumerator Download(string assetBundleName, Action<bool> callback)
+        private IEnumerator Download(string assetBundleName, int bundleIndex,  Action<bool> callback)
         {
-
-            //while(!Caching.ready)
-            //    yield return null;
+            if(Caching.enabled)
+                while(!Caching.ready)
+                    yield return null;
 
             string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
 
-            string plataform = "WebGL\\";
+            string plataform = "WebGL/";
 
 #if UNITY_EDITOR
-            plataform = "StandaloneWindows\\";
+         //   plataform = "StandaloneWindows/";
 #endif
 
             string url = urlBase + plataform + assetBundleName;
 
             Log("Baixando assetbundle em: " + url);
 
-            using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url))
+            using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url, 0))
             {
                 OnStartLoad.Invoke();
 
@@ -355,7 +403,7 @@ namespace MDS.Core.SceneManagement
                 }
                 else
                 {
-                    _assetbundle = DownloadHandlerAssetBundle.GetContent(request);
+                    _bundles[bundleIndex] = DownloadHandlerAssetBundle.GetContent(request);
                     if(callback != null)
                         callback(false);
                 }
@@ -367,7 +415,5 @@ namespace MDS.Core.SceneManagement
 
         #endregion
 
-
-        
     }
 }
