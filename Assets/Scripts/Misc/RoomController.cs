@@ -73,27 +73,27 @@ public class RoomController : MDSBehaviour {
 
 	public void NextButton()
 	{
-		if (_charSelectionMask.activeSelf)
-		{
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (true);
-			nextButton.SetActive (false);
-			_hotlinks.SetActive (true);
-			backButton.SetActive (true);
-		} 
-	}
+        nextButton.SetActive(false);
+        _hotlinks.SetActive(true);
+        backButton.SetActive(true);
+        if (_charSelectionMask.activeSelf)
+        {
+            _charSelectionMask.SetActive(false);
+            _worldSelectionMask.SetActive(true);
+        }
+    }
 
 	public void BackButton()
 	{
-		if (_worldSelectionMask.activeSelf)
-		{
-			_worldSelectionMask.SetActive (false);
-			_hotlinks.SetActive (false);
-			backButton.SetActive (false);
-			_charSelectionMask.SetActive (true);
-			nextButton.SetActive (true);
-		}
-	}
+        backButton.SetActive(false);
+        _hotlinks.SetActive(false);
+        nextButton.SetActive(true);
+        if (_worldSelectionMask.activeSelf)
+        {
+            _worldSelectionMask.SetActive(false);
+            _charSelectionMask.SetActive(true);
+        }
+    }
 
 	public void CloseMaskButton()
 	{
@@ -102,9 +102,6 @@ public class RoomController : MDSBehaviour {
 			closeMaskButton.SetActive (false);
 			_charSelectionMask.SetActive (false);
 			_worldSelectionMask.SetActive (false);
-			nextButton.SetActive (false);
-			_hotlinks.SetActive (false);
-			backButton.SetActive (false);
 		} 
 	}
 
@@ -113,11 +110,10 @@ public class RoomController : MDSBehaviour {
 		if (!_charSelectionMask.activeSelf && !_worldSelectionMask.activeSelf)
 		{
 			closeMaskButton.SetActive (true);
-			_charSelectionMask.SetActive (true);
-			_worldSelectionMask.SetActive (false);
-			nextButton.SetActive (true);
-			_hotlinks.SetActive (false);
-			backButton.SetActive (false);
+            if (backButton.activeSelf)
+                _worldSelectionMask.SetActive(true);
+            if (nextButton.activeSelf)
+                _charSelectionMask.SetActive (true);
 		} 
 	}
 }
