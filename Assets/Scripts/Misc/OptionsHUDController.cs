@@ -30,10 +30,13 @@ public class OptionsHUDController : MonoBehaviour {
 
 		#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
 			_fullScreenBtn.SetActive (false);
-			_quitGameBtn.SetActive(false);
-		#endif
+        #endif
 
-		Scene scene = SceneManager.GetActiveScene ();
+        #if UNITY_WEBGL
+            _quitGameBtn.SetActive(false);
+        #endif
+
+        Scene scene = SceneManager.GetActiveScene ();
         if(scene.IsLogin())
         {
             gameObject.SetActive(false);
@@ -70,6 +73,7 @@ public class OptionsHUDController : MonoBehaviour {
 	//Tela cheia (WebGL e Desktop)
 	public void FullScreen()
 	{
+        Debug.Log("Clicado no botão fullscreen. Deveria fazer alguma coisa. Status atual do FS: " + Screen.fullScreen);
 		Screen.fullScreen = !Screen.fullScreen;
 	}
 

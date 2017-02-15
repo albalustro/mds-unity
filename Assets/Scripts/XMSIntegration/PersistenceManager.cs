@@ -2,8 +2,12 @@
 using System.Text;
 using System.Security.Cryptography;
 using Newtonsoft.Json;
+using MDS.Utilities;
+using UnityEngine.SceneManagement;
 
 public class PersistenceManager : Singleton<PersistenceManager> {
+
+    private string _gameIndexToComposePlayerPrefsKey;
 
     protected override void Awake()
     {
@@ -13,11 +17,13 @@ public class PersistenceManager : Singleton<PersistenceManager> {
             Destroy(gameObject);
         else
             DontDestroyOnLoad(gameObject);
+
+        _gameIndexToComposePlayerPrefsKey = "_" + SceneManager.GetActiveScene().GetGameIndex().ToString();
     }
 
     public LoginInfo LoadLocalUserProfile(string user, ref string pass)
 	{
-        AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(user));
+        AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(user + _gameIndexToComposePlayerPrefsKey));
         LoginInfo li = aux.loginInfo;
         pass = aux.pass;
         return li;
@@ -25,11 +31,11 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 		
 	public void LoadConceptMap(UserProfile profile, ref ConceptMap cm)
 	{
-        if (!PlayerPrefs.HasKey(profile.login))
+        if (!PlayerPrefs.HasKey(profile.login + _gameIndexToComposePlayerPrefsKey))
             cm = null;
         else
         {
-            AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(profile.login));
+            AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(profile.login + _gameIndexToComposePlayerPrefsKey));
             cm = aux.conceptMap;
         }
 	}
@@ -41,7 +47,7 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         aux.pass  = GetMD5Hash(profile.pass);
         aux.loginInfo = profile.loginInfo;
         aux.conceptMap = profile.conceptMap;
-		PlayerPrefs.SetString (profile.login, JsonConvert.SerializeObject (aux));
+        PlayerPrefs.SetString (profile.login + _gameIndexToComposePlayerPrefsKey, JsonConvert.SerializeObject (aux));
     }
 
     public bool HasKey(string key)
@@ -58,16 +64,6 @@ public class PersistenceManager : Singleton<PersistenceManager> {
     {
         PlayerPrefs.SetString(key, value);
     }
-
-	public int GetGameIndex()
-	{
-		return PlayerPrefs.GetInt ("GameIndex");
-	}
-
-	public void SetGameIndex(int index)
-	{
-		PlayerPrefs.SetInt ("GameIndex", index);
-	}
 
 	#region Segurança
 	/// <summary>
