@@ -139,6 +139,14 @@ namespace MDS.Core
 
         private IValidationActivator[] _answerProcessors;
         private int _errorCount = 0;
+
+       
+        private bool _isExecutingActions;
+        private bool _isInVictoryCondition;
+
+        public bool IsExecutingActions() { return _isExecutingActions; }
+        public bool IsInVictoryCondition() { return _isInVictoryCondition; }
+
         #endregion
 
         #region Unity methods
@@ -168,12 +176,13 @@ namespace MDS.Core
                 foreach(var item in _answerProcessors)
                 {
                     item.OnValidateAnswer += ProcessResult;
-                    item.Enable(); 
+                    //item.Enable(); 
                 }
             }
             
             ExecuteActions(_actions.onStartActions);
 
+            _isInVictoryCondition = false;
         }
 
         public void OnDisable()
@@ -193,6 +202,8 @@ namespace MDS.Core
 
         void Victory()
         {
+            _isInVictoryCondition = true;
+
             List<IAction> tmp = new List<Interfaces.IAction>(_actions.onVictoryActions);
 
             // se tem um proximo challenge, inserir as actions para desabilitar/habilitar
@@ -214,20 +225,6 @@ namespace MDS.Core
 				}
             }
 
-
-            List<UnityEngine.Object> vList = new List<UnityEngine.Object>();
-            foreach(var item in _answerProcessors)
-            {
-                vList.Add((BaseValidationActivator)item.Behaviour);
-                Collider2D c2D = item.Behaviour.GetComponent<Collider2D>();
-                if(c2D != null)
-                    vList.Add(c2D);
-            }
-            tmp.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, vList.ToArray()));
-
-
-            //_actions.onVictoryActions = tmp.ToArray();
-            //ExecuteActions(_actions.onVictoryActions);
             ExecuteActions(tmp.ToArray());
             
         }
@@ -260,16 +257,6 @@ namespace MDS.Core
                     
             }
 
-            List<UnityEngine.Object> vList = new List<UnityEngine.Object>();
-            foreach(var item in _answerProcessors)
-            {
-                vList.Add((BaseValidationActivator)item.Behaviour);
-                Collider2D c2D = item.Behaviour.GetComponent<Collider2D>();
-                if(c2D != null)
-                    vList.Add(c2D);
-            }
-            actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, vList.ToArray()));
-
             // colocando conceito amarelo para qq erro será sobrescrito
             // pela action que coloca conceito vermelho.
             // dessa forma nao precisa se preocupar se o desafio tem 1, 2 ou 3 erros
@@ -299,6 +286,13 @@ namespace MDS.Core
         }
 
         #endregion
+
+        protected override IEnumerator exec(IAction[] a)
+        {
+            _isExecutingActions = true;
+            yield return base.exec(a);
+            _isExecutingActions = false;
+        }
 
         #region Static methods
         /// <summary>

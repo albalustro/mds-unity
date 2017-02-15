@@ -92,8 +92,6 @@ namespace MDS.Actions
                     {
                         (target as Renderer).enabled = en;
                     }
-                    if(target.name.Equals("CheckAnswerButton"))
-                        Debug.LogFormat("{0}.enabled = {1}", target.name, en.ToString());
                 }
             }
 

@@ -3,6 +3,8 @@ using System.Collections;
 using System;
 using Newtonsoft.Json;
 using MDS.ScriptableObjects;
+using UnityEngine.SceneManagement;
+using MDS.Utilities;
 
 public class ConnectionManager : Singleton<ConnectionManager>
 {
@@ -28,12 +30,16 @@ public class ConnectionManager : Singleton<ConnectionManager>
     #region Login
     public void DoLogin(string user, string pass, Action<LoginInfo> callback)
 	{
+        Scene curScene = SceneManager.GetActiveScene();
+        string game = "MDS" + curScene.GetGameIndex().ToString();
+        string season = curScene.GetGameIndex().ToString();
+
 		doLoginCallback = callback;
 		WWWForm loginForm = new WWWForm();
 		loginForm.AddField("login", user);
 		loginForm.AddField("password", pass);
-		loginForm.AddField("game", "4");
-		loginForm.AddField("season_id", "1");
+		loginForm.AddField("game", game);
+		loginForm.AddField("season_id", season);
 		WWW www = new WWW(_config.loginURL, loginForm);
 		StartCoroutine(ValidateLogin(www));
 	}

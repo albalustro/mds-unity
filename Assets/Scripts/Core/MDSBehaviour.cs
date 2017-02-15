@@ -28,7 +28,7 @@ public class MDSBehaviour : BaseBehavior
     }
 
 
-    protected IEnumerator exec(IAction[] a)
+    protected virtual IEnumerator exec(IAction[] a)
     {
         for(int i = 0; i < a.Length; i++)
         {

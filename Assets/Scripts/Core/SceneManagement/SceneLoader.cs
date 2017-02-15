@@ -193,6 +193,13 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         public void LoadMapScene()
         {
+            // Destruindo objeto de contexto...
+            var context = GameObject.FindObjectOfType<EpisodeContext>();
+            if(context != null)
+            {
+                DestroyObject(context.gameObject);
+            }
+
             Scene scene = SceneManager.GetActiveScene();
             int gameIndex = scene.GetGameIndex();
             int worldIndex = scene.GetWorldIndex();

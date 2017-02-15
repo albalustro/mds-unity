@@ -26,7 +26,7 @@ public class ConceptEpisode
 		return challenges[challengeIndex].concept == ConceptTypes.CONCEPT_GREEN;
 	}
 
-	public bool CheckDirectAccessToChallenge(int challengeIndex)
+	public bool CheckDirectAccessToChallenge()
 	{
 		return challenges.All(c => c.concept != ConceptTypes.CONCEPT_NOT_PLAYED);
 	}

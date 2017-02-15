@@ -97,7 +97,7 @@ public class LoadProgress : MDSBehaviour {
 
     public void UpdateProgressBar(float percent)
     {
-        Debug.Log(percent);
+        //Debug.Log(percent);
         _progressBarFill.fillAmount = percent;
         _textSize.text = string.Format("{0:0.00}%", percent*100f);
         if(percent < .1f)

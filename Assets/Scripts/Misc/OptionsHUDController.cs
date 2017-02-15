@@ -47,8 +47,8 @@ public class OptionsHUDController : MonoBehaviour {
 		else
 		{
 			//_restoreMaskBtn.SetActive (false);
-			if (scene.IsChallenge())
-				_tutorialBtn.SetActive (false);
+		//	if (scene.IsChallenge())
+		//		_tutorialBtn.SetActive (false);
 		}
 	}
 		

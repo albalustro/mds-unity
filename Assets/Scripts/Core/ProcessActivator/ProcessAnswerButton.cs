@@ -30,6 +30,7 @@ namespace MDS.Core.ProcessActivator
         private GameObject _particlesInstance;
 
         private IValidator _validador;
+        private Challenge _currentChallenge;
 
         protected override void Awake()
         {
@@ -92,8 +93,20 @@ namespace MDS.Core.ProcessActivator
         public void Update()
         {
             //TODO: ficar verificando o validator atual é bem ruim.. preciso providenciar um modo mais performatico de fazer isso
-            //if(_validador == null)
-                _validador = Challenge.GetCurrentValidador();
+
+            _currentChallenge = Challenge.GetActiveInstance();
+
+
+            if (_executingPreValidationActions || 
+                _currentChallenge.IsExecutingActions() || 
+                _currentChallenge.IsInVictoryCondition())
+            {
+                Log("Process button DISABLED");
+                Disable();
+                return;
+            }
+
+            _validador = Challenge.GetCurrentValidador();
             
             if(_validador.ReadyToValidate())
                 Enable();
@@ -101,6 +114,7 @@ namespace MDS.Core.ProcessActivator
                 Disable();
         }
 
+#if UNITY_EDITOR
         protected override void OnValidate()
         {
             base.OnValidate();
@@ -110,6 +124,7 @@ namespace MDS.Core.ProcessActivator
                 _spriteRenderer.sprite = upSprite;
 
         }
+#endif
     }
 
 }

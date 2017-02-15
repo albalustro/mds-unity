@@ -22,7 +22,7 @@ namespace MDS.Core.ProcessActivator
 
         protected bool _isEnabled;
 
-        private bool _processing;
+        protected bool _executingPreValidationActions;
 
         public virtual void Disable()
         {
@@ -35,12 +35,12 @@ namespace MDS.Core.ProcessActivator
             _isEnabled = true;
 
         }
-
+        
         protected void FireValidationEvent()
         {
-            if(!_processing)
+            if(!_executingPreValidationActions)
             {
-                _processing = true;
+                _executingPreValidationActions = true;
                 StartCoroutine(fve());
             }
         }
@@ -52,33 +52,20 @@ namespace MDS.Core.ProcessActivator
 
                 if(preValidationActions != null)
                 {
-
-                    List<IAction> actions = new List<IAction>();
-
-                    List<UnityEngine.Object> vList = new List<UnityEngine.Object>();
-                    vList.Add(this);
-                    Collider2D c2D = GetComponent<Collider2D>();
-                    if(c2D != null)
-                        vList.Add(c2D);
-                    actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Disable, vList.ToArray()));
-
-                    actions.AddRange(preValidationActions);
-
-//                    actions.Add(new EnableDisableAction(EnableDisableAction.EAction.Enable, vList.ToArray()));
-
-                    foreach(var action in actions)
+                    foreach(var action in preValidationActions)
                     {
-                        if(action == null)
+                        if(action != null)
+                            action.Initialize(this); 
+                        else
                             LogError("Action nula no vetor");
-                        action.Initialize(this);
-                        Log(action.GetType().Name);
+                        //   Log(action.GetType().Name);
                     }
-                    yield return exec(actions.ToArray());
+                    yield return exec(preValidationActions.ToArray());
                 }
 
                 OnValidateAnswer();
 
-                _processing = false;
+                _executingPreValidationActions = false;
             }
         }
     }

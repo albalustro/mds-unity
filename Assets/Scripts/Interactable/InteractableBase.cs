@@ -47,5 +47,12 @@ namespace MDS.Interactable
 
             ExecuteActions(OnAfterInteractActions);
         }
+
+        protected override IEnumerator exec(IAction[] a)
+        {
+            _collider.enabled = false;
+            yield return base.exec(a);
+            _collider.enabled = true;
+        }
     }
 }

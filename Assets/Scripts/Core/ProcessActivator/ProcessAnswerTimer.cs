@@ -19,7 +19,7 @@ namespace MDS.Core.ProcessActivator
         private bool _countDown;
 
         [SerializeField]
-        private bool _startOnStart =  true;
+        private bool _startOnStart;
 
         public UnityEvent<int> OnTick;
 

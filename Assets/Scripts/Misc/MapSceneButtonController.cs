@@ -56,7 +56,7 @@ public class MapSceneButtonController : MDSBehaviour {
 			{
 				_anim.SetInteger ("Status", 1);
 				episodeIndexRenderer.sprite = episodeIndexNormal;
-				if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge (episodeIndex))
+				if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge ())
 					keyColliderGO.SetActive (false);
 
 			} 
@@ -75,7 +75,7 @@ public class MapSceneButtonController : MDSBehaviour {
 					letter.SetActive (true);
 					keyBase.SetActive (true);
 					//_btnCollider.enabled = true;
-					if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge (episodeIndex))
+					if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge ())
 						keyColliderGO.SetActive (false);
 				}
 			}

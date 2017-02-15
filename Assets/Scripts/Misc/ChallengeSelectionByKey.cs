@@ -46,19 +46,27 @@ public class ChallengeSelectionByKey : MDSBehaviour
 		Scene scene = SceneManager.GetActiveScene ();
 		w = scene.GetWorldIndex() - 1;
 
-		foreach (var item in challengeCrystalList)
-		{
-			if (UserProfile.Instance.conceptMap.worlds [w].episodes [episodeIndex-1].CheckChallengeComplete (item.Key))
-			{
+        bool directAccess = UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckDirectAccessToChallenge();
+
+        foreach(var item in challengeCrystalList)
+        {
+            if(directAccess)
+            {
+                item.Value.button.onClick.AddListener(() => SceneLoader.Instance.LoadChallenge(item.Key + 1, episodeIndex));
+                item.Value.button.interactable = true;
+            }
+            else
+                item.Value.button.interactable = false;
+
+            if(UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckChallengeComplete(item.Key))
+            {
 				//coloca na posição correta (aberto ou fechado)
 				item.Value.go.GetComponent<RectTransform>().localPosition = item.Value.completedChallengeLocalPosition;
-				item.Value.button.onClick.AddListener(() => SceneLoader.Instance.LoadChallenge(item.Key+1, episodeIndex));
 			} 
 			else
 			{
 				//coloca na posição correta (aberto ou fechado)
 				item.Value.go.GetComponent<RectTransform>().localPosition = item.Value.uncompletedChallengeLocalPosition;
-				item.Value.button.interactable = false;
 			}
 			//ativa o objeto
 			item.Value.go.SetActive (true);

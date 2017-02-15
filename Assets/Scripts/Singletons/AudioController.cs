@@ -54,9 +54,17 @@ public class AudioController : Singleton<AudioController>
 		_ThemeSource.loop = true;
 		_ThemeSource.volume = _ThemeVolume;
 		_ThemeSource.outputAudioMixerGroup = audioMixer.FindMatchingGroups ("Master")[1];
+
+
+        SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 	}
 
-	void Start()
+    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    {
+        StopVoiceOver();
+    }
+
+    void Start()
 	{
 		_SoundFXStatus = true;
 		_ThemeStatus = true;
