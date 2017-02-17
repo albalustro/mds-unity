@@ -156,25 +156,25 @@ public class AddMenu : EditorWindow
         
         for(int g = 1; g < 4; g++)
         {
-            scenePath = string.Format("MDS{0}/Scenes/G{0}Login.unity", g);
+            scenePath = string.Format("Assets/MDS{0}/Scenes/G{0}Login.unity", g);
             RevertEssentialToPrefabAt(scenePath);
 
-            scenePath = string.Format("MDS{0}/Scenes/G{0}Room.unity", g);
+            scenePath = string.Format("Assets/MDS{0}/Scenes/G{0}Room.unity", g);
             RevertEssentialToPrefabAt(scenePath);
 
             for(int w = 1; w < 5; w++)
             {
-                scenePath = string.Format("MDS{0}/Scenes/G{0}W{1}EpisodeMap.unity", g, w);
+                scenePath = string.Format("Assets/MDS{0}/Scenes/G{0}W{1}EpisodeMap.unity", g, w);
                 RevertEssentialToPrefabAt(scenePath);
 
                 for(int e = 1; e < 9; e++)
                 {
-                    scenePath = string.Format("MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}.unity", g, w, e);
+                    scenePath = string.Format("Assets/MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}.unity", g, w, e);
                     RevertEssentialToPrefabAt(scenePath);
 
                     for(int c = 1; c < 6; c++)
                     {
-                        scenePath = string.Format("MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}C{3}.unity", g, w, e, c);
+                        scenePath = string.Format("Assets/MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}C{3}.unity", g, w, e, c);
                         RevertEssentialToPrefabAt(scenePath);
                     }
                 }
@@ -194,10 +194,11 @@ public class AddMenu : EditorWindow
        
     }
 
-    static GameObject essentialsInstance;
+     
     private static void RevertEssentialToPrefabAt(string scenePath)
     {
-        EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+        GameObject essentialsInstance;
+        Scene curScene = EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
         essentialsInstance = GameObject.Find("Essentials");
         if(essentialsInstance == null)
         {
@@ -209,7 +210,7 @@ public class AddMenu : EditorWindow
             Debug.LogError(scenePath + " nao reverteu o Essentials");
             return;
         }
-        EditorSceneManager.SaveOpenScenes();
+        EditorSceneManager.SaveScene(curScene);
     }
 }
 
