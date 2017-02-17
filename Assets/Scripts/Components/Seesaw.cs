@@ -18,7 +18,8 @@ public class Seesaw : MDSBehaviour {
 
 	private SpriteRenderer _spriteRenderer;
 
-	public int scaleState;
+
+    float scaleState;
 
     protected override void Awake()
     {
@@ -28,87 +29,98 @@ public class Seesaw : MDSBehaviour {
 		slotsB = mathValidator._validatableB.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
     }
 
-    void Update()
+    IEnumerator Start()
     {
-
+   
         int? A, B;
+        WaitForSeconds wfs = new WaitForSeconds(0.16f);
 
-        mathValidator.GetNumericValues(out A, out B);
+        while(true)
+        {
+            mathValidator.GetNumericValues(out A, out B);
 
-        if(!A.HasValue)
-            A = 0;
+            if(!A.HasValue)
+                A = 0;
 
-        if(!B.HasValue)
-            B = 0;
+            if(!B.HasValue)
+                B = 0;
 
-		if (A.Value > B.Value) {
-			_spriteRenderer.sprite = Left_AIsGreater;
-			if (scaleState != -1){
-				StartCoroutine(TipTheScales (-1));
-			}
-		}
 
-		else if (A.Value == B.Value) {
-			_spriteRenderer.sprite = Middle_Equal;
-			if (scaleState != 0){
-				StartCoroutine(TipTheScales (0));
-			}
-		}
+            if(A.Value > B.Value && scaleState != -1)
+            {
+                _spriteRenderer.sprite = Left_AIsGreater;
+                TipTheScales(-1);
+                yield return wfs;
+            }
 
-		else if (A.Value < B.Value) {
-			_spriteRenderer.sprite = Right_BIsGreater;
-			if (scaleState != 1){
-				StartCoroutine(TipTheScales (1));
-			}
-		}
+            else if(A.Value == B.Value && scaleState != 0)
+            {
+                _spriteRenderer.sprite = Middle_Equal;
+                TipTheScales(0);
+                yield return wfs;
+            }
+
+            else if(A.Value < B.Value && scaleState != 1)
+            {
+                _spriteRenderer.sprite = Right_BIsGreater;
+                TipTheScales(1);
+                yield return wfs;
+            }
+            yield return null;
+        }
     }
 
-    IEnumerator TipTheScales(int myState)
+    void TipTheScales(int myState)
     {
-
-        if(myState == -1)
+        switch(myState)
         {
-            SetPosition(min_PosY, max_PosY);
-			scaleState = -1;
-            yield return new WaitForSeconds(0.5f);
+            case -1:
+                SetPosition(min_PosY, max_PosY);
+                break;
+            case 0:
+                SetPosition(balanced_PosY, balanced_PosY);
+                break;
+            case 1:
+                SetPosition(max_PosY, min_PosY);
+                break;
         }
-
-        if(myState == 0)
-        {
-            SetPosition(balanced_PosY, balanced_PosY);
-			scaleState = 0;
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        if(myState == 1)
-        {
-            SetPosition(max_PosY, min_PosY);
-			scaleState = 1;
-            yield return new WaitForSeconds(0.5f);
-        }
-
+        scaleState = myState;
     }
 
 
     void SetPosition(float a_y, float b_y)
     {
-
+        Vector3 pos;
         foreach(var slotA in slotsA)
         {
-            LeanTween.moveY(slotA.gameObject, a_y, 0.5f);
+            pos = slotA.gameObject.transform.position;
+            pos.y = a_y;
+            slotA.gameObject.transform.position= pos;
             if(slotA.draggableReference != null)
             {
-                LeanTween.moveLocalY(slotA.draggableReference.gameObject, a_y, 0.5f);
+                LeanTween.move(slotA.draggableReference.gameObject, slotA.gameObject.transform.position, 0.6f);
             }
         }
 
         foreach(var slotB in slotsB)
         {
-            LeanTween.moveY(slotB.gameObject, b_y, 0.5f);
+            pos = slotB.gameObject.transform.position;
+            pos.y = b_y;
+            slotB.gameObject.transform.position = pos;
             if(slotB.draggableReference != null)
             {
-                LeanTween.moveLocalY(slotB.draggableReference.gameObject, b_y, 0.5f);
+                LeanTween.move(slotB.draggableReference.gameObject, slotB.gameObject.transform.position, 0.6f);
             }
         }
     }
+
+
+//#if UNITY_EDITOR
+//    void OnDrawGizmos()
+//    {
+//        Gizmos.color = Color.red;
+
+//        Gizmos.DrawWireCube(bounds.center, bounds.size);
+//    }
+//#endif
 }
