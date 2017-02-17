@@ -92,11 +92,14 @@ public class OptionsHUDController : MonoBehaviour {
 		}
 	}
 
+    private bool _backing = false;
 	public void BackHUDBtn()
 	{
-		//se está na cena de quarto, icone desativado = Feito no awake
+        if(_backing) return;
+        _backing = true;
+        //se está na cena de quarto, icone desativado = Feito no awake
 
-		Scene scene = SceneManager.GetActiveScene ();
+        Scene scene = SceneManager.GetActiveScene ();
 		if (scene.IsMap())
 		{
 			//se está na cena de mapa, volta para o quarto

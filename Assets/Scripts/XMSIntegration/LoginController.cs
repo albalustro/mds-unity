@@ -19,6 +19,8 @@ public class LoginController : MDSBehaviour {
     [SerializeField] private Text _fbText;
     [SerializeField] private Button _fbButton;
 	[SerializeField] private AudioClip[] ambientSound;
+
+    private bool _tryingLogin = false;
     #endregion
 
     #region Métodos Unity
@@ -47,6 +49,8 @@ public class LoginController : MDSBehaviour {
     #region Ações dos botões
     public void Login()
 	{
+        if(_tryingLogin) return;
+        
         if (_userField.text == "" || _passField.text == "")
             OpenFeedbackPanel("Favor digitar usuário e senha.");
         else
@@ -55,7 +59,9 @@ public class LoginController : MDSBehaviour {
                 PersistenceManager.Instance.SetString("rememberUser", _userField.text);
 			if (_rememberPass.isOn)
                 PersistenceManager.Instance.SetString("rememberPass", _passField.text);
-			ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, ReturnResponseLoginValidate);
+
+            _tryingLogin = true;
+            ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, ReturnResponseLoginValidate);
 			OpenLoadingPanel();
         }
 	}
@@ -73,25 +79,32 @@ public class LoginController : MDSBehaviour {
 
 	public void ReturnResponseLoginValidate(LoginInfo wsReturn)
 	{
-		CloseFeedbackPanel ();
+        
+        CloseFeedbackPanel ();
 		if (wsReturn == null) //Servidor nao respondeu, tentar efetuar o login offline
 		{
             string pass = null;
 			LoginInfo loginData = PersistenceManager.Instance.LoadLocalUserProfile (_userField.text, ref pass);
-			if (loginData == null)
-				OpenFeedbackPanel("Falha ao realizar login.");
-			else
-			{
-				if (PersistenceManager.Instance.GetMD5Hash(_passField.text) == pass)
-				{
-					loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
+            if(loginData == null)
+            {
+                OpenFeedbackPanel("Falha ao realizar login.");
+                _tryingLogin = false;
+            }
+            else
+            {
+                if(PersistenceManager.Instance.GetMD5Hash(_passField.text) == pass)
+                {
+                    loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
                     loginData.status.message = "Offline";
-					UserProfile.Instance.SetLoginInfo (_userField.text, _passField.text, loginData);
-					SceneLoader.Instance.LoadRoomScene ();
-				}
-				else
-					OpenFeedbackPanel("Usuário ou senha inválidos.");
-			}
+                    UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginData);
+                    SceneLoader.Instance.LoadRoomScene();
+                }
+                else
+                {
+                    OpenFeedbackPanel("Usuário ou senha inválidos.");
+                    _tryingLogin = false;
+                }
+            }
 		} 
 		else  //Servidor respondeu
 		{
@@ -107,7 +120,8 @@ public class LoginController : MDSBehaviour {
 			//Erro de usuário e/ou senha
 			case ConnectionResponse.LOGIN_ERROR:
 				OpenFeedbackPanel(loginInfo.status.message);
-				break;
+                    _tryingLogin = false;
+                    break;
 			}
 		}
 	}

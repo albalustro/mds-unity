@@ -17,6 +17,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
 		public Vector3 completedChallengeLocalPosition;
 		public Button button;
 
+        
 #if UNITY_EDITOR
         [FullInspector.InspectorButton]
         void CaptureCompletedPosition()
@@ -39,7 +40,9 @@ public class ChallengeSelectionByKey : MDSBehaviour
 
     }
 
-	public IEnumerator ConfigureCrystalsOnKey(int episodeIndex)
+    private bool _loadingScene = false;
+
+    public IEnumerator ConfigureCrystalsOnKey(int episodeIndex)
 	{
 		int w, e;
 
@@ -52,7 +55,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
         {
             if(directAccess)
             {
-                item.Value.button.onClick.AddListener(() => SceneLoader.Instance.LoadChallenge(item.Key + 1, episodeIndex));
+                item.Value.button.onClick.AddListener(() => loadChallengeOnClick(item.Key + 1, episodeIndex));
                 item.Value.button.interactable = true;
             }
             else
@@ -76,6 +79,13 @@ public class ChallengeSelectionByKey : MDSBehaviour
 			yield return new WaitForSeconds (0.3f);
 		}
 	}
+
+    private void loadChallengeOnClick(int challengeIndex, int episodeIndex)
+    {
+        if(_loadingScene) return;
+        _loadingScene = true;
+        SceneLoader.Instance.LoadChallenge(challengeIndex, episodeIndex);
+    }
 
     [FullInspector.ShowInInspector]
     public Dictionary<int, ChallengeSelection> challengeCrystalList;

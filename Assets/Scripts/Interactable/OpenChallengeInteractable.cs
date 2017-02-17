@@ -34,10 +34,13 @@ namespace MDS.Interactable
 
         }
 
+        private bool _loadingScene = false;
         public override void Interact()
         {
             if(Vector2.Distance(_player.transform.position, _interationPosition) < 1f)
             {
+                if(_loadingScene) return;
+                _loadingScene = true;
                 SceneLoader.Instance.LoadChallenge(_challengeSceneIndex, SceneManager.GetActiveScene().GetEpisodeIndex());
                 return;
             }

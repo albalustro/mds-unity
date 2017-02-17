@@ -22,6 +22,8 @@ public class MapSceneButtonController : MDSBehaviour {
 	private Collider2D _btnCollider;
 	private Animator _anim;
 
+    private bool _loadingScene = false;
+
 	void Start () {
 		_anim = GetComponent<Animator> ();
 		_btnCollider = GetComponent<Collider2D> ();
@@ -94,8 +96,11 @@ public class MapSceneButtonController : MDSBehaviour {
 		}
 	}
 
+
 	public void LoadEpisode()
 	{
+        if(_loadingScene) return;
+        _loadingScene = true;
 		SceneLoader.Instance.LoadEpisodeScene (episodeIndex);
 	}
 

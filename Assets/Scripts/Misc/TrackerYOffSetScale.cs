@@ -39,12 +39,19 @@ public class TrackerYOffSetScale : MDSBehaviour {
     }
 #endif
 
+    float signal;
+
+    private void Start()
+    {
+        signal = Mathf.Sign(transform.localScale.x);
+    }
 
     void Update()
 	{
         float curY = transform.position.y;
         float t = (curY - _minYScale.y) / (_maxYScale.y - _minYScale.y);
         Vector3 scale = Vector3.Lerp(_minYScale.scale, _maxYScale.scale, t);
+        scale.x = Mathf.Abs(scale.x) * signal;
         transform.localScale = scale;
 	}
 
