@@ -101,7 +101,7 @@ namespace MDS.Core.ProcessActivator
                 _currentChallenge.IsExecutingActions() || 
                 _currentChallenge.IsInVictoryCondition())
             {
-                Log("Process button DISABLED");
+                //Log("Process button DISABLED");
                 Disable();
                 return;
             }
