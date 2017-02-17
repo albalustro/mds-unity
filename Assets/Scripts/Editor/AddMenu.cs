@@ -79,13 +79,13 @@ public class AddMenu : EditorWindow
         return ret;
     }
 
-    [MenuItem("MDS/PlayerPref/Reset Playerprefs")]
+    [MenuItem("MDS/Tools/PlayerPref/Reset Playerprefs")]
     public static void DeletePlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
     }
 
-    [MenuItem("MDS/Caching/Clean")]
+    [MenuItem("MDS/Tools/Caching/Clean")]
     public static void ClearCaching()
     {
         Caching.CleanCache();
@@ -148,6 +148,69 @@ public class AddMenu : EditorWindow
     }
 
 
+    [MenuItem("MDS/Tools/Revert ESSENTIALS to Prefab")]
+    static void Revert()
+    {
+
+        string scenePath;
+        
+        for(int g = 1; g < 4; g++)
+        {
+            scenePath = string.Format("MDS{0}/Scenes/G{0}Login.unity", g);
+            RevertEssentialToPrefabAt(scenePath);
+
+            scenePath = string.Format("MDS{0}/Scenes/G{0}Room.unity", g);
+            RevertEssentialToPrefabAt(scenePath);
+
+            for(int w = 1; w < 5; w++)
+            {
+                scenePath = string.Format("MDS{0}/Scenes/G{0}W{1}EpisodeMap.unity", g, w);
+                RevertEssentialToPrefabAt(scenePath);
+
+                for(int e = 1; e < 9; e++)
+                {
+                    scenePath = string.Format("MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}.unity", g, w, e);
+                    RevertEssentialToPrefabAt(scenePath);
+
+                    for(int c = 1; c < 6; c++)
+                    {
+                        scenePath = string.Format("MDS{0}/Scenes/World{1}/Episode{2}/G{0}W{1}E{2}C{3}.unity", g, w, e, c);
+                        RevertEssentialToPrefabAt(scenePath);
+                    }
+                }
+            }
+        }
+
+
+        var selection = Selection.gameObjects;
+
+        if(selection.Length > 0)
+        {
+            for(var i = 0; i < selection.Length; i++)
+            {
+                PrefabUtility.RevertPrefabInstance(selection[i]);
+            }
+        }
+       
+    }
+
+    static GameObject essentialsInstance;
+    private static void RevertEssentialToPrefabAt(string scenePath)
+    {
+        EditorSceneManager.OpenScene(scenePath, OpenSceneMode.Single);
+        essentialsInstance = GameObject.Find("Essentials");
+        if(essentialsInstance == null)
+        {
+            Debug.LogError(scenePath + " nao tem Essentials");
+            return;
+        }
+        if (PrefabUtility.RevertPrefabInstance(essentialsInstance)==false)
+        {
+            Debug.LogError(scenePath + " nao reverteu o Essentials");
+            return;
+        }
+        EditorSceneManager.SaveOpenScenes();
+    }
 }
 
 [InitializeOnLoad]
