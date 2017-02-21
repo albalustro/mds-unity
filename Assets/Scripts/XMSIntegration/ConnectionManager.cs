@@ -89,6 +89,15 @@ public class ConnectionManager : Singleton<ConnectionManager>
 	{
 		ConceptMap cm;
 		yield return www;
+
+        // TIMEOUT, para o futuro, se necessario
+        //while(!www.isDone)
+        //{
+        //    if(timer > timeOut) { failed = true; break; }
+        //    timer += Time.deltaTime;
+        //    yield return null;
+        //}
+
         if(www.error == null)
         {
             string wsReturn = www.text.Trim();

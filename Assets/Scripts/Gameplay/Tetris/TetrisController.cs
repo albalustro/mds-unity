@@ -151,13 +151,13 @@ namespace MDS.Gameplay.Tetris
 
         private IEnumerator WaitLoseAnimation()
         {
-            Log("Antes do dialogo");
+           // Log("Antes do dialogo");
             yield return new WaitForSeconds(0.1f);
             yield return new WaitWhile(MDS.DialogueSystem.DialogueSystem.Instance.IsDialogueOpen);
-            Log("Depois do dialogo fechar, aguardando 1,5s");
+           // Log("Depois do dialogo fechar, aguardando 1,5s");
             yield return new WaitForSeconds(1.5f);
             _isPreAnimating = false;
-            Log("Iniciando animacao de vitoria");
+           // Log("Iniciando animacao de vitoria");
             StartCoroutine(VictoryAnimation());
         }
         #endregion

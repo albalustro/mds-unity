@@ -23,10 +23,10 @@ public class ConceptSyncer : Singleton<ConceptSyncer>
     public void SendConceptMapToServer(string token, ConceptMap cm, Action<ConceptMap> callback)
 	{
 		sendConceptCallback = callback;
-		ConnectionManager.Instance.DoSincronize (token, cm, ReceiveConceptMapFromServer);
+		ConnectionManager.Instance.DoSincronize (token, cm, ReceiveConceptMapFromServerCallback);
 	}
 
-	public void ReceiveConceptMapFromServer(ConceptMap s)
+	public void ReceiveConceptMapFromServerCallback(ConceptMap s)
 	{
 		sendConceptCallback (s);
 	}

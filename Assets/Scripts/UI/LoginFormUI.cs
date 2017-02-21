@@ -28,6 +28,10 @@ public class LoginFormUI : MonoBehaviour {
         _feedbackUI = FeedbackUI.Instance;
         _persistenceManager = PersistenceManager.Instance;
 
+        _userField.shouldHideMobileInput = true;
+        _passField.shouldHideMobileInput = true;
+        TouchScreenKeyboard.hideInput = true;
+
         if(_persistenceManager.HasKey("rememberUser"))
         {
             _userField.text = _persistenceManager.GetString("rememberUser");
@@ -39,7 +43,7 @@ public class LoginFormUI : MonoBehaviour {
             _rememberPass.isOn = true;
         }
 
-        TouchScreenKeyboard.hideInput = true;
+        
     }
 
     #region Ações dos botões
@@ -68,14 +72,31 @@ public class LoginFormUI : MonoBehaviour {
     #endregion
 
     TouchScreenKeyboard _curTouchScreenKeyboard;
-    public void OpenTouchKB(bool pass)
+    public void OpenTKB_Login()
     {
-#if UNITY_ANDROID || UNITY_IOS
-        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 1.0f);
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
 
-        _curTouchScreenKeyboard = TouchScreenKeyboard.Open("", TouchScreenKeyboardType.Default, 
-                                    false, false, pass, true);
+        TouchScreenKeyboard.hideInput = true;
+        _curTouchScreenKeyboard = TouchScreenKeyboard.Open(_userField.text, 
+                                    TouchScreenKeyboardType.Default, 
+                                    false, false, false, false);
         
+        StopCoroutine(CloseTouchKB());
+        StartCoroutine(CloseTouchKB());
+#endif
+    }
+
+    public void OpenTKB_Pass()
+    {
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
+
+        TouchScreenKeyboard.hideInput = true;
+        _curTouchScreenKeyboard = TouchScreenKeyboard.Open("",
+                                    TouchScreenKeyboardType.Default,
+                                    false, false, true, false);
+
         StopCoroutine(CloseTouchKB());
         StartCoroutine(CloseTouchKB());
 #endif
@@ -90,17 +111,23 @@ public class LoginFormUI : MonoBehaviour {
 
     private IEnumerator CloseTouchKB()
     {
-#if UNITY_ANDROID || UNITY_IOS
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
         
         while(_curTouchScreenKeyboard.active)
             yield return null;
 
-        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 20, 1.0f);
+        _curTouchScreenKeyboard = null;
+
+        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 20, 0.3f);
 #else
         yield return null;
 #endif
 
     }
+
+
+
+
 
     private void DoLoginCallback(LoginInfo wsReturn)
     {

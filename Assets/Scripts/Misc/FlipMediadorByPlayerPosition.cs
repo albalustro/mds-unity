@@ -6,13 +6,13 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 
 	private Transform playerTransform;
 	private Vector3 targetPosition;
-	private SpriteRenderer renderer;
+	private SpriteRenderer _renderer;
 	[FullInspector.InspectorTooltip("Set this to only flip GO if its Mediator")]
 	private bool _isMediator;
 
 	void Start () {
 		playerTransform = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform> ();
-		renderer = GetComponent<SpriteRenderer> ();
+		_renderer = GetComponent<SpriteRenderer> ();
 		StartCoroutine (CheckFlip ());
 		if (gameObject.tag == "Mediator")
 			_isMediator = true;
@@ -28,9 +28,9 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 			}
 
 			if ((targetPosition.y - 0.5f) < (transform.position.y - 1f))
-				renderer.sortingOrder = 0;
+				_renderer.sortingOrder = 0;
 			else
-				renderer.sortingOrder = 2;
+				_renderer.sortingOrder = 2;
 			
 			yield return new WaitForSeconds (0.35f);
 		}
@@ -39,8 +39,8 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 	void FlipMediator()
 	{
 		if (targetPosition.x < transform.position.x)
-			renderer.flipX = false;
+			_renderer.flipX = false;
 		else
-			renderer.flipX = true;
+			_renderer.flipX = true;
 	}
 }

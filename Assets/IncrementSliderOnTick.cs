@@ -20,7 +20,7 @@ public class IncrementSliderOnTick : MDSBehaviour {
 		while (true) {
 			yield return _seconds;
 			_slider.IncrementStep ();
-			Log (transform.parent.name);
+			//Log (transform.parent.name);
 		}
 	}
 

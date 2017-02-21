@@ -31,7 +31,7 @@ public class PersistenceManager : Singleton<PersistenceManager> {
     public LoginInfo LoadLocalUserProfile(string user, ref string pass)
 	{
         string key = user + _gameIndexToComposePlayerPrefsKey;
-        Log("Key: " + key);
+       // Log("Key: " + key);
         if(!HasKey(key))
         {
             return null;

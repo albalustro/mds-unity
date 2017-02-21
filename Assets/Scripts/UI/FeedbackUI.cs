@@ -83,6 +83,7 @@ public class FeedbackUI : Singleton<FeedbackUI> {
 
     internal void Show(string text)
     {
+        SetButtons(true, false, false, false);
         _textField.text = text;
         _canvas.SetActive(true);
     }
@@ -99,24 +100,25 @@ public class FeedbackUI : Singleton<FeedbackUI> {
     {
         if(_okFB != null)
             _okFB();
+        Close();
     }
     public void CloseHandler()
     {
-        Close();
         if(_closeFB != null)
             _closeFB();
+        Close();
     }
     public void SimHandler()
     {
         if(_simFB != null)
             _simFB();
+        Close();
     }
     public void NaoHandler()
     {
-        if(_naoFB!=null)
-        {
+        if(_naoFB != null)
             _naoFB();
-        }
+        Close();
     }
 
    
