@@ -4,15 +4,21 @@ using UnityEngine.Audio;
 using MDS.Utilities;
 using UnityEngine.SceneManagement;
 using FullInspector;
+using MDS.Core.SceneManagement;
 
 [RequireComponent(typeof(AudioListener))]
 public class AudioController : Singleton<AudioController>
 {
-	private AudioSource _SoundFXSource = new AudioSource();
+    [SerializeField]
+    private AudioClip[] themeLogin;
+    [SerializeField]
+    private AudioClip[][] themeWorlds;
+
+    private AudioSource _SoundFXSource = new AudioSource();
 	private AudioSource _VoiceOverSource = new AudioSource();
 	private AudioSource _ThemeSource = new AudioSource();
-	private float _ThemeVolume = 0.75f;
-	private float _VoiceOverVolume = 0.75f;
+	private float _ThemeVolume = 0.70f;
+	private float _VoiceOverVolume = 1.0f;
 	private float _SoundFXVolume = 1.0f;
 	private bool _ThemeStatus;
 	private bool _VoiceOverStatus;
@@ -59,9 +65,27 @@ public class AudioController : Singleton<AudioController>
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
 	}
 
-    private void SceneManager_sceneLoaded(Scene arg0, LoadSceneMode arg1)
+    private void SceneManager_sceneLoaded(Scene curScene, LoadSceneMode arg1)
     {
         StopVoiceOver();
+        if(curScene.name.Equals("splash")) return;
+        if (curScene.IsLogin())
+        {
+            PlayTheme(themeLogin.GetRandom());
+        }
+        else if (curScene.IsChallenge())
+        {
+            // se nao tem um contexto, é porque veio pela chave na cena do mapa. 
+            // dessa forma o audio do episodio nao inicia, entao temos que
+            // inicia-lo na mão
+            if (EpisodeContext.HasEpisodeContext()==false)
+            {
+                int w, e;
+                w = curScene.GetWorldIndex() - 1;
+                e = curScene.GetEpisodeIndex() - 1;
+                PlayTheme(themeWorlds[w][e]);
+            }
+        }
     }
 
     void Start()

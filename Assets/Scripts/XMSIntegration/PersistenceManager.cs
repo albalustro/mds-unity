@@ -7,7 +7,15 @@ using UnityEngine.SceneManagement;
 
 public class PersistenceManager : Singleton<PersistenceManager> {
 
-    private string _gameIndexToComposePlayerPrefsKey;
+    private string _gameIndexToComposePlayerPrefsKey
+    {
+        get
+        {
+            if (SceneManager.GetActiveScene().name.Equals("splash")==false)
+                return  "_" + SceneManager.GetActiveScene().GetGameIndex().ToString();
+            return "__";
+        }
+    }
 
     protected override void Awake()
     {
@@ -18,12 +26,17 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         else
             DontDestroyOnLoad(gameObject);
 
-        _gameIndexToComposePlayerPrefsKey = "_" + SceneManager.GetActiveScene().GetGameIndex().ToString();
     }
 
     public LoginInfo LoadLocalUserProfile(string user, ref string pass)
 	{
-        AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(user + _gameIndexToComposePlayerPrefsKey));
+        string key = user + _gameIndexToComposePlayerPrefsKey;
+        Log("Key: " + key);
+        if(!HasKey(key))
+        {
+            return null;
+        }
+        AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(key));
         LoginInfo li = aux.loginInfo;
         pass = aux.pass;
         return li;
@@ -31,11 +44,13 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 		
 	public void LoadConceptMap(UserProfile profile, ref ConceptMap cm)
 	{
-        if (!PlayerPrefs.HasKey(profile.login + _gameIndexToComposePlayerPrefsKey))
+        string key = profile.login + _gameIndexToComposePlayerPrefsKey;
+        if (!PlayerPrefs.HasKey(key))
             cm = null;
         else
         {
-            AuxClass aux = JsonConvert.DeserializeObject<AuxClass>(PlayerPrefs.GetString(profile.login + _gameIndexToComposePlayerPrefsKey));
+            AuxClass aux = JsonConvert.DeserializeObject<AuxClass>
+                (PlayerPrefs.GetString(key));
             cm = aux.conceptMap;
         }
 	}
@@ -47,7 +62,8 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         aux.pass  = GetMD5Hash(profile.pass);
         aux.loginInfo = profile.loginInfo;
         aux.conceptMap = profile.conceptMap;
-        PlayerPrefs.SetString (profile.login + _gameIndexToComposePlayerPrefsKey, JsonConvert.SerializeObject (aux));
+        string key = profile.login + _gameIndexToComposePlayerPrefsKey;
+        PlayerPrefs.SetString (key, JsonConvert.SerializeObject (aux));
     }
 
     public bool HasKey(string key)

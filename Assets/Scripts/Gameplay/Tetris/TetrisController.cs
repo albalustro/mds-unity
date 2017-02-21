@@ -71,7 +71,7 @@ namespace MDS.Gameplay.Tetris
 			//Define os keyframes da curva de incremento da velocidade
 			Keyframe[] keys = new Keyframe[2];
 			keys [0] = new Keyframe (0, 1);
-			keys [1] = new Keyframe (1, 0.5f);
+			keys [1] = new Keyframe (1, 0.75f);
 			timeCurve = new AnimationCurve (keys);
 
 			SpawnNewItem();

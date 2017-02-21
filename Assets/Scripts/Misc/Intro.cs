@@ -24,8 +24,8 @@ namespace MDS
             yield return SceneLoader.Instance.DownloadInitialAssetbundles();
             //FadeTransition.Instance.FadeColor = originalFadeColor;
 #else
-            FadeTransition.Instance.BeginFade(FadeDirection.In);
-            yield return new WaitForSeconds(3f);
+           // FadeTransition.Instance.BeginFade(FadeDirection.In);
+           // yield return new WaitForSeconds(3f);
 #endif
 
             FadeTransition.Instance.FadeTime = originalFadeTime;

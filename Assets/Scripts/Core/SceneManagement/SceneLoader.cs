@@ -264,7 +264,8 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         IEnumerator LoadSceneByIndex(int index)
         {
-            yield return new WaitForSeconds(_fadeTransitionInstance.BeginFade(FadeDirection.Out));
+            //yield return new WaitForSeconds(_fadeTransitionInstance.BeginFade(FadeDirection.Out));
+            yield return null;
             SceneManager.LoadScene(index);
         }
 

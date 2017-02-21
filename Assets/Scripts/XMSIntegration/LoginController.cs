@@ -15,9 +15,7 @@ public class LoginController : MDSBehaviour {
 	[SerializeField] private InputField _passField;
     [SerializeField] private Toggle _rememberUser;
     [SerializeField] private Toggle _rememberPass;
-    [SerializeField] private GameObject _feedBackPanel;
-    [SerializeField] private Text _fbText;
-    [SerializeField] private Button _fbButton;
+    
 	[SerializeField] private AudioClip[] ambientSound;
 
     private bool _tryingLogin = false;
@@ -35,13 +33,7 @@ public class LoginController : MDSBehaviour {
 
     void Start () {
 
-        if (PersistenceManager.Instance.HasKey("rememberUser"))
-            _userField.text = PersistenceManager.Instance.GetString("rememberUser");
-        if (PersistenceManager.Instance.HasKey("rememberPass"))
-        {
-            _passField.text = PersistenceManager.Instance.GetString("rememberPass");
-            _rememberPass.isOn = true;
-        }
+       
 		AudioController.Instance.PlayTheme (ambientSound.GetRandom());
     }
     #endregion
@@ -79,8 +71,8 @@ public class LoginController : MDSBehaviour {
 
 	public void ReturnResponseLoginValidate(LoginInfo wsReturn)
 	{
-        
-        CloseFeedbackPanel ();
+
+        FeedbackUI.Instance.Close();
 		if (wsReturn == null) //Servidor nao respondeu, tentar efetuar o login offline
 		{
             string pass = null;
@@ -96,6 +88,7 @@ public class LoginController : MDSBehaviour {
                 {
                     loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
                     loginData.status.message = "Offline";
+                    OpenFeedbackPanel("Login offline");
                     UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginData);
                     SceneLoader.Instance.LoadRoomScene();
                 }
@@ -133,28 +126,16 @@ public class LoginController : MDSBehaviour {
     /// <param name="text">Texto a ser exibido no painel</param>
     public void OpenFeedbackPanel(string text)
     {
-        _fbText.text = text;
-        _fbButton.gameObject.SetActive(true);
-        _feedBackPanel.SetActive(true);
+        FeedbackUI.Instance.SetText(text).Show();
     }
 
-    /// <summary>
-    /// Fecha painel informativo
-    /// </summary>
-    public void CloseFeedbackPanel()
-    {
-        _fbText.text = "";
-        _feedBackPanel.SetActive(false);
-    }
 
     /// <summary>
     /// Exibe painel de Loading...
     /// </summary>
 	public void OpenLoadingPanel()
     {
-        _fbText.text = "Carregando...";
-        _fbButton.gameObject.SetActive(false);
-        _feedBackPanel.SetActive(true);
+        FeedbackUI.Instance.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
     }
     #endregion
 
