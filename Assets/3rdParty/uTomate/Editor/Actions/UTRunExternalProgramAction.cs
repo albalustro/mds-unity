@@ -36,40 +36,44 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(order = 2)]
         public UTBool useShellExecute;
 
-        [UTDoc(description = "Calculate a file set that should be given as arguments to the external program?")]
+        [UTDoc(description = "Start the process without creating a new window?")]
         [UTInspectorHint(order = 3)]
+        public UTBool createNoWindow;
+
+        [UTDoc(description = "Calculate a file set that should be given as arguments to the external program?")]
+        [UTInspectorHint(order = 4)]
         public UTBool useFileset;
 
         [UTDoc(description = "Base path for includes and excludes.")]
-        [UTInspectorHint(required = true, order = 4, displayAs = UTInspectorHint.DisplayAs.FolderSelect, caption = "Select base path for fileset.")]
+        [UTInspectorHint(required = true, order = 5, displayAs = UTInspectorHint.DisplayAs.FolderSelect, caption = "Select base path for fileset.")]
         public UTString basePath;
 
         [UTDoc(description = "Files to include into the argument list.")]
-        [UTInspectorHint(order = 5)]
+        [UTInspectorHint(order = 6)]
         public UTString[] includes;
 
         [UTDoc(description = "Files to exclude from the argument list.")]
-        [UTInspectorHint(order = 6)]
+        [UTInspectorHint(order = 7)]
         public UTString[] excludes;
 
         [UTDoc(description = "Should the file paths be given relative to the base path?")]
-        [UTInspectorHint(order = 7)]
+        [UTInspectorHint(order = 8)]
         public UTBool relativePaths;
 
         [UTDoc(description = "Path separator to use for the files.")]
-        [UTInspectorHint(order = 8)]
+        [UTInspectorHint(order = 9)]
         public UTPathSeparator pathSeparator;
 
         [UTDoc(description = "Should the external program be run once for each file in the file set?")]
-        [UTInspectorHint(order = 9)]
+        [UTInspectorHint(order = 10)]
         public UTBool runOncePerFile;
 
         [UTDoc(description = "Should the execution be aborted if the external program returns with a nonzero status code?")]
-        [UTInspectorHint(order = 10)]
+        [UTInspectorHint(order = 11)]
         public UTBool failOnError;
 
         [UTDoc(description = "Command line arguments. One argument per line. These are auto-quoted, so you don't quote them manually.")]
-        [UTInspectorHint(order = 11)]
+        [UTInspectorHint(order = 12)]
         public UTExecutableParam[] arguments;
 
         // transient
@@ -292,6 +296,7 @@ namespace AncientLightStudios.uTomate
             }
 
             var doUseShellExecute = useShellExecute.EvaluateIn(context);
+            var doCreateNoWindow = createNoWindow.EvaluateIn(context);
 
             var theWorkingDirectory = workingDirectory.EvaluateIn(context);
             if (!string.IsNullOrEmpty(theWorkingDirectory))
@@ -306,6 +311,7 @@ namespace AncientLightStudios.uTomate
             process.StartInfo.FileName = executable;
             process.StartInfo.Arguments = finalArgs;
             process.StartInfo.UseShellExecute = doUseShellExecute;
+            process.StartInfo.CreateNoWindow = doCreateNoWindow;
 
             if (!string.IsNullOrEmpty(theWorkingDirectory))
             {

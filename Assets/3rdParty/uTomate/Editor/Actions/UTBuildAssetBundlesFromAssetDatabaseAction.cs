@@ -7,10 +7,8 @@
 
 namespace AncientLightStudios.uTomate
 {
-    using AncientLightStudios.uTomate.API;
-    using System;
+    using API;
     using System.Collections;
-    using System.IO;
     using UnityEditor;
     using UnityEngine;
     using UObject = UnityEngine.Object;
@@ -50,6 +48,12 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(group = "Bundle", order = 6)]
         public UTBool forceRebuild;
 
+#if !(UNITY_5_0 || UNITY_5_1|| UNITY_5_2) // VR: 5.3
+        [UTDoc(title = "Chunk Based Compression", description = "Use chunk-based LZ4 compression when creating the AssetBundle.")]
+        [UTInspectorHint(group = "Bundle", order = 7)]
+        public UTBool chunkBasedCompression;
+#endif
+
         public override IEnumerator Execute(UTContext context)
         {
             var theOutputPath = outputPath.EvaluateIn(context);
@@ -77,7 +81,9 @@ namespace AncientLightStudios.uTomate
             var realUncompressedAssetBundle = uncompressedAssetBundle.EvaluateIn(context);
             var realAppendHash = appendHash.EvaluateIn(context);
             var realForceRebuild = forceRebuild.EvaluateIn(context);
-
+#if !(UNITY_5_0 || UNITY_5_1|| UNITY_5_2) // VR: 5.3
+            var realChunkBasedCompression = chunkBasedCompression.EvaluateIn(context);
+#endif
             var buildOpts = (BuildAssetBundleOptions)0;
 
             if (realDisableWriteTypeTree)
@@ -105,7 +111,13 @@ namespace AncientLightStudios.uTomate
                 buildOpts |= BuildAssetBundleOptions.ForceRebuildAssetBundle;
             }
 
-			BuildTarget target = targetPlatform.EvaluateIn(context);
+#if !(UNITY_5_0 || UNITY_5_1|| UNITY_5_2) // VR: 5.3
+            if (realChunkBasedCompression)
+            {
+                buildOpts |= BuildAssetBundleOptions.ChunkBasedCompression;
+            }
+#endif
+			var target = targetPlatform.EvaluateIn(context);
 			BuildPipeline.BuildAssetBundles(theOutputPath, buildOpts, target);
             Debug.Log("Built asset bundles at " + theOutputPath);
             yield break;

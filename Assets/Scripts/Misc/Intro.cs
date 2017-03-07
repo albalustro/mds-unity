@@ -7,9 +7,15 @@ namespace MDS
 {
     public class Intro : MDSBehaviour
     {
+        public GameObject textVersion;
+        public bool byPassOBB;
 
         IEnumerator Start()
         {
+#if UNITY_ANDROID && !UNITY_EDITOR
+            Log("Inicio");
+            SceneLoader.Instance.LoadOBB();
+#endif
             float originalFadeTime = FadeTransition.Instance.FadeTime;
             FadeTransition.Instance.FadeTime = 1f;
             FadeTransition.Instance.BeginFade(FadeDirection.In);
@@ -23,10 +29,15 @@ namespace MDS
             FadeTransition.Instance.BeginFade(FadeDirection.In);
             yield return SceneLoader.Instance.DownloadInitialAssetbundles();
             //FadeTransition.Instance.FadeColor = originalFadeColor;
-#else
-           // FadeTransition.Instance.BeginFade(FadeDirection.In);
-           // yield return new WaitForSeconds(3f);
 #endif
+#if UNITY_ANDROID && !UNITY_EDITOR
+            // FadeTransition.Instance.BeginFade(FadeDirection.In);
+            // yield return new WaitForSeconds(3f);
+            if (byPassOBB==false)
+                yield return SceneLoader.Instance.WaitOBB();
+#endif
+
+            textVersion.SetActive(false);
 
             FadeTransition.Instance.FadeTime = originalFadeTime;
             SceneLoader.Instance.LoadLogin();

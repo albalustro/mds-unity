@@ -27,6 +27,10 @@ namespace AncientLightStudios.uTomate
                 case "runOncePerFile":
                     return (self.useFileset.UseExpression || self.useFileset.Value) ?
                         UTVisibilityDecision.Visible : UTVisibilityDecision.Invisible;
+                case "createNoWindow":
+                    return self.useShellExecute.HasValueOrExpression(false)
+                        ? UTVisibilityDecision.Visible : UTVisibilityDecision.Invisible;
+
             }
 
             return base.IsVisible(fieldInfo);

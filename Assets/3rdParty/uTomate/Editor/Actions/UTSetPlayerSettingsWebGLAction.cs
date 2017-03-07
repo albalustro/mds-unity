@@ -48,10 +48,17 @@ namespace AncientLightStudios.uTomate
             PlayerSettings.defaultWebScreenHeight = defaultScreenHeight.EvaluateIn(context);
             PlayerSettings.runInBackground = runInBackground.EvaluateIn(context);
 
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            PlayerSettings.WebGL.memorySize = memorySize.EvaluateIn(context);
+            PlayerSettings.WebGL.exceptionSupport = enableExceptions.EvaluateIn(context);
+            PlayerSettings.WebGL.dataCaching = dataCaching.EvaluateIn(context);
+#endif
             using(var wrapper = new UTPlayerSettingsWrapper()) {
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 // VR: [5.0,5.4]
                 wrapper.SetInt(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "memorySize"), memorySize.EvaluateIn(context));
                 wrapper.SetEnum(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "exceptionSupport"), enableExceptions.EvaluateIn(context));
                 wrapper.SetBool(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "dataCaching"), dataCaching.EvaluateIn(context));
+#endif
 
                 ApplyCommonSettings(wrapper, context);
             }
@@ -80,12 +87,15 @@ namespace AncientLightStudios.uTomate
             defaultScreenWidth.StaticValue = PlayerSettings.defaultWebScreenWidth;
             defaultScreenHeight.StaticValue = PlayerSettings.defaultWebScreenHeight;
             runInBackground.StaticValue = PlayerSettings.runInBackground;
-            renderingPath.StaticValue = PlayerSettings.renderingPath;
-
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            memorySize.StaticValue = PlayerSettings.WebGL.memorySize;
+            enableExceptions.StaticValue = PlayerSettings.WebGL.exceptionSupport;
+            dataCaching.StaticValue = PlayerSettings.WebGL.dataCaching;
+#else
             memorySize.StaticValue = wrapper.GetInt(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "memorySize"));
             enableExceptions.StaticValue = wrapper.GetEnum<WebGLExceptionSupport>(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "exceptionSupport"));
             dataCaching.StaticValue = wrapper.GetBool(UTPlayerSettingsWrapper.GetPropertyNameForBuildTarget(BuildTargetGroup.WebGL, "dataCaching"));
-
+#endif
             LoadCommonSettings(wrapper);
         }
 
@@ -125,12 +135,5 @@ namespace AncientLightStudios.uTomate
         }
 #endif
 
-
-        public enum WebGLExceptionSupport
-        {
-            None,
-            ExplicitlyThrownExceptionsOnly,
-            Full,
-        }
     }
 }

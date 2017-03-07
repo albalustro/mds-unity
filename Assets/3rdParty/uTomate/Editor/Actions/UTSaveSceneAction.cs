@@ -10,7 +10,7 @@ namespace AncientLightStudios.uTomate
     using API;
     using System.Collections;
     using UnityEditor;
-#if !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2 // VR 5.3
+#if !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2 // VR: 5.3
     using UnityEditor.SceneManagement;
 #endif
 
@@ -42,7 +42,7 @@ namespace AncientLightStudios.uTomate
 
                 UTFileUtils.EnsureParentFolderExists(UTFileUtils.CombineToPath(UTFileUtils.ProjectRoot, theFileName));
             }
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             if (!EditorApplication.SaveScene(theFileName, isSaveCopy))
 #else
             if (!EditorSceneManager.SaveScene(EditorSceneManager.GetActiveScene(), theFileName, isSaveCopy))

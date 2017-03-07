@@ -202,11 +202,17 @@ namespace AncientLightStudios.uTomate.API
                 EditorGUILayout.HelpBox(utDoc.description, MessageType.None, true);
             }
 
+            if (!string.IsNullOrEmpty(utDoc.notice))
+            {
+                EditorGUILayout.HelpBox(utDoc.notice, MessageType.Info, true);
+            }
+
             string msg;
             if (!UTRequiresLicenseAttribute.HasRequiredLicense(type, out msg))
             {
                 EditorGUILayout.HelpBox("This action requires the following licenses that are not currently installed: " + msg, MessageType.Warning, true);
             }
+
         }
 
         private void OpenHelp(string helpUrl)

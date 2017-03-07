@@ -290,9 +290,7 @@ namespace AncientLightStudios.uTomate
 
                 wrapper.SetBool("m_MobileMTRendering", multithreadedRendering.EvaluateIn(context));
                 wrapper.SetBool("gpuSkinning", gpuSkinning.EvaluateIn(context));
-                wrapper.SetEnum("m_MobileRenderingPath", renderingPath.EvaluateIn(context));
 
-             
                 wrapper.SetBool("AndroidTVCompatibility", androidTvCompatibility.EvaluateIn(context));
                 wrapper.SetBool("AndroidIsGame", androidGame.EvaluateIn(context));
 
@@ -434,6 +432,18 @@ namespace AncientLightStudios.uTomate
             get
             {
                 return "Load Android specific player settings";
+            }
+        }
+
+        public override bool SupportsMutingAudio
+        {
+            get
+            {
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+                return true;
+#else
+                return false;
+#endif
             }
         }
 

@@ -201,12 +201,41 @@ namespace AncientLightStudios.uTomate
 
             Debug.Log("Compiling " + fileList.Length + " files and " + resourceFiles.Length + " resources.");
 
+
             var responseFile = UTFileUtils.TempFile(".rsp");
             File.WriteAllText(responseFile, options + codeFiles.ToString());
 
             var parameters = new CompilerParameters {CompilerOptions = "@" + UTExecutableParam.Quote(responseFile), OutputAssembly = theOutputFile, IncludeDebugInformation = theDebugInformation};
 
-            var results = compiler.CompileAssemblyFromFile(parameters);
+            var path = Environment.GetEnvironmentVariable("PATH");
+
+            // on OSX Unity has messed up the paths to gmcs so we need to fix this here...
+            if (Application.platform == RuntimePlatform.OSXEditor)
+            {
+
+                var pathIncludingMono = path + Path.PathSeparator + EditorApplication.applicationContentsPath +
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 // VR: [5.0, 5.3]
+                                        "/Frameworks/Mono/bin";
+#else
+                                        "/Mono/bin";
+#endif
+                Environment.SetEnvironmentVariable("PATH", pathIncludingMono, EnvironmentVariableTarget.Process);
+            }
+
+            CompilerResults results;
+            try
+            {
+                results = compiler.CompileAssemblyFromFile(parameters);
+            }
+            finally
+            {
+                // make sure the path variable is reset.
+                if (Application.platform == RuntimePlatform.OSXEditor)
+                {
+                    Environment.SetEnvironmentVariable("PATH", path, EnvironmentVariableTarget.Process);
+                }
+            }
+
 
             // ensure that temp file is deleted
             File.Delete(responseFile);

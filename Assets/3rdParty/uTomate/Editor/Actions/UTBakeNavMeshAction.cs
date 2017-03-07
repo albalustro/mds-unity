@@ -11,11 +11,14 @@ namespace AncientLightStudios.uTomate
     using System.Collections;
     using UnityEditor;
     using UnityEngine;
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+    using UnityEditor.AI;
+#endif
 
     [UTActionInfo(actionCategory = "Bake")]
     [UTDoc(title = "Bake Nav Mesh", description = "Bakes the navigation mesh for the current scene.")]
     [UTRequiresLicense(UTLicense.UnityPro)]
-    [UTInspectorGroups(groups = new string[] { "General", "Generated Off Mesh Links", "Advanced" })]
+    [UTInspectorGroups(groups = new[] { "General", "Generated Off Mesh Links", "Advanced" })]
     [UTDefaultAction]
     public class UTBakeNavMeshAction : UTAction
     {
@@ -66,7 +69,7 @@ namespace AncientLightStudios.uTomate
             {
                 Debug.Log("Setting up nav mesh settings.");
             }
-            var settingsObject = new SerializedObject(UnityEditor.AI.NavMeshBuilder.navMeshSettingsObject);
+            var settingsObject = new SerializedObject(NavMeshBuilder.navMeshSettingsObject);
             var agentRadiusSetting = settingsObject.FindProperty("m_BuildSettings.agentRadius");
             var agentHeightSetting = settingsObject.FindProperty("m_BuildSettings.agentHeight");
             var agentSlopeSetting = settingsObject.FindProperty("m_BuildSettings.agentSlope");
@@ -92,15 +95,15 @@ namespace AncientLightStudios.uTomate
             settingsObject.ApplyModifiedProperties();
 
             Debug.Log("Starting baking of nav mesh.");
-            UnityEditor.AI.NavMeshBuilder.BuildNavMeshAsync();
+            NavMeshBuilder.BuildNavMeshAsync();
             do
             {
                 yield return "";
                 if (context.CancelRequested)
                 {
-                    UnityEditor.AI.NavMeshBuilder.Cancel();
+                    NavMeshBuilder.Cancel();
                 }
-            } while (UnityEditor.AI.NavMeshBuilder.isRunning);
+            } while (NavMeshBuilder.isRunning);
             Debug.Log("Nav mesh bake process finished.");
         }
 
@@ -113,7 +116,7 @@ namespace AncientLightStudios.uTomate
 
         public static void LoadFromSettings(UTBakeNavMeshAction action)
         {
-            var settingsObject = new SerializedObject(UnityEditor.AI.NavMeshBuilder.navMeshSettingsObject);
+            var settingsObject = new SerializedObject(NavMeshBuilder.navMeshSettingsObject);
             var agentRadiusSetting = settingsObject.FindProperty("m_BuildSettings.agentRadius");
             var agentHeightSetting = settingsObject.FindProperty("m_BuildSettings.agentHeight");
             var agentSlopeSetting = settingsObject.FindProperty("m_BuildSettings.agentSlope");

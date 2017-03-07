@@ -59,7 +59,10 @@ namespace AncientLightStudios.uTomate
 
             context["unity:isUnityPro"] = UTils.IsUnityPro;
             context["unity:supportsAndroid"] = UTils.IsBuildTargetSupported(UnityEditor.BuildTarget.Android);
-            context ["unity:supportsIos"] = UTils.IsBuildTargetSupported(BuildTarget.iOS);
+            context["unity:supportsIos"] = UTils.IsBuildTargetSupported(BuildTarget.iOS);
+            context["unity:supportsWindows"] = UTils.IsBuildTargetSupported(BuildTarget.StandaloneWindows);
+            context["unity:supportsOsx"] = UTils.IsBuildTargetSupported(BuildTarget.StandaloneOSXIntel);
+            context["unity:supportsLinux"] = UTils.IsBuildTargetSupported(BuildTarget.StandaloneLinux);
             context["unity:version"] = Application.unityVersion;
 
             context["utomate:debugMode"] = UTPreferences.DebugMode;

@@ -26,8 +26,13 @@ namespace AncientLightStudios.uTomate.API
         /// <summary>
         /// The action version. This is used to facilitate later migration steps if actions change.
         /// </summary>
-        public static string ActionVersion = "1.4";
-
+        public static string ActionVersion = "1.7";    //
+                                                       // 1.2 for UTBuildPlayerAction, UTSetPlayerSettingsIosAction
+                                                       // 1.3 for UTRunUTomateInExternalProjectAction
+                                                       // 1.4 for UTUploadToTestFairyAction
+                                                       // 1.5 for UTBuildXcodeProjectAction
+                                                       // 1.6 for UTSetPlayerSettingsIosAction
+                                                       // 1.7 for UTSetPlayerSettingsPcMacAction
         [HideInInspector]
         public string CreatedWithActionVersion;
 

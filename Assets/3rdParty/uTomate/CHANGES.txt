@@ -4,6 +4,34 @@ uTomate Changelog
 Change log
 ----------
 
+Version 1.9.0
+~~~~~~~~~~~~~
+* New Feature: A new action 'Set Graphics Tier Settings' allows to set the new graphics tier settings. This replaces
+  the traditional setting of the rendering path in Unity 5.5. See also the breaking changes section below.
+* Improvement: uTomate now works properly with Unity 5.5.
+* Improvement: Added new built-in variables `unity:supportsWindows`, `unity:supportsOsx`, `unity:supportsLinux` which
+  allow automation plans to check whether build support for a certain OS is installed. These complement the already
+  existing variables of `unity:supportsIos` and `unity:supportsAndroid`.
+* Improvement: The 'Build DLL' action now works around an issue in Unity 5.4 or later where the Mono path is not set
+  correctly by Unity.
+* Breaking Change: Unity 5.5 introduces rendering tiers per target platform. Therefore it is no longer possible to set
+  the rendering path in the 'Set Player Settings' action when using Unity 5.5. Please use the new 'Set Graphics Tier Settings'
+  action instead. If you're using Unity 5.4 or earlier with uTomate 1.9.0 you can still set the rendering path per platform,
+  so this change only affects you if you are upgrading to Unity 5.5 or later.
+
+
+Version 1.8.1
+~~~~~~~~~~~~~
+* Improvement: Added support for Xcode 8 to the 'Build Xcode Project' action. 
+* Improvement: It's now possible to use an export options plist file in the 'Build Xcode Project' action.
+* Improvement: 'Create No Window' option added to the 'Run External Program' action. This checkbox is only visible if 'Use Shell Execute' is not checked.
+* Improvement: Added support for chunk based compression in the 'Build Asset Bundles from Asset Database' action. A big
+  thanks goes to John Arnold for suggesting this and providing us with a patch!
+* Fix: uTomate should now properly exit from batch mode unless you specified the -keepRunning flag.
+* Fix: The 'Set Player Settings iOS' action now supports the 167x167 pixel icon for the iPad Pro. A big thanks goes to
+  John Arnold and Julian Scott who both spotted the problem and provided us with a patch!
+* Fix: The 'Set Lighting Settings' action no longer throws an NRE in Unity 5.4.
+
 Version 1.8.0
 ~~~~~~~~~~~~~
 * New Feature: The new "Set Player WebGL Settings" action allows you to set player settings for the WebGL player.

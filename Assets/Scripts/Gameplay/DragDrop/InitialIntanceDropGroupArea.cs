@@ -113,6 +113,7 @@ namespace MDS.Gameplay.DragDrop
             draggable.OnAfterDrop.RemoveAllListeners();
             newDraggable.OnAfterDrop.AddListener(DraggableAfterDropHandler);
 			newDraggable.GetComponent<Collider2D> ().enabled = true;
+            newDraggable.enabled = true;
 
             if (dropedItens!=null)
                 newDraggable.transform.SetParent(dropedItens);
@@ -123,12 +124,36 @@ namespace MDS.Gameplay.DragDrop
 				draggable.transform.SetParent(dropedItens);
 			}
 
-			// o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
-			newDraggable.currentSlot = originalSlot;
+
+            if (draggable.scaleState!=null)
+            {
+                newDraggable.scaleState = new DraggableState<float>()
+                {
+                    draggingValue = draggable.scaleState.draggingValue,
+                    releasedFinalPositionValue = draggable.scaleState.releasedFinalPositionValue,
+                    releasedValue = draggable.scaleState.releasedValue
+                };
+            }
+
+            if (draggable.spriteState!=null)
+            {
+                newDraggable.spriteState = new DraggableState<Sprite>()
+                {
+                    draggingValue = draggable.spriteState.draggingValue,
+                    releasedFinalPositionValue = draggable.spriteState.releasedFinalPositionValue,
+                    releasedValue = draggable.spriteState.releasedValue
+                };
+            }
+                       
+           // newDraggable.transform.localScale = Vector3.one * draggable.scaleState.releasedValue;
+
+            // o metodo DraggableUtilities.SetDraggableInSlot altera as referencias entao nao pode ser usado..
+            newDraggable.currentSlot = originalSlot;
 			originalSlot.draggableReference = newDraggable;
 			Vector3 pos = originalSlot.transform.position;
 			newDraggable.TweenGoto (pos, 0);
 
+            
         }
 
         public void ResetInitialInstanceGroup()

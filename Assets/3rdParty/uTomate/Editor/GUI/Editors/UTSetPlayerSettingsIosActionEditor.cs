@@ -42,6 +42,20 @@ namespace AncientLightStudios.uTomate
                 case "launchScreenSizeInPoints":
                     return VisibleIf(self.iPhoneLaunchScreen.HasValueOrExpression(UTSetPlayerSettingsIosAction.IosLaunchScreenType.ImageAndBackgroundConstant));
 #endif
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                case "iPadLaunchScreenImage":
+                case "iPadLaunchScreenBackgroundColor":
+                    return VisibleIf(self.iPadLaunchScreen.HasValueOrExpression(UTSetPlayerSettingsIosAction.IosLaunchScreenType.ImageAndBackgroundRelative,
+                        UTSetPlayerSettingsIosAction.IosLaunchScreenType.ImageAndBackgroundConstant));
+                case "iPadCustomXibPath":
+                    return VisibleIf(self.iPadLaunchScreen.HasValueOrExpression(UTSetPlayerSettingsIosAction.IosLaunchScreenType.CustomXib));
+                case "iPadLaunchScreenFillPercentage":
+                    return VisibleIf(self.iPadLaunchScreen.HasValueOrExpression(UTSetPlayerSettingsIosAction.IosLaunchScreenType.ImageAndBackgroundRelative));
+                case "iPadLaunchScreenSizeInPoints":
+                    return VisibleIf(self.iPadLaunchScreen.HasValueOrExpression(UTSetPlayerSettingsIosAction.IosLaunchScreenType.ImageAndBackgroundConstant));
+
+#endif
                 case "useAnimatedAutoRotation":
                     return VisibleIf(self.defaultOrientation.HasValueOrExpression(UIOrientation.AutoRotation));
             }

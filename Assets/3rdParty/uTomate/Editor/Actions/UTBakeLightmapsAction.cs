@@ -19,10 +19,20 @@ namespace AncientLightStudios.uTomate
     {
         [UTDoc(description = "What should be baked?")]
         [UTInspectorHint(required = true, order = 0)]
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+        [HideInInspector]
+#endif
         public UTBakeType whatToBake;
 
         public override IEnumerator Execute(UTContext context)
         {
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            if (!Lightmapping.BakeAsync())
+            {
+                throw new UTFailBuildException("Lightmapping was not finished successfully.", this);
+            }
+#else
             var whatReallyToBake = whatToBake.EvaluateIn(context);
             switch (whatReallyToBake)
             {
@@ -36,7 +46,7 @@ namespace AncientLightStudios.uTomate
 
                 case UTTypeOfBake.SelectionOnly:
                     Debug.Log("Building lightmaps for current selection. This may take a while.", this);
-                    if (!Lightmapping.BakeAsync())
+                    if (!Lightmapping.BakeSelectedAsync())
                     {
                         throw new UTFailBuildException("Lightmapping was not finished successfully.", this);
                     }
@@ -44,12 +54,13 @@ namespace AncientLightStudios.uTomate
 
                 case UTTypeOfBake.LightProbesOnly:
                     Debug.Log("Building light probes for current scene. This may take a while.", this);
-                    if (!Lightmapping.BakeAsync())
+                    if (!Lightmapping.BakeLightProbesOnlyAsync())
                     {
                         throw new UTFailBuildException("Lightmapping was not finished successfully.", this);
                     }
                     break;
             }
+#endif
             do
             {
                 yield return "";

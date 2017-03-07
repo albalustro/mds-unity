@@ -9,7 +9,8 @@ namespace MDS.DialogueSystem
 {
     public class DialogueSystem : Singleton<DialogueSystem>
     {
-
+        // fix: hud sendo aberta durante o dialogo
+        public GameObject HUDCanvasGo;
 
         //Propriedades de um DialogueEntry
         public static string game;
@@ -97,6 +98,7 @@ namespace MDS.DialogueSystem
         /// </summary>
         void OpenDialogueBox()
         {
+            HUDCanvasGo.SetActive(false);
             _currentDialogueIndex = 0;
             dialogue.gameObject.SetActive(true);
             isActive = true;
@@ -110,6 +112,7 @@ namespace MDS.DialogueSystem
         /// </summary>
         void CloseDialogueBox()
         {
+            HUDCanvasGo.SetActive(true);
             dialogue.gameObject.SetActive(false);
             AudioController.Instance.StopVoiceOver();
             isActive = false;

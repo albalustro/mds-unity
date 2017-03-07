@@ -64,31 +64,66 @@ namespace MDS.Gameplay.DragDrop
         [InspectorTooltip("ATENÇÃO: Ao criar actions para serem executadas quando o draggable for solto em uma área SEM um group, *AUTOMATICAMENTE* o draggable deixa de executar a ação padrão - que depende de outros fatores: voltar para origem, ser destruído, etc")]
         public IAction[] OnInvalidAreaDropActions;
 
+        private bool _initialized = false;
 
         protected override void Awake()
         {
             base.Awake();
+
+            if(_initialized == false)
+                Initialize();     
+
+            //			if (OnAfterDrop == null) {
+            //				OnAfterDrop = new UnityEvent<Draggable, DropGroupSlot>();
+            //			}
+
+        }
+
+        private void Initialize()
+        {
 
             gameObject.layer = LayerMask.NameToLayer("Draggable");
 
             _renderer = this.GetComponent<SpriteRenderer>();
 
 
-            if(changeScale && (scaleState.draggingValue <= 0f
-                        || scaleState.releasedValue <= 0)) {
-                scaleState.draggingValue = scaleState.releasedValue = 1f;
+            if(changeScale && scaleState != null && (scaleState.draggingValue <= 0f
+                                                || scaleState.releasedValue <= 0))
+            {
+                scaleState.draggingValue = 1.3f;
+                scaleState.releasedValue = 1f;
             }
 
-            if(changeScale && scaleState.releasedFinalPositionValue == 0)
+
+
+            if(changeScale && scaleState != null && scaleState.releasedFinalPositionValue == 0)
                 scaleState.releasedFinalPositionValue = scaleState.releasedValue;
 
-            if(changeSprite && spriteState.releasedFinalPositionValue == null)
+
+
+            if(changeSprite && spriteState != null && spriteState.releasedFinalPositionValue == null)
                 spriteState.releasedFinalPositionValue = spriteState.releasedValue;
 
-            //			if (OnAfterDrop == null) {
-            //				OnAfterDrop = new UnityEvent<Draggable, DropGroupSlot>();
-            //			}
 
+
+            if((!changeScale) || (changeScale && scaleState==null))
+            {
+                changeScale = true;
+                scaleState = new DraggableState<float>()
+                {
+                    draggingValue = transform.localScale.x * 1.5f,
+                    releasedValue = transform.localScale.x,
+                    releasedFinalPositionValue = transform.localScale.x
+                };
+            }
+
+            _initialized = true;
+        }
+
+        private void Start()
+        {
+            if (_renderer==null)
+                _renderer = this.GetComponent<SpriteRenderer>();
         }
 
         public void OnMouseDown()
@@ -120,6 +155,7 @@ namespace MDS.Gameplay.DragDrop
 
         public void OnMouseUp()
         {
+            Vector3 destination;
 
             BaseDropGroupArea group = null;
             DropGroupSlot slot = null;
@@ -159,7 +195,9 @@ namespace MDS.Gameplay.DragDrop
                 // Porem tb nao deve procurar um slot vazio.
                 if(currentSlot.IsInstatiableInitialSlot && slot && slot.IsTaken)
                 {
-                    TweenGoto(currentSlot.transform.position);
+                    destination = currentSlot.transform.position;
+                    destination.z = transform.position.z;
+                    TweenGoto(destination);
                     return;
                 }
 
@@ -169,7 +207,6 @@ namespace MDS.Gameplay.DragDrop
                 if(group.SetInSlot(this, ref slot))
                 {
                     ProcessSlotChanging(originalSlot);
-
                 }
                 else
                 // caso contrário, (por motivos quaisquer) o group nao aceitar o draggable, entao deve voltar para a posicao que estava
@@ -177,7 +214,11 @@ namespace MDS.Gameplay.DragDrop
                     if(OnGroupRefuseActions != null && OnGroupRefuseActions.Length > 0)
                         ExecuteActions(OnGroupRefuseActions);
                     else // PERIGOSO...
-                        TweenGoto(currentSlot.transform.position);
+                    {
+                        destination = currentSlot.transform.position;
+                        destination.z = transform.position.z;
+                        TweenGoto(destination);
+                    }
                 }
 
 
@@ -197,7 +238,9 @@ namespace MDS.Gameplay.DragDrop
                     }
                     else
                     {
-                        TweenGoto(currentSlot.transform.position);
+                        destination = currentSlot.transform.position;
+                        destination.z = transform.position.z;
+                        TweenGoto(destination);
                     }
                 }
 
@@ -221,39 +264,56 @@ namespace MDS.Gameplay.DragDrop
 
         public void TweenGoto(Vector3 pos, float speed = 0.5f)
         {
+            if(_initialized == false)
+                Initialize();
+
             _renderer.sortingOrder = 5;
             LeanTween.move(gameObject, pos, speed)
                 .setEase(LeanTweenType.easeOutCubic)
-                .setOnComplete(() =>
+                .setOnComplete(TweenMoveOnCompleteCallback,pos);
+        }
+
+        private void TweenMoveOnCompleteCallback(object obj)
+        {
+
+            Vector3 pos = (Vector3)obj;
+            if(_renderer == null)
+                _renderer = GetComponent<SpriteRenderer>();
+            _renderer.sortingOrder = 0;
+            if(changeSprite)
+            {
+                if(spriteState == null)
+                    LogError("changeSprite sem spriteState");
+
+                if(!currentSlot.IsInitialSlot)
+                    _renderer.sprite = spriteState.releasedFinalPositionValue;
+                else
+                    _renderer.sprite = spriteState.releasedValue;
+
+            }
+
+
+            if(changeScale)
+            {
+                if(scaleState == null)
+                    LogError("changeScale sem scaleState");
+
+                float value = scaleState.releasedValue;
+                if(!currentSlot.IsInitialSlot)
+                    value = scaleState.releasedFinalPositionValue;
+                LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
+            }
+
+            if(activeWhileDragging)
+            {
+                if(m_activatedWhileDragging != null)
                 {
-                    _renderer.sortingOrder = 0;
-                    if(changeSprite)
-                    {
-                        if(!currentSlot.IsInitialSlot)
-                            _renderer.sprite = spriteState.releasedFinalPositionValue;
-                        else
-                            _renderer.sprite = spriteState.releasedValue;
+                    m_activatedWhileDragging.SetActive(false);
+                }
+            }
 
-                    }
-
-
-                    if(changeScale)
-                    {
-                        float value = scaleState.releasedValue;
-                        if(!currentSlot.IsInitialSlot)
-                            value = scaleState.releasedFinalPositionValue;
-                        LeanTween.scale(gameObject, Vector3.one * value, 0.2f).setEase(LeanTweenType.linear);
-                    }
-
-                    if(activeWhileDragging) {
-                        if(m_activatedWhileDragging != null) {
-                            m_activatedWhileDragging.SetActive(false);
-                        }
-                    }
-
-                    pos.z = -1;
-                    transform.position = pos;
-                });
+            pos.z = -1;
+            transform.position = pos;
         }
 
         public void FadeAndDestroy()

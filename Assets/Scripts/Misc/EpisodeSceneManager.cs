@@ -66,8 +66,8 @@ public class EpisodeSceneManager : MDSBehaviour {
     [InspectorCategory("General")]
     public float bottomY;
 
-	[InspectorCategory("General")]
-	public AudioClip episodeTheme;
+	//[InspectorCategory("General")]
+	//public AudioClip episodeTheme;
 
 	[InspectorCategory("One Time Actions")]
 	[SerializeField, InspectorCollectionShowItemDropdown(IsCollapsedByDefault = true)]
@@ -165,7 +165,7 @@ public class EpisodeSceneManager : MDSBehaviour {
 
 	private IEnumerator Start()
     {
-		AudioController.Instance.PlayTheme (episodeTheme);
+		//AudioController.Instance.PlayTheme (episodeTheme);
 
         // iniciado com 5 apenas para a sequencia do switch ficar 'bonitinha'
         // se nenhum dos challenges estiver com status available é de se supor que

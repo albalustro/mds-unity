@@ -134,7 +134,7 @@ namespace AncientLightStudios.uTomate
 
         public void OnEnable()
         {
-            UTils.MigrateActionIfRequired(this, 1.4f, delegate(UTUploadToTestFairyAction action)
+            UTils.MigrateActionIfRequired(this, "1.4", delegate(UTUploadToTestFairyAction action)
             {
                 action.enableInstrumentation.StaticValue = true;
                 Debug.Log("The action '" + action.name + "' has been migrated. Please verify the settings of this action.", action);

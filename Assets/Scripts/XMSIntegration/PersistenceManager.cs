@@ -89,9 +89,12 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 	/// <returns>MD5 Hash do texto informado</returns>
 	public string GetMD5Hash(string text)
 	{
-		MD5 md5Hash = MD5.Create();
-		// Converter a String para array de bytes
-		byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(text));
+        // TROCA NECESSARIA POR CONTA DO ANDROID com stripping code.. :)
+        //MD5 md5Hash = MD5.Create();
+        var md5Hash = new MD5CryptoServiceProvider();
+
+        // Converter a String para array de bytes
+        byte[] data = md5Hash.ComputeHash(Encoding.UTF8.GetBytes(text));
 		// Cria-se um StringBuilder para recompôr a string.
 		StringBuilder sBuilder = new StringBuilder();
 		// Loop para formatar cada byte como uma String em hexadecimal

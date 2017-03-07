@@ -68,7 +68,9 @@ public class AudioController : Singleton<AudioController>
     private void SceneManager_sceneLoaded(Scene curScene, LoadSceneMode arg1)
     {
         StopVoiceOver();
+
         if(curScene.name.Equals("splash")) return;
+
         if (curScene.IsLogin())
         {
             PlayTheme(themeLogin.GetRandom());
@@ -85,6 +87,13 @@ public class AudioController : Singleton<AudioController>
                 e = curScene.GetEpisodeIndex() - 1;
                 PlayTheme(themeWorlds[w][e]);
             }
+        }
+        else if (curScene.IsEpisode())
+        {
+            int w, e;
+            w = curScene.GetWorldIndex() - 1;
+            e = curScene.GetEpisodeIndex() - 1;
+            PlayTheme(themeWorlds[w][e]);
         }
     }
 

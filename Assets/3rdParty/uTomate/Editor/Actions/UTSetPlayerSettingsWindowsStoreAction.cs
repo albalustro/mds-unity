@@ -287,6 +287,13 @@ namespace AncientLightStudios.uTomate
         [SuppressMessage("ReSharper", "CoVariantArrayConversion")]
         public override IEnumerator Execute(UTContext context)
         {
+            if (!UTils.IsPlatformSupportLoaded(BuildTarget.WSAPlayer))
+            {
+                Debug.LogWarning("Windows Store module is not loaded. Cannot change Windows Store player settings.");
+                yield break;
+            }
+
+
             if (UTPreferences.DebugMode)
             {
                 Debug.Log("Modifying Windows Store player settings.", this);
@@ -372,8 +379,12 @@ namespace AncientLightStudios.uTomate
 #if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 // VR: [5.0, 5.3]
                 PlayerSettings.stereoscopic3D = stereoscopicRendering.EvaluateIn(context);
 #endif
-                PlayerSettings.SetPropertyInt("ScriptingBackend", (int)scriptingBackend.EvaluateIn(context), BuildTargetGroup.WSA);
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
 
+                PlayerSettings.SetScriptingBackend(BuildTargetGroup.WSA, scriptingBackend.EvaluateIn(context));
+#else
+                PlayerSettings.SetPropertyInt("ScriptingBackend", (int)scriptingBackend.EvaluateIn(context), BuildTargetGroup.WSA);
+#endif
                 wrapper.SetInt("accelerometerFrequency", theFrequency);
 
                 wrapper.SetString("metroPackageName", thePackageName);
@@ -444,7 +455,14 @@ namespace AncientLightStudios.uTomate
         /// </summary>
         public void LoadSettings()
         {
+            if (!UTils.IsPlatformSupportLoaded(BuildTarget.WSAPlayer))
+            {
+                Debug.LogWarning("Windows Store module is not loaded. Cannot load current Windows Store settings.");
+                return;
+            }
+
             var wrapper = new UTPlayerSettingsWrapper();
+
 
             runInBackground.StaticValue = wrapper.GetBool("runInBackground");
             defaultOrientation.StaticValue = wrapper.GetEnum<UIOrientation>("defaultScreenOrientation");
@@ -487,7 +505,12 @@ namespace AncientLightStudios.uTomate
 #if UNITY_5_3 // VR: [5.3, 5.3]           
             stereoscopicRendering.StaticValue = PlayerSettings.stereoscopic3D;
 #endif
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            scriptingBackend.StaticValue = PlayerSettings.GetScriptingBackend(BuildTargetGroup.WSA);
+#else
             scriptingBackend.StaticValue = (ScriptingImplementation) PlayerSettings.GetPropertyInt("ScriptingBackend", BuildTargetGroup.WSA);
+#endif
 
             accelerometerFrequency.StaticValue = wrapper.GetInt("accelerometerFrequency");
 

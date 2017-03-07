@@ -29,6 +29,8 @@ namespace AncientLightStudios.uTomate
 
                 case "strippingLevel":
                     return VisibleIf(self.SupportsStripping);
+                case "muteOtherAudioSources":
+                    return VisibleIf(self.SupportsMutingAudio);
 
 #if !UNITY_5_0 // VR: 5.1
                 case "splashScreenStyle":

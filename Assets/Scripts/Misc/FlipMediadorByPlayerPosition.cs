@@ -11,7 +11,7 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 	private bool _isMediator;
 
 	void Start () {
-		playerTransform = GameObject.FindGameObjectWithTag ("Player").GetComponent<Transform> ();
+		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform.FindChild("Art").GetComponent<Transform> ();
 		_renderer = GetComponent<SpriteRenderer> ();
 		StartCoroutine (CheckFlip ());
 		if (gameObject.tag == "Mediator")
@@ -19,21 +19,27 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 			
 	}
 
+    Vector3 myPos;
 	IEnumerator CheckFlip () {
-		while (true)
-		{
-			targetPosition = playerTransform.position;
-			if (_isMediator) {
-				FlipMediator ();
-			}
+        while(true)
+        {
+            myPos = transform.position;
+            targetPosition = playerTransform.position;
+            if(_isMediator)
+            {
+                FlipMediator();
+            }
 
-			if ((targetPosition.y - 0.5f) < (transform.position.y - 1f))
-				_renderer.sortingOrder = 0;
-			else
-				_renderer.sortingOrder = 2;
-			
-			yield return new WaitForSeconds (0.35f);
-		}
+            //if((targetPosition.y - 0.5f) < (transform.position.y - 1f))
+            if(targetPosition.y < transform.position.y)
+                myPos.z = targetPosition.z + 0.1f;
+            //_renderer.sortingOrder = -1 ;
+            else
+                myPos.z = targetPosition.z - 0.1f;
+            //_renderer.sortingOrder = 2;
+            transform.position = myPos;
+            yield return null;
+        }
 	}
 
 	void FlipMediator()
