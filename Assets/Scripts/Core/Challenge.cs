@@ -274,12 +274,12 @@ namespace MDS.Core
 
             if(_validatorResult == ValidatorResult.Victory)
             {
-                Log("Correct!!");
+               // Log("Correct!!");
                 Victory();
             }
             else
             {
-                Log("Wrong!!");
+                //Log("Wrong!!");
                 _errorCount++;
                 Lose(_errorCount);
             }

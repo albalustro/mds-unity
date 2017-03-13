@@ -13,7 +13,7 @@ using UnityEditor.SceneManagement;
 
 public class AddMenu : EditorWindow
 {
-
+    #region SOUND
     [MenuItem("MDS/Sound/Create")]
     public static void Create()
     {
@@ -78,18 +78,25 @@ public class AddMenu : EditorWindow
         }
         return ret;
     }
+    #endregion
 
+    #region PLAYERPREF
     [MenuItem("MDS/Tools/PlayerPref/Reset Playerprefs")]
     public static void DeletePlayerPrefs()
     {
         PlayerPrefs.DeleteAll();
     }
+    #endregion
 
+    #region CACHING
     [MenuItem("MDS/Tools/Caching/Clean")]
     public static void ClearCaching()
     {
         Caching.CleanCache();
     }
+    #endregion
+
+    #region V/H ALIGN
 
     [MenuItem("MDS/Align Selection/Horizontal")]
     public static void HorizontalSpacer()
@@ -134,8 +141,9 @@ public class AddMenu : EditorWindow
 
 
     }
+    #endregion
 
-    
+    #region RUN F5
     [MenuItem("MDS/Run _F5")]
     public static void RunFromSplash()
     {
@@ -146,8 +154,9 @@ public class AddMenu : EditorWindow
         EditorSceneManager.OpenScene("Assets/Common/Scenes/splash.unity");
         EditorApplication.ExecuteMenuItem("Edit/Play");
     }
+    #endregion
 
-
+    #region PREFABS ESSENTIALS
     [MenuItem("MDS/Tools/Revert ESSENTIALS to Prefab")]
     static void Revert()
     {
@@ -193,8 +202,7 @@ public class AddMenu : EditorWindow
         }
        
     }
-
-     
+ 
     private static void RevertEssentialToPrefabAt(string scenePath)
     {
         GameObject essentialsInstance;
@@ -212,6 +220,27 @@ public class AddMenu : EditorWindow
         }
         EditorSceneManager.SaveScene(curScene);
     }
+    #endregion
+
+
+    #region Texture import settings
+    [MenuItem("MDS/Textures/Fix import settings")]
+    public static void FixTexturesImportSettings()
+    {
+        var selectedList = Selection.GetFiltered(typeof(Texture2D), SelectionMode.Unfiltered);
+        foreach(var item in selectedList)
+        {
+            Texture2D tex = (Texture2D)item;
+            string path = AssetDatabase.GetAssetPath(item.GetInstanceID());
+            if (tex.width%4==0 && tex.height%4==0)
+                Debug.Log("[OK] -> " + path);
+            else
+                Debug.LogError("[***] -> " + path);
+
+
+        }
+    }
+    #endregion
 }
 
 [InitializeOnLoad]

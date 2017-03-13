@@ -9,11 +9,15 @@
 // all the time and there is no longer a consistent API to change them. So we use different APIs in this
 // action. Most of the code here was reverse-engineered from their PlayerSettingsEditor class.
 
+
+
 namespace AncientLightStudios.uTomate
 {
     using API;
-    using System.Collections;
+    using System;
+    using System.Collections.Generic;
     using System.Diagnostics.CodeAnalysis;
+    using System.Collections;
     using UnityEditor;
     using UnityEngine;
 
@@ -27,6 +31,12 @@ namespace AncientLightStudios.uTomate
         [UTDoc(description = "Use animation for auto-rotation?")]
         [UTInspectorHint(group = "Resolution & Presentation", order = 2, indentLevel = 1)]
         public UTBool useAnimatedAutoRotation;
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2_0 || UNITY_5_2_1 || UNITY_5_2_2) // VR: 5.2.3
+        [UTDoc(description = "When ticked opts out of iOS 9.0 multitasking support.")]
+        [UTInspectorHint(group = "Resolution & Presentation", order = 9)]
+        public UTBool requiresFullScreen;
+#endif
 
         [UTDoc(description = "Should status bar be hidden?")]
         [UTInspectorHint(group = "Resolution & Presentation", order = 10)]
@@ -60,31 +70,37 @@ namespace AncientLightStudios.uTomate
         [UTDoc(description = "Icon for 180x180 pixels.", title = "180x180")]
         public UTTexture2D iconSize180;
 
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
         [UTInspectorHint(group = "Icon", order = 3)]
+        [UTDoc(description = "Icon for 167x167 pixels.", title = "167x167")]
+        public UTTexture2D iconSize167;
+#endif
+
+        [UTInspectorHint(group = "Icon", order = 4)]
         [UTDoc(description = "Icon for 152x152 pixels.", title = "152x152")]
         public UTTexture2D iconSize152;
 
-        [UTInspectorHint(group = "Icon", order = 4)]
+        [UTInspectorHint(group = "Icon", order = 5)]
         [UTDoc(description = "Icon for 144x144 pixels.", title = "144x144")]
         public UTTexture2D iconSize144;
 
-        [UTInspectorHint(group = "Icon", order = 5)]
+        [UTInspectorHint(group = "Icon", order = 6)]
         [UTDoc(description = "Icon for 120x120 pixels.", title = "120x120")]
         public UTTexture2D iconSize120;
 
-        [UTInspectorHint(group = "Icon", order = 6)]
+        [UTInspectorHint(group = "Icon", order = 7)]
         [UTDoc(description = "Icon for 114x114 pixels.", title = "114x114")]
         public UTTexture2D iconSize114;
 
-        [UTInspectorHint(group = "Icon", order = 7)]
+        [UTInspectorHint(group = "Icon", order = 8)]
         [UTDoc(description = "Icon for 76x76 pixels.", title = "76x76")]
         public UTTexture2D iconSize76;
 
-        [UTInspectorHint(group = "Icon", order = 8)]
+        [UTInspectorHint(group = "Icon", order = 9)]
         [UTDoc(description = "Icon for 72x72 pixels.", title = "72x72")]
         public UTTexture2D iconSize72;
 
-        [UTInspectorHint(group = "Icon", order = 9)]
+        [UTInspectorHint(group = "Icon", order = 10)]
         [UTDoc(description = "Icon for 57x57 pixels.", title = "57x57")]
         public UTTexture2D iconSize57;
 
@@ -145,7 +161,7 @@ namespace AncientLightStudios.uTomate
         [UTRequiresLicense(UTLicense.UnityPro)]
         public UTTexture2D highResIpadLandscape;
 
-        [UTDoc(description = "Launch screen type for iPhone")]
+        [UTDoc(title="iPhone Launch Screen", description = "Launch screen type for iPhone")]
         [UTInspectorHint(group = "Splash Image", order = 15)]
         public UTIosLaunchScreenType iPhoneLaunchScreen;
 
@@ -153,7 +169,7 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(group = "Splash Image", order = 16, indentLevel = 1)]
         public UTTexture2D launchScreenPortraitImage;
 
-        [UTDoc(description = "Landscape image for the launch screen.", title = "Portrait Image")]
+        [UTDoc(description = "Landscape image for the launch screen.", title = "Landscape Image")]
         [UTInspectorHint(group = "Splash Image", order = 17, indentLevel = 1)]
         public UTTexture2D launchScreenLandscapeImage;
 
@@ -171,9 +187,37 @@ namespace AncientLightStudios.uTomate
         public UTFloat launchScreenSizeInPoints;
 #endif
 
+
         [UTDoc(description = "Path to a custom XIB file ", title = "Custom XIB")]
         [UTInspectorHint(group = "Splash Image", order = 21, indentLevel = 1, displayAs = UTInspectorHint.DisplayAs.OpenFileSelect)]
         public UTString customXibPath;
+
+        [UTDoc(title="iPad Launch Screen", description = "Launch screen type for iPad")]
+        [UTInspectorHint(group = "Splash Image", order = 22)]
+        public UTIosLaunchScreenType iPadLaunchScreen;
+
+        [UTDoc(description = "Portrait image for the launch screen.", title = "Image")]
+        [UTInspectorHint(group = "Splash Image", order = 23, indentLevel = 1)]
+        public UTTexture2D iPadLaunchScreenImage;
+
+        [UTDoc(description = "Background color of the launch screen.", title = "Background Color")]
+        [UTInspectorHint(group = "Splash Image", order = 24, indentLevel = 1)]
+        public UTColor iPadLaunchScreenBackgroundColor;
+
+        [UTDoc(description = "Fill percentage of the launch screen image.", title = "Fill Percentage")]
+        [UTInspectorHint(group = "Splash Image", order = 25, indentLevel = 1, minValue = 0, maxValue = 100f, displayAs = UTInspectorHint.DisplayAs.Slider)]
+        public UTFloat iPadLaunchScreenFillPercentage;
+
+#if !UNITY_5_0 // VR: 5.1
+        [UTDoc(description = "Size in points of the launch screen image.", title = "Size in Points")]
+        [UTInspectorHint(group = "Splash Image", order = 26, indentLevel = 1)]
+        public UTFloat iPadLaunchScreenSizeInPoints;
+#endif
+
+        [UTDoc(description = "Path to a custom XIB file ", title = "Custom XIB")]
+        [UTInspectorHint(group = "Splash Image", order = 27, indentLevel = 1, displayAs = UTInspectorHint.DisplayAs.OpenFileSelect)]
+        public UTString iPadCustomXibPath;
+
 
         // Debugging & Crash Reporting 
         [UTDoc(description = "Enable internal profiler.")]
@@ -217,7 +261,7 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(group = "Configuration", order = 2)]
         public UTiOSTargetDevice targetDevice;
 
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
         [UTDoc(description = "Targeted resolution.")]
         [UTInspectorHint(group = "Configuration", order = 3)]
         public UTiOSTargetResolution targetResolution;
@@ -238,11 +282,6 @@ namespace AncientLightStudios.uTomate
         [UTDoc(description = "The reason for using the player's location.")]
         [UTInspectorHint(group = "Configuration", order = 6)]
         public UTString locationUsageDescription;
-
-        [UTDoc(description = "Silence the user's iPod music?", title = "Override iPod music")]
-        [UTInspectorHint(group = "Configuration", order = 7)]
-        public UTBool overrideIpodMusic;
-
 
         [UTDoc(description = "Should the iOS recording APIs be initialised?", title = "Prepare iOS for recording")]
         [UTInspectorHint(group = "Configuration", order = 8)]
@@ -272,19 +311,49 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(group = "Optimization", order = 6)]
         public UTiOSSdkVersion sdkVersion;
 
-        [UTDoc(description = "Deployment minimal version of iOS.")]
-        [UTInspectorHint(group = "Optimization", order = 7)]
-        public UTiOSTargetOsVersion targetOsVersion;
+        [UTDoc(description = "Deployment minimal version of iOS.")] [UTInspectorHint(group = "Optimization", order = 7)]
+        public UTString targetOsVersion;
 
 
         [UTDoc(description = "Script calling optimization level.")]
         [UTInspectorHint(group = "Optimization", order = 9)]
         public UTScriptCallOptimizationLevel scriptCallOptimizationLevel;
 
+
+        // Version Enum -> String map for enum change in Unity 5.5
+        private static readonly Dictionary<string,string> versionMap = new Dictionary<string, string>();
+
+        static UTSetPlayerSettingsIosAction()
+        {
+#if (UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: [5.0, 5.3]
+            versionMap["22"] = "6.0";
+#endif
+            versionMap["24"] = "7.0";
+            versionMap["26"] = "7.1";
+            versionMap["28"] = "8.0";
+            versionMap["30"] = "8.1";
+#if !UNITY_5_0 // VR: 5.1
+            versionMap["32"] = "8.2";
+            versionMap["34"] = "8.3";
+            versionMap["36"] = "8.4";
+#if UNITY_5_1 || UNITY_5_2 || UNITY_5_3 // VR: [5.1, 5.3]
+            versionMap["40"] = "9.0";
+#else
+            versionMap["38"] = "9.0"; // yes this changed in 5.4...
+#endif
+#if !(UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
+            versionMap["40"] = "9.1"; // and 40 is now 9.1 in 5.4
+            versionMap["42"] = "9.2";
+            versionMap["44"] = "9.3";
+            versionMap["46"] = "10.0";
+#endif
+#endif
+        }
+
         public void OnEnable()
         {
             // property is not yet initialized for new actions, only for existing ones
-            UTils.MigrateActionIfRequired(this, 1.2f, delegate(UTSetPlayerSettingsIosAction action)
+            UTils.MigrateActionIfRequired(this, "1.2", delegate(UTSetPlayerSettingsIosAction action)
             {
                 if (action.exitOnSuspend.UseExpression)
                 {
@@ -300,6 +369,45 @@ namespace AncientLightStudios.uTomate
                     action.backgroundBehaviour.Value = action.exitOnSuspend.Value ? iOSAppInBackgroundBehavior.Exit : iOSAppInBackgroundBehavior.Suspend;
                 }
 
+            });
+
+            UTils.MigrateActionIfRequired(this, "1.6", delegate(UTSetPlayerSettingsIosAction action)
+            {
+                if (action.targetOsVersion.UseExpression)
+                {
+                    Debug.Log(
+                        "The 'Set Player Settings IOS' action now uses a string field for the target IOS version instead of an enum. " +
+                        "Your action '" + action.name +
+                        "' uses an expression for this field which cannot be automatically migrated. Please " +
+                        "check and correct the expression in the 'Target OS Version' field to return a proper version string now. You can " +
+                        "highlight the action by clicking on this message.", action);
+                }
+                else
+                {
+                    // this is being migrated from an enum to a string in Unity 5.5
+                    if (versionMap.ContainsKey(action.targetOsVersion.Value))
+                    {
+                        action.targetOsVersion.StaticValue = versionMap[action.targetOsVersion.Value];
+                        Debug.Log(
+                            "The 'Set Player Settings IOS' action now uses a string field for the target iOS version. Your action " +
+                            action.name +
+                            "' has been migrated automatically. Please verify that the migrated value is correct. You can " +
+                            "highlight the action by clicking on this message.", action);
+                    }
+                    else
+                    {
+                        // use a proper version in this case
+                        action.targetOsVersion.StaticValue = "7.0";
+
+                        Debug.Log(
+                            "The 'Set Player Settings IOS' action now uses a string field for the target iOS version. Your action " +
+                            action.name +
+                            "' could not be migrated automatically. Please check the value of the 'Target OS Version' property. You can " +
+                            "highlight the action by clicking on this message.", action);
+
+                    }
+
+                }
             });
         }
 
@@ -334,6 +442,40 @@ namespace AncientLightStudios.uTomate
                 throw new UTFailBuildException("Invalid accelerometer frequency. Valid values for accelerometer frequencies are 0, 15, 30, 60 and 100.", this);
             }
 
+            var theTargetOsVersion = targetOsVersion.EvaluateIn(context);
+            try
+            {
+                // ReSharper disable once ObjectCreationAsStatement
+                new Version(theTargetOsVersion);
+            }
+            catch (Exception)
+            {
+                throw new UTFailBuildException("The given target OS version '" + theTargetOsVersion + "' is no valid version string.", this);
+            }
+
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 // VR: [5.0,5.4]
+            // The exposed enum isn't complete, at least not in Unity 5.2. So we're using our conversion map to come up
+            // with the correct value.
+            var key = "";
+            foreach (var entry in versionMap)
+            {
+                if (entry.Value == theTargetOsVersion)
+                {
+                    key = entry.Key;
+                    break;
+                }
+            }
+
+            if (string.IsNullOrEmpty(key))
+            {
+                throw new UTFailBuildException("The iOS version " + theTargetOsVersion + " not supported by this version of Unity.", this);
+            }
+            var theTargetOsVersionEnum = int.Parse(key);
+#endif
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2_0 || UNITY_5_2_1 || UNITY_5_2_2) // VR: 5.2.3
+            PlayerSettings.iOS.requiresFullScreen = requiresFullScreen.EvaluateIn(context);
+#endif
             PlayerSettings.statusBarHidden = statusBarHidden.EvaluateIn(context);
             PlayerSettings.iOS.statusBarStyle = statusBarStyle.EvaluateIn(context);
 #if UNITY_5_0 // VR: [5.0, 5.1)
@@ -353,7 +495,7 @@ namespace AncientLightStudios.uTomate
 #if UNITY_5_0  // VR: [5.0, 5.0]
             PlayerSettings.targetGlesGraphics = targetGlesGraphics.EvaluateIn(context);
 #endif
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             PlayerSettings.iOS.targetResolution = targetResolution.EvaluateIn(context);
 #endif
             PlayerSettings.accelerometerFrequency = theFrequency;
@@ -361,9 +503,19 @@ namespace AncientLightStudios.uTomate
             PlayerSettings.iOS.appInBackgroundBehavior = backgroundBehaviour.EvaluateIn(context);
             PlayerSettings.aotOptions = aotCompilationOptions.EvaluateIn(context);
             PlayerSettings.iOS.sdkVersion = sdkVersion.EvaluateIn(context);
-            PlayerSettings.iOS.targetOSVersion = targetOsVersion.EvaluateIn(context);
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            PlayerSettings.iOS.targetOSVersionString = theTargetOsVersion;
+
+#else
+            // this actually works, even if the int is outside of the range of the exposed enum
+            PlayerSettings.iOS.targetOSVersion = (iOSTargetOSVersion) theTargetOsVersionEnum;
+#endif
             PlayerSettings.iOS.scriptCallOptimization = scriptCallOptimizationLevel.EvaluateIn(context);
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            PlayerSettings.SetScriptingBackend(BuildTargetGroup.iOS, scriptingBackend.EvaluateIn(context));
+#else
             PlayerSettings.SetPropertyInt("ScriptingBackend", (int)scriptingBackend.EvaluateIn(context), BuildTarget.iOS);
+#endif
 #if UNITY_5_0 // VR: [5.0, 5.1)
 			PlayerSettings.SetPropertyBool("UseIl2CppPrecompiledHeader", useIl2CppPrecompiledHeader.EvaluateIn(context), BuildTarget.iOS);
 #endif
@@ -373,6 +525,9 @@ namespace AncientLightStudios.uTomate
                 PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.iOS, new[]
                 {
                     iconSize180.EvaluateIn(context),
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                    iconSize167.EvaluateIn(context),
+#endif
                     iconSize152.EvaluateIn(context),
                     iconSize144.EvaluateIn(context),
                     iconSize120.EvaluateIn(context),
@@ -412,6 +567,21 @@ namespace AncientLightStudios.uTomate
                 }
                 wrapper.SetString("iOSLaunchScreenCustomXibPath", theCustomXibPath);
 
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                wrapper.SetInt("iOSLaunchScreeniPadType", (int) iPadLaunchScreen.EvaluateIn(context));
+                wrapper.SetFloat("iOSLaunchScreeniPadFillPct", iPadLaunchScreenFillPercentage.EvaluateIn(context));
+                wrapper.SetFloat("iOSLaunchScreeniPadSize", iPadLaunchScreenSizeInPoints.EvaluateIn(context));
+                wrapper.SetObject("iOSLaunchScreeniPadImage", iPadLaunchScreenImage.EvaluateIn(context));
+                wrapper.SetColor("iOSLaunchScreeniPadBackgroundColor", iPadLaunchScreenBackgroundColor.EvaluateIn(context));
+                var theIpadCustomXibPath = iPadCustomXibPath.EvaluateIn(context);
+                if (!string.IsNullOrEmpty(theIpadCustomXibPath))
+                {
+                    theIpadCustomXibPath = UTFileUtils.FullPathToProjectPath(theIpadCustomXibPath);
+                }
+                wrapper.SetString("iOSLaunchScreeniPadCustomXibPath", theIpadCustomXibPath);
+#endif
+
                 wrapper.SetBool("useOSAutorotation", useAnimatedAutoRotation.EvaluateIn(context));
 
                 wrapper.SetBool("uIPrerenderedIcon", prerenderedIcon.EvaluateIn(context));
@@ -433,13 +603,16 @@ namespace AncientLightStudios.uTomate
                 wrapper.SetBool("logObjCUncaughtExceptions", logUncaughtObjectiveCExceptions.EvaluateIn(context));
                 wrapper.SetBool("enableCrashReportAPI", enableCrashReportApi.EvaluateIn(context));
                 wrapper.SetString("locationUsageDescription", locationUsageDescription.EvaluateIn(context));
-                wrapper.SetBool("Override IPod Music", overrideIpodMusic.EvaluateIn(context));
                 wrapper.SetBool("Prepare IOS For Recording", prepareIosForRecording.EvaluateIn(context));
 
                 ApplyCommonSettings(wrapper, context);
             }
 
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            PlayerSettings.SetArchitecture(BuildTargetGroup.iOS, (int) architecture.EvaluateIn(context));
+#else
             PlayerSettings.SetPropertyInt("Architecture", (int)architecture.EvaluateIn(context), BuildTargetGroup.iOS);
+#endif
 
             if (UTPreferences.DebugMode)
             {
@@ -471,6 +644,9 @@ namespace AncientLightStudios.uTomate
             var wrapper = new UTPlayerSettingsWrapper();
 
             useAnimatedAutoRotation.StaticValue = wrapper.GetBool("useOSAutorotation");
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2_0 || UNITY_5_2_1 || UNITY_5_2_2) // VR: 5.2.3
+            requiresFullScreen.StaticValue = PlayerSettings.iOS.requiresFullScreen;
+#endif
             statusBarHidden.StaticValue = PlayerSettings.statusBarHidden;
             statusBarStyle.StaticValue = PlayerSettings.iOS.statusBarStyle;
 
@@ -487,7 +663,7 @@ namespace AncientLightStudios.uTomate
 #if UNITY_5_0  // VR: [5.0, 5.0]
             targetGlesGraphics.StaticValue = PlayerSettings.targetGlesGraphics;
 #endif
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             targetResolution.StaticValue = PlayerSettings.iOS.targetResolution;
 #endif
             accelerometerFrequency.StaticValue = PlayerSettings.accelerometerFrequency;
@@ -498,10 +674,37 @@ namespace AncientLightStudios.uTomate
 
             aotCompilationOptions.StaticValue = PlayerSettings.aotOptions;
             sdkVersion.StaticValue = PlayerSettings.iOS.sdkVersion;
-            targetOsVersion.StaticValue = PlayerSettings.iOS.targetOSVersion;
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            targetOsVersion.StaticValue = PlayerSettings.iOS.targetOSVersionString;
+#else
+            var version = (int) PlayerSettings.iOS.targetOSVersion;
+            if (version != 999) // 999 == Unknown, I'm not sure what unknown is supposed to mean
+            {
+                // Unknown
+                var versionString = version.ToString();
+                string result;
+                if (versionMap.TryGetValue(versionString, out result))
+                {
+                    targetOsVersion.StaticValue = result;
+                }
+                else
+                {
+                    Debug.LogWarning("Unable to convert enum value " + version +
+                                     " into version string. This is almost certainly a bug. Please report this to support@ancientlightstudios.com. Thank you very much.");
+                }
+            }
+            else
+            {
+                targetOsVersion.StaticValue = "7.0";
+            }
+#endif
             scriptCallOptimizationLevel.StaticValue = PlayerSettings.iOS.scriptCallOptimization;
 
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            scriptingBackend.StaticValue = PlayerSettings.GetScriptingBackend(BuildTargetGroup.iOS);
+#else
             scriptingBackend.StaticValue = (ScriptingImplementation)PlayerSettings.GetPropertyInt("ScriptingBackend", BuildTargetGroup.iOS);
+#endif
 
 #if UNITY_5_0 // VR: [5.0, 5.1)
 			var il2ppsetting = false;
@@ -516,10 +719,15 @@ namespace AncientLightStudios.uTomate
             enableCrashReportApi.StaticValue = wrapper.GetBool("enableCrashReportAPI");
 
             locationUsageDescription.StaticValue = wrapper.GetString("locationUsageDescription");
-            overrideIpodMusic.StaticValue = wrapper.GetBool("Override IPod Music");
+
             prepareIosForRecording.StaticValue = wrapper.GetBool("Prepare IOS For Recording");
 
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+            architecture.StaticValue = (IosArchitecture)PlayerSettings.GetArchitecture(BuildTargetGroup.iOS);
+#else
             architecture.StaticValue = (IosArchitecture)PlayerSettings.GetPropertyInt("Architecture", BuildTargetGroup.iOS);
+#endif
 
             mobileSplashScreen.StaticValue = wrapper.GetObject("iPhoneSplashScreen") as Texture2D;
             highResIphone.StaticValue = wrapper.GetObject("iPhoneHighResSplashScreen") as Texture2D;
@@ -536,27 +744,41 @@ namespace AncientLightStudios.uTomate
 
             if (icons != null && icons.Length > 0)
             {
-                if (icons.Length == 8)
+                // did I say that this is a MESS?
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                const int NumberOfIcons = 9;
+#else
+                const int NumberOfIcons = 8;
+#endif
+
+                if (icons.Length == NumberOfIcons)
                 {
-                    iconSize180.StaticValue = icons[0];
-                    iconSize152.StaticValue = icons[1];
-                    iconSize144.StaticValue = icons[2];
-                    iconSize120.StaticValue = icons[3];
-                    iconSize114.StaticValue = icons[4];
-                    iconSize76.StaticValue = icons[5];
-                    iconSize72.StaticValue = icons[6];
-                    iconSize57.StaticValue = icons[7];
+                    var index = 0;
+                    iconSize180.StaticValue = icons[index++];
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                    iconSize167.StaticValue = icons[index++];
+#endif
+                    iconSize152.StaticValue = icons[index++];
+                    iconSize144.StaticValue = icons[index++];
+                    iconSize120.StaticValue = icons[index++];
+                    iconSize114.StaticValue = icons[index++];
+                    iconSize76.StaticValue = icons[index++];
+                    iconSize72.StaticValue = icons[index++];
+                    iconSize57.StaticValue = icons[index++];
                     overrideIconForIphone.StaticValue = true;
                 }
                 else
                 {
-                    Debug.LogWarning("Amount of icon sizes for iOS has changed (was " + icons.Length + " but should be 8). Please report this issue to support@ancientlightstudios.com. Thank you!");
+                    Debug.LogWarning("Amount of icon sizes for iOS has changed (was " + icons.Length + " but should be " + NumberOfIcons + "). Please run this action again to update the number of images. If you still see this issue after running this action, please report this to support@ancientlightstudios.com. Thank you!", this);
                 }
             }
             else
             {
                 overrideIconForIphone.StaticValue = false;
                 iconSize180.StaticValue = null;
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+                iconSize167.StaticValue = null;
+#endif
                 iconSize152.StaticValue = null;
                 iconSize144.StaticValue = null;
                 iconSize120.StaticValue = null;
@@ -590,7 +812,23 @@ namespace AncientLightStudios.uTomate
                 xibPath = UTFileUtils.CombineToPath(UTFileUtils.ProjectRoot, xibPath);
             }
             customXibPath.StaticValue = xibPath ?? "";
-                
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+            iPadLaunchScreen.StaticValue = (IosLaunchScreenType) wrapper.GetInt("iOSLaunchScreeniPadType");
+            iPadLaunchScreenFillPercentage.StaticValue = wrapper.GetFloat("iOSLaunchScreeniPadFillPct");
+            iPadLaunchScreenSizeInPoints.StaticValue = wrapper.GetFloat("iOSLaunchScreeniPadSize");
+            iPadLaunchScreenImage.StaticValue = wrapper.GetObject("iOSLaunchScreeniPadImage") as Texture2D;
+            iPadLaunchScreenBackgroundColor.StaticValue = wrapper.GetColor("iOSLaunchScreeniPadBackgroundColor");
+
+            var iPadXibPath = wrapper.GetString("iOSLaunchScreeniPadCustomXibPath");
+            if (!string.IsNullOrEmpty(xibPath))
+            {
+                // to full path
+                iPadXibPath = UTFileUtils.CombineToPath(UTFileUtils.ProjectRoot, iPadXibPath);
+            }
+            iPadCustomXibPath.StaticValue = iPadXibPath ?? "";
+#endif
+
             LoadCommonSettings(wrapper);
 
         }
@@ -629,13 +867,25 @@ namespace AncientLightStudios.uTomate
             ImageAndBackgroundConstant,
 #endif
         }
-        
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
+        public override bool SupportsVirtualReality
+        {
+            get { return false; }
+        }
+#endif
+
         protected override bool IsMobilePlatform
         {
             get
             {
                return true;
             }
+        }
+
+        public override bool SupportsMutingAudio
+        {
+            get { return true; }
         }
 
         protected override BuildTarget Platform
@@ -654,3 +904,4 @@ namespace AncientLightStudios.uTomate
         }
     }
 }
+

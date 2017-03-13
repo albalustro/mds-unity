@@ -14,7 +14,11 @@ namespace AncientLightStudios.uTomate
     using System;
 
     [UTActionInfo(actionCategory = "Build")]
-    [UTDoc(title = "Set Web Player Settings", description = "Sets the player settings for Web player builds.")]
+    [UTDoc(title = "Set Web Player Settings", description = "Sets the player settings for Web player builds."
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 ) // VR: 5.4
+            , notice = "The web player has been removed in Unity 5.4. This action will do nothing in Unity 5.4 or later."
+#endif
+     )]
     [UTInspectorGroups(groups = new[] { "Resolution & Presentation", "Rendering", "Streaming", "Configuration", "Optimization" })]
     [UTDefaultAction]
     public class UTSetPlayerSettingsWebAction : UTSetPlayerSettingsActionBase, UTICanLoadSettingsFromEditor
@@ -69,7 +73,7 @@ namespace AncientLightStudios.uTomate
 #if UNITY_5_0  // VR: [5.0, 5.0]
             PlayerSettings.useDirect3D11 = useDirect3D11.EvaluateIn(context);
 #endif
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             PlayerSettings.firstStreamedLevelWithResources = firstStreamedLevel.EvaluateIn(context);
 #endif
             using(var wrapper = new UTPlayerSettingsWrapper()) {
@@ -112,7 +116,7 @@ namespace AncientLightStudios.uTomate
             useDirect3D11.StaticValue = PlayerSettings.useDirect3D11;
             useDirect3D11.UseExpression = false;
 #endif
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             firstStreamedLevel.StaticValue = PlayerSettings.firstStreamedLevelWithResources;
 #endif
             LoadCommonSettings(wrapper);

@@ -5,8 +5,6 @@
 // http://www.ancientlightstudios.com
 //
 
-using UnityEngine;
-using System.Collections;
 
 namespace AncientLightStudios.uTomate
 {
@@ -267,7 +265,11 @@ namespace AncientLightStudios.uTomate
 
 			// general GI
 			if (theActivateRealtimeGI || theActivateBakedGI) {
-				lightmapSettings.FindProperty("m_LightmapsMode").intValue = (int) directionalMode.EvaluateIn(context);
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
+			    lightmapSettings.FindProperty("m_LightmapEditorSettings.m_LightmapsBakeMode").intValue = (int) directionalMode.EvaluateIn(context);
+#else
+			    lightmapSettings.FindProperty("m_LightmapsMode").intValue = (int) directionalMode.EvaluateIn(context);
+#endif
 				lightmapSettings.FindProperty("m_GISettings.m_IndirectOutputScale").floatValue = indirectIntensity.EvaluateIn(context);
 				lightmapSettings.FindProperty("m_GISettings.m_AlbedoBoost").floatValue = bounceBoost.EvaluateIn(context);
 				lightmapSettings.FindProperty("m_LightmapEditorSettings.m_TextureWidth").intValue = (int) atlasSize.EvaluateIn(context);

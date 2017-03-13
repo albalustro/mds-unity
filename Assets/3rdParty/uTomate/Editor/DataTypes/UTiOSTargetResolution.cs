@@ -5,7 +5,7 @@
 // http://www.ancientlightstudios.com
 //
 
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
 namespace AncientLightStudios.uTomate
 {
     using API;

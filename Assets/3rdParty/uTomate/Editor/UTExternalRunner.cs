@@ -45,7 +45,7 @@ namespace AncientLightStudios.uTomate
             }
 
             var keepRunning = GetArg("-keepRunning");
-            if (keepRunning != null && keepRunning.ToLowerInvariant() != "true")
+            if (keepRunning == null || keepRunning.ToLowerInvariant() != "true")
             {
                 UTomateRunner.Instance.OnRunnerFinished += delegate (bool cancelled, bool failed)
                 {

@@ -12,7 +12,7 @@ namespace AncientLightStudios.uTomate
     using UnityEditor;
     using UnityEngine;
 
- #if !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2 // VR 5.3
+ #if !UNITY_5_0 && !UNITY_5_1 && !UNITY_5_2 // VR: 5.3
     using UnityEditor.SceneManagement;
 #endif
 
@@ -47,13 +47,13 @@ namespace AncientLightStudios.uTomate
             {
                 Debug.Log("Opening scene: " + theScene, this);
             }
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             var result = EditorApplication.OpenScene(theScene);
 #else
             var result = EditorSceneManager.OpenScene(theScene);
 #endif
 
-#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR [5.0, 5.2]
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 // VR: [5.0, 5.2]
             if (!result)
 #else
             if (!result.IsValid())

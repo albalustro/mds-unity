@@ -10,6 +10,7 @@ namespace AncientLightStudios.uTomate
     using API;
     using UnityEditor;
     using UnityEngine;
+    using UnityEngine.Serialization;
 
     public abstract class UTSetPlayerSettingsActionBase : UTAction
     {
@@ -54,15 +55,21 @@ namespace AncientLightStudios.uTomate
         [UTDoc(description = "Style of splash screen to use.")]
         [UTInspectorHint(group = "Splash Image", order = 4)]
         [UTRequiresLicense(UTLicense.UnityPro)]
+#if UNITY_5_4 // VR: [5.4, 5.4]
         public UTSplashScreenStyle splashScreenStyle;
-#endif    
+#else
+        public UTUnityLogoStyle splashScreenStyle;
+#endif
+#endif
 
         // --------- RENDERING ----------------
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 // VR: [5.0, 5.4]
         [UTDoc(description = "The rendering path to use.")]
         [UTInspectorHint(group = "Rendering", order = 1,
             captions = new[] { "Legacy Vertex Lit", "Forward", "Legacy Deferred (light prepass)", "Deferred" },
             allowedValues = new[] { "VertexLit", "Forward", "DeferredLighting", "DeferredShading" })]
         public UTRenderingPath renderingPath;
+#endif
 
         [UTDoc(description = "Enable static batching?")]
         [UTInspectorHint(group = "Rendering", order = 5)]
@@ -79,6 +86,11 @@ namespace AncientLightStudios.uTomate
 
 
         // ------------ CONFIGURATION --------------
+        [UTDoc(description = "Mute other audio sources when the game is playing?")]
+        [UTInspectorHint(group = "Configuration", order = 7)]
+        [FormerlySerializedAs("overrideIpodMusic")]
+        public UTBool muteOtherAudioSources;
+
         [UTDoc(description = "Don't send hardware statistics to Unity.", title = "Disable Analytics")]
         [UTInspectorHint(group = "Configuration", order = 20)]
         [UTRequiresLicense(UTLicense.UnityPro)]
@@ -146,12 +158,14 @@ namespace AncientLightStudios.uTomate
                 }
 #endif
 
-#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
                 if (UTils.IsUnityPro) // Keep in line with Unity's licensing terms.
                 {
+#if UNITY_5_4 // VR: [5.4,5.4]
                     wrapper.SetEnum("m_SplashScreenStyle", splashScreenStyle.EvaluateIn(context));
-                }
+#elif !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 ) // VR: 5.5
+                    wrapper.SetEnum("m_SplashScreenLogoStyle", splashScreenStyle.EvaluateIn(context));
 #endif
+                }
 
 #if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
                 if (SupportsVirtualReality)
@@ -161,6 +175,7 @@ namespace AncientLightStudios.uTomate
 #endif
             }
             // ------------ RENDERING -------------
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 // VR: [5.0, 5.4]
             if (IsMobilePlatform)
             {
                 wrapper.SetEnum("m_MobileRenderingPath", renderingPath.EvaluateIn(context));
@@ -169,6 +184,7 @@ namespace AncientLightStudios.uTomate
             {
                 PlayerSettings.renderingPath = renderingPath.EvaluateIn(context);
             }
+#endif
             UTInternalCall.InvokeStatic("UnityEditor.PlayerSettings", "SetBatchingForPlatform", Platform,
             staticBatching.EvaluateIn(context) ? 1 : 0, dynamicBatching.EvaluateIn(context) ? 1 : 0);
 
@@ -179,6 +195,15 @@ namespace AncientLightStudios.uTomate
             if (UTils.HasAdvancedLicenseOn(Platform))
             {
                 wrapper.SetBool("submitAnalytics", !disableHardwareStatistics.EvaluateIn(context));
+            }
+
+            if (SupportsMutingAudio)
+            {
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+                PlayerSettings.muteOtherAudioSources = muteOtherAudioSources.EvaluateIn(context);
+#else
+                wrapper.SetBool("Override IPod Music", muteOtherAudioSources.EvaluateIn(context));
+#endif
             }
 
 
@@ -226,8 +251,11 @@ namespace AncientLightStudios.uTomate
                 showUnitySplashScreen.StaticValue = wrapper.GetBool("m_ShowUnitySplashScreen");
 #endif
 
-#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
+#if UNITY_5_4 // VR: [5.4,5.4]
                 splashScreenStyle.StaticValue = wrapper.GetEnum<SplashScreenStyle>("m_SplashScreenStyle");
+#elif !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+                splashScreenStyle.StaticValue =
+                    wrapper.GetEnum<PlayerSettings.SplashScreen.UnityLogoStyle>("m_SplashScreenLogoStyle");
 #endif
 #if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2) // VR: 5.3
                 if (SupportsVirtualReality)
@@ -238,6 +266,7 @@ namespace AncientLightStudios.uTomate
             }
 
             // -------------- RENDERING ----------------
+#if UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 // VR: [5.0, 5.4]
             if (IsMobilePlatform)
             {
                 renderingPath.StaticValue = wrapper.GetEnum<RenderingPath>("m_MobileRenderingPath");
@@ -246,6 +275,7 @@ namespace AncientLightStudios.uTomate
             {
                 renderingPath.StaticValue = PlayerSettings.renderingPath;
             }
+#endif
             var parameters = new object[3];
             parameters[0] = Platform;
 
@@ -260,6 +290,15 @@ namespace AncientLightStudios.uTomate
             // ------------ CONFIGURATION ---------------
 
             disableHardwareStatistics.StaticValue = !wrapper.GetBool("submitAnalytics");
+            if (SupportsMutingAudio)
+            {
+
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+                muteOtherAudioSources.StaticValue = PlayerSettings.muteOtherAudioSources;
+#else
+                muteOtherAudioSources.StaticValue = wrapper.GetBool("Override IPod Music");
+#endif
+            }
 
             // ----------- OPTIMIZATION -----------------
 
@@ -291,6 +330,11 @@ namespace AncientLightStudios.uTomate
         protected abstract bool IsMobilePlatform { get; }
 
         protected abstract BuildTarget Platform { get; }
+
+        public virtual bool SupportsMutingAudio
+        {
+            get { return false; }
+        }
 
         public virtual bool SupportsStripping
         {

@@ -9,6 +9,7 @@ namespace AncientLightStudios.uTomate
 {
     using API;
     using System.Collections;
+    using System.Diagnostics.CodeAnalysis;
     using UnityEditor;
     using UnityEngine;
     using UObject = UnityEngine.Object;
@@ -34,6 +35,7 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(order = 4)]
         public UTBool onlyFirstAsset;
 
+        [SuppressMessage("ReSharper", "CoVariantArrayConversion")]
         public override IEnumerator Execute(UTContext context)
         {
             var theName = propertyName.EvaluateIn(context);
@@ -71,7 +73,7 @@ namespace AncientLightStudios.uTomate
                 var idx = 0;
                 foreach (var file in fileSet)
                 {
-                    result[idx] = AssetDatabase.LoadMainAssetAtPath(file);
+                    result[idx++] = AssetDatabase.LoadMainAssetAtPath(file);
                     yield return null;
                 }
                 context[theName] = result;

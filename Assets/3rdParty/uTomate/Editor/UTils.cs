@@ -9,7 +9,6 @@ namespace AncientLightStudios.uTomate
 {
     using System;
     using System.Collections.Generic;
-    using System.Globalization;
     using System.IO;
     using System.Linq;
     using System.Security.Cryptography;
@@ -35,7 +34,7 @@ namespace AncientLightStudios.uTomate
         /// </returns>
         public static T CreateAssetOfType<T>(string preferredName) where T : ScriptableObject
         {
-            var name = String.IsNullOrEmpty(preferredName) ? typeof (T).Name : preferredName;
+            var name = string.IsNullOrEmpty(preferredName) ? typeof (T).Name : preferredName;
 
             var path = "Assets";
             foreach (var obj in Selection.GetFiltered(typeof (UObject), SelectionMode.Assets))
@@ -407,13 +406,20 @@ namespace AncientLightStudios.uTomate
         /// <param name="action">the action to check</param>
         /// <param name="versionIntroducingTheChange">the version that introduced the change.</param>
         /// <param name="migration">the migration to execute</param>
-        public static void MigrateActionIfRequired<T>(T action, float versionIntroducingTheChange, Action<T> migration) where T:UTAction
+        public static void MigrateActionIfRequired<T>(T action, string versionIntroducingTheChange, Action<T> migration) where T:UTAction
         {
-            if (action.CreatedWithActionVersion == null || !(float.Parse(action.CreatedWithActionVersion) < versionIntroducingTheChange)) return;
+            var theCreatedActionVersion = new Version(action.CreatedWithActionVersion ?? "1.0");
+            var theVersionIntroducingTheChange = new Version(versionIntroducingTheChange);
+
+            if (theCreatedActionVersion.CompareTo(theVersionIntroducingTheChange) >= 0)
+            {
+                return;
+            }
 
             migration(action);
-            action.CreatedWithActionVersion = versionIntroducingTheChange.ToString(CultureInfo.InvariantCulture);
+            action.CreatedWithActionVersion = versionIntroducingTheChange;
             EditorUtility.SetDirty(action);
+            AssetDatabase.SaveAssets();
         }
     }
 }

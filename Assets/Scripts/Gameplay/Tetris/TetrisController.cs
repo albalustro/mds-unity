@@ -71,7 +71,7 @@ namespace MDS.Gameplay.Tetris
 			//Define os keyframes da curva de incremento da velocidade
 			Keyframe[] keys = new Keyframe[2];
 			keys [0] = new Keyframe (0, 1);
-			keys [1] = new Keyframe (1, 0.5f);
+			keys [1] = new Keyframe (1, 0.75f);
 			timeCurve = new AnimationCurve (keys);
 
 			SpawnNewItem();
@@ -151,13 +151,13 @@ namespace MDS.Gameplay.Tetris
 
         private IEnumerator WaitLoseAnimation()
         {
-            Log("Antes do dialogo");
+           // Log("Antes do dialogo");
             yield return new WaitForSeconds(0.1f);
             yield return new WaitWhile(MDS.DialogueSystem.DialogueSystem.Instance.IsDialogueOpen);
-            Log("Depois do dialogo fechar, aguardando 1,5s");
+           // Log("Depois do dialogo fechar, aguardando 1,5s");
             yield return new WaitForSeconds(1.5f);
             _isPreAnimating = false;
-            Log("Iniciando animacao de vitoria");
+           // Log("Iniciando animacao de vitoria");
             StartCoroutine(VictoryAnimation());
         }
         #endregion

@@ -1,5 +1,6 @@
-﻿using System.Collections;
+﻿
 using UnityEngine;
+
 
 public class SFXController : MDSBehaviour {
 
@@ -11,7 +12,7 @@ public class SFXController : MDSBehaviour {
 	void Start()
 	{
 		instance = this;
+        
 	}
-
 
 }

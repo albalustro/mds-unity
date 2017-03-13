@@ -40,6 +40,15 @@ public class ConnectionManager : Singleton<ConnectionManager>
 		loginForm.AddField("password", pass);
 		loginForm.AddField("game", game);
 		loginForm.AddField("season_id", season);
+
+        //Log(_config.loginURL);
+        //Log(loginForm.ToString());
+        //Log("game: " + game);
+        //Log("season_id: " + season);
+        //Log("login: " + user);
+        //Log("pass: " + pass);
+
+        
 		WWW www = new WWW(_config.loginURL, loginForm);
 		StartCoroutine(ValidateLogin(www));
 	}
@@ -48,15 +57,18 @@ public class ConnectionManager : Singleton<ConnectionManager>
 	{
 		LoginInfo info = new LoginInfo ();
 		yield return www;
-		if (www.error == null)
-		{
-			string wsReturn = www.text.Trim ();
-            Log(wsReturn);
-            info = JsonConvert.DeserializeObject<LoginInfo> (wsReturn);
-            Log("info é nulo?? : " + (info == null).ToString());
-		}
-		else
-			info = null;
+        if(www.error == null)
+        {
+            string wsReturn = www.text.Trim();
+           // Log("wsReturn: " + wsReturn);
+            info = JsonConvert.DeserializeObject<LoginInfo>(wsReturn);
+           // Log("info é nulo?? : " + (info == null).ToString());
+        }
+        else
+        {
+            LogError("Erro: " + www.error);
+            info = null;
+        }
 		doLoginCallback(info);
 	}
 	#endregion
@@ -77,13 +89,25 @@ public class ConnectionManager : Singleton<ConnectionManager>
 	{
 		ConceptMap cm;
 		yield return www;
-		if (www.error == null)
-		{
-			string wsReturn = www.text.Trim ();
-			cm = JsonConvert.DeserializeObject<ConceptMap> (wsReturn);
-		}
-		else
-			cm = null;
+
+        // TIMEOUT, para o futuro, se necessario
+        //while(!www.isDone)
+        //{
+        //    if(timer > timeOut) { failed = true; break; }
+        //    timer += Time.deltaTime;
+        //    yield return null;
+        //}
+
+        if(www.error == null)
+        {
+            string wsReturn = www.text.Trim();
+            cm = JsonConvert.DeserializeObject<ConceptMap>(wsReturn);
+        }
+        else
+        {
+            LogError("Erro: " +www.error);
+            cm = null;
+        }
 		sendConceptCallback (cm);
 	}
 	#endregion

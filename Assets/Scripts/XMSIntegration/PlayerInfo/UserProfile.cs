@@ -68,6 +68,7 @@ public class UserProfile : Singleton<UserProfile>
             return;
 #endif
 
+        SaveUserProfile();
         SendConceptMapToSyncer();
     }
 
@@ -102,19 +103,21 @@ public class UserProfile : Singleton<UserProfile>
 	private void SendConceptMapToSyncer()
 	{
 		if (loginInfo.status.code == ConnectionResponse.OK)
-			ConceptSyncer.Instance.SendConceptMapToServer (loginInfo.token, _conceptMap, ReceiveConceptMapFromSyncer);
-		else
-            loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
+			ConceptSyncer.Instance.SendConceptMapToServer (loginInfo.token, _conceptMap, SendConceptMapToServerCallback);
+		//else
+  //          loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
 	}
 
-	private void ReceiveConceptMapFromSyncer(ConceptMap cm)
+	private void SendConceptMapToServerCallback(ConceptMap cm)
 	{
-		if (cm == null)
+        if(cm == null) // estava on line no login (caso contrario nem teria enviado nada..) e voltou com algum erro
+        {
             loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
-		else
-		{
+        }
+        else
+        {
             _conceptMap = cm;
-			SaveUserProfile ();
+            SaveUserProfile();
 
             if(OnConceptMapUpdatedByRemoteEvent != null)
                 OnConceptMapUpdatedByRemoteEvent();

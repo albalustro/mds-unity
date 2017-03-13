@@ -54,7 +54,7 @@ namespace MDS.Gameplay.FSM
                 if(_currentGameTime + time >= _gameDuration)
                     time = _gameDuration - _currentGameTime;
 
-                Log("Proximo spawn em: " + time.ToString());
+                //Log("Proximo spawn em: " + time.ToString());
 
                 yield return new WaitForSeconds(time);
 

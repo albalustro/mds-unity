@@ -11,6 +11,11 @@ namespace AncientLightStudios.uTomate
     using UnityEditor;
     using UnityEngine;
     using System.Collections;
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4) // VR: 5.5
+    using TheStereoRenderingPath = UnityEditor.StereoRenderingPath;
+#else
+    using TheStereoRenderingPath = AncientLightStudios.uTomate.StereoRenderingPath;
+#endif
 
     [UTDoc(title = "Set PC, Mac and Linux Standalone Player Settings", description = "Sets the player settings for PC, Mac and Linux standalone builds.")]
     [UTActionInfo(actionCategory = "Build")]
@@ -23,16 +28,20 @@ namespace AncientLightStudios.uTomate
         [UTInspectorHint(group = "Resolution", order = 1)]
         public UTBool defaultIsFullscreen;
 
-        [UTDoc(description = "Default screen width of the standalone player window.")]
+        [UTDoc(description = "If enabled, the game will default to the native device resolution.")]
         [UTInspectorHint(group = "Resolution", order = 2)]
+        public UTBool defaultIsNativeResolution;
+
+        [UTDoc(description = "Default screen width of the standalone player window.")]
+        [UTInspectorHint(group = "Resolution", order = 3)]
         public UTInt defaultScreenWidth;
 
         [UTDoc(description = "Default screen height of the standalone player window.")]
-        [UTInspectorHint(group = "Resolution", order = 3)]
+        [UTInspectorHint(group = "Resolution", order = 4)]
         public UTInt defaultScreenHeight;
 
         [UTDoc(description = "Continue running when application loses focus?")]
-        [UTInspectorHint(group = "Resolution", order = 4)]
+        [UTInspectorHint(group = "Resolution", order = 5)]
         public UTBool runInBackground;
 
         // ----------- STANDALONE PLAYER OPTIONS ------------
@@ -141,7 +150,7 @@ namespace AncientLightStudios.uTomate
 
         // ------------- SPLASH SCREEN ------------
         [UTDoc(description = "The splash image for the resolution selection dialog.", title = "Config Dialog Banner")]
-        [UTInspectorHint(group = "Splash Image", order = 5)]
+        [UTInspectorHint(group = "Splash Image", order = 1)]
         public UTTexture2D splashImage;
 
         // -------------- RENDERING ---------------
@@ -168,12 +177,40 @@ namespace AncientLightStudios.uTomate
         public UTBool virtualRealitySupported; 
 #endif 
 
-#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4 
-        [UTDoc(description = "Enable single-pass stereoscopic rendering?")]
-        [UTInspectorHint(group = "Rendering", order = 12)]
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
+        [HideInInspector]
         public UTBool singlePassStereoscopicRendering;
+
+        [UTDoc(description = "Stereoscopic rendering method to use.")]
+        [UTInspectorHint(group = "Rendering", allowedValues = new[] {"MultiPass", "SinglePass"}, order = 12)]
+        public UTStereoRenderingPath stereoRenderingMethod;
 #endif
-       
+
+        public void OnEnable()
+        {
+#if !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
+            UTils.MigrateActionIfRequired(this, "1.7", delegate(UTSetPlayerSettingsPcMacAction action)
+            {
+                if (action.singlePassStereoscopicRendering.UseExpression)
+                {
+                    Debug.Log(
+                        "The setting for 'Single Pass Stereoscopic Rendering' is now an enum. Your expression '" +
+                        action.singlePassStereoscopicRendering.Expression +
+                        "' cannot be automatically migrated. Please " +
+                        "check the '" + action.name +
+                        "' action and set the new 'Stereo Rendering Method' setting to an appropriate value. " +
+                        "You can select the action by clicking on this message.", action);
+                }
+                else
+                {
+                    action.stereoRenderingMethod.StaticValue = action.singlePassStereoscopicRendering.Value
+                        ? TheStereoRenderingPath.SinglePass
+                        : TheStereoRenderingPath.MultiPass;
+                    Debug.Log("The action '" + action.name + "' has been migrated. Please verify the settings of this action.", action);
+                }
+            });
+#endif
+        }
 
         public override IEnumerator Execute(UTContext context)
         {
@@ -186,6 +223,7 @@ namespace AncientLightStudios.uTomate
             PlayerSettings.defaultScreenHeight = defaultScreenHeight.EvaluateIn(context);
             PlayerSettings.runInBackground = runInBackground.EvaluateIn(context);
             PlayerSettings.defaultIsFullScreen = defaultIsFullscreen.EvaluateIn(context);
+            PlayerSettings.defaultIsNativeResolution = defaultIsNativeResolution.EvaluateIn(context);
             PlayerSettings.captureSingleScreen = captureSingleScreen.EvaluateIn(context);
             PlayerSettings.displayResolutionDialog = resolutionDialog.EvaluateIn(context);
             PlayerSettings.usePlayerLog = usePlayerLog.EvaluateIn(context);
@@ -242,15 +280,18 @@ namespace AncientLightStudios.uTomate
             }
 
 #if  !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
-            var doSinglePassStereoscopicRendering = singlePassStereoscopicRendering.EvaluateIn(context);
+            var stereoRenderingPath = stereoRenderingMethod.EvaluateIn(context);
+#if UNITY_5_4 // VR: [5.4,5.4]
+            var doSinglePassStereoscopicRendering = stereoRenderingPath == TheStereoRenderingPath.SinglePass;
             // single-pass stereo rendering must only be enabled when vr is enabled.
             PlayerSettings.singlePassStereoRendering = doSinglePassStereoscopicRendering && isVirtualRealitySupported;
+#else
+            PlayerSettings.stereoRenderingPath = stereoRenderingPath;
 #endif
-            
-#endif 
+#endif
+#endif
             using (var wrapper = new UTPlayerSettingsWrapper())
             {
-
                 wrapper.SetBool("resizableWindow", resizableWindow.EvaluateIn(context));
                 wrapper.SetEnum("d3d9FullscreenMode", d3d9FullscreenMode.EvaluateIn(context));
                 wrapper.SetEnum("d3d11FullscreenMode", d3d11FullscreenMode.EvaluateIn(context));
@@ -290,6 +331,7 @@ namespace AncientLightStudios.uTomate
             defaultScreenHeight.StaticValue = PlayerSettings.defaultScreenHeight;
             runInBackground.StaticValue = PlayerSettings.runInBackground;
             defaultIsFullscreen.StaticValue = PlayerSettings.defaultIsFullScreen;
+            defaultIsNativeResolution.StaticValue = PlayerSettings.defaultIsNativeResolution;
 
             captureSingleScreen.StaticValue = PlayerSettings.captureSingleScreen;
             resolutionDialog.StaticValue = PlayerSettings.displayResolutionDialog;
@@ -358,7 +400,13 @@ namespace AncientLightStudios.uTomate
 #endif
 
 #if  !(UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3) // VR: 5.4
-            singlePassStereoscopicRendering.StaticValue = PlayerSettings.singlePassStereoRendering;
+#if UNITY_5_4 // VR: [5.4,5.4]
+            stereoRenderingMethod.StaticValue = PlayerSettings.singlePassStereoRendering
+                ? TheStereoRenderingPath.SinglePass
+                : TheStereoRenderingPath.MultiPass;
+#else
+            stereoRenderingMethod.StaticValue = PlayerSettings.stereoRenderingPath;
+#endif
 #endif
 #if !UNITY_5_0 // VR: 5.1
             virtualRealitySupported.StaticValue = PlayerSettings.virtualRealitySupported;

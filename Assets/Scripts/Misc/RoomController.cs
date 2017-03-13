@@ -40,7 +40,7 @@ public class RoomController : MDSBehaviour {
 			nextButton.SetActive (true);
 			closeMaskButton.SetActive (true);
 		}
-		currentGameIndex = SceneManager.GetActiveScene().name.Substring(1, 1);
+        currentGameIndex = SceneManager.GetActiveScene().GetGameIndex().ToString();
 		AudioController.Instance.PlayTheme (_theme);
 	}
 		
@@ -71,49 +71,39 @@ public class RoomController : MDSBehaviour {
 		}
 	}
 
-	public void NextButton()
-	{
+    public void NextButton()
+    {
         nextButton.SetActive(false);
         _hotlinks.SetActive(true);
         backButton.SetActive(true);
-        if (_charSelectionMask.activeSelf)
-        {
-            _charSelectionMask.SetActive(false);
-            _worldSelectionMask.SetActive(true);
-        }
+        _charSelectionMask.SetActive(false);
+        _worldSelectionMask.SetActive(true);
     }
 
-	public void BackButton()
-	{
+    public void BackButton()
+    {
         backButton.SetActive(false);
         _hotlinks.SetActive(false);
         nextButton.SetActive(true);
-        if (_worldSelectionMask.activeSelf)
-        {
-            _worldSelectionMask.SetActive(false);
-            _charSelectionMask.SetActive(true);
-        }
+        _worldSelectionMask.SetActive(false);
+        _charSelectionMask.SetActive(true);
     }
 
-	public void CloseMaskButton()
-	{
-		if (_charSelectionMask.activeSelf || _worldSelectionMask.activeSelf)
-		{
-			closeMaskButton.SetActive (false);
-			_charSelectionMask.SetActive (false);
-			_worldSelectionMask.SetActive (false);
-		} 
-	}
+    public void CloseMaskButton()
+    {
+        _hotlinks.SetActive(true);
+        backButton.SetActive(false);
+        nextButton.SetActive(false);
+        closeMaskButton.SetActive(false);
+        _charSelectionMask.SetActive(false);
+        _worldSelectionMask.SetActive(false);
+    }
 
-	public void RestartMask()
-	{
-		if (!_charSelectionMask.activeSelf && !_worldSelectionMask.activeSelf)
-		{
-			closeMaskButton.SetActive (true);
-            if (backButton.activeSelf)
-                _worldSelectionMask.SetActive(true);
-            if (nextButton.activeSelf)
-                _charSelectionMask.SetActive (true);
-		} 
-	}
+    public void RestartMask()
+    {
+        backButton.SetActive(true);
+        closeMaskButton.SetActive(true);
+        _worldSelectionMask.SetActive(true);
+
+    }
 }

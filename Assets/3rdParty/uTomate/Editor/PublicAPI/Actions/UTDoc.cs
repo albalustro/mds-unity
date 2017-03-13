@@ -12,24 +12,32 @@ namespace AncientLightStudios.uTomate.API
     using UnityEditor;
 
     /// <summary>
-    /// Documentation annotation that can be used to document the properties of actions.
+    /// Documentation annotation that can be used to document the properties of actions and actions themselves.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class | AttributeTargets.Field)]
     public class UTDoc : System.Attribute
     {
         /// <summary>
-        /// The title of the the property. If not specified, the title will be derived from the field name.
+        /// The title of the the property/action. If not specified, the title will be derived from the field name or
+        /// class name of the action.
         /// </summary>
         public string title;
 
         /// <summary>
-        /// The description of the property. This will be displayed as tooltip in the inspector.
+        /// The description of the property/action. This will be displayed as tooltip in the inspector for properties
+        /// and on top of the action for actions..
         /// </summary>
         public string description;
 
         /// <summary>
+        /// A notice that should be rendered on top of the action. This can contain important information regarding
+        /// the action (e.g. external prerequisites). Ignored for properties.
+        /// </summary>
+        public string notice;
+
+        /// <summary>
         /// A help URL. If specified, a help icon will be displayed in the inspector. When the user clicks the
-        /// help icon, the url will be opened in the default browser.
+        /// help icon, the url will be opened in the default browser. Ignored for properties.
         /// </summary>
         public string helpUrl;
 

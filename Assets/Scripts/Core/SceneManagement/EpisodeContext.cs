@@ -21,6 +21,13 @@ namespace MDS.Core.SceneManagement
             }
         }
 
+        public static bool HasEpisodeContext()
+        {
+            return _instance != null;
+        }
+
+        
+
         [SerializeField]
         private ChallengeStatusInEpisode[] _challengeStatus = new ChallengeStatusInEpisode[5];
 
