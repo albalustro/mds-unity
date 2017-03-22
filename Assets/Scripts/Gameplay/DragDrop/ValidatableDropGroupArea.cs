@@ -223,23 +223,24 @@ namespace MDS.Gameplay.DragDrop
 
 		public int? GetNumericValue()
 		{
-			bool hasResult = false;
-			int result = 0;
-			int? temp;
-			foreach(var s in slots)
-			{
-				temp = s.GetNumericValue();
-				if (temp.HasValue) {
-					result += temp.Value;
-					hasResult = true;
-				} else {
-					if (s.notNullIfNumeric) {
-						return null;
+			if (slots != null && slots.Count > 0) {
+				bool hasResult = false;
+				int result = 0;
+				int? temp;
+				foreach (var s in slots) {
+					temp = s.GetNumericValue ();
+					if (temp.HasValue) {
+						result += temp.Value;
+						hasResult = true;
+					} else {
+						if (s.notNullIfNumeric) {
+							return null;
+						}
 					}
 				}
-			}
-			if (hasResult) {
-				return result;
+				if (hasResult) {
+					return result;
+				}
 			}
 			return null;
 		}
