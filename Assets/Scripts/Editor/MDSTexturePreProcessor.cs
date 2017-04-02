@@ -15,68 +15,95 @@ public class MDSTexturePreProcessor : AssetPostprocessor
 
     void OnPreprocessTexture()
     {
-
+        #region Common
         i = (TextureImporter)assetImporter;
         i.textureType = TextureImporterType.Sprite;
         i.spriteImportMode = SpriteImportMode.Single;
-        i.spritePackingTag = Path.GetDirectoryName(i.assetPath).Replace("/","_");
+        i.mipmapEnabled = false;
+
+
+//#if UNITY_ANDROID
+//        i.spritePackingTag = Path.GetDirectoryName(i.assetPath).Replace("/","_");
+//#elif UNITY_WEBGL
+//        i.spritePackingTag = string.Empty;
+//#endif
+
+        i.spritePackingTag = string.Empty;
+
         i.spritePixelsPerUnit = 100f;
         i.alphaIsTransparency = true;
         i.maxTextureSize = 2048;
         i.alphaSource = TextureImporterAlphaSource.FromInput;
         i.filterMode = FilterMode.Bilinear;
         i.anisoLevel = 0;
+        i.wrapMode = TextureWrapMode.Repeat;
 
-        //asset = AssetDatabase.LoadAssetAtPath<Texture2D>(i.assetPath);
-        //if(asset == null)
-        //{
-        //    i.SaveAndReimport();
-        //    return;
-        //}
-        //bool canCrunch = asset.width % 4 == 0 && asset.height % 4 == 0;
-        //Resources.UnloadAsset(asset);
+        asset = AssetDatabase.LoadAssetAtPath<Texture2D>(i.assetPath);
+        if(asset == null)
+        {
+            i.SaveAndReimport();
+            return;
+        }
+        bool canCrunch = asset.width % 4 == 0 && asset.height % 4 == 0;
+        Resources.UnloadAsset(asset);
+
+        #endregion
+
+        #region Default
 
         defaultIS = new TextureImporterPlatformSettings();
         defaultIS.name = "Default";
         defaultIS.maxTextureSize = 2048;
-        defaultIS.format = TextureImporterFormat.RGBA16;
-        defaultIS.compressionQuality = 50;
+        defaultIS.format = TextureImporterFormat.RGBA32;
+        defaultIS.compressionQuality = 100;
 
+        #endregion
+
+        #region Android
 
         androidImporterSettings = new TextureImporterPlatformSettings();
         androidImporterSettings.name = "Android";
         androidImporterSettings.overridden = true;
         androidImporterSettings.maxTextureSize = 2048;
 
-        if (i.DoesSourceTextureHaveAlpha())
-            androidImporterSettings.format =TextureImporterFormat.ETC2_RGBA8;
-        else
-            androidImporterSettings.format = TextureImporterFormat.ETC2_RGBA8;
+        //if(i.DoesSourceTextureHaveAlpha())
+        //    androidImporterSettings.format = TextureImporterFormat.ETC2_RGBA8;
+        //else
+        //    androidImporterSettings.format = TextureImporterFormat.ETC2_RGBA8;
+        androidImporterSettings.format = TextureImporterFormat.RGBA32;
 
-        androidImporterSettings.compressionQuality = 50;
+        androidImporterSettings.textureCompression = TextureImporterCompression.Uncompressed ;
+        androidImporterSettings.compressionQuality = 100;
 
+        #endregion
+
+        #region Webgl
 
         webglImporterSettings = new TextureImporterPlatformSettings();
         webglImporterSettings.name = "WebGL";
         webglImporterSettings.overridden = true;
         webglImporterSettings.maxTextureSize = 2048;
-        //if(canCrunch)
-        //{
-        //    if(i.DoesSourceTextureHaveAlpha())
+        if(canCrunch)
+        {
+            if(i.DoesSourceTextureHaveAlpha())
                 webglImporterSettings.format = TextureImporterFormat.DXT5Crunched;
-        //    else
-        //        webglImporterSettings.format = TextureImporterFormat.DXT1Crunched;
-        //}
-        //else
-        //{
-        //    if(i.DoesSourceTextureHaveAlpha())
-        //        webglImporterSettings.format = TextureImporterFormat.ARGB16;
-        //    else
-        //        webglImporterSettings.format = TextureImporterFormat.RGB16;
-        //}
+            else
+                webglImporterSettings.format = TextureImporterFormat.DXT1Crunched;
+        }
+        else
+        {
+            if(i.DoesSourceTextureHaveAlpha())
+                webglImporterSettings.format = TextureImporterFormat.ARGB16;
+            else
+                webglImporterSettings.format = TextureImporterFormat.RGB16;
+        }
+
+        //webglImporterSettings.format = TextureImporterFormat.RGBA32;
         webglImporterSettings.compressionQuality = 50;
-        webglImporterSettings.crunchedCompression = true;
+        //webglImporterSettings.crunchedCompression = true;
         webglImporterSettings.textureCompression = TextureImporterCompression.Compressed;
+
+        #endregion
 
         i.SetPlatformTextureSettings(defaultIS);
         i.SetPlatformTextureSettings(androidImporterSettings);
