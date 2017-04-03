@@ -27,7 +27,11 @@ public class OptionsHUDController : MonoBehaviour {
 		_fullScreenBtn = GameObject.Find ("FullScreenHUDBtn");
 		_quitGameBtn = GameObject.Find ("QuitGameHUDBtn");
 		_restoreMaskBtn = GameObject.Find ("RestoreMaskHUDBtn");
-		//_tutorialBtn = GameObject.Find ("TutorialHUDBtn");
+		_tutorialBtn = GameObject.Find ("TutorialHUDBtn");
+
+		if (_tutorialBtn != null) {
+			_tutorialBtn.SetActive (false);
+		}
 
 		#if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
 			_fullScreenBtn.SetActive (false);
@@ -47,12 +51,11 @@ public class OptionsHUDController : MonoBehaviour {
 		if (scene.IsRoom ())
 		{
 			_backBtn.SetActive (false);
+			_restoreMaskBtn.SetActive (true);
 		}
 		else
 		{
-			//_restoreMaskBtn.SetActive (false);
-		//	if (scene.IsChallenge())
-		//		_tutorialBtn.SetActive (false);
+			_restoreMaskBtn.SetActive (false);
 		}
 	}
 		
@@ -83,7 +86,7 @@ public class OptionsHUDController : MonoBehaviour {
 
 		if (_optionsHUDPanelOn)
 		{
-			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-25, -10, 0), 0.4f).setEase(LeanTweenType.easeInQuart);
+			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-4, -10, 0), 0.4f).setEase(LeanTweenType.easeInQuart);
 			_optionsHUDPanelOn = false;
 		} 
 		else

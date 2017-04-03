@@ -15,6 +15,7 @@ public class MDSTexturePreProcessor : AssetPostprocessor
 
     void OnPreprocessTexture()
     {
+		return;
 
         i = (TextureImporter)assetImporter;
         i.textureType = TextureImporterType.Sprite;
