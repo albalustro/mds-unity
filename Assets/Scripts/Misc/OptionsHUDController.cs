@@ -86,7 +86,7 @@ public class OptionsHUDController : MonoBehaviour {
 
 		if (_optionsHUDPanelOn)
 		{
-			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-4, -10, 0), 0.4f).setEase(LeanTweenType.easeInQuart);
+			LeanTween.move (_transformOptionsHUDPanel, new Vector3 (-6, -10, 0), 0.4f).setEase(LeanTweenType.easeInQuart);
 			_optionsHUDPanelOn = false;
 		} 
 		else

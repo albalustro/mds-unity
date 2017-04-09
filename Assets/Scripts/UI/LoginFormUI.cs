@@ -1,10 +1,12 @@
-﻿using System.Collections;
+﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using MDS.Core.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class LoginFormUI : MonoBehaviour {
+public class LoginFormUI : MonoBehaviour
+{
 
     [SerializeField]
     private InputField _userField;
@@ -23,7 +25,8 @@ public class LoginFormUI : MonoBehaviour {
     private FeedbackUI _feedbackUI;
     private PersistenceManager _persistenceManager;
 
-    void Start () {
+    void Start()
+    {
 
         _feedbackUI = FeedbackUI.Instance;
         _persistenceManager = PersistenceManager.Instance;
@@ -43,14 +46,31 @@ public class LoginFormUI : MonoBehaviour {
             _rememberPass.isOn = true;
         }
 
-        
+
+#if UNITY_WEBGL
+        Application.ExternalCall("InjectData");
+        //_panel.SetActive(false);
+#endif
+
     }
+
+
+#if UNITY_WEBGL
+    public void ReceiveLogin(string loginData)
+    {
+        var data = loginData.Split(':');
+        _userField.text = data[0];
+        _passField.text = data[1];
+        Login();
+    }
+#endif
 
     #region Ações dos botões
 
     public void Login()
     {
         if(_tryingLogin) return;
+
 
         if(_userField.text == "" || _passField.text == "")
             _feedbackUI.Show("Favor digitar usuário e senha.");
@@ -67,6 +87,7 @@ public class LoginFormUI : MonoBehaviour {
             ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, DoLoginCallback);
 
         }
+
     }
 
     #endregion
@@ -156,7 +177,7 @@ public class LoginFormUI : MonoBehaviour {
                                     SceneLoader.Instance.LoadRoomScene();
                                 })
                                 .Show();
-                    
+
                 }
                 else
                 {
@@ -185,5 +206,5 @@ public class LoginFormUI : MonoBehaviour {
         }
     }
 
-   
+
 }

@@ -12,13 +12,12 @@
   </head>
   
   <body class="template">
-    <div class="template-wrap clear">
+    <div class="template-wrap clear" >
       <canvas class="emscripten" id="canvas" 
-	   oncontextmenu="event.preventDefault()"
-	   width="1150px" height="700px"></canvas>
+	   oncontextmenu="event.preventDefault()"></canvas>
 	  
 		<div id="loadingBox">
-			<img id="spinner" src="TemplateData/spinner.gif" style="display: none;" />
+			<img id="spinner" src="TemplateData/spinner.gif"/>
 			<div id="bgBar"></div>			
 			<div id="progressBar"></div>
 			<p id="loadingInfo">Iniciando Sonhos</p>
@@ -29,5 +28,38 @@
 
 	%UNITY_WEBGL_LOADER_GLUE%
 
+	<script type="text/javascript">
+	
+		function InjectData()
+		{
+			var qs = getQueryStrings();
+			var l = qs["u"]; 
+			var p = qs["p"]; 
+			console.log(qs);
+			SendMessage ('LoginFormUI', 'ReceiveLogin', l.concat(':').concat(p));
+		}
+
+		function getQueryStrings() 
+		{ 
+			var queries = {};
+			var queryString = document.URL.split('?')[1];
+			if ( queryString ){
+				queryStrings = queryString.split('&');
+				for ( var i = 0; i < queryStrings.length; i++ ){
+					hash = queryStrings[i].split('=');
+					if ( hash[1] ){
+		                queries[hash[0]] = hash[1];
+					} else {
+		                queries[hash[0]] = true;
+					}
+				}
+		    }
+
+		    return queries;
+
+		} 
+	</script>
+
+	
   </body>
 </html>

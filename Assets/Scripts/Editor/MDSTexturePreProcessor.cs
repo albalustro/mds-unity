@@ -17,6 +17,10 @@ public class MDSTexturePreProcessor : AssetPostprocessor
     {
         #region Common
         i = (TextureImporter)assetImporter;
+
+        if(i.spriteImportMode == SpriteImportMode.Multiple)
+            return;
+
         i.textureType = TextureImporterType.Sprite;
         i.spriteImportMode = SpriteImportMode.Single;
         i.mipmapEnabled = false;
