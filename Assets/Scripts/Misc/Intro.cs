@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using MDS.Core.SceneManagement;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace MDS
 {
@@ -9,6 +10,7 @@ namespace MDS
     {
         public GameObject textVersion;
         public bool byPassOBB;
+        public Text debugText;
 
         IEnumerator Start()
         {
@@ -20,6 +22,21 @@ namespace MDS
             FadeTransition.Instance.FadeTime = 1f;
             FadeTransition.Instance.BeginFade(FadeDirection.In);
             yield return new WaitForSeconds(3f);
+
+            if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.H))
+            {
+                ConnectionManager.Instance.SetHomolgConfig();
+                debugText.text += "[Homolog Connection] ";
+            }
+
+            if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.C))
+            {
+                PlayerPrefs.DeleteAll();
+                Debug.Log("Buffer limpo");
+                debugText.text += "[Buffer limpo]";
+            }
+
+
 
 #if UNITY_WEBGL
             //Color originalFadeColor = FadeTransition.Instance.FadeColor;
@@ -43,6 +60,20 @@ namespace MDS
             SceneLoader.Instance.LoadLogin();
         }
 
+
+        private int _inc = 0;
+        public void IncDebugButton()
+        {
+            _inc++;
+            if(_inc == 7)
+            {
+                ConnectionManager.Instance.SetHomolgConfig();
+                debugText.text += "[Homolog Connection] ";
+                PlayerPrefs.DeleteAll();
+                Debug.Log("Buffer limpo");
+                debugText.text += "[Buffer limpo]";
+            }
+        }
     }
 
 }

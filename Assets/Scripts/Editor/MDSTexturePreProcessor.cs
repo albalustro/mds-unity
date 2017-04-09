@@ -9,6 +9,7 @@ public class MDSTexturePreProcessor : AssetPostprocessor
 
     Texture2D asset;
     TextureImporter i;
+    TextureImporterPlatformSettings windowsIS;
     TextureImporterPlatformSettings defaultIS;
     TextureImporterPlatformSettings androidImporterSettings;
     TextureImporterPlatformSettings webglImporterSettings;
@@ -19,7 +20,10 @@ public class MDSTexturePreProcessor : AssetPostprocessor
         i = (TextureImporter)assetImporter;
 
         if(i.spriteImportMode == SpriteImportMode.Multiple)
+        {
+            Debug.LogWarningFormat("Skipping {0}", i.assetPath);
             return;
+        }
 
         i.textureType = TextureImporterType.Sprite;
         i.spriteImportMode = SpriteImportMode.Single;
@@ -58,9 +62,9 @@ public class MDSTexturePreProcessor : AssetPostprocessor
         defaultIS = new TextureImporterPlatformSettings();
         defaultIS.name = "Default";
         defaultIS.maxTextureSize = 2048;
-        defaultIS.format = TextureImporterFormat.RGBA32;
+        defaultIS.format = TextureImporterFormat.Automatic;
         defaultIS.compressionQuality = 100;
-
+        
         #endregion
 
         #region Android
@@ -109,7 +113,20 @@ public class MDSTexturePreProcessor : AssetPostprocessor
 
         #endregion
 
+
+        #region Windows
+
+        windowsIS = new TextureImporterPlatformSettings();
+        windowsIS.name = "Standalone";
+        windowsIS.overridden = true;
+        windowsIS.format = TextureImporterFormat.RGBA32;
+        windowsIS.textureCompression = TextureImporterCompression.Compressed;
+        windowsIS.compressionQuality = 100;
+
+        #endregion
+
         i.SetPlatformTextureSettings(defaultIS);
+        i.SetPlatformTextureSettings(windowsIS);
         i.SetPlatformTextureSettings(androidImporterSettings);
         i.SetPlatformTextureSettings(webglImporterSettings);
 
