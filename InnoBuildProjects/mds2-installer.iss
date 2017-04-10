@@ -3,16 +3,16 @@
 
 #define MyAppName "Mistério dos Sonhos 2"
 #define MyAppVersion "2.0"
-#define MyAppPublisher "Xmile Leaning"
+#define MyAppPublisher "Xmile Learning"
 #define MyAppURL "http://www.xmile.com.br"
-#define MyAppExeName "mds2.exe"
-#define baseName "mds2"
+#define MyAppExeName "MDS2.exe"
+#define baseName "MDS2"
 
 [Setup]
 ; NOTE: The value of AppId uniquely identifies this application.
 ; Do not use the same AppId value in installers for other applications.
 ; (To generate a new GUID, click Tools | Generate GUID inside the IDE.)
-AppId={22216C88-B763-4B20-ADB0-E7E75417DCEA}
+AppId={{22216C88-B763-4B20-ADB0-E7E75417DCEA}
 AppName={#MyAppName}
 AppVersion={#MyAppVersion}
 AppVerName={#MyAppName} {#MyAppVersion}
@@ -24,7 +24,7 @@ DefaultDirName={pf}\{#MyAppPublisher}\{#MyAppName}
 DefaultGroupName={#MyAppPublisher}\{#MyAppName}
 AllowNoIcons=yes
 OutputDir="..\Build\Windows\Installers\"
-OutputBaseFilename=setup-{#baseName}
+OutputBaseFilename=setup-{#baseName}-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
 
@@ -37,8 +37,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: "..\Build\Windows\{#MyAppExeName}"; DestDir: "{app}"
-Source: "..\Build\Windows\{#basename}_Data\*"; DestDir: "{app}\{#basename}_Data"; Flags: ignoreversion createallsubdirs recursesubdirs
+Source: "..\Build\Windows\{#baseName}\{#MyAppExeName}"; DestDir: "{app}"
+Source: "..\Build\Windows\{#baseName}\{#basename}_Data\*"; DestDir: "{app}\{#basename}_Data"; Flags: ignoreversion createallsubdirs recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; IconIndex: 0
