@@ -21,6 +21,8 @@ public class Counter : MDSBehaviour
     [SerializeField]
     private Sprite[] _numbers;
 
+	//Acrescentando uma linha de codigo comentado pra testar esse bagaca.
+
     public void Start()
     {
         if(_numbers.Length != 10)
