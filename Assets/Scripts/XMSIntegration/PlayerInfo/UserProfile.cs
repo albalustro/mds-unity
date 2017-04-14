@@ -24,6 +24,16 @@ public class UserProfile : Singleton<UserProfile>
     private ConceptMap _conceptMap;
     public ConceptMap conceptMap { get { return _conceptMap; } }
 
+    private const string STUDENT_ROLE = "Estudante";
+
+    public bool IsStudent
+    {
+        get
+        {
+            return loginInfo.role.Equals(STUDENT_ROLE);
+        }
+    }
+
     protected override void Awake()
     {
         base.Awake();
@@ -166,7 +176,7 @@ public class UserProfile : Singleton<UserProfile>
         this.pass = "";
         this.loginInfo = new LoginInfo()
         {
-             role = "Student",
+             role = "Estudante",
              status = new StatusInfo() {  code= ConnectionResponse.CONNECTION_OFFLINE},
         };
     }

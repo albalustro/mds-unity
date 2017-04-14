@@ -77,7 +77,7 @@ public class OptionsHUDController : MonoBehaviour {
 	//Tela cheia (WebGL e Desktop)
 	public void FullScreen()
 	{
-        Debug.Log("Clicado no botão fullscreen. Deveria fazer alguma coisa. Status atual do FS: " + Screen.fullScreen);
+        //Debug.Log("Clicado no botão fullscreen. Deveria fazer alguma coisa. Status atual do FS: " + Screen.fullScreen);
 		Screen.fullScreen = !Screen.fullScreen;
 	}
 

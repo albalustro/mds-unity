@@ -9,7 +9,6 @@ namespace MDS
     public class Intro : MDSBehaviour
     {
         public GameObject textVersion;
-        public bool byPassOBB;
         public Text debugText;
 
         IEnumerator Start()
@@ -22,6 +21,16 @@ namespace MDS
             FadeTransition.Instance.FadeTime = 1f;
             FadeTransition.Instance.BeginFade(FadeDirection.In);
             yield return new WaitForSeconds(3f);
+
+            if(debugText == null)
+            {
+                Debug.Log("debug lost reference");
+                var go = GameObject.Find("DebugText");
+                if(go != null)
+                {
+                    debugText = go.GetComponent<Text>();
+                }
+            }
 
             if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.H))
             {
@@ -50,7 +59,7 @@ namespace MDS
 #if UNITY_ANDROID && !UNITY_EDITOR
             // FadeTransition.Instance.BeginFade(FadeDirection.In);
             // yield return new WaitForSeconds(3f);
-            if (byPassOBB==false)
+            // if (byPassOBB==false)
                 yield return SceneLoader.Instance.WaitOBB();
 #endif
 
@@ -73,6 +82,9 @@ namespace MDS
                 Debug.Log("Buffer limpo");
                 debugText.text += "[Buffer limpo]";
             }
+            else
+                if (_inc <7)
+                    debugText.text = _inc.ToString();
         }
     }
 

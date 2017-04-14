@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mistério dos Sonhos 3"
-#define MyAppVersion "3.0"
+#define MyAppVersion "2.0"
 #define MyAppPublisher "Xmile Learning"
 #define MyAppURL "http://www.xmile.com.br"
 #define MyAppExeName "MDS3.exe"

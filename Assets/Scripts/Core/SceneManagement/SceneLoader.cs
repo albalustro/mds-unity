@@ -230,12 +230,15 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         public void GoBackAfterChallenge()
         {
-            Scene curScene = SceneManager.GetActiveScene();
-            if(curScene.IsChallenge())
-                UserProfile.Instance.UpdateConcept(curScene,
-                            Challenge.ChallengeConcept, DateTime.Now);
-            else
-                LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
+            if(UserProfile.Instance.IsStudent)
+            {
+                Scene curScene = SceneManager.GetActiveScene();
+                if(curScene.IsChallenge())
+                    UserProfile.Instance.UpdateConcept(curScene,
+                                Challenge.ChallengeConcept, DateTime.Now);
+                else
+                    LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
+            }
 
             if(_backToMap)
                 LoadMapScene();
