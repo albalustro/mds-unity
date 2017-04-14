@@ -21,7 +21,7 @@ public class Counter : MDSBehaviour
     [SerializeField]
     private Sprite[] _numbers;
 
-	//Acrescentando uma linha de codigo comentado pra testar esse bagaca.
+	//meta deletado
 
     public void Start()
     {
