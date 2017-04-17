@@ -82,9 +82,9 @@ namespace MDS
                 Debug.Log("Buffer limpo");
                 debugText.text += "[Buffer limpo]";
             }
-            else
-                if (_inc <7)
-                    debugText.text = _inc.ToString();
+            //else
+            //    if (_inc <7)
+            //        debugText.text = _inc.ToString();
         }
     }
 
