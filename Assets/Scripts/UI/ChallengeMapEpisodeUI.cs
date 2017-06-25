@@ -46,7 +46,10 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
         letter.SetActive(libStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER);
         locker.SetActive(libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER);
 
-        if(libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER)
+        var episodeComplete = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].CheckEpisodeComplete();
+
+        if((libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || 
+           libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER) && !episodeComplete)
         {
             episodeImage.texture = episodeBlockedTexture;
             episodeIndexImage.texture = episodeIndexBlockedTexture;
@@ -54,7 +57,7 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
             return;
         }
 
-        if(UserProfile.Instance.conceptMap.worlds[world].episodes[episode].CheckEpisodeComplete())
+        if(episodeComplete)
         {
             episodeImage.texture = episodeCompleteTexture;
             episodeIndexImage.texture = episodeIndexCompleteTexture;
