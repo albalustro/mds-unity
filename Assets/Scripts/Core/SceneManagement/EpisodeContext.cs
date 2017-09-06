@@ -23,7 +23,7 @@ namespace MDS.Core.SceneManagement
 
         public static bool HasEpisodeContext()
         {
-            return _instance != null;
+            return Instance != null;
         }
 
         
