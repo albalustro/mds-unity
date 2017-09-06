@@ -26,7 +26,8 @@ public class Seesaw : MDSBehaviour {
         base.Awake();
         _spriteRenderer = GetComponent<SpriteRenderer>();
 		slotsA = mathValidator._validatableA.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
-		slotsB = mathValidator._validatableB.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
+        if (!mathValidator.compareConstante())
+		    slotsB = mathValidator._validatableB.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
     }
 
     IEnumerator Start()
@@ -102,14 +103,17 @@ public class Seesaw : MDSBehaviour {
             }
         }
 
-        foreach(var slotB in slotsB)
+        if (slotsB != null)
         {
-            pos = slotB.gameObject.transform.position;
-            pos.y = b_y;
-            slotB.gameObject.transform.position = pos;
-            if(slotB.draggableReference != null)
+            foreach (var slotB in slotsB)
             {
-                LeanTween.move(slotB.draggableReference.gameObject, slotB.gameObject.transform.position, 0.6f);
+                pos = slotB.gameObject.transform.position;
+                pos.y = b_y;
+                slotB.gameObject.transform.position = pos;
+                if (slotB.draggableReference != null)
+                {
+                    LeanTween.move(slotB.draggableReference.gameObject, slotB.gameObject.transform.position, 0.6f);
+                }
             }
         }
     }

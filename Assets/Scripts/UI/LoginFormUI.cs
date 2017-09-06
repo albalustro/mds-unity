@@ -4,6 +4,9 @@ using System.Collections.Generic;
 using MDS.Core.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Analytics;
+using UnityEngine.SceneManagement;
+using MDS.Utilities;
 
 public class LoginFormUI : MonoBehaviour
 {
@@ -35,12 +38,12 @@ public class LoginFormUI : MonoBehaviour
         _passField.shouldHideMobileInput = true;
         TouchScreenKeyboard.hideInput = true;
 
-        if(_persistenceManager.HasKey("rememberUser"))
+        if (_persistenceManager.HasKey("rememberUser"))
         {
             _userField.text = _persistenceManager.GetString("rememberUser");
             _rememberUser.isOn = true;
         }
-        if(_persistenceManager.HasKey("rememberPass"))
+        if (_persistenceManager.HasKey("rememberPass"))
         {
             _passField.text = _persistenceManager.GetString("rememberPass");
             _rememberPass.isOn = true;
@@ -69,16 +72,16 @@ public class LoginFormUI : MonoBehaviour
 
     public void Login()
     {
-        if(_tryingLogin) return;
+        if (_tryingLogin) return;
 
 
-        if(_userField.text == "" || _passField.text == "")
+        if (_userField.text == "" || _passField.text == "")
             _feedbackUI.Show("Favor digitar usuário e senha.");
         else
         {
-            if(_rememberUser.isOn)
+            if (_rememberUser.isOn)
                 _persistenceManager.SetString("rememberUser", _userField.text);
-            if(_rememberPass.isOn)
+            if (_rememberPass.isOn)
                 _persistenceManager.SetString("rememberPass", _passField.text);
 
             _tryingLogin = true;
@@ -133,13 +136,17 @@ public class LoginFormUI : MonoBehaviour
     private IEnumerator CloseTouchKB()
     {
 #if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-        
-        while(_curTouchScreenKeyboard.active)
+        while (_curTouchScreenKeyboard != null && _curTouchScreenKeyboard.active)
             yield return null;
 
         _curTouchScreenKeyboard = null;
 
-        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 20, 0.3f);
+        if (_panel != null)
+        {
+            RectTransform r = _panel.GetComponent<RectTransform>();
+            if (r!=null)
+                LeanTween.moveY(r, 20, 0.3f);
+        }
 #else
         yield return null;
 #endif
@@ -152,20 +159,28 @@ public class LoginFormUI : MonoBehaviour
 
     private void DoLoginCallback(LoginInfo wsReturn)
     {
+        Scene curScene = SceneManager.GetActiveScene();
+        var dic = new Dictionary<string, object>();
+        dic.Add("Game", "MDS" + curScene.GetGameIndex().ToString());
+        dic.Add("Plat", Application.platform.ToString());
+        dic.Add("User", _userField.text);
 
         _feedbackUI.Close();
-        if(wsReturn == null) //Servidor nao respondeu, tentar efetuar o login offline
+        if (wsReturn == null) //Servidor nao respondeu, tentar efetuar o login offline
         {
+            dic.Add("Conn", "offline");
+
             string pass = null;
             LoginInfo loginData = _persistenceManager.LoadLocalUserProfile(_userField.text, ref pass);
-            if(loginData == null)
+            if (loginData == null)
             {
                 _feedbackUI.Show("Sem conexão com servidor.");
                 _tryingLogin = false;
+                dic.Add("login", "no - no local data");
             }
             else
             {
-                if(_persistenceManager.GetMD5Hash(_passField.text) == pass)
+                if (_persistenceManager.GetMD5Hash(_passField.text) == pass)
                 {
                     loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
                     loginData.status.message = "Offline";
@@ -177,33 +192,46 @@ public class LoginFormUI : MonoBehaviour
                                     SceneLoader.Instance.LoadRoomScene();
                                 })
                                 .Show();
-
+                    dic.Add("login", "yes - offline");
                 }
                 else
                 {
                     _feedbackUI.Show("Usuário ou senha inválidos.");
                     _tryingLogin = false;
+                    dic.Add("login", "no - user/pass invalid");
                 }
             }
         }
         else  //Servidor respondeu
         {
+            dic.Add("Conn", "online");
+
             LoginInfo loginInfo = wsReturn;
-            switch(loginInfo.status.code)
+            switch (loginInfo.status.code)
             {
                 //Login efetuado com sucesso
                 case ConnectionResponse.OK:
                     //Enviando informações para o UserProfile
+                    dic.Add("login", "yes - online");
+
                     UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginInfo);
                     SceneLoader.Instance.LoadRoomScene();
                     break;
                 //Erro de usuário e/ou senha
                 case ConnectionResponse.LOGIN_ERROR:
+                    dic.Add("login", "no - user/pass invalid");
+
                     _feedbackUI.Show("Ocorreu um erro durante o login: " + loginInfo.status.message);
                     _tryingLogin = false;
                     break;
             }
         }
+
+        dic.Add("dt", DateTime.Now.ToString());
+
+        Analytics.CustomEvent("GameLogin", dic);
+        Analytics.FlushEvents();
+
     }
 
 

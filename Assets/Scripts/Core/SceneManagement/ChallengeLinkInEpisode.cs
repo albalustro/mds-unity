@@ -28,7 +28,10 @@ public class ChallengeLinkInEpisode : MDSBehaviour {
     {
         get
         {
-            return EpisodeContext.Instance.GetChallengeStatus(ChallengeIndex);
+            ChallengeStatusInEpisode ret = ChallengeStatusInEpisode.Unavailable;
+            if (EpisodeContext.HasEpisodeContext())
+                ret = EpisodeContext.Instance.GetChallengeStatus(ChallengeIndex);
+            return ret;
         }
         set
         {
