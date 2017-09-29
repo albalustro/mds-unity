@@ -21,18 +21,14 @@ public class Seesaw : MDSBehaviour {
 
     float scaleState;
 
-    protected override void Awake()
-    {
-        base.Awake();
-        _spriteRenderer = GetComponent<SpriteRenderer>();
-		slotsA = mathValidator._validatableA.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
-        if (!mathValidator.compareConstante())
-		    slotsB = mathValidator._validatableB.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
-    }
 
     IEnumerator Start()
     {
-   
+        _spriteRenderer = GetComponent<SpriteRenderer>();
+        slotsA = mathValidator._validatableA.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
+        if (!mathValidator.compareConstante())
+            slotsB = mathValidator._validatableB.GetGameObject().GetComponentsInChildren<DropGroupSlot>();
+
         int? A, B;
         WaitForSeconds wfs = new WaitForSeconds(0.16f);
 

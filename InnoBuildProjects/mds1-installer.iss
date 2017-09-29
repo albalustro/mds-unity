@@ -2,7 +2,7 @@
 ; SEE THE DOCUMENTATION FOR DETAILS ON CREATING INNO SETUP SCRIPT FILES!
 
 #define MyAppName "Mistério dos Sonhos 1"
-#define MyAppVersion "2.0"
+#define MyAppVersion "2.0.1"
 #define MyAppPublisher "Xmile Learning"
 #define MyAppURL "http://www.xmile.com.br"
 #define MyAppExeName "MDS1.exe"
@@ -23,7 +23,7 @@ AppUpdatesURL={#MyAppURL}
 DefaultDirName={pf}\{#MyAppPublisher}\{#MyAppName}
 DefaultGroupName={#MyAppPublisher}\{#MyAppName}
 AllowNoIcons=yes
-OutputDir="..\Build\Windows\Installers\"
+OutputDir="..\Build\{#MyAppVersion}\Windows\Installers\"
 OutputBaseFilename=setup-{#baseName}-{#MyAppVersion}
 Compression=lzma
 SolidCompression=yes
@@ -37,8 +37,8 @@ Name: "quicklaunchicon"; Description: "{cm:CreateQuickLaunchIcon}"; GroupDescrip
 
 [Files]
 ; NOTE: Don't use "Flags: ignoreversion" on any shared system files
-Source: "..\Build\Windows\{#baseName}\{#MyAppExeName}"; DestDir: "{app}"
-Source: "..\Build\Windows\{#baseName}\{#basename}_Data\*"; DestDir: "{app}\{#basename}_Data"; Flags: ignoreversion createallsubdirs recursesubdirs
+Source: "..\Build\{#MyAppVersion}\Windows\{#baseName}\{#MyAppExeName}"; DestDir: "{app}"
+Source: "..\Build\{#MyAppVersion}\Windows\{#baseName}\{#basename}_Data\*"; DestDir: "{app}\{#basename}_Data"; Flags: ignoreversion createallsubdirs recursesubdirs
 
 [Icons]
 Name: "{group}\{#MyAppName}"; Filename: "{app}\{#MyAppExeName}"; IconFilename: "{app}\{#MyAppExeName}"; IconIndex: 0
