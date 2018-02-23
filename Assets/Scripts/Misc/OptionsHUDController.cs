@@ -3,22 +3,20 @@ using UnityEngine.SceneManagement;
 using MDS.Utilities;
 using MDS.Core.SceneManagement;
 using MDS.DialogueSystem;
+using System.Collections;
 
 public class OptionsHUDController : MonoBehaviour
 {
-
+    private GameObject _audioOnHUDBtn;
     private GameObject _backBtn;
     private GameObject _fullScreenBtn;
     private GameObject _quitGameBtn;
-  //  private GameObject _restoreMaskBtn;
-    private GameObject _tutorialBtn;
+    private GameObject _tutorialBtn;                        //Tutorial MDS
+    private GameObject _tutorialPlayMoveHUDBtn;             //Painel de Informações Playmove
+    private GameObject _placarBtn;                          //Botão para o placar (exclusividade Playmove)
+    //  private GameObject _restoreMaskBtn;
     private RectTransform _transformOptionsHUDPanel;
     private bool _optionsHUDPanelOn;
-
-    /*
-	 TODO
-	  - Acho que falta só o tutorial 
-	 */
 
     void Awake()
     {
@@ -27,13 +25,15 @@ public class OptionsHUDController : MonoBehaviour
         _backBtn = GameObject.Find("BackHUDBtn");
         _fullScreenBtn = GameObject.Find("FullScreenHUDBtn");
         _quitGameBtn = GameObject.Find("QuitGameHUDBtn");
-      //  _restoreMaskBtn = GameObject.Find("RestoreMaskHUDBtn");
+        //  _restoreMaskBtn = GameObject.Find("RestoreMaskHUDBtn");
         _tutorialBtn = GameObject.Find("TutorialHUDBtn");
 
-        if(_tutorialBtn != null)
-        {
-            //		_tutorialBtn.SetActive (false);
-        }
+        _audioOnHUDBtn = GameObject.Find("AudioOnHUDBtn");
+
+        //PLAYMOVE
+        _tutorialPlayMoveHUDBtn = GameObject.Find("TutorialPlayMoveHUDBtn");
+        _placarBtn = GameObject.Find("PlacarHUDBtn");
+        
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
         _fullScreenBtn.SetActive(false);
@@ -43,8 +43,14 @@ public class OptionsHUDController : MonoBehaviour
         _quitGameBtn.SetActive(false);
 #endif
 
+#if PLAY_MOVE
+
+#endif
+
         Scene scene = SceneManager.GetActiveScene();
-        if(scene.IsLogin())
+
+#if !PLAY_MOVE
+        if (scene.IsLogin())
         {
             gameObject.SetActive(false);
             return;
@@ -64,7 +70,24 @@ public class OptionsHUDController : MonoBehaviour
             _tutorialBtn.SetActive(true);
         else
             _tutorialBtn.SetActive(false);
+#else
+        gameObject.SetActive(true);
+        _placarBtn.SetActive(true);
+        _tutorialBtn.SetActive(false);
+        _backBtn.SetActive(false);
+        _fullScreenBtn.SetActive(false);
+        _quitGameBtn.SetActive(false);
+        _audioOnHUDBtn.SetActive(false);
+#endif
     }
+
+//#if PLAY_MOVE
+//    IEnumerator Start()
+//    {
+//        yield return new WaitForEndOfFrame();
+//        TogglePanel();
+//    }
+//#endif
 
     public void UnMute()
     {

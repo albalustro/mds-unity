@@ -97,7 +97,7 @@ public class UserProfile : Singleton<UserProfile>
 		SincronizeConceptMapOnLogin ();
 	}
 
-	private void SincronizeConceptMapOnLogin()
+    private void SincronizeConceptMapOnLogin()
 	{
 		PersistenceManager.Instance.LoadConceptMap (this, ref _conceptMap);
 #if UNITY_EDITOR
@@ -166,6 +166,45 @@ public class UserProfile : Singleton<UserProfile>
 			_conceptMap.worlds [i].episodes [0].liberationStatus = EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS;
 		}
 	}
+
+
+#if PLAY_MOVE
+    public void SetPlayMoveLoginInfo(string l, string p, LoginInfo i)
+    {
+        this.login = l;
+        this.pass = p;
+        this.loginInfo = i;
+    }
+
+    //Libera o conteúdo completo do jogo
+    private void SetConceptMapForNoRegisteredPlayMoveUser()
+    {
+        _conceptMap = new ConceptMap();
+        _conceptMap.worlds = new ConceptWorld[4];
+        for (int w = 0; w < 4; w++)
+        {
+            _conceptMap.worlds[w] = new ConceptWorld();
+            _conceptMap.worlds[w].episodes = new ConceptEpisode[8];
+            for (int e = 0; e < 8; e++)
+            {
+                _conceptMap.worlds[w].episodes[e] = new ConceptEpisode();
+                _conceptMap.worlds[w].episodes[e].challenges = new ConceptChallenge[5];
+                for (int c = 0; c < 5; c++)
+                {
+                    _conceptMap.worlds[w].episodes[e].challenges[c] = new ConceptChallenge();
+                    _conceptMap.worlds[w].episodes[e].challenges[c].concept = ConceptTypes.CONCEPT_GREEN;
+                    _conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
+                    _conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
+                }
+            }
+        }
+        for (int i = 0; i < 4; i++)
+        {
+            _conceptMap.worlds[i].episodes[0].liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
+        }
+    }
+#endif
+
 
 #if UNITY_EDITOR
     [InspectorButton]

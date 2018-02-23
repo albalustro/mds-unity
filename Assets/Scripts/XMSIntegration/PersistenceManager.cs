@@ -41,7 +41,7 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         pass = aux.pass;
         return li;
 	}
-		
+
 	public void LoadConceptMap(UserProfile profile, ref ConceptMap cm)
 	{
         string key = profile.login + _gameIndexToComposePlayerPrefsKey;
@@ -81,13 +81,23 @@ public class PersistenceManager : Singleton<PersistenceManager> {
         PlayerPrefs.SetString(key, value);
     }
 
-	#region Segurança
-	/// <summary>
-	/// Método para gerar o MD5 de uma string
-	/// </summary>
-	/// <param name="text">Texto a ser gerado a Hash MD5</param>
-	/// <returns>MD5 Hash do texto informado</returns>
-	public string GetMD5Hash(string text)
+    public int GetInt(string key)
+    {
+        return PlayerPrefs.GetInt(key);
+    }
+
+    public void SetInt(string key, int value)
+    {
+        PlayerPrefs.SetInt(key, value);
+    }
+
+    #region Segurança
+    /// <summary>
+    /// Método para gerar o MD5 de uma string
+    /// </summary>
+    /// <param name="text">Texto a ser gerado a Hash MD5</param>
+    /// <returns>MD5 Hash do texto informado</returns>
+    public string GetMD5Hash(string text)
 	{
         // TROCA NECESSARIA POR CONTA DO ANDROID com stripping code.. :)
         //MD5 md5Hash = MD5.Create();
