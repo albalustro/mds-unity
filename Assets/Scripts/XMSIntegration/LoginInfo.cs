@@ -6,7 +6,6 @@ public class LoginInfo
 {
     public LoginInfo()
     {
-
     }
 
 	public StatusInfo status;

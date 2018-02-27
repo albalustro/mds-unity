@@ -14,6 +14,8 @@ public class OptionsHUDController : MonoBehaviour
     private GameObject _tutorialBtn;                        //Tutorial MDS
     private GameObject _tutorialPlayMoveHUDBtn;             //Painel de Informações Playmove
     private GameObject _placarBtn;                          //Botão para o placar (exclusividade Playmove)
+    private GameObject _returnToMenu;
+
     //  private GameObject _restoreMaskBtn;
     private RectTransform _transformOptionsHUDPanel;
     private bool _optionsHUDPanelOn;
@@ -33,6 +35,7 @@ public class OptionsHUDController : MonoBehaviour
         //PLAYMOVE
         _tutorialPlayMoveHUDBtn = GameObject.Find("TutorialPlayMoveHUDBtn");
         _placarBtn = GameObject.Find("PlacarHUDBtn");
+        _returnToMenu = GameObject.Find("ReturnToMenu");
         
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
@@ -41,10 +44,6 @@ public class OptionsHUDController : MonoBehaviour
 
 #if UNITY_WEBGL
         _quitGameBtn.SetActive(false);
-#endif
-
-#if PLAY_MOVE
-
 #endif
 
         Scene scene = SceneManager.GetActiveScene();
@@ -72,12 +71,30 @@ public class OptionsHUDController : MonoBehaviour
             _tutorialBtn.SetActive(false);
 #else
         gameObject.SetActive(true);
+        _tutorialPlayMoveHUDBtn.SetActive(true);
         _placarBtn.SetActive(true);
         _tutorialBtn.SetActive(false);
         _backBtn.SetActive(false);
         _fullScreenBtn.SetActive(false);
         _quitGameBtn.SetActive(false);
         _audioOnHUDBtn.SetActive(false);
+
+        if (!scene.IsLogin())
+        {
+            _returnToMenu.SetActive(true);
+        }
+        else
+        {
+            _returnToMenu.SetActive(false);
+        }
+
+        if(scene.IsEpisode() || scene.IsChallenge() || scene.IsMap())
+        {
+            _placarBtn.SetActive(false);
+            _tutorialPlayMoveHUDBtn.SetActive(false);
+            _backBtn.SetActive(true);
+        }
+
 #endif
     }
 
@@ -102,6 +119,21 @@ public class OptionsHUDController : MonoBehaviour
     public void QuitGame()
     {
         SceneLoader.Instance.Quit();
+    }
+    public void QuitToMenu()
+    {
+        FeedbackUI.Instance.SetText("Tem certeza que deseja sair?")
+                                .SetButtons(false, false, true, true)
+                                .SetSimFeedback(() =>
+                                {
+                                    SceneLoader.Instance.LoadLogin();
+                                })
+                                .SetNaoFeedback(() =>
+                                {
+                                    FeedbackUI.Instance.Close();
+                                }
+                                )
+                                .Show();
     }
 
     //Tela cheia (WebGL e Desktop)
@@ -146,6 +178,10 @@ public class OptionsHUDController : MonoBehaviour
             SceneLoader.Instance.LoadMapScene();
         }
 
+    }
+    public void OpenPlacar()
+    {
+        FindObjectOfType<HelpUI>().ShowPlacarHUD(true);
     }
 
     public void OpenTutorial()

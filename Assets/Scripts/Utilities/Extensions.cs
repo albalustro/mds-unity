@@ -189,6 +189,11 @@ namespace MDS.Utilities
             return titles[episodeName];
         }
 
+        //Playmove
+        public static IEnumerable<TSource> Page<TSource>(this IEnumerable<TSource> source, int page, int pageSize)
+        {
+            return source.Skip((page - 1) * pageSize).Take(pageSize);
+        }
     }
 }
 

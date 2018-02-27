@@ -9,10 +9,18 @@ using UnityEngine.UI;
 
 public class LoginPlaymove : MonoBehaviour
 {
+    private int pageIndex = 1;
     private bool _tryingLogin;
     private FeedbackUI _feedbackUI;
     private PersistenceManager _persistenceManager;
+    private List<string> allNames = new List<string>();
+    private List<string> inSceneNames = new List<string>();
     [SerializeField] private Toggle _registerScore;
+    [SerializeField] private GameObject loginCanvas;
+    [SerializeField] private GameObject registerCanvas;
+    [SerializeField] private Text[] buttonTextList;
+    [SerializeField] private InputField nameField;
+    
 
     void Start () {
         _feedbackUI = FeedbackUI.Instance;
@@ -23,26 +31,121 @@ public class LoginPlaymove : MonoBehaviour
 #endif
     }
 
+    public void SwipePageIndex(bool nextPage)
+    {
+        if (nextPage)
+        {
+            pageIndex++;
+        }
+        else
+        {
+            pageIndex--;
+        }
+        allNames = _persistenceManager.AllPlayersName;
+
+        if (allNames.Count > 0)
+        {
+            pageIndex = Mathf.Clamp(pageIndex, 1, Mathf.CeilToInt(allNames.Count / 10) + 1);
+        }
+        SwitchRegisterCanvas(true);
+    }
+    public void SwitchRegisterCanvas(bool showRegister)
+    {
+        if (showRegister)
+        {
+            foreach (var item in buttonTextList)
+            {
+                item.text = "---";
+            }
+            allNames = _persistenceManager.AllPlayersName;
+            var aux = allNames.Page(pageIndex, 10);
+            inSceneNames.Clear();
+            int i = 0;
+            string name;
+            foreach (var item in aux)
+            {
+                name = item.ToString();
+                if (name != "")
+                {
+                    inSceneNames.Add(name);
+                    buttonTextList[i].text = name;
+                    i++;
+                }
+            }
+        }
+        loginCanvas.SetActive(!showRegister);
+        registerCanvas.SetActive(showRegister);
+        
+    }
+
     public void Login()
     {
         if (_tryingLogin) return;
 
-        _tryingLogin = true;
-        _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
-
         if (_registerScore.isOn)
         {
-            _persistenceManager.SetInt("RegisterScore", 1);
+            //_persistenceManager.SetInt("RegisterScore", 1);
+            SwitchRegisterCanvas(true);
+            
             //Abrir tela para registro do jogador
             //Essa partida irá armazenar pontuação para o ranking
         }
         //Entra no jogo com todas as fases liberadas e não contabilizará pontos
         else
         {
+            _tryingLogin = true;
+            _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
+
             _persistenceManager.SetInt("RegisterScore", 0);
             LoginInfo infoGuest = new LoginInfo();
             infoGuest = null;
             DoLoginCallback(infoGuest);
+        }
+    }
+    public void LoginWithNewName()
+    {
+        string newName = nameField.text;
+        if (newName != "")
+        {
+            allNames =_persistenceManager.AllPlayersName;
+            foreach (var item in allNames)
+            {
+                if(item == newName)
+                {
+                    _feedbackUI.SetText("O nome '" +newName + "' já existe, escolha outro, por favor!").SetButtons(false, true, false, false).Show();
+                    return;
+                }
+            }
+
+            _tryingLogin = true;
+            _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
+
+            _persistenceManager.SetInt("RegisterScore", 1);
+            LoginInfo infoGuest = new LoginInfo() {
+                name = newName
+            };
+
+            DoLoginCallback(infoGuest);
+
+        }
+        else
+        {
+            _feedbackUI.SetText("Digite um nome valido, por favor!").SetButtons(false, true, false, false).Show();
+            return;
+        }
+    }
+
+    public void LoginWithRegistredName(int index)
+    {
+        string nome = buttonTextList[index].text;
+        if (nome != "---")
+        {
+            _tryingLogin = true;
+            _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
+            _persistenceManager.SetInt("RegisterScore", 1);
+            LoginInfo info = _persistenceManager.GetPlayMoveLoginInfo(nome);
+            info.name = nome;
+            DoLoginCallback(info);
         }
     }
 
@@ -53,13 +156,11 @@ public class LoginPlaymove : MonoBehaviour
         dic.Add("Game", "MDS" + curScene.GetGameIndex().ToString());
         dic.Add("Plat", "Playmove");
         dic.Add("User", "PMUser");
-
         _feedbackUI.Close();
 
         //Logando como Guest (sem registro de usuário e sem contagem de pontos para o placar
         if (wsReturn == null) 
         {
-            dic.Add("Conn", "offline");
             LoginInfo loginData = new LoginInfo();
             loginData.status = new StatusInfo();
             loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
@@ -74,38 +175,24 @@ public class LoginPlaymove : MonoBehaviour
             //            })
             //            .Show();
 #if PLAY_MOVE
+            Debug.Log("Playmove Login");
             UserProfile.Instance.SetPlayMoveLoginInfo("Guest", "", loginData);
 #endif
             SceneLoader.Instance.LoadRoomScene();
-            dic.Add("login", "yes - offline");
         }
         else
         {
-            //dic.Add("Conn", "online");
+            wsReturn.status = new StatusInfo();
+            wsReturn.status.code = ConnectionResponse.CONNECTION_OFFLINE;
+            wsReturn.role = "RegisteredPlayMoveUser";
+            wsReturn.status.message = "Playmove com registro";
 
-            //LoginInfo loginInfo = wsReturn;
-            //switch (loginInfo.status.code)
-            //{
-            //    //Login efetuado com sucesso
-            //    case ConnectionResponse.OK:
-            //        //Enviando informações para o UserProfile
-            //        dic.Add("login", "yes - online");
-
-            //        UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginInfo);
-            //        SceneLoader.Instance.LoadRoomScene();
-            //        break;
-            //    //Erro de usuário e/ou senha
-            //    case ConnectionResponse.LOGIN_ERROR:
-            //        dic.Add("login", "no - user/pass invalid");
-
-            //        _feedbackUI.Show("Ocorreu um erro durante o login: " + loginInfo.status.message);
-            //        _tryingLogin = false;
-            //        break;
-            //}
+            UserProfile.Instance.SetPlayMoveLoginInfo(wsReturn.name, "", wsReturn);
+            SceneLoader.Instance.LoadRoomScene();
         }
-
+        dic.Add("Conn", "offline");
+        dic.Add("login", "yes - offline");
         dic.Add("dt", DateTime.Now.ToString());
-
         Analytics.CustomEvent("GameLogin", dic);
         Analytics.FlushEvents();
 

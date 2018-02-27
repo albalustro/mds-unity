@@ -10,13 +10,14 @@ public class UserProfile : Singleton<UserProfile>
 {
 
 #if UNITY_EDITOR
-    public bool debugMode = false;
+    private bool debugMode = false;
     public bool forceFirstAccessConceptMap = false;
 #endif
 
     public string login;
 	public string pass;
     public LoginInfo loginInfo;
+    public int score;
 
     public event Action OnConceptMapUpdatedByRemoteEvent;
 
@@ -25,12 +26,21 @@ public class UserProfile : Singleton<UserProfile>
     public ConceptMap conceptMap { get { return _conceptMap; } }
 
     private const string STUDENT_ROLE = "Estudante";
+    private const string PLAYMOVE_ROLE_REGISTER = "RegisteredPlayMoveUser";
 
     public bool IsStudent
     {
         get
         {
             return loginInfo.role.Equals(STUDENT_ROLE);
+        }
+    }
+
+    public bool IsPlayMoveRegister
+    {
+        get
+        {
+            return loginInfo.role.Equals(PLAYMOVE_ROLE_REGISTER);
         }
     }
 
@@ -53,17 +63,23 @@ public class UserProfile : Singleton<UserProfile>
     //code: t000m000e000d000
     public void UpdateConcept(Scene challengeScene, ConceptTypes newConcept, DateTime startDate)
     {
+        Debug.Log("Updated Concept " + newConcept);
         int w, e, c;
 
         if(challengeScene.IsChallenge() == false) return;
-
+        Debug.Log("NOT FALSE");
         w = challengeScene.GetWorldIndex() - 1;
         e = challengeScene.GetEpisodeIndex() - 1;
         c = challengeScene.GetChallengeIndex() - 1;
 
         var curChallenge = _conceptMap.worlds[w].episodes[e].challenges[c];
+
         if (newConcept > curChallenge.concept)
+        {
+            score += (int)newConcept - (int)curChallenge.concept;
             curChallenge.concept = newConcept;
+        }
+
         curChallenge.startDate = startDate.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
 
         // atualiza a liberacao do proximo episodio
@@ -79,7 +95,9 @@ public class UserProfile : Singleton<UserProfile>
 #endif
 
         SaveUserProfile();
+#if !PLAY_MOVE
         SendConceptMapToSyncer();
+#endif
     }
 
     public EpisodeLiberationTypes CheckNextEpisodeLiberationStatus(ConceptEpisode cEpisode)
@@ -105,12 +123,15 @@ public class UserProfile : Singleton<UserProfile>
 #else
         if(_conceptMap == null)
 #endif
-            SetConceptMapAtFirstAccess ();
-		SaveUserProfile ();
-		SendConceptMapToSyncer ();
-	}
+        SetConceptMapAtFirstAccess ();                                          //Single Line IF
 
-	private void SendConceptMapToSyncer()
+        SaveUserProfile ();
+#if !PLAY_MOVE
+        SendConceptMapToSyncer ();
+#endif
+    }
+
+    private void SendConceptMapToSyncer()
 	{
 		if (loginInfo.status.code == ConnectionResponse.OK)
 			ConceptSyncer.Instance.SendConceptMapToServer (loginInfo.token, _conceptMap, SendConceptMapToServerCallback);
@@ -137,28 +158,40 @@ public class UserProfile : Singleton<UserProfile>
 	private void SaveUserProfile()
 	{
 		PersistenceManager.Instance.SaveUserProfile (this);
+        if (IsPlayMoveRegister)
+        {
+            PersistenceManager.Instance.RefreshPlayerData(this);
+        }
 	}
 
 	private void SetConceptMapAtFirstAccess()
 	{
+        Debug.Log("NOT PLAYMOVE PLAYER");
+        _conceptMap = new ConceptMap
+        {
+            worlds = new ConceptWorld[4]
+        };
 
-		_conceptMap = new ConceptMap();
-		_conceptMap.worlds = new ConceptWorld[4];
-		for (int w = 0; w < 4; w++)
+        for (int w = 0; w < 4; w++)
 		{
-			_conceptMap.worlds [w] = new ConceptWorld ();
-			_conceptMap.worlds[w].episodes = new ConceptEpisode[8];
-			for (int e = 0; e < 8; e++)
+            _conceptMap.worlds[w] = new ConceptWorld
+            {
+                episodes = new ConceptEpisode[8]
+            };
+            for (int e = 0; e < 8; e++)
 			{
-				_conceptMap.worlds [w].episodes [e] = new ConceptEpisode ();
-				_conceptMap.worlds [w].episodes [e].challenges = new ConceptChallenge[5];
-				for (int c = 0; c < 5; c++)
+                _conceptMap.worlds[w].episodes[e] = new ConceptEpisode
+                {
+                    challenges = new ConceptChallenge[5]
+                };
+                for (int c = 0; c < 5; c++)
 				{
-					_conceptMap.worlds [w].episodes [e].challenges [c] = new ConceptChallenge ();
-					_conceptMap.worlds [w].episodes [e].challenges [c].concept = ConceptTypes.CONCEPT_NOT_PLAYED;
-					_conceptMap.worlds [w].episodes [e].challenges [c].startDate = null;
-					_conceptMap.worlds [w].episodes [e].challenges [c].startDate = null;
-				}
+                    _conceptMap.worlds[w].episodes[e].challenges[c] = new ConceptChallenge
+                    {
+                        concept = ConceptTypes.CONCEPT_NOT_PLAYED,
+                        startDate = null
+                    };
+                }
 			}
 		}
 		for (int i = 0; i < 4; i++)
@@ -174,34 +207,9 @@ public class UserProfile : Singleton<UserProfile>
         this.login = l;
         this.pass = p;
         this.loginInfo = i;
-    }
 
-    //Libera o conteúdo completo do jogo
-    private void SetConceptMapForNoRegisteredPlayMoveUser()
-    {
-        _conceptMap = new ConceptMap();
-        _conceptMap.worlds = new ConceptWorld[4];
-        for (int w = 0; w < 4; w++)
-        {
-            _conceptMap.worlds[w] = new ConceptWorld();
-            _conceptMap.worlds[w].episodes = new ConceptEpisode[8];
-            for (int e = 0; e < 8; e++)
-            {
-                _conceptMap.worlds[w].episodes[e] = new ConceptEpisode();
-                _conceptMap.worlds[w].episodes[e].challenges = new ConceptChallenge[5];
-                for (int c = 0; c < 5; c++)
-                {
-                    _conceptMap.worlds[w].episodes[e].challenges[c] = new ConceptChallenge();
-                    _conceptMap.worlds[w].episodes[e].challenges[c].concept = ConceptTypes.CONCEPT_GREEN;
-                    _conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
-                    _conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
-                }
-            }
-        }
-        for (int i = 0; i < 4; i++)
-        {
-            _conceptMap.worlds[i].episodes[0].liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-        }
+        SincronizeConceptMapOnLogin();
+
     }
 #endif
 

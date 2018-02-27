@@ -50,7 +50,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
 		w = scene.GetWorldIndex() - 1;
 
         bool directAccess = true;
-        if (UserProfile.Instance.IsStudent)
+        if (UserProfile.Instance.IsStudent||UserProfile.Instance.IsPlayMoveRegister)
             directAccess = UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckDirectAccessToChallenge();
 
         foreach(var item in challengeCrystalList)
@@ -63,7 +63,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
             else
                 item.Value.button.interactable = false;
 
-            if(UserProfile.Instance.IsStudent &&
+            if((UserProfile.Instance.IsStudent || UserProfile.Instance.IsPlayMoveRegister) &&
                 UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckChallengeComplete(item.Key))
             {
 				//coloca na posição correta (aberto ou fechado)

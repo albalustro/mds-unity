@@ -38,7 +38,7 @@ public class MapSceneButtonController : MDSBehaviour {
 		w = scene.GetWorldIndex() - 1;
 		e = episodeIndex - 1;
         EpisodeLiberationTypes liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-        if (UserProfile.Instance.IsStudent)
+        if (UserProfile.Instance.IsStudent || UserProfile.Instance.IsPlayMoveRegister)
            liberationStatus = UserProfile.Instance.conceptMap.worlds [w].episodes [e].liberationStatus;
 
 		//ALLOW FOR TEACHER = TUDO LIBERADO
@@ -93,10 +93,15 @@ public class MapSceneButtonController : MDSBehaviour {
 		yield return new WaitForSeconds (0.5f);
 		for (int i = 0; i < 5; i++)
 		{
-			if (UserProfile.Instance.IsStudent==false || 
+#if !PLAY_MOVE
+            if (UserProfile.Instance.IsStudent==false || 
                 UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckChallengeComplete (i))
 				crystalsHolder.transform.GetChild (i).gameObject.SetActive (true);
-		}
+#else
+            if(!UserProfile.Instance.IsPlayMoveRegister ||UserProfile.Instance.conceptMap.worlds[w].episodes[e].CheckChallengeComplete(i))
+				crystalsHolder.transform.GetChild(i).gameObject.SetActive(true);
+#endif
+    }
 	}
 
 

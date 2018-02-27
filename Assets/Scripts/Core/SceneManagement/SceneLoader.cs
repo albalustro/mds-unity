@@ -231,7 +231,7 @@ namespace MDS.Core.SceneManagement
         /// </summary>
         public void GoBackAfterChallenge()
         {
-            if(UserProfile.Instance.IsStudent)
+            if(UserProfile.Instance.IsStudent||UserProfile.Instance.IsPlayMoveRegister)
             {
                 Scene curScene = SceneManager.GetActiveScene();
                 if(curScene.IsChallenge())
