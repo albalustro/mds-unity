@@ -4,6 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using Playmove;
 
 public class PlacarManager : MonoBehaviour {
     PersistenceManager persintence;
@@ -11,8 +12,32 @@ public class PlacarManager : MonoBehaviour {
     int pageIndex = 1;
     int? selectedIndex;
     [SerializeField] private Text[] names, points, indexes;
-    private Outline[] highlights; 
+    private Outline[] highlights;
+    [SerializeField] private LoginPlaymove login;
     [SerializeField] private Button[] keyButtons;
+    [SerializeField] private PlayTableKeyboard.KeyboardTextEvent confirmEvent = new PlayTableKeyboard.KeyboardTextEvent();
+    [SerializeField] private PlayTableKeyboard.KeyboardEvent cancelEvent = new PlayTableKeyboard.KeyboardEvent();
+
+    public void ShowKeyboard(bool value)
+    {
+         
+        login.keyboard.SetActive(value);
+        foreach (var item in login.canvasCaster)
+        {
+            item.enabled = !value;
+        }
+        if (value)
+        {
+            PlayTableKeyboard.Instance.onConfirm = confirmEvent;
+            PlayTableKeyboard.Instance.onCancel = cancelEvent;
+
+        }
+        else
+        {
+            PlayTableKeyboard.Instance.ClearText();
+        }
+    }
+
 
     private void Awake()
     {
@@ -108,9 +133,12 @@ public class PlacarManager : MonoBehaviour {
     }
     public void SelectIndex(int index)
     {
-        selectedIndex = index;
-        ResetHighLights();
-        highlights[index].enabled = true;
+        if (index < showingNames.Count)
+        {
+            selectedIndex = index;
+            ResetHighLights();
+            highlights[index].enabled = true;
+        }
     }
 
     public void TrashSelected()
@@ -118,22 +146,48 @@ public class PlacarManager : MonoBehaviour {
         if (selectedIndex != null)
         {
             string nome = showingNames[(int)selectedIndex].name;
-            FeedbackUI.Instance.SetText("Deseja mesmo deletar o usuário: '" + nome + "'?")
+            FeedbackUI.Instance.SetText("Digite APAGAR para deletar o usuário: '" + nome + "'!")
                 .SetButtons(false, false, true, true)
                 .SetSimFeedback(() =>
                 {
-                    persintence.RemovePlayMovePlayer(name);
-                    ShowNamesAndPoints();
+                    ShowKeyboard(true);
                 })
                 .SetNaoFeedback(() =>
                 {
                     FeedbackUI.Instance.Close();
                 }).Show();
-            
-            ShowNamesAndPoints();
         }
     }
-    
+    public void DeletePlayer()
+    {
+        if (PlayTableKeyboard.Instance.Text.ToUpper().Equals("APAGAR"))
+        {
+            if (selectedIndex != null)
+            {
+                Debug.Log(selectedIndex);
+                string nome = showingNames[(int)selectedIndex].name;
+                persintence.RemovePlayMovePlayer(nome);
+                ShowNamesAndPoints();
+                FeedbackUI.Instance.SetText("Nome Removido!")
+                    .SetButtons(true, false, false, false)
+                    .SetOKFeedback(() =>
+                    {
+                        FeedbackUI.Instance.Close();
+                        FeedbackUI.Instance.CloseHandler();
+                    }).Show();
+            }
+        }
+        else
+        {
+            FeedbackUI.Instance.SetText("Palavra Incorreta!")
+                .SetButtons(true, false, false, false)
+                .SetOKFeedback(() => {
+                    FeedbackUI.Instance.Close();
+                    FeedbackUI.Instance.CloseHandler();
+                }).Show();
+        }
+        ShowKeyboard(false);
+    }
     public void OpenConceptMapFromIndex(int index)
     {
         FindObjectOfType<PlayMoveChallengeMapUI>().Open(showingNames[index].conceptMap);

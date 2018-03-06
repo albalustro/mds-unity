@@ -171,6 +171,10 @@ namespace Playmove
             Cursor.visible = false;
 #endif
 
+#if UNITY_EDITOR
+            Cursor.visible = true;
+#endif
+
             GameGuid = settings[SETTING_INDEX_GAME_GUID].Split(':')[1].Trim();// .Replace("Game GUID: ", "");
 
             ReadArguments();

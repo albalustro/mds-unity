@@ -68,6 +68,7 @@ public class HelpUI : MonoBehaviour {
     
     public void Open()
     {
+        //Debug.Log("Open called");
         ResetPanels();
         root.SetActive(true);
         LeanTween.scale(window, Vector3.one, animTime).setEase( LeanTweenType.easeOutBack);

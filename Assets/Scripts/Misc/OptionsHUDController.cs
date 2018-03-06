@@ -186,7 +186,8 @@ public class OptionsHUDController : MonoBehaviour
 
     public void OpenTutorial()
     {
-        HelpUI help = GameObject.FindObjectOfType<HelpUI>();
+        HelpUI help = FindObjectOfType<HelpUI>();
+        //Debug.Log(help);
         if(help != null)
             help.Open();
     }

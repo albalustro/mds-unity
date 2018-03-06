@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Playmove;
 
 public class LoginPlaymove : MonoBehaviour
 {
@@ -20,7 +21,10 @@ public class LoginPlaymove : MonoBehaviour
     [SerializeField] private GameObject registerCanvas;
     [SerializeField] private Text[] buttonTextList;
     [SerializeField] private InputField nameField;
-    
+    public GameObject keyboard;
+    public GraphicRaycaster[] canvasCaster;
+    [SerializeField] private PlayTableKeyboard.KeyboardTextEvent confirmEvent = new PlayTableKeyboard.KeyboardTextEvent();
+    [SerializeField] private PlayTableKeyboard.KeyboardEvent cancelEvent = new PlayTableKeyboard.KeyboardEvent();
 
     void Start () {
         _feedbackUI = FeedbackUI.Instance;
@@ -102,37 +106,71 @@ public class LoginPlaymove : MonoBehaviour
             DoLoginCallback(infoGuest);
         }
     }
+
     public void LoginWithNewName()
     {
-        string newName = nameField.text;
-        if (newName != "")
+        if (PlayTableKeyboard.Instance.BannedName())
         {
-            allNames =_persistenceManager.AllPlayersName;
-            foreach (var item in allNames)
-            {
-                if(item == newName)
-                {
-                    _feedbackUI.SetText("O nome '" +newName + "' já existe, escolha outro, por favor!").SetButtons(false, true, false, false).Show();
-                    return;
-                }
-            }
-
-            _tryingLogin = true;
-            _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
-
-            _persistenceManager.SetInt("RegisterScore", 1);
-            LoginInfo infoGuest = new LoginInfo() {
-                name = newName
-            };
-
-            DoLoginCallback(infoGuest);
-
+            _feedbackUI.SetText("Nome impróprio, tente outro nome!").SetButtons(true, false, false, false).SetOKFeedback(() =>
+             {
+                 _feedbackUI.Close();
+                 _feedbackUI.CloseHandler();
+                 PlayTableKeyboard.Instance.ClearText();
+             }).Show();
         }
         else
         {
-            _feedbackUI.SetText("Digite um nome valido, por favor!").SetButtons(false, true, false, false).Show();
-            return;
+            string newName = PlayTableKeyboard.Instance.Text;
+            if (newName != "")
+            {
+                allNames = _persistenceManager.AllPlayersName;
+                foreach (var item in allNames)
+                {
+                    if (item == newName)
+                    {
+                        _feedbackUI.SetText("O nome '" + newName + "' já existe, escolha outro, por favor!").SetButtons(false, true, false, false).Show();
+                        return;
+                    }
+                }
+
+                _tryingLogin = true;
+                _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
+
+                _persistenceManager.SetInt("RegisterScore", 1);
+                LoginInfo infoGuest = new LoginInfo()
+                {
+                    name = newName
+                };
+
+                DoLoginCallback(infoGuest);
+
+            }
+            else
+            {
+                _feedbackUI.SetText("Digite um nome valido, por favor!").SetButtons(false, true, false, false).Show();
+                return;
+            }
+
+            ShowKeyboard(false);
         }
+    }
+    public void ShowKeyboard(bool value)
+    {
+        keyboard.SetActive(value);
+        foreach (var item in canvasCaster)
+        {
+            item.enabled = !value;
+        }
+        if (value)
+        {
+            PlayTableKeyboard.Instance.onConfirm = confirmEvent;
+            PlayTableKeyboard.Instance.onCancel = cancelEvent;
+        }
+        else
+        {
+            PlayTableKeyboard.Instance.ClearText();
+        }
+
     }
 
     public void LoginWithRegistredName(int index)

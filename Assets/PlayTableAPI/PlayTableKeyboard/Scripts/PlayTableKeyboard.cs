@@ -55,7 +55,9 @@ namespace Playmove
 
         public string Text
         {
-            get { return _text; }
+            get {
+                return _text;
+            }
             private set
             {
                 _text = value;
@@ -223,6 +225,7 @@ namespace Playmove
             if (Camera == null)
                 Camera = Camera.main;
             Initialize();
+            
         }
 
         private void Initialize()
@@ -787,7 +790,7 @@ namespace Playmove
                 onInvalidName.Invoke();
         }
 
-        private bool BannedName()
+        public bool BannedName()
         {
             foreach (string word in Text.Split(new char[] { ' ', ',', '.', '-', '\'' }))
             {
