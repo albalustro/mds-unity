@@ -18,7 +18,6 @@ public class PlayMoveChallengeMapUI : MonoBehaviour {
         _windowsCanvasGroup = window.GetComponent<CanvasGroup>();
     }
 
-
     public void Open(ConceptMap myMap)
     {
         activeMap = myMap;

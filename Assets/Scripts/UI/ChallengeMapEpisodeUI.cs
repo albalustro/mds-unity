@@ -42,6 +42,7 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
         locker = transform.Find("cadeado").gameObject;
         episodeIndexImage = transform.Find("EpisodeIndex").GetComponent<RawImage>();
         episodeImage = GetComponent<RawImage>();
+
 #if PLAY_MOVE
         episodeIndexImage.texture = episodeIndexDefaultTexture;
         episodeImage.texture = episodeDefaultTexture;
@@ -62,6 +63,7 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
 #if !PLAY_MOVE
         ConceptMap activeMap = UserProfile.Instance.conceptMap;
 #else
+        
         ConceptMap activeMap;
         if (SceneManager.GetActiveScene().IsLogin())
         {
@@ -69,12 +71,12 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
         }
         else
         {
+            Debug.Log("USER PROFILE LOADED");
             activeMap = UserProfile.Instance.conceptMap;
         }
 #endif
         RestoreToDefault();
         var libStatus = activeMap.worlds[world].episodes[episode].liberationStatus;
-
 #if !PLAY_MOVE
         letter.SetActive(libStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER);
 #else

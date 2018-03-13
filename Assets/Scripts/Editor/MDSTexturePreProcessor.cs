@@ -44,7 +44,7 @@ public class MDSTexturePreProcessor : AssetPostprocessor
         i.alphaSource = TextureImporterAlphaSource.FromInput;
         i.filterMode = FilterMode.Bilinear;
         i.anisoLevel = 0;
-        i.wrapMode = TextureWrapMode.Repeat;
+        //i.wrapMode = TextureWrapMode.Repeat;
 
         asset = AssetDatabase.LoadAssetAtPath<Texture2D>(i.assetPath);
         if(asset == null)

@@ -95,6 +95,11 @@ public class OptionsHUDController : MonoBehaviour
             _backBtn.SetActive(true);
         }
 
+        if (scene.IsRoom())
+        {
+            _placarBtn.SetActive(false);
+        }
+
 #endif
     }
 

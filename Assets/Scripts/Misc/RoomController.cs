@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
+#if PLAY_MOVE
+using Playmove;
+#endif
 
 public class RoomController : MDSBehaviour {
 
@@ -25,7 +28,12 @@ public class RoomController : MDSBehaviour {
 	private GameObject hudCanvas;
 	private string currentGameIndex;
 
-	protected override void Awake ()
+#if PLAY_MOVE
+    private SoundControlButton pm_soundControlButton;
+    private InvertScreen pm_invertScreen;
+#endif
+
+    protected override void Awake ()
 	{
 		base.Awake ();
 		hudCanvas.SetActive (true);
@@ -42,7 +50,16 @@ public class RoomController : MDSBehaviour {
 		}
         currentGameIndex = SceneManager.GetActiveScene().GetGameIndex().ToString();
 		AudioController.Instance.PlayTheme (_theme);
-	}
+
+#if PLAY_MOVE
+        pm_soundControlButton = FindObjectOfType<SoundControlButton>();
+        pm_invertScreen = FindObjectOfType<InvertScreen>();
+        if (pm_invertScreen != null)
+            pm_invertScreen.gameObject.SetActive(false);
+        if (pm_soundControlButton != null)
+            pm_soundControlButton.gameObject.SetActive(false);
+#endif
+    }
 		
 	public void ChangeScene(int scene)
 	{
@@ -97,9 +114,16 @@ public class RoomController : MDSBehaviour {
         closeMaskButton.SetActive(false);
         _charSelectionMask.SetActive(false);
         _worldSelectionMask.SetActive(false);
-    }
 
-    public void RestartMask()
+#if PLAY_MOVE
+        if (pm_invertScreen != null)
+            pm_invertScreen.gameObject.SetActive(true);
+        if (pm_soundControlButton != null)
+            pm_soundControlButton.gameObject.SetActive(true);
+#endif
+}
+
+public void RestartMask()
     {
         backButton.SetActive(true);
         closeMaskButton.SetActive(true);

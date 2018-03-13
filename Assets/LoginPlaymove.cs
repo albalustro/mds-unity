@@ -53,6 +53,7 @@ public class LoginPlaymove : MonoBehaviour
         }
         SwitchRegisterCanvas(true);
     }
+
     public void SwitchRegisterCanvas(bool showRegister)
     {
         if (showRegister)
@@ -156,6 +157,10 @@ public class LoginPlaymove : MonoBehaviour
     }
     public void ShowKeyboard(bool value)
     {
+        if (keyboard == null)
+        {
+            keyboard = PlayTableKeyboard.Instance.gameObject;
+        }
         keyboard.SetActive(value);
         foreach (var item in canvasCaster)
         {
@@ -189,6 +194,7 @@ public class LoginPlaymove : MonoBehaviour
 
     private void DoLoginCallback(LoginInfo wsReturn)
     {
+        UserProfile.Instance.score = 0;
         Scene curScene = SceneManager.GetActiveScene();
         var dic = new Dictionary<string, object>();
         dic.Add("Game", "MDS" + curScene.GetGameIndex().ToString());
@@ -204,14 +210,6 @@ public class LoginPlaymove : MonoBehaviour
             loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
             loginData.role = "NotRegisteredPlayMoveUser";
             loginData.status.message = "Playmove sem registro";
-            //_feedbackUI.SetText("Efetuando login sem registro")
-            //            .SetButtons(true, false, false, false)
-            //            .SetOKFeedback(() =>
-            //            {
-            //                UserProfile.Instance.SetPlayMoveLoginInfo("Guest", "", loginData);
-            //                SceneLoader.Instance.LoadRoomScene();
-            //            })
-            //            .Show();
 #if PLAY_MOVE
             Debug.Log("Playmove Login");
             UserProfile.Instance.SetPlayMoveLoginInfo("Guest", "", loginData);
@@ -225,6 +223,12 @@ public class LoginPlaymove : MonoBehaviour
             wsReturn.role = "RegisteredPlayMoveUser";
             wsReturn.status.message = "Playmove com registro";
 
+            
+            PlayMoveUserData pmud = _persistenceManager.GetPlayMoveUserData(wsReturn.name);
+            if (pmud != null)
+            {
+                UserProfile.Instance.score = pmud.score;
+            }
             UserProfile.Instance.SetPlayMoveLoginInfo(wsReturn.name, "", wsReturn);
             SceneLoader.Instance.LoadRoomScene();
         }

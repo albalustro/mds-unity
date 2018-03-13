@@ -108,6 +108,8 @@ public class PersistenceManager : Singleton<PersistenceManager> {
 #endif
 #endif
 
+
+
     public List<PlayMoveUserData> GetPlayMoveData
     {
         get
@@ -172,6 +174,19 @@ public class PersistenceManager : Singleton<PersistenceManager> {
             if(item.name == login)
             {
                 return item.loginInfo;
+            }
+        }
+        return null;
+    }
+
+    public PlayMoveUserData GetPlayMoveUserData(string login)
+    {
+        List<PlayMoveUserData> playmoveData = GetPlayMoveData;
+        foreach (var item in playmoveData)
+        {
+            if (item.name == login)
+            {
+                return item;
             }
         }
         return null;

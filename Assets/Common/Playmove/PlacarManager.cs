@@ -20,7 +20,10 @@ public class PlacarManager : MonoBehaviour {
 
     public void ShowKeyboard(bool value)
     {
-         
+        if (login.keyboard == null)
+        {
+            login.keyboard = PlayTableKeyboard.Instance.gameObject;
+        } 
         login.keyboard.SetActive(value);
         foreach (var item in login.canvasCaster)
         {

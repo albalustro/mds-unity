@@ -117,14 +117,24 @@ public class UserProfile : Singleton<UserProfile>
 
     private void SincronizeConceptMapOnLogin()
 	{
-		PersistenceManager.Instance.LoadConceptMap (this, ref _conceptMap);
-#if UNITY_EDITOR
-        if(_conceptMap == null || forceFirstAccessConceptMap)
-#else
-        if(_conceptMap == null)
-#endif
-        SetConceptMapAtFirstAccess ();                                          //Single Line IF
 
+        if (IsStudent || IsPlayMoveRegister)
+        {
+            PersistenceManager.Instance.LoadConceptMap (this, ref _conceptMap);
+            #if UNITY_EDITOR
+                if (_conceptMap == null || forceFirstAccessConceptMap)
+                {
+            #else
+                if(_conceptMap == null) 
+                {
+            #endif
+                    SetConceptMapAtFirstAccess();
+                }     
+        }
+        else
+        {
+            SetConceptMapAtFirstAccess(true);
+        }
         SaveUserProfile ();
 #if !PLAY_MOVE
         SendConceptMapToSyncer ();
@@ -164,9 +174,8 @@ public class UserProfile : Singleton<UserProfile>
         }
 	}
 
-	private void SetConceptMapAtFirstAccess()
+	private void SetConceptMapAtFirstAccess(bool check = false)
 	{
-        Debug.Log("NOT PLAYMOVE PLAYER");
         _conceptMap = new ConceptMap
         {
             worlds = new ConceptWorld[4]
@@ -194,10 +203,19 @@ public class UserProfile : Singleton<UserProfile>
                 }
 			}
 		}
-		for (int i = 0; i < 4; i++)
-		{
-			_conceptMap.worlds [i].episodes [0].liberationStatus = EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS;
-		}
+        for (int i = 0; i < 4; i++)
+        {
+            if(!check)
+                _conceptMap.worlds[i].episodes[0].liberationStatus = EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS;
+            else
+            {
+                for (int e = 0; e < 8; e++)
+                {
+                    _conceptMap.worlds[i].episodes[e].liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
+                }
+            }
+                
+        }
 	}
 
 

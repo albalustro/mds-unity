@@ -24,7 +24,11 @@ namespace Playmove
                 {
                     instance = FindObjectOfType<PlayTableKeyboard>();
                     if (instance == null)
+                    {
+                        print("instanciando novo teclado");
                         instance = Instantiate(Resources.Load<PlayTableKeyboard>("PlaytableKeyboardNew"));
+                    }
+                        
                 }
                 return instance;
             }
