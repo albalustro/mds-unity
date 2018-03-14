@@ -52,8 +52,8 @@ public class RoomController : MDSBehaviour {
 		AudioController.Instance.PlayTheme (_theme);
 
 #if PLAY_MOVE
-        pm_soundControlButton = FindObjectOfType<SoundControlButton>();
-        pm_invertScreen = FindObjectOfType<InvertScreen>();
+        pm_soundControlButton = GameObject.FindWithTag("SoundControlButton").GetComponent<SoundControlButton>();
+        pm_invertScreen = GameObject.FindWithTag("InvertScreenButton").GetComponent<InvertScreen>();
         if (pm_invertScreen != null)
             pm_invertScreen.gameObject.SetActive(false);
         if (pm_soundControlButton != null)

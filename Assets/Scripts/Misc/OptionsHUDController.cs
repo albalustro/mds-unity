@@ -131,6 +131,13 @@ public class OptionsHUDController : MonoBehaviour
                                 .SetButtons(false, false, true, true)
                                 .SetSimFeedback(() =>
                                 {
+                                    // Destruindo objeto de contexto...
+                                    var context = GameObject.FindObjectOfType<EpisodeContext>();
+                                    if (context != null)
+                                    {
+                                        print("destruindo contexto");
+                                        DestroyObject(context.gameObject);
+                                    }
                                     SceneLoader.Instance.LoadLogin();
                                 })
                                 .SetNaoFeedback(() =>

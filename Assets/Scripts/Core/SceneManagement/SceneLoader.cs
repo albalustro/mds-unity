@@ -216,6 +216,7 @@ namespace MDS.Core.SceneManagement
             var context = GameObject.FindObjectOfType<EpisodeContext>();
             if(context != null)
             {
+                print("destruindo contexto");
                 DestroyObject(context.gameObject);
             }
 
