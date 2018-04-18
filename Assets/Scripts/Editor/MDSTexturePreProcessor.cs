@@ -14,7 +14,7 @@ public class MDSTexturePreProcessor : AssetPostprocessor
     TextureImporterPlatformSettings androidImporterSettings;
     TextureImporterPlatformSettings webglImporterSettings;
 
-    void OnPreprocessTexture()
+    void OnPreprocessTextureXXX()
     {
         #region Common
         i = (TextureImporter)assetImporter;

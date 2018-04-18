@@ -10,9 +10,9 @@ using MDS.Core.SceneManagement;
 public class AudioController : Singleton<AudioController>
 {
     [SerializeField]
-    private AudioClip[] themeLogin;
+    private string[] themeLoginAudioNames;
     [SerializeField]
-    private AudioClip[][] themeWorlds;
+    private string[][] themeWorldsAudioNames;
 
     private AudioSource _SoundFXSource = new AudioSource();
 	private AudioSource _VoiceOverSource = new AudioSource();
@@ -73,7 +73,8 @@ public class AudioController : Singleton<AudioController>
 
         if (curScene.IsLogin())
         {
-            PlayTheme(themeLogin.GetRandom());
+            AudioClip ac = Resources.Load<AudioClip>(themeLoginAudioNames.GetRandom());
+            PlayTheme(ac);
         }
         else if (curScene.IsChallenge())
         {
@@ -85,7 +86,8 @@ public class AudioController : Singleton<AudioController>
                 int w, e;
                 w = curScene.GetWorldIndex() - 1;
                 e = curScene.GetEpisodeIndex() - 1;
-                PlayTheme(themeWorlds[w][e]);
+                AudioClip ac = Resources.Load<AudioClip>(themeWorldsAudioNames[w][e]);
+                PlayTheme(ac);
             }
         }
         else if (curScene.IsEpisode())
@@ -93,7 +95,9 @@ public class AudioController : Singleton<AudioController>
             int w, e;
             w = curScene.GetWorldIndex() - 1;
             e = curScene.GetEpisodeIndex() - 1;
-            PlayTheme(themeWorlds[w][e]);
+            AudioClip ac = Resources.Load<AudioClip>(themeWorldsAudioNames[w][e]);
+            PlayTheme(ac);
+
         }
     }
 
