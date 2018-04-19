@@ -487,7 +487,7 @@ namespace AncientLightStudios.uTomate
 
             PlayerSettings.iOS.prerenderedIcon = prerenderedIcon.EvaluateIn(context);
 
-            PlayerSettings.bundleIdentifier = theBundleIdentifier;
+            PlayerSettings.applicationIdentifier = theBundleIdentifier;
             PlayerSettings.bundleVersion = theBundleVersion;
 
             PlayerSettings.iOS.targetDevice = targetDevice.EvaluateIn(context);
@@ -656,7 +656,7 @@ namespace AncientLightStudios.uTomate
 
             showActivityIndicatorOnLoading.StaticValue = PlayerSettings.iOS.showActivityIndicatorOnLoading;
 
-            bundleIdentifier.StaticValue = PlayerSettings.bundleIdentifier;
+            bundleIdentifier.StaticValue = PlayerSettings.applicationIdentifier;
             bundleVersion.StaticValue = PlayerSettings.bundleVersion;
 
             targetDevice.StaticValue = PlayerSettings.iOS.targetDevice;

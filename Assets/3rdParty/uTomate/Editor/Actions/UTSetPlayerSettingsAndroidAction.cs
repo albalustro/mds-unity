@@ -240,7 +240,7 @@ namespace AncientLightStudios.uTomate
 
            
 
-            PlayerSettings.bundleIdentifier = theBundleIdentifier;
+            PlayerSettings.applicationIdentifier = theBundleIdentifier;
             PlayerSettings.bundleVersion = theBundleVersion;
             PlayerSettings.Android.bundleVersionCode = bundleVersionCode.EvaluateIn(context);
             PlayerSettings.Android.minSdkVersion = minimumApiLevel.EvaluateIn(context);
@@ -394,7 +394,7 @@ namespace AncientLightStudios.uTomate
             multithreadedRendering.StaticValue = wrapper.GetBool("m_MobileMTRendering");
 
 
-            bundleIdentifier.StaticValue = PlayerSettings.bundleIdentifier;
+            bundleIdentifier.StaticValue = PlayerSettings.applicationIdentifier;
             bundleVersion.StaticValue = PlayerSettings.bundleVersion;
             bundleVersionCode.StaticValue = PlayerSettings.Android.bundleVersionCode;
             minimumApiLevel.StaticValue = PlayerSettings.Android.minSdkVersion;

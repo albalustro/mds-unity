@@ -34,12 +34,12 @@ public class LoadProgress : MDSBehaviour {
     {
         base.Awake();
 
-        _bgGO = transform.FindChild("BG").gameObject;
-        _animGO = transform.FindChild("Anim").gameObject;
-        _fillGO = transform.FindChild("Fill").gameObject;
-        _fillBGGO = transform.FindChild("FillBG").gameObject;
-        _textGO = transform.FindChild("Text").gameObject;
-        _textSizeGO = transform.FindChild("SizeText").gameObject;
+        _bgGO = transform.Find("BG").gameObject;
+        _animGO = transform.Find("Anim").gameObject;
+        _fillGO = transform.Find("Fill").gameObject;
+        _fillBGGO = transform.Find("FillBG").gameObject;
+        _textGO = transform.Find("Text").gameObject;
+        _textSizeGO = transform.Find("SizeText").gameObject;
 
         _bgImage = _bgGO.GetComponent<Image>();
         _animator = _animGO.GetComponent<Animator>();

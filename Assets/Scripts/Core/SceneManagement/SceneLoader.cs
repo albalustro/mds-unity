@@ -48,6 +48,8 @@ namespace MDS.Core.SceneManagement
         public bool destroyDebugObjectsOnSceneLoad = false;
 #endif
 
+        public bool byPassOBB = true;
+
         #region Unity Methods
 
         protected override void Awake()
@@ -55,13 +57,13 @@ namespace MDS.Core.SceneManagement
             base.Awake();
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-            if(Application.bundleIdentifier.Contains("mds1"))
+            if(Application.identifier.Contains("mds1"))
                 androidPublicKey = androidPublicKeyMDS1;
 
-            if(Application.bundleIdentifier.Contains("mds2"))
+            if(Application.identifier.Contains("mds2"))
                 androidPublicKey = androidPublicKeyMDS2;
 
-            if(Application.bundleIdentifier.Contains("mds3"))
+            if(Application.identifier.Contains("mds3"))
                 androidPublicKey = androidPublicKeyMDS3;
 #endif
 
@@ -450,6 +452,7 @@ namespace MDS.Core.SceneManagement
 
         public void LoadOBB()
         {
+            if (byPassOBB) return;
 
             GooglePlayDownloader.setEnvironment(androidPublicKey);
             Log("setEnvironment");
@@ -488,6 +491,8 @@ namespace MDS.Core.SceneManagement
 
         public IEnumerator WaitOBB()
         {
+            if (byPassOBB) yield break;
+
             string mainPath = null;
             string expansionFilePath = GooglePlayDownloader.GetExpansionFilePath();
             Log("[WaitoBB] expFilePath: "+ expansionFilePath);

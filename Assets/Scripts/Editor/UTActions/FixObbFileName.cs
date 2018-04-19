@@ -10,7 +10,7 @@ public class FixObbFileName : UTAction
 
     public override IEnumerator Execute(UTContext context)
     {
-        string bundleName = PlayerSettings.bundleIdentifier.Replace("com.xmile.", "");
+        string bundleName = PlayerSettings.applicationIdentifier.Replace("com.xmile.", "");
         string bundleVersion = PlayerSettings.Android.bundleVersionCode.ToString();
 
         string curObbFileName = string.Format("{0}.main.obb", bundleName);

@@ -59,10 +59,8 @@ namespace MDS
 #if UNITY_ANDROID && !UNITY_EDITOR
             // FadeTransition.Instance.BeginFade(FadeDirection.In);
             // yield return new WaitForSeconds(3f);
-            // if (byPassOBB==false)
-                yield return SceneLoader.Instance.WaitOBB();
+            yield return SceneLoader.Instance.WaitOBB();
 #endif
-
             textVersion.SetActive(false);
 
             FadeTransition.Instance.FadeTime = originalFadeTime;
