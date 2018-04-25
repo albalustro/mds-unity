@@ -71,9 +71,13 @@ public class AudioController : Singleton<AudioController>
 
         if(curScene.name.Equals("splash")) return;
 
+        AudioClip ac;
+        string theme = "Not defined";
+
         if (curScene.IsLogin())
         {
-            AudioClip ac = Resources.Load<AudioClip>(themeLoginAudioNames.GetRandom());
+            theme = themeLoginAudioNames.GetRandom();
+            ac = Resources.Load<AudioClip>(theme);
             PlayTheme(ac);
         }
         else if (curScene.IsChallenge())
@@ -86,7 +90,8 @@ public class AudioController : Singleton<AudioController>
                 int w, e;
                 w = curScene.GetWorldIndex() - 1;
                 e = curScene.GetEpisodeIndex() - 1;
-                AudioClip ac = Resources.Load<AudioClip>(themeWorldsAudioNames[w][e]);
+                theme = themeWorldsAudioNames[w][e];
+                ac = Resources.Load<AudioClip>(theme);
                 PlayTheme(ac);
             }
         }
@@ -95,10 +100,12 @@ public class AudioController : Singleton<AudioController>
             int w, e;
             w = curScene.GetWorldIndex() - 1;
             e = curScene.GetEpisodeIndex() - 1;
-            AudioClip ac = Resources.Load<AudioClip>(themeWorldsAudioNames[w][e]);
+            theme = themeWorldsAudioNames[w][e];
+            ac = Resources.Load<AudioClip>(theme);
             PlayTheme(ac);
-
         }
+
+       // Debug.Log("Theme: " + theme);
     }
 
     void Start()

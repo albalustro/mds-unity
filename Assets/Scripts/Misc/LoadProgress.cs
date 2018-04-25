@@ -10,46 +10,49 @@ public class LoadProgress : MDSBehaviour {
 
 
 
+   // [SerializeField]
+ //   private Sprite[] _backgroundsSprites;
     [SerializeField]
-    private Sprite[] _backgroundsSprites;
+    private string[] _backgroundsSpritesPaths;
 
     [SerializeField]
     private Sprite[] _progressBarSprites;
 
-    private Image _bgImage;
-    private Image _progressBarBG;
-    private Image _progressBarFill;
-    private Animator _animator;
-    private Text _text;
-    private Text _textSize;
 
-    private GameObject _bgGO;
-    private GameObject _animGO;
-    private GameObject _fillGO;
-    private GameObject _fillBGGO;
-    private GameObject _textGO;
-    private GameObject _textSizeGO;
+    [Header("Internal refs")]
+    [SerializeField] private Image _bgImage;
+    [SerializeField] private Image _progressBarBG;
+    [SerializeField] private Image _progressBarFill;
+    [SerializeField] private Animator _animator;
+    [SerializeField] private Text _text;
+    [SerializeField] private Text _textSize;
+
+    [SerializeField] private GameObject _bgGO;
+    [SerializeField] private GameObject _animGO;
+    [SerializeField] private GameObject _fillGO;
+    [SerializeField] private GameObject _fillBGGO;
+    [SerializeField] private GameObject _textGO;
+    [SerializeField] private GameObject _textSizeGO;
 
     protected override void Awake()
     {
         base.Awake();
 
-        _bgGO = transform.Find("BG").gameObject;
-        _animGO = transform.Find("Anim").gameObject;
-        _fillGO = transform.Find("Fill").gameObject;
-        _fillBGGO = transform.Find("FillBG").gameObject;
-        _textGO = transform.Find("Text").gameObject;
-        _textSizeGO = transform.Find("SizeText").gameObject;
+        //_bgGO = transform.Find("BG").gameObject;
+        //_animGO = transform.Find("Anim").gameObject;
+        //_fillGO = transform.Find("Fill").gameObject;
+        //_fillBGGO = transform.Find("FillBG").gameObject;
+        //_textGO = transform.Find("Text").gameObject;
+        //_textSizeGO = transform.Find("SizeText").gameObject;
 
-        _bgImage = _bgGO.GetComponent<Image>();
-        _animator = _animGO.GetComponent<Animator>();
-        _progressBarBG = _fillBGGO.GetComponent<Image>();
-        _progressBarFill = _fillGO.GetComponent<Image>();
-        _text = _textGO.GetComponent<Text>();
-        _textSize = _textSizeGO.GetComponent<Text>();
+        //_bgImage = _bgGO.GetComponent<Image>();
+        //_animator = _animGO.GetComponent<Animator>();
+        //_progressBarBG = _fillBGGO.GetComponent<Image>();
+        //_progressBarFill = _fillGO.GetComponent<Image>();
+        //_text = _textGO.GetComponent<Text>();
+        //_textSize = _textSizeGO.GetComponent<Text>();
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
-
 
     }
 
@@ -80,9 +83,7 @@ public class LoadProgress : MDSBehaviour {
         if(!curScene.name.Equals("splash"))
             wIndex = curScene.GetWorldIndex() - 1;            
         
-
-        
-        _bgImage.sprite = _backgroundsSprites[wIndex];
+        _bgImage.sprite = Resources.Load<Sprite>( _backgroundsSpritesPaths[wIndex]);
         _progressBarBG.sprite = _progressBarSprites[wIndex];
         _progressBarFill.sprite = _progressBarSprites[wIndex];
         StartCoroutine(LazySetAnim(wIndex));
