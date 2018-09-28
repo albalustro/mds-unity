@@ -294,7 +294,7 @@ namespace AncientLightStudios.uTomate
                     return ".exe";
 
                 case BuildTarget.StandaloneOSXIntel:
-                case BuildTarget.StandaloneOSXUniversal:
+                case BuildTarget.StandaloneOSX:
                     return ".app";
 
                 case BuildTarget.Android:

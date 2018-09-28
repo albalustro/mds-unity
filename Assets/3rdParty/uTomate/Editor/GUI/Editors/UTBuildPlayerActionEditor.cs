@@ -65,7 +65,7 @@ namespace AncientLightStudios.uTomate
                     BuildTarget.StandaloneWindows,
                     BuildTarget.StandaloneWindows64,
                     BuildTarget.StandaloneOSXIntel, 
-                    BuildTarget.StandaloneOSXUniversal,
+                    BuildTarget.StandaloneOSX,
                     BuildTarget.Android) ?
                     UTVisibilityDecision.Visible : UTVisibilityDecision.Invisible;
             }

@@ -397,9 +397,9 @@ namespace MDS.Core.SceneManagement
 
         private IEnumerator Download(string assetBundleName, int bundleIndex,  Action<bool> callback)
         {
-            if(Caching.enabled)
-                while(!Caching.ready)
-                    yield return null;
+            //if(Caching.enabled)
+            //    while(!Caching.ready)
+            //        yield return null;
 
             string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
 
@@ -427,7 +427,7 @@ namespace MDS.Core.SceneManagement
 
                 Log("Terminou de baixar");
 
-                if(request.isError)
+                if(request.isNetworkError)
                 {
                     LogError(request.error);
                     if(callback != null)
