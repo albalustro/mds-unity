@@ -40,15 +40,23 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
         episode = int.Parse(gameObject.name.Substring(gameObject.name.Length - 2, 1)) - 1;
         world = int.Parse(transform.parent.name.Substring(transform.parent.name.Length - 2, 1)) - 1;
 
-        var libStatus = UserProfile.Instance.conceptMap.worlds[world]
-                    .episodes[episode].liberationStatus;
+        EpisodeLiberationTypes libStatus;
+
+        if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
+            libStatus = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].liberationStatus;
+        else
+            libStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
 
         letter.SetActive(libStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER);
         locker.SetActive(libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER);
 
-        var episodeComplete = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].CheckEpisodeComplete();
+        bool episodeComplete;
+        if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
+            episodeComplete = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].CheckEpisodeComplete();
+        else
+            episodeComplete = true;
 
-        if((libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || 
+        if ((libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || 
            libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER) && !episodeComplete)
         {
             episodeImage.texture = episodeBlockedTexture;
@@ -66,10 +74,12 @@ public class ChallengeMapEpisodeUI : MonoBehaviour
         for(int i = 0; i < 5; i++)
         {
 
-            bool active = UserProfile.Instance.conceptMap
-                    .worlds[world]
-                    .episodes[episode]
-                    .challenges[i].concept == ConceptTypes.CONCEPT_GREEN;
+            bool active = true;
+            if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
+                active = UserProfile.Instance.conceptMap
+                        .worlds[world]
+                        .episodes[episode]
+                        .challenges[i].concept == ConceptTypes.CONCEPT_GREEN;
             crystals[i].SetActive(active);
         }
 
