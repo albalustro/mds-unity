@@ -416,8 +416,8 @@ namespace MDS.Core.SceneManagement
             using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url, 0))
             {
                 OnStartLoad.Invoke();
-
-                request.Send();
+                
+                request.SendWebRequest();
                 while(!request.isDone)
                 {
                     OnLoadProgressUpdate.Invoke(request.downloadProgress);

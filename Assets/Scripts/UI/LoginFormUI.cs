@@ -7,6 +7,9 @@ using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
+#if UNITY_WEBGL && !UNITY_EDITOR
+using System.Runtime.InteropServices;
+#endif
 
 public class LoginFormUI : MonoBehaviour
 {
@@ -27,6 +30,11 @@ public class LoginFormUI : MonoBehaviour
 
     private FeedbackUI _feedbackUI;
     private PersistenceManager _persistenceManager;
+
+#if UNITY_WEBGL && !UNITY_EDITOR
+        [DllImport("__Internal")]
+        public static extern void InjectData();
+#endif
 
     void Start()
     {
@@ -50,8 +58,9 @@ public class LoginFormUI : MonoBehaviour
         }
 
 
-#if UNITY_WEBGL
-        Application.ExternalCall("InjectData");
+#if UNITY_WEBGL && ! UNITY_EDITOR
+        InjectData();
+       // Application.ExternalCall("InjectData");
         //_panel.SetActive(false);
 #endif
 
@@ -68,7 +77,7 @@ public class LoginFormUI : MonoBehaviour
     }
 #endif
 
-    #region Ações dos botões
+#region Ações dos botões
 
     public void Login()
     {
@@ -93,7 +102,7 @@ public class LoginFormUI : MonoBehaviour
 
     }
 
-    #endregion
+#endregion
 
     TouchScreenKeyboard _curTouchScreenKeyboard;
     public void OpenTKB_Login()
