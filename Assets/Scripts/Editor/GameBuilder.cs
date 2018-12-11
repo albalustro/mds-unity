@@ -302,7 +302,7 @@ public class GameBuilder : EditorWindow
 
     private void BuildAllWebGL()
     {
-        // BuildAssetbundlesWebGL();
+        BuildAssetbundlesWebGL();
         Build_MDS_WebGL(Game.MDS1);
         Build_MDS_WebGL(Game.MDS2);
         Build_MDS_WebGL(Game.MDS3);
