@@ -48,6 +48,8 @@ namespace MDS.Core.SceneManagement
         public bool destroyDebugObjectsOnSceneLoad = false;
 #endif
 
+        public bool byPassOBB = true;
+
         #region Unity Methods
 
         protected override void Awake()
@@ -55,13 +57,13 @@ namespace MDS.Core.SceneManagement
             base.Awake();
 
 #if UNITY_ANDROID && !UNITY_EDITOR
-            if(Application.bundleIdentifier.Contains("mds1"))
+            if(Application.identifier.Contains("mds1"))
                 androidPublicKey = androidPublicKeyMDS1;
 
-            if(Application.bundleIdentifier.Contains("mds2"))
+            if(Application.identifier.Contains("mds2"))
                 androidPublicKey = androidPublicKeyMDS2;
 
-            if(Application.bundleIdentifier.Contains("mds3"))
+            if(Application.identifier.Contains("mds3"))
                 androidPublicKey = androidPublicKeyMDS3;
 #endif
 
@@ -396,9 +398,9 @@ namespace MDS.Core.SceneManagement
 
         private IEnumerator Download(string assetBundleName, int bundleIndex,  Action<bool> callback)
         {
-            if(Caching.enabled)
-                while(!Caching.ready)
-                    yield return null;
+            //if(Caching.enabled)
+            //    while(!Caching.ready)
+            //        yield return null;
 
             string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
 
@@ -415,8 +417,8 @@ namespace MDS.Core.SceneManagement
             using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url, 0))
             {
                 OnStartLoad.Invoke();
-
-                request.Send();
+                
+                request.SendWebRequest();
                 while(!request.isDone)
                 {
                     OnLoadProgressUpdate.Invoke(request.downloadProgress);
@@ -426,7 +428,7 @@ namespace MDS.Core.SceneManagement
 
                 Log("Terminou de baixar");
 
-                if(request.isError)
+                if(request.isNetworkError)
                 {
                     LogError(request.error);
                     if(callback != null)
@@ -451,6 +453,7 @@ namespace MDS.Core.SceneManagement
 
         public void LoadOBB()
         {
+            if (byPassOBB) return;
 
             GooglePlayDownloader.setEnvironment(androidPublicKey);
             Log("setEnvironment");
@@ -489,6 +492,8 @@ namespace MDS.Core.SceneManagement
 
         public IEnumerator WaitOBB()
         {
+            if (byPassOBB) yield break;
+
             string mainPath = null;
             string expansionFilePath = GooglePlayDownloader.GetExpansionFilePath();
             Log("[WaitoBB] expFilePath: "+ expansionFilePath);

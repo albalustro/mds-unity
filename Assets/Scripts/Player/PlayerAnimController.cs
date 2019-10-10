@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace MDS.Player
 {
@@ -81,6 +78,7 @@ namespace MDS.Player
         public void SetAvatar(PlayerAvatar avatar)
         {
             _avatar = avatar;
+            _animator.runtimeAnimatorController = Resources.Load<RuntimeAnimatorController>(string.Format("PlayerAnimController {0}", (int)_avatar));
             _animator.SetInteger(paramAvatarHash, (int)_avatar);
         }
 

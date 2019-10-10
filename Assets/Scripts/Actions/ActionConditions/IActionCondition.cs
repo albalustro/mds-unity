@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using FullInspector;
+﻿using FullInspector;
 using MDS.Core.Interfaces;
 
 namespace MDS.Actions.DialogConditions

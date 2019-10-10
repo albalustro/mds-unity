@@ -10,9 +10,9 @@ using MDS.Core.SceneManagement;
 public class AudioController : Singleton<AudioController>
 {
     [SerializeField]
-    private AudioClip[] themeLogin;
+    private string[] themeLoginAudioNames;
     [SerializeField]
-    private AudioClip[][] themeWorlds;
+    private string[][] themeWorldsAudioNames;
 
     private AudioSource _SoundFXSource = new AudioSource();
 	private AudioSource _VoiceOverSource = new AudioSource();
@@ -71,9 +71,14 @@ public class AudioController : Singleton<AudioController>
 
         if(curScene.name.Equals("splash")) return;
 
+        AudioClip ac;
+        string theme = "Not defined";
+
         if (curScene.IsLogin())
         {
-            PlayTheme(themeLogin.GetRandom());
+            theme = themeLoginAudioNames.GetRandom();
+            ac = Resources.Load<AudioClip>(theme);
+            PlayTheme(ac);
         }
         else if (curScene.IsChallenge())
         {
@@ -85,7 +90,9 @@ public class AudioController : Singleton<AudioController>
                 int w, e;
                 w = curScene.GetWorldIndex() - 1;
                 e = curScene.GetEpisodeIndex() - 1;
-                PlayTheme(themeWorlds[w][e]);
+                theme = themeWorldsAudioNames[w][e];
+                ac = Resources.Load<AudioClip>(theme);
+                PlayTheme(ac);
             }
         }
         else if (curScene.IsEpisode())
@@ -93,8 +100,12 @@ public class AudioController : Singleton<AudioController>
             int w, e;
             w = curScene.GetWorldIndex() - 1;
             e = curScene.GetEpisodeIndex() - 1;
-            PlayTheme(themeWorlds[w][e]);
+            theme = themeWorldsAudioNames[w][e];
+            ac = Resources.Load<AudioClip>(theme);
+            PlayTheme(ac);
         }
+
+       // Debug.Log("Theme: " + theme);
     }
 
     void Start()

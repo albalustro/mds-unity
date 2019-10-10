@@ -11,7 +11,7 @@ public class FlipMediadorByPlayerPosition : MonoBehaviour {
 	private bool _isMediator;
 
 	void Start () {
-		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform.FindChild("Art").GetComponent<Transform> ();
+		playerTransform = GameObject.FindGameObjectWithTag ("Player").transform.Find("Art").GetComponent<Transform> ();
 		_renderer = GetComponent<SpriteRenderer> ();
 		StartCoroutine (CheckFlip ());
 		if (gameObject.tag == "Mediator")

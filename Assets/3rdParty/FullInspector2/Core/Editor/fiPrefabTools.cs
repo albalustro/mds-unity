@@ -64,7 +64,7 @@ namespace FullInspector.Internal {
             }
 
             // Not a prefab
-            var prefabGameObject = (GameObject)PrefabUtility.GetPrefabParent(((MonoBehaviour)instance).gameObject);
+            var prefabGameObject = (GameObject)PrefabUtility.GetPrefabObject(((MonoBehaviour)instance).gameObject);
             if (prefabGameObject == null) {
                 return;
             }
@@ -137,7 +137,7 @@ namespace FullInspector.Internal {
             }
 
             // If there is no prefab, then we don't show anything in bold.
-            var prefabGameObject = (GameObject)PrefabUtility.GetPrefabParent(((MonoBehaviour)instance).gameObject);
+            var prefabGameObject = (GameObject)PrefabUtility.GetPrefabObject(((MonoBehaviour)instance).gameObject);
             if (prefabGameObject == null) {
                 return false;
             }

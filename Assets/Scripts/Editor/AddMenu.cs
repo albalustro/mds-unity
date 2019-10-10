@@ -92,7 +92,7 @@ public class AddMenu : EditorWindow
     [MenuItem("MDS/Tools/Caching/Clean")]
     public static void ClearCaching()
     {
-        Caching.CleanCache();
+        Caching.ClearCache();
     }
     #endregion
 

@@ -46,7 +46,7 @@ public class DownloadManager : Singleton<DownloadManager>
             yield return null;
 
         if(cleanCache)
-            Caching.CleanCache();
+            Caching.ClearCache();
 
         string urlBase = useLocal ? localUrlBase : remoteUrlBase;
 
@@ -55,12 +55,12 @@ public class DownloadManager : Singleton<DownloadManager>
         Log("Baixando " + url);
 
         UnityWebRequest request = UnityWebRequest.GetAssetBundle(url);
-        yield return request.Send();
+        yield return request.SendWebRequest();
 
 
         Log("Terminou de baixar");
 
-        if(request.isError)
+        if(request.isNetworkError)
         {
             LogError(request.error);
         }
