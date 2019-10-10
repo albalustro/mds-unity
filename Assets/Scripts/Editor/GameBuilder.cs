@@ -336,7 +336,7 @@ public class GameBuilder : EditorWindow
     {
         Debug.LogFormat("[{0}][WebGL][{1}] - Starting ", "ASSETBUNDLES", System.DateTime.Now.ToShortTimeString());
         string path = string.Format("AssetBundles/prod/{0}/WebGL", PlayerSettings.bundleVersion);
-        BuildPipeline.BuildAssetBundles(path, BuildAssetBundleOptions.None, BuildTarget.WebGL);
+        BuildPipeline.BuildAssetBundles(path, BuildAssetBundleOptions.UncompressedAssetBundle, BuildTarget.WebGL);
         Debug.LogFormat("[{0}][WebGL][{1}] - Done ", "ASSETBUNDLES", System.DateTime.Now.ToShortTimeString());
 
         //Debug.Log("[Assetbundles][WebGL][" + System.DateTime.Now.ToShortTimeString() + "] - Starting ");
