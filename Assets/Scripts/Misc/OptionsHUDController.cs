@@ -2,8 +2,6 @@
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
 using MDS.Core.SceneManagement;
-using MDS.DialogueSystem;
-using System.Collections;
 
 public class OptionsHUDController : MonoBehaviour
 {
@@ -12,9 +10,7 @@ public class OptionsHUDController : MonoBehaviour
     private GameObject _fullScreenBtn;
     private GameObject _quitGameBtn;
     private GameObject _tutorialBtn;                        //Tutorial MDS
-    private GameObject _tutorialPlayMoveHUDBtn;             //Painel de Informações Playmove
-    private GameObject _placarBtn;                          //Botão para o placar (exclusividade Playmove)
-    private GameObject _returnToMenu;
+
 
     //  private GameObject _restoreMaskBtn;
     private RectTransform _transformOptionsHUDPanel;
@@ -32,10 +28,6 @@ public class OptionsHUDController : MonoBehaviour
 
         _audioOnHUDBtn = GameObject.Find("AudioOnHUDBtn");
 
-        //PLAYMOVE
-        _tutorialPlayMoveHUDBtn = GameObject.Find("TutorialPlayMoveHUDBtn");
-        _placarBtn = GameObject.Find("PlacarHUDBtn");
-        _returnToMenu = GameObject.Find("ReturnToMenu");
         
 
 #if UNITY_IOS || UNITY_ANDROID || UNITY_EDITOR
@@ -48,7 +40,6 @@ public class OptionsHUDController : MonoBehaviour
 
         Scene scene = SceneManager.GetActiveScene();
 
-#if !PLAY_MOVE
         if (scene.IsLogin())
         {
             gameObject.SetActive(false);
@@ -69,47 +60,9 @@ public class OptionsHUDController : MonoBehaviour
             _tutorialBtn.SetActive(true);
         else
             _tutorialBtn.SetActive(false);
-#else
-        gameObject.SetActive(true);
-        _tutorialPlayMoveHUDBtn.SetActive(true);
-        _placarBtn.SetActive(true);
-        _tutorialBtn.SetActive(false);
-        _backBtn.SetActive(false);
-        _fullScreenBtn.SetActive(false);
-        _quitGameBtn.SetActive(false);
-        _audioOnHUDBtn.SetActive(false);
 
-        if (!scene.IsLogin())
-        {
-            _returnToMenu.SetActive(true);
-        }
-        else
-        {
-            _returnToMenu.SetActive(false);
-        }
-
-        if(scene.IsEpisode() || scene.IsChallenge() || scene.IsMap())
-        {
-            _placarBtn.SetActive(false);
-            _tutorialPlayMoveHUDBtn.SetActive(false);
-            _backBtn.SetActive(true);
-        }
-
-        if (scene.IsRoom())
-        {
-            _placarBtn.SetActive(false);
-        }
-
-#endif
     }
 
-//#if PLAY_MOVE
-//    IEnumerator Start()
-//    {
-//        yield return new WaitForEndOfFrame();
-//        TogglePanel();
-//    }
-//#endif
 
     public void UnMute()
     {
@@ -136,7 +89,7 @@ public class OptionsHUDController : MonoBehaviour
                                     if (context != null)
                                     {
                                         print("destruindo contexto");
-                                        DestroyObject(context.gameObject);
+                                        DestroyImmediate(context.gameObject);
                                     }
                                     SceneLoader.Instance.LoadLogin();
                                 })
@@ -191,10 +144,7 @@ public class OptionsHUDController : MonoBehaviour
         }
 
     }
-    public void OpenPlacar()
-    {
-        FindObjectOfType<HelpUI>().ShowPlacarHUD(true);
-    }
+
 
     public void OpenTutorial()
     {

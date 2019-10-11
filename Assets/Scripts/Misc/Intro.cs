@@ -14,7 +14,6 @@ namespace MDS
         IEnumerator Start()
         {
 #if UNITY_ANDROID && !UNITY_EDITOR
-            Log("Inicio");
             SceneLoader.Instance.LoadOBB();
 #endif
             float originalFadeTime = FadeTransition.Instance.FadeTime;

@@ -11,9 +11,18 @@ namespace DldUtil
 		public BackwardReader(string path)
 		{
 			fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+		}
+
+		public void JumpToEnd(long lineNumber)
+		{
 			fs.Seek(0, SeekOrigin.End);
 		}
 
+		public void JumpToLine(long lineNumber)
+		{
+			fs.Seek(lineNumber, SeekOrigin.Begin);
+		}
+		
 		public string ReadLine()
 		{
 			var text = new byte[1];
@@ -46,7 +55,7 @@ namespace DldUtil
 				fs.Read(text, 0, 1);
 				var asciiText = Encoding.ASCII.GetString(text);
 
-				// moveback to the character before
+				// move back to the character before
 				fs.Seek(-2, SeekOrigin.Current);
 
 				if (asciiText.Equals("\n"))

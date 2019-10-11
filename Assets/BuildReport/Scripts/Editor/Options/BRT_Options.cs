@@ -1,3 +1,4 @@
+using System;
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
@@ -14,40 +15,78 @@ public class SavedOptions
 {
 	public string EditorLogOverridePath;
 
-	public bool IncludeSvnInUnused = true;
-	public bool IncludeGitInUnused = true;
-
-	public bool AllowDeletingOfUsedAssets;
-	public bool CollectBuildInfo = true;
-
 	public string BuildReportFolderName = BuildReportTool.Options.BUILD_REPORTS_DEFAULT_FOLDER_NAME;
 
 	/// <summary>
-	/// Where build reports are saved to: in user's My Documents, or outside the project folder.
+	/// Where build reports are saved to: <br/>
+	/// 0: in user's My Documents <br/>
+	/// 1: or outside the project folder.
 	/// </summary>
 	public int SaveType;
 
-	/// <summary>
-	/// Use file filters from global config, or use the ones embedded in the saved build report file.
-	/// </summary>
-	public int FilterToUseInt;
+	// ----------------------------------------------------------
 
-	public int AssetListPaginationLength = 300;
-	public int UnusedAssetsEntriesPerBatch = 1000;
-	
-	public int NumberOfTopLargestUsedAssetsToShow = 10;
-	public int NumberOfTopLargestUnusedAssetsToShow = 10;
+	public bool CollectBuildInfo = true;
+	public bool CalculateAssetDependencies = true;
+	public bool CalculateAssetDependenciesOnUnusedToo = false;
+
+	public bool GetProjectSettings = true;
 
 	public bool IncludeUsedAssetsInReportCreation = true;
 	public bool IncludeUnusedAssetsInReportCreation = true;
 	public bool IncludeUnusedPrefabsInReportCreation = true;
 	public bool IncludeBuildSizeInReportCreation = true;
+
+	public bool IncludeSvnInUnused = true;
+	public bool IncludeGitInUnused = true;
 	
 	public bool GetSizeBeforeBuildForUsedAssets = true;
 	public bool GetImportedSizesForUnusedAssets = true;
-	public bool ShowImportedSizeForUsedAssets = false;
 
-	public bool GetProjectSettings = true;
+	// ----------------------------------------------------------
+	
+	/// <summary>
+	/// 0: Use file filters from global config. <br/>
+	/// 1: Use file filters embedded in the saved build report file.
+	/// </summary>
+	public int FilterToUseInt;
+
+	public int AssetListPaginationLength = 300;
+	public int UnusedAssetsEntriesPerBatch = 1000;
+
+	public bool DoubleClickOnAssetWillPing = false;
+
+	/// <summary>
+	/// Method of displaying labels that explain how one asset uses another. <br/>
+	/// 0: verbose (use words only) <br/>
+	/// 1: standard (use arrows when possible, use words for extra info) <br/>
+	/// 2: minimal (use arrows only, don't show extra info even if available)
+	/// </summary>
+	public int AssetUsageLabelType;
+
+	public bool ShowAssetPrimaryUsersInTooltipIfAvailable = true;
+	
+	public bool ShowTooltipThumbnail = true;
+
+	/// <summary>
+	/// 0: Thumbnail should appear when mouse is hovering over asset icon only. <br/>
+	/// 1: Thumbnail should appear when mouse is hovering over asset label too, not just on the icon.
+	/// </summary>
+	public int ShowThumbnailOnHoverType;
+	
+	public int TooltipThumbnailWidth = 256;
+	public int TooltipThumbnailHeight = 256;
+	
+	public int TooltipThumbnailZoomedInWidth = 512;
+	public int TooltipThumbnailZoomedInHeight = 512;
+	
+	public int NumberOfTopLargestUsedAssetsToShow = 10;
+	public int NumberOfTopLargestUnusedAssetsToShow = 10;
+	
+	// ----------------------------------------------------------
+
+	public bool AllowDeletingOfUsedAssets;
+	public bool ShowImportedSizeForUsedAssets = false;
 
 	public bool AutoShowWindowAfterNormalBuild = true;
 	public bool AutoResortAssetsWhenUnityEditorRegainsFocus = false;
@@ -55,6 +94,8 @@ public class SavedOptions
 	public bool UseThreadedReportGeneration = true;
 	public bool UseThreadedFileLoading = false;
 
+	// ----------------------------------------------------------
+	
 	public void OnBeforeSave()
 	{
 		// get rid of invalid characters for folder name
@@ -86,19 +127,27 @@ public class SavedOptions
 		SavedOptions result = null;
 			
 		XmlSerializer x = new XmlSerializer( typeof(SavedOptions) );
-			
-		using(FileStream fs = new FileStream(path, FileMode.Open))
+
+		try
 		{
-			if (fs.Length == 0)
+			using (FileStream fs = new FileStream(path, FileMode.Open))
 			{
-				// nothing inside
-				return null;
+				if (fs.Length == 0)
+				{
+					// nothing inside
+					return null;
+				}
+				XmlReader reader = new XmlTextReader(fs);
+				result = (SavedOptions) x.Deserialize(reader);
+				fs.Close();
 			}
-			XmlReader reader = new XmlTextReader(fs);
-			result = (SavedOptions)x.Deserialize(reader);
-			fs.Close();
 		}
-			
+		catch(Exception e)
+		{
+			Debug.LogFormat("Build Report Tool: Error found upon loading options XML file in {0}\nWill create a new options file instead.\n\nError: {1}", path, e);
+			return new SavedOptions();
+		}
+		
 		//Debug.LogFormat("Build Report Tool: Loaded options from: {0}", path);
 		return result;
 	}
@@ -116,7 +165,15 @@ public static class Options
 	public const string BUILD_REPORT_TOOL_DEFAULT_FOLDER_NAME = "BuildReport";
 
 	public const string BUILD_REPORTS_DEFAULT_FOLDER_NAME = "UnityBuildReports";
-	
+
+
+	public const int SAVE_TYPE_PERSONAL = 0;
+	public const int SAVE_TYPE_PROJECT = 1;
+
+
+	public const int ASSET_USAGE_LABEL_TYPE_VERBOSE = 0;
+	public const int ASSET_USAGE_LABEL_TYPE_STANDARD = 1;
+	public const int ASSET_USAGE_LABEL_TYPE_MINIMAL = 2;
 
 	// =======================================================
 	// 
@@ -379,7 +436,6 @@ public static class Options
 		}
 	}
 
-
 	public static bool CollectBuildInfo
 	{
 		get
@@ -397,7 +453,42 @@ public static class Options
 			}
 		}
 	}
-	
+
+	public static bool CalculateAssetDependencies
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.CalculateAssetDependencies;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.CalculateAssetDependencies != value)
+			{
+				_savedOptions.CalculateAssetDependencies = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	public static bool CalculateAssetDependenciesOnUnusedToo
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.CalculateAssetDependenciesOnUnusedToo;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.CalculateAssetDependenciesOnUnusedToo != value)
+			{
+				_savedOptions.CalculateAssetDependenciesOnUnusedToo = value;
+				SaveOptions();
+			}
+		}
+	}
 
 	public static string BuildReportFolderName
 	{
@@ -418,6 +509,10 @@ public static class Options
 	}
 
 
+	/// <summary>
+	/// Full path to folder where Build Reports are saved.
+	/// Note: Makes use of Application.dataPath so it has to be called from the main thread.
+	/// </summary>
 	public static string BuildReportSavePath
 	{
 		get
@@ -430,6 +525,7 @@ public static class Options
 			{
 				// assume BuildReportTool.Options.SaveType == BuildReportTool.Options.SAVE_TYPE_PROJECT
 
+				// makes use of Application.dataPath so it has to be called from the main thread
 				return BuildReportTool.ReportGenerator.GetSavePathToProjectFolder() + "/" + BuildReportFolderName;
 			}
 		}
@@ -461,9 +557,6 @@ public static class Options
 		DropDown = 0,
 		Buttons = 1
 	}
-
-	public const int SAVE_TYPE_PERSONAL = 0;
-	public const int SAVE_TYPE_PROJECT = 1;
 
 
 
@@ -534,6 +627,213 @@ public static class Options
 		}
 	}
 
+
+
+
+	public static int AssetUsageLabelType
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.AssetUsageLabelType;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.AssetUsageLabelType != value)
+			{
+				_savedOptions.AssetUsageLabelType = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	public static bool IsAssetUsageLabelTypeOnVerbose
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.AssetUsageLabelType == ASSET_USAGE_LABEL_TYPE_VERBOSE;
+		}
+	}
+
+	public static bool IsAssetUsageLabelTypeOnStandard
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.AssetUsageLabelType == ASSET_USAGE_LABEL_TYPE_STANDARD;
+		}
+	}
+
+	public static bool IsAssetUsageLabelTypeOnMinimal
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.AssetUsageLabelType == ASSET_USAGE_LABEL_TYPE_MINIMAL;
+		}
+	}
+	
+
+	public static bool DoubleClickOnAssetWillPing
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.DoubleClickOnAssetWillPing;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.DoubleClickOnAssetWillPing != value)
+			{
+				_savedOptions.DoubleClickOnAssetWillPing = value;
+				SaveOptions();
+			}
+		}
+	}
+
+
+	public static bool ShowAssetPrimaryUsersInTooltipIfAvailable
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.ShowAssetPrimaryUsersInTooltipIfAvailable;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.ShowAssetPrimaryUsersInTooltipIfAvailable != value)
+			{
+				_savedOptions.ShowAssetPrimaryUsersInTooltipIfAvailable = value;
+				SaveOptions();
+			}
+		}
+	}
+	
+	public static bool ShowTooltipThumbnail
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.ShowTooltipThumbnail;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.ShowTooltipThumbnail != value)
+			{
+				_savedOptions.ShowTooltipThumbnail = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	public static int ShowThumbnailOnHoverType
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.ShowThumbnailOnHoverType;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.ShowThumbnailOnHoverType != value)
+			{
+				_savedOptions.ShowThumbnailOnHoverType = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	/// <summary>
+	/// If thumbnail should appear when mouse is hovering over asset label too, not just on the icon.
+	/// </summary>
+	public static bool ShowThumbnailOnHoverLabelToo
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.ShowThumbnailOnHoverType == 1;
+		}
+	}
+	
+	public static int TooltipThumbnailWidth
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.TooltipThumbnailWidth;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.TooltipThumbnailWidth != value)
+			{
+				_savedOptions.TooltipThumbnailWidth = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	public static int TooltipThumbnailHeight
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.TooltipThumbnailHeight;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.TooltipThumbnailHeight != value)
+			{
+				_savedOptions.TooltipThumbnailHeight = value;
+				SaveOptions();
+			}
+		}
+	}
+
+
+	public static int TooltipThumbnailZoomedInWidth
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.TooltipThumbnailZoomedInWidth;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.TooltipThumbnailZoomedInWidth != value)
+			{
+				_savedOptions.TooltipThumbnailZoomedInWidth = value;
+				SaveOptions();
+			}
+		}
+	}
+
+	public static int TooltipThumbnailZoomedInHeight
+	{
+		get
+		{
+			InitializeOptionsIfNeeded();
+			return _savedOptions.TooltipThumbnailZoomedInHeight;
+		}
+		set
+		{
+			InitializeOptionsIfNeeded();
+			if (_savedOptions.TooltipThumbnailZoomedInHeight != value)
+			{
+				_savedOptions.TooltipThumbnailZoomedInHeight = value;
+				SaveOptions();
+			}
+		}
+	}
+	
 
 	public static int UnusedAssetsEntriesPerBatch
 	{

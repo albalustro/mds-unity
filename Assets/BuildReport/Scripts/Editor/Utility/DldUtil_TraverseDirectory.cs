@@ -65,7 +65,10 @@ public static class TraverseDirectory
 
 				if (File.Exists(allInCurrentFolder[n]) && !allInCurrentFolder[n].EndsWith(".meta"))
 				{
-					yield return allInCurrentFolder[n].Replace("\\", "/");
+					var returnValue = allInCurrentFolder[n].Replace("\\", "/");
+					returnValue = returnValue.Replace("&amp;", "&");
+					
+					yield return returnValue;
 				}
 				else if (Directory.Exists(allInCurrentFolder[n]))
 				{

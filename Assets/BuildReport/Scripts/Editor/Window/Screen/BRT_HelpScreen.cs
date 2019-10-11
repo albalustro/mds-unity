@@ -42,8 +42,10 @@ public class Help : BaseScreen
 		}
 	}
 
-	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay)
+	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay, AssetDependencies assetDependencies, out bool requestRepaint)
 	{
+		requestRepaint = false;
+		
 		GUI.SetNextControlName("BRT_HelpUnfocuser");
 		GUI.TextField(new Rect(-100, -100, 10, 10), "");
 

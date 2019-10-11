@@ -11,17 +11,41 @@ public class Options : BaseScreen
 {
 	public override string Name { get{ return Labels.OPTIONS_CATEGORY_LABEL; } }
 
-	string[] _saveTypeLabels = null;
+	string[] _saveTypeLabels;
+
+	/// <summary>
+	/// 0: always use configured file filters <br/>
+	/// 1: use file filters embedded in opened build report, if available
+	/// </summary>
+	static readonly string[] FileFilterToUseType =
+		{Labels.FILTER_GROUP_TO_USE_CONFIGURED_LABEL, Labels.FILTER_GROUP_TO_USE_EMBEDDED_LABEL};
+
+	/// <summary>
+	/// 0: mouse is hovering over icon <br/>
+	/// 1: mouse is hovering over icon or label
+	/// </summary>
+	static readonly string[] ShowThumbnailOnHoverTypeLabels =
+		{"Mouse is hovering over asset's icon", "Mouse is hovering over asset's icon or label"};
+
+	/// <summary>
+	/// 0: dedicated ping button before each asset <br/>
+	/// 1: double-click on asset label will ping
+	/// </summary>
+	static readonly string[] AssetPingTypeLabels =
+		{"Dedicated ping button before each asset", "Double-clicking on asset will ping"};
+
+	/// <summary>
+	/// 0: verbose <br/>
+	/// 1: standard <br/>
+	/// 2: minimal
+	/// </summary>
+	static readonly string[] AssetUsageLabelTypeLabels =
+	{
+		"Verbose\n(use words only)",
+		"Standard\n(use arrows when possible, show any extra info with words)",
+		"Minimal\n(use arrows only, don't show any extra info even if available)"
+	};
 	
-
-
-
-
-
-	string[] _fileFilterToUseType = new string[] {Labels.FILTER_GROUP_TO_USE_CONFIGURED_LABEL, Labels.FILTER_GROUP_TO_USE_EMBEDDED_LABEL};
-
-
-
 	string OPEN_IN_FILE_BROWSER_OS_SPECIFIC_LABEL
 	{
 		get
@@ -49,16 +73,13 @@ public class Options : BaseScreen
 	}
 
 
-
-
-
-	string[] _calculationTypeLabels = new string[] {
+	static readonly string[] CalculationTypeLabels = {
 		Labels.CALCULATION_LEVEL_FULL_NAME,
 		Labels.CALCULATION_LEVEL_NO_PREFAB_NAME,
 		Labels.CALCULATION_LEVEL_NO_UNUSED_NAME,
 		Labels.CALCULATION_LEVEL_MINIMAL_NAME};
 
-	int _selectedCalculationLevelIdx = 0;
+	int _selectedCalculationLevelIdx;
 
 	string CalculationLevelDescription
 	{
@@ -129,16 +150,22 @@ public class Options : BaseScreen
 
 	public override void RefreshData(BuildInfo buildReport)
 	{
-		_saveTypeLabels = new string[] {SAVE_PATH_TYPE_PERSONAL_OS_SPECIFIC_LABEL, Labels.SAVE_PATH_TYPE_PROJECT_LABEL};
-		
+		if (_saveTypeLabels == null)
+		{
+			_saveTypeLabels = new[] {SAVE_PATH_TYPE_PERSONAL_OS_SPECIFIC_LABEL, Labels.SAVE_PATH_TYPE_PROJECT_LABEL};
+		}
+
 		_selectedCalculationLevelIdx = GetCalculationLevelGuiIdxFromOptions();
 	}
 
 	GUIStyle _linkStyle;
 	GUIStyle _textBesideLinkStyle;
 
-	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay)
+	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay, AssetDependencies assetDependencies, out bool requestRepaint)
 	{
+		requestRepaint = false;
+		var prevEnabled = GUI.enabled;
+		
 		GUILayout.Space(10); // extra top padding
 
 
@@ -179,7 +206,7 @@ public class Options : BaseScreen
 					"Automatically show Build Report Window after building (if it is not open yet)");
 				
 				BuildReportTool.Options.AutoResortAssetsWhenUnityEditorRegainsFocus = GUILayout.Toggle(BuildReportTool.Options.AutoResortAssetsWhenUnityEditorRegainsFocus,
-					"Re-sort assets whenever the Unity Editor regains focus");
+					"Re-sort assets automatically whenever the Unity Editor regains focus");
 				
 				BuildReportTool.Options.AllowDeletingOfUsedAssets = GUILayout.Toggle(BuildReportTool.Options.AllowDeletingOfUsedAssets,
 					"Allow deleting of Used Assets (practice caution!)");
@@ -227,6 +254,16 @@ public class Options : BaseScreen
 
 				BuildReportTool.Options.GetProjectSettings = GUILayout.Toggle(BuildReportTool.Options.GetProjectSettings,
 					"Get Unity project settings upon creation of a build report");
+
+				GUILayout.Space(10);
+
+				BuildReportTool.Options.CalculateAssetDependencies = GUILayout.Toggle(
+					BuildReportTool.Options.CalculateAssetDependencies,
+					"Calculate asset dependencies upon creation of a build report");
+
+				BuildReportTool.Options.CalculateAssetDependenciesOnUnusedToo = GUILayout.Toggle(
+					BuildReportTool.Options.CalculateAssetDependenciesOnUnusedToo,
+					"Include Unused Assets in asset dependency calculations");
 				
 				GUILayout.Space(10);
 
@@ -266,7 +303,7 @@ public class Options : BaseScreen
 					GUILayout.Label("Calculation Level: ");
 
 					GUILayout.BeginVertical();
-						int newSelectedCalculationLevelIdx = EditorGUILayout.Popup(_selectedCalculationLevelIdx, _calculationTypeLabels, "Popup", GUILayout.Width(300));
+						int newSelectedCalculationLevelIdx = EditorGUILayout.Popup(_selectedCalculationLevelIdx, CalculationTypeLabels, "Popup", GUILayout.Width(300));
 						GUILayout.BeginHorizontal();
 							GUILayout.Space(20);
 							GUILayout.Label(CalculationLevelDescription, GUILayout.MaxWidth(500), GUILayout.MinHeight(75));
@@ -343,7 +380,7 @@ public class Options : BaseScreen
 				
 				// top largest used
 				GUILayout.BeginHorizontal();
-					GUILayout.Label("Number of Top Largest Used Assets to display:");
+					GUILayout.Label("Number of Top Largest Used Assets to display in Overview Tab:");
 					string numberOfTopUsedInput = GUILayout.TextField(BuildReportTool.Options.NumberOfTopLargestUsedAssetsToShow.ToString(), GUILayout.MinWidth(100));
 					numberOfTopUsedInput = Regex.Replace(numberOfTopUsedInput, @"[^0-9]", ""); // positive numbers only, no fractions
 					if (string.IsNullOrEmpty(numberOfTopUsedInput))
@@ -357,7 +394,7 @@ public class Options : BaseScreen
 				
 				// top largest unused
 				GUILayout.BeginHorizontal();
-					GUILayout.Label("Number of Top Largest Unused Assets to display:");
+					GUILayout.Label("Number of Top Largest Unused Assets to display in Overview Tab:");
 					string numberOfTopUnusedInput = GUILayout.TextField(BuildReportTool.Options.NumberOfTopLargestUnusedAssetsToShow.ToString(), GUILayout.MinWidth(100));
 					numberOfTopUnusedInput = Regex.Replace(numberOfTopUnusedInput, @"[^0-9]", ""); // positive numbers only, no fractions
 					if (string.IsNullOrEmpty(numberOfTopUnusedInput))
@@ -369,6 +406,13 @@ public class Options : BaseScreen
 				GUILayout.EndHorizontal();
 
 
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(20);
+				GUILayout.Label(
+					"Note: To disable the display of Top Largest Assets, use a value of 0.",
+					BuildReportTool.Window.Settings.BOXED_LABEL_STYLE_NAME, GUILayout.MaxWidth(525));
+				GUILayout.EndHorizontal();
+				
 				GUILayout.Space(10);
 
 				// pagination length
@@ -405,7 +449,7 @@ public class Options : BaseScreen
 				// choose which file filter group to use
 				GUILayout.BeginHorizontal();
 					GUILayout.Label(Labels.FILTER_GROUP_TO_USE_LABEL);
-					BuildReportTool.Options.FilterToUseInt = GUILayout.SelectionGrid(BuildReportTool.Options.FilterToUseInt, _fileFilterToUseType, _fileFilterToUseType.Length);
+					BuildReportTool.Options.FilterToUseInt = GUILayout.SelectionGrid(BuildReportTool.Options.FilterToUseInt, FileFilterToUseType, FileFilterToUseType.Length);
 					GUILayout.FlexibleSpace();
 				GUILayout.EndHorizontal();
 
@@ -419,6 +463,145 @@ public class Options : BaseScreen
 					GUILayout.FlexibleSpace();
 				GUILayout.EndHorizontal();
 
+				GUILayout.Space(10);
+
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("Asset Ping method:");
+				BuildReportTool.Options.DoubleClickOnAssetWillPing = GUILayout.SelectionGrid(
+					BuildReportTool.Options.DoubleClickOnAssetWillPing ? 1 : 0,
+					AssetPingTypeLabels, 2, GUILayout.Height(26)) == 1;
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(20);
+				
+				GUILayout.Label(
+					BuildReportTool.Options.DoubleClickOnAssetWillPing
+						? "Note: To ping multiple assets, select the assets, and hold Alt while double-clicking one of them."
+						: "Note: To ping multiple assets, select the assets, and hold Alt while pressing one of their Ping buttons.",
+					BuildReportTool.Window.Settings.BOXED_LABEL_STYLE_NAME, GUILayout.MaxWidth(593));
+				
+				GUILayout.EndHorizontal();
+				
+				GUILayout.Space(10);
+				
+				//AssetUsageLabelTypeLabels
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("Asset usage labels:");
+				BuildReportTool.Options.AssetUsageLabelType = GUILayout.SelectionGrid(
+					BuildReportTool.Options.AssetUsageLabelType, AssetUsageLabelTypeLabels, 1);
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+
+				GUILayout.Space(10);
+				
+				BuildReportTool.Options.ShowAssetPrimaryUsersInTooltipIfAvailable = GUILayout.Toggle(
+					BuildReportTool.Options.ShowAssetPrimaryUsersInTooltipIfAvailable,
+					"Show end users in asset tooltip (if available)");
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(20);
+				GUILayout.Label(
+					"Note: \"End users\" are the scenes (or Resources assets) that use a given asset (directly or indirectly), they are the main reason why that asset got included in the build.",
+					BuildReportTool.Window.Settings.BOXED_LABEL_STYLE_NAME, GUILayout.MaxWidth(525));
+				GUILayout.EndHorizontal();
+				
+				GUILayout.Space(10);
+					
+				BuildReportTool.Options.ShowTooltipThumbnail = GUILayout.Toggle(
+					BuildReportTool.Options.ShowTooltipThumbnail,
+					"Show thumbnail in asset tooltip");
+
+				GUI.enabled = prevEnabled && BuildReportTool.Options.ShowTooltipThumbnail;
+
+				GUILayout.BeginHorizontal();
+				GUILayout.Label("Show thumbnail when:");
+				BuildReportTool.Options.ShowThumbnailOnHoverType = GUILayout.SelectionGrid(
+					BuildReportTool.Options.ShowThumbnailOnHoverType, ShowThumbnailOnHoverTypeLabels,
+					ShowThumbnailOnHoverTypeLabels.Length, GUILayout.Height(26));
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+				
+				GUILayout.BeginHorizontal();
+				
+				GUILayout.Label("Thumbnail Tooltip Width:");
+				string tooltipThumbnailWidthInput =
+					GUILayout.TextField(BuildReportTool.Options.TooltipThumbnailWidth.ToString(),
+						GUILayout.MinWidth(100));
+				tooltipThumbnailWidthInput =
+					Regex.Replace(tooltipThumbnailWidthInput, @"[^0-9]", ""); // positive numbers only, no fractions
+				if (string.IsNullOrEmpty(tooltipThumbnailWidthInput))
+				{
+					tooltipThumbnailWidthInput = "0";
+				}
+
+				BuildReportTool.Options.TooltipThumbnailWidth = int.Parse(tooltipThumbnailWidthInput);
+				
+				GUILayout.Space(3);
+
+				GUILayout.Label("Height:");
+				string tooltipThumbnailHeightInput =
+					GUILayout.TextField(BuildReportTool.Options.TooltipThumbnailHeight.ToString(),
+						GUILayout.MinWidth(100));
+				tooltipThumbnailHeightInput =
+					Regex.Replace(tooltipThumbnailHeightInput, @"[^0-9]", ""); // positive numbers only, no fractions
+				if (string.IsNullOrEmpty(tooltipThumbnailHeightInput))
+				{
+					tooltipThumbnailHeightInput = "0";
+				}
+
+				BuildReportTool.Options.TooltipThumbnailHeight = int.Parse(tooltipThumbnailHeightInput);
+				
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+
+
+
+				GUILayout.BeginHorizontal();
+
+				GUILayout.Label("Thumbnail Tooltip Zoomed-in Width:");
+				string tooltipThumbnailZoomedInWidthInput =
+					GUILayout.TextField(BuildReportTool.Options.TooltipThumbnailZoomedInWidth.ToString(),
+						GUILayout.MinWidth(100));
+				tooltipThumbnailZoomedInWidthInput =
+					Regex.Replace(tooltipThumbnailZoomedInWidthInput, @"[^0-9]", ""); // positive numbers only, no fractions
+				if (string.IsNullOrEmpty(tooltipThumbnailZoomedInWidthInput))
+				{
+					tooltipThumbnailZoomedInWidthInput = "0";
+				}
+
+				BuildReportTool.Options.TooltipThumbnailZoomedInWidth = int.Parse(tooltipThumbnailZoomedInWidthInput);
+
+				GUILayout.Space(3);
+
+				GUILayout.Label("Height:");
+				string tooltipThumbnailZoomedInHeightInput =
+					GUILayout.TextField(BuildReportTool.Options.TooltipThumbnailZoomedInHeight.ToString(),
+						GUILayout.MinWidth(100));
+				tooltipThumbnailZoomedInHeightInput =
+					Regex.Replace(tooltipThumbnailZoomedInHeightInput, @"[^0-9]", ""); // positive numbers only, no fractions
+				if (string.IsNullOrEmpty(tooltipThumbnailZoomedInHeightInput))
+				{
+					tooltipThumbnailZoomedInHeightInput = "0";
+				}
+
+				BuildReportTool.Options.TooltipThumbnailZoomedInHeight = int.Parse(tooltipThumbnailZoomedInHeightInput);
+
+				GUILayout.FlexibleSpace();
+				GUILayout.EndHorizontal();
+				GUI.enabled = prevEnabled;
+				
+				GUILayout.BeginHorizontal();
+				GUILayout.Space(20);
+				GUILayout.Label(
+					"Note: Hold Ctrl while a thumbnail tooltip is shown to zoom-in.",
+					BuildReportTool.Window.Settings.BOXED_LABEL_STYLE_NAME, GUILayout.MaxWidth(525));
+				GUILayout.EndHorizontal();
+				
+				
 				GUILayout.Space(BuildReportTool.Window.Settings.CATEGORY_VERTICAL_SPACING);
 
 
@@ -448,6 +631,12 @@ public class Options : BaseScreen
 				// where to save build reports (my docs/home, or beside project)
 				GUILayout.BeginHorizontal();
 					GUILayout.Label(Labels.SAVE_PATH_TYPE_LABEL);
+
+					if (_saveTypeLabels == null)
+					{
+						_saveTypeLabels = new[]
+							{SAVE_PATH_TYPE_PERSONAL_OS_SPECIFIC_LABEL, Labels.SAVE_PATH_TYPE_PROJECT_LABEL};
+					}
 					BuildReportTool.Options.SaveType = GUILayout.SelectionGrid(BuildReportTool.Options.SaveType, _saveTypeLabels, _saveTypeLabels.Length);
 					GUILayout.FlexibleSpace();
 				GUILayout.EndHorizontal();

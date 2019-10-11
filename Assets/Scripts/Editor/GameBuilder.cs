@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
+using UnityEditor.Build.Reporting;
 using UnityEditor.SceneManagement;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -246,10 +247,10 @@ public class GameBuilder : EditorWindow
             return;
         }
 
-        var ret = BuildPipeline.BuildPlayer(options);
-        if (!string.IsNullOrEmpty(ret))
-            Debug.LogWarning(ret);
-        Debug.LogFormat("[{0}][Android][{1}] - Building report ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+        BuildReport ret = BuildPipeline.BuildPlayer(options);
+		Debug.Log("BUILD result: " +ret.summary.result.ToString());
+
+		Debug.LogFormat("[{0}][Android][{1}] - Building report ", game.ToString(), System.DateTime.Now.ToShortTimeString());
         BuildReport(options);
         Debug.LogFormat("[{0}][Android][{1}] - Done ", game.ToString(), System.DateTime.Now.ToShortTimeString());
     }
@@ -324,10 +325,10 @@ public class GameBuilder : EditorWindow
             return;
         }
 
-        var ret = BuildPipeline.BuildPlayer(options);
-        if (!string.IsNullOrEmpty(ret))
-            Debug.LogWarning(ret);
-        Debug.LogFormat("[{0}][WebGL][{1}] - Building report ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+		BuildReport ret = BuildPipeline.BuildPlayer(options);
+		Debug.Log("BUILD result: " + ret.summary.result.ToString());
+
+		Debug.LogFormat("[{0}][WebGL][{1}] - Building report ", game.ToString(), System.DateTime.Now.ToShortTimeString());
         BuildReport(options);
         Debug.LogFormat("[{0}][WebGL][{1}] - Done ", game.ToString(), System.DateTime.Now.ToShortTimeString());
     }
@@ -394,10 +395,10 @@ public class GameBuilder : EditorWindow
             return;
         }
 
-        var ret = BuildPipeline.BuildPlayer(options);
-        if (!string.IsNullOrEmpty(ret))
-            Debug.LogWarning(ret);
-        Debug.Log(string.Format("[{0}][Standalone][{1}] - Building Report ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
+		BuildReport ret = BuildPipeline.BuildPlayer(options);
+		Debug.Log("BUILD result: " + ret.summary.result.ToString());
+
+		Debug.Log(string.Format("[{0}][Standalone][{1}] - Building Report ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
         BuildReport(options);
         Debug.Log(string.Format("[{0}][Standalone][{1}] - Starting ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
     }

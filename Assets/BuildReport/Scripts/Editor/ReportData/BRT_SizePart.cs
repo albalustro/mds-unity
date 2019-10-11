@@ -19,7 +19,7 @@ public class SizePart
 	/// How much the asset takes up space in the final build, in percentage.
 	/// Value will be from the editor log if possible. If not, it will be calculated manually.
 	/// </summary>
-	public double Percentage = 0;
+	public double Percentage;
 
 	// -----------------------------------
 
@@ -75,7 +75,7 @@ public class SizePart
 	///
 	/// This applies to the "Used Assets" list
 	/// </summary>
-	public double DerivedSize = 0;
+	public double DerivedSize;
 	
 	// -----------------------------------
 	

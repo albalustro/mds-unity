@@ -1,16 +1,9 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
+﻿
 using UnityEngine;
 using UnityEngine.UI;
 
 public class HelpUI : MonoBehaviour {
 
-    //Playmove Stuff
-    [Tooltip("Need to be set if is a build for the platform PlayMove")]
-    public GameObject playmoveRoot;
-    public GameObject PlacarRoot;
-    private LoginPlaymove entryHud;
 
     //Default Stuff
     public GameObject root;
@@ -32,10 +25,6 @@ public class HelpUI : MonoBehaviour {
 
     private void Start()
     {
-#if PLAY_MOVE
-        root = playmoveRoot;
-        entryHud = FindObjectOfType<LoginPlaymove>();
-#endif
         _canvas = root.GetComponentInChildren<Canvas>();
         ResetPanels();
         root.SetActive(false);
@@ -98,14 +87,6 @@ public class HelpUI : MonoBehaviour {
         previousButton.interactable = _currentPanelIndex > 0;
     }
 
-    public void ShowPlacarHUD(bool value)
-    {
-#if PLAY_MOVE
-        if (entryHud)
-        {
-            entryHud.gameObject.SetActive(!value);
-        }
-        PlacarRoot.SetActive(value);
-    }
-#endif
+
+
 }

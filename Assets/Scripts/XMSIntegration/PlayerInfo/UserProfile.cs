@@ -168,10 +168,6 @@ public class UserProfile : Singleton<UserProfile>
 	private void SaveUserProfile()
 	{
 		PersistenceManager.Instance.SaveUserProfile (this);
-        if (IsPlayMoveRegister)
-        {
-            PersistenceManager.Instance.RefreshPlayerData(this);
-        }
 	}
 
 	private void SetConceptMapAtFirstAccess(bool check = false)

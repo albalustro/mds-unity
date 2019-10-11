@@ -56,7 +56,7 @@ namespace MDS.Core.SceneManagement
         {
             base.Awake();
 
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID //&& !UNITY_EDITOR
             if(Application.identifier.Contains("mds1"))
                 androidPublicKey = androidPublicKeyMDS1;
 
@@ -414,7 +414,7 @@ namespace MDS.Core.SceneManagement
 
             Log("Baixando assetbundle em: " + url);
 
-            using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url, 0))
+            using(UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url, 0))
             {
                 OnStartLoad.Invoke();
                 
@@ -449,7 +449,7 @@ namespace MDS.Core.SceneManagement
         #endregion
 
         #region OBB
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID //&& !UNITY_EDITOR
 
         public void LoadOBB()
         {
