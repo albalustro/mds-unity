@@ -11,9 +11,9 @@ public abstract class BaseScreen
 
 	public abstract void RefreshData(BuildInfo buildReport);
 
-	public abstract void DrawGUI(Rect position, BuildInfo buildReportToDisplay);
+	public abstract void DrawGUI(Rect position, BuildInfo buildReportToDisplay, AssetDependencies assetDependencies, out bool requestRepaint);
 	
-	public virtual void Update(double timeNow, double deltaTime, BuildInfo buildReportToDisplay)
+	public virtual void Update(double timeNow, double deltaTime, BuildInfo buildReportToDisplay, AssetDependencies assetDependencies)
 	{
 	}
 

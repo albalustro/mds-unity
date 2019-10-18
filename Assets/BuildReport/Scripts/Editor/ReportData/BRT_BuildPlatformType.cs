@@ -43,6 +43,7 @@ public enum BuildPlatform
 
 	Windows32 = 300,
 	Windows64,
+	WindowsStoreApp,
 
 	Linux32 = 400,
 	Linux64,
@@ -70,7 +71,9 @@ public enum BuildPlatform
 	PSMobile,
 	
 	WiiU,
-	Nintendo3DS
+	Nintendo3DS,
+	
+	Switch,
 }
 
 }

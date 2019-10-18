@@ -10,9 +10,11 @@ namespace MDS
     {
         public GameObject textVersion;
         public Text debugText;
+		public GameObject reporter;
 
         IEnumerator Start()
         {
+			textVersion.GetComponent<Text>().text ="Version "+Application.version;
 #if UNITY_ANDROID && !UNITY_EDITOR
             Log("Inicio");
             SceneLoader.Instance.LoadOBB();
@@ -74,11 +76,12 @@ namespace MDS
             _inc++;
             if(_inc == 7)
             {
-                ConnectionManager.Instance.SetHomolgConfig();
-                debugText.text += "[Homolog Connection] ";
-                PlayerPrefs.DeleteAll();
-                Debug.Log("Buffer limpo");
-                debugText.text += "[Buffer limpo]";
+                //ConnectionManager.Instance.SetHomolgConfig();
+                //debugText.text += "[Homolog Connection] ";
+                //PlayerPrefs.DeleteAll();
+                //Debug.Log("Buffer limpo");
+                //debugText.text += "[Buffer limpo]";
+				reporter.SetActive(true);
             }
             //else
             //    if (_inc <7)

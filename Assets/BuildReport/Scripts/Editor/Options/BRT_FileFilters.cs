@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEditor;
 using System.Collections.Generic;
@@ -13,17 +14,17 @@ public class FileFilters
 	{
 		_label = label;
 
-		bool shouldBeAllLowerCase = false;
 		for (int n = 0, len = filters.Length; n < len; ++n)
 		{
 			_filtersDict.Add(filters[n], false);
-			shouldBeAllLowerCase = true;
+			var shouldBeAllLowerCase = true;
 
-			if ((filters[n].StartsWith("/") || filters[n].ToLower().StartsWith("assets/")) && filters[n].EndsWith("/"))
+			if ((filters[n].StartsWith("/") || filters[n].StartsWith("Assets/", StringComparison.OrdinalIgnoreCase)) &&
+			    filters[n].EndsWith("/"))
 			{
 				_usesFolderFilter = true;
 			}
-			else if (filters[n].StartsWith(BUILT_IN_ASSET_KEYWORD))
+			else if (filters[n].StartsWith(BUILT_IN_ASSET_KEYWORD, StringComparison.OrdinalIgnoreCase))
 			{
 				_usesFolderFilter = true;
 
@@ -57,18 +58,23 @@ public class FileFilters
 	[SerializeField]
 	string _label;
 
-	Dictionary<string, bool> _filtersDict = new Dictionary<string, bool>();
+	readonly Dictionary<string, bool> _filtersDict = new Dictionary<string, bool>();
 
 	[SerializeField]
 	string[] _filtersList;
 
 	[SerializeField]
-	bool _usesFolderFilter = false;
+	bool _usesFolderFilter;
 
 	[SerializeField]
-	bool _usesExactFileMatching = false;
+	bool _usesExactFileMatching;
 
-	public string Label { get{ return _label; } set{ _label = value; } }
+	public string Label
+	{
+		get { return _label; }
+		set { _label = value; }
+	}
+	
 	public string[] FiltersList
 	{
 		get{ return _filtersList; }
@@ -76,17 +82,17 @@ public class FileFilters
 		{
 			_filtersList = value;
 
-			bool shouldBeAllLowerCase = false;
 			for (int n = 0, len = _filtersList.Length; n < len; ++n)
 			{
 				_filtersDict.Add(_filtersList[n], false);
-				shouldBeAllLowerCase = true;
+				var shouldBeAllLowerCase = true;
 
-				if ((_filtersList[n].StartsWith("/") || _filtersList[n].StartsWith("assets/")) && _filtersList[n].EndsWith("/"))
+				if ((_filtersList[n].StartsWith("/") || _filtersList[n].StartsWith("Assets/", StringComparison.OrdinalIgnoreCase)) &&
+				    _filtersList[n].EndsWith("/"))
 				{
 					_usesFolderFilter = true;
 				}
-				else if (_filtersList[n].StartsWith(BUILT_IN_ASSET_KEYWORD))
+				else if (_filtersList[n].StartsWith(BUILT_IN_ASSET_KEYWORD, StringComparison.OrdinalIgnoreCase))
 				{
 					_usesFolderFilter = true;
 					shouldBeAllLowerCase = false;
@@ -110,16 +116,13 @@ public class FileFilters
 
 	public string GetFileExt(string file)
 	{
-		int lastDotIdx = file.LastIndexOf(".");
+		int lastDotIdx = file.LastIndexOf(".", StringComparison.OrdinalIgnoreCase);
 		if (lastDotIdx == -1) return "";
 		return file.Substring(lastDotIdx, file.Length-lastDotIdx);
 	}
 
 	public bool IsFileInFilter(string file)
 	{
-		string fileAllLower = file.ToLower();
-
-
 		// -------------------------------------------------
 		// try using folder filter method:
 
@@ -128,13 +131,16 @@ public class FileFilters
 			//Debug.Log(_label + " uses folder filter");
 			for (int n = 0, len = _filtersList.Length; n < len; ++n)
 			{
-				if (_filtersList[n].StartsWith(BUILT_IN_ASSET_KEYWORD) && file.StartsWith(BUILT_IN_ASSET_KEYWORD) && file.IndexOf(_filtersList[n]) != -1) // built-in asset compare is case-sensitive
+				// built-in asset compare is case-sensitive
+				if (_filtersList[n].StartsWith(BUILT_IN_ASSET_KEYWORD, StringComparison.OrdinalIgnoreCase) &&
+				    file.StartsWith(BUILT_IN_ASSET_KEYWORD, StringComparison.OrdinalIgnoreCase) &&
+				    file.IndexOf(_filtersList[n], StringComparison.OrdinalIgnoreCase) != -1)
 				{
 					return true;
 				}
 
 				//Debug.Log(file + " ---- " + _filtersList[n]);
-				if (fileAllLower.IndexOf(_filtersList[n]) != -1)
+				if (file.IndexOf(_filtersList[n], StringComparison.OrdinalIgnoreCase) != -1)
 				{
 					return true;
 				}
@@ -155,11 +161,11 @@ public class FileFilters
 
 				if (_filtersList[n].StartsWith("\"") && _filtersList[n].EndsWith("\""))
 				{
-					string fileWithQuotes = "\"" + System.IO.Path.GetFileName(fileAllLower) + "\"";
+					string fileWithQuotes = "\"" + System.IO.Path.GetFileName(file) + "\"";
 
 					//Debug.Log("match? " + _filtersList[n] + " == " + fileWithQuotes);
 
-					if (_filtersList[n] == fileWithQuotes)
+					if (_filtersList[n].Equals(fileWithQuotes))
 					{
 						return true;
 					}
@@ -170,7 +176,24 @@ public class FileFilters
 		// -------------------------------------------------
 		// if not found using exact file matching, try checking in dictionary next:
 
-		return _filtersDict.ContainsKey(GetFileExt(fileAllLower));
+		var fileExtension = GetFileExt(file);
+		
+		if (_filtersDict.ContainsKey(fileExtension))
+		{
+			return true;
+		}
+
+		for (int n = 0, len = _filtersList.Length; n < len; ++n)
+		{
+			//Debug.Log("in quotes: " + _filtersList[n] + " " + (_filtersList[n].StartsWith("\"") && _filtersList[n].EndsWith("\"")));
+
+			if (fileExtension.Equals(_filtersList[n], StringComparison.OrdinalIgnoreCase))
+			{
+				return true;
+			}
+		}
+
+		return false;
 	}
 }
 
@@ -220,8 +243,16 @@ public class FileFilterGroup
 		_names[_names.Length-1] = "Unknown";
 	}
 
-	int _selectedFilterIdx = 0;
-	public int SelectedFilterIdx { get{ return _selectedFilterIdx-1; } }
+	int _selectedFilterIdx;
+
+	/// <summary>
+	/// -1 means "All" list.
+	/// </summary>
+	public int SelectedFilterIdx
+	{
+		get { return _selectedFilterIdx - 1; }
+	}
+	
 	public int GetSelectedFilterIdx()
 	{
 		return _selectedFilterIdx;
@@ -263,55 +294,63 @@ public class FileFilterGroup
 		return styleToUse;
 	}
 
-	public void Draw(AssetList assetList, float width)
+	public bool Draw(AssetList assetList, float width)
 	{
 		BuildReportTool.Options.FileFilterDisplay displayType = BuildReportTool.Options.GetOptionFileFilterDisplay();
 		switch (displayType)
 		{
 			case BuildReportTool.Options.FileFilterDisplay.DropDown:
-				DrawFiltersAsDropDown(assetList, width);
-				break;
+				return DrawFiltersAsDropDown(assetList, width);
 			case BuildReportTool.Options.FileFilterDisplay.Buttons:
-				DrawFiltersAsButtons(assetList, width);
-				break;
+				return DrawFiltersAsButtons(assetList, width);
 		}
+
+		return false;
 	}
 
-	void DrawFiltersAsDropDown(AssetList assetList, float width)
+	bool DrawFiltersAsDropDown(AssetList assetList, float width)
 	{
+		var changed = false;
 		GUILayout.BeginHorizontal();
 			GUILayout.Space(3);
 			GUILayout.Label("Filter: ", BuildReportTool.Window.Settings.TOP_BAR_LABEL_STYLE_NAME);
 			if (assetList != null && assetList.Labels != null && assetList.Labels.Length > 0)
 			{
-				_selectedFilterIdx = EditorGUILayout.Popup(_selectedFilterIdx, assetList.Labels,
+				var newSelectedFilterIdx = EditorGUILayout.Popup(_selectedFilterIdx, assetList.Labels,
 					BuildReportTool.Window.Settings.FILE_FILTER_POPUP_STYLE_NAME);
+				
+				if (newSelectedFilterIdx != _selectedFilterIdx)
+				{
+					_selectedFilterIdx = newSelectedFilterIdx;
+					assetList.SortIfNeeded(this);
+					changed = true;
+				}
 			}
 		GUILayout.EndHorizontal();
+
+		return changed;
 	}
 
-	void DrawFiltersAsButtons(AssetList assetList, float width)
+	bool DrawFiltersAsButtons(AssetList assetList, float width)
 	{
-		string styleToUse;
-
+		var changed = false;
 		GUILayout.BeginHorizontal();
 
 		float overallWidth = 0;
-		float widthToAdd = 0;
-		string label = "";
 
 
+		var styleToUse = GetStyleToUse(assetList.All.Length, _selectedFilterIdx, 0);
+		var label = "All (" + assetList.All.Length.ToString() + ")";
 
-		styleToUse = GetStyleToUse(assetList.All.Length, _selectedFilterIdx, 0);
-		label = "All (" + assetList.All.Length + ")";
-
-		widthToAdd = GUI.skin.GetStyle(styleToUse).CalcSize(new GUIContent(label)).x;
+		var widthToAdd = GUI.skin.GetStyle(styleToUse).CalcSize(new GUIContent(label)).x;
 
 		overallWidth += widthToAdd;
 
 		if (GUILayout.Button(label, styleToUse))
 		{
 			_selectedFilterIdx = 0;
+			assetList.SortIfNeeded(this);
+			changed = true;
 		}
 
 		if (overallWidth >= width)
@@ -326,7 +365,7 @@ public class FileFilterGroup
 			for (int n = 0, len = _fileFilters.Length; n < len; ++n)
 			{
 				styleToUse = GetStyleToUse(assetList.PerCategory[n].Length, _selectedFilterIdx, n+1);
-				label = _fileFilters[n].Label + " (" + assetList.PerCategory[n].Length + ")";
+				label = _fileFilters[n].Label + " (" + assetList.PerCategory[n].Length.ToString() + ")";
 
 				widthToAdd = GUI.skin.GetStyle(styleToUse).CalcSize(new GUIContent(label)).x;
 
@@ -342,18 +381,18 @@ public class FileFilterGroup
 				if (GUILayout.Button(label, styleToUse))
 				{
 					_selectedFilterIdx = n+1;
+					assetList.SortIfNeeded(this);
+					changed = true;
 				}
-
-
 			}
 
 			styleToUse = GetStyleToUse(assetList.PerCategory[assetList.PerCategory.Length-1].Length, _selectedFilterIdx, assetList.PerCategory.Length);
 
-			label = "Unknown (" + assetList.PerCategory[assetList.PerCategory.Length-1].Length + ")";
+			label = string.Format("Unknown ({0})", assetList.PerCategory[assetList.PerCategory.Length-1].Length.ToString());
 			widthToAdd = GUI.skin.GetStyle(styleToUse).CalcSize(new GUIContent(label)).x;
 			if (overallWidth + widthToAdd >= width)
 			{
-				overallWidth = 0;
+				//overallWidth = 0;
 				GUILayout.EndHorizontal();
 				GUILayout.BeginHorizontal();
 			}
@@ -361,10 +400,13 @@ public class FileFilterGroup
 			if (GUILayout.Button(label, styleToUse))
 			{
 				_selectedFilterIdx = assetList.PerCategory.Length;
+				assetList.SortIfNeeded(this);
+				changed = true;
 			}
 		}
 
 		GUILayout.EndHorizontal();
+		return changed;
 	}
 
 	public FileFilters this[int idx]
@@ -376,11 +418,13 @@ public class FileFilterGroup
 
 	public override string ToString()
 	{
-		string ret = "(" + _names.Length + ") ";
+		string ret = "(" + _names.Length.ToString() + ") ";
+		
 		for (int n = 0, len = _names.Length; n < len; ++n)
 		{
 			ret += _names[n] + ", ";
 		}
+		
 		return ret;
 	}
 }

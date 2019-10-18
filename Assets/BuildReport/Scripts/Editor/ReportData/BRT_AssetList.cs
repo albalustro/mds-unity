@@ -12,6 +12,7 @@ namespace BuildReportTool
 public class AssetList
 {
 	// ==================================================================================
+
 	[SerializeField]
 	BuildReportTool.SizePart[] _all;
 
@@ -28,7 +29,7 @@ public class AssetList
 	public BuildReportTool.SizePart[] All
 	{
 		get{ return _all; }
-		private set{ _all = value; }
+		set{ _all = value; }
 	}
 
 	public BuildReportTool.SizePart[][] PerCategory
@@ -64,8 +65,9 @@ public class AssetList
 	void PostSetListAll(int numberOfTop)
 	{
 		List<BuildReportTool.SizePart> topLargestList = new List<BuildReportTool.SizePart>();
-		
-		SortRawSize(_all, SortOrder.Descending);
+
+		// temporarily sort "All" list by raw size so we can get the top largest
+		SortAssetList(_all, SortType.RawSize, SortOrder.Descending);
 		
 		// in case entries in "all" list is lesser than the numberOfTop value
 		int len = Mathf.Min(numberOfTop, _all.Length);
@@ -76,7 +78,8 @@ public class AssetList
 		}
 		_topLargest = topLargestList.ToArray();
 
-		Resort();
+		// revert "All" list to original sort type
+		Resort(_all);
 	}
 
 	public void ResortDefault(int numberOfTop)
@@ -111,134 +114,100 @@ public class AssetList
 		Descending
 	}
 
-	SortType _currentSortType = SortType.RawSize;
-	SortOrder _currentSortOrder = SortOrder.Descending;
-
-	public SortType CurrentSortType
-	{
-		get{ return _currentSortType; }
-	}
-	public SortOrder CurrentSortOrder
-	{
-		get{ return _currentSortOrder; }
-	}
-
-	public void ToggleSort(SortType newSortType)
-	{
-		if (_currentSortType != newSortType)
-		{
-			_currentSortType = newSortType;
-			_currentSortOrder = SortOrder.Descending; // descending by default
-		}
-		else
-		{
-			// already in this sort type
-			// now toggle the sort order
-			if (_currentSortOrder == SortOrder.Descending)
-			{
-				_currentSortOrder = SortOrder.Ascending;
-			}
-			else
-			{
-				_currentSortOrder = SortOrder.Descending;
-			}
-		}
-
-		SetSort(_currentSortType, _currentSortOrder);
-	}
-	
 	SortType _lastSortType = SortType.None;
 	SortOrder _lastSortOrder = SortOrder.None;
-
-	public void Resort()
+	
+	public SortType LastSortType
+	{
+		get{ return _lastSortType; }
+	}
+	public SortOrder LastSortOrder
+	{
+		get{ return _lastSortOrder; }
+	}
+	
+	readonly HashSet<int> _hasListBeenSorted = new HashSet<int>();
+	
+	public void Resort(BuildReportTool.SizePart[] assetList)
 	{
 		if (_lastSortType != SortType.None && _lastSortOrder != SortOrder.None)
 		{
-			SetSort(_lastSortType, _lastSortOrder);
+			SortAssetList(assetList, _lastSortType, _lastSortOrder);
 		}
 	}
 
-	public void SetSort(SortType sortType, SortOrder sortOrder)
+	public void Sort(SortType sortType, SortOrder sortOrder, BuildReportTool.FileFilterGroup fileFilters)
 	{
 		_lastSortType = sortType;
 		_lastSortOrder = sortOrder;
 
-		if (sortType == SortType.RawSize)
+		_hasListBeenSorted.Clear();
+
+		_hasListBeenSorted.Add(fileFilters.SelectedFilterIdx);
+		
+		// sort only currently displayed list
+		if (fileFilters.SelectedFilterIdx == -1)
 		{
-			SortRawSize(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortRawSize(_perCategory[n], sortOrder);
-			}
+			SortAssetList(_all, sortType, sortOrder);
 		}
-		else if (sortType == SortType.ImportedSize)
+		else
 		{
-			SortImportedSize(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortImportedSize(_perCategory[n], sortOrder);
-			}
+			SortAssetList(_perCategory[fileFilters.SelectedFilterIdx], sortType, sortOrder);
 		}
-		else if (sortType == SortType.ImportedSizeOrRawSize)
-		{
-			SortImportedSizeOrRawSize(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortImportedSizeOrRawSize(_perCategory[n], sortOrder);
-			}
-		}
-		else if (sortType == SortType.SizeBeforeBuild)
-		{
-			SortSizeBeforeBuild(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortSizeBeforeBuild(_perCategory[n], sortOrder);
-			}
-		}
-		else if (sortType == SortType.PercentSize)
-		{
-			SortPercentSize(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortPercentSize(_perCategory[n], sortOrder);
-			}
-		}
-		else if (sortType == SortType.AssetFullPath)
-		{
-			SortAssetFullPath(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortAssetFullPath(_perCategory[n], sortOrder);
-			}
-		}
-		else if (sortType == SortType.AssetFilename)
-		{
-			SortAssetName(_all, sortOrder);
-			for (int n = 0, len = _perCategory.Length; n < len; ++n)
-			{
-				SortAssetName(_perCategory[n], sortOrder);
-			}
-		}
+		
+		//SortAssetList(_all, sortType, sortOrder);
+		//for (int n = 0, len = _perCategory.Length; n < len; ++n)
+		//{
+		//	SortAssetList(_perCategory[n], sortType, sortOrder);
+		//}
 	}
 
-	static int SortByAssetNameDescending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	public void SortIfNeeded(BuildReportTool.FileFilterGroup fileFilters)
 	{
-		int result = string.Compare(entry1.Name, entry2.Name, true);
+		if (_lastSortType != SortType.None && _lastSortOrder != SortOrder.None &&
+		    !_hasListBeenSorted.Contains(fileFilters.SelectedFilterIdx))
+		{
+			if (fileFilters.SelectedFilterIdx == -1)
+			{
+				SortAssetList(_all, _lastSortType, _lastSortOrder);
+			}
+			else
+			{
+				SortAssetList(_perCategory[fileFilters.SelectedFilterIdx], _lastSortType, _lastSortOrder);
+			}
 
-		return result;
+			_hasListBeenSorted.Add(fileFilters.SelectedFilterIdx);
+		}
 	}
 
-	static int SortByAssetNameAscending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	public static void SortAssetList(BuildReportTool.SizePart[] assetList, SortType sortType, SortOrder sortOrder)
 	{
-		int result = string.Compare(entry1.Name, entry2.Name, true);
-
-		// invert the result
-		if (result == 1) return -1;
-		if (result == -1) return 1;
-
-		return 0;
+		switch (sortType)
+		{
+			case SortType.RawSize:
+				SortRawSize(assetList, sortOrder);
+				break;
+			case SortType.ImportedSize:
+				SortImportedSize(assetList, sortOrder);
+				break;
+			case SortType.ImportedSizeOrRawSize:
+				SortImportedSizeOrRawSize(assetList, sortOrder);
+				break;
+			case SortType.SizeBeforeBuild:
+				SortSizeBeforeBuild(assetList, sortOrder);
+				break;
+			case SortType.PercentSize:
+				SortPercentSize(assetList, sortOrder);
+				break;
+			case SortType.AssetFullPath:
+				SortAssetFullPath(assetList, sortOrder);
+				break;
+			case SortType.AssetFilename:
+				SortAssetName(assetList, sortOrder);
+				break;
+		}
 	}
-
+	
 	static void SortRawSize(BuildReportTool.SizePart[] assetList, SortOrder sortOrder)
 	{
 		if (sortOrder == SortOrder.Descending)
@@ -265,7 +234,6 @@ public class AssetList
 		}
 	}
 
-	
 	static void SortImportedSizeOrRawSize(BuildReportTool.SizePart[] assetList, SortOrder sortOrder)
 	{
 		if (sortOrder == SortOrder.Descending)
@@ -292,7 +260,6 @@ public class AssetList
 			});
 		}
 	}
-
 
 	static void SortImportedSize(BuildReportTool.SizePart[] assetList, SortOrder sortOrder)
 	{
@@ -356,7 +323,7 @@ public class AssetList
 				
 				// same percent
 				// sort by asset name for assets with same percent
-				return SortByAssetNameDescending(entry1, entry2);
+				return SortByAssetFullPathDescending(entry1, entry2);
 			});
 		}
 		else
@@ -367,36 +334,40 @@ public class AssetList
 				
 				// same size
 				// sort by asset name for assets with same sizes
-				return SortByAssetNameAscending(entry1, entry2);
+				return SortByAssetFullPathAscending(entry1, entry2);
 			});
 		}
 	}
-
 
 	static void SortAssetFullPath(BuildReportTool.SizePart[] assetList, SortOrder sortOrder)
 	{
 		if (sortOrder == SortOrder.Descending)
 		{
-			Array.Sort(assetList, delegate(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2) {
-				int result = string.Compare(entry1.Name, entry2.Name, true);
-				
-				return result;
-			});
+			Array.Sort(assetList, SortByAssetFullPathDescending);
 		}
 		else
 		{
-			Array.Sort(assetList, delegate(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2) {
-				int result = string.Compare(entry1.Name, entry2.Name, true);
-
-				// invert the result
-				if (result == 1) return -1;
-				if (result == -1) return 1;
-				return 0;
-			});
+			Array.Sort(assetList, SortByAssetFullPathAscending);
 		}
 	}
 
+	static int SortByAssetFullPathDescending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	{
+		int result = string.Compare(entry1.Name, entry2.Name, StringComparison.OrdinalIgnoreCase);
 
+		return result;
+	}
+
+	static int SortByAssetFullPathAscending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	{
+		int result = string.Compare(entry1.Name, entry2.Name, StringComparison.OrdinalIgnoreCase);
+
+		// invert the result
+		if (result == 1) return -1;
+		if (result == -1) return 1;
+		return 0;
+	}
+	
 	static void SortAssetName(BuildReportTool.SizePart[] assetList, SortOrder sortOrder)
 	{
 		if (sortOrder == SortOrder.Descending)
@@ -407,6 +378,26 @@ public class AssetList
 		{
 			Array.Sort(assetList, SortByAssetNameAscending);
 		}
+	}
+
+	static int SortByAssetNameDescending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	{
+		int result = string.Compare(System.IO.Path.GetFileName(entry1.Name), System.IO.Path.GetFileName(entry2.Name),
+			StringComparison.OrdinalIgnoreCase);
+
+		return result;
+	}
+
+	static int SortByAssetNameAscending(BuildReportTool.SizePart entry1, BuildReportTool.SizePart entry2)
+	{
+		int result = string.Compare(System.IO.Path.GetFileName(entry1.Name), System.IO.Path.GetFileName(entry2.Name),
+			StringComparison.OrdinalIgnoreCase);
+
+		// invert the result
+		if (result == 1) return -1;
+		if (result == -1) return 1;
+
+		return 0;
 	}
 
 	// Queries
@@ -448,7 +439,7 @@ public class AssetList
 
 		if (fileFilters.SelectedFilterIdx == -1)
 		{
-			return _viewOffsets[0];
+			return _viewOffsets[0]; // _viewOffsets[0] is the "All" list
 		}
 		else if (PerCategory != null && PerCategory.Length >= fileFilters.SelectedFilterIdx+1)
 		{
@@ -483,13 +474,25 @@ public class AssetList
 		{
 			_all[n].Name = BuildReportTool.Util.MyHtmlDecode(_all[n].Name);
 		}
+
+
+		if (_perCategory != null)
+		{
+			for (int catIdx = 0, catLen = _perCategory.Length; catIdx < catLen; ++catIdx)
+			{
+				for (int n = 0, len = _perCategory[catIdx].Length; n < len; ++n)
+				{
+					_perCategory[catIdx][n].Name = BuildReportTool.Util.MyHtmlDecode(_perCategory[catIdx][n].Name);
+				}
+			}
+		}
 	}
 
 	public void SetViewOffsetForDisplayedList(FileFilterGroup fileFilters, int newVal)
 	{
 		if (fileFilters.SelectedFilterIdx == -1)
 		{
-			_viewOffsets[0] = newVal;
+			_viewOffsets[0] = newVal; // _viewOffsets[0] is the "All" list
 		}
 		else if (PerCategory != null && PerCategory.Length >= fileFilters.SelectedFilterIdx+1)
 		{
@@ -514,7 +517,6 @@ public class AssetList
 
 	public void PopulateImportedSizes()
 	{
-		long importedSize = -1;
 		for (int n = 0, len = _all.Length; n < len; ++n)
 		{
 			/*if (BuildReportTool.Util.IsFileAUnityAsset(_all[n].Name))
@@ -532,7 +534,7 @@ public class AssetList
 			}
 			else*/
 			{
-				importedSize = BRT_LibCacheUtil.GetImportedFileSize(_all[n].Name);
+				var importedSize = BRT_LibCacheUtil.GetImportedFileSize(_all[n].Name);
 
 				_all[n].ImportedSizeBytes = importedSize;
 				_all[n].ImportedSize = BuildReportTool.Util.GetBytesReadable(importedSize);
@@ -542,13 +544,12 @@ public class AssetList
 	
 	public void PopulateSizeInAssetsFolder()
 	{
-		long size = -1;
 		var projectPath = BuildReportTool.Util.GetProjectPath(Application.dataPath);
 		for (int n = 0, len = _all.Length; n < len; ++n)
 		{
 			string assetImportedPath = projectPath + BuildReportTool.Util.MyHtmlDecode(_all[n].Name);
 
-			size = BuildReportTool.Util.GetFileSizeInBytes(assetImportedPath);
+			var size = BuildReportTool.Util.GetFileSizeInBytes(assetImportedPath);
 			_all[n].SizeInAssetsFolderBytes = size;
 			_all[n].SizeInAssetsFolder = BuildReportTool.Util.GetBytesReadable(size);
 		}
@@ -604,15 +605,16 @@ public class AssetList
 		PostSetListAll(numberOfTop);
 		_perCategory = perCategory;
 
-		_viewOffsets = new int[1 + PerCategory.Length];
+		_viewOffsets = new int[1 + PerCategory.Length]; // +1 since we need to include the "All" list
 
-		if (_currentSortType == SortType.None)
+		if (_lastSortType == SortType.None)
 		{
-			ToggleSort(SortType.RawSize);
+			// sort by raw size, descending, by default
+			Sort(SortType.RawSize, SortOrder.Descending, fileFilters);
 		}
 		else
 		{
-			SetSort(_currentSortType, _currentSortOrder);
+			Sort(_lastSortType, _lastSortOrder, fileFilters);
 		}
 
 		RefreshFilterLabels(fileFilters);
@@ -620,8 +622,8 @@ public class AssetList
 
 	public void Init(BuildReportTool.SizePart[] all, BuildReportTool.SizePart[][] perCategory, int numberOfTop, FileFilterGroup fileFilters, SortType newSortType, SortOrder newSortOrder)
 	{
-		_currentSortType = newSortType;
-		_currentSortOrder = newSortOrder;
+		_lastSortType = newSortType;
+		_lastSortOrder = newSortOrder;
 
 		Init(all, perCategory, numberOfTop, fileFilters);
 	}
@@ -636,7 +638,7 @@ public class AssetList
 	public void AssignPerCategoryList(BuildReportTool.SizePart[][] perCategory)
 	{
 		_perCategory = perCategory;
-		_viewOffsets = new int[1 + _perCategory.Length];
+		_viewOffsets = new int[1 + _perCategory.Length]; // +1 since we need to include the "All" list
 	}
 
 	public void RefreshFilterLabels(FileFilterGroup fileFiltersToUse)
@@ -663,6 +665,7 @@ public class AssetList
 	[SerializeField]
 	Dictionary <string, BuildReportTool.SizePart> _selectedForSum = new Dictionary<string, BuildReportTool.SizePart>();
 
+	BuildReportTool.SizePart _lastSelected;
 
 
 
@@ -724,9 +727,19 @@ public class AssetList
 		}
 	}
 
+	public Dictionary<string, SizePart>.Enumerator GetSelectedEnumerator()
+	{
+		return _selectedForSum.GetEnumerator();
+	}
+
 	public int GetSelectedCount()
 	{
 		return _selectedForSum.Count;
+	}
+
+	public SizePart GetLastSelected()
+	{
+		return _lastSelected;
 	}
 
 
@@ -760,6 +773,8 @@ public class AssetList
 			return;
 		}
 		_selectedForSum.Add(b.Name, b);
+		
+		_lastSelected = b;
 	}
 
 	public void AddDisplayedRangeToSumSelection(FileFilterGroup fileFilters, int offset, int range)

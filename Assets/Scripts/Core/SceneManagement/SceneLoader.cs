@@ -46,9 +46,8 @@ namespace MDS.Core.SceneManagement
 #if UNITY_EDITOR
         public bool byPassAssetbundles = true;
         public bool destroyDebugObjectsOnSceneLoad = false;
-#endif
-
         public bool byPassOBB = true;
+#endif
 
         #region Unity Methods
 
@@ -445,15 +444,16 @@ namespace MDS.Core.SceneManagement
 
         }
 
-        #endregion
+		#endregion
 
-        #region OBB
-#if UNITY_ANDROID && !UNITY_EDITOR
+#region OBB
+#if UNITY_ANDROID //&& !UNITY_EDITOR
 
         public void LoadOBB()
         {
+#if UNITY_EDITOR
             if (byPassOBB) return;
-
+#endif
             GooglePlayDownloader.setEnvironment(androidPublicKey);
             Log("setEnvironment");
 
@@ -491,8 +491,9 @@ namespace MDS.Core.SceneManagement
 
         public IEnumerator WaitOBB()
         {
+#if UNITY_EDITOR
             if (byPassOBB) yield break;
-
+#endif
             string mainPath = null;
             string expansionFilePath = GooglePlayDownloader.GetExpansionFilePath();
             Log("[WaitoBB] expFilePath: "+ expansionFilePath);
@@ -531,7 +532,7 @@ namespace MDS.Core.SceneManagement
         }
 
 #endif
-        #endregion
+#endregion
 
     }
 }

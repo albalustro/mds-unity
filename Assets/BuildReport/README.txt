@@ -14,9 +14,29 @@ Then try opening the Build Report Window again.
 
 
 
+=== Saved Options ===
+
+Options are saved to an XML file named "BuildReportToolOptions.xml".
+
+By default this file is saved inside the BuildReport folder, but can be moved to, and will be recognized at certain paths:
+1. inside the BuildReport folder itself
+2. inside the topmost Assets folder of your project
+3. outside the topmost Assets folder (i.e. in your project folder)
+4. in your project folder's ProjectSettings folder
+5. in the user's My Documents (inside the same folder where Build Report XML files are saved)
+
+This is in prioritized order, so even if there is an options file in the My Documents folder, if there is also one in the project folder, it will use the one in the project folder instead.
+
+If at any time no options file is found anywhere, it will create a new one inside the BuildReport folder with default values. You can move this file elsewhere in the above mentioned places if you don't want it inside the BuildReport folder.
+
+
+
+
 === Batchmode Builds ===
 
 You can call BuildReportTool.ReportGenerator.CreateReport() to manually create a build report. Use this in your build scripts to properly create build reports. It should be called after BuildPipeline.BuildPlayer().
+
+Check the file in BuildReport/CustomBuildScriptExample.txt for example code on how it's done.
 
 
 
@@ -167,7 +187,7 @@ Don't worry, the assets that the Build Report Tool itself uses won't be included
 
 
 
-Copyright © 2013-2014 by Anomalous Underdog
+Copyright © 2013-2019 by Anomalous Underdog
 
 For support, you can either:
 

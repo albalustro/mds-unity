@@ -1,27 +1,28 @@
 #if UNITY_EDITOR
-using UnityEngine;
+
 using System.IO;
 using System.Xml;
 using System.Xml.Serialization;
+using UnityEngine;
 
 namespace BuildReportTool
 {
 
 public class FiltersUsed
 {
-	static FileFilterGroup _defaultFileFilters = new FileFilterGroup(CreateDefaultFileFilters());
+	static readonly FileFilterGroup DefaultFileFilters = new FileFilterGroup(CreateDefaultFileFilters());
 
 	static FileFilterGroup GetDefaultFileFilterGroup()
 	{
-		return _defaultFileFilters;
+		return DefaultFileFilters;
 	}
 
 	static FileFilters[] CreateDefaultFileFilters()
 	{
-		return new FileFilters[]
+		return new[]
 		{
 			new FileFilters("Textures",
-				new string[]{
+				new[]{
 				".psd",
 				".jpg",
 				".jpeg",
@@ -35,10 +36,10 @@ public class FiltersUsed
 				".exr",
 				".iff",
 				".pict",
-				"Built-in Texture2D:",
+				"Built-in Texture2D:" // Unity-generated sprite atlases
 			}),
 			new FileFilters("Models",
-				new string[]{
+				new[]{
 				".fbx",
 				".dae",
 				".mb",
@@ -47,52 +48,53 @@ public class FiltersUsed
 				".blend",
 				".obj",
 				".3ds",
-				".dxf",
+				".dxf"
 			}),
 			new FileFilters("Prefabs",
-				new string[]{
-				".prefab",
+				new[]{
+				".prefab"
 			}),
 			new FileFilters("Animation",
-				new string[]{
+				new[]{
 				".anim",
 				".controller",
-				".mask",
+				".mask"
 			}),
 			new FileFilters("Movies",
-				new string[]{
+				new[]{
 				".mov",
 				".mpg",
 				".mpeg",
 				".mp4",
 				".avi",
-				".asf",
+				".asf"
 			}),
 			new FileFilters("Materials",
-				new string[]{
+				new[]{
 				".mat",
 				".sbsar",
 				".cubemap",
 				".flare",
-				"Built-in Material:",
+				"Built-in Material:"
 			}),
 			new FileFilters("Shaders",
-				new string[]{
+				new[]{
 				".shader",
 				".compute",
 				".cginc",
-				"Built-in Shader:",
+				"Built-in Shader:"
 			}),
 			new FileFilters("GUI",
-				new string[]{
+				new[]{
 				".guiskin",
 				".fontsettings",
 				".ttf",
 				".dfont",
-				".otf",
+				".otf"
 			}),
 			new FileFilters("Sounds",
-				new string[]{
+				new[]{
+				".mixer",
 				".wav",
 				".mp3",
 				".ogg",
@@ -100,17 +102,17 @@ public class FiltersUsed
 				".xm",
 				".mod",
 				".it",
-				".s3m",
+				".s3m"
 			}),
 			new FileFilters("Scripts",
-				new string[]{
+				new[]{
 				".cs",
 				".js",
 				".boo",
-				"Built-in MonoScript:",
+				"Built-in MonoScript:"
 			}),
 			new FileFilters("Plugins",
-				new string[]{
+				new[]{
 				".dll", // Windows
 				".bundle", // Mac
 				".so", // Android (C++) or Linux
@@ -119,57 +121,58 @@ public class FiltersUsed
 				".m", // iOS
 				".mm", // iOS
 				".c", // iOS
-				".cpp", // iOS
+				".cpp" // iOS
 			}),
 			new FileFilters("Text",
-				new string[]{
+				new[]{
 				".txt",
 				".bytes",
 				".html",
 				".htm",
 				".xml",
-				".log",
+				".yaml",
+				".json",
+				".log"
 			}),
 			new FileFilters("Misc",
-				new string[]{
+				new[]{
 				".asset",
 				".physicmaterial",
-				".unity",
+				".unity"
 			}),
 			new FileFilters("Standard Assets",
-				new string[]{
-				"/Standard Assets/",
+				new[]{
+				"/Standard Assets/"
 			}),
 			new FileFilters("\"Resources\" Assets",
-				new string[]{
-				"/Resources/",
+				new[]{
+				"/Resources/"
 			}),
 			new FileFilters("Streaming Assets",
-				new string[]{
-				"Assets/StreamingAssets/",
+				new[]{
+				"Assets/StreamingAssets/"
 			}),
 			new FileFilters("Editor",
-				new string[]{
-				"/Editor/",
+				new[]{
+				"/Editor/"
 			}),
 			new FileFilters("Version Control",
-				new string[]{
+				new[]{
 				"/.svn/",
 				"/.git/",
-				"/.cvs/",
+				"/.cvs/"
 			}),
 			new FileFilters("Built-in Assets",
-				new string[]{
-				"Built-in",
+				new[]{
+				"Built-in"
 			}),
 			new FileFilters("Useless Files",
-				new string[]{
+				new[]{
 				"\"Thumbs.db\"",
 				"\".DS_Store\"",
-				"\"._.DS_Store\"",
-			}),
+				"\"._.DS_Store\""
+			})
 		};
-
 	}
 
 	static void SaveFileFilterGroupToFile(string saveFilePath, FileFilterGroup filterGroup)
@@ -187,7 +190,7 @@ public class FiltersUsed
 
 	static FileFilterGroup AttemptLoadFileFiltersFromFile(string filePath)
 	{
-		FileFilterGroup ret = null;
+		FileFilterGroup ret;
 
 		XmlSerializer x = new XmlSerializer( typeof(FileFilterGroup) );
 
@@ -259,7 +262,7 @@ public class FiltersUsed
 			Debug.Log("Created a new Build Report File Filter Config XML File at " + userFileFilterSavePath);
 			Directory.CreateDirectory(userFileFilterSavePath);
 		}
-		SaveFileFilterGroupToFile(fileFilterGroupAtUserPersonalFolder, _defaultFileFilters);
+		SaveFileFilterGroupToFile(fileFilterGroupAtUserPersonalFolder, DefaultFileFilters);
 		return fileFilterGroupAtUserPersonalFolder;
 	}
 

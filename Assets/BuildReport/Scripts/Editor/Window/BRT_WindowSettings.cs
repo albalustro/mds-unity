@@ -35,6 +35,7 @@ public static class Settings
 	public const string TAB_MIDDLE_STYLE_NAME = "TabMiddle";
 	public const string TAB_RIGHT_STYLE_NAME = "TabRight";
 
+	public const string STATUS_BAR_BG_STYLE_NAME = "StatusBarBg";
 	public const string STATUS_BAR_LABEL_STYLE_NAME = "StatusBarLabel";
 
 	public const string VERSION_STYLE_NAME = "Version";
