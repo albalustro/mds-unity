@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 using UnityEditor;
 
@@ -18,8 +19,31 @@ public static class Utility
 		GUI.Label(new Rect(x, y, w, h), msg);
 	}
 
+	public static void PingSelectedAssets(AssetList list)
+	{
+		var newSelection = new List<UnityEngine.Object>(list.GetSelectedCount());
+
+		var iterator = list.GetSelectedEnumerator();
+		while (iterator.MoveNext())
+		{
+			var loadedObject =
+				AssetDatabase.LoadAssetAtPath(iterator.Current.Key, typeof(UnityEngine.Object));
+			if (loadedObject != null)
+			{
+				newSelection.Add(loadedObject);
+			}
+		}
+
+		Selection.objects = newSelection.ToArray();
+	}
+
 	public static void PingAssetInProject(string file)
 	{
+		if (string.IsNullOrEmpty(file))
+		{
+			return;
+		}
+
 		if (!file.StartsWith("Assets/"))
 		{
 			return;

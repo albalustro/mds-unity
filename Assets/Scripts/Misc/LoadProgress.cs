@@ -6,7 +6,7 @@ using UnityEngine.Networking;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class LoadProgress : MDSBehaviour
+public class LoadProgress : MonoBehaviour
 {
 
     [SerializeField]
@@ -31,9 +31,9 @@ public class LoadProgress : MDSBehaviour
     [SerializeField] private GameObject _textGO;
     [SerializeField] private GameObject _textSizeGO;
 
-    protected override void Awake()
+    protected  void Awake()
     {
-        base.Awake();
+       // base.Awake();
 
         SceneManager.sceneLoaded += SceneManager_sceneLoaded;
     }

@@ -5,7 +5,7 @@ using System;
 
 public class GooglePlayDownloader
 {
-#if UNITY_ANDROID && !UNITY_EDITOR
+#if UNITY_ANDROID //&& !UNITY_EDITOR
     private static AndroidJavaClass detectAndroidJNI;
 	public static bool RunningOnAndroid()
 	{

@@ -26,8 +26,18 @@
 #define UNITY_5_5_AND_LESSER
 #endif
 
+#if !UNITY_2018
+#define UNITY_2017_AND_LESSER
+#endif
+
+#if !UNITY_4 && !UNITY_5 && !UNITY_2017
+#define UNITY_2018_AND_NEWER
+#endif
+
 using System.Collections.Generic;
+#if !UNITY_5_1_AND_LESSER // 5.2 and greater
 using System.Linq;
+#endif
 using UnityEditor;
 using UnityEngine;
 
@@ -42,12 +52,12 @@ public static class UnityBuildSettingsUtility
 	{
 		// WARNING! changing contents here will require changing code in:
 		//
-		//  SetSelectedSettingsIdxFromBuildReportValues
-		//  SetSettingsShownFromIdx
+		//  GetIdxFromBuildReportValues
+		//  GetSettingsCategoryFromIdx
 		//
 		// as they rely on the array indices
 		//
-		return new GUIContent[]
+		return new []
 		{
 			/* 0 */ new GUIContent("Windows"),
 			/* 1 */ new GUIContent("Mac"),
@@ -309,7 +319,7 @@ public static class UnityBuildSettingsUtility
 #endif
 		settings.StripUnusedMeshComponents = PlayerSettings.stripUnusedMeshComponents;
 		
-#if !UNITY_5_1_AND_LESSER
+#if !UNITY_5_1_AND_LESSER // 5.2 and greater
 		settings.StripEngineCode = PlayerSettings.stripEngineCode;
 #endif
 
@@ -337,21 +347,25 @@ public static class UnityBuildSettingsUtility
 
 
 
-		settings.StrippingLevelUsed = PlayerSettings.strippingLevel.ToString();
-		
-#if UNITY_5_5_AND_LESSER
-		settings.NETApiCompatibilityLevel = PlayerSettings.apiCompatibilityLevel.ToString();
+#if UNITY_2018_3_OR_NEWER
+		settings.StrippingLevelUsed = PlayerSettings.GetManagedStrippingLevel(EditorUserBuildSettings.selectedBuildTargetGroup).ToString();
 #else
+		settings.StrippingLevelUsed = PlayerSettings.strippingLevel.ToString();
+#endif
+
+#if UNITY_5_6_OR_NEWER
 		settings.NETApiCompatibilityLevel = PlayerSettings.GetApiCompatibilityLevel(EditorUserBuildSettings.selectedBuildTargetGroup).ToString();
+#else
+		settings.NETApiCompatibilityLevel = PlayerSettings.apiCompatibilityLevel.ToString();
 #endif
 
 		settings.AOTOptions = PlayerSettings.aotOptions;
-#if UNITY_5_4_AND_LESSER
-		settings.LocationUsageDescription = PlayerSettings.locationUsageDescription;
-#else
+		
+#if UNITY_5_5_OR_NEWER
 		settings.LocationUsageDescription = PlayerSettings.iOS.locationUsageDescription;
+#else
+		settings.LocationUsageDescription = PlayerSettings.locationUsageDescription;
 #endif
-
 
 
 
@@ -376,9 +390,9 @@ public static class UnityBuildSettingsUtility
 		settings.RenderingPathUsed = PlayerSettings.renderingPath.ToString();
 #endif
 #endif
-		
-		
-#if !UNITY_5_1_AND_LESSER
+
+
+#if !UNITY_5_1_AND_LESSER // 5.2 and greater
 		settings.EnableVirtualRealitySupport = PlayerSettings.virtualRealitySupported;
 #endif
 
@@ -405,7 +419,7 @@ public static class UnityBuildSettingsUtility
 		}
 		settings.AspectRatiosAllowed = aspectRatiosList.ToArray();
 
-#if !UNITY_5_1_AND_LESSER
+#if !UNITY_5_1_AND_LESSER // 5.2 and greater
 		settings.GraphicsAPIsUsed = PlayerSettings.GetGraphicsAPIs(EditorUserBuildSettings.activeBuildTarget).Select(type => type.ToString()).ToArray();
 #endif
 
@@ -423,19 +437,18 @@ public static class UnityBuildSettingsUtility
 	{
 		// web player settings
 		// ---------------------------------------------------------------
-		
-#if UNITY_5_5_AND_LESSER
-		settings.WebPlayerDefaultScreenWidth = PlayerSettings.defaultWebScreenWidth;
-		settings.WebPlayerDefaultScreenHeight = PlayerSettings.defaultWebScreenHeight;
-
-		settings.WebPlayerEnableStreaming = EditorUserBuildSettings.webPlayerStreamed;
-		settings.WebPlayerDeployOffline = EditorUserBuildSettings.webPlayerOfflineDeployment;
-#else
+#if UNITY_5_6_OR_NEWER
 		settings.WebPlayerDefaultScreenWidth = 0;
 		settings.WebPlayerDefaultScreenHeight = 0;
 
 		settings.WebPlayerEnableStreaming = false;
 		settings.WebPlayerDeployOffline = false;
+#else
+		settings.WebPlayerDefaultScreenWidth = PlayerSettings.defaultWebScreenWidth;
+		settings.WebPlayerDefaultScreenHeight = PlayerSettings.defaultWebScreenHeight;
+
+		settings.WebPlayerEnableStreaming = EditorUserBuildSettings.webPlayerStreamed;
+		settings.WebPlayerDeployOffline = EditorUserBuildSettings.webPlayerOfflineDeployment;
 #endif
 
 #if UNITY_5_2_AND_LESSER
@@ -450,7 +463,7 @@ public static class UnityBuildSettingsUtility
 #if UNITY_5_3_AND_LESSER
 		settings.WebGLOptimizationLevel = EditorUserBuildSettings.webGLOptimizationLevel.ToString();
 #endif
-#if UNITY_5_4_OR_NEWER
+#if UNITY_5_4_OR_NEWER && !UNITY_2019_1_OR_NEWER
 		settings.WebGLUsePreBuiltUnityEngine = EditorUserBuildSettings.webGLUsePreBuiltUnityEngine;
 #endif
 #if UNITY_5_5_OR_NEWER
@@ -467,12 +480,19 @@ public static class UnityBuildSettingsUtility
 	{
 		// standalone (windows/mac/linux) build settings
 		// ---------------------------------------------------------------
+#if !UNITY_2019_1_OR_NEWER
 		settings.StandaloneResolutionDialogSettingUsed = PlayerSettings.displayResolutionDialog.ToString();
+#endif
+#if UNITY_2018_AND_NEWER
+		settings.StandaloneFullScreenModeUsed = PlayerSettings.fullScreenMode.ToString();
+#endif
 
 		settings.StandaloneDefaultScreenWidth = PlayerSettings.defaultScreenWidth;
 		settings.StandaloneDefaultScreenHeight = PlayerSettings.defaultScreenHeight;
 
+#if UNITY_2017_AND_LESSER && !UNITY_2019_1_OR_NEWER
 		settings.StandaloneFullScreenByDefault = PlayerSettings.defaultIsFullScreen;
+#endif
 #if !UNITY_5_2_AND_LESSER
 		settings.StandaloneAllowFullScreenSwitch = PlayerSettings.allowFullscreenSwitch;
 #endif
@@ -481,7 +501,6 @@ public static class UnityBuildSettingsUtility
 
 		settings.StandaloneForceSingleInstance = PlayerSettings.forceSingleInstance;
 		settings.StandaloneEnableResizableWindow = PlayerSettings.resizableWindow;
-
 
 
 		// windows only build settings
@@ -494,7 +513,7 @@ public static class UnityBuildSettingsUtility
 		settings.WinDirect3D9FullscreenModeUsed = PlayerSettings.d3d9FullscreenMode.ToString();
 #endif
 
-#if !UNITY_4
+#if !UNITY_4 && UNITY_2017_AND_LESSER && !UNITY_2019_1_OR_NEWER
 		settings.WinDirect3D11FullscreenModeUsed = PlayerSettings.d3d11FullscreenMode.ToString();
 #endif
 
@@ -506,7 +525,7 @@ public static class UnityBuildSettingsUtility
 
 		// Windows Store App only build settings
 		// ---------------------------------------------------------------
-#if !UNITY_4
+#if !UNITY_4 && !UNITY_2019_1_OR_NEWER
 		settings.WSAGenerateReferenceProjects = EditorUserBuildSettings.wsaGenerateReferenceProjects;
 #endif
 #if UNITY_5_2_AND_GREATER
@@ -518,7 +537,9 @@ public static class UnityBuildSettingsUtility
 		// mac only build settings
 		// ---------------------------------------------------------------
 		settings.MacUseAppStoreValidation = PlayerSettings.useMacAppStoreValidation;
+#if UNITY_2017_AND_LESSER && !UNITY_2019_1_OR_NEWER
 		settings.MacFullscreenModeUsed = PlayerSettings.macFullscreenMode.ToString();
+#endif
 	}
 
 
@@ -627,7 +648,11 @@ public static class UnityBuildSettingsUtility
 		settings.AndroidVersionCode = PlayerSettings.Android.bundleVersionCode;
 
 		settings.AndroidMinSDKVersion = PlayerSettings.Android.minSdkVersion.ToString();
+#if UNITY_2018_AND_NEWER
+		settings.AndroidTargetDevice = PlayerSettings.Android.targetArchitectures.ToString();
+#else
 		settings.AndroidTargetDevice = PlayerSettings.Android.targetDevice.ToString();
+#endif
 
 		settings.AndroidSplashScreenScaleMode = PlayerSettings.Android.splashScreenScale.ToString();
 
@@ -787,6 +812,7 @@ public static class UnityBuildSettingsUtility
 		// PS Vita build settings
 		// ---------------------------------------------------------------
 
+#if !UNITY_2018_3_OR_NEWER // PS Vita removed in 2018.3
 #if UNITY_4
 		settings.PSVTrophyPackagePath = PlayerSettings.psp2NPTrophyPackPath;
 		settings.PSVParamSfxPath = PlayerSettings.psp2ParamSfxPath;
@@ -846,6 +872,7 @@ public static class UnityBuildSettingsUtility
 		settings.PSVLiveAreaTrialPath = PlayerSettings.PSVita.liveAreaTrialPath;
 
 		settings.PSVManualPath = PlayerSettings.PSVita.manualPath;
+#endif
 #endif
 	}
 

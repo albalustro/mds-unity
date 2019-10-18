@@ -1,27 +1,3 @@
-#if (UNITY_5 && (!UNITY_5_0 && !UNITY_5_1)) || UNITY_5_3_OR_NEWER
-#define UNITY_5_2_AND_GREATER
-#endif
-
-#if (UNITY_4 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2)
-#define UNITY_5_2_AND_LESS
-#endif
-
-#if UNITY_4 || UNITY_5_0 || UNITY_5_1
-#define UNITY_5_1_AND_LESSER
-#endif
-
-#if UNITY_4 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3
-#define UNITY_5_3_AND_LESSER
-#endif
-
-#if UNITY_4 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4
-#define UNITY_5_4_AND_LESSER
-#endif
-
-#if UNITY_4 || UNITY_5_0 || UNITY_5_1 || UNITY_5_2 || UNITY_5_3 || UNITY_5_4 || UNITY_5_5
-#define UNITY_5_5_AND_LESSER
-#endif
-
 using UnityEngine;
 using UnityEditor;
 
@@ -264,19 +240,7 @@ public class BuildSettings : BaseScreen
 	
 	// =================================================================================
 
-	bool UnityMajorVersionUsedIsAtMost(int versionAtMost, string unityVersionName)
-	{
-		return BuildReportTool.Util.UnityMajorVersionUsedIsAtMost(versionAtMost, unityVersionName);
-	}
-	
-	bool UnityMajorVersionUsedIsAtLeast(int versionAtMost, string unityVersionName)
-	{
-		return BuildReportTool.Util.UnityMajorVersionUsedIsAtLeast(versionAtMost, unityVersionName);
-	}
-	
-	// =================================================================================
-
-	int _selectedSettingsIdxFromDropdownBox = 0;
+	int _selectedSettingsIdxFromDropdownBox;
 
 	GUIContent[] _settingDropdownBoxLabels;
 	string _buildTargetOfReport = string.Empty;
@@ -318,25 +282,25 @@ public class BuildSettings : BaseScreen
 		}
 		else if (IsShowingXbox360Settings)
 		{
-			DrawSetting("Title ID:", settings.Xbox360TitleId, true);
+			DrawSetting("Title ID:", settings.Xbox360TitleId);
 		}
 		else if (IsShowingXboxOneSettings)
 		{
-			DrawSetting("Title ID:", settings.XboxOneTitleId, true);
-			DrawSetting("Content ID:", settings.XboxOneContentId, true);
-			DrawSetting("Product ID:", settings.XboxOneProductId, true);
-			DrawSetting("Sandbox ID:", settings.XboxOneSandboxId, true);
-			DrawSetting("Service Configuration ID:", settings.XboxOneServiceConfigId, true);
-			DrawSetting("Xbox One version:", settings.XboxOneVersion, true);
-			DrawSetting("Description:", settings.XboxOneDescription, true);
+			DrawSetting("Title ID:", settings.XboxOneTitleId);
+			DrawSetting("Content ID:", settings.XboxOneContentId);
+			DrawSetting("Product ID:", settings.XboxOneProductId);
+			DrawSetting("Sandbox ID:", settings.XboxOneSandboxId);
+			DrawSetting("Service Configuration ID:", settings.XboxOneServiceConfigId);
+			DrawSetting("Xbox One version:", settings.XboxOneVersion);
+			DrawSetting("Description:", settings.XboxOneDescription);
 		}
 		else if (IsShowingPS4Settings)
 		{
-			DrawSetting("App type:", settings.PS4AppType, true);
-			DrawSetting("App version:", settings.PS4AppVersion, true);
-			DrawSetting("Category:", settings.PS4Category, true);
-			DrawSetting("Content ID:", settings.PS4ContentId, true);
-			DrawSetting("Master version:", settings.PS4MasterVersion, true);
+			DrawSetting("App type:", settings.PS4AppType);
+			DrawSetting("App version:", settings.PS4AppVersion);
+			DrawSetting("Category:", settings.PS4Category);
+			DrawSetting("Content ID:", settings.PS4ContentId);
+			DrawSetting("Master version:", settings.PS4MasterVersion);
 		}
 		else if (IsShowingPSVitaSettings)
 		{
@@ -415,9 +379,9 @@ public class BuildSettings : BaseScreen
 			DrawSetting("Build type:", settings.BlackBerryBuildType);
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
-			if (UnityMajorVersionUsedIsAtMost(4, buildReportToDisplay.UnityVersion))
+			if (buildReportToDisplay.IsUnityVersionAtMost(4, 0, 0))
 			{
-			DrawSetting("Author ID:", settings.BlackBerryAuthorID);
+				DrawSetting("Author ID:", settings.BlackBerryAuthorID);
 			}
 			
 			DrawSetting("Device address:", settings.BlackBerryDeviceAddress);
@@ -435,8 +399,8 @@ public class BuildSettings : BaseScreen
 			DrawSetting("Run method:", settings.Xbox360RunMethod);
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 			
-			DrawSetting("Image .xex filepath:", settings.Xbox360ImageXexFilePath, true);
-			DrawSetting(".spa filepath:", settings.Xbox360SpaFilePath, true);
+			DrawSetting("Image .xex filepath:", settings.Xbox360ImageXexFilePath);
+			DrawSetting(".spa filepath:", settings.Xbox360SpaFilePath);
 			DrawSetting("Auto-generate .spa:", settings.Xbox360AutoGenerateSpa);
 			DrawSetting("Additional title memory size:", settings.Xbox360AdditionalTitleMemSize);
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
@@ -469,12 +433,12 @@ public class BuildSettings : BaseScreen
 
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
-			DrawSetting("Title config filepath:", settings.PS3TitleConfigFilePath, true);
-			DrawSetting("DLC config filepath:", settings.PS3DLCConfigFilePath, true);
-			DrawSetting("Thumbnail filepath:", settings.PS3ThumbnailFilePath, true);
-			DrawSetting("Background image filepath:", settings.PS3BackgroundImageFilePath, true);
-			DrawSetting("Background sound filepath:", settings.PS3BackgroundSoundFilePath, true);
-			DrawSetting("Trophy package path:", settings.PS3TrophyPackagePath, true);
+			DrawSetting("Title config filepath:", settings.PS3TitleConfigFilePath);
+			DrawSetting("DLC config filepath:", settings.PS3DLCConfigFilePath);
+			DrawSetting("Thumbnail filepath:", settings.PS3ThumbnailFilePath);
+			DrawSetting("Background image filepath:", settings.PS3BackgroundImageFilePath);
+			DrawSetting("Background sound filepath:", settings.PS3BackgroundSoundFilePath);
+			DrawSetting("Trophy package path:", settings.PS3TrophyPackagePath);
 
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
@@ -583,13 +547,13 @@ public class BuildSettings : BaseScreen
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 		}
 
-		if (IsShowingiOSSettings && UnityMajorVersionUsedIsAtMost(4, buildReportToDisplay.UnityVersion))
+		if (IsShowingiOSSettings && buildReportToDisplay.IsUnityVersionAtMost(4, 0, 0))
 		{
 			DrawSetting("Is appended build:", settings.iOSAppendedToProject);
 		}
 		DrawSetting("Install in build folder:", settings.InstallInBuildFolder);
 
-		if (UnityMajorVersionUsedIsAtMost(4, buildReportToDisplay.UnityVersion))
+		if (buildReportToDisplay.IsUnityVersionAtMost(4, 0, 0))
 		{
 			DrawSetting("Physics code stripped:", settings.StripPhysicsCode);
 		}
@@ -618,11 +582,11 @@ public class BuildSettings : BaseScreen
 			DrawSetting("Accelerometer frequency:", settings.MobileAccelerometerFrequency);
 			DrawSetting("Requires persistent Wi-Fi:", settings.iOSRequiresPersistentWiFi);
 
-			if (UnityMajorVersionUsedIsAtMost(4, buildReportToDisplay.UnityVersion))
+			if (buildReportToDisplay.IsUnityVersionAtMost(4, 0, 0))
 			{
 				DrawSetting("Exit on suspend:", settings.iOSExitOnSuspend);
 			}
-			if (UnityMajorVersionUsedIsAtLeast(5, buildReportToDisplay.UnityVersion))
+			if (buildReportToDisplay.IsUnityVersionAtLeast(5, 0, 0))
 			{
 				DrawSetting("App-in-background behavior:", settings.iOSAppInBackgroundBehavior);
 			}
@@ -694,14 +658,22 @@ public class BuildSettings : BaseScreen
 
 		DrawSetting("Is development build:", settings.EnableDevelopmentBuild);
 		DrawSetting("Debug Log enabled:", settings.EnableDebugLog);
-		
-		GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
-		
-		DrawSetting("Stack trace for regular logs:", UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForLog), false);
-		DrawSetting("Stack trace for warning logs:", UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForWarning), false);
-		DrawSetting("Stack trace for error logs:", UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForError), false);
-		DrawSetting("Stack trace for assert logs:", UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForAssert), false);
-		DrawSetting("Stack trace for exception logs:", UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForException), false);
+
+		if (buildReportToDisplay.IsUnityVersionAtLeast(5, 4, 0))
+		{
+			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
+
+			DrawSetting("Stack trace for regular logs:",
+				UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForLog), false);
+			DrawSetting("Stack trace for warning logs:",
+				UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForWarning), false);
+			DrawSetting("Stack trace for error logs:",
+				UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForError), false);
+			DrawSetting("Stack trace for assert logs:",
+				UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForAssert), false);
+			DrawSetting("Stack trace for exception logs:",
+				UnityBuildSettingsUtility.GetReadableStackTraceType(settings.StackTraceForException), false);
+		}
 
 		GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
@@ -713,8 +685,11 @@ public class BuildSettings : BaseScreen
 		}
 		else if (IsShowingiOSSettings)
 		{
-			DrawSetting("Log Objective-C uncaught exceptions:", settings.iOSLogObjCUncaughtExceptions);
-			
+			if (buildReportToDisplay.IsUnityVersionAtLeast(5, 0, 0))
+			{
+				DrawSetting("Log Objective-C uncaught exceptions:", settings.iOSLogObjCUncaughtExceptions);
+			}
+
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 		}
 		else if (IsShowingWebGlSettings)
@@ -725,21 +700,29 @@ public class BuildSettings : BaseScreen
 			
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 		}
-		
+
 		DrawSetting("Enable explicit null checks:", settings.EnableExplicitNullChecks);
-#if !UNITY_5_3_AND_LESSER
-		DrawSetting("Enable explicit divide-by-zero checks:", settings.EnableExplicitDivideByZeroChecks);
-#endif
-		DrawSetting("Action on unhandled .NET exception:", settings.ActionOnDotNetUnhandledException);
+
+		if (buildReportToDisplay.IsUnityVersionAtLeast(5, 4, 0))
+		{
+			DrawSetting("Enable explicit divide-by-zero checks:", settings.EnableExplicitDivideByZeroChecks);
+		}
+
+		if (buildReportToDisplay.IsUnityVersionAtLeast(5, 0, 0))
+		{
+			DrawSetting("Action on unhandled .NET exception:", settings.ActionOnDotNetUnhandledException);
 		
+			DrawSetting("Enable internal profiler:", settings.EnableInternalProfiler);
+		
+			DrawSetting("Enable CrashReport API:", settings.EnableCrashReportApi);
+		}
+
 		GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
 		DrawSetting("Auto-connect to Unity profiler:", settings.ConnectProfiler);
-		DrawSetting("Enable internal profiler:", settings.EnableInternalProfiler);
 
 		DrawSetting("Allow debugger:", settings.EnableSourceDebugging);
-		
-		DrawSetting("Enable CrashReport API:", settings.EnableCrashReportApi);
+
 		DrawSetting("Force script optimization on debug builds:", settings.ForceOptimizeScriptCompilation);
 	}
 
@@ -750,7 +733,7 @@ public class BuildSettings : BaseScreen
 		DrawSetting("Script Compilation Defines:", settings.CompileDefines);
 		
 		DrawSetting(".NET API compatibility level:", settings.NETApiCompatibilityLevel);
-		DrawSetting("AOT options:", settings.AOTOptions, true);
+		DrawSetting("AOT options:", settings.AOTOptions);
 		DrawSetting("Location usage description:", settings.LocationUsageDescription);
 
 		if (IsShowingiOSSettings)
@@ -778,9 +761,12 @@ public class BuildSettings : BaseScreen
 		DrawSetting("Graphics jobs mode:", settings.GraphicsJobsType);
 		DrawSetting("Use GPU skinning:", settings.UseGPUSkinning);
 		DrawSetting("Enable Virtual Reality Support:", settings.EnableVirtualRealitySupport);
-#if UNITY_5_2_AND_GREATER
-		DrawSetting("Graphics APIs Used:", settings.GraphicsAPIsUsed);
-#endif
+
+		if (buildReportToDisplay.IsUnityVersionAtLeast(5, 2, 0))
+		{
+			DrawSetting("Graphics APIs Used:", settings.GraphicsAPIsUsed);
+		}
+
 		GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 
 		if (IsShowingMobileSettings)
@@ -799,25 +785,51 @@ public class BuildSettings : BaseScreen
 			string standaloneScreenSize = settings.StandaloneDefaultScreenWidth + " x " + settings.StandaloneDefaultScreenHeight;
 			DrawSetting("Default screen size:", standaloneScreenSize);
 			DrawSetting("Resolution dialog:", settings.StandaloneResolutionDialogSettingUsed);
-			DrawSetting("Full-screen by default:", settings.StandaloneFullScreenByDefault);
+
+			// removed in Unity 2018
+			if (buildReportToDisplay.IsUnityVersionAtLeast(2017, 0, 0))
+			{
+				DrawSetting("Full-screen by default:", settings.StandaloneFullScreenByDefault);
+			}
+
 			DrawSetting("Resizable window:", settings.StandaloneEnableResizableWindow);
+
+			// added in Unity 2018
+			if (buildReportToDisplay.IsUnityVersionAtLeast(2018, 0, 0))
+			{
+				DrawSetting("Fullscreen Mode:", settings.StandaloneFullScreenModeUsed);
+			}
 
 			if (IsShowingWindowsDesktopSettings)
 			{
-#if UNITY_5_2_AND_LESS
 				// not needed in Unity 5.3 since settings.GraphicsAPIsUsed shows better information
-				DrawSetting("Use Direct3D11 if available:", settings.WinUseDirect3D11IfAvailable);
-#endif
-				DrawSetting("Direct3D9 Fullscreen Mode:", settings.WinDirect3D9FullscreenModeUsed);
-#if UNITY_5
-				DrawSetting("Direct3D11 Fullscreen Mode:", settings.WinDirect3D11FullscreenModeUsed);
-#endif
+				if (buildReportToDisplay.IsUnityVersionAtMost(5, 2, 0))
+				{
+					DrawSetting("Use Direct3D11 if available:", settings.WinUseDirect3D11IfAvailable);
+				}
+
+				// removed in 2017
+				if (buildReportToDisplay.IsUnityVersionAtLeast(5, 0, 0))
+				{
+					DrawSetting("Direct3D9 Fullscreen Mode:", settings.WinDirect3D9FullscreenModeUsed);
+				}
+
+				// removed in 2018
+				if (buildReportToDisplay.IsUnityVersionAtLeast(2017, 0, 0))
+				{
+					DrawSetting("Direct3D11 Fullscreen Mode:", settings.WinDirect3D11FullscreenModeUsed);
+				}
+
 				DrawSetting("Visible in background (for Fullscreen Windowed mode):", settings.VisibleInBackground);
 			}
 			else if (IsShowingMacSettings)
 			{
-				DrawSetting("Fullscreen mode:", settings.MacFullscreenModeUsed);
-				GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
+				// removed in 2018
+				if (buildReportToDisplay.IsUnityVersionAtLeast(2017, 0, 0))
+				{
+					DrawSetting("Fullscreen mode:", settings.MacFullscreenModeUsed);
+					GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
+				}
 			}
 
 			DrawSetting("Allow OS switching between full-screen and window mode:", settings.StandaloneAllowFullScreenSwitch);
@@ -837,25 +849,30 @@ public class BuildSettings : BaseScreen
 		}
 		else if (IsShowingiOSSettings)
 		{
-#if !UNITY_5_3
-			// Unity 5.3 has a Screen.resolutions but I don't know which of those in the array would be the iOS target resolution
-			DrawSetting("Target resolution:", settings.iOSTargetResolution);
-#endif
-#if UNITY_5_1_AND_LESSER
-			// not used in Unity 5.2 since settings.GraphicsAPIsUsed shows better information
-			DrawSetting("Target graphics:", settings.iOSTargetGraphics);
-#endif
+			if (buildReportToDisplay.IsUnityVersionAtMost(5, 2, 0))
+			{
+				// Unity 5.3 has a Screen.resolutions but I don't know
+				// which of those in the array would be the iOS target resolution
+				DrawSetting("Target resolution:", settings.iOSTargetResolution);
+			}
+
+			if (buildReportToDisplay.IsUnityVersionAtMost(5, 1, 0))
+			{
+				// not used in Unity 5.2 since settings.GraphicsAPIsUsed shows better information
+				DrawSetting("Target graphics:", settings.iOSTargetGraphics);
+			}
+
 
 			DrawSetting("App icon pre-rendered:", settings.iOSIsIconPrerendered);
 			GUILayout.Space(SETTINGS_GROUP_MINOR_SPACING);
 		}
 		else if (IsShowingAndroidSettings)
 		{
-			if (UnityMajorVersionUsedIsAtMost(4, buildReportToDisplay.UnityVersion))
+			if (buildReportToDisplay.IsUnityVersionAtMost(4, 0, 0))
 			{
 				DrawSetting("Use 24-bit depth buffer:", settings.AndroidUse24BitDepthBuffer);
 			}
-			if (UnityMajorVersionUsedIsAtLeast(5, buildReportToDisplay.UnityVersion))
+			if (buildReportToDisplay.IsUnityVersionAtLeast(5, 0, 0))
 			{
 				DrawSetting("Disable depth and stencil buffers:", settings.AndroidDisableDepthAndStencilBuffers);
 			}
@@ -879,7 +896,7 @@ public class BuildSettings : BaseScreen
 	}
 	
 	
-	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay)
+	public override void DrawGUI(Rect position, BuildInfo buildReportToDisplay, AssetDependencies assetDependencies, out bool requestRepaint)
 	{
 		BuildSettingCategory b = ReportGenerator.GetBuildSettingCategoryFromBuildValues(buildReportToDisplay);
 		_buildTargetOfReport = UnityBuildSettingsUtility.GetReadableBuildSettingCategory(b);
@@ -889,6 +906,7 @@ public class BuildSettings : BaseScreen
 		if (settings == null)
 		{
 			Utility.DrawCentralMessage(position, "No \"Project Settings\" recorded in this build report.");
+			requestRepaint = false;
 			return;
 		}
 
@@ -982,6 +1000,7 @@ public class BuildSettings : BaseScreen
 		GUILayout.EndVertical();
 		GUILayout.EndHorizontal();
 		GUILayout.EndScrollView();
+		requestRepaint = false;
 	}
 }
 

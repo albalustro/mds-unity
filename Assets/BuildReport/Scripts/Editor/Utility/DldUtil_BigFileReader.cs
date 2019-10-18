@@ -17,13 +17,9 @@ public static class BigFileReader
 		BufferedStream bs = new BufferedStream(fs);
 		StreamReader sr = new StreamReader(bs);
 
-		string line = "";
-
-		long currentLine = 0;
 		while (true)
 		{
-			++currentLine;
-			line = sr.ReadLine();
+			var line = sr.ReadLine();
 
 			if (line == null)
 			{
@@ -56,13 +52,11 @@ public static class BigFileReader
 		BufferedStream bs = new BufferedStream(fs);
 		StreamReader sr = new StreamReader(bs);
 
-		string line = string.Empty;
-		
 		//long currentLine = 0;
 		while (true)
 		{
 			//++currentLine;
-			line = sr.ReadLine();
+			var line = sr.ReadLine();
 			//Debug.LogFormat("seeking... line number {0}: {1}", currentLine, line);
 
 			// reached end of file?
@@ -95,15 +89,13 @@ public static class BigFileReader
 		BufferedStream bs = new BufferedStream(fs);
 		StreamReader sr = new StreamReader(bs);
 
-		string line = string.Empty;
-		
 		List<FoundText> returnValue = new List<FoundText>();
 
 		long currentLine = 0;
 		while (true)
 		{
 			++currentLine;
-			line = sr.ReadLine();
+			var line = sr.ReadLine();
 			//Debug.LogFormat("seeking... line number {0}: {1}", currentLine, line);
 
 			// reached end of file?
@@ -134,11 +126,11 @@ public static class BigFileReader
 
 	public static IEnumerable<string> ReadFile(string path, bool startAfterSeekedText, params string[] seekText)
 	{
-		FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-		BufferedStream bs = new BufferedStream(fs);
-		StreamReader sr = new StreamReader(bs);
+		var fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+		var bs = new BufferedStream(fs);
+		var sr = new StreamReader(bs);
 
-		string line = "";
+		string line;
 		
 		bool seekTextRequested = (seekText != null) && (seekText.Length > 0) && !string.IsNullOrEmpty(seekText[0]);
 
@@ -228,8 +220,6 @@ public static class BigFileReader
 			}
 		}
 		
-		line = "";
-		
 		sr.Close();
 		bs.Close();
 		fs.Close();
@@ -238,15 +228,13 @@ public static class BigFileReader
 
 	public static IEnumerable<string> ReadFile(string path)
 	{
-		FileStream fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
-		BufferedStream bs = new BufferedStream(fs);
-		StreamReader sr = new StreamReader(bs);
-
-		string line = "";
+		var fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+		var bs = new BufferedStream(fs);
+		var sr = new StreamReader(bs);
 
 		while (true)
 		{
-			line = sr.ReadLine();
+			var line = sr.ReadLine();
 
 			if (line == null)
 			{
@@ -256,7 +244,33 @@ public static class BigFileReader
 			yield return line;
 		}
 
-		line = "";
+		sr.Close();
+		bs.Close();
+		fs.Close();
+	}
+
+	public static IEnumerable<FoundText> ReadFileWithLine(string path)
+	{
+		var fs = File.Open(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+		var bs = new BufferedStream(fs);
+		var sr = new StreamReader(bs);
+		
+		long currentLineNumber = 0;
+		while (true)
+		{
+			++currentLineNumber;
+			var line = sr.ReadLine();
+
+			if (line == null)
+			{
+				break;
+			}
+
+			FoundText text;
+			text.Text = line;
+			text.LineNumber = currentLineNumber;
+			yield return text;
+		}
 
 		sr.Close();
 		bs.Close();
