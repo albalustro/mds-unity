@@ -35,6 +35,7 @@ public class GameBuilder : EditorWindow
 			GUILayout.Space(3);
 			PlayerSettings.bundleVersion = EditorGUILayout.TextField("Version", PlayerSettings.bundleVersion);
 			PlayerSettings.Android.bundleVersionCode = EditorGUILayout.IntField("Build Number", PlayerSettings.Android.bundleVersionCode);
+			PlayerSettings.iOS.buildNumber = PlayerSettings.Android.bundleVersionCode.ToString();
 			_onlySetup = EditorGUILayout.Toggle("Only Setup (do not build)", _onlySetup);
 			GUILayout.Space(5);
 
@@ -47,8 +48,8 @@ public class GameBuilder : EditorWindow
 					GUILayout.Space(5);
 					//if (GUILayout.Button("Assetbundles"))
 					//{
-						//if (!Confirm("ASSETBUNDLES - WINDOWS")) return;
-						//BuildAssetbundlesStandalone();
+					//if (!Confirm("ASSETBUNDLES - WINDOWS")) return;
+					//BuildAssetbundlesStandalone();
 					//}
 					if (GUILayout.Button("MDS1"))
 					{
@@ -149,10 +150,27 @@ public class GameBuilder : EditorWindow
 				{
 					GUILayout.Space(5);
 					//if (GUILayout.Button("Assetbundles")) { }
-					if (GUILayout.Button("MDS1")) { }
-					if (GUILayout.Button("MDS2")) { }
-					if (GUILayout.Button("MDS3")) { }
-					if (GUILayout.Button("ALL iOS")) { }
+					if (GUILayout.Button("MDS1"))
+					{
+						if (!Confirm("MDS1 - iOS")) return;
+						Build_MDS_iOS(Game.MDS1);
+					}
+					if (GUILayout.Button("MDS2"))
+					{
+						if (!Confirm("MDS2 - iOS")) return;
+						Build_MDS_iOS(Game.MDS2);
+					}
+					if (GUILayout.Button("MDS3"))
+					{
+						if (!Confirm("MDS3 - iOS")) return;
+						Build_MDS_iOS(Game.MDS3);
+
+					}
+					if (GUILayout.Button("ALL iOS"))
+					{
+						if (!Confirm("ALL - iOS")) return;
+						BuildAlliOS();
+					}
 
 				}
 				GUILayout.EndVertical();
@@ -232,6 +250,12 @@ public class GameBuilder : EditorWindow
 		Build_MDS_Android(Game.MDS3);
 	}
 
+	private void BuildAlliOS()
+	{
+		Build_MDS_iOS(Game.MDS1);
+		Build_MDS_iOS(Game.MDS2);
+		Build_MDS_iOS(Game.MDS3);
+	}
 	private void Build_MDS_Android(Game game)
 	{
 		Debug.LogFormat("[{0}][Android][{1}] - Starting ", game.ToString(), System.DateTime.Now.ToShortTimeString());
@@ -257,6 +281,31 @@ public class GameBuilder : EditorWindow
 		Debug.LogFormat("[{0}][Android][{1}] - Done ", game.ToString(), System.DateTime.Now.ToShortTimeString());
 	}
 
+	private void Build_MDS_iOS(Game game)
+	{
+		Debug.LogFormat("[{0}][iOS][{1}] - Starting ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+		SetGame(game);
+		SetiOSConfig(game);
+		BuildPlayerOptions options = SetupBuildiOS(game);
+		SetDefineSymbols(game);
+
+		EditorBuildSettings.scenes = (from s in options.scenes
+									  select new EditorBuildSettingsScene(s, true)).ToArray();
+
+		if (_onlySetup)
+		{
+			Debug.LogFormat("[{0}][iOS][{1}] - Done ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+			return;
+		}
+
+		var ret = BuildPipeline.BuildPlayer(options);
+		if (!string.IsNullOrEmpty(ret))
+			Debug.LogWarning(ret);
+		Debug.LogFormat("[{0}][iOS][{1}] - Building report ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+		BuildReport(options);
+		Debug.LogFormat("[{0}][iOS][{1}] - Done ", game.ToString(), System.DateTime.Now.ToShortTimeString());
+	}
+	
 	private static void BuildReport(BuildPlayerOptions options)
 	{
 		BuildReportTool.Util.ShouldSaveGottenBuildReportNow = true;
@@ -468,6 +517,10 @@ public class GameBuilder : EditorWindow
 		PlayerSettings.Android.keyaliasPass = "xmile1@3";
 	}
 
+	private void SetiOSConfig(Game game)
+	{
+		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("br.com.xmile.sonhos{0}", game.ToString().Remove(0, 3)));
+	}
 	private static void SetGame(Game game)
 	{
 		SetNameAndDefaultIcon(game);
@@ -520,9 +573,19 @@ public class GameBuilder : EditorWindow
 		options.target = BuildTarget.Android;
 		options.targetGroup = BuildTargetGroup.Android;
 		return options;
-
 	}
 
+	private BuildPlayerOptions SetupBuildiOS(Game game)
+	{
+		string version = PlayerSettings.bundleVersion;
+		string buildNumber = PlayerSettings.iOS.buildNumber;
+		BuildPlayerOptions options = new BuildPlayerOptions();
+		options.locationPathName = string.Format("Build/{1}/iOS/{0}/", game.ToString(), version);
+		options.scenes = GetScenesOfMDS(game);
+		options.target = BuildTarget.iOS;
+		options.targetGroup = BuildTargetGroup.iOS;
+		return options;
+	}
 	private BuildPlayerOptions SetupBuildStandAlone(Game game)
 	{
 		string version = PlayerSettings.bundleVersion;
@@ -539,7 +602,7 @@ public class GameBuilder : EditorWindow
 	{
 		string gId = game.ToString().Replace("MDS", "");
 		PlayerSettings.productName = string.Format("Misterio dos Sonhos {0}", gId);
-		Texture2D mainIcon = AssetDatabase.LoadAllAssetsAtPath(string.Format("Assets/{0}/Artwork/Icons/icon_1024.png", game.ToString()))[0] as Texture2D;
+		Texture2D mainIcon = AssetDatabase.LoadAllAssetsAtPath(string.Format("Assets/{0}/Artwork/Icons/new_icon_1024.png", game.ToString()))[0] as Texture2D;
 		PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.Unknown, new Texture2D[] { mainIcon });
 	}
 
@@ -555,7 +618,7 @@ public class GameBuilder : EditorWindow
 	//        AssetDatabase.LoadAssetAtPath<Sprite>(string.Format("Assets/Art2D/{0}_gameName.png", gId));
 
 	//    GameObject.Find("Lbl Version").GetComponent<TMPro.TextMeshProUGUI>().SetText(
-	//        string.Format("Versão {0} B{1}",
+	//        string.Format("Versï¿½o {0} B{1}",
 	//        PlayerSettings.bundleVersion,
 	//        PlayerSettings.Android.bundleVersionCode));
 
