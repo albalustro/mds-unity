@@ -24,7 +24,7 @@ namespace MDS.Core
     public class Challenge : MDSBehaviour
     {
 
-#if UNITY_EDITOR
+#if UNITY_EDITOR && DEBUG_CHALLENGES
 
         void OnGUI()
         {
