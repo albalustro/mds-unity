@@ -412,7 +412,7 @@ namespace MDS.Core.SceneManagement
 
             Log("Baixando assetbundle em: " + url);
 
-            using(UnityWebRequest request = UnityWebRequest.GetAssetBundle(url, 0))
+            using(UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url, 0))
             {
                 OnStartLoad.Invoke();
                 

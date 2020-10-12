@@ -137,7 +137,8 @@ namespace FullInspector.Internal {
             }
 
             // If there is no prefab, then we don't show anything in bold.
-            var prefabGameObject = (GameObject)PrefabUtility.GetPrefabObject(((MonoBehaviour)instance).gameObject);
+            var prefabGameObject = PrefabUtility.GetPrefabInstanceHandle(((MonoBehaviour)instance).gameObject) as GameObject;
+			
             if (prefabGameObject == null) {
                 return false;
             }

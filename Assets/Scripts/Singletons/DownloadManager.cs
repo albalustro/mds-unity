@@ -54,7 +54,7 @@ public class DownloadManager : Singleton<DownloadManager>
 
         Log("Baixando " + url);
 
-        UnityWebRequest request = UnityWebRequest.GetAssetBundle(url);
+        UnityWebRequest request = UnityWebRequestAssetBundle.GetAssetBundle(url);
         yield return request.SendWebRequest();
 
 
