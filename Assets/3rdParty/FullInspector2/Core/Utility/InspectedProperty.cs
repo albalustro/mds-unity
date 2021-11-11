@@ -213,7 +213,7 @@ namespace FullInspector {
             Name = MemberInfo.Name;
 
             // Setup the display name. Allow the user to override it.
-            var attr = fsPortableReflection.GetAttribute<InspectorNameAttribute>(MemberInfo);
+            var attr = fsPortableReflection.GetAttribute<FIInspectorNameAttribute>(MemberInfo);
             if (attr != null) {
                 DisplayName = attr.DisplayName;
             }

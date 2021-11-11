@@ -6,7 +6,7 @@ namespace FullInspector {
     /// custom name instead.
     /// </summary>
     [AttributeUsage(AttributeTargets.Method | AttributeTargets.Field | AttributeTargets.Property)]
-    public sealed class InspectorNameAttribute : Attribute {
+    public sealed class FIInspectorNameAttribute : Attribute {
         /// <summary>
         /// The name of the field, property, or button. If this is null or the empty string, then a
         /// default name generated off of the reflected name will be used instead.
@@ -16,7 +16,7 @@ namespace FullInspector {
         /// <summary>
         /// Set the name of the member.
         /// </summary>
-        public InspectorNameAttribute(string displayName) {
+        public FIInspectorNameAttribute(string displayName) {
             DisplayName = displayName;
         }
     }

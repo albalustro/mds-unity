@@ -2,16 +2,16 @@
 using System.Collections.Generic;
 using FullInspector.Internal;
 using UnityEngine;
-using UnityEngine.Networking;
+//using UnityEngine.Networking;
 using UnityObject = UnityEngine.Object;
 
-namespace FullInspector.Internal {
-    /// <summary>
-    /// A common class that derives from MonoBehavior so that we can provide a custom editor for
-    /// BaseBehavior{TSerializer}
-    /// </summary>
-    public class CommonBaseNetworkBehavior : NetworkBehaviour { }
-}
+//namespace FullInspector.Internal {
+//    /// <summary>
+//    /// A common class that derives from MonoBehavior so that we can provide a custom editor for
+//    /// BaseBehavior{TSerializer}
+//    /// </summary>
+//    public class CommonBaseNetworkBehavior : NetworkBehaviour { }
+//}
 
 namespace FullInspector {
     /// <summary>
@@ -21,7 +21,7 @@ namespace FullInspector {
     /// We don't serialize anything in this type through Json.NET, as we recover the Json.NET
     /// serialized data via Unity serialization
     /// </remarks>
-    public abstract class BaseNetworkBehavior :
+    /*public abstract class BaseNetworkBehavior :
         CommonBaseNetworkBehavior, ISerializedObject, ISerializationCallbackReceiver {
 
         static BaseNetworkBehavior() {
@@ -135,5 +135,6 @@ namespace FullInspector {
             fiSerializationManager.OnUnityObjectSerialize<FullSerializerSerializer>(this);
         }
     }
+    */
 }
 #endif

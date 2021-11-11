@@ -23,7 +23,7 @@ namespace FullInspector {
 
             // DisplayLabel.text
             {
-                var attr = fsPortableReflection.GetAttribute<InspectorNameAttribute>(method);
+                var attr = fsPortableReflection.GetAttribute<FIInspectorNameAttribute>(method);
                 if (attr != null) {
                     DisplayLabel.text = attr.DisplayName;
                 }

@@ -2,7 +2,7 @@
 using UnityEditor;
 
 namespace FullInspector.Internal {
-    [CustomEditor(typeof(CommonBaseNetworkBehavior), true)]
+    //[CustomEditor(typeof(CommonBaseNetworkBehavior), true)]
     public class CommonBaseNetworkBehaviorEditor : FullInspectorCommonSerializedObjectEditor {
     }
 }
