@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using MDS.ScriptableObjects;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
+using UnityEngine.Networking;
 
 public class ConnectionManager : Singleton<ConnectionManager>
 {
@@ -68,20 +69,18 @@ public class ConnectionManager : Singleton<ConnectionManager>
         //Log("pass: " + pass);
 
 
-        WWW www = new WWW(connectionConfig.loginURL, loginForm);
+        var www = UnityWebRequest.Post(connectionConfig.loginURL, loginForm);
         StartCoroutine(ValidateLogin(www));
     }
 
-    IEnumerator ValidateLogin(WWW www)
+    IEnumerator ValidateLogin(UnityWebRequest www)
     {
         LoginInfo info = new LoginInfo();
         yield return www;
         if(www.error == null)
         {
-            string wsReturn = www.text.Trim();
-            // Log("wsReturn: " + wsReturn);
+            string wsReturn = www.downloadHandler.text.Trim();
             info = JsonConvert.DeserializeObject<LoginInfo>(wsReturn);
-            // Log("info é nulo?? : " + (info == null).ToString());
         }
         else
         {
