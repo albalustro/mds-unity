@@ -39,7 +39,7 @@ public class LoginController : MDSBehaviour {
     #endregion
 
     #region Ações dos botões
-    public void Login()
+    public async void Login()
 	{
         if(_tryingLogin) return;
         
@@ -53,8 +53,10 @@ public class LoginController : MDSBehaviour {
                 PersistenceManager.Instance.SetString("rememberPass", _passField.text);
 
             _tryingLogin = true;
-            ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, ReturnResponseLoginValidate);
 			OpenLoadingPanel();
+
+            var loginInfo = await NetworkManager.Instance.DoLogin(_userField.text, _passField.text);
+            ReturnResponseLoginValidate(loginInfo);
         }
 	}
 
@@ -63,9 +65,6 @@ public class LoginController : MDSBehaviour {
         string guest = "{\"token\":\"Experimente\",\"api\":\"v1\",\"assets_url\":\"http://jogos.xmile.com.br/4/pt_br/\",\"assets_version\":\"1\",\"id\":99999,\"name\":\"Guest\",\"role\":\"Guest\"}";
         PersistenceManager.Instance.SetString("GuestLoginInfo", guest);
 		UserProfile.Instance.loginInfo = JsonConvert.DeserializeObject<LoginInfo>(guest);
-		////////////FadeToWhite////////////////
-		//Carregando próxima Scene
-        //SceneManager.LoadScene("Splash", LoadSceneMode.Single);
     }
     #endregion
 

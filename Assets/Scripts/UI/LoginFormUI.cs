@@ -7,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.Analytics;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
+using Newtonsoft.Json.Utilities;
 #if UNITY_WEBGL && !UNITY_EDITOR
 using System.Runtime.InteropServices;
 #endif
@@ -79,7 +80,7 @@ public class LoginFormUI : MonoBehaviour
 
 #region Ações dos botões
 
-    public void Login()
+    public async void Login()
     {
         if (_tryingLogin) return;
 
@@ -96,75 +97,13 @@ public class LoginFormUI : MonoBehaviour
             _tryingLogin = true;
             _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
 
-            ConnectionManager.Instance.DoLogin(_userField.text, _passField.text, DoLoginCallback);
-
+            var loginInfo = await NetworkManager.Instance.DoLogin(_userField.text, _passField.text);
+            DoLoginCallback(loginInfo);
         }
 
     }
 
-#endregion
-
-    TouchScreenKeyboard _curTouchScreenKeyboard;
-    public void OpenTKB_Login()
-    {
-#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
-
-        TouchScreenKeyboard.hideInput = true;
-        _curTouchScreenKeyboard = TouchScreenKeyboard.Open(_userField.text, 
-                                    TouchScreenKeyboardType.Default, 
-                                    false, false, false, false);
-        
-        StopCoroutine(CloseTouchKB());
-        StartCoroutine(CloseTouchKB());
-#endif
-    }
-
-    public void OpenTKB_Pass()
-    {
-#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
-
-        TouchScreenKeyboard.hideInput = true;
-        _curTouchScreenKeyboard = TouchScreenKeyboard.Open("",
-                                    TouchScreenKeyboardType.Default,
-                                    false, false, true, false);
-
-        StopCoroutine(CloseTouchKB());
-        StartCoroutine(CloseTouchKB());
-#endif
-    }
-
-    public void CloseTouchScreenKeyboard()
-    {
-        _curTouchScreenKeyboard.active = false;
-        StopCoroutine(CloseTouchKB());
-        StartCoroutine(CloseTouchKB());
-    }
-
-    private IEnumerator CloseTouchKB()
-    {
-#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
-        while (_curTouchScreenKeyboard != null && _curTouchScreenKeyboard.active)
-            yield return null;
-
-        _curTouchScreenKeyboard = null;
-
-        if (_panel != null)
-        {
-            RectTransform r = _panel.GetComponent<RectTransform>();
-            if (r!=null)
-                LeanTween.moveY(r, 20, 0.3f);
-        }
-#else
-        yield return null;
-#endif
-
-    }
-
-
-
-
+    #endregion
 
     private void DoLoginCallback(LoginInfo wsReturn)
     {
@@ -242,6 +181,73 @@ public class LoginFormUI : MonoBehaviour
         Analytics.FlushEvents();
 
     }
+
+
+    #region Touchscreenkeyboard
+
+    TouchScreenKeyboard _curTouchScreenKeyboard;
+    public void OpenTKB_Login()
+    {
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
+
+        TouchScreenKeyboard.hideInput = true;
+        _curTouchScreenKeyboard = TouchScreenKeyboard.Open(_userField.text, 
+                                    TouchScreenKeyboardType.Default, 
+                                    false, false, false, false);
+        
+        StopCoroutine(CloseTouchKB());
+        StartCoroutine(CloseTouchKB());
+#endif
+    }
+
+    public void OpenTKB_Pass()
+    {
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        LeanTween.moveY(_panel.GetComponent<RectTransform>(), 620, 0.3f);
+
+        TouchScreenKeyboard.hideInput = true;
+        _curTouchScreenKeyboard = TouchScreenKeyboard.Open("",
+                                    TouchScreenKeyboardType.Default,
+                                    false, false, true, false);
+
+        StopCoroutine(CloseTouchKB());
+        StartCoroutine(CloseTouchKB());
+#endif
+    }
+
+    public void CloseTouchScreenKeyboard()
+    {
+        _curTouchScreenKeyboard.active = false;
+        StopCoroutine(CloseTouchKB());
+        StartCoroutine(CloseTouchKB());
+    }
+
+    private IEnumerator CloseTouchKB()
+    {
+#if (UNITY_ANDROID || UNITY_IOS) && !UNITY_EDITOR
+        while (_curTouchScreenKeyboard != null && _curTouchScreenKeyboard.active)
+            yield return null;
+
+        _curTouchScreenKeyboard = null;
+
+        if (_panel != null)
+        {
+            RectTransform r = _panel.GetComponent<RectTransform>();
+            if (r!=null)
+                LeanTween.moveY(r, 20, 0.3f);
+        }
+#else
+        yield return null;
+#endif
+
+    }
+
+	#endregion
+
+
+
+	
 
 
 }

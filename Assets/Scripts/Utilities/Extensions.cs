@@ -7,12 +7,51 @@ using UnityEngine.SceneManagement;
 
 namespace MDS.Utilities
 {
+    using UnityEngine.Networking;
+    using System;
+    using System.Runtime.CompilerServices;
+
+    public static class UnityWebRequestAsyncOperationExtensions
+    {
+        public static UnityWebRequestAsyncOperationAwaiter GetAwaiter(this UnityWebRequestAsyncOperation asyncOperation)
+        {
+            return new UnityWebRequestAsyncOperationAwaiter(asyncOperation);
+        }
+    }
+
+
+    public class UnityWebRequestAsyncOperationAwaiter : INotifyCompletion
+    {
+        private UnityWebRequestAsyncOperation m_asyncOperation;
+
+        public bool IsCompleted
+        {
+            get { return m_asyncOperation.isDone; }
+        }
+
+        public UnityWebRequestAsyncOperationAwaiter(UnityWebRequestAsyncOperation asyncOperation)
+        {
+            m_asyncOperation = asyncOperation;
+        }
+
+        public void GetResult()
+        {
+            //NOTE: Since the results can be accessed from UnityWebRequest, is not necessary to return here 
+        }
+
+        public void OnCompleted(Action continuation)
+        {
+            m_asyncOperation.completed += _ => { continuation(); };
+        }
+    }
+
+
     public static class Extensions
     {
 
         public static T GetRandom<T> (this IEnumerable<T> sequence)
         {
-            int index = Random.Range(0, sequence.Count());
+            int index = UnityEngine.Random.Range(0, sequence.Count());
             return sequence.ElementAt(index);
         }
 

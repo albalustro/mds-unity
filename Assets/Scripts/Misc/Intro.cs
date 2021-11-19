@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using MDS.Core.SceneManagement;
 using UnityEngine;
 using UnityEngine.UI;
@@ -32,12 +31,6 @@ namespace MDS
                 {
                     debugText = go.GetComponent<Text>();
                 }
-            }
-
-            if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.H))
-            {
-                ConnectionManager.Instance.SetHomolgConfig();
-                debugText.text += "[Homolog Connection] ";
             }
 
             if(Input.GetKey(KeyCode.X) && Input.GetKey(KeyCode.C))

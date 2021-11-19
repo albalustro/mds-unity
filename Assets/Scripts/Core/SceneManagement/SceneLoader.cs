@@ -400,7 +400,7 @@ namespace MDS.Core.SceneManagement
             //    while(!Caching.ready)
             //        yield return null;
 
-            string urlBase = ConnectionManager.Instance.connectionConfig.assetbundlesURL;
+            string urlBase = NetworkManager.Instance.connectionConfig.assetbundlesURL;
 
             string plataform = "WebGL/";
 
