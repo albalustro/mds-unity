@@ -130,8 +130,8 @@ public class LoginFormUI : MonoBehaviour
             {
                 if (_persistenceManager.GetMD5Hash(_passField.text) == pass)
                 {
-                    loginData.status.code = ConnectionResponse.CONNECTION_OFFLINE;
-                    loginData.status.message = "Offline";
+                    loginData.Status.code = ConnectionResponse.CONNECTION_OFFLINE;
+                    loginData.Status.message = "Offline";
                     _feedbackUI.SetText("Sem conexão com servidor. Efetuando login em modo offline.")
                                 .SetButtons(true, false, false, false)
                                 .SetOKFeedback(() =>
@@ -155,7 +155,7 @@ public class LoginFormUI : MonoBehaviour
             dic.Add("Conn", "online");
 
             LoginInfo loginInfo = wsReturn;
-            switch (loginInfo.status.code)
+            switch (loginInfo.Status.code)
             {
                 //Login efetuado com sucesso
                 case ConnectionResponse.OK:
@@ -169,7 +169,7 @@ public class LoginFormUI : MonoBehaviour
                 case ConnectionResponse.LOGIN_ERROR:
                     dic.Add("login", "no - user/pass invalid");
 
-                    _feedbackUI.Show("Ocorreu um erro durante o login: " + loginInfo.status.message);
+                    _feedbackUI.Show("Ocorreu um erro durante o login: " + loginInfo.Status.message);
                     _tryingLogin = false;
                     break;
             }

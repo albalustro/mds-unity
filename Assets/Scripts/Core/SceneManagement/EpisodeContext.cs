@@ -58,7 +58,7 @@ namespace MDS.Core.SceneManagement
         public void SetCurrentChallengeDone()
         {
             Scene curScene = SceneManager.GetActiveScene();
-            if(curScene.IsChallenge() == false)
+            if(!curScene.IsChallenge())
                 return;
 
             int index = curScene.GetChallengeIndex() - 1;

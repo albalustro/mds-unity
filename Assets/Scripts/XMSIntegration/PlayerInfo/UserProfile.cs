@@ -30,7 +30,7 @@ public class UserProfile : Singleton<UserProfile>
 	{
 		get
 		{
-			return loginInfo.role.Equals(STUDENT_ROLE);
+			return loginInfo.Role.Equals(STUDENT_ROLE);
 		}
 	}
 
@@ -50,29 +50,29 @@ public class UserProfile : Singleton<UserProfile>
 		}
 	}
 
-	//code: t000m000e000d000
 	public void UpdateConcept(Scene challengeScene, ConceptTypes newConcept, DateTime startDate)
 	{
 		int w, e, c;
 
-		if (challengeScene.IsChallenge() == false)
+		if (!challengeScene.IsChallenge())
 			return;
 
 		w = challengeScene.GetWorldIndex() - 1;
 		e = challengeScene.GetEpisodeIndex() - 1;
 		c = challengeScene.GetChallengeIndex() - 1;
 
-		var curChallenge = _conceptMap.worlds[w].episodes[e].challenges[c];
-		if (newConcept > curChallenge.concept)
-			curChallenge.concept = newConcept;
-		curChallenge.startDate = startDate.ToString("yyyy-MM-dd HH:mm:ss", System.Globalization.CultureInfo.InvariantCulture);
+		var conceptData = _conceptMap.GetConceptData(w, e, c);
+		if (conceptData.Concept.HasValue && conceptData.Concept.Value > (int)newConcept)
+		{
+			return;
+		}
+
+		conceptData.Concept = (int)newConcept;
+		conceptData.StartDate = startDate;
+		conceptData.EndDate = DateTime.UtcNow;
 
 		// atualiza a liberacao do proximo episodio
-		if (e < _conceptMap.worlds[w].episodes.Length - 1)
-		{
-			if (_conceptMap.worlds[w].episodes[e + 1].liberationStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT)
-				_conceptMap.worlds[w].episodes[e + 1].liberationStatus = CheckNextEpisodeLiberationStatus(_conceptMap.worlds[w].episodes[e]);
-		}
+		_conceptMap.TryUpdateNextEpisodeLiberationStatus(challengeScene);
 
 #if UNITY_EDITOR
 		if (loginInfo == null)
@@ -81,13 +81,6 @@ public class UserProfile : Singleton<UserProfile>
 
 		SaveUserProfile();
 		SendConceptMapToSyncer();
-	}
-
-	public EpisodeLiberationTypes CheckNextEpisodeLiberationStatus(ConceptEpisode cEpisode)
-	{
-		if (cEpisode.challenges.All(c => c.concept == ConceptTypes.CONCEPT_GREEN))
-			return EpisodeLiberationTypes.ALLOW_BY_CONCEPT;
-		return EpisodeLiberationTypes.BLOCK_BY_CONCEPT;
 	}
 
 	public void SetLoginInfo(string l, string p, LoginInfo i)
@@ -115,7 +108,7 @@ public class UserProfile : Singleton<UserProfile>
 
 	private async void SendConceptMapToSyncer()
 	{
-		if (loginInfo.status.code != ConnectionResponse.OK)
+		if (loginInfo.Status.code != ConnectionResponse.OK)
 		{
 			return;
 		}
@@ -124,7 +117,7 @@ public class UserProfile : Singleton<UserProfile>
 
 		if (cm == null) // estava on line no login (caso contrario nem teria enviado nada..) e voltou com algum erro
 		{
-			loginInfo.status.code = ConnectionResponse.CONNECTION_OFFLINE;
+			loginInfo.Status.code = ConnectionResponse.CONNECTION_OFFLINE;
 		}
 		else
 		{
@@ -144,27 +137,26 @@ public class UserProfile : Singleton<UserProfile>
 	{
 
 		_conceptMap = new ConceptMap();
-		_conceptMap.worlds = new ConceptWorld[4];
+		_conceptMap.Concepts = new ConceptData[4 * 8 * 5];
+		int index = 0;
 		for (int w = 0 ; w < 4 ; w++)
 		{
-			_conceptMap.worlds[w] = new ConceptWorld();
-			_conceptMap.worlds[w].episodes = new ConceptEpisode[8];
 			for (int e = 0 ; e < 8 ; e++)
 			{
-				_conceptMap.worlds[w].episodes[e] = new ConceptEpisode();
-				_conceptMap.worlds[w].episodes[e].challenges = new ConceptChallenge[5];
 				for (int c = 0 ; c < 5 ; c++)
 				{
-					_conceptMap.worlds[w].episodes[e].challenges[c] = new ConceptChallenge();
-					_conceptMap.worlds[w].episodes[e].challenges[c].concept = ConceptTypes.CONCEPT_NOT_PLAYED;
-					_conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
-					_conceptMap.worlds[w].episodes[e].challenges[c].startDate = null;
+					_conceptMap.Concepts[index++] = new ConceptData()
+					{
+						WorldIndex = w,
+						EpisodeIndex = e,
+						ChallengeIndex = c,
+						Concept = (int)ConceptTypes.CONCEPT_NOT_PLAYED,
+						EndDate = null,
+						StartDate = null,
+						LiberationType = e == 0 ? EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS : EpisodeLiberationTypes.BLOCK_BY_CONCEPT
+					};
 				}
 			}
-		}
-		for (int i = 0 ; i < 4 ; i++)
-		{
-			_conceptMap.worlds[i].episodes[0].liberationStatus = EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS;
 		}
 	}
 
@@ -177,8 +169,8 @@ public class UserProfile : Singleton<UserProfile>
 		this.pass = "";
 		this.loginInfo = new LoginInfo()
 		{
-			role = "Estudante",
-			status = new StatusInfo() { code = ConnectionResponse.CONNECTION_OFFLINE },
+			Role = "Estudante",
+			Status = new StatusInfo() { code = ConnectionResponse.CONNECTION_OFFLINE },
 		};
 	}
 #endif

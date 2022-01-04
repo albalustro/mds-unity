@@ -236,8 +236,7 @@ namespace MDS.Core.SceneManagement
             {
                 Scene curScene = SceneManager.GetActiveScene();
                 if(curScene.IsChallenge())
-                    UserProfile.Instance.UpdateConcept(curScene,
-                                Challenge.ChallengeConcept, DateTime.Now);
+                    UserProfile.Instance.UpdateConcept(curScene, Challenge.ChallengeConcept, DateTime.UtcNow);
                 else
                     LogError("GoBackAfterChallenge sendo invocado a partir de uma cena que não é um desafio");
             }

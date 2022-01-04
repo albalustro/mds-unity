@@ -1,26 +1,22 @@
 ﻿using UnityEngine;
-using System.Collections;
+using System;
+using System.Collections.Generic;
 
 public class XmsLoginInfo : XmsMessage<LoginInfo> { }
 
 [System.Serializable]
 public class LoginInfo
 {
-    public LoginInfo()
-    {
+	public LoginInfo()
+	{
 
-    }
+	}
 
-	public StatusInfo status;
-	public string token;
-	public string name;
-	public string role;
-}
+	public StatusInfo Status { get; set; }
 
-public class LoginRequest
-{
-	public string Login { get; set; }
-	public string Password { get; set; }
-	public string Game { get; set; }
-	public string SeasonId { get; set; }
+	public string Token { get; set; }
+	public string Name { get; set; }
+	public string Role { get; set; }
+
+	public List<ConceptData> Concepts { get; set; }
 }

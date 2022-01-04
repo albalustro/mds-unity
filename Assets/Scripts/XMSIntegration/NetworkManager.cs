@@ -1,8 +1,5 @@
 ﻿using UnityEngine;
-using System.Collections;
-using System;
 using Newtonsoft.Json;
-using MDS.ScriptableObjects;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
 using UnityEngine.Networking;
@@ -43,13 +40,13 @@ public class NetworkManager : Singleton<NetworkManager>
 			DontDestroyOnLoad(gameObject);
 	}
 
-	private async Task<string> Post(string url, string bodyJsonString = null)
+	private async Task<NetworkResponse> Post(string url, string bodyJsonString = null)
 	{
 		using (UnityWebRequest request = new UnityWebRequest(url, "POST"))
 		{
 			if (UserProfile.Instance.loginInfo != null)
 			{
-				string authorization = $"Bearer {UserProfile.Instance.loginInfo.token}";
+				string authorization = $"Bearer {UserProfile.Instance.loginInfo.Token}";
 				request.SetRequestHeader("Authorization", authorization);
 			}
 
@@ -64,7 +61,7 @@ public class NetworkManager : Singleton<NetworkManager>
 
 			await request.SendWebRequest();
 
-			return request.downloadHandler.text;
+			return new NetworkResponse() { Result = request.result, HttpCode = request.responseCode, Body = request.downloadHandler.text };
 		}
 	}
 
@@ -72,37 +69,68 @@ public class NetworkManager : Singleton<NetworkManager>
 	public async Task<LoginInfo> DoLogin(string user, string pass)
 	{
 		Scene curScene = SceneManager.GetActiveScene();
-		string game = "MDS" + curScene.GetGameIndex().ToString();
 		string season = curScene.GetGameIndex().ToString();
 
 		var loginRequest = new LoginRequest()
 		{
 			Login = user,
 			Password = pass,
-			Game = game,
 			SeasonId = season
 		};
 
 		var requestStr = JsonConvert.SerializeObject(loginRequest, settings);
-		var resultStr = await Post(connectionConfig.loginURL, requestStr);
+		var postResult = await Post(connectionConfig.loginURL, requestStr);
 
-		XmsLoginInfo info = JsonConvert.DeserializeObject<XmsLoginInfo>(resultStr);
+		switch (postResult.Result)
+		{
+			case UnityWebRequest.Result.ConnectionError:
+			case UnityWebRequest.Result.ProtocolError:
+			case UnityWebRequest.Result.DataProcessingError:
+				return null;
+		}
+
+		XmsLoginInfo info = JsonConvert.DeserializeObject<XmsLoginInfo>(postResult.Body);
 
 		return info?.Data;
 	}
+
 	#endregion
 
 	#region ConceptMap
+
+	public Task RefreshConceptMap()
+	{
+
+	}
+
 	public async Task<ConceptMap> DoSincronize(ConceptMap cm)
 	{
 		var requestStr = JsonConvert.SerializeObject(cm, settings);
-		var resultStr = await Post(connectionConfig.conceptURL, requestStr);
+		var postResult = await Post(connectionConfig.conceptURL, requestStr);
 
-		var newConceptMap = JsonConvert.DeserializeObject<XmsConceptInfo>(resultStr);
+		switch (postResult.Result)
+		{
+			case UnityWebRequest.Result.ConnectionError:
+			case UnityWebRequest.Result.ProtocolError:
+			case UnityWebRequest.Result.DataProcessingError:
+				return null;
+		}
+
+		var newConceptMap = JsonConvert.DeserializeObject<XmsConceptInfo>(postResult.Body);
 
 		return newConceptMap?.Data;
 	}
 
 	#endregion
+
+
+	private class NetworkResponse
+	{
+		public long HttpCode { get; set; }
+
+		public UnityWebRequest.Result Result { get; set; }
+
+		public string Body { get; set; }
+	}
 
 }

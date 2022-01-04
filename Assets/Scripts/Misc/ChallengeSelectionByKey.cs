@@ -44,27 +44,25 @@ public class ChallengeSelectionByKey : MDSBehaviour
 
     public IEnumerator ConfigureCrystalsOnKey(int episodeIndex)
 	{
-		int w, e;
-
 		Scene scene = SceneManager.GetActiveScene ();
-		w = scene.GetWorldIndex() - 1;
+		var w = scene.GetWorldIndex() - 1;
 
-        bool directAccess = true;
-        if (UserProfile.Instance.IsStudent)
-            directAccess = UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckDirectAccessToChallenge();
+        bool hasDirectAccess = true;
+		if (UserProfile.Instance.IsStudent)
+		{
+			hasDirectAccess = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
+		}
 
         foreach(var item in challengeCrystalList)
         {
-            if(directAccess)
-            {
-                item.Value.button.onClick.AddListener(() => loadChallengeOnClick(item.Key + 1, episodeIndex));
-                item.Value.button.interactable = true;
-            }
-            else
-                item.Value.button.interactable = false;
+			if (hasDirectAccess)
+			{
+				item.Value.button.onClick.AddListener(() => loadChallengeOnClick(item.Key + 1, episodeIndex));			
+			}
 
-            if(UserProfile.Instance.IsStudent &&
-                UserProfile.Instance.conceptMap.worlds[w].episodes[episodeIndex - 1].CheckChallengeComplete(item.Key))
+			item.Value.button.interactable = hasDirectAccess;
+
+			if (UserProfile.Instance.IsStudent && UserProfile.Instance.conceptMap.CheckChallengeComplete(scene, item.Key))
             {
 				//coloca na posição correta (aberto ou fechado)
 				item.Value.go.GetComponent<RectTransform>().localPosition = item.Value.completedChallengeLocalPosition;
@@ -74,6 +72,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
 				//coloca na posição correta (aberto ou fechado)
 				item.Value.go.GetComponent<RectTransform>().localPosition = item.Value.uncompletedChallengeLocalPosition;
 			}
+
 			//ativa o objeto
 			item.Value.go.SetActive (true);
 			//faz o fade in e a escala com tween e delay para o proximo

@@ -7,85 +7,81 @@ using UnityEngine.UI;
 public class ChallengeMapEpisodeUI : MonoBehaviour
 {
 
-    public Texture episodeCompleteTexture;
-    public Texture episodeIndexCompleteTexture;
+	public Texture episodeCompleteTexture;
+	public Texture episodeIndexCompleteTexture;
 
-    public Texture episodeBlockedTexture;
-    public Texture episodeIndexBlockedTexture;
+	public Texture episodeBlockedTexture;
+	public Texture episodeIndexBlockedTexture;
 
-    private GameObject letter;
-    private GameObject locker;
-    private RawImage episodeIndexImage;
-    private RawImage episodeImage;
-    private GameObject[] crystals;
-    private GameObject key;
-    private int world;
-    private int episode;
+	private GameObject letter;
+	private GameObject locker;
+	private RawImage episodeIndexImage;
+	private RawImage episodeImage;
+	private GameObject[] crystals;
+	private GameObject key;
+	private int world;
+	private int episode;
 
-    void Start()
-    {
-        key = transform.Find("chave_base").gameObject;
-        letter = transform.Find("cartinha").gameObject;
-        locker = transform.Find("cadeado").gameObject;
-        episodeIndexImage = transform.Find("EpisodeIndex").GetComponent<RawImage>();
-        episodeImage = GetComponent<RawImage>();
-        crystals = new GameObject[5];
-        for(int i = 0; i < 5; i++)
-        {
-            crystals[i] = transform.Find("chave_base/MiniPedras/MiniPedra" + (i + 1).ToString()).gameObject;
-        }
+	void Start()
+	{
+		key = transform.Find("chave_base").gameObject;
+		letter = transform.Find("cartinha").gameObject;
+		locker = transform.Find("cadeado").gameObject;
+		episodeIndexImage = transform.Find("EpisodeIndex").GetComponent<RawImage>();
+		episodeImage = GetComponent<RawImage>();
+		crystals = new GameObject[5];
+		for (int i = 0 ; i < 5 ; i++)
+		{
+			crystals[i] = transform.Find("chave_base/MiniPedras/MiniPedra" + (i + 1).ToString()).gameObject;
+		}
+
+		episode = int.Parse(gameObject.name.Substring(gameObject.name.Length - 2, 1)) - 1;
+		world = int.Parse(transform.parent.name.Substring(transform.parent.name.Length - 2, 1)) - 1;
+
+		EpisodeLiberationTypes libStatus = UserProfile.Instance.conceptMap.EpisodeLiberationStatusByWorldAndEpisode(world, episode);
+		
+		if (!UserProfile.Instance.IsStudent)
+		{
+			libStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
+		}
+
+		letter.SetActive(libStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER);
+		locker.SetActive(libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER);
+
+		bool episodeComplete = true;
+		if (UserProfile.Instance.IsStudent)
+		{
+			episodeComplete = UserProfile.Instance.conceptMap.CheckEpisodeComplete(world, episode);
+		}
+
+		if ((libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT ||
+		   libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER) && !episodeComplete)
+		{
+			episodeImage.texture = episodeBlockedTexture;
+			episodeIndexImage.texture = episodeIndexBlockedTexture;
+			key.SetActive(false);
+			return;
+		}
+
+		if (episodeComplete)
+		{
+			episodeImage.texture = episodeCompleteTexture;
+			episodeIndexImage.texture = episodeIndexCompleteTexture;
+		}
+
+		for (int i = 0 ; i < 5 ; i++)
+		{
+			bool active = true;
+			if (UserProfile.Instance.IsStudent)
+			{
+				active = UserProfile.Instance.conceptMap.CheckChallengeComplete(world, episode, i);
+			}
+			crystals[i].SetActive(active);
+		}
 
 
 
-        episode = int.Parse(gameObject.name.Substring(gameObject.name.Length - 2, 1)) - 1;
-        world = int.Parse(transform.parent.name.Substring(transform.parent.name.Length - 2, 1)) - 1;
-
-        EpisodeLiberationTypes libStatus;
-
-        if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
-            libStatus = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].liberationStatus;
-        else
-            libStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-
-        letter.SetActive(libStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER);
-        locker.SetActive(libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER);
-
-        bool episodeComplete;
-        if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
-            episodeComplete = UserProfile.Instance.conceptMap.worlds[world].episodes[episode].CheckEpisodeComplete();
-        else
-            episodeComplete = true;
-
-        if ((libStatus == EpisodeLiberationTypes.BLOCK_BY_CONCEPT || 
-           libStatus == EpisodeLiberationTypes.BLOCK_BY_TEACHER) && !episodeComplete)
-        {
-            episodeImage.texture = episodeBlockedTexture;
-            episodeIndexImage.texture = episodeIndexBlockedTexture;
-            key.SetActive(false);
-            return;
-        }
-
-        if(episodeComplete)
-        {
-            episodeImage.texture = episodeCompleteTexture;
-            episodeIndexImage.texture = episodeIndexCompleteTexture;
-        }
-
-        for(int i = 0; i < 5; i++)
-        {
-
-            bool active = true;
-            if (UserProfile.Instance.loginInfo.role.Equals("Estudante"))
-                active = UserProfile.Instance.conceptMap
-                        .worlds[world]
-                        .episodes[episode]
-                        .challenges[i].concept == ConceptTypes.CONCEPT_GREEN;
-            crystals[i].SetActive(active);
-        }
-
-        
-
-    }
+	}
 
 
 }

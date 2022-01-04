@@ -6,7 +6,8 @@ using MDS.Utilities;
 using MDS.Core.SceneManagement;
 using UnityEngine.UI;
 
-public class MapSceneButtonController : MDSBehaviour {
+public class MapSceneButtonController : MDSBehaviour
+{
 
 	public SpriteRenderer episodeIndexRenderer;
 	public Sprite episodeIndexNormal;
@@ -15,102 +16,106 @@ public class MapSceneButtonController : MDSBehaviour {
 	public int episodeIndex;
 	public GameObject keyBase;
 	public GameObject keyColliderGO;
-	public GameObject locked;		//cadeado
-	public GameObject letter;		//letter
+	public GameObject locked;       //cadeado
+	public GameObject letter;       //letter
 	public GameObject crystalsHolder;
 
 	private Collider2D _btnCollider;
 	private Animator _anim;
 
-    private bool _loadingScene = false;
+	private bool _loadingScene = false;
 
-	void Start () {
-		_anim = GetComponent<Animator> ();
-		_btnCollider = GetComponent<Collider2D> ();
-		SetupButtonsByConpects ();
+	void Start()
+	{
+		_anim = GetComponent<Animator>();
+		_btnCollider = GetComponent<Collider2D>();
+		SetupButtonsByConpects();
 	}
-	
+
 	void SetupButtonsByConpects()
 	{
 		int w, e;
 
-		Scene scene = SceneManager.GetActiveScene ();
+		Scene scene = SceneManager.GetActiveScene();
 		w = scene.GetWorldIndex() - 1;
 		e = episodeIndex - 1;
-        EpisodeLiberationTypes liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-        if (UserProfile.Instance.IsStudent)
-           liberationStatus = UserProfile.Instance.conceptMap.worlds [w].episodes [e].liberationStatus;
+
+		EpisodeLiberationTypes liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
+		bool hasDirectAccessToChallenges = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
+
+		if (UserProfile.Instance.IsStudent)
+		{
+			liberationStatus = UserProfile.Instance.conceptMap.EpisodeLiberationStatusByScene(scene);
+		}
 
 		//ALLOW FOR TEACHER = TUDO LIBERADO
 		if (liberationStatus == EpisodeLiberationTypes.ALLOW_FOR_TEACHER)
 		{
-			_anim.SetInteger ("Status", 1);
+			_anim.SetInteger("Status", 1);
 			episodeIndexRenderer.sprite = episodeIndexNormal;
-		} 
+			hasDirectAccessToChallenges = true;
+		}
 		else
 		{
 			//EPISÓDIO COMPLETO (ROXO)
-			if (UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckEpisodeComplete ())
+			if (UserProfile.Instance.conceptMap.CheckEpisodeComplete(scene))
 			{
-				_anim.SetInteger ("Status", 2);
+				_anim.SetInteger("Status", 2);
 				episodeIndexRenderer.sprite = episodeIndexCompleted;
-			} 
-		//EPISÓDIO LIBERADO (VERDE)
+			}
+			//EPISÓDIO LIBERADO (VERDE)
 			else if (liberationStatus == EpisodeLiberationTypes.ALLOW_BY_CONCEPT || liberationStatus == EpisodeLiberationTypes.ALLOW_BY_FIRST_ACCESS)
 			{
-				_anim.SetInteger ("Status", 1);
+				_anim.SetInteger("Status", 1);
 				episodeIndexRenderer.sprite = episodeIndexNormal;
-				if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge ())
-					keyColliderGO.SetActive (false);
-
-			} 
-		//EPISÓDIO BLOQUEADO (LARANJA/CINZA)
+			}
+			//EPISÓDIO BLOQUEADO (LARANJA/CINZA)
 			else
 			{
-				keyBase.SetActive (false);
+				keyBase.SetActive(false);
 				_btnCollider.enabled = false;
-				locked.SetActive (true);
-				_anim.SetInteger ("Status", 0);
+				locked.SetActive(true);
+				_anim.SetInteger("Status", 0);
 				episodeIndexRenderer.sprite = episodeIndexLocked;
 
 				//EPISÓDIO LIBERADO PELO PROFESSOR
 				if (liberationStatus == EpisodeLiberationTypes.ALLOW_BY_TEACHER)
 				{
-					letter.SetActive (true);
-					keyBase.SetActive (true);
-					//_btnCollider.enabled = true;
-					if (!UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckDirectAccessToChallenge ())
-						keyColliderGO.SetActive (false);
+					letter.SetActive(true);
+					keyBase.SetActive(true);
 				}
 			}
 		}
 
-		StartCoroutine(SetupCrystals (w, e));
+		keyColliderGO.SetActive(hasDirectAccessToChallenges);
+		StartCoroutine(SetupCrystals(scene));
 	}
-		
-	private IEnumerator SetupCrystals(int w, int e)
+
+	private IEnumerator SetupCrystals(Scene scene)
 	{
-		yield return new WaitForSeconds (0.5f);
-		for (int i = 0; i < 5; i++)
+		yield return new WaitForSeconds(0.5f);
+		for (int i = 0 ; i < 5 ; i++)
 		{
-			if (UserProfile.Instance.IsStudent==false || 
-                UserProfile.Instance.conceptMap.worlds [w].episodes [e].CheckChallengeComplete (i))
-				crystalsHolder.transform.GetChild (i).gameObject.SetActive (true);
+			if (!UserProfile.Instance.IsStudent || UserProfile.Instance.conceptMap.CheckChallengeComplete(scene, i))
+			{
+				crystalsHolder.transform.GetChild(i).gameObject.SetActive(true);
+			}
 		}
 	}
 
 
 	public void LoadEpisode()
 	{
-        if(_loadingScene) return;
-        _loadingScene = true;
-		SceneLoader.Instance.LoadEpisodeScene (episodeIndex);
+		if (_loadingScene)
+			return;
+		_loadingScene = true;
+		SceneLoader.Instance.LoadEpisodeScene(episodeIndex);
 	}
 
 
 	public void ChangeButtonConceptTemporarilyToNormal()
 	{
-		_anim.SetInteger ("Status", 1);
+		_anim.SetInteger("Status", 1);
 		episodeIndexRenderer.sprite = episodeIndexNormal;
 		_btnCollider.enabled = true;
 	}
