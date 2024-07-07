@@ -35,6 +35,14 @@ public class ConceptMap
 	{
 		return Concepts.First(cd => cd.WorldIndex == w && cd.EpisodeIndex == e && cd.ChallengeIndex == c);
 	}
+	
+	public void SetLiberationStatusForEpisode(int w, int e, EpisodeLiberationTypes liberationType = EpisodeLiberationTypes.ALLOW_BY_CONCEPT)
+	{
+		foreach (var cd in FromEpisode(w, e))
+        {
+            cd.LiberationType = liberationType;
+        }
+	}
 
 	/// <summary>
 	/// This method will give the liberarion status of a given episode
@@ -54,13 +62,13 @@ public class ConceptMap
 	}
 
 	/// <summary>
-	/// This method will check if exist a next episode in in the world and
+	/// This method will check if exist a next episode in the world and
 	///   if the case, it will check all challenges of the current episode 
 	///   and determine what should be the status
 	///   of the next episode.
 	/// </summary>
 	/// <param name="scene">Current Episode Scene</param>
-	public async Task TryUpdateNextEpisodeLiberationStatus(Scene scene)
+	public void TryUpdateNextEpisodeLiberationStatus(Scene scene)
 	{
 		var w = scene.GetWorldIndex() - 1;
 		var e = scene.GetEpisodeIndex() - 1;
@@ -70,7 +78,7 @@ public class ConceptMap
 			return;
 		}
 
-		var finishedCurrentEpisode = FromEpisode(w, e).All(c => c.Concept.HasValue && c.Concept.Value == (int)ConceptTypes.CONCEPT_GREEN);
+		var finishedCurrentEpisode = CheckEpisodeComplete(w, e); //FromEpisode(w, e).All(c => c.Concept.HasValue && c.Concept.Value == (int)ConceptTypes.CONCEPT_GREEN);
 
 		if (!finishedCurrentEpisode)
 		{
@@ -80,14 +88,19 @@ public class ConceptMap
 		e++; // next episode
 		var nextEpisodeLiberationType = FromEpisode(w, e).First().LiberationType;
 
-		if (nextEpisodeLiberationType == EpisodeLiberationTypes.BLOCK_BY_TEACHER)
+		if (nextEpisodeLiberationType == EpisodeLiberationTypes.BLOCK_BY_CONCEPT)
 		{
-			return;
+			//Set next episode as ALLOW_BY_CONCEPT
+			SetLiberationStatusForEpisode(w, e);
 		}
+		
+		// if (nextEpisodeLiberationType == EpisodeLiberationTypes.BLOCK_BY_TEACHER)
+		// {
+		// 	return;
+		// }
 
 		// next episode should be ok to play
-		await NetworkManager.Instance.RefreshConceptMap();
-
+		//await NetworkManager.Instance.RefreshConceptMap();
 	}
 
 
@@ -124,15 +137,15 @@ public class ConceptMap
 	}
 
 
-	/// <summary>
-	/// Allow the player to play directly a certain challenge when 
-	///		all challenges in this episode was already played before
-	/// </summary>
-	/// <param name="scene">Challenge scene</param>
-	/// <returns>TRUE if already have concepts in all challenges of this episode, false otherwise</returns>
-	public bool CheckDirectAccessToChallenge(Scene scene)
+	///  <summary>
+	///  Allow the player to play directly a certain challenge when 
+	/// 		all challenges in this episode was already played before
+	///  </summary>
+	///  <param name="world"></param>
+	///  <param name="episode"></param>
+	///  <returns>TRUE if already have concepts in all challenges of this episode, false otherwise</returns>
+	public bool CheckDirectAccessToChallenge(int world, int episode)
 	{
-		return FromEpisode(scene).All(c => c.Concept.HasValue || c.Concept.Value != (int)ConceptTypes.CONCEPT_NOT_PLAYED);
+		return FromEpisode(world, episode).All(c => c.Concept.HasValue && c.Concept.Value != (int)ConceptTypes.CONCEPT_NOT_PLAYED);
 	}
-
 }

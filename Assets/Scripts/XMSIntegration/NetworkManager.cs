@@ -102,10 +102,10 @@ public class NetworkManager : Singleton<NetworkManager>
 
 	#region ConceptMap
 
-	public async Task RefreshConceptMap()
-	{
-		await Task.Delay(1000);
-	}
+	// public async Task RefreshConceptMap()
+	// {
+	// 	
+	// }
 
 	public async Task<ConceptMap> DoSincronize(ConceptMap cm)
 	{

@@ -97,12 +97,39 @@ public class LoginFormUI : MonoBehaviour
             _tryingLogin = true;
             _feedbackUI.SetText("Aguarde...").SetButtons(false, false, false, false).Show();
 
-            var loginInfo = await NetworkManager.Instance.DoLogin(_userField.text, _passField.text);
-            DoLoginCallback(loginInfo);
+            // var loginInfo = await NetworkManager.Instance.DoLogin(_userField.text, _passField.text);
+            // DoLoginCallback(loginInfo);
+            DoMockLogin();
         }
 
     }
 
+    private void DoMockLogin()
+    {
+        Scene curScene = SceneManager.GetActiveScene();
+        _feedbackUI.Close(); 
+
+        LoginInfo loginInfo = new LoginInfo()
+        {
+            Role = "Estudante",
+            Status = new StatusInfo() {  code= ConnectionResponse.CONNECTION_OFFLINE},
+        };
+
+
+        var dic = new Dictionary<string, object>();
+        dic.Add("Game", "MDS" + curScene.GetGameIndex().ToString());
+        dic.Add("Plat", Application.platform.ToString());
+        dic.Add("User", _userField.text);
+
+        UserProfile.Instance.SetLoginInfo(_userField.text, _passField.text, loginInfo);
+        SceneLoader.Instance.LoadRoomScene();
+
+        dic.Add("dt", DateTime.Now.ToString());
+
+        Analytics.CustomEvent("GameLogin", dic);
+        Analytics.FlushEvents();
+    }
+    
     #endregion
 
     private void DoLoginCallback(LoginInfo wsReturn)

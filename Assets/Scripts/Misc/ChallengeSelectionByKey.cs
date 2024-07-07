@@ -46,11 +46,12 @@ public class ChallengeSelectionByKey : MDSBehaviour
 	{
 		Scene scene = SceneManager.GetActiveScene ();
 		var w = scene.GetWorldIndex() - 1;
-
+		var e = episodeIndex - 1;
+		
         bool hasDirectAccess = true;
 		if (UserProfile.Instance.IsStudent)
 		{
-			hasDirectAccess = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
+			hasDirectAccess = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(w, e);
 		}
 
         foreach(var item in challengeCrystalList)
@@ -62,7 +63,7 @@ public class ChallengeSelectionByKey : MDSBehaviour
 
 			item.Value.button.interactable = hasDirectAccess;
 
-			if (UserProfile.Instance.IsStudent && UserProfile.Instance.conceptMap.CheckChallengeComplete(scene, item.Key))
+			if (UserProfile.Instance.IsStudent && UserProfile.Instance.conceptMap.CheckChallengeComplete(w, e, item.Key))
             {
 				//coloca na posição correta (aberto ou fechado)
 				item.Value.go.GetComponent<RectTransform>().localPosition = item.Value.completedChallengeLocalPosition;

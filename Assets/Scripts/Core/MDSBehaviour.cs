@@ -34,7 +34,7 @@ public class MDSBehaviour : BaseBehavior
         {
             if(a[i] == null)
             {
-                LogError("Action n„o definida.");
+                LogError("Action n√£o definida.");
                 continue;
             }
 

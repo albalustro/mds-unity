@@ -41,8 +41,7 @@ public class MapSceneButtonController : MDSBehaviour
 		e = episodeIndex - 1;
 
 		EpisodeLiberationTypes liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-		//bool hasDirectAccessToChallenges = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
-		bool hasDirectAccessToChallenges = false;
+		bool hasDirectAccessToChallenges = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(w, e);
 
 		if (UserProfile.Instance.IsStudent)
 		{
