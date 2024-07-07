@@ -11,12 +11,12 @@ namespace MDS.Actions
 	{
 
 		[FullInspector.InspectorTooltip("Dá lock nos draggables dos slots do grupo selecionado")]
-		[FullInspector.FIInspectorName("DropGroupDraggableContent")]
+		//[FullInspector.FIInspectorName("DropGroupDraggableContent")]
 		public GameObject m_freezeEntireGroup;
 		private bool FreezeOrUnfreezeEntireGroup {get {return m_freezeEntireGroup != null;}}
 
 		[FullInspector.InspectorTooltip("Dá lock nos filhos do GameObject selecionado")]
-		[FullInspector.FIInspectorName("ChildrensOfThisGO")]
+		//[FullInspector.FIInspectorName("ChildrensOfThisGO")]
 		public GameObject m_freezeGroupContent;
 
 		[SerializeField]

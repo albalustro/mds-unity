@@ -12,27 +12,27 @@ namespace MDS.Actions{
 	public class SetSelected : BaseAction
 	{
         [InspectorComment("Selecionar qual(is) objeto(os) serão alvos do select/unselect ")]
-        [InspectorOrder(3)]
+        [FullInspector.InspectorOrder(3)]
 		public bool m_useMemorizedGo;
 
-		[FullInspector.InspectorHideIf("m_useMemorizedGo"), InspectorOrder(4)]
+		[FullInspector.InspectorHideIf("m_useMemorizedGo"), FullInspector.InspectorOrder(4)]
 		public GameObject[] obj;
 
-		[SerializeField, InspectorOrder(5), InspectorName("Select/Unselect")]
+		[SerializeField, FullInspector.InspectorOrder(5), InspectorName("Select/Unselect")]
 		private bool m_set;
 
         [InspectorComment("Abaixo use o grupo para fazer unselect/lock em todos os elementos do grupo")]
-		[SerializeField,InspectorOrder(0), Tooltip("Drag SelectableGroup to here if you want to Lock/Unlock all selectable colliders")]
+		[SerializeField,FullInspector.InspectorOrder(0), Tooltip("Drag SelectableGroup to here if you want to Lock/Unlock all selectable colliders")]
 		private Transform m_groupTransform;
 		private bool ShowLockUnlockButton {get {return m_groupTransform != null;}}
 
 
 		[InspectorShowIf("ShowLockUnlockButton")]
-		[SerializeField, InspectorOrder(2)]
+		[SerializeField, FullInspector.InspectorOrder(2)]
 		private bool m_unselectAll = false;
 
 		[SerializeField, InspectorTooltip("Check this if you want to lock/unlock the selected group")]
-		[InspectorShowIf("ShowLockUnlockButton"), InspectorOrder(1)]
+		[InspectorShowIf("ShowLockUnlockButton"), FullInspector.InspectorOrder(1)]
 		private bool m_lockGroup;
 
 

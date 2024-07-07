@@ -19,20 +19,20 @@ public class EpisodeSceneManager : MDSBehaviour {
     [Serializable]
     public class ParallaxItem
     {
-        [InspectorOrder(0)]
+        [FullInspector.InspectorOrder(0)]
         public Transform target;
-        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(1)]
+        [InspectorShowIf("ShowCaptureButtons"), FullInspector.InspectorOrder(1)]
         public Vector3 rightPosition;
-        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(3)]
+        [InspectorShowIf("ShowCaptureButtons"), FullInspector.InspectorOrder(3)]
         public Vector3 leftPostion;
 
-        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(2), InspectorButton]
+        [InspectorShowIf("ShowCaptureButtons"), FullInspector.InspectorOrder(2), InspectorButton]
         void CaptureRightPosition()
         {
             rightPosition = target.position;
         }
 
-        [InspectorShowIf("ShowCaptureButtons"), InspectorOrder(4), InspectorButton]
+        [InspectorShowIf("ShowCaptureButtons"), FullInspector.InspectorOrder(4), InspectorButton]
         void CaptureLeftPosition()
         {
             leftPostion = target.position;

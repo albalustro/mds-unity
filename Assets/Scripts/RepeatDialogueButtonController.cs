@@ -13,7 +13,7 @@ public class RepeatDialogueButtonController : MonoBehaviour {
 	private Image image;
 	private Button button;
 	private SpriteState spriteState;
-
+	
 	void Start ()
 	{
 		Scene scene = SceneManager.GetActiveScene ();

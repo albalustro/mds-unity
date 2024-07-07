@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections;
-using System.Collections.Generic;
 using FullInspector;
 using UnityEngine;
 
@@ -13,11 +11,11 @@ public class TrackerYOffSetScale : MDSBehaviour {
         public Vector3 scale;
     }
 
-    [SerializeField, InspectorOrder(0) ]
+    [SerializeField, FullInspector.InspectorOrder(0)]
     private YScale _minYScale;
 
 #if UNITY_EDITOR
-    [InspectorButton, InspectorOrder(1)]
+    [InspectorButton, FullInspector.InspectorOrder(1)]
     public void CaptureMin()
     {
         _minYScale = new YScale();
@@ -26,11 +24,11 @@ public class TrackerYOffSetScale : MDSBehaviour {
     }
 #endif
 
-    [SerializeField, InspectorOrder(2)]
+    [SerializeField, FullInspector.InspectorOrder(2)]
     private YScale _maxYScale;
 
 #if UNITY_EDITOR
-    [InspectorButton, InspectorOrder(3)]
+    [InspectorButton, FullInspector.InspectorOrder(3)]
     public void CaptureMax()
     {
         _maxYScale = new YScale();

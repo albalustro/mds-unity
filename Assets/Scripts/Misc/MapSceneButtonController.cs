@@ -41,11 +41,12 @@ public class MapSceneButtonController : MDSBehaviour
 		e = episodeIndex - 1;
 
 		EpisodeLiberationTypes liberationStatus = EpisodeLiberationTypes.ALLOW_FOR_TEACHER;
-		bool hasDirectAccessToChallenges = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
+		//bool hasDirectAccessToChallenges = UserProfile.Instance.conceptMap.CheckDirectAccessToChallenge(scene);
+		bool hasDirectAccessToChallenges = false;
 
 		if (UserProfile.Instance.IsStudent)
 		{
-			liberationStatus = UserProfile.Instance.conceptMap.EpisodeLiberationStatusByScene(scene);
+			liberationStatus = UserProfile.Instance.conceptMap.EpisodeLiberationStatusByWorldAndEpisode(w, e);
 		}
 
 		//ALLOW FOR TEACHER = TUDO LIBERADO
@@ -58,7 +59,7 @@ public class MapSceneButtonController : MDSBehaviour
 		else
 		{
 			//EPISÓDIO COMPLETO (ROXO)
-			if (UserProfile.Instance.conceptMap.CheckEpisodeComplete(scene))
+			if (UserProfile.Instance.conceptMap.CheckEpisodeComplete(w, e))
 			{
 				_anim.SetInteger("Status", 2);
 				episodeIndexRenderer.sprite = episodeIndexCompleted;
@@ -88,15 +89,15 @@ public class MapSceneButtonController : MDSBehaviour
 		}
 
 		keyColliderGO.SetActive(hasDirectAccessToChallenges);
-		StartCoroutine(SetupCrystals(scene));
+		StartCoroutine(SetupCrystals(w, e));
 	}
 
-	private IEnumerator SetupCrystals(Scene scene)
+	private IEnumerator SetupCrystals(int world, int episode)
 	{
 		yield return new WaitForSeconds(0.5f);
 		for (int i = 0 ; i < 5 ; i++)
 		{
-			if (!UserProfile.Instance.IsStudent || UserProfile.Instance.conceptMap.CheckChallengeComplete(scene, i))
+			if (!UserProfile.Instance.IsStudent || UserProfile.Instance.conceptMap.CheckChallengeComplete(world, episode, i))
 			{
 				crystalsHolder.transform.GetChild(i).gameObject.SetActive(true);
 			}

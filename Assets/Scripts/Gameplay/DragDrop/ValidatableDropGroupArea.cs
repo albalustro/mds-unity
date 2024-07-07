@@ -16,7 +16,7 @@ namespace MDS.Gameplay.DragDrop
 		[InspectorMargin(10), InspectorDivider, InspectorHeader("Validation Properties")]
 
 		[InspectorCategory("Validation")]
-		[SerializeField, InspectorOrder(0), InspectorTooltip("Com essa propriedade ativa, a validação usará um algoritmo diferente: o primeiro elemento define o LABEL que TODOS OS DEMAIS deverão ter para que a validação tenha sucesso. Caso o primeiro elemento tenha mais de um label, todos serão testados da mesma maneira")]
+		[SerializeField, FullInspector.InspectorOrder(0), InspectorTooltip("Com essa propriedade ativa, a validação usará um algoritmo diferente: o primeiro elemento define o LABEL que TODOS OS DEMAIS deverão ter para que a validação tenha sucesso. Caso o primeiro elemento tenha mais de um label, todos serão testados da mesma maneira")]
 		private bool _isGeneric;
 
         [HideInInspector]

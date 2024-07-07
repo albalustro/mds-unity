@@ -43,7 +43,7 @@ namespace MDS.Actions
             }
         }
 
-        [InspectorButton, InspectorOrder(0)]
+        [InspectorButton, FullInspector.InspectorOrder(0)]
         public void GetSlugs()
         {
             Scene curScene = SceneManager.GetActiveScene();
@@ -77,7 +77,7 @@ namespace MDS.Actions
                     .ToList();
         }
 
-        [InspectorButton, InspectorOrder(1)]
+        [InspectorButton, FullInspector.InspectorOrder(1)]
         public void SetupSelected()
         {
             if(sceneSlugs == null || sceneSlugs.Count == 0) return;
@@ -95,7 +95,7 @@ namespace MDS.Actions
         }
 
 
-        [ShowInInspector, InspectorOrder(3)]
+        [ShowInInspector, FullInspector.InspectorOrder(3)]
         private List<slugSelector> sceneSlugs;
 
 #endif

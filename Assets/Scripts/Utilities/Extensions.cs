@@ -101,7 +101,8 @@ namespace MDS.Utilities
         /// </summary>
         public static int GetEpisodeIndex(this Scene sceneName)
         {
-            return int.Parse(sceneName.name.Substring(5, 1));
+            string episodeIndex = sceneName.name.Substring(5, 1);
+            return int.Parse(episodeIndex);
         }
 
         /// <summary>

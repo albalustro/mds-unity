@@ -1,4 +1,6 @@
-﻿using UnityEngine;
+﻿using System;
+using System.Collections.Generic;
+using UnityEngine;
 using Newtonsoft.Json;
 using UnityEngine.SceneManagement;
 using MDS.Utilities;
@@ -68,39 +70,41 @@ public class NetworkManager : Singleton<NetworkManager>
 	#region Login
 	public async Task<LoginInfo> DoLogin(string user, string pass)
 	{
-		Scene curScene = SceneManager.GetActiveScene();
-		string season = curScene.GetGameIndex().ToString();
+		// Scene curScene = SceneManager.GetActiveScene();
+		// string season = curScene.GetGameIndex().ToString();
 
-		var loginRequest = new LoginRequest()
-		{
-			Login = user,
-			Password = pass,
-			SeasonId = season
-		};
+		// var loginRequest = new LoginRequest()
+		// {
+		// 	Login = user,
+		// 	Password = pass,
+		// 	SeasonId = season
+		// };
+		//
+		// var requestStr = JsonConvert.SerializeObject(loginRequest, settings);
+		// var postResult = await Post(connectionConfig.loginURL, requestStr);
+		//
+		// switch (postResult.Result)
+		// {
+		// 	case UnityWebRequest.Result.ConnectionError:
+		// 	case UnityWebRequest.Result.ProtocolError:
+		// 	case UnityWebRequest.Result.DataProcessingError:
+		// 		return null;
+		// }
 
-		var requestStr = JsonConvert.SerializeObject(loginRequest, settings);
-		var postResult = await Post(connectionConfig.loginURL, requestStr);
-
-		switch (postResult.Result)
-		{
-			case UnityWebRequest.Result.ConnectionError:
-			case UnityWebRequest.Result.ProtocolError:
-			case UnityWebRequest.Result.DataProcessingError:
-				return null;
-		}
-
-		XmsLoginInfo info = JsonConvert.DeserializeObject<XmsLoginInfo>(postResult.Body);
-
-		return info?.Data;
+		// XmsLoginInfo info = JsonConvert.DeserializeObject<XmsLoginInfo>(postResult.Body);
+		// return info?.Data;
+		
+		XmsLoginInfo byPassInfo = new XmsLoginInfo { Sucesso = true, Data = new LoginInfo { Status = new StatusInfo { code = ConnectionResponse.OK, message = "Ok" }, Token = Guid.NewGuid().ToString(), Role = "Estudante", Concepts = new List<ConceptData>()} };
+		return byPassInfo.Data;
 	}
 
 	#endregion
 
 	#region ConceptMap
 
-	public Task RefreshConceptMap()
+	public async Task RefreshConceptMap()
 	{
-
+		await Task.Delay(1000);
 	}
 
 	public async Task<ConceptMap> DoSincronize(ConceptMap cm)
