@@ -46,7 +46,7 @@ namespace MDS.Core.SceneManagement
 #if UNITY_EDITOR
         public bool byPassAssetbundles = true;
         public bool destroyDebugObjectsOnSceneLoad = false;
-        public bool byPassOBB = true;
+        // public bool byPassOBB = true;
 #endif
 
         #region Unity Methods
@@ -444,94 +444,5 @@ namespace MDS.Core.SceneManagement
         }
 
 		#endregion
-
-#region OBB
-#if UNITY_ANDROID //&& !UNITY_EDITOR
-
-        public void LoadOBB()
-        {
-#if UNITY_EDITOR
-            if (byPassOBB) return;
-#endif
-            GooglePlayDownloader.setEnvironment(androidPublicKey);
-            Log("setEnvironment");
-
-            if (!GooglePlayDownloader.RunningOnAndroid())
-            {
-                LogError("Nao esta rodando no android");
-                //FeedbackUI.Instance.Show("Erro: Não está rodando em dispositivo Android.");
-                return;
-                //yield break;
-            }
-
-            string expansionFilePath = GooglePlayDownloader.GetExpansionFilePath();
-            if (string.IsNullOrEmpty(expansionFilePath))
-            {
-                //FeedbackUI.Instance.Show("Erro: Não há espaço livre para download dos dados. Utilize uma expansão externa ou libere espaço no cartão SD principal.");
-                LogError("Sem espaço");
-                return;
-                //yield break;
-            }
-            Log("expFilePath: " + expansionFilePath);
-
-            string mainPath = GooglePlayDownloader.GetMainOBBPath(expansionFilePath);
-            Log("mainPath: " + mainPath);
-            if (string.IsNullOrEmpty(mainPath))
-            {
-                Log("FetchOBB");
-                GooglePlayDownloader.FetchOBB();
-            }
-            else
-            {
-                LogError("Pulando fetch??");
-            }
-
-        }
-
-        public IEnumerator WaitOBB()
-        {
-#if UNITY_EDITOR
-            if (byPassOBB) yield break;
-#endif
-            string mainPath = null;
-            string expansionFilePath = GooglePlayDownloader.GetExpansionFilePath();
-            Log("[WaitoBB] expFilePath: "+ expansionFilePath);
-            WaitForSeconds halfSec = new WaitForSeconds(0.5f);
-
-            //FeedbackUI.Instance.SetButtons(false, false, false, false)
-            //        .Show("Download de conteúdo 1/2");
-
-            do
-            {
-                yield return halfSec;
-                mainPath = GooglePlayDownloader.GetMainOBBPath(expansionFilePath);
-                Log("[WaitoBB] mainPath: " + mainPath);
-            } while(string.IsNullOrEmpty(mainPath));
-
-            //FeedbackUI.Instance.Close();
-            //FeedbackUI.Instance.SetButtons(false, false, false, false)
-            //        .Show("Download de conteúdo 2/2");
-
-            string uri = "file://" + mainPath;
-
-            Log("[WaitoBB] uri: "+uri);
-
-            WWW www = WWW.LoadFromCacheOrDownload(uri, 0);
-
-            yield return www;
-
-            if (string.IsNullOrEmpty(www.error)==false)
-            {
-                LogError("[WaitoBB] www.error: "+www.error);
-            }
-            else
-                Log("[WaitoBB] success");
-            //FeedbackUI.Instance.Close();
-
-        }
-
-#endif
-#endregion
-
     }
 }

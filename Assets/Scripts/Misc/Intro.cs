@@ -14,10 +14,7 @@ namespace MDS
         IEnumerator Start()
         {
 			textVersion.GetComponent<Text>().text ="Version "+Application.version;
-#if UNITY_ANDROID && !UNITY_EDITOR
-            Log("Inicio");
-            SceneLoader.Instance.LoadOBB();
-#endif
+
             float originalFadeTime = FadeTransition.Instance.FadeTime;
             FadeTransition.Instance.FadeTime = 1f;
             FadeTransition.Instance.BeginFade(FadeDirection.In);
@@ -53,8 +50,8 @@ namespace MDS
 #endif
 #if UNITY_ANDROID && !UNITY_EDITOR
             // FadeTransition.Instance.BeginFade(FadeDirection.In);
-            // yield return new WaitForSeconds(3f);
-            yield return SceneLoader.Instance.WaitOBB();
+            yield return new WaitForSeconds(3f);
+            //yield return SceneLoader.Instance.WaitOBB();
 #endif
             textVersion.SetActive(false);
 
