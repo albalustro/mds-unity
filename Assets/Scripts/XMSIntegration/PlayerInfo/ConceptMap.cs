@@ -116,7 +116,7 @@ public class ConceptMap
 
 	public bool CheckEpisodeComplete(int world, int episode)
 	{
-		return FromEpisode(world, episode).All(c => c.Concept.HasValue && c.Concept.Value == (int)ConceptTypes.CONCEPT_GREEN);
+		return FromEpisode(world, episode).All(c => c.Concept.HasValue && c.Concept.Value != (int)ConceptTypes.CONCEPT_NOT_PLAYED);
 	}
 
 
