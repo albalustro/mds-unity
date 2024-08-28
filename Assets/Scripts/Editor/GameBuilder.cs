@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.iOS;
 
 public class GameBuilder : EditorWindow
 {
@@ -447,7 +448,7 @@ public class GameBuilder : EditorWindow
 			return;
 		}
 
-		//var ret = BuildPipeline.BuildPlayer(options);
+		var ret = BuildPipeline.BuildPlayer(options);
 		//if (!string.IsNullOrEmpty(ret))
 		//	Debug.LogWarning(ret);
 		Debug.Log(string.Format("[{0}][Standalone][{1}] - Building Report ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
@@ -537,6 +538,7 @@ public class GameBuilder : EditorWindow
 		//com.Oyo-Labs.Misterio-dos-Sonhos-3
 		string suffix = game == Game.MDS1 ? "-1" : game == Game.MDS2 ? "2" : "-3";
 		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("com.Oyo-Labs.Misterio-dos-Sonhos{0}", suffix));
+		PlayerSettings.iOS.deferSystemGesturesMode = SystemGestureDeferMode.All;
 	}
 	private static void SetGame(Game game)
 	{
