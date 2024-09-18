@@ -3,9 +3,8 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using UnityEditor;
-using UnityEditor.SceneManagement;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.iOS;
 
 public class GameBuilder : EditorWindow
 {
@@ -19,7 +18,7 @@ public class GameBuilder : EditorWindow
 	}
 
 
-	[MenuItem("Xmile/Distribution Builder")]
+	[MenuItem("OyoLabs/Distribution Builder")]
 	static void Init()
 	{
 		// Get existing open window or if none, make a new one:
@@ -437,6 +436,9 @@ public class GameBuilder : EditorWindow
 	{
 		Debug.Log(string.Format("[{0}][Standalone][{1}] - Starting ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
 		SetGame(game);
+		
+		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Standalone, string.Format("com.OyoLabs.{0}", game.ToString())); 
+		
 		BuildPlayerOptions options = SetupBuildStandAlone(game);
 		SetDefineSymbols(game);
 
@@ -446,7 +448,7 @@ public class GameBuilder : EditorWindow
 			return;
 		}
 
-		//var ret = BuildPipeline.BuildPlayer(options);
+		var ret = BuildPipeline.BuildPlayer(options);
 		//if (!string.IsNullOrEmpty(ret))
 		//	Debug.LogWarning(ret);
 		Debug.Log(string.Format("[{0}][Standalone][{1}] - Building Report ", game.ToString(), System.DateTime.Now.ToShortTimeString()));
@@ -497,29 +499,46 @@ public class GameBuilder : EditorWindow
 
 	private void SetAndroidConfig(Game game)
 	{
-		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, string.Format("com.xmile.{0}", game.ToString().ToLower()));
-		PlayerSettings.Android.keystoreName = Application.dataPath.Replace("/Assets", string.Format("/Keys/{0}.keystore", game.ToString().ToLower()));
-		PlayerSettings.Android.keystorePass = "xmile1@3";
+		//Android
+		//com.OyoLabs.MisteriodosSonhos1
+		//com.OyoLabs.MisteriodosSonhos2
+		//com.OyoLabs.MisteriodosSonhos3
+		
 		string alias = string.Empty;
+		string identifier = string.Empty;
 		switch (game)
 		{
 			case Game.MDS1:
 				alias = "mds1";
+				identifier = "MisteriodosSonhos1";
 				break;
 			case Game.MDS2:
 				alias = "misterio dos sonhos 2";
+				identifier = "MisteriodosSonhos2";
 				break;
 			case Game.MDS3:
 				alias = "misterio dos sonhos 3";
+				identifier = "MisteriodosSonhos3";
 				break;
 		}
-		PlayerSettings.Android.keyaliasName = alias;
-		PlayerSettings.Android.keyaliasPass = "xmile1@3";
+		
+		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.Android, string.Format("com.OyoLabs.{0}", identifier));
+		// PlayerSettings.Android.keystoreName = Application.dataPath.Replace("/Assets", string.Format("/Keys/{0}.keystore", game.ToString().ToLower()));
+		// PlayerSettings.Android.keystorePass = "xmile1@3";
+		//
+		// PlayerSettings.Android.keyaliasName = alias;
+		// PlayerSettings.Android.keyaliasPass = "xmile1@3";
 	}
 
 	private void SetiOSConfig(Game game)
 	{
-		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("br.com.xmile.sonhos{0}", game.ToString().Remove(0, 3)));
+		//IOS
+		//com.Oyo-Labs.Misterio-dos-Sonhos-1
+		//com.Oyo-Labs.Misterio-dos-Sonhos2
+		//com.Oyo-Labs.Misterio-dos-Sonhos-3
+		string suffix = game == Game.MDS1 ? "-1" : game == Game.MDS2 ? "2" : "-3";
+		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("com.Oyo-Labs.Misterio-dos-Sonhos{0}", suffix));
+		PlayerSettings.iOS.deferSystemGesturesMode = SystemGestureDeferMode.All;
 	}
 	private static void SetGame(Game game)
 	{
@@ -600,8 +619,16 @@ public class GameBuilder : EditorWindow
 
 	private static void SetNameAndDefaultIcon(Game game)
 	{
-		string gId = game.ToString().Replace("MDS", "");
-		PlayerSettings.productName = string.Format("Misterio dos Sonhos {0}", gId);
+		// string gId = game.ToString().Replace("MDS", "");
+		string gname = game switch
+		{
+			Game.MDS1 => "MDS 1: O Chamado dos Guardiões",
+			Game.MDS2 => "MDS 2: A Máquina do Poder",
+			Game.MDS3 => "MDS 3: A Grande Jornada",
+			_ => throw new ArgumentOutOfRangeException(nameof(game), game, null)
+		};
+		PlayerSettings.companyName = "Oyo Labs";
+		PlayerSettings.productName = gname;
 		Texture2D mainIcon = AssetDatabase.LoadAllAssetsAtPath(string.Format("Assets/{0}/Artwork/Icons/new_icon_1024.png", game.ToString()))[0] as Texture2D;
 		PlayerSettings.SetIconsForTargetGroup(BuildTargetGroup.Unknown, new Texture2D[] { mainIcon });
 	}
