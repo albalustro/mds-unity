@@ -504,21 +504,17 @@ public class GameBuilder : EditorWindow
 		//com.OyoLabs.MisteriodosSonhos2
 		//com.OyoLabs.MisteriodosSonhos3
 		
-		string alias = string.Empty;
 		string identifier = string.Empty;
 		switch (game)
 		{
 			case Game.MDS1:
-				alias = "mds1";
-				identifier = "MisteriodosSonhos1";
+				identifier = "newmds1";
 				break;
 			case Game.MDS2:
-				alias = "misterio dos sonhos 2";
-				identifier = "MisteriodosSonhos2";
+				identifier = "newmds2";
 				break;
 			case Game.MDS3:
-				alias = "misterio dos sonhos 3";
-				identifier = "MisteriodosSonhos3";
+				identifier = "newmds3";
 				break;
 		}
 		
@@ -536,8 +532,8 @@ public class GameBuilder : EditorWindow
 		//com.Oyo-Labs.Misterio-dos-Sonhos-1
 		//com.Oyo-Labs.Misterio-dos-Sonhos2
 		//com.Oyo-Labs.Misterio-dos-Sonhos-3
-		string suffix = game == Game.MDS1 ? "-1" : game == Game.MDS2 ? "2" : "-3";
-		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("com.Oyo-Labs.Misterio-dos-Sonhos{0}", suffix));
+		string suffix = game == Game.MDS1 ? "1" : game == Game.MDS2 ? "2" : "3";
+		PlayerSettings.SetApplicationIdentifier(BuildTargetGroup.iOS, string.Format("com.Oyo-Labs.newmds{0}", suffix));
 		PlayerSettings.iOS.deferSystemGesturesMode = SystemGestureDeferMode.All;
 	}
 	private static void SetGame(Game game)
