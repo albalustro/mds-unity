@@ -42,11 +42,14 @@ public class DownloadManager : Singleton<DownloadManager>
     private IEnumerator Download(string assetbundleName)
     {
 
+#if !UNITY_WEBGL
+        // WebGL nao tem a classe Caching (o proprio navegador faz o cache dos bundles)
         while(!Caching.ready)
             yield return null;
 
         if(cleanCache)
             Caching.ClearCache();
+#endif
 
         string urlBase = useLocal ? localUrlBase : remoteUrlBase;
 
